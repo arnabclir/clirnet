@@ -1,0 +1,12 @@
+flowchart LR
+    site["site"] -->|uses| Cookies["Cookies"]
+    site["site"] -->|provides| Cookie_Settings["Cookie Settings"]
+    Elsevier_B.V.["Elsevier B.V."] -->|holds copyright with| licensors["licensors"]
+    Elsevier_B.V.["Elsevier B.V."] -->|holds copyright with| contributors["contributors"]
+    Copyright["Copyright"] -->|held by| Elsevier_B.V.["Elsevier B.V."]
+    Copyright["Copyright"] -->|held by| licensors["licensors"]
+    Copyright["Copyright"] -->|held by| contributors["contributors"]
+    Copyright["Copyright"] -->|year| 2024["2024"]
+    rights["rights"] -->|reserved for| text_and_data_mining["text and data mining"]
+    rights["rights"] -->|reserved for| AI_training["AI training"]
+    open_access_content["open access content"] -->|governed by| licensing_terms["licensing terms"]
