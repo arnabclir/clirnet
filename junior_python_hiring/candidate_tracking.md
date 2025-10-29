@@ -7,6 +7,7 @@
 | Aashish Gupta | 2025-10-21 | Evaluated | 82/100 | B | Pass | Claude | 2025-10-28 |
 | Binita Ganguly | 2025-10-23 | Evaluated | 74/100 | C | Pass | Claude | 2025-10-28 |
 | Sujit | 2025-10-27 | Evaluated | 15/100 | F | Fail | Claude | 2025-10-28 |
+| Ashmita Chakrabarti | 2025-10-27 | Evaluated | 54/100 | F | Fail | Claude | 2025-10-29 |
 
 ---
 
@@ -265,38 +266,143 @@ files and 1 CSV as core requirements.
 
 ---
 
+### Candidate: Ashmita Chakrabarti
+**Submission Date**: 2025-10-27  
+**Reviewer**: Claude  
+**Review Date**: 2025-10-29
+
+#### Category Scores
+| Category | Points Earned | Max Points | % |
+|----------|--------------|------------|---|
+| Code Quality & Implementation | 19 | 30 | 63% |
+| DSPy Concepts Understanding | 12 | 25 | 48% |
+| Deliverables Completeness | 10 | 25 | 40% |
+| Data Quality & Accuracy | 11 | 15 | 73% |
+| Production Readiness | 2 | 5 | 40% |
+| **TOTAL** | **54** | **100** | **54%** |
+
+**Breakdown**:
+- DSPy Framework Usage: 11/12 (proper signatures, predictors, LLM config with XMLAdapter)
+- Web Scraping: 3/6 (basic scraping with BeautifulSoup, but 2 URLs failed with 403 errors)
+- Error Handling: 3/6 (has try-except for scraping, but doesn't handle failures gracefully)
+- Code Organization: 2/6 (uses markdown section headers, but minimal comments, mostly inline code)
+- Confidence Loops: 5/10 (deduplication loop EXISTS with target_confidence=0.9, but NO relation extraction confidence loop - CRITICAL GAP)
+- Deduplication Logic: 6/8 (batch_size=10, proper while loop, fallback with rapidfuzz)
+- Pydantic & Validation: 1/7 (has BaseModel classes but no length validation, no strict filtering)
+- Mermaid Diagrams: 5/12 (only 8/10 files present - missing mermaid_9.md and mermaid_10.md; valid syntax for all 8)
+- CSV Quality: 4/8 (correct structure, but only 8/10 URLs represented; 1589 rows total; no duplicates)
+- Notebook Execution: 1/5 (code runs but fails to generate all 10 deliverables)
+- Entity Quality: 6/7 (relevant entities with accurate semantic types - Concept, Activity, Resource, etc.)
+- Relationship Quality: 4/5 (meaningful relations, decent predicate trimming)
+- Graph Utility: 1/3 (mermaid_1 very dense with 100+ relations; mermaid_3 very sparse with only 7 relations)
+- Production Readiness: 2/5 (proper pip installs; hardcoded API key -1pt; no os.makedirs shown -1pt; follows naming convention; mostly inline code -1pt)
+
+#### Deliverables Checklist
+- [ ] 10 Mermaid diagrams (only 8/10 - missing mermaid_9.md and mermaid_10.md)
+- [x] CSV file with correct structure (link, tag, tag_type)
+- [x] Colab notebook (.ipynb)
+- [x] Code runs (but doesn't generate all outputs)
+- [ ] All 10 URLs processed (only 8/10 - 2 ScienceDirect URLs failed with 403)
+
+#### Key Strengths
+- **Proper deduplication confidence loop** - Implements while loop with target_confidence=0.9 (Assignment_DSPy.ipynb cell showing deduplicate_with_lm function)
+- **Good DSPy framework usage** - Proper Signatures (ExtractEntities, DeduplicateEntities, ExtractRelations), ChainOfThought, dspy.Predict()
+- **Fallback deduplication strategy** - Uses rapidfuzz for local fuzzy deduplication when LLM fails (threshold=88)
+- **High-quality entity extraction** - 1746 total entities collected with relevant, well-typed semantic labels
+- **Proper chunking logic** - Chunks text to 3500 chars per paragraph for manageable processing
+
+#### Areas for Improvement
+- **Missing 2 Mermaid files** - Only submitted 8/10 diagrams (missing mermaid_9.md and mermaid_10.md) - incomplete deliverable
+- **NO relation extraction confidence loop** - This is a CRITICAL requirement that was explicitly emphasized in the assignment
+- **Failed URL handling** - 2 ScienceDirect URLs returned 403 errors; code doesn't handle this gracefully or attempt alternative scraping methods
+- **Hardcoded API key** - API key written directly to .env file in notebook (cell 5) - security risk
+- **No output validation** - Missing length checks (<=40 chars for entities), no filtering of invalid outputs
+- **Minimal code documentation** - Very few comments explaining logic despite moderate complexity
+- **Inconsistent graph quality** - mermaid_1 has 100+ edges (too dense), mermaid_3 has only 7 (too sparse)
+- **No directory management** - Doesn't create output directories with os.makedirs
+
+#### Critical Issues (if any)
+- **AUTO-FAIL: Missing 2 Mermaid files** - Only 8/10 deliverables submitted
+- **AUTO-FAIL: Missing 2 URLs in CSV** - Only 8/10 URLs represented due to scraping failures
+- **CRITICAL: No relation extraction confidence loop** - Key conceptual requirement missing
+- Hardcoded API key (security risk)
+
+#### Recommendation
+- [ ] Strong Hire - Move to next round immediately
+- [ ] Hire - Schedule interview
+- [ ] Maybe - Borderline, discuss with team
+- [x] No Hire - Reject with feedback
+
+#### Notes/Comments
+```
+FAIL grade (54/100). This submission demonstrates partial understanding of DSPy concepts 
+but has critical gaps in both implementation and deliverables.
+
+Critical failures:
+1. Only 8/10 Mermaid files (missing mermaid_9.md and mermaid_10.md)
+2. Only 8/10 URLs in CSV (2 ScienceDirect URLs failed to scrape)
+3. No confidence loop for relation extraction (key requirement)
+4. Hardcoded API key (security issue)
+
+The candidate shows some strengths:
+- Proper deduplication confidence loop (target_confidence=0.9)
+- Good DSPy framework usage with proper signatures
+- Smart fallback with rapidfuzz for fuzzy deduplication
+- High volume of quality entity extraction (1746 entities)
+
+However, the missing deliverables and lack of relation extraction confidence loop are 
+deal-breakers. The assignment explicitly required 10 Mermaid files and confidence loops 
+for BOTH deduplication and relation extraction. The candidate implemented only half of 
+the confidence loop requirement.
+
+The scraping failures (403 errors from ScienceDirect) suggest lack of robustness - no 
+retry logic, alternative scraping methods, or graceful degradation. A production-ready 
+solution would handle these failures better.
+
+Strong rejection recommended. If candidate requests feedback, emphasize:
+1. Always deliver ALL required outputs (10/10 files, not 8/10)
+2. Confidence loops required for both deduplication AND relation extraction
+3. Need better error handling for failed web requests
+4. Never hardcode API keys - use environment variables
+5. Test all deliverables before submission
+```
+
+---
+
 ## Evaluation Statistics
 
 ### Overall Stats
-- **Total Candidates Evaluated**: 3
-- **Average Score**: 57/100
+- **Total Candidates Evaluated**: 4
+- **Average Score**: 56/100
 - **Highest Score**: 82/100 (Aashish Gupta)
 - **Lowest Score**: 15/100 (Sujit)
 
 ### Pass/Fail Distribution
-- **Pass (≥60)**: 2 (67%)
-- **Fail (<60)**: 1 (33%)
-- **Pass Rate**: 67%
+- **Pass (≥60)**: 2 (50%)
+- **Fail (<60)**: 2 (50%)
+- **Pass Rate**: 50%
 
 ### Grade Distribution
 - **A (90-100)**: 0
 - **B (75-89)**: 1 (Aashish Gupta - 82%)
 - **C (60-74)**: 1 (Binita Ganguly - 74%)
-- **D/F (<60)**: 1 (Sujit - 15%)
+- **D/F (<60)**: 2 (Sujit - 15%, Ashmita Chakrabarti - 54%)
 
 ### Common Issues Found
-1. **Hardcoded API keys** - 2/3 candidates (Aashish, Binita) hardcoded API keys instead of using environment variables (security risk)
-2. **Missing relation extraction confidence loop** - 2/3 candidates (Binita, Sujit) didn't implement confidence loops for relation extraction (key requirement)
-3. **Poor code documentation** - All 3 candidates had minimal comments despite code complexity
-4. **Incomplete deliverables** - 2/3 candidates (Binita: 6/10 URLs in CSV, Sujit: 0/10 Mermaid files)
-5. **Code organization issues** - Very long functions, minimal modularity across submissions
+1. **Missing relation extraction confidence loop** - 3/4 candidates (Binita, Sujit, Ashmita) didn't implement confidence loops for relation extraction (key requirement)
+2. **Hardcoded API keys** - 3/4 candidates (Aashish, Binita, Ashmita) hardcoded API keys instead of using environment variables (security risk)
+3. **Incomplete deliverables** - 3/4 candidates (Binita: 6/10 URLs in CSV; Sujit: 0/10 Mermaid files; Ashmita: 8/10 Mermaid files, 8/10 URLs)
+4. **Poor code documentation** - All 4 candidates had minimal comments despite code complexity
+5. **Code organization issues** - Very long functions, minimal modularity, mostly inline code across submissions
+6. **Web scraping robustness** - 2/4 candidates (Binita, Ashmita) had URLs fail to scrape without proper retry logic or fallbacks
 
 ### Common Strengths Observed
-1. **Strong production-readiness mindset** - Binita showed exceptional HTTP retry logic, fallbacks; Aashish used proper directory creation
-2. **Good DSPy framework usage** - 2/3 candidates (Aashish, Binita) properly used Signatures, Predictors, ChainOfThought
-3. **Quality entity extraction** - Passing candidates extracted relevant, well-typed entities (Drug, Disease, Concept, etc.)
-4. **Proper Pydantic usage** - All candidates understood and used BaseModel classes with Field descriptions
-5. **Error handling attempts** - Candidates showed awareness of need for try-except blocks and fallback strategies 
+1. **Good DSPy framework usage** - 3/4 candidates (Aashish, Binita, Ashmita) properly used Signatures, Predictors, ChainOfThought
+2. **Deduplication confidence loops** - 2/4 candidates (Aashish, Ashmita) implemented proper deduplication confidence loops with 0.9 threshold
+3. **Quality entity extraction** - 3/4 candidates extracted relevant, well-typed entities (Drug, Disease, Concept, Activity, etc.)
+4. **Proper Pydantic usage** - 3/4 candidates understood and used BaseModel classes with Field descriptions
+5. **Error handling attempts** - Most candidates showed awareness of need for try-except blocks and fallback strategies
+6. **Fallback strategies** - 2/4 candidates (Binita, Ashmita) implemented smart fallbacks (fuzzy matching, Wikipedia API) 
 
 ---
 
