@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator Catalog - Medical Calculators</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: #667eea !important;
+        }
+
+        .header-section {
+            padding: 2rem 0;
+            color: white;
+            background: rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .header-section h1 {
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .container-main {
+            max-width: 1400px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .calculator-item {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .calculator-item:hover {
+            background: #f8f9ff;
+            transform: translateX(5px);
+        }
+
+        .calculator-item h5 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .calculator-item p {
+            color: #666;
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .calculator-type {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: #667eea;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .calculator-type.clinical {
+            background: #e74c3c;
+        }
+
+        .calculator-type.equation {
+            background: #3498db;
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .category-header h3 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .category-count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-left: auto;
+        }
+
+        .filter-controls {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-box {
+            padding: 0.8rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .calculator-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat .label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .category-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .category-count {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-calculator"></i> Medical Calculators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="catalog.html">Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="todo.html">Build Progress</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="docs.html">Documentation</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="header-section">
+        <div class="container">
+            <h1><i class="fas fa-book"></i> Calculator Catalog</h1>
+            <p>Browse all available medical calculators with descriptions</p>
+        </div>
+    </div>
+
+    <div class="container container-main">
+        <!-- Statistics -->
+        <div class="calculator-stats">
+            <div class="stat">
+                <div class="number">250+</div>
+                <div class="label">Total Calculators</div>
+            </div>
+            <div class="stat">
+                <div class="number">26</div>
+                <div class="label">Specialties</div>
+            </div>
+            <div class="stat">
+                <div class="number">130</div>
+                <div class="label">Clinical Criteria</div>
+            </div>
+            <div class="stat">
+                <div class="number">120</div>
+                <div class="label">Equations</div>
+            </div>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="filter-controls">
+            <input type="text" class="search-box" id="searchBox" placeholder="Search calculators..." onkeyup="filterCalculators()">
+            <div class="filter-tabs">
+                <button class="filter-btn active" onclick="filterByType('all')">All</button>
+                <button class="filter-btn" onclick="filterByType('clinical')">Clinical Criteria</button>
+                <button class="filter-btn" onclick="filterByType('equation')">Medical Equations</button>
+            </div>
+        </div>
+
+        <!-- Catalog Content -->
+        <div id="catalog-content">
+            <!-- Content will be generated by JavaScript -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Comprehensive calculator database
+        const allCalculators = {
+            "Allergy and Immunology": {
+                "Medical Equations": [
+                    { name: "Absolute eosinophil count", desc: "Calculates absolute eosinophil count from WBC and percentage. Used to assess immune response and parasitic infections." },
+                    { name: "Conventional (gravimetric, imperial, US) unit to SI unit conversions: Chemistry and endocrine tests", desc: "Converts laboratory values from conventional to SI units for chemistry and endocrine tests." },
+                    { name: "Conventional (gravimetric, imperial, US) unit to SI unit conversions: Immunology lab values", desc: "Converts laboratory immunology values from conventional to SI units." },
+                    { name: "SI unit to conventional (gravimetric, imperial, US) unit conversions: Chemistry and endocrine tests", desc: "Converts chemistry and endocrine values from SI to conventional units." },
+                    { name: "SI unit to conventional (gravimetric, imperial, US) unit conversions: Immunology lab values", desc: "Converts immunology lab values from SI to conventional units." }
+                ]
+            },
+            "Anesthesiology": {
+                "Clinical Criteria": [
+                    { name: "APACHE II scoring system by admission diagnosis in adults", desc: "Predicts hospital mortality in critically ill adult patients. Combines acute physiology, age, and chronic health factors." },
+                    { name: "ARISCAT (Canet) preoperative pulmonary risk index in adults", desc: "Predicts risk of postoperative pulmonary complications based on age, BMI, comorbidities, and surgery type." },
+                    { name: "CIWA-Ar Clinical Institute Withdrawal Assessment for Alcohol scale in adults", desc: "Assesses severity of alcohol withdrawal symptoms and guides pharmacological management." },
+                    { name: "Child Pugh score for severity of liver disease in adults (SI units)", desc: "Predicts prognosis in cirrhosis patients using bilirubin, albumin, INR, ascites, and encephalopathy." },
+                    { name: "Child Pugh score for severity of liver disease in adults (conventional units)", desc: "Predicts prognosis in cirrhosis patients using bilirubin, albumin, INR, ascites, and encephalopathy (conventional units)." },
+                    { name: "Clinical indicators for malignant hyperthermia in adults", desc: "Identifies risk factors for malignant hyperthermia reaction during anesthesia." },
+                    { name: "Enhanced STOP-Bang screening questionnaire for obstructive sleep apnea (OSA) in adults", desc: "Screens for obstructive sleep apnea risk in preoperative patients." }
+                ],
+                "Medical Equations": [
+                    { name: "Body mass index (BMI; Quetelet's index) in adults", desc: "Calculates BMI using weight and height. Categories: Underweight, Normal, Overweight, Obese." },
+                    { name: "Body surface area (BSA) (Mosteller, square root method) in children and adults", desc: "Calculates BSA for drug dosing and metabolic assessment using the Mosteller method." },
+                    { name: "Body surface area (BSA) in adults (Du Bois method)", desc: "Alternative BSA calculation using the Du Bois formula for adult patients." },
+                    { name: "Fat-free mass (a measure of LBW, female adults)", desc: "Calculates lean body weight in adult females for drug dosing adjustments." },
+                    { name: "Fat-free mass (a measure of LBW, male adults)", desc: "Calculates lean body weight in adult males for drug dosing adjustments." },
+                    { name: "Ideal body weight and adjusted body weight for adults", desc: "Determines ideal and adjusted body weight for obese patients for accurate drug dosing." }
+                ]
+            },
+            "Cardiovascular Medicine": {
+                "Clinical Criteria": [
+                    { name: "CHA2DS2-VASc risk stratification score for estimation of stroke risk for nonvalvular atrial fibrillation in adults", desc: "Predicts stroke risk in atrial fibrillation. Guides anticoagulation decisions with score 0-9." },
+                    { name: "Clinical characteristics comprising the HAS-BLED bleeding risk score in adults", desc: "Assesses major bleeding risk in anticoagulated patients. Score 0-9 predicts bleeding risk." },
+                    { name: "Embolic risk (ER) French score in infective endocarditis in adults", desc: "Predicts risk of embolic complications in infective endocarditis." },
+                    { name: "Good Outcomes Following Attempted Resuscitation (GO-FAR) score", desc: "Predicts neurologically intact survival after in-hospital cardiac arrest." },
+                    { name: "Probability of heart failure with preserved ejection fraction (H2FPEF score) in adults with dyspnea", desc: "Calculates probability of HFpEF in dyspneic patients using clinical and echo parameters." },
+                    { name: "Thrombolysis in Myocardial Infarction (TIMI) score for ST elevation MI in adults", desc: "Predicts 30-day mortality in acute STEMI for risk stratification." },
+                    { name: "Thrombolysis in Myocardial Infarction (TIMI) score for unstable angina or non-ST elevation MI in adults", desc: "Predicts risk in unstable angina/NSTEMI using clinical and laboratory factors." }
+                ],
+                "Medical Equations": [
+                    { name: "Cardiac output in adults (conventional and SI units)", desc: "Calculates cardiac output from heart rate and stroke volume for hemodynamic assessment." },
+                    { name: "Pulmonary vascular resistance (PVR) and pulmonary vascular resistance index (PVRI) in adults and children", desc: "Calculates PVR and PVRI from hemodynamic measurements." },
+                    { name: "Systemic vascular resistance in adults", desc: "Calculates systemic vascular resistance from hemodynamic parameters." },
+                    { name: "QT interval correction (ECG) in adults and children", desc: "Corrects QT interval for heart rate to assess for QT prolongation." },
+                    { name: "Friedewald Equation for Low Density Lipoprotein (LDL-C)", desc: "Estimates LDL cholesterol from triglycerides, total cholesterol, and HDL." }
+                ]
+            },
+            "Emergency Medicine": {
+                "Clinical Criteria": [
+                    { name: "Clinical Opioid Withdrawal Scale (COWS) for adults and adolescents", desc: "Assesses severity of opioid withdrawal symptoms to guide medication therapy." },
+                    { name: "Pulmonary Embolism Rule-Out Criteria (PERC) rule", desc: "Clinical criteria to rule out PE in low-risk patients without imaging." },
+                    { name: "Sequential Organ Failure Assessment (Quick) qSOFA score in adults", desc: "Rapid bedside assessment of organ dysfunction risk and sepsis prognosis." }
+                ],
+                "Medical Equations": [
+                    { name: "Blood ethanol concentration estimation", desc: "Calculates blood alcohol concentration from alcohol consumed and time." },
+                    { name: "Burn injury fluid resuscitation (Parkland crystalloid estimate) in adults", desc: "Calculates fluid requirements for burn management using Parkland formula." },
+                    { name: "Burn injury fluid resuscitation (modified Brooke crystalloid estimate) in adults", desc: "Calculates fluid requirements using modified Brooke formula." },
+                    { name: "Endotracheal tube size for children (1 to 8 years)", desc: "Predicts appropriate ET tube size based on child's age." }
+                ]
+            },
+            "Endocrinology and Diabetes": {
+                "Clinical Criteria": [
+                    { name: "Thyroid Imaging Reporting and Data System (TI-RADS) with guidance on FNA of thyroid nodules in adults", desc: "Stratifies thyroid nodule malignancy risk and guides FNA recommendations." }
+                ],
+                "Medical Equations": [
+                    { name: "Body mass index (BMI) for adults (Metric, Patient education)", desc: "Patient-friendly BMI calculator with metric units." },
+                    { name: "Body mass index (BMI) for adults (Patient education)", desc: "Patient-friendly BMI calculator with standard units." },
+                    { name: "Body mass index (BMI; Quetelet's index) in adults", desc: "Standard BMI calculation for weight status assessment." },
+                    { name: "Calcium correction in hypoalbuminemia in adults and children ≥1 year (SI units)", desc: "Corrects serum calcium for low albumin levels (SI units)." },
+                    { name: "Calcium correction in hypoalbuminemia in adults and children ≥1 year (conventional units)", desc: "Corrects serum calcium for low albumin levels (conventional units)." },
+                    { name: "Conversion of hemoglobin A1C from percent to mmol/mol and estimation of corresponding average glucose", desc: "Converts A1C between percent and mmol/mol and estimates average glucose." },
+                    { name: "Plasma sodium concentration correction for hyperglycemia in adults", desc: "Corrects serum sodium for hyperglycemia effects." }
+                ]
+            }
+        };
+
+        let currentFilter = 'all';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCatalog();
+        });
+
+        function renderCatalog() {
+            const catalogContent = document.getElementById('catalog-content');
+            let html = '';
+
+            for (const [category, types] of Object.entries(allCalculators)) {
+                let categoryCalculators = [];
+
+                for (const [type, calculators] of Object.entries(types)) {
+                    const typeClass = type.toLowerCase().replace(/\s+/g, '-');
+                    calculators.forEach(calc => {
+                        categoryCalculators.push({
+                            ...calc,
+                            type: type,
+                            typeClass: typeClass,
+                            category: category
+                        });
+                    });
+                }
+
+                const categoryCount = categoryCalculators.length;
+                html += `
+                    <div class="category-header">
+                        <div>
+                            <h3><i class="fas fa-folder"></i> ${category}</h3>
+                        </div>
+                        <div class="category-count">${categoryCount} calculators</div>
+                    </div>
+                `;
+
+                categoryCalculators.forEach(calc => {
+                    const isClinic = calc.type === 'Clinical Criteria';
+                    const typeLabel = isClinic ? 'Clinical' : 'Equation';
+                    const typeBadgeClass = isClinic ? 'clinical' : 'equation';
+
+                    html += `
+                        <div class="calculator-item" data-type="${typeLabel.toLowerCase()}" data-search="${calc.name.toLowerCase()}">
+                            <h5>
+                                <i class="fas ${isClinic ? 'fa-stethoscope' : 'fa-calculator'}"></i>
+                                ${calc.name}
+                            </h5>
+                            <p>${calc.desc}</p>
+                            <div>
+                                <span class="calculator-type ${typeBadgeClass}">${calc.type}</span>
+                                <span class="calculator-type" style="background: #95a5a6;">${category}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            catalogContent.innerHTML = html;
+        }
+
+        function filterByType(type) {
+            currentFilter = type;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            applyFilters();
+        }
+
+        function filterCalculators() {
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+            const items = document.querySelectorAll('.calculator-item');
+
+            items.forEach(item => {
+                const matchesSearch = item.dataset.search.includes(searchTerm);
+                const matchesType = currentFilter === 'all' || item.dataset.type === currentFilter;
+
+                item.style.display = (matchesSearch && matchesType) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>

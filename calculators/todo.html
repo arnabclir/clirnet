@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Progress - Medical Calculators</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: #667eea !important;
+        }
+
+        .header-section {
+            padding: 2rem 0;
+            color: white;
+            background: rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .header-section h1 {
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .container-main {
+            max-width: 1200px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1.5rem;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .progress-stat {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-stat .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0.5rem 0;
+        }
+
+        .progress-stat.pending .number {
+            color: #ffc107;
+        }
+
+        .progress-stat.in-progress .number {
+            color: #17a2b8;
+        }
+
+        .progress-stat.completed .number {
+            color: #28a745;
+        }
+
+        .progress-stat .label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .todo-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .todo-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 3px 15px rgba(102, 126, 234, 0.15);
+        }
+
+        .todo-item.completed {
+            opacity: 0.6;
+            background: #f0f5ff;
+            border-left-color: #28a745;
+        }
+
+        .todo-item.completed .todo-text {
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .todo-item.in-progress {
+            border-left-color: #17a2b8;
+            background: #f0f8ff;
+        }
+
+        .todo-checkbox {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .todo-text {
+            flex: 1;
+        }
+
+        .todo-text h6 {
+            margin: 0 0 0.3rem 0;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .todo-text p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .todo-meta {
+            display: flex;
+            gap: 0.5rem;
+            margin-left: auto;
+        }
+
+        .todo-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .todo-status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .todo-status.in-progress {
+            background: #cfe2ff;
+            color: #084298;
+        }
+
+        .todo-status.completed {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .category-badge {
+            background: #667eea;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .filter-controls {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .overall-progress {
+            margin-bottom: 2rem;
+        }
+
+        .progress {
+            height: 30px;
+            border-radius: 10px;
+            background: #e0e0e0;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .specialty-group {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .specialty-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .specialty-header h5 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .specialty-progress {
+            margin-top: 1rem;
+        }
+
+        .specialty-progress .progress {
+            height: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .progress-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filter-controls {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .todo-meta {
+                flex-direction: column;
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-calculator"></i> Medical Calculators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="catalog.html">Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="todo.html">Build Progress</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="docs.html">Documentation</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="header-section">
+        <div class="container">
+            <h1><i class="fas fa-tasks"></i> Build Progress Tracker</h1>
+            <p>Monitor the development status of all medical calculators</p>
+        </div>
+    </div>
+
+    <div class="container container-main">
+        <!-- Progress Statistics -->
+        <div class="progress-stats">
+            <div class="progress-stat pending">
+                <div class="number" id="pending-count">250</div>
+                <div class="label">Pending</div>
+            </div>
+            <div class="progress-stat in-progress">
+                <div class="number" id="inprogress-count">0</div>
+                <div class="label">In Progress</div>
+            </div>
+            <div class="progress-stat completed">
+                <div class="number" id="completed-count">0</div>
+                <div class="label">Completed</div>
+            </div>
+            <div class="progress-stat">
+                <div class="number" style="color: #667eea;">0%</div>
+                <div class="label">Completion Rate</div>
+            </div>
+        </div>
+
+        <!-- Overall Progress -->
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fas fa-chart-line"></i> Overall Progress</h5>
+            </div>
+            <div class="card-body">
+                <div class="overall-progress">
+                    <div class="progress">
+                        <div class="progress-bar" id="overall-progress-bar" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            0% Complete
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="filter-controls">
+            <label style="margin: 0; font-weight: 600;">Filter by Status:</label>
+            <button class="filter-btn active" onclick="filterByStatus('all')">All</button>
+            <button class="filter-btn" onclick="filterByStatus('pending')">Pending</button>
+            <button class="filter-btn" onclick="filterByStatus('in-progress')">In Progress</button>
+            <button class="filter-btn" onclick="filterByStatus('completed')">Completed</button>
+        </div>
+
+        <!-- Todo List by Specialty -->
+        <div id="todo-container">
+            <!-- Todos will be loaded here -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sample calculator data organized by specialty
+        const calculatorsBySpecialty = {
+            "Allergy and Immunology": {
+                count: 5,
+                items: [
+                    { name: "Absolute eosinophil count", status: "pending" }
+                ]
+            },
+            "Anesthesiology": {
+                count: 14,
+                items: [
+                    { name: "APACHE II scoring system", status: "pending" },
+                    { name: "ARISCAT preoperative pulmonary risk index", status: "pending" },
+                    { name: "CIWA-Ar Clinical Institute Withdrawal Assessment", status: "pending" },
+                    { name: "Child Pugh score (SI units)", status: "pending" },
+                    { name: "Body mass index (BMI)", status: "pending" }
+                ]
+            },
+            "Cardiovascular Medicine": {
+                count: 17,
+                items: [
+                    { name: "CHA2DS2-VASc risk stratification score", status: "pending" },
+                    { name: "HAS-BLED bleeding risk score", status: "pending" },
+                    { name: "TIMI score for ST elevation MI", status: "pending" },
+                    { name: "Cardiac output calculation", status: "pending" }
+                ]
+            },
+            "Emergency Medicine": {
+                count: 7,
+                items: [
+                    { name: "Clinical Opioid Withdrawal Scale (COWS)", status: "pending" },
+                    { name: "Pulmonary Embolism Rule-Out Criteria (PERC)", status: "pending" },
+                    { name: "qSOFA score", status: "pending" }
+                ]
+            },
+            "Endocrinology and Diabetes": {
+                count: 12,
+                items: [
+                    { name: "Thyroid Imaging Reporting and Data System (TI-RADS)", status: "pending" },
+                    { name: "BMI for adults (Metric)", status: "pending" },
+                    { name: "Calcium correction in hypoalbuminemia", status: "pending" }
+                ]
+            }
+        };
+
+        let currentStatusFilter = 'all';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderTodoList();
+            updateStats();
+        });
+
+        function renderTodoList() {
+            const container = document.getElementById('todo-container');
+            let html = '';
+
+            for (const [specialty, data] of Object.entries(calculatorsBySpecialty)) {
+                html += `
+                    <div class="specialty-group">
+                        <div class="specialty-header">
+                            <h5><i class="fas fa-folder"></i> ${specialty}</h5>
+                            <span class="category-badge">${data.count} calculators</span>
+                        </div>
+                `;
+
+                data.items.forEach((item, index) => {
+                    const itemId = `${specialty.replace(/\s+/g, '-')}-${index}`;
+                    html += `
+                        <div class="todo-item ${item.status}" id="${itemId}" data-status="${item.status}">
+                            <input type="checkbox" class="todo-checkbox" ${item.status === 'completed' ? 'checked' : ''} onchange="updateTodoStatus('${itemId}', '${item.status}')">
+                            <div class="todo-text">
+                                <h6>${item.name}</h6>
+                                <p>${specialty}</p>
+                            </div>
+                            <div class="todo-meta">
+                                <span class="todo-status ${item.status}">${item.status.replace('-', ' ')}</span>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `
+                    <div class="specialty-progress">
+                        <small style="color: #666;">Progress: <span id="progress-${specialty.replace(/\s+/g, '-')}">${data.items.filter(i => i.status === 'completed').length}</span> of ${data.count} completed</small>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: ${(data.items.filter(i => i.status === 'completed').length / data.count) * 100}%" aria-valuenow="${(data.items.filter(i => i.status === 'completed').length / data.count) * 100}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        function updateTodoStatus(itemId, currentStatus) {
+            const item = document.getElementById(itemId);
+            const statuses = ['pending', 'in-progress', 'completed'];
+            const currentIndex = statuses.indexOf(currentStatus);
+            const nextStatus = statuses[(currentIndex + 1) % statuses.length];
+
+            item.classList.remove(currentStatus);
+            item.classList.add(nextStatus);
+            item.dataset.status = nextStatus;
+
+            const statusBadge = item.querySelector('.todo-status');
+            statusBadge.className = `todo-status ${nextStatus}`;
+            statusBadge.textContent = nextStatus.replace('-', ' ');
+
+            const checkbox = item.querySelector('.todo-checkbox');
+            checkbox.checked = nextStatus === 'completed';
+
+            updateStats();
+            filterByStatus(currentStatusFilter);
+        }
+
+        function filterByStatus(status) {
+            currentStatusFilter = status;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.querySelectorAll('.todo-item').forEach(item => {
+                const itemStatus = item.dataset.status;
+                if (status === 'all' || itemStatus === status) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function updateStats() {
+            const items = document.querySelectorAll('.todo-item');
+            const pending = document.querySelectorAll('.todo-item.pending').length;
+            const inProgress = document.querySelectorAll('.todo-item.in-progress').length;
+            const completed = document.querySelectorAll('.todo-item.completed').length;
+            const total = items.length;
+
+            document.getElementById('pending-count').textContent = pending;
+            document.getElementById('inprogress-count').textContent = inProgress;
+            document.getElementById('completed-count').textContent = completed;
+
+            const completionRate = total > 0 ? Math.round((completed / total) * 100) : 0;
+            const progressBar = document.getElementById('overall-progress-bar');
+            progressBar.style.width = completionRate + '%';
+            progressBar.textContent = completionRate + '% Complete';
+        }
+    </script>
+</body>
+</html>

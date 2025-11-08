@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - Medical Calculators</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: #667eea !important;
+        }
+
+        .header-section {
+            padding: 2rem 0;
+            color: white;
+            background: rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .header-section h1 {
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .container-main {
+            max-width: 1200px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1.5rem;
+        }
+
+        .card-body {
+            padding: 2rem;
+            background: white;
+        }
+
+        .doc-section {
+            margin-bottom: 2rem;
+        }
+
+        .doc-section h3 {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .doc-section h4 {
+            color: #764ba2;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .code-block {
+            background: #f5f5f5;
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 0.7rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: #555;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .tech-item {
+            background: #f8f9ff;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+
+        .tech-item h6 {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .calculator-type-box {
+            background: white;
+            border: 2px solid #667eea;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .calculator-type-box h5 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .calculation-example {
+            background: #f0f5ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+
+        .toc {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .toc h5 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc a {
+            color: #667eea;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .alert-custom {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+
+        .success-custom {
+            background: #d1e7dd;
+            border-left: 4px solid #198754;
+            color: #0f5132;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .tech-stack {
+                grid-template-columns: 1fr;
+            }
+
+            .card-body {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-calculator"></i> Medical Calculators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="catalog.html">Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="todo.html">Build Progress</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="docs.html">Documentation</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="header-section">
+        <div class="container">
+            <h1><i class="fas fa-book"></i> Documentation</h1>
+            <p>Complete guide to the Medical Calculators Collection</p>
+        </div>
+    </div>
+
+    <div class="container container-main">
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h5><i class="fas fa-list"></i> Table of Contents</h5>
+            <ul>
+                <li><a href="#overview">Project Overview</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#tech-stack">Technology Stack</a></li>
+                <li><a href="#calculator-types">Calculator Types</a></li>
+                <li><a href="#specialties">Medical Specialties</a></li>
+                <li><a href="#usage">Usage Guide</a></li>
+                <li><a href="#development">Development Guide</a></li>
+                <li><a href="#api-reference">API Reference</a></li>
+                <li><a href="#contributing">Contributing</a></li>
+            </ul>
+        </div>
+
+        <!-- Overview Section -->
+        <div class="card">
+            <div class="card-header">
+                <h5 id="overview"><i class="fas fa-info-circle"></i> Project Overview</h5>
+            </div>
+            <div class="card-body">
+                <div class="doc-section">
+                    <p>
+                        The Medical Calculators Collection is a comprehensive web-based tool that brings together over 250 clinical decision support calculators from UpToDate, organized by medical specialty. This project aims to provide healthcare professionals with quick, accessible, and reliable calculation tools for clinical practice.
+                    </p>
+                    <p>
+                        The project is built entirely using <strong>HTML5</strong>, <strong>CSS3</strong>, and <strong>Bootstrap 5</strong>, ensuring a responsive, modern interface that works seamlessly across all devices.
+                    </p>
+
+                    <h4>Project Goals</h4>
+                    <ul class="feature-list">
+                        <li>Provide easy access to 250+ verified medical calculators</li>
+                        <li>Support clinical decision-making across all major specialties</li>
+                        <li>Offer both Clinical Criteria scoring systems and Medical Equations</li>
+                        <li>Ensure responsive design for desktop, tablet, and mobile use</li>
+                        <li>Maintain accurate calculations with proper unit conversions</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="card">
+            <div class="card-header">
+                <h5 id="features"><i class="fas fa-star"></i> Features</h5>
+            </div>
+            <div class="card-body">
+                <div class="doc-section">
+                    <h4>Core Features</h4>
+                    <ul class="feature-list">
+                        <li>Interactive dashboard with real-time progress tracking</li>
+                        <li>Comprehensive calculator catalog with advanced search and filtering</li>
+                        <li>Calculator organization by medical specialty (26 specialties)</li>
+                        <li>Two calculator types: Clinical Criteria and Medical Equations</li>
+                        <li>Build progress tracker showing completion status</li>
+                        <li>Responsive Bootstrap 5 design</li>
+                        <li>Unit conversion support (SI and conventional units)</li>
+                        <li>Clean, intuitive user interface</li>
+                    </ul>
+
+                    <h4>Pages Included</h4>
+                    <div class="row mt-3">
+                        <div class="col-md-6 mb-3">
+                            <div class="calculator-type-box">
+                                <h5>Dashboard (index.html)</h5>
+                                <p>Main entry point with statistics, build progress, and quick navigation to all calculator categories.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="calculator-type-box">
+                                <h5>Catalog (catalog.html)</h5>
+                                <p>Complete listing of all calculators with descriptions, searchable and filterable by type and specialty.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="calculator-type-box">
+                                <h5>Build Progress (todo.html)</h5>
+                                <p>Tracks development status of each calculator with progress bars and status indicators by specialty.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="calculator-type-box">
+                                <h5>Individual Calculators</h5>
+                                <p>Standalone HTML/CSS/Bootstrap pages for each calculator with full functionality and validation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technology Stack -->
+        <div class="card">
+            <div class="card-header">
+                <h5 id="tech-stack"><i class="fas fa-code"></i> Technology Stack</h5>
+            </div>
+            <div class="card-body">
+                <div class="doc-section">
+                    <p>The entire project uses only front-end technologies with no backend dependencies:</p>
+
+                    <div class="tech-stack">
+                        <div class="tech-item">
+                            <h6><i class="fab fa-html5"></i> HTML5</h6>
+                            <p>Semantic markup and structure</p>
+                        </div>
+                        <div class="tech-item">
+                            <h6><i class="fab fa-css3"></i> CSS3</h6>
+                            <p>Styling and responsive design</p>
+                        </div>
+                        <div class="tech-item">
+                            <h6><i class="fab fa-bootstrap"></i> Bootstrap 5</h6>
+                            <p>UI framework and components</p>
+                        </div>
+                        <div class="tech-item">
+                            <h6><i class="fab fa-js-square"></i> JavaScript</h6>
+                            <p>Client-side interactivity</p>
+                        </div>
+                        <div class="tech-item">
+                            <h6><i class="fas fa-icons"></i> Font Awesome</h6>
+                            <p>Icon library</p>
+                        </div>
+                        <div class="tech-item">
+                            <h6><i class="fas fa-database"></i> JSON</h6>
+                            <p>Data structure for calculators</p>
+                        </div>
+                    </div>
+
+                    <h4>No External Dependencies</h4>
+                    <ul class="feature-list">
+                        <li>No backend server required</li>
+                        <li>No database needed</li>
+                        <li>No build process required</li>
+                        <li>Works entirely in the browser</li>
+                        <li>Easy to deploy and maintain</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculator Types -->
+        <div class="card">
+            <div class="card-header">
+                <h5 id="calculator-types"><i class="fas fa-calculator"></i> Calculator Types</h5>
+            </div>
+            <div class="card-body">
+                <div class="doc-section">
+                    <h4>1. Clinical Criteria Scoring Systems</h4>
+                    <div class="calculator-type-box">
+                        <p><strong>Purpose:</strong> Risk stratification and prognostic assessment using clinical parameters</p>
+                        <p><strong>Examples:</strong></p>
+                        <ul class="feature-list">
+                            <li>APACHE II Scoring System</li>
+                            <li>CHA2DS2-VASc Stroke Risk Score</li>
+                            <li>TIMI Score for MI</li>
+                            <li>HAS-BLED Bleeding Risk Score</li>
+                        </ul>
+                        <p><strong>Output:</strong> Risk scores, mortality predictions, stratification categories</p>
+                    </div>
+
+                    <h4>2. Medical Equations</h4>
+                    <div class="calculator-type-box">
+                        <p><strong>Purpose:</strong> Calculate physiological, biochemical, and pharmacological parameters</p>
+                        <p><strong>Examples:</strong></p>
+                        <ul class="feature-list">
+                            <li>Body Mass Index (BMI)</li>
+                            <li>Body Surface Area (BSA)</li>
+                            <li>Cardiac Output</li>
+                            <li>Glomerular Filtration Rate (GFR)</li>
+                            <li>Unit Conversions (SI to Conventional)</li>
+                        </ul>
+                        <p><strong>Output:</strong> Numerical values with appropriate units and interpretation ranges</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Medical Specialties -->
+        <div class="card">
+            <div class="card-header">
+                <h5 id="specialties"><i class="fas fa-hospital"></i> Medical Specialties Covered</h5>
+            </div>
+            <div class="card-body">
+                <div class="doc-section">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="feature-list">
+                                <li>Allergy and Immunology</li>
+                                <li>Anesthesiology</li>
+                                <li>Cardiovascular Medicine</li>
+                                <li>Dermatology</li>
+                                <li>Emergency Medicine</li>
+                                <li>Endocrinology and Diabetes</li>
+                                <li>Family Medicine and General Practice</li>
+                                <li>Gastroenterology and Hepatology</li>
+                                <li>Geriatrics</li>
+                                <li>Hematology</li>
+                                <li>Hospital Medicine</li>
+                                <li>Infectious Diseases</li>
+                                <li>Nephrology and Hypertension</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="feature-list">
+                                <li>Neurology</li>
+                                <li>Obstetrics, Gynecology and Women's Health</li>
+                                <li>Oncology</li>
+                                <li>Palliative Care</li>
+                                <li>Pediatrics</li>
+                                <li>Primary Care (Adult)</li>
+                                <li>Primary Care Sports Medicine</li>
+                                <li>Psychiatry</li>
+                                <li>Pulmonary and Critical Care</li>
+                                <li>Rheumatology</li>
+                                <li>Sleep Medicine</li>
+                                <li>Surgery</li>
+                                <li>Unit Conversions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Usage Guide -->
+        <div class="card">
+            <div class="card-header">
+                <h5 id="usage"><i class="fas fa-play-circle"></i> Usage Guide</h5>
+            </div>
+            <div class="card-body">
+                <div class="doc-section">
+                    <h4>Getting Started</h4>
+                    <ol>
+                        <li>Open <code>index.html</code> in your web browser</li>
+                        <li>Browse the dashboard for quick statistics and overview</li>
+                        <li>Use the navigation menu to access different sections</li>
+                    </ol>
+
+                    <h4>Dashboard</h4>
+                    <p>View overall project statistics including:</p>
+                    <ul class="feature-list">
+                        <li>Total number of calculators</li>
+                        <li>Number of medical specialties</li>
+                        <li>Build progress percentage</li>
+                        <li>Completion status by specialty</li>
+                    </ul>
+
+                    <h4>Searching for a Calculator</h4>
+                    <ol>
+                        <li>Go to the Catalog page</li>
+                        <li>Use the search box to find by name</li>
+                        <li>Filter by Clinical Criteria or Medical Equations</li>
+                        <li>View the description and category</li>
+                    </ol>
+
+                    <h4>Tracking Build Progress</h4>
+                    <ol>
+                        <li>Navigate to Build Progress page</li>
+                        <li>View overall completion percentage</li>
+                        <li>Filter by status (Pending, In Progress, Completed)</li>
+                        <li>Track progress by specialty</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Development Guide -->
+        <div class="card">
+            <div class="card-header">
+                <h5 id="development"><i class="fas fa-wrench"></i> Development Guide</h5>
+            </div>
+            <div class="card-body">
+                <div class="doc-section">
+                    <h4>Project Structure</h4>
+                    <div class="code-block">
+calculators/
+├── index.html           # Main dashboard
+├── catalog.html         # Calculator catalog
+├── todo.html            # Build progress tracker
+├── docs.html            # Documentation
+├── data/
+│   └── calculators.json # Calculator database
+└── calculators/
+    └── [individual calculator files]
+                    </div>
+
+                    <h4>Building a New Calculator</h4>
+                    <p>Each calculator should:</p>
+                    <ul class="feature-list">
+                        <li>Be a standalone HTML file with embedded CSS and JavaScript</li>
+                        <li>Use Bootstrap 5 for responsive design</li>
+                        <li>Include input validation</li>
+                        <li>Display clear results with interpretation</li>
+                        <li>Support unit conversions where applicable</li>
+                        <li>Include references to source calculations</li>
+                    </ul>
+
+                    <h4>Calculator Template</h4>
+                    <div class="code-block">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Calculator Name&lt;/title&gt;
+    &lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="container"&gt;
+        &lt;!-- Form inputs --&gt;
+        &lt;!-- Calculate button --&gt;
+        &lt;!-- Results display --&gt;
+    &lt;/div&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        // Calculation logic
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Reference -->
+        <div class="card">
+            <div class="card-header">
+                <h5 id="api-reference"><i class="fas fa-code"></i> Data Structure</h5>
+            </div>
+            <div class="card-body">
+                <div class="doc-section">
+                    <h4>Calculator Object Structure</h4>
+                    <div class="code-block">
+{
+  "id": "unique-identifier",
+  "name": "Calculator Display Name",
+  "category": "Medical Specialty",
+  "type": "Clinical Criteria|Medical Equation",
+  "description": "What the calculator does",
+  "inputs": [
+    {
+      "name": "Input Field Name",
+      "unit": "Unit of Measurement",
+      "type": "number|text|boolean"
+    }
+  ],
+  "formula": "Mathematical formula used",
+  "status": "pending|in-progress|completed"
+}
+                    </div>
+
+                    <h4>Input Types</h4>
+                    <ul class="feature-list">
+                        <li><strong>number</strong> - Numerical input with unit conversion</li>
+                        <li><strong>text</strong> - Text selection or dropdown</li>
+                        <li><strong>boolean</strong> - Yes/No or checkbox</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contributing -->
+        <div class="card">
+            <div class="card-header">
+                <h5 id="contributing"><i class="fas fa-users"></i> Contributing</h5>
+            </div>
+            <div class="card-body">
+                <div class="doc-section">
+                    <h4>Contributing Guidelines</h4>
+                    <div class="alert-custom">
+                        <i class="fas fa-lightbulb"></i> <strong>Contribution Process:</strong> Follow the development workflow to add new calculators or improve existing ones.
+                    </div>
+
+                    <ol>
+                        <li><strong>Create Calculator File</strong> - Create a new HTML file for the calculator</li>
+                        <li><strong>Update Database</strong> - Add entry to calculators.json</li>
+                        <li><strong>Test Functionality</strong> - Verify all inputs and calculations</li>
+                        <li><strong>Add Documentation</strong> - Include references and usage instructions</li>
+                        <li><strong>Update Progress</strong> - Mark as completed in todo.html</li>
+                    </ol>
+
+                    <div class="success-custom">
+                        <i class="fas fa-check-circle"></i> <strong>Best Practices:</strong>
+                        <ul class="feature-list" style="margin-top: 0.5rem;">
+                            <li>Use semantic HTML for accessibility</li>
+                            <li>Implement responsive design</li>
+                            <li>Validate all mathematical formulas</li>
+                            <li>Include clinical references</li>
+                            <li>Test across different screen sizes</li>
+                            <li>Provide clear unit conversion options</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="card mt-4">
+            <div class="card-body" style="background: #f8f9ff; text-align: center;">
+                <p><strong>Medical Calculators Collection</strong></p>
+                <p style="margin: 0.5rem 0; font-size: 0.95rem;">Pure HTML5 • CSS3 • Bootstrap 5</p>
+                <p style="font-size: 0.85rem; color: #666; margin-top: 1rem;">250+ Clinical Decision Support Tools • 26 Medical Specialties</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
