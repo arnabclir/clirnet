@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EDD Calculator for Patients - Calculate your due date easily">
+    <title>When Is My Due Date? - Patient Calculator</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Styles with Purple Gradient Theme -->
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #b88cd9 100%);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(102, 126, 234, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .main-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .card-header p {
+            margin: 10px 0 0 0;
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
+        }
+
+        .btn-calculate {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            width: 100%;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+
+        .result-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 30px;
+            display: none;
+            border-left: 5px solid #667eea;
+            text-align: center;
+        }
+
+        .result-section.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .due-date-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 3px solid #667eea;
+        }
+
+        .due-date-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .due-date {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 10px 0;
+        }
+
+        .due-date-day {
+            font-size: 1rem;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .pregnancy-week {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .pregnancy-week-label {
+            color: #667eea;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .pregnancy-week-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, #e8f0fe 0%, #f3e5f5 100%);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            line-height: 1.8;
+        }
+
+        .info-title {
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .info-text {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .help-text {
+            background: #fff9e6;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #856404;
+        }
+
+        .helpful-info {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .helpful-title {
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .helpful-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .helpful-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .helpful-list li:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .card-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .due-date {
+                font-size: 2rem;
+            }
+
+            .main-container {
+                margin: 20px auto;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-heartbeat"></i> Medical Calculators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../catalog.html">Catalog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="card">
+            <!-- Card Header -->
+            <div class="card-header">
+                <h2><i class="fas fa-baby"></i> When Is My Due Date?</h2>
+                <p>Find out when your baby is expected to arrive</p>
+            </div>
+
+            <!-- Card Body -->
+            <div class="card-body">
+                <!-- Input Section -->
+                <div class="mb-4">
+                    <label for="lmpDate" class="form-label">
+                        <i class="fas fa-calendar-alt"></i> First Day of Your Last Period
+                    </label>
+                    <input type="date" class="form-control" id="lmpDate">
+                    <div class="help-text">
+                        <strong>How to find this date:</strong> Look at your period tracker, calendar, or medical records. It's the first day of bleeding of your last menstrual period before you became pregnant.
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <button class="btn btn-calculate" onclick="calculateDueDate()">
+                    <i class="fas fa-calendar-check"></i> Calculate My Due Date
+                </button>
+
+                <!-- Results Section -->
+                <div id="resultSection" class="result-section">
+                    <!-- Due Date Display -->
+                    <div class="due-date-box">
+                        <div class="due-date-label">Your Estimated Due Date</div>
+                        <div class="due-date" id="dueDateDisplay">--</div>
+                        <div class="due-date-day" id="dayOfWeek">--</div>
+                    </div>
+
+                    <!-- Pregnancy Progress -->
+                    <div class="pregnancy-week">
+                        <div class="pregnancy-week-label">You are currently in week:</div>
+                        <div class="pregnancy-week-value" id="currentWeek">--</div>
+                    </div>
+
+                    <!-- Important Information -->
+                    <div class="info-box">
+                        <div class="info-title">
+                            <i class="fas fa-info-circle"></i> Important to Know
+                        </div>
+                        <div class="info-text">
+                            <p style="margin-bottom: 10px;"><strong>Your due date is an estimate, not a deadline.</strong> It's normal for babies to arrive 2 weeks before or after this date. Most babies are born between 37 and 42 weeks of pregnancy.</p>
+                            <p><strong>Your healthcare provider will confirm this date</strong> with an ultrasound scan, usually during your first prenatal visit or at your dating ultrasound.</p>
+                        </div>
+                    </div>
+
+                    <!-- Helpful Information -->
+                    <div class="helpful-info">
+                        <div class="helpful-title">
+                            <i class="fas fa-lightbulb"></i> What to Expect at Different Stages
+                        </div>
+                        <ul class="helpful-list">
+                            <li><strong>Weeks 1-12 (First Trimester):</strong> First appointment, dating ultrasound, screening tests</li>
+                            <li><strong>Weeks 13-27 (Second Trimester):</strong> Anatomy ultrasound, continued prenatal visits</li>
+                            <li><strong>Weeks 28-40 (Third Trimester):</strong> More frequent visits, labor preparation, positioning</li>
+                            <li><strong>37+ weeks:</strong> Baby is full-term and ready to be born at any time</li>
+                            <li><strong>42 weeks:</strong> Your doctor may recommend induction if labor hasn't started</li>
+                        </ul>
+                    </div>
+
+                    <!-- Additional Resources -->
+                    <div class="info-box" style="margin-top: 20px;">
+                        <div class="info-title">
+                            <i class="fas fa-hospital"></i> Next Steps
+                        </div>
+                        <div class="info-text">
+                            <ul style="margin-bottom: 0; padding-left: 20px;">
+                                <li>Schedule your first prenatal appointment</li>
+                                <li>Confirm this date with your healthcare provider</li>
+                                <li>Start prenatal vitamins (if not already)</li>
+                                <li>Prepare for your dating ultrasound</li>
+                                <li>Share your due date with family and friends</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Educational Content -->
+        <div class="card" style="margin-top: 30px;">
+            <div class="card-header" style="background: linear-gradient(135deg, #764ba2 0%, #b88cd9 100%);">
+                <h3 style="margin: 0; font-size: 1.3rem;">
+                    <i class="fas fa-question-circle"></i> Frequently Asked Questions
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <h5><i class="fas fa-check-circle" style="color: #667eea;"></i> What if I don't know my last period date?</h5>
+                    <p>Your doctor can estimate your due date using an ultrasound. This is especially accurate if done early in pregnancy. Many women get a dating ultrasound between 8-14 weeks to confirm the due date.</p>
+                </div>
+
+                <div class="mb-4">
+                    <h5><i class="fas fa-check-circle" style="color: #667eea;"></i> Will my baby be born exactly on the due date?</h5>
+                    <p>No. Due dates are estimates. Only about 5% of babies are born exactly on their due date. Most babies are born within 2 weeks (before or after) the estimated due date. Babies born anytime from 37-42 weeks are considered full-term.</p>
+                </div>
+
+                <div class="mb-4">
+                    <h5><i class="fas fa-check-circle" style="color: #667eea;"></i> What if my cycle is longer or shorter than 28 days?</h5>
+                    <p>If your cycles are different, your actual due date may vary slightly. Your ultrasound is the best way to confirm the due date, especially early in pregnancy.</p>
+                </div>
+
+                <div class="mb-4">
+                    <h5><i class="fas fa-check-circle" style="color: #667eea;"></i> When should I expect labor?</h5>
+                    <p><strong>Early labor</strong> (37-38 weeks) is possible but babies born before 37 weeks may need special care. <strong>Full-term</strong> is 39-40 weeks. Most healthy pregnancies continue to 40 weeks or slightly beyond.</p>
+                </div>
+
+                <div class="mb-4">
+                    <h5><i class="fas fa-check-circle" style="color: #667eea;"></i> Should I be concerned if my baby isn't born by the due date?</h5>
+                    <p>Not necessarily. Your doctor will monitor you and your baby. If you go past 42 weeks, your doctor may recommend induction, but many pregnancies naturally go a few days past the due date.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Calculator Logic -->
+    <script>
+        /**
+         * Calculate due date using LMP (patient-friendly version)
+         */
+        function calculateDueDate() {
+            // Get LMP date
+            const lmpDateInput = document.getElementById('lmpDate').value;
+
+            // Validation
+            if (!lmpDateInput) {
+                alert('Please select the first day of your last period');
+                return;
+            }
+
+            // Parse date
+            const lmpDate = new Date(lmpDateInput);
+
+            // Check if date is in the future
+            if (lmpDate > new Date()) {
+                alert('Please select a date in the past');
+                return;
+            }
+
+            // Calculate due date: LMP + 280 days (40 weeks)
+            const dueDate = new Date(lmpDate);
+            dueDate.setDate(dueDate.getDate() + 280);
+
+            // Display results
+            displayResults(dueDate, lmpDate);
+        }
+
+        /**
+         * Display due date results in patient-friendly format
+         */
+        function displayResults(dueDate, lmpDate) {
+            const resultSection = document.getElementById('resultSection');
+            const dueDateDisplay = document.getElementById('dueDateDisplay');
+            const dayOfWeek = document.getElementById('dayOfWeek');
+            const currentWeek = document.getElementById('currentWeek');
+
+            // Format due date
+            const dueDateFormatted = dueDate.toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric'
+            });
+
+            const dayName = dueDate.toLocaleDateString('en-US', {
+                weekday: 'long'
+            });
+
+            dueDateDisplay.textContent = dueDateFormatted;
+            dayOfWeek.textContent = dayName;
+
+            // Calculate current pregnancy week
+            const today = new Date();
+            const daysElapsed = Math.floor((today - lmpDate) / (1000 * 60 * 60 * 24));
+            const weeksElapsed = Math.floor(daysElapsed / 7);
+            const daysInCurrentWeek = daysElapsed % 7;
+
+            if (weeksElapsed <= 0) {
+                currentWeek.textContent = 'Not yet started';
+            } else if (weeksElapsed > 42) {
+                currentWeek.textContent = 'Beyond due date - contact your healthcare provider';
+            } else {
+                currentWeek.textContent = `${weeksElapsed} weeks and ${daysInCurrentWeek} days`;
+            }
+
+            // Show results
+            resultSection.classList.add('show');
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>

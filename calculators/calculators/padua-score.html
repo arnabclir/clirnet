@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padua Score - VTE Risk in Hospitalized Patients</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-dark: #2d3748;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .nav-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .calculator-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 2rem 1.5rem;
+        }
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+        }
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 5px solid #667eea;
+        }
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 1rem 0;
+        }
+        .interpretation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+        .formula-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+        .score-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .risk-low { color: #28a745; font-weight: 600; }
+        .risk-high { color: #dc3545; font-weight: 600; }
+        .info-badge {
+            display: inline-block;
+            background: #e7f3ff;
+            color: #0066cc;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="mb-0"><i class="fas fa-heartbeat"></i> Critical Care Calculators</h1>
+                    <small>Pulmonary & Critical Care Medicine</small>
+                </div>
+                <a href="index.html" class="btn btn-light btn-sm"><i class="fas fa-home"></i> Home</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="calculator-container">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-code"></i> Padua Score</h2>
+                <p>VTE Risk in Hospitalized Medical Patients - Simplified Assessment</p>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="info-badge">
+                    <i class="fas fa-exclamation-circle"></i> Simple scoring for VTE risk identification
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="age2" class="form-check-input">
+                        <label for="age2">Age ≥60 years (1 point)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="cancer2" class="form-check-input">
+                        <label for="cancer2">Cancer (3 points)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="hf2" class="form-check-input">
+                        <label for="hf2">Heart failure or respiratory disease (1 point)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="mi" class="form-check-input">
+                        <label for="mi">Acute MI or stroke (1 point)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="infec" class="form-check-input">
+                        <label for="infec">Acute infection (1 point)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="immob" class="form-check-input">
+                        <label for="immob">Immobility ≥3 consecutive days (1 point)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="dvtpe2" class="form-check-input">
+                        <label for="dvtpe2">History of DVT/PE (3 points)</label>
+                    </div>
+                </div>
+
+                <button onclick="calculatePadua()" class="btn btn-primary btn-lg w-100 mt-4">
+                    <i class="fas fa-calculator"></i> Calculate Padua Score
+                </button>
+
+                <div id="result" style="display:none;" class="result-box">
+                    <h4><i class="fas fa-chart-pie"></i> Padua Risk Result</h4>
+                    <div class="result-score" id="scoreValue">--</div>
+                    <div class="interpretation">
+                        <h5>VTE Risk:</h5>
+                        <p id="riskLevel"></p>
+                    </div>
+                    <div class="interpretation">
+                        <h5>Prophylaxis Recommendation:</h5>
+                        <p id="recommendation"></p>
+                    </div>
+                </div>
+
+                <div class="formula-section">
+                    <h5><i class="fas fa-book"></i> Padua Score Risk Categories</h5>
+                    <ul class="small mb-0">
+                        <li>Score <4: Low risk - No prophylaxis needed unless additional clinical concerns</li>
+                        <li>Score ≥4: High risk - Pharmacologic prophylaxis recommended</li>
+                        <li>Simple 7-item score easier to apply than Geneva</li>
+                        <li>Predicts symptomatic VTE in hospitalized medical patients</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate Padua Score
+        function calculatePadua() {
+            let score = 0;
+
+            if (document.getElementById('age2').checked) score += 1;
+            if (document.getElementById('cancer2').checked) score += 3;
+            if (document.getElementById('hf2').checked) score += 1;
+            if (document.getElementById('mi').checked) score += 1;
+            if (document.getElementById('infec').checked) score += 1;
+            if (document.getElementById('immob').checked) score += 1;
+            if (document.getElementById('dvtpe2').checked) score += 3;
+
+            let riskLevel = '';
+            let recommendation = '';
+
+            if (score < 4) {
+                riskLevel = '<span class="risk-low"><i class="fas fa-check-circle"></i> Low Risk</span> - ~3% VTE rate';
+                recommendation = 'Routine care with early mobilization. Pharmacologic prophylaxis not routinely recommended unless additional risk factors present.';
+            } else {
+                riskLevel = '<span class="risk-high"><i class="fas fa-times-circle"></i> High Risk</span> - ~10% VTE rate';
+                recommendation = 'Pharmacologic VTE prophylaxis strongly recommended (LMWH, fondaparinux, or heparin). Mechanical prophylaxis (SCDs) can be added if contraindications to anticoagulation.';
+            }
+
+            document.getElementById('scoreValue').textContent = score;
+            document.getElementById('riskLevel').innerHTML = riskLevel;
+            document.getElementById('recommendation').innerHTML = recommendation;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

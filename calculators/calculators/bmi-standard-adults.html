@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator - Standard (Adults) - Patient Education</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ==========================================
+           CUSTOM STYLING & PURPLE GRADIENT THEME
+           ========================================== */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            --secondary-gradient: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%);
+            --text-dark: #2d3748;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+
+        /* Navigation Header */
+        .nav-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .nav-header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+
+        /* Main Container */
+        .calculator-container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 0 1rem 2rem 1rem;
+        }
+
+        /* Card Styling */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.15);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 2rem 1.5rem;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        .card-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.95;
+            font-size: 0.9rem;
+        }
+
+        /* Form Controls */
+        .form-control, .form-select {
+            border: 2px solid #e9d5ff;
+            border-radius: 10px;
+            padding: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 0.2rem rgba(139, 92, 246, 0.25);
+        }
+
+        .form-label {
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Input Group */
+        .input-group-text {
+            background-color: #f3e8ff;
+            border: 2px solid #e9d5ff;
+            color: #6d28d9;
+            font-weight: 600;
+        }
+
+        /* Buttons */
+        .btn-calculate {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            color: white;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+            color: white;
+        }
+
+        .btn-reset {
+            background: #e9d5ff;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            color: #6d28d9;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reset:hover {
+            background: #ddd6fe;
+            color: #5b21b6;
+        }
+
+        /* Result Box */
+        .result-box {
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-left: 5px solid #8b5cf6;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #6d28d9;
+            margin: 1rem 0;
+        }
+
+        /* Interpretation Boxes */
+        .interpretation-box {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-left: 4px solid #8b5cf6;
+        }
+
+        .interpretation-title {
+            color: #6d28d9;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .interpretation-text {
+            color: #4b5563;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #f0f4ff;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-left: 4px solid #8b5cf6;
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+
+        .info-box i {
+            color: #8b5cf6;
+            margin-right: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-header h1 {
+                font-size: 1.4rem;
+            }
+
+            .card-header {
+                padding: 1.5rem 1rem;
+            }
+
+            .card-header h2 {
+                font-size: 1.3rem;
+            }
+
+            .result-score {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <div class="nav-header">
+        <div class="container">
+            <h1><i class="fas fa-weight"></i> Body Mass Index Calculator</h1>
+            <p>Standard Units (lbs, inches) - Patient Education</p>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="calculator-container">
+        <!-- Instruction Card -->
+        <div class="card">
+            <div class="card-body">
+                <div class="alert alert-info" role="alert">
+                    <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> Enter your weight in pounds and height in feet and inches. BMI will be calculated using the standard imperial formula.
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculator Form -->
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-ruler-combined"></i> BMI Calculation</h2>
+                <p>Standard (Imperial) measurements for adults</p>
+            </div>
+            <div class="card-body">
+                <form id="bmiForm">
+                    <!-- Weight Input -->
+                    <div class="mb-4">
+                        <label for="weight" class="form-label">
+                            <i class="fas fa-weight-scale"></i> Weight
+                        </label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="weight" placeholder="Enter weight" step="0.1" min="0" required>
+                            <span class="input-group-text">lbs</span>
+                        </div>
+                        <small class="text-muted">Enter your weight in pounds</small>
+                    </div>
+
+                    <!-- Height Input (Feet and Inches) -->
+                    <div class="mb-4">
+                        <label class="form-label">
+                            <i class="fas fa-ruler"></i> Height
+                        </label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="feet" placeholder="Feet" step="1" min="0" max="8" required>
+                                    <span class="input-group-text">ft</span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="inches" placeholder="Inches" step="1" min="0" max="11" required>
+                                    <span class="input-group-text">in</span>
+                                </div>
+                            </div>
+                        </div>
+                        <small class="text-muted">Enter your height in feet and inches</small>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-calculate w-100" onclick="calculateBMI()">
+                                <i class="fas fa-calculator"></i> Calculate BMI
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="reset" class="btn btn-reset w-100">
+                                <i class="fas fa-redo"></i> Clear Form
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="result-box" id="resultBox">
+            <h3><i class="fas fa-chart-pie"></i> Your BMI Results</h3>
+            <div class="result-score" id="scoreValue">0</div>
+
+            <!-- Interpretation -->
+            <div class="interpretation-box" id="interpretationBox"></div>
+
+            <!-- Clinical Notes -->
+            <div class="info-box">
+                <i class="fas fa-stethoscope"></i>
+                <strong>Health Information:</strong> BMI is a general health screening tool. It does not directly measure body fat or account for muscle mass, bone density, or age. Discuss your results with your healthcare provider for personalized guidance.
+            </div>
+        </div>
+
+        <!-- BMI Categories -->
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-book"></i> BMI Categories</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead style="background-color: #f3e8ff;">
+                        <tr>
+                            <th>BMI Range</th>
+                            <th>Category</th>
+                            <th>Health Risk</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Below 18.5</strong></td>
+                            <td><span class="badge bg-info">Underweight</span></td>
+                            <td>Risk of nutritional deficiency and other health issues</td>
+                        </tr>
+                        <tr>
+                            <td><strong>18.5 - 24.9</strong></td>
+                            <td><span class="badge bg-success">Normal Weight</span></td>
+                            <td>Healthy weight range</td>
+                        </tr>
+                        <tr>
+                            <td><strong>25.0 - 29.9</strong></td>
+                            <td><span class="badge bg-warning text-dark">Overweight</span></td>
+                            <td>Increased risk of health complications</td>
+                        </tr>
+                        <tr>
+                            <td><strong>30.0 - 34.9</strong></td>
+                            <td><span class="badge bg-danger">Obese (Class I)</span></td>
+                            <td>Significant health risks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>35.0 - 39.9</strong></td>
+                            <td><span class="badge bg-danger">Obese (Class II)</span></td>
+                            <td>Very high health risks</td>
+                        </tr>
+                        <tr>
+                            <td><strong>40.0+</strong></td>
+                            <td><span class="badge bg-danger">Obese (Class III)</span></td>
+                            <td>Extreme health risks; urgent intervention needed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Formula Section -->
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-flask"></i> Formula</h4>
+            </div>
+            <div class="card-body">
+                <p><strong>BMI = [Weight (lbs) ÷ Height (inches)²] × 703</strong></p>
+                <p class="text-muted">Example: If you weigh 160 lbs and are 5'8" (68 inches) tall:<br>
+                BMI = [160 ÷ 68²] × 703 = [160 ÷ 4,624] × 703 = 24.3 (Normal Weight)</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="card mt-3">
+            <div class="card-body text-center text-muted small">
+                <p>For patient education purposes only. Not a substitute for professional medical evaluation.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /**
+         * Calculate BMI for Adults (Standard/Imperial)
+         * BMI = [weight (lbs) / height (inches)²] × 703
+         */
+        function calculateBMI() {
+            // Get input values
+            const weight = parseFloat(document.getElementById('weight').value);
+            const feet = parseFloat(document.getElementById('feet').value);
+            const inches = parseFloat(document.getElementById('inches').value);
+
+            // Validate inputs
+            if (!weight || !feet || feet < 0 || inches < 0 || weight <= 0) {
+                alert('Please enter valid weight and height values');
+                return;
+            }
+
+            // Convert height to total inches
+            const totalInches = (feet * 12) + inches;
+
+            // Calculate BMI
+            const bmi = (weight / (totalInches * totalInches)) * 703;
+
+            // Display score
+            document.getElementById('scoreValue').textContent = bmi.toFixed(1);
+
+            // Generate interpretation based on BMI
+            let category = '';
+            let badgeClass = '';
+            let interpretation = '';
+
+            if (bmi < 18.5) {
+                category = 'Underweight';
+                badgeClass = 'bg-info';
+                interpretation = '<strong style="color: #0891b2;">Underweight (BMI < 18.5)</strong><br>Your weight is below the normal range. This may indicate nutritional deficiency. Consult your healthcare provider for personalized guidance on healthy weight gain and nutrition.';
+            } else if (bmi >= 18.5 && bmi < 25) {
+                category = 'Normal Weight';
+                badgeClass = 'bg-success';
+                interpretation = '<strong style="color: #10b981;">Normal Weight (BMI 18.5 - 24.9)</strong><br>Your weight is within the healthy range. Maintain your current healthy habits including balanced nutrition and regular physical activity.';
+            } else if (bmi >= 25 && bmi < 30) {
+                category = 'Overweight';
+                badgeClass = 'bg-warning';
+                interpretation = '<strong style="color: #f59e0b;">Overweight (BMI 25.0 - 29.9)</strong><br>Your weight is above the normal range. Consider discussing lifestyle modifications with your healthcare provider, including diet and exercise.';
+            } else if (bmi >= 30 && bmi < 35) {
+                category = 'Obese (Class I)';
+                badgeClass = 'bg-danger';
+                interpretation = '<strong style="color: #ef4444;">Obese - Class I (BMI 30.0 - 34.9)</strong><br>Your weight significantly exceeds the normal range. Professional medical guidance is recommended. Your healthcare provider can help develop a safe weight management plan.';
+            } else if (bmi >= 35 && bmi < 40) {
+                category = 'Obese (Class II)';
+                badgeClass = 'bg-danger';
+                interpretation = '<strong style="color: #ef4444;">Obese - Class II (BMI 35.0 - 39.9)</strong><br>Your weight significantly exceeds the normal range with increased health risks. Consult your healthcare provider urgently about weight management and potential health screening.';
+            } else {
+                category = 'Obese (Class III)';
+                badgeClass = 'bg-danger';
+                interpretation = '<strong style="color: #ef4444;">Obese - Class III (BMI 40.0+)</strong><br>Your weight poses serious health risks. It is strongly recommended to seek professional medical help immediately for comprehensive evaluation and weight management.';
+            }
+
+            // Display interpretation
+            document.getElementById('interpretationBox').innerHTML =
+                `<div class="interpretation-title"><span class="badge ${badgeClass}">${category}</span></div><div class="interpretation-text">${interpretation}</div>`;
+
+            // Show result box
+            document.getElementById('resultBox').classList.add('show');
+        }
+
+        /**
+         * Initialize form
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('bmiForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                calculateBMI();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GFR - Race-Free CKD-EPI eGFRcys - Nephrology Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .container-main {
+            max-width: 1000px;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            padding: 2rem;
+            border: none;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .card-subtitle {
+            color: rgba(255,255,255,0.9);
+            margin-top: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-control {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 0.75rem;
+        }
+
+        .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-calculate {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-calculate:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 1rem 0;
+        }
+
+        .result-label {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .interpretation {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .interpretation-text {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+            color: #1565c0;
+        }
+
+        .formula-box {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .card-title {
+                font-size: 1.4rem;
+            }
+
+            .result-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/calculators/calculators/index.html">
+                <i class="fas fa-calculator"></i> Nephrology Calculators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/calculators/calculators/index.html">
+                            <i class="fas fa-home"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <i class="fas fa-flask"></i> Calculators
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-main">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">
+                    <i class="fas fa-flask-vial"></i> GFR (Race-Free CKD-EPI eGFRcys)
+                </h1>
+                <p class="card-subtitle">Based on Cystatin C Only</p>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Input Section -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <label class="input-label">
+                                <i class="fas fa-venus-mars"></i> Sex
+                            </label>
+                            <select class="form-select" id="sex">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <label class="input-label">
+                                <i class="fas fa-calendar"></i> Age (years)
+                            </label>
+                            <input type="number" class="form-control" id="age" placeholder="Enter age" min="0" max="120">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <label class="input-label">
+                                <i class="fas fa-flask-vial"></i> Serum Cystatin C
+                            </label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="cystatinC" placeholder="Enter value" step="0.01">
+                                <span class="input-group-text">mg/L</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>2021 CKD-EPI Equation (Cystatin C Only):</strong> Uses cystatin C as a standalone marker. Useful in patients with abnormal muscle mass or when creatinine-based estimates are unreliable.
+                </div>
+
+                <div class="formula-box">
+                    <strong>Formula (Race-Free CKD-EPI eGFRcys):</strong><br>
+                    eGFR = 133 × min(Cys/0.8, 1)^-0.4 × max(Cys/0.8, 1)^-1.2 × 0.9938^age × [1.06 if female]
+                </div>
+
+                <button class="btn btn-calculate btn-lg w-100" onclick="calculateGFR()">
+                    <i class="fas fa-calculator"></i> Calculate eGFR
+                </button>
+
+                <!-- Results Section -->
+                <div id="resultsSection" class="hidden">
+                    <div class="result-card">
+                        <div class="result-label">Estimated Glomerular Filtration Rate</div>
+                        <div class="result-value" id="gfrResult">-</div>
+                        <div class="result-label">mL/min/1.73m²</div>
+                    </div>
+
+                    <div class="interpretation">
+                        <div class="interpretation-title">
+                            <i class="fas fa-stethoscope"></i> Clinical Interpretation
+                        </div>
+                        <div class="interpretation-text" id="interpretationText">
+                            Select all parameters and click Calculate
+                        </div>
+                    </div>
+
+                    <div class="interpretation">
+                        <div class="interpretation-title">
+                            <i class="fas fa-clipboard-list"></i> CKD Stages
+                        </div>
+                        <div class="interpretation-text">
+                            <strong>Stage 1:</strong> eGFR ≥90<br>
+                            <strong>Stage 2:</strong> eGFR 60-89<br>
+                            <strong>Stage 3a:</strong> eGFR 45-59<br>
+                            <strong>Stage 3b:</strong> eGFR 30-44<br>
+                            <strong>Stage 4:</strong> eGFR 15-29<br>
+                            <strong>Stage 5:</strong> eGFR <15
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 text-muted">
+        <small>&copy; 2024 Nephrology Calculators. For educational and clinical reference only.</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /**
+         * Calculate eGFR using 2021 Race-Free CKD-EPI Equation (Cystatin C)
+         */
+        function calculateGFR() {
+            const sex = document.getElementById('sex').value;
+            const age = parseFloat(document.getElementById('age').value);
+            const cystatinC = parseFloat(document.getElementById('cystatinC').value);
+
+            // Validate inputs
+            if (!age || !cystatinC || age < 18) {
+                alert('Please enter valid values (age must be ≥18 years)');
+                return;
+            }
+
+            // Define coefficients based on sex
+            let female_factor = sex === 'female' ? 1.06 : 1;
+
+            // Calculate eGFR using race-free CKD-EPI equation (Cystatin C only)
+            const cysRatio = cystatinC / 0.8;
+            let cysTerm;
+            if (cysRatio <= 1) {
+                cysTerm = Math.pow(cysRatio, -0.4);
+            } else {
+                cysTerm = Math.pow(cysRatio, -1.2);
+            }
+
+            const age_factor = Math.pow(0.9938, age);
+            const eGFR = 133 * cysTerm * age_factor * female_factor;
+
+            // Display results
+            document.getElementById('gfrResult').textContent = eGFR.toFixed(1);
+
+            let interpretation = '';
+            if (eGFR >= 90) {
+                interpretation = '<strong>Stage 1 (eGFR ≥90):</strong> Normal kidney function. Cystatin C-based assessment particularly useful when muscle mass is abnormal.';
+            } else if (eGFR >= 60) {
+                interpretation = '<strong>Stage 2 (eGFR 60-89):</strong> Mild reduction. Monitor regularly.';
+            } else if (eGFR >= 45) {
+                interpretation = '<strong>Stage 3a (eGFR 45-59):</strong> Mild to moderate decline. Assess for CKD etiology.';
+            } else if (eGFR >= 30) {
+                interpretation = '<strong>Stage 3b (eGFR 30-44):</strong> Moderate to severe decline. Requires closer follow-up.';
+            } else if (eGFR >= 15) {
+                interpretation = '<strong>Stage 4 (eGFR 15-29):</strong> Severe decline. Needs nephrologist management and RRT preparation.';
+            } else {
+                interpretation = '<strong>Stage 5 (eGFR <15):</strong> Kidney failure. Requires renal replacement therapy.';
+            }
+
+            document.getElementById('interpretationText').innerHTML = interpretation;
+            document.getElementById('resultsSection').classList.remove('hidden');
+        }
+
+        // Allow Enter key to calculate
+        document.querySelectorAll('.form-control, .form-select').forEach(input => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') calculateGFR();
+            });
+        });
+    </script>
+</body>
+</html>

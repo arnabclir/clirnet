@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IgE Measurement Interpretation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --light-bg: #f8f9fa;
+        }
+
+        body {
+            background: var(--light-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 20px;
+        }
+
+        .gradient-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .gradient-header h1 {
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .gradient-header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin: 0;
+        }
+
+        .calculator-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        .input-group-text {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-calculate {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .btn-calculate:active {
+            transform: translateY(0);
+        }
+
+        .results-section {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+        }
+
+        .results-section.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-item {
+            margin-bottom: 20px;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .interpretation-box {
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid;
+        }
+
+        .interpretation-normal {
+            background-color: #d4edda;
+            border-left-color: #28a745;
+            color: #155724;
+        }
+
+        .interpretation-low {
+            background-color: #cfe2ff;
+            border-left-color: #0d6efd;
+            color: #084298;
+        }
+
+        .interpretation-elevated {
+            background-color: #fff3cd;
+            border-left-color: #ff9800;
+            color: #856404;
+        }
+
+        .interpretation-high {
+            background-color: #f8d7da;
+            border-left-color: #dc3545;
+            color: #721c24;
+        }
+
+        .interpretation-veryhigh {
+            background-color: #f5c2c7;
+            border-left-color: #842029;
+            color: #842029;
+        }
+
+        .error-message {
+            display: none;
+            padding: 15px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            color: #721c24;
+            margin-bottom: 20px;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .reference-box {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .reference-box h5 {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .reference-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .reference-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .reference-item strong {
+            display: block;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .interpretation-table {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        .interpretation-table table {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        .interpretation-table th {
+            background-color: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            font-weight: 600;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .interpretation-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .back-button {
+            margin-bottom: 20px;
+        }
+
+        .back-button a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.2s;
+        }
+
+        .back-button a:hover {
+            gap: 12px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .badge-interpretation {
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .badge-normal {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .badge-elevated {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-high {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #0066cc;
+        }
+
+        .info-box strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-button">
+            <a href="/index.html" title="Return to main dashboard">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+        </div>
+
+        <div class="gradient-header">
+            <h1>
+                <i class="fas fa-vial"></i>
+                IgE Measurement Interpretation
+            </h1>
+            <p>Interpret immunoglobulin E levels and assess allergic sensitivity</p>
+        </div>
+
+        <div class="calculator-container">
+            <!-- Error Message -->
+            <div class="error-message" id="errorMessage" role="alert">
+                <i class="fas fa-exclamation-circle"></i> <span id="errorText"></span>
+            </div>
+
+            <!-- Info Box -->
+            <div class="info-box">
+                <strong><i class="fas fa-info-circle"></i> About IgE Testing</strong>
+                <p class="mb-0">
+                    IgE (Immunoglobulin E) is an antibody produced by the immune system in response to allergen exposure.
+                    Total IgE levels help evaluate allergic tendency, atopy, and parasitic infections.
+                </p>
+            </div>
+
+            <!-- Input Section -->
+            <div class="input-section">
+                <div class="row">
+                    <div class="col-md-12 mb-4">
+                        <label for="igeValue" class="form-label">
+                            <i class="fas fa-vial-circle-check"></i> Total IgE Level
+                        </label>
+                        <div class="input-group">
+                            <input
+                                type="number"
+                                class="form-control form-control-lg"
+                                id="igeValue"
+                                placeholder="Enter IgE value"
+                                min="0"
+                                step="0.1"
+                                aria-label="IgE Value"
+                            >
+                            <span class="input-group-text">
+                                <i class="fas fa-cube"></i> IU/mL
+                            </span>
+                        </div>
+                        <small class="form-text text-muted mt-2">
+                            Enter value in IU/mL (kIU/L) or mg/dL - Normal: &lt;0.35 IU/mL (or &lt;100 ng/mL)
+                        </small>
+                    </div>
+                </div>
+
+                <button class="btn btn-lg btn-calculate" onclick="interpretIgE()">
+                    <i class="fas fa-magnifying-glass-chart"></i> Interpret IgE Level
+                </button>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection">
+                <h3 class="mb-4">
+                    <i class="fas fa-chart-line"></i> IgE Interpretation Results
+                </h3>
+
+                <div class="result-item">
+                    <p class="fw-bold">IgE Level:</p>
+                    <div class="result-value" id="igeValueDisplay"></div>
+                    <small class="text-muted">IU/mL</small>
+                </div>
+
+                <div class="result-item">
+                    <p class="fw-bold"><i class="fas fa-check-circle"></i> Interpretation:</p>
+                    <div id="interpretationBadge"></div>
+                    <div class="interpretation-box" id="interpretationBox"></div>
+                </div>
+
+                <div class="result-item mt-4">
+                    <p class="fw-bold"><i class="fas fa-lightbulb"></i> Clinical Significance:</p>
+                    <div id="clinicalSignificance" class="alert alert-info border-start-4 ps-3"></div>
+                </div>
+
+                <div class="result-item mt-4">
+                    <p class="fw-bold"><i class="fas fa-list"></i> Possible Associated Conditions:</p>
+                    <ul id="associatedConditions" class="list-unstyled ps-3"></ul>
+                </div>
+
+                <div class="result-item mt-4">
+                    <p class="fw-bold"><i class="fas fa-recommendations"></i> Clinical Recommendations:</p>
+                    <ul id="recommendations" class="list-unstyled ps-3"></ul>
+                </div>
+            </div>
+
+            <!-- Reference Section -->
+            <div class="reference-box">
+                <h5>
+                    <i class="fas fa-book"></i> IgE Classification & Reference Ranges
+                </h5>
+                <div class="interpretation-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Classification</th>
+                                <th>IgE Level (IU/mL)</th>
+                                <th>IgE Level (ng/mL)</th>
+                                <th>Clinical Significance</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="badge bg-success">Normal</span></td>
+                                <td>&lt;0.35</td>
+                                <td>&lt;100</td>
+                                <td>No atopy, minimal allergic risk</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-info">Low (Borderline)</span></td>
+                                <td>0.35-0.70</td>
+                                <td>100-200</td>
+                                <td>Possible mild allergic tendency</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-warning">Mild Elevation</span></td>
+                                <td>0.70-5.0</td>
+                                <td>200-1,400</td>
+                                <td>Mild allergic responses or parasitic infection</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-danger">Moderate Elevation</span></td>
+                                <td>5.0-50</td>
+                                <td>1,400-14,000</td>
+                                <td>Moderate atopy, multiple allergies, parasites</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-danger">High Elevation</span></td>
+                                <td>50-500</td>
+                                <td>14,000-140,000</td>
+                                <td>Strong atopy, hypereosinophilic syndrome</td>
+                            </tr>
+                            <tr>
+                                <td><span class="badge bg-dark">Very High</span></td>
+                                <td>&gt;500</td>
+                                <td>&gt;140,000</td>
+                                <td>Hypereosinophilic syndrome, parasitic disease</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="reference-item mt-3">
+                    <strong><i class="fas fa-flask"></i> Laboratory Units:</strong>
+                    <p>
+                        1 IU/mL = 2.4 ng/mL (conversion factor)<br>
+                        kIU/L is equivalent to IU/mL (same unit system in modern labs)<br>
+                        Normal range typically defined as &lt;0.35 IU/mL or &lt;100 ng/mL
+                    </p>
+                </div>
+
+                <div class="reference-item">
+                    <strong><i class="fas fa-lightbulb"></i> Interpretation Notes:</strong>
+                    <p>
+                        - Total IgE screening has limited sensitivity and specificity for individual allergies<br>
+                        - Specific IgE testing to individual allergens is more useful for allergy diagnosis<br>
+                        - IgE levels can be elevated in parasitic infections (common in tropical regions)<br>
+                        - Mild elevations may occur in smokers, asthmatics, and atopic individuals<br>
+                        - Very high levels (&gt;1000) suggest hypereosinophilic syndrome or lymphoproliferative disorder
+                    </p>
+                </div>
+
+                <div class="reference-item">
+                    <strong><i class="fas fa-medical-book"></i> Sources:</strong>
+                    <p>
+                        - American Academy of Allergy, Asthma & Immunology (AAAAI)<br>
+                        - Clinical Immunology: Principles and Practice (6th Edition)<br>
+                        - Mayo Clinic Laboratories Reference Values<br>
+                        - Journal of Allergy and Clinical Immunology
+                    </p>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>
+                    <i class="fas fa-clock"></i> Last Updated: <span id="timestamp"></span>
+                </p>
+                <p style="font-size: 0.85rem; margin-top: 10px;">
+                    Medical Calculators for Allergy and Immunology | IgE interpretation should be correlated with clinical presentation
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /**
+         * IgE interpretation data structure
+         * Contains cutoff values and clinical information
+         */
+        const igeRanges = [
+            {
+                minValue: 0,
+                maxValue: 0.35,
+                label: 'Normal',
+                badgeClass: 'badge-normal',
+                interpretation: 'IgE level is within normal range. No significant atopy detected.',
+                clinicalSig: 'Normal IgE levels suggest the individual has minimal allergic tendency. This does not rule out IgE-mediated allergies to specific allergens.',
+                conditions: [
+                    'No atopy or allergic sensitization',
+                    'Low risk of IgE-mediated allergic reactions',
+                    'Normal immune response'
+                ],
+                recommendations: [
+                    'Continue routine follow-up if clinically indicated',
+                    'Perform specific IgE testing if individual allergies are suspected',
+                    'Monitor for any new symptom development'
+                ]
+            },
+            {
+                minValue: 0.35,
+                maxValue: 0.70,
+                label: 'Borderline Low',
+                badgeClass: 'badge-info',
+                interpretation: 'IgE level is slightly elevated above normal range. Minimal allergic tendency.',
+                clinicalSig: 'Borderline elevated IgE may indicate very mild allergic sensitization or early atopic development. Consider clinical context.',
+                conditions: [
+                    'Possible mild allergic tendency',
+                    'Early atopic disease development',
+                    'Minimal parasitic infection risk'
+                ],
+                recommendations: [
+                    'Consider skin prick testing for common allergens',
+                    'Assess patient\'s clinical symptoms',
+                    'Monitor IgE trends with repeat testing if indicated'
+                ]
+            },
+            {
+                minValue: 0.70,
+                maxValue: 5.0,
+                label: 'Mild Elevation',
+                badgeClass: 'badge-elevated',
+                interpretation: 'IgE level is mildly elevated. Consistent with mild allergic responses or early allergy development.',
+                clinicalSig: 'Mildly elevated IgE suggests the patient has some degree of allergic sensitization. May indicate atopic individuals or mild parasitic infections.',
+                conditions: [
+                    'Atopic dermatitis',
+                    'Allergic rhinitis',
+                    'Mild asthma',
+                    'Mild parasitic infections',
+                    'Allergic urticaria'
+                ],
+                recommendations: [
+                    'Perform specific IgE testing to identify offending allergens',
+                    'Consider skin prick test battery for common allergens',
+                    'Screen for parasitic infections if travel history is relevant',
+                    'Counsel on allergen avoidance strategies',
+                    'Consider trial of antihistamines or nasal corticosteroids'
+                ]
+            },
+            {
+                minValue: 5.0,
+                maxValue: 50,
+                label: 'Moderate Elevation',
+                badgeClass: 'badge-elevated',
+                interpretation: 'IgE level is moderately elevated. Consistent with moderate allergic disease or parasitic infection.',
+                clinicalSig: 'Moderately elevated IgE typically indicates moderate degree of allergic sensitization with multiple allergen sensitivities or moderate parasitic infection.',
+                conditions: [
+                    'Multiple allergies',
+                    'Moderate asthma',
+                    'Moderate atopic dermatitis',
+                    'Moderate allergic rhinitis',
+                    'Parasitic infections (helminths)',
+                    'Allergic bronchopulmonary aspergillosis (suspected)'
+                ],
+                recommendations: [
+                    'Comprehensive specific IgE testing to multiple allergens',
+                    'Perform allergist consultation',
+                    'Initiate allergen immunotherapy if indicated',
+                    'Consider prophylactic medications (inhaled corticosteroids)',
+                    'Stool examination for parasites if epidemiologically indicated',
+                    'Monitor eosinophil count and clinical response'
+                ]
+            },
+            {
+                minValue: 50,
+                maxValue: 500,
+                label: 'High Elevation',
+                badgeClass: 'badge-high',
+                interpretation: 'IgE level is significantly elevated. Consistent with strong allergic disease.',
+                clinicalSig: 'Significantly elevated IgE indicates strong atopic tendency with extensive allergic sensitization, or hypereosinophilic syndrome.',
+                conditions: [
+                    'Severe asthma (allergic)',
+                    'Severe atopic dermatitis',
+                    'Allergic bronchopulmonary aspergillosis',
+                    'Hypereosinophilic syndrome (possible)',
+                    'Chronic parasitic infection',
+                    'Allergic fungal sinusitis'
+                ],
+                recommendations: [
+                    'Urgent referral to allergy/immunology specialist',
+                    'Comprehensive allergen testing and assessment',
+                    'Evaluate for secondary IgE-mediated complications',
+                    'Check peripheral eosinophil count (CBC differential)',
+                    'Consider CT imaging if aspergillosis suspected',
+                    'Initiate aggressive allergen avoidance and pharmacotherapy'
+                ]
+            },
+            {
+                minValue: 500,
+                maxValue: Infinity,
+                label: 'Very High Elevation',
+                badgeClass: 'badge-high',
+                interpretation: 'IgE level is markedly elevated (>500). Highly suggestive of hypereosinophilic syndrome or severe parasitic disease.',
+                clinicalSig: 'Very high IgE levels are unusual and typically indicate hypereosinophilic syndrome, lymphoproliferative disorder, or severe parasitic infection. Urgent evaluation needed.',
+                conditions: [
+                    'Hypereosinophilic syndrome',
+                    'Lymphoproliferative disorder',
+                    'Severe parasitic infection',
+                    'IgE myeloma (rare)',
+                    'ABPA with high burden',
+                    'Atopic syndrome with extreme sensitization'
+                ],
+                recommendations: [
+                    'Urgent hematology/immunology referral',
+                    'Complete blood count with differential',
+                    'Bone marrow examination may be needed',
+                    'Molecular studies for clonal disorders',
+                    'Evaluate for parasitic diseases comprehensively',
+                    'Imaging studies (CT, imaging) as clinically indicated',
+                    'Cytokine profile and T-cell studies'
+                ]
+            }
+        ];
+
+        /**
+         * Interpret IgE levels based on value
+         */
+        function interpretIgE() {
+            const igeInput = parseFloat(document.getElementById('igeValue').value);
+            const errorDiv = document.getElementById('errorMessage');
+            const resultsSection = document.getElementById('resultsSection');
+
+            // Validation
+            if (!igeInput && igeInput !== 0) {
+                showError('Please enter an IgE value');
+                resultsSection.classList.remove('show');
+                return;
+            }
+
+            if (isNaN(igeInput)) {
+                showError('Please enter a valid numeric value');
+                resultsSection.classList.remove('show');
+                return;
+            }
+
+            if (igeInput < 0) {
+                showError('IgE value cannot be negative');
+                resultsSection.classList.remove('show');
+                return;
+            }
+
+            // Find appropriate range
+            const range = igeRanges.find(r => igeInput >= r.minValue && igeInput < r.maxValue);
+
+            if (!range) {
+                showError('Unable to interpret IgE value');
+                resultsSection.classList.remove('show');
+                return;
+            }
+
+            // Display results
+            errorDiv.classList.remove('show');
+            displayResults(igeInput, range);
+            resultsSection.classList.add('show');
+        }
+
+        /**
+         * Display IgE interpretation results
+         */
+        function displayResults(igeValue, range) {
+            // Display value
+            document.getElementById('igeValueDisplay').textContent = igeValue.toFixed(2);
+
+            // Display badge
+            const badgeHtml = `<span class="badge-interpretation ${range.badgeClass}"><i class="fas fa-tag"></i> ${range.label}</span>`;
+            document.getElementById('interpretationBadge').innerHTML = badgeHtml;
+
+            // Display interpretation
+            const interpretationClass = range.label.includes('High') || range.label.includes('Very') ? 'interpretation-high' :
+                                      range.label.includes('Moderate') ? 'interpretation-elevated' :
+                                      range.label.includes('Normal') ? 'interpretation-normal' : 'interpretation-low';
+
+            const interpretationHtml = `
+                <div class="interpretation-box ${interpretationClass}">
+                    <strong><i class="fas fa-stethoscope"></i> ${range.label}</strong><br>
+                    ${range.interpretation}
+                </div>
+            `;
+            document.getElementById('interpretationBox').innerHTML = interpretationHtml;
+
+            // Display clinical significance
+            document.getElementById('clinicalSignificance').innerHTML = `
+                <i class="fas fa-info-circle"></i> ${range.clinicalSig}
+            `;
+
+            // Display associated conditions
+            const conditionsList = range.conditions.map(c => `<li><i class="fas fa-check"></i> ${c}</li>`).join('');
+            document.getElementById('associatedConditions').innerHTML = conditionsList;
+
+            // Display recommendations
+            const recommendationsList = range.recommendations.map(r => `<li><i class="fas fa-arrow-right"></i> ${r}</li>`).join('');
+            document.getElementById('recommendations').innerHTML = recommendationsList;
+        }
+
+        /**
+         * Show error message
+         */
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            errorText.textContent = message;
+            errorDiv.classList.add('show');
+        }
+
+        /**
+         * Update timestamp
+         */
+        function updateTimestamp() {
+            const now = new Date();
+            document.getElementById('timestamp').textContent = now.toLocaleString();
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', updateTimestamp);
+
+        // Allow Enter key to interpret
+        document.getElementById('igeValue').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') interpretIgE();
+        });
+    </script>
+</body>
+</html>

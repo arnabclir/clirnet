@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUA Symptom Score - Urinary Assessment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Main body styling with purple gradient background */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        /* Container wrapper with max width */
+        .container-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Card styling with shadow and border radius */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        /* Card header with purple gradient */
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-bottom: none;
+        }
+
+        /* Calculator title styling */
+        .calculator-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Subtitle text styling */
+        .calculator-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        /* Header badges container */
+        .header-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Badge styling */
+        .badge {
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        /* Navigation back link */
+        .nav-back {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .nav-back a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-back a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Card body styling */
+        .card-body {
+            padding: 30px;
+            background-color: #f8f9fa;
+        }
+
+        /* Form group styling */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        /* Form label styling */
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Form select styling */
+        .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* Button styling */
+        .btn-calculate {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 12px 40px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        /* Result container styling */
+        .result-container {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .result-container.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        /* Slide in animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Score display styling */
+        .score-display {
+            font-size: 32px;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        /* Interpretation box styling */
+        .interpretation {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .interpretation.low {
+            background-color: #d1e7dd;
+            color: #0f5132;
+            border-left: 4px solid #198754;
+        }
+
+        .interpretation.moderate {
+            background-color: #fef3cd;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+        }
+
+        .interpretation.high {
+            background-color: #f8d7da;
+            color: #842029;
+            border-left: 4px solid #dc3545;
+        }
+
+        /* Formula section styling */
+        .formula-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 2px dashed #667eea;
+        }
+
+        /* Formula title styling */
+        .formula-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Formula content styling */
+        .formula-content {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        /* Info box styling */
+        .info-box {
+            background-color: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        /* Responsive design for mobile */
+        @media (max-width: 768px) {
+            .calculator-title {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-wrapper">
+        <!-- Navigation back button -->
+        <div class="nav-back">
+            <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        </div>
+
+        <!-- Main calculator card -->
+        <div class="card">
+            <div class="card-header">
+                <h1 class="calculator-title">
+                    <i class="fas fa-restroom"></i>
+                    AUA Symptom Score
+                </h1>
+                <p class="calculator-subtitle">
+                    American Urological Association Symptom Score - Assessment of lower urinary tract symptoms
+                </p>
+                <div class="header-badges">
+                    <span class="badge"><i class="fas fa-heartbeat"></i> Urology</span>
+                    <span class="badge"><i class="fas fa-book"></i> 7 Questions</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <!-- Information box -->
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    The AUA Symptom Score assesses the severity of lower urinary tract symptoms. Total score ranges from 0-35, with higher scores indicating more severe symptoms.
+                </div>
+
+                <!-- AUA form with 7 questions -->
+                <form id="auaForm">
+                    <!-- Q1: Incomplete emptying -->
+                    <div class="form-group">
+                        <label class="form-label">Q1. Over the past month, how often have you had a sensation of not emptying your bladder completely after urination?</label>
+                        <select class="form-select" id="q1">
+                            <option value="">Select response</option>
+                            <option value="0">Not at all (0)</option>
+                            <option value="1">Less than 1 time in 5 (1)</option>
+                            <option value="2">Less than half the time (2)</option>
+                            <option value="3">About half the time (3)</option>
+                            <option value="4">More than half the time (4)</option>
+                            <option value="5">Almost always (5)</option>
+                        </select>
+                    </div>
+
+                    <!-- Q2: Frequency -->
+                    <div class="form-group">
+                        <label class="form-label">Q2. How often have you had to urinate again less than two hours after you finished urinating?</label>
+                        <select class="form-select" id="q2">
+                            <option value="">Select response</option>
+                            <option value="0">Not at all (0)</option>
+                            <option value="1">Less than 1 time in 5 (1)</option>
+                            <option value="2">Less than half the time (2)</option>
+                            <option value="3">About half the time (3)</option>
+                            <option value="4">More than half the time (4)</option>
+                            <option value="5">Almost always (5)</option>
+                        </select>
+                    </div>
+
+                    <!-- Q3: Intermittency -->
+                    <div class="form-group">
+                        <label class="form-label">Q3. How often have you found you stopped and started again several times when you urinated?</label>
+                        <select class="form-select" id="q3">
+                            <option value="">Select response</option>
+                            <option value="0">Not at all (0)</option>
+                            <option value="1">Less than 1 time in 5 (1)</option>
+                            <option value="2">Less than half the time (2)</option>
+                            <option value="3">About half the time (3)</option>
+                            <option value="4">More than half the time (4)</option>
+                            <option value="5">Almost always (5)</option>
+                        </select>
+                    </div>
+
+                    <!-- Q4: Urgency -->
+                    <div class="form-group">
+                        <label class="form-label">Q4. How often have you found it difficult to postpone urination?</label>
+                        <select class="form-select" id="q4">
+                            <option value="">Select response</option>
+                            <option value="0">Not at all (0)</option>
+                            <option value="1">Less than 1 time in 5 (1)</option>
+                            <option value="2">Less than half the time (2)</option>
+                            <option value="3">About half the time (3)</option>
+                            <option value="4">More than half the time (4)</option>
+                            <option value="5">Almost always (5)</option>
+                        </select>
+                    </div>
+
+                    <!-- Q5: Weak stream -->
+                    <div class="form-group">
+                        <label class="form-label">Q5. How often have you had a weak urinary stream?</label>
+                        <select class="form-select" id="q5">
+                            <option value="">Select response</option>
+                            <option value="0">Not at all (0)</option>
+                            <option value="1">Less than 1 time in 5 (1)</option>
+                            <option value="2">Less than half the time (2)</option>
+                            <option value="3">About half the time (3)</option>
+                            <option value="4">More than half the time (4)</option>
+                            <option value="5">Almost always (5)</option>
+                        </select>
+                    </div>
+
+                    <!-- Q6: Straining -->
+                    <div class="form-group">
+                        <label class="form-label">Q6. How often have you had to strain to start urination?</label>
+                        <select class="form-select" id="q6">
+                            <option value="">Select response</option>
+                            <option value="0">Not at all (0)</option>
+                            <option value="1">Less than 1 time in 5 (1)</option>
+                            <option value="2">Less than half the time (2)</option>
+                            <option value="3">About half the time (3)</option>
+                            <option value="4">More than half the time (4)</option>
+                            <option value="5">Almost always (5)</option>
+                        </select>
+                    </div>
+
+                    <!-- Q7: Nocturia -->
+                    <div class="form-group">
+                        <label class="form-label">Q7. How many times did you most typically get up to urinate at night?</label>
+                        <select class="form-select" id="q7">
+                            <option value="">Select response</option>
+                            <option value="0">None (0)</option>
+                            <option value="1">1 time (1)</option>
+                            <option value="2">2 times (2)</option>
+                            <option value="3">3 times (3)</option>
+                            <option value="4">4 times (4)</option>
+                            <option value="5">5 or more times (5)</option>
+                        </select>
+                    </div>
+
+                    <!-- Calculate button -->
+                    <button type="submit" class="btn btn-calculate">
+                        <i class="fas fa-calculator"></i> Calculate AUA Score
+                    </button>
+                </form>
+
+                <!-- Results section -->
+                <div id="resultContainer" class="result-container">
+                    <h4><i class="fas fa-star"></i> AUA Score Results</h4>
+                    <div class="score-display">
+                        <span id="scoreValue">--</span>/35
+                    </div>
+                    <div id="interpretationBox"></div>
+                </div>
+
+                <!-- Clinical information section -->
+                <div class="formula-section">
+                    <div class="formula-title">
+                        <i class="fas fa-flask"></i> Score Interpretation
+                    </div>
+                    <div class="formula-content">
+AUA Symptom Score Interpretation:
+
+0-7 points:   Mild Symptoms
+- Minimal lower urinary tract symptoms
+- Conservative management recommended
+- Lifestyle modifications and monitoring
+- Reassurance and watchful waiting
+
+8-19 points:  Moderate Symptoms
+- Moderate lower urinary tract symptoms
+- May impact quality of life
+- Consider behavioral therapy first
+- Medical treatment may be warranted
+- Follow-up evaluation recommended
+
+20-35 points: Severe Symptoms
+- Significant lower urinary tract symptoms
+- Substantial impact on quality of life
+- Medical evaluation strongly recommended
+- Treatment options: medications, procedures
+- Consider urology referral
+- May indicate BPH, OAB, or other pathology
+
+Clinical Correlation:
+- Total score of 8+ suggests need for evaluation
+- Nocturia (Q7) highly impacts quality of life
+- Consider patient bother score and impact
+- Reassess periodically after intervention
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Form submission handler
+        document.getElementById('auaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculateAUA();
+        });
+
+        // AUA score calculation function
+        function calculateAUA() {
+            let score = 0;
+            let answered = 0;
+
+            // Collect all responses and sum points
+            for (let i = 1; i <= 7; i++) {
+                const value = document.getElementById(`q${i}`).value;
+                if (value !== '') {
+                    score += parseInt(value);
+                    answered++;
+                } else {
+                    alert(`Please answer Question ${i}`);
+                    return;
+                }
+            }
+
+            // Check all questions answered
+            if (answered !== 7) {
+                alert('Please answer all 7 questions');
+                return;
+            }
+
+            // Display score
+            document.getElementById('scoreValue').textContent = score;
+
+            // Determine interpretation based on score
+            let interpretation = '';
+            let className = '';
+
+            if (score <= 7) {
+                interpretation = '<strong>Mild Symptoms</strong><br>Minimal lower urinary tract symptoms. Conservative management and monitoring recommended.';
+                className = 'low';
+            } else if (score <= 19) {
+                interpretation = '<strong>Moderate Symptoms</strong><br>Moderate symptoms affecting quality of life. Consider behavioral therapy and medical evaluation.';
+                className = 'moderate';
+            } else {
+                interpretation = '<strong>Severe Symptoms</strong><br>Significant symptoms substantially impacting quality of life. Medical evaluation and treatment recommended.';
+                className = 'high';
+            }
+
+            // Display interpretation in result box
+            document.getElementById('interpretationBox').innerHTML =
+                `<div class="interpretation ${className}"><i class="fas fa-exclamation-triangle"></i> ${interpretation}</div>`;
+
+            // Show results section with animation
+            document.getElementById('resultContainer').classList.add('show');
+        }
+    </script>
+</body>
+</html>

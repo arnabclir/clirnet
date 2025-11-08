@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicted Body Weight (PBW) Calculator - Mechanical Ventilation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-dark: #2d3748;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .nav-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1rem 0;
+        }
+        .calculator-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 2rem 1.5rem;
+        }
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+        }
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 5px solid #667eea;
+        }
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 1rem 0;
+        }
+        .interpretation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+        .formula-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+        .score-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .info-badge {
+            display: inline-block;
+            background: #e7f3ff;
+            color: #0066cc;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="mb-0"><i class="fas fa-heartbeat"></i> Critical Care Calculators</h1>
+                    <small>Pulmonary & Critical Care Medicine</small>
+                </div>
+                <a href="index.html" class="btn btn-light btn-sm"><i class="fas fa-home"></i> Home</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="calculator-container">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-balance-scale"></i> Predicted Body Weight (PBW)</h2>
+                <p>Mechanical Ventilation Tidal Volume Calculation</p>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="info-badge">
+                    <i class="fas fa-exclamation-circle"></i> Calculates ideal tidal volume for lung-protective ventilation
+                </div>
+
+                <div class="score-item">
+                    <label><strong>Sex</strong></label>
+                    <select id="sex" class="form-select">
+                        <option value="">Select sex</option>
+                        <option value="0">Male</option>
+                        <option value="1">Female</option>
+                    </select>
+                </div>
+
+                <div class="score-item">
+                    <label><strong>Height (cm)</strong></label>
+                    <input type="number" id="height" class="form-control" placeholder="Enter height in cm" step="0.1">
+                    <small>Range: 140-220 cm</small>
+                </div>
+
+                <button onclick="calculatePBW()" class="btn btn-primary btn-lg w-100 mt-4">
+                    <i class="fas fa-calculator"></i> Calculate PBW
+                </button>
+
+                <div id="result" style="display:none;" class="result-box">
+                    <h4><i class="fas fa-chart-pie"></i> Predicted Body Weight Result</h4>
+                    <div class="result-score" id="pbwValue">-- kg</div>
+                    <div class="interpretation">
+                        <h5>Recommended Tidal Volume Settings:</h5>
+                        <p id="tvSettings"></p>
+                    </div>
+                    <div class="interpretation">
+                        <h5>Clinical Application:</h5>
+                        <p id="interpretation"></p>
+                    </div>
+                </div>
+
+                <div class="formula-section">
+                    <h5><i class="fas fa-book"></i> PBW Formula</h5>
+                    <p><strong>Males: PBW (kg) = 50 + 0.91 × (height - 152.4)</strong></p>
+                    <p><strong>Females: PBW (kg) = 45.5 + 0.91 × (height - 152.4)</strong></p>
+                    <ul class="small mb-0">
+                        <li>Used to calculate lung-protective tidal volumes</li>
+                        <li>Standard is 6-8 mL/kg PBW for mechanical ventilation</li>
+                        <li>Reduces ventilator-induced lung injury (VILI)</li>
+                        <li>Lower tidal volumes improve ARDS outcomes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate PBW
+        function calculatePBW() {
+            const sex = parseInt(document.getElementById('sex').value);
+            const height = parseFloat(document.getElementById('height').value);
+
+            if (isNaN(sex) || isNaN(height)) {
+                alert('Please enter valid values for all fields');
+                return;
+            }
+
+            // PBW formula
+            let pbw;
+            if (sex === 0) {
+                // Male: 50 + 0.91(height - 152.4)
+                pbw = 50 + 0.91 * (height - 152.4);
+            } else {
+                // Female: 45.5 + 0.91(height - 152.4)
+                pbw = 45.5 + 0.91 * (height - 152.4);
+            }
+
+            // Tidal volume recommendations
+            const tvLow = (pbw * 6).toFixed(1);
+            const tvMid = (pbw * 7).toFixed(1);
+            const tvHigh = (pbw * 8).toFixed(1);
+
+            const tvSettings = `
+                <strong>Lung-protective ventilation:</strong>
+                <ul>
+                    <li><strong>Conservative:</strong> 6 mL/kg = ${tvLow} mL/breath</li>
+                    <li><strong>Standard:</strong> 7 mL/kg = ${tvMid} mL/breath</li>
+                    <li><strong>Permissive:</strong> 8 mL/kg = ${tvHigh} mL/breath</li>
+                </ul>
+            `;
+
+            const interpretation = `
+                Set ventilator tidal volume based on PBW, not actual body weight. Lung-protective ventilation with lower tidal volumes (6-8 mL/kg) is associated with better outcomes in ARDS and critical illness. Monitor peak and plateau pressures - maintain plateau pressure <30 cmH₂O.
+            `;
+
+            document.getElementById('pbwValue').textContent = pbw.toFixed(1) + ' kg';
+            document.getElementById('tvSettings').innerHTML = tvSettings;
+            document.getElementById('interpretation').innerHTML = interpretation;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Estimated Date of Delivery (EDD) Calculator - Calculate due date using multiple methods">
+    <title>Estimated Date of Delivery (EDD) Calculator</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Styles with Purple Gradient Theme -->
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #b88cd9 100%);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(102, 126, 234, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .main-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .card-header p {
+            margin: 10px 0 0 0;
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px 12px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
+        }
+
+        .btn-calculate {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+
+        .btn-reset {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reset:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .result-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 25px;
+            display: none;
+            border-left: 5px solid #667eea;
+        }
+
+        .result-section.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .result-value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 15px 0;
+        }
+
+        .interpretation-box {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .interpretation-text {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .clinical-note {
+            background: linear-gradient(135deg, #fff5e1 0%, #ffe8cc 100%);
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .clinical-note-title {
+            font-weight: 700;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        .clinical-note-text {
+            color: #856404;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .input-group-text {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .form-text {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .tabs-container {
+            margin-bottom: 30px;
+        }
+
+        .nav-tabs {
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .nav-tabs .nav-link {
+            color: #667eea;
+            font-weight: 600;
+            border: none;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs .nav-link.active {
+            background: none;
+            color: #764ba2;
+            border-bottom-color: #667eea;
+        }
+
+        @media (max-width: 768px) {
+            .card-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .result-value {
+                font-size: 1.6rem;
+            }
+
+            .main-container {
+                margin: 20px auto;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-heartbeat"></i> Medical Calculators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../catalog.html">Catalog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="card">
+            <!-- Card Header -->
+            <div class="card-header">
+                <h2><i class="fas fa-calendar-check"></i> Estimated Date of Delivery (EDD)</h2>
+                <p>Calculate due date using LMP or ultrasound measurements</p>
+            </div>
+
+            <!-- Card Body -->
+            <div class="card-body">
+                <!-- Tab Navigation -->
+                <ul class="nav nav-tabs tabs-container" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="lmp-tab" data-bs-toggle="tab" data-bs-target="#lmp-content" type="button" role="tab">
+                            <i class="fas fa-calendar-alt"></i> LMP Method
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="us-tab" data-bs-toggle="tab" data-bs-target="#us-content" type="button" role="tab">
+                            <i class="fas fa-ultrasound"></i> Ultrasound Method
+                        </button>
+                    </li>
+                </ul>
+
+                <!-- Tab Content -->
+                <div class="tab-content">
+                    <!-- LMP Method Tab -->
+                    <div id="lmp-content" class="tab-pane fade show active" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="lmpDate" class="form-label">
+                                        <i class="fas fa-calendar"></i> First Day of Last Menstrual Period
+                                    </label>
+                                    <input type="date" class="form-control" id="lmpDate">
+                                    <small class="form-text">Date of start of last period</small>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="cycleLengthLMP" class="form-label">
+                                        <i class="fas fa-circle"></i> Menstrual Cycle Length (days)
+                                    </label>
+                                    <input type="number" class="form-control" id="cycleLengthLMP" value="28" min="21" max="42">
+                                    <small class="form-text">Usually 28 days (21-42 normal)</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-calculate" onclick="calculateEDD_LMP()">
+                            <i class="fas fa-calculator"></i> Calculate EDD (LMP Method)
+                        </button>
+                    </div>
+
+                    <!-- Ultrasound Method Tab -->
+                    <div id="us-content" class="tab-pane fade" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="trimester" class="form-label">
+                                        <i class="fas fa-fetus"></i> Trimester of Ultrasound
+                                    </label>
+                                    <select class="form-select" id="trimester">
+                                        <option value="">-- Select --</option>
+                                        <option value="first">First Trimester (8-14 weeks)</option>
+                                        <option value="second">Second Trimester (15-20 weeks)</option>
+                                        <option value="third">Third Trimester (> 20 weeks)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="gaWeeks" class="form-label">
+                                        <i class="fas fa-clock"></i> Gestational Age (weeks + days)
+                                    </label>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <input type="number" class="form-control" id="gaWeeks" placeholder="Weeks" min="0" max="42">
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="number" class="form-control" id="gaDays" placeholder="Days" min="0" max="6">
+                                        </div>
+                                    </div>
+                                    <small class="form-text">From ultrasound report</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="usDate" class="form-label">
+                                        <i class="fas fa-calendar"></i> Date of Ultrasound
+                                    </label>
+                                    <input type="date" class="form-control" id="usDate">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="btn btn-calculate" onclick="calculateEDD_Ultrasound()">
+                            <i class="fas fa-calculator"></i> Calculate EDD (Ultrasound Method)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Reset Button -->
+                <button class="btn btn-reset ms-2" onclick="resetForm()">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+
+                <!-- Results Section -->
+                <div id="resultSection" class="result-section">
+                    <div class="result-title">
+                        <i class="fas fa-calendar-check"></i> Estimated Date of Delivery
+                    </div>
+
+                    <div class="result-value" id="eddDate">--</div>
+
+                    <div class="interpretation-box">
+                        <div class="interpretation-title">Additional Information:</div>
+                        <div class="interpretation-text" id="interpretation">--</div>
+                    </div>
+
+                    <div class="clinical-note">
+                        <div class="clinical-note-title">
+                            <i class="fas fa-lightbulb"></i> Clinical Considerations
+                        </div>
+                        <div class="clinical-note-text">
+                            <ul style="margin-bottom: 0; padding-left: 20px;">
+                                <li><strong>LMP method:</strong> Assumes 28-day cycle with ovulation on day 14. Error margin ±3-5 days</li>
+                                <li><strong>Naegele's Rule:</strong> LMP + 280 days (40 weeks)</li>
+                                <li><strong>Ultrasound accuracy:</strong> Best in first trimester (±3-5 days), decreases as pregnancy advances</li>
+                                <li>Delivery typically occurs between 37-42 weeks</li>
+                                <li>Use best available dating from earliest assessment</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Calculator Logic -->
+    <script>
+        /**
+         * Calculate EDD using Last Menstrual Period (Naegele's Rule)
+         * EDD = LMP + 280 days (40 weeks)
+         */
+        function calculateEDD_LMP() {
+            // Get input values
+            const lmpDateInput = document.getElementById('lmpDate').value;
+            const cycleLength = parseInt(document.getElementById('cycleLengthLMP').value);
+
+            // Validation
+            if (!lmpDateInput) {
+                alert('Please select the date of last menstrual period');
+                return;
+            }
+
+            if (cycleLength < 21 || cycleLength > 42) {
+                alert('Please enter valid cycle length (21-42 days)');
+                return;
+            }
+
+            // Parse the LMP date
+            const lmpDate = new Date(lmpDateInput);
+
+            // Calculate ovulation date (typically day 14 of 28-day cycle)
+            const ovulationDayOfCycle = Math.round(cycleLength / 2);
+            const ovulationDate = new Date(lmpDate);
+            ovulationDate.setDate(ovulationDate.getDate() + ovulationDayOfCycle);
+
+            // Conception approximately day after ovulation
+            const conceptionDate = new Date(ovulationDate);
+            conceptionDate.setDate(conceptionDate.getDate() + 1);
+
+            // EDD = LMP + 280 days (40 weeks)
+            const eddDate = new Date(lmpDate);
+            eddDate.setDate(eddDate.getDate() + 280);
+
+            // Calculate additional dates
+            const termDates = {
+                preterm37: new Date(lmpDate),
+                term37: new Date(lmpDate),
+                term40: eddDate,
+                term42: new Date(lmpDate),
+            };
+            termDates.preterm37.setDate(termDates.preterm37.getDate() + 259); // 37 weeks
+            termDates.term37.setDate(termDates.term37.getDate() + 259);
+            termDates.term42.setDate(termDates.term42.getDate() + 294); // 42 weeks
+
+            displayEDDResults(eddDate, termDates);
+        }
+
+        /**
+         * Calculate EDD using Ultrasound dating
+         */
+        function calculateEDD_Ultrasound() {
+            // Get input values
+            const trimester = document.getElementById('trimester').value;
+            const gaWeeks = parseInt(document.getElementById('gaWeeks').value);
+            const gaDays = parseInt(document.getElementById('gaDays').value);
+            const usDateInput = document.getElementById('usDate').value;
+
+            // Validation
+            if (!trimester || isNaN(gaWeeks) || isNaN(gaDays) || !usDateInput) {
+                alert('Please fill in all ultrasound fields');
+                return;
+            }
+
+            if (gaWeeks < 0 || gaWeeks > 42 || gaDays < 0 || gaDays > 6) {
+                alert('Please enter valid gestational age');
+                return;
+            }
+
+            // Parse ultrasound date
+            const usDate = new Date(usDateInput);
+
+            // Calculate days remaining until 40 weeks
+            const totalDaysGA = gaWeeks * 7 + gaDays;
+            const remainingDays = (40 * 7) - totalDaysGA;
+
+            // Calculate EDD
+            const eddDate = new Date(usDate);
+            eddDate.setDate(eddDate.getDate() + remainingDays);
+
+            // Calculate term dates
+            const termDates = {
+                preterm37: new Date(usDate),
+                term37: new Date(usDate),
+                term40: eddDate,
+                term42: new Date(usDate),
+            };
+
+            const daysTo37weeks = (37 * 7) - totalDaysGA;
+            const daysTo42weeks = (42 * 7) - totalDaysGA;
+
+            termDates.preterm37.setDate(termDates.preterm37.getDate() + daysTo37weeks);
+            termDates.term37.setDate(termDates.term37.getDate() + daysTo37weeks);
+            termDates.term42.setDate(termDates.term42.getDate() + daysTo42weeks);
+
+            displayEDDResults(eddDate, termDates);
+        }
+
+        /**
+         * Display EDD calculation results
+         */
+        function displayEDDResults(eddDate, termDates) {
+            const resultSection = document.getElementById('resultSection');
+            const eddDateEl = document.getElementById('eddDate');
+            const interpretationEl = document.getElementById('interpretation');
+
+            // Format dates for display
+            const eddFormatted = eddDate.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            eddDateEl.textContent = eddFormatted;
+
+            // Build interpretation text
+            const term37Formatted = termDates.term37.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            const term42Formatted = termDates.term42.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+            let interpretation = `<strong>Estimated Due Date: ${eddFormatted}</strong><br>`;
+            interpretation += `Term pregnancy (at term): After ${term37Formatted}<br>`;
+            interpretation += `Post-term limit: ${term42Formatted}<br>`;
+            interpretation += `Most accurate EDD assumes regular menstrual cycles and early ultrasound correlation. The EDD may be adjusted if ultrasound dating differs significantly from LMP dating.`;
+
+            interpretationEl.innerHTML = interpretation;
+
+            // Show results section
+            resultSection.classList.add('show');
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        /**
+         * Reset the calculator form
+         */
+        function resetForm() {
+            document.getElementById('lmpDate').value = '';
+            document.getElementById('cycleLengthLMP').value = '28';
+            document.getElementById('trimester').value = '';
+            document.getElementById('gaWeeks').value = '';
+            document.getElementById('gaDays').value = '';
+            document.getElementById('usDate').value = '';
+            document.getElementById('resultSection').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

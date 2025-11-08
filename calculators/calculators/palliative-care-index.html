@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Information -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palliative Care Calculators - Clinical Decision Support</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ========== Color Scheme & Variables ========== */
+        :root {
+            /* Purple gradient theme for Palliative Care */
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #a855f7 100%);
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --bg-light: #f7fafc;
+        }
+
+        /* ========== Base Styles ========== */
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+
+        /* ========== Navigation Header ========== */
+        .nav-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 3rem 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-header h1 {
+            margin-bottom: 0.5rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .nav-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.95;
+            font-size: 1rem;
+        }
+
+        .nav-back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+
+        /* ========== Container ========== */
+        .container-main {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        /* ========== Section Headers ========== */
+        .section-header {
+            margin-top: 3rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--primary-gradient);
+        }
+
+        .section-header h2 {
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+            margin: 0.5rem 0 0 0;
+        }
+
+        /* ========== Calculator Card Styles ========== */
+        .calc-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border-left: 4px solid #667eea;
+        }
+
+        .calc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .calc-card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .calc-card-header h4 {
+            margin: 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .calc-card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .calc-description {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+
+        .calc-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .calc-category {
+            display: inline-block;
+            background: #f0f4ff;
+            color: #667eea;
+            padding: 0.3rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .calc-link {
+            display: inline-block;
+            background: var(--primary-gradient);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            align-self: flex-start;
+        }
+
+        .calc-link:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+
+        /* ========== Intro Box ========== */
+        .intro-box {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid var(--primary-gradient);
+        }
+
+        .intro-box h3 {
+            color: var(--text-dark);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .intro-box p {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+
+        .intro-box ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .intro-box li {
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+        }
+
+        /* ========== Footer ========== */
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0.5rem 0;
+            opacity: 0.9;
+        }
+
+        /* ========== Responsive Design ========== */
+        @media (max-width: 768px) {
+            .nav-header {
+                padding: 2rem 0;
+            }
+
+            .nav-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .container-main {
+                margin: 2rem auto;
+            }
+        }
+
+        /* ========== Grid Layout ========== */
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .calc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ========== Navigation Header ========== -->
+    <div class="nav-header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center px-4">
+                <div>
+                    <h1><i class="fas fa-heart-pulse"></i> Palliative Care Calculators</h1>
+                    <p>Evidence-Based Clinical Decision Support for Symptom Assessment & Quality of Life</p>
+                </div>
+                <a href="../index.html" class="btn nav-back-btn"><i class="fas fa-home"></i> Back to Portal</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== Main Content ========== -->
+    <div class="container-main">
+        <!-- ========== Introduction ========== -->
+        <div class="intro-box">
+            <h3><i class="fas fa-info-circle"></i> About These Calculators</h3>
+            <p>
+                These evidence-based clinical tools are designed specifically for palliative care practitioners to assess
+                patient symptoms, disease progression, and quality of life. Each calculator provides rapid risk stratification
+                and clinical interpretation to guide treatment decisions and support shared decision-making.
+            </p>
+            <p>
+                <strong>Key Features:</strong>
+            </p>
+            <ul>
+                <li>Evidence-based scoring systems widely used in palliative and critical care medicine</li>
+                <li>Real-time calculations with clinical interpretation and recommendations</li>
+                <li>Responsive design for use on desktop and mobile devices</li>
+                <li>Emphasis on symptom assessment and quality of life measures</li>
+                <li>Support for prognosis estimation and care planning</li>
+            </ul>
+        </div>
+
+        <!-- ========== RESPIRATORY & COPD SECTION ========== -->
+        <div class="section-header">
+            <h2><i class="fas fa-lungs"></i> Respiratory & COPD Assessment</h2>
+            <p>Tools for evaluating respiratory status and COPD prognosis in palliative care</p>
+        </div>
+
+        <div class="calc-grid">
+            <!-- BODE Index Calculator -->
+            <div class="calc-card">
+                <div class="calc-card-header">
+                    <h4><i class="fas fa-wind"></i> BODE Index</h4>
+                </div>
+                <div class="calc-card-body">
+                    <p class="calc-description">
+                        Predicts 4-year mortality in COPD patients using Body-mass index, Obstruction (FEV1),
+                        Dyspnea, and Exercise capacity measurements. Essential for prognostic assessment.
+                    </p>
+                    <div class="calc-categories">
+                        <span class="calc-category"><i class="fas fa-lungs"></i> COPD</span>
+                        <span class="calc-category"><i class="fas fa-chart-line"></i> Prognosis</span>
+                    </div>
+                    <a href="bode-index.html" class="calc-link">
+                        <i class="fas fa-calculator"></i> Open Calculator
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== SUBSTANCE WITHDRAWAL SECTION ========== -->
+        <div class="section-header">
+            <h2><i class="fas fa-brain"></i> Addiction & Withdrawal Assessment</h2>
+            <p>Tools for evaluating alcohol and substance withdrawal severity in palliative care patients</p>
+        </div>
+
+        <div class="calc-grid">
+            <!-- CIWA-Ar Scale -->
+            <div class="calc-card">
+                <div class="calc-card-header">
+                    <h4><i class="fas fa-flask"></i> CIWA-Ar Scale</h4>
+                </div>
+                <div class="calc-card-body">
+                    <p class="calc-description">
+                        Clinical Institute Withdrawal Assessment for Alcohol Scale quantifies alcohol withdrawal severity
+                        to guide treatment decisions and prevent life-threatening complications.
+                    </p>
+                    <div class="calc-categories">
+                        <span class="calc-category"><i class="fas fa-exclamation"></i> Withdrawal</span>
+                        <span class="calc-category"><i class="fas fa-heartbeat"></i> Critical</span>
+                    </div>
+                    <a href="ciwa-ar-scale.html" class="calc-link">
+                        <i class="fas fa-calculator"></i> Open Calculator
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== LIVER DISEASE SECTION ========== -->
+        <div class="section-header">
+            <h2><i class="fas fa-flask-vial"></i> Hepatic Function & HCC Assessment</h2>
+            <p>Tools for evaluating liver disease severity and hepatocellular carcinoma prognosis</p>
+        </div>
+
+        <div class="calc-grid">
+            <!-- Child Pugh Score SI Units -->
+            <div class="calc-card">
+                <div class="calc-card-header">
+                    <h4><i class="fas fa-vial"></i> Child Pugh (SI Units)</h4>
+                </div>
+                <div class="calc-card-body">
+                    <p class="calc-description">
+                        Classifies cirrhosis severity using international SI units (albumin g/L, bilirubin μmol/L).
+                        Predicts surgical risk and mortality in patients with liver disease.
+                    </p>
+                    <div class="calc-categories">
+                        <span class="calc-category"><i class="fas fa-flask"></i> Liver Disease</span>
+                        <span class="calc-category"><i class="fas fa-globe"></i> SI Units</span>
+                    </div>
+                    <a href="child-pugh-si.html" class="calc-link">
+                        <i class="fas fa-calculator"></i> Open Calculator
+                    </a>
+                </div>
+            </div>
+
+            <!-- Child Pugh Score Conventional Units -->
+            <div class="calc-card">
+                <div class="calc-card-header">
+                    <h4><i class="fas fa-vial"></i> Child Pugh (Conventional Units)</h4>
+                </div>
+                <div class="calc-card-body">
+                    <p class="calc-description">
+                        Classifies cirrhosis severity using conventional units (albumin g/dL, bilirubin mg/dL).
+                        Alternative version for systems using traditional measurement units.
+                    </p>
+                    <div class="calc-categories">
+                        <span class="calc-category"><i class="fas fa-flask"></i> Liver Disease</span>
+                        <span class="calc-category"><i class="fas fa-ruler"></i> Conventional</span>
+                    </div>
+                    <a href="child-pugh-conventional.html" class="calc-link">
+                        <i class="fas fa-calculator"></i> Open Calculator
+                    </a>
+                </div>
+            </div>
+
+            <!-- ALBI Grade HCC -->
+            <div class="calc-card">
+                <div class="calc-card-header">
+                    <h4><i class="fas fa-chart-pie"></i> ALBI Grade (HCC)</h4>
+                </div>
+                <div class="calc-card-body">
+                    <p class="calc-description">
+                        Albumin-Bilirubin grade for hepatocellular carcinoma survival estimation. Simple and effective
+                        prognostic model using only two common laboratory values.
+                    </p>
+                    <div class="calc-categories">
+                        <span class="calc-category"><i class="fas fa-cancer"></i> HCC</span>
+                        <span class="calc-category"><i class="fas fa-chart-line"></i> Prognosis</span>
+                    </div>
+                    <a href="albi-grade-hcc.html" class="calc-link">
+                        <i class="fas fa-calculator"></i> Open Calculator
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== MENTAL HEALTH SECTION ========== -->
+        <div class="section-header">
+            <h2><i class="fas fa-smile"></i> Mental Health & Sleep Assessment</h2>
+            <p>Tools for evaluating depression, anxiety, and sleep disturbance in palliative care</p>
+        </div>
+
+        <div class="calc-grid">
+            <!-- PHQ-9 Depression -->
+            <div class="calc-card">
+                <div class="calc-card-header">
+                    <h4><i class="fas fa-clipboard-check"></i> PHQ-9 Depression Screening</h4>
+                </div>
+                <div class="calc-card-body">
+                    <p class="calc-description">
+                        Patient Health Questionnaire-9 for rapid assessment of depressive symptoms and severity.
+                        Guides treatment decisions and monitors response to antidepressant therapy.
+                    </p>
+                    <div class="calc-categories">
+                        <span class="calc-category"><i class="fas fa-brain"></i> Depression</span>
+                        <span class="calc-category"><i class="fas fa-heart"></i> Screening</span>
+                    </div>
+                    <a href="phq-9-depression-screening.html" class="calc-link">
+                        <i class="fas fa-calculator"></i> Open Calculator
+                    </a>
+                </div>
+            </div>
+
+            <!-- Sleep Problems Questionnaire -->
+            <div class="calc-card">
+                <div class="calc-card-header">
+                    <h4><i class="fas fa-bed"></i> Sleep Problems Questionnaire</h4>
+                </div>
+                <div class="calc-card-body">
+                    <p class="calc-description">
+                        Comprehensive sleep disturbance assessment evaluating sleep initiation, maintenance, duration,
+                        quality, and impact. Identifies need for sleep interventions in palliative care.
+                    </p>
+                    <div class="calc-categories">
+                        <span class="calc-category"><i class="fas fa-moon"></i> Sleep</span>
+                        <span class="calc-category"><i class="fas fa-chart-bar"></i> Assessment</span>
+                    </div>
+                    <a href="sleep-problems-questionnaire.html" class="calc-link">
+                        <i class="fas fa-calculator"></i> Open Calculator
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== SKIN & WOUND SECTION ========== -->
+        <div class="section-header">
+            <h2><i class="fas fa-first-aid"></i> Skin Care & Wound Prevention</h2>
+            <p>Tools for assessing pressure ulcer risk in immobile palliative care patients</p>
+        </div>
+
+        <div class="calc-grid">
+            <!-- Braden Score -->
+            <div class="calc-card">
+                <div class="calc-card-header">
+                    <h4><i class="fas fa-shield-alt"></i> Braden Score</h4>
+                </div>
+                <div class="calc-card-body">
+                    <p class="calc-description">
+                        Pressure ulcer risk assessment tool evaluating sensory perception, moisture, activity, mobility,
+                        nutrition, and friction. Essential for preventing skin breakdown in bed-bound patients.
+                    </p>
+                    <div class="calc-categories">
+                        <span class="calc-category"><i class="fas fa-band-aid"></i> Pressure Ulcers</span>
+                        <span class="calc-category"><i class="fas fa-exclamation"></i> Prevention</span>
+                    </div>
+                    <a href="pressure-ulcer-risk-braden.html" class="calc-link">
+                        <i class="fas fa-calculator"></i> Open Calculator
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== LABORATORY CONVERSIONS SECTION ========== -->
+        <div class="section-header">
+            <h2><i class="fas fa-flask-vial"></i> Laboratory Unit Conversions</h2>
+            <p>Tools for converting between conventional and SI (International System) laboratory units</p>
+        </div>
+
+        <div class="calc-grid">
+            <!-- Conventional to SI Conversion -->
+            <div class="calc-card">
+                <div class="calc-card-header">
+                    <h4><i class="fas fa-arrow-right"></i> Conventional → SI Units</h4>
+                </div>
+                <div class="calc-card-body">
+                    <p class="calc-description">
+                        Converts chemistry and endocrine laboratory values from conventional US units to
+                        SI (International System) units. Useful for international patient records and collaboration.
+                    </p>
+                    <div class="calc-categories">
+                        <span class="calc-category"><i class="fas fa-flask"></i> Chemistry</span>
+                        <span class="calc-category"><i class="fas fa-exchange-alt"></i> Conversion</span>
+                    </div>
+                    <a href="conventional-to-si-unit-conversion-chemistry.html" class="calc-link">
+                        <i class="fas fa-calculator"></i> Open Calculator
+                    </a>
+                </div>
+            </div>
+
+            <!-- SI to Conventional Conversion -->
+            <div class="calc-card">
+                <div class="calc-card-header">
+                    <h4><i class="fas fa-arrow-left"></i> SI → Conventional Units</h4>
+                </div>
+                <div class="calc-card-body">
+                    <p class="calc-description">
+                        Converts chemistry and endocrine laboratory values from SI (International System) units to
+                        conventional US units. Essential for interpreting international lab reports.
+                    </p>
+                    <div class="calc-categories">
+                        <span class="calc-category"><i class="fas fa-flask"></i> Chemistry</span>
+                        <span class="calc-category"><i class="fas fa-exchange-alt"></i> Conversion</span>
+                    </div>
+                    <a href="si-to-conventional-unit-conversion-chemistry.html" class="calc-link">
+                        <i class="fas fa-calculator"></i> Open Calculator
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========== Footer Note ========== -->
+        <div class="intro-box" style="margin-top: 3rem;">
+            <h3><i class="fas fa-exclamation-circle"></i> Clinical Disclaimer</h3>
+            <p>
+                These calculators are provided for educational and clinical decision support purposes only.
+                They should not replace clinical judgment or be used as the sole basis for treatment decisions.
+                Always consider the complete clinical context, patient preferences, and multidisciplinary team input.
+                Results should be interpreted by qualified healthcare professionals.
+            </p>
+        </div>
+    </div>
+
+    <!-- ========== Footer ========== -->
+    <div class="footer">
+        <div class="container-fluid">
+            <p><strong>Palliative Care Clinical Decision Support</strong></p>
+            <p>Evidence-based calculators for symptom assessment and quality of life measures</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                <i class="fas fa-copyright"></i> 2024 Clinical Calculator Suite
+            </p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

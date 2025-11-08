@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Height for Age Percentiles - Males (2-20 years)</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
+        body {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 900px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .card-header {
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .percentile-badge {
+            display: inline-block;
+            font-size: 28px;
+            font-weight: bold;
+            padding: 15px 25px;
+            border-radius: 10px;
+            color: white;
+            margin: 10px 0;
+        }
+
+        .percentile-normal {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .percentile-tall {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .percentile-short {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .percentile-chart {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .chart-bar {
+            background: linear-gradient(to right, #e0e7ff, #667eea);
+            height: 30px;
+            border-radius: 5px;
+            margin: 10px 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark mb-4" style="background: transparent;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html" style="color: white;">
+                    <i class="fas fa-calculator"></i> Pediatric Calculators
+                </a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">
+                    <i class="fas fa-ruler-vertical"></i> Height for Age Percentiles - Males (2-20 years)
+                </h1>
+                <small>CDC Growth Chart Based</small>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Instructions -->
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> Enter the boy's age in years and height in centimeters.
+                    Based on CDC growth standards for males ages 2-20 years.
+                </div>
+
+                <!-- Input Form -->
+                <form id="heightForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-birthday-cake"></i> Age (years)
+                            </label>
+                            <input type="number" class="form-control" id="age" placeholder="2-20" min="2" max="20" step="0.1" required>
+                            <small class="text-muted">Range: 2-20 years</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-ruler-vertical"></i> Height (cm)
+                            </label>
+                            <input type="number" class="form-control" id="height" placeholder="Height in cm" min="80" max="210" step="0.1" required>
+                            <small class="text-muted">Range: 80-210 cm</small>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="calculateHeightPercentile()">
+                            <i class="fas fa-calculator"></i> Calculate Percentile
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results -->
+                <div id="resultBox" class="result-box">
+                    <h4 class="text-center mb-4"><i class="fas fa-check-circle"></i> Height Percentile Result</h4>
+
+                    <div class="text-center">
+                        <p class="text-muted"><small>Height Percentile for Age</small></p>
+                        <div class="percentile-badge" id="percentileBadge">--</div>
+                        <p id="percentileCategory" class="text-center font-weight-bold mt-2"></p>
+                    </div>
+
+                    <div class="percentile-chart">
+                        <p class="text-muted text-center"><small>Percentile Position</small></p>
+                        <div class="chart-bar" id="chartBar" style="width: 50%;"></div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Clinical Guidance -->
+                    <div id="clinicalGuidance"></div>
+
+                    <!-- Reference Values -->
+                    <div class="alert alert-light mt-4">
+                        <strong><i class="fas fa-chart-bar"></i> Approximate Height by Age - Males (CDC):</strong>
+                        <table class="table table-sm mt-2">
+                            <tbody>
+                                <tr>
+                                    <td><strong>2 years</strong></td>
+                                    <td>5th: 82 cm</td>
+                                    <td>50th: 90 cm</td>
+                                    <td>95th: 97 cm</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>5 years</strong></td>
+                                    <td>5th: 105 cm</td>
+                                    <td>50th: 114 cm</td>
+                                    <td>95th: 124 cm</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>10 years</strong></td>
+                                    <td>5th: 131 cm</td>
+                                    <td>50th: 142 cm</td>
+                                    <td>95th: 152 cm</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>15 years</strong></td>
+                                    <td>5th: 158 cm</td>
+                                    <td>50th: 170 cm</td>
+                                    <td>95th: 181 cm</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>20 years</strong></td>
+                                    <td>5th: 163 cm</td>
+                                    <td>50th: 176 cm</td>
+                                    <td>95th: 188 cm</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Male height percentile reference data by age (CDC, approximation)
+        const maleHeightData = {
+            2: {5: 82, 50: 90, 95: 97},
+            3: {5: 89, 50: 98, 95: 106},
+            4: {5: 96, 50: 105, 95: 114},
+            5: {5: 103, 50: 113, 95: 122},
+            6: {5: 109, 50: 119, 95: 128},
+            7: {5: 115, 50: 125, 95: 135},
+            8: {5: 121, 50: 131, 95: 141},
+            9: {5: 127, 50: 137, 95: 147},
+            10: {5: 132, 50: 142, 95: 152},
+            11: {5: 138, 50: 149, 95: 159},
+            12: {5: 144, 50: 155, 95: 166},
+            13: {5: 151, 50: 162, 95: 174},
+            14: {5: 158, 50: 170, 95: 181},
+            15: {5: 163, 50: 176, 95: 186},
+            16: {5: 167, 50: 179, 95: 188},
+            17: {5: 170, 50: 182, 95: 191},
+            18: {5: 171, 50: 184, 95: 193},
+            19: {5: 172, 50: 185, 95: 193},
+            20: {5: 173, 50: 187, 95: 194}
+        };
+
+        // Calculate height percentile
+        function calculateHeightPercentile() {
+            const age = parseFloat(document.getElementById('age').value);
+            const height = parseFloat(document.getElementById('height').value);
+
+            if (age === '' || height === '') {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Get reference data for age
+            const ageRounded = Math.round(age);
+            const refData = maleHeightData[ageRounded];
+
+            if (!refData) {
+                alert('Age must be between 2 and 20 years');
+                return;
+            }
+
+            // Calculate percentile
+            let percentile;
+            if (height < refData[5]) {
+                percentile = Math.max(1, (height / refData[5]) * 5);
+            } else if (height < refData[50]) {
+                percentile = 5 + ((height - refData[5]) / (refData[50] - refData[5])) * 45;
+            } else if (height < refData[95]) {
+                percentile = 50 + ((height - refData[50]) / (refData[95] - refData[50])) * 45;
+            } else {
+                percentile = Math.min(99, 95 + ((height - refData[95]) / refData[95]) * 4);
+            }
+
+            // Display results
+            displayHeightResult(height, percentile);
+            document.getElementById('resultBox').classList.add('show');
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Display height result
+        function displayHeightResult(height, percentile) {
+            let badgeClass, category, guidance;
+
+            if (percentile < 5) {
+                badgeClass = 'percentile-short';
+                category = 'SHORT STATURE';
+                guidance = `<div class="alert alert-warning"><strong><i class="fas fa-exclamation-triangle"></i> Short Stature (< 5th percentile):</strong><br>
+                    <p>Height is below the 5th percentile for age.</p>
+                    <p><strong>Recommendations:</strong></p>
+                    <ul>
+                        <li>Evaluate growth velocity (trend is more important than single point)</li>
+                        <li>Assess for chronic illness or malnutrition</li>
+                        <li>Consider familial short stature</li>
+                        <li>Check thyroid function and other metabolic markers</li>
+                        <li>Assess developmental milestones</li>
+                        <li>Consider endocrinology referral if progressive decline</li>
+                    </ul>
+                </div>`;
+            } else if (percentile < 10) {
+                badgeClass = 'percentile-short';
+                category = 'LOW (3RD-10TH PERCENTILE)';
+                guidance = `<div class="alert alert-info"><strong><i class="fas fa-info-circle"></i> Low Height (3rd-10th percentile):</strong><br>
+                    <p>Height is below average for age.</p>
+                    <p><strong>Recommendations:</strong></p>
+                    <ul>
+                        <li>Monitor growth velocity at routine visits</li>
+                        <li>Assess for familial patterns</li>
+                        <li>Ensure adequate nutrition</li>
+                        <li>Regular follow-up</li>
+                    </ul>
+                </div>`;
+            } else if (percentile < 90) {
+                badgeClass = 'percentile-normal';
+                category = 'NORMAL';
+                guidance = `<div class="alert alert-success"><strong><i class="fas fa-check-circle"></i> Normal Height (10th-90th percentile):</strong><br>
+                    <p>Height is within normal range for age.</p>
+                    <p><strong>Recommendations:</strong></p>
+                    <ul>
+                        <li>Continue routine monitoring at health visits</li>
+                        <li>Maintain healthy diet and exercise</li>
+                        <li>Annual growth assessment</li>
+                    </ul>
+                </div>`;
+            } else if (percentile < 97) {
+                badgeClass = 'percentile-tall';
+                category = 'HIGH (90TH-97TH PERCENTILE)';
+                guidance = `<div class="alert alert-info"><strong><i class="fas fa-info-circle"></i> Tall Height (90th-97th percentile):</strong><br>
+                    <p>Height is above average for age.</p>
+                    <p><strong>Recommendations:</strong></p>
+                    <ul>
+                        <li>Assess for familial tall stature</li>
+                        <li>Growth velocity should remain normal</li>
+                        <li>Routine monitoring adequate</li>
+                    </ul>
+                </div>`;
+            } else {
+                badgeClass = 'percentile-tall';
+                category = 'TALL STATURE';
+                guidance = `<div class="alert alert-info"><strong><i class="fas fa-info-circle"></i> Tall Stature (> 95th percentile):</strong><br>
+                    <p>Height is above the 95th percentile for age.</p>
+                    <p><strong>Recommendations:</strong></p>
+                    <ul>
+                        <li>Assess for familial tall stature</li>
+                        <li>Evaluate growth velocity (should normalize in late teens)</li>
+                        <li>Consider hormonal evaluation if rapid growth</li>
+                        <li>Assess for endocrine disorders if unusual features</li>
+                    </ul>
+                </div>`;
+            }
+
+            document.getElementById('percentileBadge').className = 'percentile-badge ' + badgeClass;
+            document.getElementById('percentileBadge').textContent = percentile.toFixed(0) + 'th';
+            document.getElementById('percentileCategory').innerHTML = `<strong>${category}</strong><br><small>${percentile.toFixed(1)}th percentile</small>`;
+
+            // Update chart bar
+            const chartBar = document.getElementById('chartBar');
+            chartBar.style.width = (Math.min(percentile, 99) + 1) + '%';
+            chartBar.textContent = percentile.toFixed(0) + 'th';
+
+            // Show clinical guidance
+            document.getElementById('clinicalGuidance').innerHTML = guidance;
+        }
+    </script>
+</body>
+</html>

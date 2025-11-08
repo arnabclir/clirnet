@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for responsive design and character encoding -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive Sleep Problems Questionnaire - Assessment of sleep quality and sleep disorders in adults">
+    <title>Sleep Problems Questionnaire Calculator</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        /* Root variables for purple gradient theme */
+        :root {
+            --primary-purple: #6B46C1;
+            --secondary-purple: #9333EA;
+            --light-purple: #E9D5FF;
+            --dark-purple: #4C1D95;
+        }
+
+        /* Body styling with gradient background */
+        body {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Navigation bar styling */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid var(--primary-purple);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-purple) !important;
+            font-size: 1.3rem;
+        }
+
+        /* Page header styling */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Main container styling */
+        .main-container {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+        }
+
+        /* Form section styling */
+        .form-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark-purple);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-purple);
+        }
+
+        /* Question card styling */
+        .question-card {
+            background: #f8f9fa;
+            border-left: 4px solid var(--primary-purple);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+        }
+
+        .question-label {
+            font-weight: 600;
+            color: var(--dark-purple);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Checkbox styling */
+        .form-check {
+            margin-bottom: 12px;
+        }
+
+        .form-check-input {
+            width: 1.5em;
+            height: 1.5em;
+            cursor: pointer;
+            border: 2px solid var(--primary-purple);
+        }
+
+        .form-check-input:checked {
+            background-color: var(--primary-purple);
+            border-color: var(--primary-purple);
+        }
+
+        .form-check-label {
+            cursor: pointer;
+            margin-left: 10px;
+            font-weight: 500;
+        }
+
+        /* Slider styling for numeric questions */
+        .slider-container {
+            margin-top: 15px;
+        }
+
+        .form-range {
+            height: 8px;
+            border-radius: 5px;
+        }
+
+        .form-range::-webkit-slider-thumb {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-range::-moz-range-thumb {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider-value {
+            font-weight: 600;
+            color: var(--primary-purple);
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        /* Button styling */
+        .btn-calculate {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 15px 40px;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .btn-calculate:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(107, 70, 193, 0.4);
+            color: white;
+        }
+
+        .btn-reset {
+            background: #6c757d;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .btn-reset:hover {
+            background: #5a6268;
+            color: white;
+        }
+
+        /* Results section styling */
+        .results-section {
+            margin-top: 40px;
+            padding: 30px;
+            border-radius: 12px;
+            display: none;
+        }
+
+        .results-section.show {
+            display: block;
+        }
+
+        .risk-minimal {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: white;
+        }
+
+        .risk-mild {
+            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+            color: white;
+        }
+
+        .risk-moderate {
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            color: white;
+        }
+
+        .risk-significant {
+            background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+            color: white;
+        }
+
+        .result-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+
+        .interpretation-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            line-height: 1.8;
+        }
+
+        .domain-breakdown {
+            margin-top: 30px;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            color: #333;
+        }
+
+        .domain-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .domain-item:last-child {
+            border-bottom: none;
+        }
+
+        .domain-name {
+            font-weight: 600;
+            color: var(--dark-purple);
+        }
+
+        .domain-score {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .recommendations {
+            margin-top: 30px;
+            background: white;
+            border-left: 4px solid var(--primary-purple);
+            padding: 20px;
+            border-radius: 6px;
+            color: #333;
+        }
+
+        .recommendations h5 {
+            color: var(--dark-purple);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .recommendations ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .recommendations li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        /* Footer styling */
+        .footer {
+            background: rgba(0, 0, 0, 0.1);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-text {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 20px;
+            }
+
+            .page-header {
+                padding: 30px 15px;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-heart-pulse me-2"></i>Sleep Medicine
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i>Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1 class="page-title"><i class="fas fa-bed me-3"></i>Sleep Problems Questionnaire</h1>
+            <p class="page-subtitle">Comprehensive Assessment of Sleep Quality and Sleep Disorders</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-container">
+            <!-- Information Alert -->
+            <div class="alert alert-info" role="alert">
+                <i class="fas fa-circle-info me-2"></i>
+                <strong>Clinical Context:</strong> This comprehensive questionnaire assesses multiple dimensions of sleep health including sleep quality, duration, disturbances, daytime impairment, and medication use.
+            </div>
+
+            <!-- Assessment Form -->
+            <form id="sleepProblemsForm">
+                <!-- Sleep Duration Section -->
+                <div class="form-section">
+                    <h3 class="section-title"><i class="fas fa-moon me-2"></i>Sleep Duration & Schedule</h3>
+
+                    <!-- Question 1: Sleep Duration -->
+                    <div class="question-card">
+                        <label class="question-label">
+                            <i class="fas fa-hourglass-end me-2" style="color: var(--primary-purple);"></i>
+                            How many hours do you typically sleep per night?
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" class="form-range" id="sleepDuration" min="0" max="12" step="0.5" value="7" oninput="updateSliderValue('sleepDuration', this.value + ' hours')">
+                            <div class="slider-value" id="sleepDuration-value">7 hours</div>
+                        </div>
+                    </div>
+
+                    <!-- Question 2: Sleep Consistency -->
+                    <div class="question-card">
+                        <label class="question-label">
+                            <i class="fas fa-calendar-check me-2" style="color: var(--primary-purple);"></i>
+                            Do you maintain a consistent sleep schedule (same bedtime and wake time)?
+                        </label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="consistency" id="cons_yes" value="0" required>
+                            <label class="form-check-label" for="cons_yes">Yes, very consistent</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="consistency" id="cons_mostly" value="1" required>
+                            <label class="form-check-label" for="cons_mostly">Mostly consistent (varies 1-2 hours)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="consistency" id="cons_no" value="2" required>
+                            <label class="form-check-label" for="cons_no">Inconsistent (varies more than 2 hours)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sleep Quality Section -->
+                <div class="form-section">
+                    <h3 class="section-title"><i class="fas fa-star me-2"></i>Sleep Quality</h3>
+
+                    <!-- Question 3: Overall Sleep Quality -->
+                    <div class="question-card">
+                        <label class="question-label">
+                            <i class="fas fa-rating me-2" style="color: var(--primary-purple);"></i>
+                            How would you rate your overall sleep quality?
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" class="form-range" id="sleepQuality" min="1" max="10" value="7" oninput="updateSliderValue('sleepQuality', this.value + '/10 (Poor...Excellent)')">
+                            <div class="slider-value" id="sleepQuality-value">7/10 (Poor...Excellent)</div>
+                        </div>
+                    </div>
+
+                    <!-- Question 4: Difficulty Falling Asleep -->
+                    <div class="question-card">
+                        <label class="question-label">
+                            <i class="fas fa-bed me-2" style="color: var(--primary-purple);"></i>
+                            How often do you have difficulty falling asleep?
+                        </label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="fallingAsleep" id="fall_never" value="0" required>
+                            <label class="form-check-label" for="fall_never">Never or rarely</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="fallingAsleep" id="fall_sometimes" value="1" required>
+                            <label class="form-check-label" for="fall_sometimes">Sometimes (1-2 times per week)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="fallingAsleep" id="fall_often" value="2" required>
+                            <label class="form-check-label" for="fall_often">Often (3+ times per week)</label>
+                        </div>
+                    </div>
+
+                    <!-- Question 5: Night Awakenings -->
+                    <div class="question-card">
+                        <label class="question-label">
+                            <i class="fas fa-eye me-2" style="color: var(--primary-purple);"></i>
+                            How often do you wake up during the night?
+                        </label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="nightAwakenings" id="wake_never" value="0" required>
+                            <label class="form-check-label" for="wake_never">Never or rarely</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="nightAwakenings" id="wake_sometimes" value="1" required>
+                            <label class="form-check-label" for="wake_sometimes">Sometimes (1-2 times per week)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="nightAwakenings" id="wake_often" value="2" required>
+                            <label class="form-check-label" for="wake_often">Often (3+ times per week)</label>
+                        </div>
+                    </div>
+
+                    <!-- Question 6: Early Morning Awakening -->
+                    <div class="question-card">
+                        <label class="question-label">
+                            <i class="fas fa-sunrise me-2" style="color: var(--primary-purple);"></i>
+                            Do you wake up too early and cannot go back to sleep?
+                        </label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="earlyWaking" id="early_never" value="0" required>
+                            <label class="form-check-label" for="early_never">Never or rarely</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="earlyWaking" id="early_sometimes" value="1" required>
+                            <label class="form-check-label" for="early_sometimes">Sometimes (1-2 times per week)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="earlyWaking" id="early_often" value="2" required>
+                            <label class="form-check-label" for="early_often">Often (3+ times per week)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sleep Disturbances Section -->
+                <div class="form-section">
+                    <h3 class="section-title"><i class="fas fa-exclamation-circle me-2"></i>Sleep Disturbances</h3>
+
+                    <!-- Question 7: Snoring -->
+                    <div class="question-card">
+                        <label class="question-label">
+                            <i class="fas fa-volume-high me-2" style="color: var(--primary-purple);"></i>
+                            Do you snore or have you been told you snore?
+                        </label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="snoring" id="snoring" value="1">
+                            <label class="form-check-label" for="snoring">Yes, I snore or have been told I snore</label>
+                        </div>
+                    </div>
+
+                    <!-- Question 8: Breathing Pauses -->
+                    <div class="question-card">
+                        <label class="question-label">
+                            <i class="fas fa-wind me-2" style="color: var(--primary-purple);"></i>
+                            Have you been told you stop breathing or gasp during sleep?
+                        </label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="breathingPauses" id="breathingPauses" value="1">
+                            <label class="form-check-label" for="breathingPauses">Yes, breathing pauses have been observed</label>
+                        </div>
+                    </div>
+
+                    <!-- Question 9: Restless Legs -->
+                    <div class="question-card">
+                        <label class="question-label">
+                            <i class="fas fa-person me-2" style="color: var(--primary-purple);"></i>
+                            Do you experience uncomfortable sensations in your legs at bedtime?
+                        </label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="restlessLegs" id="restlessLegs" value="1">
+                            <label class="form-check-label" for="restlessLegs">Yes, uncomfortable leg sensations</label>
+                        </div>
+                    </div>
+
+                    <!-- Question 10: Nightmares/Vivid Dreams -->
+                    <div class="question-card">
+                        <label class="question-label">
+                            <i class="fas fa-ghost me-2" style="color: var(--primary-purple);"></i>
+                            Do you experience frequent nightmares or very vivid dreams?
+                        </label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="dreams" id="dreams" value="1">
+                            <label class="form-check-label" for="dreams">Yes, frequent nightmares or vivid dreams</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daytime Impact Section -->
+                <div class="form-section">
+                    <h3 class="section-title"><i class="fas fa-sun me-2"></i>Daytime Impact</h3>
+
+                    <!-- Question 11: Daytime Dysfunction -->
+                    <div class="question-card">
+                        <label class="question-label">
+                            <i class="fas fa-person-walking me-2" style="color: var(--primary-purple);"></i>
+                            How much does poor sleep affect your daytime functioning (work, concentration, mood)?
+                        </label>
+                        <div class="slider-container">
+                            <input type="range" class="form-range" id="dytimeImpact" min="0" max="10" value="3" oninput="updateSliderValue('dytimeImpact', this.value + '/10 (None...Severe)')">
+                            <div class="slider-value" id="dytimeImpact-value">3/10 (None...Severe)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="form-section">
+                    <button type="button" class="btn btn-calculate" onclick="calculateSleepProblems()">
+                        <i class="fas fa-calculator me-2"></i>Calculate Sleep Assessment
+                    </button>
+                    <button type="reset" class="btn btn-reset" onclick="resetSleepProblems()">
+                        <i class="fas fa-redo me-2"></i>Reset Form
+                    </button>
+                </div>
+            </form>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="results-section"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer mt-5">
+        <p class="footer-text"><i class="fas fa-copyright me-1"></i>2024 Sleep Medicine Calculators. All rights reserved.</p>
+        <p class="footer-text">Clinical Assessment Tool - For Healthcare Professionals Only</p>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Calculator Script -->
+    <script>
+        // Function to update slider display value in real-time
+        function updateSliderValue(elementId, value) {
+            const displayElement = document.getElementById(elementId + '-value');
+            if (displayElement) {
+                displayElement.textContent = value;
+            }
+        }
+
+        // Function to calculate comprehensive sleep assessment
+        function calculateSleepProblems() {
+            // Validate form - ensure all required questions are answered
+            const form = document.getElementById('sleepProblemsForm');
+            if (!form.checkValidity()) {
+                alert('Please answer all questions before calculating.');
+                return;
+            }
+
+            // Calculate scores for different domains
+
+            // Sleep Duration Score (0-2 based on hours)
+            const sleepHours = parseFloat(document.getElementById('sleepDuration').value);
+            let durationScore = 0;
+            if (sleepHours < 5 || sleepHours > 9) {
+                durationScore = 2; // Poor duration
+            } else if (sleepHours < 6 || sleepHours > 8.5) {
+                durationScore = 1; // Suboptimal
+            }
+            // else durationScore = 0 (optimal 6-8.5 hours)
+
+            // Sleep Consistency Score (0-2)
+            const consistency = parseInt(document.querySelector('input[name="consistency"]:checked').value);
+
+            // Sleep Quality Score (10-point scale converted to 0-2)
+            const qualityRaw = parseInt(document.getElementById('sleepQuality').value);
+            let qualityScore = 0;
+            if (qualityRaw <= 4) qualityScore = 2;
+            else if (qualityRaw <= 7) qualityScore = 1;
+
+            // Sleep Initiation Score (0-2)
+            const fallingAsleep = parseInt(document.querySelector('input[name="fallingAsleep"]:checked').value);
+
+            // Sleep Maintenance Score (0-2)
+            const nightAwakenings = parseInt(document.querySelector('input[name="nightAwakenings"]:checked').value);
+            const earlyWaking = parseInt(document.querySelector('input[name="earlyWaking"]:checked').value);
+            const maintenanceScore = Math.max(nightAwakenings, earlyWaking); // Use higher of the two
+
+            // Sleep Disturbances Score (0-4)
+            const snoring = parseInt(document.getElementById('snoring').checked ? 1 : 0);
+            const breathingPauses = parseInt(document.getElementById('breathingPauses').checked ? 1 : 0);
+            const restlessLegs = parseInt(document.getElementById('restlessLegs').checked ? 1 : 0);
+            const dreams = parseInt(document.getElementById('dreams').checked ? 1 : 0);
+            const disturbancesScore = snoring + breathingPauses + restlessLegs + dreams;
+
+            // Daytime Impact Score (0-10 directly from slider)
+            const daytimeImpact = parseInt(document.getElementById('dytimeImpact').value);
+
+            // Calculate Total Sleep Problem Score (0-30+)
+            const totalScore = durationScore + consistency + qualityScore + fallingAsleep + maintenanceScore + disturbancesScore + Math.ceil(daytimeImpact / 3);
+
+            // Determine risk/severity category
+            let riskCategory = '';
+            let riskClass = '';
+            let interpretation = '';
+            let recommendations = '';
+
+            if (totalScore <= 5) {
+                riskCategory = 'MINIMAL SLEEP PROBLEMS';
+                riskClass = 'risk-minimal';
+                interpretation = `Your score of ${totalScore}/30+ indicates minimal sleep problems. 
+                Your sleep quality and patterns are generally healthy with few concerns.`;
+                recommendations = `
+                    <li>Maintain current healthy sleep practices</li>
+                    <li>Continue consistent sleep schedule</li>
+                    <li>Maintain adequate sleep duration (7-9 hours)</li>
+                    <li>Monitor sleep regularly for changes</li>
+                    <li>Continue regular physical activity</li>
+                `;
+            } else if (totalScore <= 12) {
+                riskCategory = 'MILD SLEEP PROBLEMS';
+                riskClass = 'risk-mild';
+                interpretation = `Your score of ${totalScore}/30+ indicates mild sleep problems. 
+                Some sleep quality or pattern concerns exist that may benefit from attention.`;
+                recommendations = `
+                    <li>Implement sleep hygiene improvements</li>
+                    <li>Establish consistent bedtime routine</li>
+                    <li>Optimize bedroom environment (dark, cool, quiet)</li>
+                    <li>Limit screen time 1-2 hours before bed</li>
+                    <li>Reduce caffeine and alcohol consumption</li>
+                    <li>Consider cognitive behavioral therapy for insomnia if needed</li>
+                    <li>Follow up with healthcare provider in 2-3 months</li>
+                `;
+            } else if (totalScore <= 20) {
+                riskCategory = 'MODERATE SLEEP PROBLEMS';
+                riskClass = 'risk-moderate';
+                interpretation = `Your score of ${totalScore}/30+ indicates moderate sleep problems. 
+                Multiple sleep disturbances or poor sleep quality require professional evaluation.`;
+                recommendations = `
+                    <li>Schedule appointment with healthcare provider</li>
+                    <li>Sleep study should be considered if risk factors present</li>
+                    <li>Comprehensive sleep disorder evaluation needed</li>
+                    <li>Implement structured sleep hygiene program</li>
+                    <li>Consider medication evaluation if appropriate</li>
+                    <li>Behavioral sleep therapy (CBT-I) is recommended</li>
+                    <li>Reduce daytime napping and stimulating activities</li>
+                    <li>Address any underlying medical or psychiatric conditions</li>
+                `;
+            } else {
+                riskCategory = 'SIGNIFICANT SLEEP PROBLEMS';
+                riskClass = 'risk-significant';
+                interpretation = `Your score of ${totalScore}/30+ indicates significant sleep problems requiring urgent attention. 
+                Multiple sleep disturbances and poor daytime function suggest serious sleep disorder.`;
+                recommendations = `
+                    <li>Urgent referral to sleep medicine specialist</li>
+                    <li>Polysomnographic sleep study should be scheduled</li>
+                    <li>Comprehensive sleep disorder evaluation required</li>
+                    <li>Evaluate for sleep apnea, narcolepsy, and periodic leg movements</li>
+                    <li>Consider pharmacological intervention</li>
+                    <li>Intensive behavioral and cognitive therapy recommended</li>
+                    <li>Close medical follow-up and monitoring essential</li>
+                    <li>Assess for depression, anxiety, and other comorbidities</li>
+                `;
+            }
+
+            // Build domain breakdown
+            const domainHTML = `
+                <div class="domain-item">
+                    <span class="domain-name"><i class="fas fa-hourglass me-2"></i>Sleep Duration</span>
+                    <span class="domain-score">${durationScore}/2</span>
+                </div>
+                <div class="domain-item">
+                    <span class="domain-name"><i class="fas fa-calendar me-2"></i>Schedule Consistency</span>
+                    <span class="domain-score">${consistency}/2</span>
+                </div>
+                <div class="domain-item">
+                    <span class="domain-name"><i class="fas fa-star me-2"></i>Overall Quality</span>
+                    <span class="domain-score">${qualityScore}/2</span>
+                </div>
+                <div class="domain-item">
+                    <span class="domain-name"><i class="fas fa-bed me-2"></i>Sleep Initiation</span>
+                    <span class="domain-score">${fallingAsleep}/2</span>
+                </div>
+                <div class="domain-item">
+                    <span class="domain-name"><i class="fas fa-eye me-2"></i>Sleep Maintenance</span>
+                    <span class="domain-score">${maintenanceScore}/2</span>
+                </div>
+                <div class="domain-item">
+                    <span class="domain-name"><i class="fas fa-exclamation-circle me-2"></i>Sleep Disturbances</span>
+                    <span class="domain-score">${disturbancesScore}/4</span>
+                </div>
+            `;
+
+            // Build result HTML
+            const resultHTML = `
+                <div class="${riskClass}">
+                    <div class="result-title">
+                        <i class="fas fa-stethoscope me-2"></i>${riskCategory}
+                    </div>
+                    <div class="result-score">Overall Score: ${totalScore}/30+</div>
+                    <div class="interpretation-box">
+                        ${interpretation}
+                    </div>
+                    <div class="domain-breakdown">
+                        <h5 style="color: var(--dark-purple); margin-bottom: 15px;"><i class="fas fa-chart-bar me-2"></i>Domain Breakdown:</h5>
+                        ${domainHTML}
+                    </div>
+                    <div class="recommendations">
+                        <h5><i class="fas fa-clipboard-list me-2"></i>Clinical Recommendations:</h5>
+                        <ul>
+                            ${recommendations}
+                        </ul>
+                    </div>
+                </div>
+            `;
+
+            // Display results
+            const resultsSection = document.getElementById('resultsSection');
+            resultsSection.innerHTML = resultHTML;
+            resultsSection.classList.add('show');
+
+            // Scroll to results
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Function to reset form and results
+        function resetSleepProblems() {
+            document.getElementById('sleepProblemsForm').reset();
+            document.getElementById('resultsSection').innerHTML = '';
+            document.getElementById('resultsSection').classList.remove('show');
+            document.getElementById('sleepDuration-value').textContent = '7 hours';
+            document.getElementById('sleepQuality-value').textContent = '7/10 (Poor...Excellent)';
+            document.getElementById('dytimeImpact-value').textContent = '3/10 (None...Severe)';
+        }
+    </script>
+</body>
+</html>

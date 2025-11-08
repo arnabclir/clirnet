@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post-test Probability Calculator - Diagnostic Medicine</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Main body styling with purple gradient background */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        /* Container wrapper with max width */
+        .container-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Card styling with shadow and border radius */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        /* Card header with purple gradient */
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-bottom: none;
+        }
+
+        /* Calculator title styling */
+        .calculator-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Subtitle text styling */
+        .calculator-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        /* Header badges container */
+        .header-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Badge styling */
+        .badge {
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        /* Navigation back link */
+        .nav-back {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .nav-back a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-back a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Card body styling */
+        .card-body {
+            padding: 30px;
+            background-color: #f8f9fa;
+        }
+
+        /* Form group styling */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        /* Form label styling */
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Form control styling */
+        .form-control {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* Button styling */
+        .btn-calculate {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 12px 40px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        /* Result container styling */
+        .result-container {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .result-container.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        /* Slide in animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Results grid styling */
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        /* Result card styling */
+        .result-card {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-label {
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .result-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        /* Progress bar styling */
+        .probability-bar {
+            margin-top: 15px;
+            height: 30px;
+            background-color: #e9ecef;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #667eea;
+        }
+
+        .probability-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        /* Info box styling */
+        .info-box {
+            background-color: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        /* Formula section styling */
+        .formula-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 2px dashed #667eea;
+        }
+
+        /* Formula title styling */
+        .formula-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Formula content styling */
+        .formula-content {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        /* Two column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Responsive design for mobile */
+        @media (max-width: 768px) {
+            .calculator-title {
+                font-size: 22px;
+            }
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-wrapper">
+        <!-- Navigation back button -->
+        <div class="nav-back">
+            <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        </div>
+
+        <!-- Main calculator card -->
+        <div class="card">
+            <div class="card-header">
+                <h1 class="calculator-title">
+                    <i class="fas fa-chart-bar"></i>
+                    Post-Test Probability Calculator
+                </h1>
+                <p class="calculator-subtitle">
+                    Calculate post-test probability from pre-test probability and likelihood ratios
+                </p>
+                <div class="header-badges">
+                    <span class="badge"><i class="fas fa-heartbeat"></i> Diagnostics</span>
+                    <span class="badge"><i class="fas fa-flask"></i> Evidence-Based</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <!-- Information box -->
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    This calculator determines the probability of disease after a test result, combining pre-test probability with likelihood ratios. Used in evidence-based medicine to guide clinical decisions.
+                </div>
+
+                <!-- Post-test probability form -->
+                <form id="postTestForm">
+                    <div class="two-column">
+                        <!-- Pre-test probability -->
+                        <div class="form-group">
+                            <label class="form-label">Pre-test Probability (%)</label>
+                            <input type="number" class="form-control" id="pretestProb" min="0.1" max="99.9" step="0.1" placeholder="e.g., 50" value="50">
+                            <small class="text-muted">Probability of disease before test (0-100%)</small>
+                        </div>
+
+                        <!-- Likelihood ratio for positive test -->
+                        <div class="form-group">
+                            <label class="form-label">Likelihood Ratio (+)</label>
+                            <input type="number" class="form-control" id="lrPositive" min="0.01" step="0.01" placeholder="e.g., 8.0" value="8">
+                            <small class="text-muted">LR+ for positive test result</small>
+                        </div>
+
+                        <!-- Likelihood ratio for negative test -->
+                        <div class="form-group">
+                            <label class="form-label">Likelihood Ratio (-)</label>
+                            <input type="number" class="form-control" id="lrNegative" min="0.01" max="1" step="0.01" placeholder="e.g., 0.2" value="0.2">
+                            <small class="text-muted">LR- for negative test result</small>
+                        </div>
+                    </div>
+
+                    <!-- Calculate button -->
+                    <button type="submit" class="btn btn-calculate">
+                        <i class="fas fa-calculator"></i> Calculate Post-Test Probability
+                    </button>
+                </form>
+
+                <!-- Results section -->
+                <div id="resultContainer" class="result-container">
+                    <h4><i class="fas fa-star"></i> Post-Test Probability Results</h4>
+
+                    <!-- Results grid -->
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <div class="result-label">After Positive Test</div>
+                            <div class="result-value"><span id="postTestPositive">--%</span></div>
+                            <div class="probability-bar">
+                                <div id="barPositive" class="probability-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-label">After Negative Test</div>
+                            <div class="result-value"><span id="postTestNegative">--%</span></div>
+                            <div class="probability-bar">
+                                <div id="barNegative" class="probability-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interpretation message -->
+                    <div id="interpretationBox"></div>
+                </div>
+
+                <!-- Clinical information section -->
+                <div class="formula-section">
+                    <div class="formula-title">
+                        <i class="fas fa-flask"></i> Likelihood Ratios & Calculations
+                    </div>
+                    <div class="formula-content">
+Post-Test Probability Calculation:
+
+1. Convert pre-test probability to pre-test odds:
+   Pre-test odds = P / (1 - P)
+
+2. Calculate post-test odds:
+   Post-test odds = Pre-test odds × Likelihood Ratio
+
+3. Convert post-test odds back to probability:
+   Post-test probability = Odds / (1 + Odds)
+
+Likelihood Ratio Interpretation:
+
+LR+ (Positive Test):
+- >10: Significant increase in disease probability
+- 5-10: Moderate increase
+- 2-5: Small increase
+- 1-2: Minimal increase
+- =1: No change in probability
+
+LR- (Negative Test):
+- <0.1: Significant decrease in disease probability
+- 0.1-0.2: Moderate decrease
+- 0.2-0.5: Small decrease
+- 0.5-1: Minimal decrease
+- =1: No change in probability
+
+Clinical Application:
+- Use to update clinical suspicion after test results
+- Helps decide: Treat, test further, or reassure
+- Combines clinical judgment with test accuracy
+- Evidence-based approach to diagnosis
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Form submission handler
+        document.getElementById('postTestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculatePostTestProbability();
+        });
+
+        // Post-test probability calculation function
+        function calculatePostTestProbability() {
+            const pretestProb = parseFloat(document.getElementById('pretestProb').value);
+            const lrPositive = parseFloat(document.getElementById('lrPositive').value);
+            const lrNegative = parseFloat(document.getElementById('lrNegative').value);
+
+            // Input validation
+            if (isNaN(pretestProb) || isNaN(lrPositive) || isNaN(lrNegative)) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            if (pretestProb < 0 || pretestProb > 100) {
+                alert('Pre-test probability must be between 0 and 100');
+                return;
+            }
+
+            if (lrPositive <= 0 || lrNegative <= 0) {
+                alert('Likelihood ratios must be greater than 0');
+                return;
+            }
+
+            // Convert percentage to decimal
+            const pretestDecimal = pretestProb / 100;
+
+            // Calculate pre-test odds
+            const pretestOdds = pretestDecimal / (1 - pretestDecimal);
+
+            // Calculate post-test odds for positive test
+            const posttestOddsPositive = pretestOdds * lrPositive;
+            const posttestProbPositive = posttestOddsPositive / (1 + posttestOddsPositive);
+
+            // Calculate post-test odds for negative test
+            const posttestOddsNegative = pretestOdds * lrNegative;
+            const posttestProbNegative = posttestOddsNegative / (1 + posttestOddsNegative);
+
+            // Convert to percentage
+            const posttestProbPositivePercent = (posttestProbPositive * 100).toFixed(1);
+            const posttestProbNegativePercent = (posttestProbNegative * 100).toFixed(1);
+
+            // Display results
+            document.getElementById('postTestPositive').textContent = posttestProbPositivePercent + '%';
+            document.getElementById('postTestNegative').textContent = posttestProbNegativePercent + '%';
+
+            // Update probability bars
+            document.getElementById('barPositive').style.width = posttestProbPositivePercent + '%';
+            document.getElementById('barNegative').style.width = posttestProbNegativePercent + '%';
+
+            // Prepare interpretation message
+            let interpretation = '';
+
+            const changePositive = posttestProbPositive - pretestDecimal;
+            const changeNegative = posttestProbNegative - pretestDecimal;
+
+            interpretation = '<strong>Clinical Interpretation:</strong><br><br>';
+            interpretation += '<strong>Positive Test Result:</strong><br>';
+
+            if (posttestProbPositive > 0.90) {
+                interpretation += `Probability increased to ${posttestProbPositivePercent}%. Disease is very likely. `;
+                interpretation += 'Proceed with treatment unless compelling contraindications. ';
+            } else if (posttestProbPositive > 0.50) {
+                interpretation += `Probability increased to ${posttestProbPositivePercent}%. Disease is more likely than not. `;
+                interpretation += 'Consider additional testing or treatment. ';
+            } else if (posttestProbPositive > 0.10) {
+                interpretation += `Probability increased to ${posttestProbPositivePercent}%. Disease is more likely than baseline. `;
+                interpretation += 'May warrant further evaluation. ';
+            } else {
+                interpretation += `Probability remains at ${posttestProbPositivePercent}%. Still relatively unlikely. `;
+            }
+
+            interpretation += '<br><br><strong>Negative Test Result:</strong><br>';
+
+            if (posttestProbNegative < 0.10) {
+                interpretation += `Probability decreased to ${posttestProbNegativePercent}%. Disease is very unlikely. `;
+                interpretation += 'Safe to reassure patient and withhold treatment. ';
+            } else if (posttestProbNegative < 0.50) {
+                interpretation += `Probability decreased to ${posttestProbNegativePercent}%. Disease is less likely than baseline. `;
+                interpretation += 'May not need treatment but continue monitoring. ';
+            } else if (posttestProbNegative < 0.90) {
+                interpretation += `Probability still at ${posttestProbNegativePercent}%. Disease remains relatively likely. `;
+                interpretation += 'Consider additional testing or alternative approaches. ';
+            } else {
+                interpretation += `Probability remains high at ${posttestProbNegativePercent}%. Still likely to have disease. `;
+            }
+
+            document.getElementById('interpretationBox').innerHTML =
+                `<div class="interpretation moderate"><i class="fas fa-exclamation-triangle"></i> ${interpretation}</div>`;
+
+            // Show results section with animation
+            document.getElementById('resultContainer').classList.add('show');
+        }
+    </script>
+</body>
+</html>

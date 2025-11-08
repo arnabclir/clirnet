@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for responsiveness and character encoding -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MASCC Neutropenic Fever Risk Score Calculator">
+    <title>MASCC Neutropenic Fever Risk Score - Clinical Calculator</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Styles with Purple Gradient Theme -->
+    <style>
+        :root {
+            --primary-purple: #667eea;
+            --secondary-purple: #764ba2;
+            --light-purple: #f3f0ff;
+            --dark-purple: #4c2d7a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--dark-purple) 0%, var(--primary-purple) 100%);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: white;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            color: white;
+            padding: 30px 20px;
+            border: none;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .card-subtitle {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .form-section {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-purple);
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-label i {
+            margin-right: 8px;
+            color: var(--primary-purple);
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-calculate {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .btn-reset {
+            background-color: #e0e0e0;
+            color: var(--dark-purple);
+            border: none;
+            padding: 10px 30px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-reset:hover {
+            background-color: #d0d0d0;
+        }
+
+        .result-section {
+            padding: 30px;
+            background-color: var(--light-purple);
+            border-top: 3px solid var(--primary-purple);
+            display: none;
+        }
+
+        .result-section.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-box {
+            background: white;
+            border-left: 5px solid var(--primary-purple);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-purple);
+            margin-bottom: 10px;
+        }
+
+        .result-label {
+            font-size: 1.1rem;
+            color: var(--dark-purple);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .risk-category {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .risk-low {
+            background-color: #d4edda;
+            color: #155724;
+            border-left: 5px solid #28a745;
+        }
+
+        .risk-high {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 5px solid #dc3545;
+        }
+
+        .info-box {
+            background-color: #e7f3ff;
+            border-left: 5px solid var(--primary-purple);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .info-box strong {
+            color: var(--dark-purple);
+        }
+
+        .interpretation {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .interpretation h5 {
+            color: var(--dark-purple);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .interpretation-item {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .interpretation-item::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: var(--primary-purple);
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .card-title {
+                font-size: 1.4rem;
+            }
+
+            .form-section, .result-section {
+                padding: 20px;
+            }
+
+            .result-score {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="fas fa-virus-covid"></i> Clinical Calculators</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/calculators/calculators/index.html"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-calculator"></i> Calculators</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container container-main">
+        <div class="card">
+            <!-- Card Header -->
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-thermometer-half"></i> MASCC Neutropenic Fever Risk Score</div>
+                <div class="card-subtitle">Multinational Association for Supportive Care in Cancer</div>
+            </div>
+
+            <!-- Form Section -->
+            <div class="form-section">
+                <div class="info-box">
+                    <strong><i class="fas fa-info-circle"></i> About This Calculator:</strong> The MASCC score identifies low-risk cancer patients with chemotherapy-induced neutropenia and fever who may be suitable for outpatient management.
+                </div>
+
+                <!-- Input Form -->
+                <form id="masccForm">
+                    <!-- Burden of Illness -->
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-stethoscope"></i> Burden of Illness</label>
+                        <select class="form-select" id="burden" required>
+                            <option value="">-- Select --</option>
+                            <option value="5">No or mild symptoms (5 points)</option>
+                            <option value="3">Moderate symptoms (3 points)</option>
+                            <option value="0">Severe symptoms (0 points)</option>
+                        </select>
+                        <small class="form-text text-muted">Based on overall clinical assessment</small>
+                    </div>
+
+                    <!-- Hypotension -->
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-heart"></i> Hypotension</label>
+                        <select class="form-select" id="hypotension" required>
+                            <option value="0">-- Select --</option>
+                            <option value="5">No hypotension (5 points)</option>
+                            <option value="0">Hypotension present (0 points)</option>
+                        </select>
+                        <small class="form-text text-muted">Systolic BP < 90 mmHg</small>
+                    </div>
+
+                    <!-- COPD -->
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-lungs"></i> Chronic Obstructive Pulmonary Disease</label>
+                        <select class="form-select" id="copd" required>
+                            <option value="0">-- Select --</option>
+                            <option value="4">No history (4 points)</option>
+                            <option value="0">History of COPD (0 points)</option>
+                        </select>
+                    </div>
+
+                    <!-- Fungal Infection -->
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-virus"></i> Prior Fungal Infection</label>
+                        <select class="form-select" id="fungal" required>
+                            <option value="0">-- Select --</option>
+                            <option value="4">No history (4 points)</option>
+                            <option value="0">History of fungal infection (0 points)</option>
+                        </select>
+                    </div>
+
+                    <!-- Nausea/Vomiting -->
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-face-flushed"></i> Nausea or Vomiting</label>
+                        <select class="form-select" id="nausea" required>
+                            <option value="0">-- Select --</option>
+                            <option value="3">None or mild (3 points)</option>
+                            <option value="0">Moderate to severe (0 points)</option>
+                        </select>
+                    </div>
+
+                    <!-- Outpatient Status -->
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-hospital"></i> Outpatient Status</label>
+                        <select class="form-select" id="outpatient" required>
+                            <option value="0">-- Select --</option>
+                            <option value="3">Outpatient (3 points)</option>
+                            <option value="0">Inpatient (0 points)</option>
+                        </select>
+                        <small class="form-text text-muted">Hospitalization at fever onset</small>
+                    </div>
+
+                    <!-- Diarrhea -->
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-person-hiking"></i> Diarrhea</label>
+                        <select class="form-select" id="diarrhea" required>
+                            <option value="0">-- Select --</option>
+                            <option value="3">No diarrhea (3 points)</option>
+                            <option value="0">Diarrhea present (0 points)</option>
+                        </select>
+                    </div>
+
+                    <!-- Buttons -->
+                    <button type="submit" class="btn-calculate"><i class="fas fa-calculator"></i> Calculate MASCC Score</button>
+                    <button type="reset" class="btn-reset"><i class="fas fa-redo"></i> Reset</button>
+                </form>
+            </div>
+
+            <!-- Result Section -->
+            <div class="result-section" id="resultSection">
+                <div class="result-box">
+                    <div class="result-label"><i class="fas fa-chart-pie"></i> MASCC Score</div>
+                    <div class="result-score" id="scoreResult">-</div>
+                    <div id="riskCategory" class="risk-category"></div>
+                </div>
+
+                <div class="interpretation">
+                    <h5><i class="fas fa-stethoscope"></i> Clinical Interpretation</h5>
+                    <div id="interpretationText"></div>
+                </div>
+
+                <div class="interpretation">
+                    <h5><i class="fas fa-hospital"></i> Management Recommendations</h5>
+                    <div id="actionText"></div>
+                </div>
+
+                <div class="interpretation">
+                    <h5><i class="fas fa-info-circle"></i> Clinical Considerations</h5>
+                    <div id="considerationsText"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><i class="fas fa-shield-alt"></i> Disclaimer: This calculator is for educational purposes only. Always consult with a healthcare provider.</p>
+        <p>&copy; 2024 Clinical Calculator Series - Infectious Diseases</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Calculator Logic -->
+    <script>
+        // Event listener for form submission
+        document.getElementById('masccForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculateMACC();
+        });
+
+        /**
+         * Calculate MASCC Score
+         */
+        function calculateMACC() {
+            // Get input values
+            const burden = parseInt(document.getElementById('burden').value);
+            const hypotension = parseInt(document.getElementById('hypotension').value);
+            const copd = parseInt(document.getElementById('copd').value);
+            const fungal = parseInt(document.getElementById('fungal').value);
+            const nausea = parseInt(document.getElementById('nausea').value);
+            const outpatient = parseInt(document.getElementById('outpatient').value);
+            const diarrhea = parseInt(document.getElementById('diarrhea').value);
+
+            // Validate inputs
+            if (isNaN(burden) || isNaN(hypotension) || isNaN(copd) || isNaN(fungal) ||
+                isNaN(nausea) || isNaN(outpatient) || isNaN(diarrhea)) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            // Calculate total score
+            const score = burden + hypotension + copd + fungal + nausea + outpatient + diarrhea;
+
+            displayResults(score);
+        }
+
+        /**
+         * Display Results
+         */
+        function displayResults(score) {
+            const resultSection = document.getElementById('resultSection');
+            const scoreResult = document.getElementById('scoreResult');
+            const riskCategory = document.getElementById('riskCategory');
+            const interpretationText = document.getElementById('interpretationText');
+            const actionText = document.getElementById('actionText');
+            const considerationsText = document.getElementById('considerationsText');
+
+            scoreResult.textContent = score;
+
+            let category = '';
+            let categoryClass = '';
+            let interpretation = '';
+            let action = '';
+            let considerations = '';
+
+            if (score >= 21) {
+                category = '<i class="fas fa-shield-alt"></i> LOW Risk';
+                categoryClass = 'risk-low';
+                interpretation = '<div class="interpretation-item"><strong>Low risk for serious complications.</strong> Patient may be suitable for outpatient management with close follow-up.</div><div class="interpretation-item"><strong>Severe complications risk:</strong> ~5%</div>';
+                action = '<div class="interpretation-item">Oral antibiotics as outpatient preferred</div><div class="interpretation-item">Daily clinical assessment</div><div class="interpretation-item">Readily available hospitalization backup</div><div class="interpretation-item">Ensure reliable communication and compliance</div>';
+                considerations = '<div class="interpretation-item">Requires careful patient selection</div><div class="interpretation-item">Close monitoring during treatment</div><div class="interpretation-item">Patient must be able to access care if needed</div><div class="interpretation-item">Ensure good patient compliance</div>';
+            } else {
+                category = '<i class="fas fa-exclamation-circle"></i> HIGH Risk';
+                categoryClass = 'risk-high';
+                interpretation = '<div class="interpretation-item"><strong>High risk for serious complications.</strong> Hospital admission is strongly recommended.</div><div class="interpretation-item"><strong>Severe complications risk:</strong> >20%</div>';
+                action = '<div class="interpretation-item">IV antibiotics in hospital setting</div><div class="interpretation-item">Continuous monitoring</div><div class="interpretation-item">Prompt diagnostic workup</div><div class="interpretation-item">Ready access to intensive supportive care</div>';
+                considerations = '<div class="interpretation-item">Higher morbidity and mortality risk</div><div class="interpretation-item">Requires inpatient management</div><div class="interpretation-item">May need broad-spectrum antibiotics</div><div class="interpretation-item">Monitor for complications closely</div>';
+            }
+
+            riskCategory.innerHTML = category;
+            riskCategory.className = 'risk-category ' + categoryClass;
+            interpretationText.innerHTML = interpretation;
+            actionText.innerHTML = action;
+            considerationsText.innerHTML = considerations;
+
+            resultSection.classList.add('show');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SI to Conventional Unit Converter - Immunology</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --light-bg: #f8f9fa;
+        }
+
+        body {
+            background: var(--light-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 20px;
+        }
+
+        .gradient-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .gradient-header h1 {
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .gradient-header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin: 0;
+        }
+
+        .calculator-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group-text {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-calculate {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .results-section {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+        }
+
+        .results-section.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .error-message {
+            display: none;
+            padding: 15px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            color: #721c24;
+            margin-bottom: 20px;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .reference-box {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .reference-box h5 {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .conversion-table {
+            margin-top: 15px;
+            overflow-x: auto;
+        }
+
+        .conversion-table table {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        .conversion-table th {
+            background-color: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            font-weight: 600;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .conversion-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .back-button {
+            margin-bottom: 20px;
+        }
+
+        .back-button a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.2s;
+        }
+
+        .back-button a:hover {
+            gap: 12px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-button">
+            <a href="/index.html" title="Return to main dashboard">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+        </div>
+
+        <div class="gradient-header">
+            <h1>
+                <i class="fas fa-vial"></i>
+                SI to Conventional Unit Converter
+            </h1>
+            <p>Immunology Laboratory Values Unit Conversion</p>
+        </div>
+
+        <div class="calculator-container">
+            <!-- Error Message -->
+            <div class="error-message" id="errorMessage" role="alert">
+                <i class="fas fa-exclamation-circle"></i> <span id="errorText"></span>
+            </div>
+
+            <!-- Input Section -->
+            <div class="mb-4">
+                <label for="testSelect" class="form-label">
+                    <i class="fas fa-list"></i> Select Immunology Test
+                </label>
+                <select class="form-select form-select-lg" id="testSelect" onchange="updateConversionInfo()">
+                    <option value="">-- Select a test --</option>
+                    <option value="ige">IgE (kIU/L → IU/mL)</option>
+                    <option value="igg">IgG (g/L → mg/dL)</option>
+                    <option value="igm">IgM (g/L → mg/dL)</option>
+                    <option value="iga">IgA (g/L → mg/dL)</option>
+                    <option value="igd">IgD (mg/L → μg/mL)</option>
+                    <option value="ige_ng">IgE (ng/mL → IU/mL)</option>
+                    <option value="complement_c3">Complement C3 (g/L → mg/dL)</option>
+                    <option value="complement_c4">Complement C4 (g/L → mg/dL)</option>
+                    <option value="wbc">WBC Count (10^9/L → K/μL)</option>
+                    <option value="lymphocytes">Lymphocytes (10^9/L → K/μL)</option>
+                    <option value="neutrophils">Neutrophils (10^9/L → K/μL)</option>
+                    <option value="monocytes">Monocytes (10^9/L → K/μL)</option>
+                    <option value="eosinophils">Eosinophils (10^9/L → K/μL)</option>
+                    <option value="basophils">Basophils (10^9/L → K/μL)</option>
+                    <option value="platelets">Platelets (10^9/L → K/μL)</option>
+                </select>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <label for="siValue" class="form-label">
+                        <i class="fas fa-input-numeric"></i> SI Value
+                    </label>
+                    <div class="input-group">
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="siValue"
+                            placeholder="Enter value"
+                            step="0.01"
+                        >
+                        <span class="input-group-text" id="siUnit">Unit</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-lg btn-calculate" onclick="convertToConventional()">
+                <i class="fas fa-exchange-alt"></i> Convert to Conventional Units
+            </button>
+
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection">
+                <h3 class="mb-4">
+                    <i class="fas fa-chart-line"></i> Conversion Result
+                </h3>
+
+                <div class="result-card">
+                    <p class="fw-bold">Test:</p>
+                    <p id="testName"></p>
+                </div>
+
+                <div class="result-card">
+                    <p class="fw-bold">Conversion Factor:</p>
+                    <code id="conversionFormula" class="d-block"></code>
+                </div>
+
+                <div class="result-card">
+                    <p class="fw-bold">Conventional Value:</p>
+                    <div class="result-value" id="conventionalResult"></div>
+                    <p class="text-muted" id="conventionalUnit"></p>
+                </div>
+
+                <div class="result-card">
+                    <p class="fw-bold">Normal Range (Conventional):</p>
+                    <p id="normalRange"></p>
+                </div>
+            </div>
+
+            <!-- Reference Section -->
+            <div class="reference-box">
+                <h5>
+                    <i class="fas fa-book"></i> Immunology Conversion Reference
+                </h5>
+                <div class="conversion-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Test</th>
+                                <th>SI</th>
+                                <th>Conventional</th>
+                                <th>Conversion Factor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>IgE</td>
+                                <td>kIU/L</td>
+                                <td>IU/mL</td>
+                                <td>× 1.0</td>
+                            </tr>
+                            <tr>
+                                <td>IgG</td>
+                                <td>g/L</td>
+                                <td>mg/dL</td>
+                                <td>× 100</td>
+                            </tr>
+                            <tr>
+                                <td>IgM</td>
+                                <td>g/L</td>
+                                <td>mg/dL</td>
+                                <td>× 100</td>
+                            </tr>
+                            <tr>
+                                <td>IgA</td>
+                                <td>g/L</td>
+                                <td>mg/dL</td>
+                                <td>× 100</td>
+                            </tr>
+                            <tr>
+                                <td>IgD</td>
+                                <td>mg/L</td>
+                                <td>μg/mL</td>
+                                <td>× 1.0</td>
+                            </tr>
+                            <tr>
+                                <td>C3</td>
+                                <td>g/L</td>
+                                <td>mg/dL</td>
+                                <td>× 100</td>
+                            </tr>
+                            <tr>
+                                <td>C4</td>
+                                <td>g/L</td>
+                                <td>mg/dL</td>
+                                <td>× 100</td>
+                            </tr>
+                            <tr>
+                                <td>WBC</td>
+                                <td>10^9/L</td>
+                                <td>K/μL</td>
+                                <td>× 1.0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>
+                    <i class="fas fa-clock"></i> Last Updated: <span id="timestamp"></span>
+                </p>
+                <p style="font-size: 0.85rem; margin-top: 10px;">
+                    Medical Calculators for Allergy and Immunology | Bidirectional conversion support
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /**
+         * Conversion factors for immunology tests (SI to Conventional)
+         */
+        const conversions = {
+            ige: {
+                name: 'IgE',
+                factor: 1,
+                siUnit: 'kIU/L',
+                conventionalUnit: 'IU/mL',
+                formula: 'kIU/L × 1.0 = IU/mL',
+                normalSI: '<0.35 kIU/L',
+                normalConventional: '<0.35 IU/mL'
+            },
+            ige_ng: {
+                name: 'IgE (ng to IU)',
+                factor: 1 / 1.2,
+                siUnit: 'ng/mL',
+                conventionalUnit: 'IU/mL',
+                formula: 'ng/mL ÷ 1.2 = IU/mL',
+                normalSI: '<0.35 ng/mL',
+                normalConventional: '<0.35 IU/mL'
+            },
+            igg: {
+                name: 'IgG',
+                factor: 100,
+                siUnit: 'g/L',
+                conventionalUnit: 'mg/dL',
+                formula: 'g/L × 100 = mg/dL',
+                normalSI: '7.0-16.0 g/L',
+                normalConventional: '700-1600 mg/dL'
+            },
+            igm: {
+                name: 'IgM',
+                factor: 100,
+                siUnit: 'g/L',
+                conventionalUnit: 'mg/dL',
+                formula: 'g/L × 100 = mg/dL',
+                normalSI: '0.40-2.30 g/L',
+                normalConventional: '40-230 mg/dL'
+            },
+            iga: {
+                name: 'IgA',
+                factor: 100,
+                siUnit: 'g/L',
+                conventionalUnit: 'mg/dL',
+                formula: 'g/L × 100 = mg/dL',
+                normalSI: '0.70-4.00 g/L',
+                normalConventional: '70-400 mg/dL'
+            },
+            igd: {
+                name: 'IgD',
+                factor: 1,
+                siUnit: 'mg/L',
+                conventionalUnit: 'μg/mL',
+                formula: 'mg/L × 1.0 = μg/mL',
+                normalSI: '0-0.08 mg/L',
+                normalConventional: '0-0.08 μg/mL'
+            },
+            complement_c3: {
+                name: 'Complement C3',
+                factor: 100,
+                siUnit: 'g/L',
+                conventionalUnit: 'mg/dL',
+                formula: 'g/L × 100 = mg/dL',
+                normalSI: '0.90-1.80 g/L',
+                normalConventional: '90-180 mg/dL'
+            },
+            complement_c4: {
+                name: 'Complement C4',
+                factor: 100,
+                siUnit: 'g/L',
+                conventionalUnit: 'mg/dL',
+                formula: 'g/L × 100 = mg/dL',
+                normalSI: '0.10-0.40 g/L',
+                normalConventional: '10-40 mg/dL'
+            },
+            wbc: {
+                name: 'WBC (White Blood Cells)',
+                factor: 1,
+                siUnit: '10^9/L',
+                conventionalUnit: 'K/μL',
+                formula: '10^9/L = K/μL (equivalent)',
+                normalSI: '4.5-11.0 × 10^9/L',
+                normalConventional: '4.5-11.0 K/μL'
+            },
+            lymphocytes: {
+                name: 'Lymphocytes',
+                factor: 1,
+                siUnit: '10^9/L',
+                conventionalUnit: 'K/μL',
+                formula: '10^9/L = K/μL (equivalent)',
+                normalSI: '1.0-4.8 × 10^9/L',
+                normalConventional: '1.0-4.8 K/μL'
+            },
+            neutrophils: {
+                name: 'Neutrophils',
+                factor: 1,
+                siUnit: '10^9/L',
+                conventionalUnit: 'K/μL',
+                formula: '10^9/L = K/μL (equivalent)',
+                normalSI: '2.0-7.5 × 10^9/L',
+                normalConventional: '2.0-7.5 K/μL'
+            },
+            monocytes: {
+                name: 'Monocytes',
+                factor: 1,
+                siUnit: '10^9/L',
+                conventionalUnit: 'K/μL',
+                formula: '10^9/L = K/μL (equivalent)',
+                normalSI: '0.2-0.8 × 10^9/L',
+                normalConventional: '0.2-0.8 K/μL'
+            },
+            eosinophils: {
+                name: 'Eosinophils',
+                factor: 1,
+                siUnit: '10^9/L',
+                conventionalUnit: 'K/μL',
+                formula: '10^9/L = K/μL (equivalent)',
+                normalSI: '0.0-0.4 × 10^9/L',
+                normalConventional: '0.0-0.4 K/μL'
+            },
+            basophils: {
+                name: 'Basophils',
+                factor: 1,
+                siUnit: '10^9/L',
+                conventionalUnit: 'K/μL',
+                formula: '10^9/L = K/μL (equivalent)',
+                normalSI: '0.0-0.1 × 10^9/L',
+                normalConventional: '0.0-0.1 K/μL'
+            },
+            platelets: {
+                name: 'Platelets',
+                factor: 1,
+                siUnit: '10^9/L',
+                conventionalUnit: 'K/μL',
+                formula: '10^9/L = K/μL (equivalent)',
+                normalSI: '150-400 × 10^9/L',
+                normalConventional: '150-400 K/μL'
+            }
+        };
+
+        /**
+         * Update conversion info when test is selected
+         */
+        function updateConversionInfo() {
+            const testSelect = document.getElementById('testSelect');
+            const testValue = testSelect.value;
+
+            if (testValue && conversions[testValue]) {
+                const conv = conversions[testValue];
+                document.getElementById('siUnit').textContent = conv.siUnit;
+            }
+        }
+
+        /**
+         * Convert SI value to conventional units
+         */
+        function convertToConventional() {
+            const testSelect = document.getElementById('testSelect');
+            const testValue = testSelect.value;
+            const siInput = parseFloat(document.getElementById('siValue').value);
+            const errorDiv = document.getElementById('errorMessage');
+            const resultsSection = document.getElementById('resultsSection');
+
+            // Validation
+            if (!testValue) {
+                showError('Please select a test');
+                resultsSection.classList.remove('show');
+                return;
+            }
+
+            if (!siInput || isNaN(siInput)) {
+                showError('Please enter a valid value');
+                resultsSection.classList.remove('show');
+                return;
+            }
+
+            if (siInput < 0) {
+                showError('Value must be greater than or equal to 0');
+                resultsSection.classList.remove('show');
+                return;
+            }
+
+            const conv = conversions[testValue];
+
+            // Calculate conventional value
+            const conventionalValue = siInput * conv.factor;
+
+            // Display results
+            errorDiv.classList.remove('show');
+            document.getElementById('testName').textContent = conv.name;
+            document.getElementById('conversionFormula').textContent = conv.formula;
+            document.getElementById('conventionalResult').textContent = conventionalValue.toFixed(4);
+            document.getElementById('conventionalUnit').textContent = conv.conventionalUnit;
+            document.getElementById('normalRange').textContent = conv.normalConventional;
+
+            resultsSection.classList.add('show');
+        }
+
+        /**
+         * Show error message
+         */
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            errorText.textContent = message;
+            errorDiv.classList.add('show');
+        }
+
+        /**
+         * Update timestamp
+         */
+        function updateTimestamp() {
+            const now = new Date();
+            document.getElementById('timestamp').textContent = now.toLocaleString();
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', updateTimestamp);
+
+        // Allow Enter key to convert
+        document.getElementById('siValue').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') convertToConventional();
+        });
+    </script>
+</body>
+</html>

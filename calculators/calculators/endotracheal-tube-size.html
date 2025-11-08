@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endotracheal Tube Size for Children</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        .container { max-width: 900px; }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-header h3 { margin: 0; font-weight: 700; }
+
+        .card-body { padding: 30px; }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-control {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-calculate {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .result-item {
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .result-label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .result-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 5px;
+        }
+
+        .formula-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #555;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            text-align: left;
+        }
+
+        table th {
+            background: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+
+        <div class="card">
+            <div class="card-header">
+                <h3><i class="fas fa-lungs"></i> Endotracheal Tube Size (Children 1-8 years)</h3>
+                <small>Calculate appropriate ETT size for pediatric patients</small>
+            </div>
+
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    ETT sizing is critical for safe pediatric airway management. Use age as primary guide; adjust for body habitus.
+                </div>
+
+                <div class="form-group">
+                    <label for="age" class="form-label">
+                        <i class="fas fa-birthday-cake"></i> Age (years)
+                    </label>
+                    <input type="number" class="form-control" id="age" min="1" max="8" step="0.5" placeholder="Enter age in years">
+                </div>
+
+                <button class="btn btn-calculate" onclick="calculateETT()">
+                    <i class="fas fa-calculator"></i> Calculate ETT Size
+                </button>
+
+                <div id="results" class="hidden">
+                    <div class="result-box">
+                        <strong style="font-size: 18px;">Endotracheal Tube Sizing Results</strong>
+
+                        <div class="result-item">
+                            <div class="result-label">Recommended ETT Diameter (uncuffed)</div>
+                            <div class="result-value" id="tubeSize">-</div>
+                            <small id="tubeNote"></small>
+                        </div>
+
+                        <div class="result-item">
+                            <div class="result-label">Tube Depth at Teeth (cm)</div>
+                            <div class="result-value" id="tubeDepth">-</div>
+                        </div>
+
+                        <div class="result-item">
+                            <div class="result-label">Backup Tubes</div>
+                            <div class="result-value" id="backupTubes">-</div>
+                            <small id="backupNote">Always have sizes one smaller and one larger available</small>
+                        </div>
+
+                        <div class="formula-box">
+                            <strong>Cole Formula:</strong><br>
+                            ETT size (mm) = (Age in years / 4) + 4<br><br>
+                            <strong>Insertion Depth at Teeth:</strong><br>
+                            Depth (cm) = (Age in years / 2) + 12<br><br>
+                            <strong>Uncuffed Tubes:<br></strong>
+                            - Recommended for age &lt; 8-10 years<br>
+                            - Reduces post-extubation croup<br>
+                            - Lower air leak risk with proper sizing<br><br>
+                            <strong>Cuffed Tubes:</strong><br>
+                            - Consider for age &gt; 8 years<br>
+                            - Allows ARDS/PEEP management<br>
+                            - Use size 0.5 mm smaller than uncuffed
+                        </div>
+                    </div>
+
+                    <div class="result-box" style="margin-top: 20px;">
+                        <strong>Age-Based ETT Size Reference Table</strong>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Age (years)</th>
+                                    <th>ETT Size (mm)</th>
+                                    <th>Insertion Depth (cm)</th>
+                                    <th>Tube Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>4.25</td>
+                                    <td>12.5</td>
+                                    <td>Uncuffed</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>4.5</td>
+                                    <td>13</td>
+                                    <td>Uncuffed</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>4.75</td>
+                                    <td>13.5</td>
+                                    <td>Uncuffed</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>14</td>
+                                    <td>Uncuffed</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>5.25</td>
+                                    <td>14.5</td>
+                                    <td>Uncuffed</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>5.5</td>
+                                    <td>15</td>
+                                    <td>Uncuffed</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>5.75</td>
+                                    <td>15.5</td>
+                                    <td>Uncuffed</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>6</td>
+                                    <td>16</td>
+                                    <td>Uncuffed or Cuffed</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function calculateETT() {
+            const age = parseFloat(document.getElementById('age').value);
+
+            if (isNaN(age) || age < 1 || age > 8) {
+                alert('Please enter a valid age between 1 and 8 years');
+                return;
+            }
+
+            // Cole formula: ETT size = (age / 4) + 4
+            const ettSize = (age / 4) + 4;
+
+            // Insertion depth formula: depth = (age / 2) + 12
+            const insertionDepth = (age / 2) + 12;
+
+            // Calculate backup sizes
+            const smallerSize = Math.max(3.5, ettSize - 0.5);
+            const largerSize = ettSize + 0.5;
+
+            let tubeType = 'Uncuffed';
+            let note = '';
+            if (age >= 8) {
+                tubeType = 'Uncuffed or Cuffed';
+                note = '(If cuffed, use 0.5 mm smaller size)';
+            }
+
+            document.getElementById('tubeSize').textContent = ettSize.toFixed(2) + ' mm ' + tubeType;
+            document.getElementById('tubeNote').textContent = note;
+            document.getElementById('tubeDepth').textContent = insertionDepth.toFixed(1) + ' cm';
+            document.getElementById('backupTubes').textContent = smallerSize.toFixed(2) + ' mm and ' + largerSize.toFixed(2) + ' mm';
+            document.getElementById('results').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

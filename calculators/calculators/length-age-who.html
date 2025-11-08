@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Length for Age Percentiles - WHO (0-24 months)</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
+        body {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 900px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .card-header {
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .percentile-badge {
+            display: inline-block;
+            font-size: 28px;
+            font-weight: bold;
+            padding: 15px 25px;
+            border-radius: 10px;
+            color: white;
+            margin: 10px 0;
+        }
+
+        .percentile-normal {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .percentile-tall {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .percentile-short {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .percentile-chart {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .chart-bar {
+            background: linear-gradient(to right, #e0e7ff, #667eea);
+            height: 30px;
+            border-radius: 5px;
+            margin: 10px 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark mb-4" style="background: transparent;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html" style="color: white;">
+                    <i class="fas fa-calculator"></i> Pediatric Calculators
+                </a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">
+                    <i class="fas fa-ruler-vertical"></i> Length for Age Percentiles
+                </h1>
+                <small>WHO Growth Chart (0-24 months)</small>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Instructions -->
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> Enter the infant's age in months and recumbent length in centimeters.
+                    Based on WHO growth standards for children 0-24 months. Note: Use length (not height) for infants up to 24 months.
+                </div>
+
+                <!-- Input Form -->
+                <form id="lengthForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-birthday-cake"></i> Age (months)
+                            </label>
+                            <input type="number" class="form-control" id="age" placeholder="0-24" min="0" max="24" step="0.1" required>
+                            <small class="text-muted">Range: 0-24 months</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-ruler-vertical"></i> Length (cm)
+                            </label>
+                            <input type="number" class="form-control" id="length" placeholder="Recumbent length in cm" min="30" max="95" step="0.1" required>
+                            <small class="text-muted">Range: 30-95 cm</small>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="calculateLengthPercentile()">
+                            <i class="fas fa-calculator"></i> Calculate Percentile
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results -->
+                <div id="resultBox" class="result-box">
+                    <h4 class="text-center mb-4"><i class="fas fa-check-circle"></i> Length for Age Percentile</h4>
+
+                    <div class="text-center">
+                        <p class="text-muted"><small>Length Percentile for Age</small></p>
+                        <div class="percentile-badge" id="percentileBadge">--</div>
+                        <p id="percentileCategory" class="text-center font-weight-bold mt-2"></p>
+                    </div>
+
+                    <div class="percentile-chart">
+                        <p class="text-muted text-center"><small>Percentile Position</small></p>
+                        <div class="chart-bar" id="chartBar" style="width: 50%;"></div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Clinical Guidance -->
+                    <div id="clinicalGuidance"></div>
+
+                    <!-- Reference Values -->
+                    <div class="alert alert-light mt-4">
+                        <strong><i class="fas fa-chart-bar"></i> Approximate Length by Age (WHO):</strong>
+                        <table class="table table-sm mt-2">
+                            <tbody>
+                                <tr>
+                                    <td><strong>Birth</strong></td>
+                                    <td>5th: 46.5 cm</td>
+                                    <td>50th: 49.9 cm</td>
+                                    <td>95th: 53.5 cm</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3 months</strong></td>
+                                    <td>5th: 54.7 cm</td>
+                                    <td>50th: 59.5 cm</td>
+                                    <td>95th: 64.5 cm</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>6 months</strong></td>
+                                    <td>5th: 62.2 cm</td>
+                                    <td>50th: 67.6 cm</td>
+                                    <td>95th: 73.2 cm</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>12 months</strong></td>
+                                    <td>5th: 69.8 cm</td>
+                                    <td>50th: 75.7 cm</td>
+                                    <td>95th: 81.8 cm</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>24 months</strong></td>
+                                    <td>5th: 77.6 cm</td>
+                                    <td>50th: 86.5 cm</td>
+                                    <td>95th: 95.5 cm</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Length for age percentile reference data by age (WHO, approximation)
+        const whoLengthData = {
+            0: {5: 46.5, 50: 49.9, 95: 53.5},
+            1: {5: 49.0, 50: 52.9, 95: 56.8},
+            2: {5: 51.3, 50: 55.5, 95: 59.8},
+            3: {5: 53.5, 50: 58.4, 95: 63.5},
+            4: {5: 55.6, 50: 60.6, 95: 66.0},
+            5: {5: 57.5, 50: 62.6, 95: 68.3},
+            6: {5: 59.2, 50: 64.6, 95: 70.3},
+            7: {5: 60.8, 50: 66.3, 95: 72.2},
+            8: {5: 62.3, 50: 68.0, 95: 74.0},
+            9: {5: 63.8, 50: 69.6, 95: 75.8},
+            10: {5: 65.2, 50: 71.1, 95: 77.5},
+            11: {5: 66.5, 50: 72.5, 95: 79.0},
+            12: {5: 67.8, 50: 74.0, 95: 80.5},
+            13: {5: 69.0, 50: 75.3, 95: 81.9},
+            14: {5: 70.1, 50: 76.6, 95: 83.2},
+            15: {5: 71.2, 50: 77.9, 95: 84.5},
+            16: {5: 72.2, 50: 79.1, 95: 85.8},
+            17: {5: 73.2, 50: 80.2, 95: 87.0},
+            18: {5: 74.2, 50: 81.3, 95: 88.2},
+            19: {5: 75.1, 50: 82.4, 95: 89.3},
+            20: {5: 76.0, 50: 83.4, 95: 90.4},
+            21: {5: 76.9, 50: 84.5, 95: 91.5},
+            24: {5: 78.6, 50: 86.5, 95: 95.5}
+        };
+
+        // Calculate length percentile
+        function calculateLengthPercentile() {
+            const age = parseFloat(document.getElementById('age').value);
+            const length = parseFloat(document.getElementById('length').value);
+
+            if (age === '' || length === '') {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Get reference data for age
+            const ageRounded = Math.round(age);
+            const refData = whoLengthData[ageRounded];
+
+            if (!refData) {
+                alert('Age must be between 0 and 24 months');
+                return;
+            }
+
+            // Calculate percentile
+            let percentile;
+            if (length < refData[5]) {
+                percentile = Math.max(1, (length / refData[5]) * 5);
+            } else if (length < refData[50]) {
+                percentile = 5 + ((length - refData[5]) / (refData[50] - refData[5])) * 45;
+            } else if (length < refData[95]) {
+                percentile = 50 + ((length - refData[50]) / (refData[95] - refData[50])) * 45;
+            } else {
+                percentile = Math.min(99, 95 + ((length - refData[95]) / refData[95]) * 4);
+            }
+
+            // Display results
+            displayLengthResult(length, percentile);
+            document.getElementById('resultBox').classList.add('show');
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Display length result
+        function displayLengthResult(length, percentile) {
+            let badgeClass, category, guidance;
+
+            if (percentile < 3) {
+                badgeClass = 'percentile-short';
+                category = 'SHORT STATURE (< 3RD)';
+                guidance = `<div class="alert alert-warning"><strong><i class="fas fa-exclamation-triangle"></i> Short Length (< 3rd percentile):</strong><br>
+                    <p>Length is below the 3rd percentile for age.</p>
+                    <p><strong>Recommendations:</strong></p>
+                    <ul>
+                        <li>Assess growth velocity and trajectory</li>
+                        <li>Evaluate nutritional status (weight, protein, calories)</li>
+                        <li>Consider intrauterine growth restriction or genetic factors</li>
+                        <li>Check thyroid function and metabolic markers</li>
+                        <li>Assess for chronic illness</li>
+                        <li>Refer to pediatric specialist if progressive decline</li>
+                    </ul>
+                </div>`;
+            } else if (percentile < 10) {
+                badgeClass = 'percentile-short';
+                category = 'LOW (3RD-10TH)';
+                guidance = `<div class="alert alert-info"><strong><i class="fas fa-info-circle"></i> Low Length (3rd-10th percentile):</strong><br>
+                    <p>Length is below average for age.</p>
+                    <p><strong>Recommendations:</strong></p>
+                    <ul>
+                        <li>Monitor growth velocity at each visit</li>
+                        <li>Ensure adequate caloric and protein intake</li>
+                        <li>Assess feeding patterns and intake</li>
+                        <li>Regular follow-up in 2-4 weeks</li>
+                    </ul>
+                </div>`;
+            } else if (percentile < 90) {
+                badgeClass = 'percentile-normal';
+                category = 'NORMAL';
+                guidance = `<div class="alert alert-success"><strong><i class="fas fa-check-circle"></i> Normal Length (10th-90th percentile):</strong><br>
+                    <p>Length is within normal range for age.</p>
+                    <p><strong>Recommendations:</strong></p>
+                    <ul>
+                        <li>Continue routine health maintenance</li>
+                        <li>Monitor growth at regular visits</li>
+                        <li>Ensure appropriate nutrition and feeding</li>
+                    </ul>
+                </div>`;
+            } else {
+                badgeClass = 'percentile-tall';
+                category = 'TALL/LONG';
+                guidance = `<div class="alert alert-info"><strong><i class="fas fa-info-circle"></i> Long Length (90th+ percentile):</strong><br>
+                    <p>Length is above average for age.</p>
+                    <p><strong>Recommendations:</strong></p>
+                    <ul>
+                        <li>Assess parental heights for genetic patterns</li>
+                        <li>Ensure growth velocity remains appropriate</li>
+                        <li>Routine monitoring adequate</li>
+                    </ul>
+                </div>`;
+            }
+
+            document.getElementById('percentileBadge').className = 'percentile-badge ' + badgeClass;
+            document.getElementById('percentileBadge').textContent = percentile.toFixed(0) + 'th';
+            document.getElementById('percentileCategory').innerHTML = `<strong>${category}</strong><br><small>${percentile.toFixed(1)}th percentile</small>`;
+
+            // Update chart bar
+            const chartBar = document.getElementById('chartBar');
+            chartBar.style.width = (Math.min(percentile, 99) + 1) + '%';
+            chartBar.textContent = percentile.toFixed(0) + 'th';
+
+            // Show clinical guidance
+            document.getElementById('clinicalGuidance').innerHTML = guidance;
+        }
+    </script>
+</body>
+</html>

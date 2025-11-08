@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absolute Eosinophil Count Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --light-bg: #f8f9fa;
+        }
+
+        body {
+            background: var(--light-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 20px;
+        }
+
+        .gradient-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .gradient-header h1 {
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .gradient-header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin: 0;
+        }
+
+        .calculator-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-section {
+            margin-bottom: 30px;
+        }
+
+        .input-group-text {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-calculate {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .btn-calculate:active {
+            transform: translateY(0);
+        }
+
+        .results-section {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+        }
+
+        .results-section.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-item {
+            margin-bottom: 20px;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .interpretation-box {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .interpretation-normal {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            color: #155724;
+        }
+
+        .interpretation-abnormal {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            color: #721c24;
+        }
+
+        .error-message {
+            display: none;
+            padding: 15px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            color: #721c24;
+            margin-bottom: 20px;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .reference-box {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .reference-box h5 {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .back-button {
+            margin-bottom: 20px;
+        }
+
+        .back-button a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.2s;
+        }
+
+        .back-button a:hover {
+            gap: 12px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .info-badge {
+            display: inline-block;
+            background: #e7f3ff;
+            color: #0066cc;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-button">
+            <a href="/index.html" title="Return to main dashboard">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+        </div>
+
+        <div class="gradient-header">
+            <h1>
+                <i class="fas fa-microscope"></i>
+                Absolute Eosinophil Count Calculator
+            </h1>
+            <p>Calculate absolute eosinophil count from WBC and eosinophil percentage</p>
+        </div>
+
+        <div class="calculator-container">
+            <!-- Error Message -->
+            <div class="error-message" id="errorMessage" role="alert">
+                <i class="fas fa-exclamation-circle"></i> <span id="errorText"></span>
+            </div>
+
+            <!-- Input Section -->
+            <div class="input-section">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label for="wbcCount" class="form-label">
+                            <i class="fas fa-droplet"></i> WBC Count
+                        </label>
+                        <div class="input-group">
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="wbcCount"
+                                placeholder="Enter WBC count"
+                                min="0"
+                                step="0.1"
+                                aria-label="WBC Count"
+                            >
+                            <span class="input-group-text">
+                                <i class="fas fa-cube"></i> K/μL
+                            </span>
+                        </div>
+                        <small class="form-text text-muted mt-2">
+                            Normal range: 4.5-11.0 K/μL
+                        </small>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <label for="eosinophilPercent" class="form-label">
+                            <i class="fas fa-percent"></i> Eosinophil Percentage
+                        </label>
+                        <div class="input-group">
+                            <input
+                                type="number"
+                                class="form-control"
+                                id="eosinophilPercent"
+                                placeholder="Enter percentage"
+                                min="0"
+                                max="100"
+                                step="0.1"
+                                aria-label="Eosinophil Percentage"
+                            >
+                            <span class="input-group-text">
+                                <i class="fas fa-percent"></i>
+                            </span>
+                        </div>
+                        <small class="form-text text-muted mt-2">
+                            Normal range: 1-4%
+                        </small>
+                    </div>
+                </div>
+
+                <button class="btn btn-lg btn-calculate" onclick="calculateAEC()">
+                    <i class="fas fa-calculator"></i> Calculate Absolute Eosinophil Count
+                </button>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection">
+                <h3 class="mb-4">
+                    <i class="fas fa-chart-line"></i> Results
+                </h3>
+
+                <div class="result-item">
+                    <p class="fw-bold">Absolute Eosinophil Count:</p>
+                    <div class="result-value" id="aecValue"></div>
+                    <small class="text-muted">cells/μL</small>
+                    <div class="interpretation-box" id="interpretationBox"></div>
+                </div>
+
+                <div class="result-item mt-3">
+                    <p class="fw-bold">Calculation Formula:</p>
+                    <code class="p-2 bg-light d-block rounded mb-2">
+                        Absolute Eosinophil Count = (WBC × Eosinophil %) ÷ 100
+                    </code>
+                </div>
+            </div>
+
+            <!-- Reference Section -->
+            <div class="reference-box">
+                <h5>
+                    <i class="fas fa-book"></i> Clinical Reference & Interpretation
+                </h5>
+                <div class="reference-item">
+                    <strong>Normal Range:</strong> 0-400 cells/μL (0-0.4 K/μL)
+                </div>
+                <div class="reference-item">
+                    <strong>Mild Eosinophilia:</strong> 400-1,500 cells/μL
+                </div>
+                <div class="reference-item">
+                    <strong>Moderate Eosinophilia:</strong> 1,500-5,000 cells/μL
+                </div>
+                <div class="reference-item">
+                    <strong>Severe Eosinophilia:</strong> >5,000 cells/μL
+                </div>
+                <div class="reference-item mt-3">
+                    <strong>Clinical Significance:</strong> Elevated eosinophils may indicate parasitic infections, allergic reactions, asthma, drug reactions, lymphoproliferative disorders, or hypereosinophilic syndrome.
+                </div>
+                <div class="reference-item mt-3">
+                    <strong>Sources:</strong> Wallach's Interpretation of Diagnostic Tests; Mayo Clinic Laboratories Reference Values
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>
+                    <i class="fas fa-clock"></i> Last Updated: <span id="timestamp"></span>
+                </p>
+                <p style="font-size: 0.85rem; margin-top: 10px;">
+                    Medical Calculators for Allergy and Immunology | Always consult clinical guidelines for patient care decisions
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /**
+         * Calculate Absolute Eosinophil Count (AEC)
+         * Formula: (WBC × Eosinophil %) ÷ 100
+         * Result is in cells/μL
+         */
+        function calculateAEC() {
+            const wbcCount = parseFloat(document.getElementById('wbcCount').value);
+            const eosinophilPercent = parseFloat(document.getElementById('eosinophilPercent').value);
+            const errorDiv = document.getElementById('errorMessage');
+            const resultsSection = document.getElementById('resultsSection');
+
+            // Input validation
+            if (!wbcCount || !eosinophilPercent) {
+                showError('Please fill in all required fields');
+                resultsSection.classList.remove('show');
+                return;
+            }
+
+            if (wbcCount < 0) {
+                showError('WBC count must be greater than 0');
+                resultsSection.classList.remove('show');
+                return;
+            }
+
+            if (eosinophilPercent < 0 || eosinophilPercent > 100) {
+                showError('Eosinophil percentage must be between 0 and 100');
+                resultsSection.classList.remove('show');
+                return;
+            }
+
+            // Convert K/μL to cells/μL (multiply by 1000)
+            const wbcCells = wbcCount * 1000;
+
+            // Calculate AEC: (WBC × Eosinophil %) ÷ 100
+            const aec = (wbcCells * eosinophilPercent) / 100;
+
+            // Display results
+            errorDiv.classList.remove('show');
+            displayResults(aec);
+            resultsSection.classList.add('show');
+        }
+
+        /**
+         * Display calculated results with clinical interpretation
+         */
+        function displayResults(aec) {
+            const aecValue = document.getElementById('aecValue');
+            const interpretationBox = document.getElementById('interpretationBox');
+
+            // Format the result
+            aecValue.textContent = aec.toFixed(0);
+
+            // Determine interpretation based on ranges
+            let interpretation = '';
+            let cssClass = '';
+
+            if (aec <= 400) {
+                interpretation = `
+                    <strong><i class="fas fa-check-circle"></i> Normal Range</strong><br>
+                    Absolute eosinophil count is within normal limits (≤400 cells/μL).
+                `;
+                cssClass = 'interpretation-normal';
+            } else if (aec <= 1500) {
+                interpretation = `
+                    <strong><i class="fas fa-exclamation-triangle"></i> Mild Eosinophilia</strong><br>
+                    Elevated eosinophil count (400-1,500 cells/μL). Consider differential diagnosis including allergic conditions, parasitic infections, or early drug reactions.
+                `;
+                cssClass = 'interpretation-abnormal';
+            } else if (aec <= 5000) {
+                interpretation = `
+                    <strong><i class="fas fa-exclamation-triangle"></i> Moderate Eosinophilia</strong><br>
+                    Significantly elevated count (1,500-5,000 cells/μL). Investigate for parasitic infections, lymphoproliferative disorders, or medication effects.
+                `;
+                cssClass = 'interpretation-abnormal';
+            } else {
+                interpretation = `
+                    <strong><i class="fas fa-exclamation"></i> Severe Eosinophilia</strong><br>
+                    Markedly elevated count (>5,000 cells/μL). Urgent evaluation recommended for hypereosinophilic syndrome, lymphoma, or other serious conditions.
+                `;
+                cssClass = 'interpretation-abnormal';
+            }
+
+            interpretationBox.className = `interpretation-box ${cssClass}`;
+            interpretationBox.innerHTML = interpretation;
+        }
+
+        /**
+         * Show error message
+         */
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            errorText.textContent = message;
+            errorDiv.classList.add('show');
+        }
+
+        /**
+         * Update timestamp on page load
+         */
+        function updateTimestamp() {
+            const now = new Date();
+            document.getElementById('timestamp').textContent = now.toLocaleString();
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', updateTimestamp);
+
+        // Allow Enter key to calculate
+        document.getElementById('wbcCount').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') calculateAEC();
+        });
+        document.getElementById('eosinophilPercent').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') calculateAEC();
+        });
+    </script>
+</body>
+</html>

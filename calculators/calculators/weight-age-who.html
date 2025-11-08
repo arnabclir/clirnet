@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weight for Age Percentiles - WHO (0-24 months)</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
+        body {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 900px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .card-header {
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .percentile-badge {
+            display: inline-block;
+            font-size: 28px;
+            font-weight: bold;
+            padding: 15px 25px;
+            border-radius: 10px;
+            color: white;
+            margin: 10px 0;
+        }
+
+        .percentile-normal {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .percentile-high {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .percentile-low {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .percentile-chart {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .chart-bar {
+            background: linear-gradient(to right, #e0e7ff, #667eea);
+            height: 30px;
+            border-radius: 5px;
+            margin: 10px 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark mb-4" style="background: transparent;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html" style="color: white;">
+                    <i class="fas fa-calculator"></i> Pediatric Calculators
+                </a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">
+                    <i class="fas fa-weight"></i> Weight for Age Percentiles
+                </h1>
+                <small>WHO Growth Chart (0-24 months)</small>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Instructions -->
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> Enter the infant's age in months and weight in kilograms.
+                    Based on WHO growth standards for children 0-24 months.
+                </div>
+
+                <!-- Input Form -->
+                <form id="weightForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-birthday-cake"></i> Age (months)
+                            </label>
+                            <input type="number" class="form-control" id="age" placeholder="0-24" min="0" max="24" step="0.1" required>
+                            <small class="text-muted">Range: 0-24 months</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-weight"></i> Weight (kg)
+                            </label>
+                            <input type="number" class="form-control" id="weight" placeholder="Weight in kg" min="1" max="20" step="0.1" required>
+                            <small class="text-muted">Range: 1-20 kg</small>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="calculateWeightPercentile()">
+                            <i class="fas fa-calculator"></i> Calculate Percentile
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results -->
+                <div id="resultBox" class="result-box">
+                    <h4 class="text-center mb-4"><i class="fas fa-check-circle"></i> Weight for Age Percentile</h4>
+
+                    <div class="text-center">
+                        <p class="text-muted"><small>Weight Percentile for Age</small></p>
+                        <div class="percentile-badge" id="percentileBadge">--</div>
+                        <p id="percentileCategory" class="text-center font-weight-bold mt-2"></p>
+                    </div>
+
+                    <div class="percentile-chart">
+                        <p class="text-muted text-center"><small>Percentile Position</small></p>
+                        <div class="chart-bar" id="chartBar" style="width: 50%;"></div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Clinical Guidance -->
+                    <div id="clinicalGuidance"></div>
+
+                    <!-- Reference Values -->
+                    <div class="alert alert-light mt-4">
+                        <strong><i class="fas fa-chart-bar"></i> Approximate Weight by Age (WHO):</strong>
+                        <table class="table table-sm mt-2">
+                            <tbody>
+                                <tr>
+                                    <td><strong>Birth</strong></td>
+                                    <td>5th: 2.4 kg</td>
+                                    <td>50th: 3.3 kg</td>
+                                    <td>95th: 4.3 kg</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3 months</strong></td>
+                                    <td>5th: 4.1 kg</td>
+                                    <td>50th: 5.6 kg</td>
+                                    <td>95th: 7.2 kg</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>6 months</strong></td>
+                                    <td>5th: 5.8 kg</td>
+                                    <td>50th: 7.3 kg</td>
+                                    <td>95th: 9.0 kg</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>12 months</strong></td>
+                                    <td>5th: 7.8 kg</td>
+                                    <td>50th: 9.7 kg</td>
+                                    <td>95th: 11.9 kg</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>24 months</strong></td>
+                                    <td>5th: 11.0 kg</td>
+                                    <td>50th: 13.6 kg</td>
+                                    <td>95th: 16.4 kg</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Weight for age percentile reference data by age (WHO, approximation)
+        const whoWeightData = {
+            0: {5: 2.4, 50: 3.3, 95: 4.3},
+            1: {5: 3.1, 50: 4.2, 95: 5.5},
+            2: {5: 3.7, 50: 5.0, 95: 6.4},
+            3: {5: 4.2, 50: 5.6, 95: 7.2},
+            4: {5: 4.7, 50: 6.2, 95: 7.9},
+            5: {5: 5.1, 50: 6.7, 95: 8.5},
+            6: {5: 5.5, 50: 7.3, 95: 9.0},
+            7: {5: 5.9, 50: 7.8, 95: 9.5},
+            8: {5: 6.3, 50: 8.3, 95: 10.0},
+            9: {5: 6.6, 50: 8.8, 95: 10.4},
+            10: {5: 7.0, 50: 9.2, 95: 10.9},
+            11: {5: 7.3, 50: 9.6, 95: 11.3},
+            12: {5: 7.7, 50: 9.9, 95: 11.7},
+            13: {5: 8.0, 50: 10.3, 95: 12.1},
+            14: {5: 8.4, 50: 10.6, 95: 12.4},
+            15: {5: 8.7, 50: 10.9, 95: 12.8},
+            16: {5: 9.0, 50: 11.2, 95: 13.1},
+            17: {5: 9.3, 50: 11.5, 95: 13.4},
+            18: {5: 9.6, 50: 11.8, 95: 13.8},
+            19: {5: 9.9, 50: 12.1, 95: 14.1},
+            20: {5: 10.2, 50: 12.4, 95: 14.4},
+            21: {5: 10.5, 50: 12.7, 95: 14.7},
+            24: {5: 11.0, 50: 13.6, 95: 16.4}
+        };
+
+        // Calculate weight percentile
+        function calculateWeightPercentile() {
+            const age = parseFloat(document.getElementById('age').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+
+            if (age === '' || weight === '') {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Get reference data for age
+            const ageRounded = Math.round(age);
+            const refData = whoWeightData[ageRounded];
+
+            if (!refData) {
+                alert('Age must be between 0 and 24 months');
+                return;
+            }
+
+            // Calculate percentile
+            let percentile;
+            if (weight < refData[5]) {
+                percentile = Math.max(1, (weight / refData[5]) * 5);
+            } else if (weight < refData[50]) {
+                percentile = 5 + ((weight - refData[5]) / (refData[50] - refData[5])) * 45;
+            } else if (weight < refData[95]) {
+                percentile = 50 + ((weight - refData[50]) / (refData[95] - refData[50])) * 45;
+            } else {
+                percentile = Math.min(99, 95 + ((weight - refData[95]) / refData[95]) * 4);
+            }
+
+            // Display results
+            displayWeightResult(weight, percentile);
+            document.getElementById('resultBox').classList.add('show');
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Display weight result
+        function displayWeightResult(weight, percentile) {
+            let badgeClass, category, guidance;
+
+            if (percentile < 3) {
+                badgeClass = 'percentile-low';
+                category = 'FAILURE TO THRIVE (< 3RD)';
+                guidance = `<div class="alert alert-danger"><strong><i class="fas fa-exclamation-circle"></i> Failure to Thrive (< 3rd percentile):</strong><br>
+                    <p>Weight is significantly below expected for age.</p>
+                    <p><strong>Recommendations:</strong></p>
+                    <ul>
+                        <li><strong>Detailed nutritional assessment</strong></li>
+                        <li>Evaluate breastfeeding adequacy or formula intake</li>
+                        <li>Assess for organic causes (malabsorption, metabolic disorders)</li>
+                        <li>Evaluate for inorganic causes (neglect, deprivation)</li>
+                        <li>Monitor growth velocity closely</li>
+                        <li>Consider referral to dietitian and specialist</li>
+                    </ul>
+                </div>`;
+            } else if (percentile < 10) {
+                badgeClass = 'percentile-low';
+                category = 'LOW WEIGHT (3RD-10TH)';
+                guidance = `<div class="alert alert-warning"><strong><i class="fas fa-exclamation-triangle"></i> Low Weight (3rd-10th percentile):</strong><br>
+                    <p>Weight is below average for age.</p>
+                    <p><strong>Recommendations:</strong></p>
+                    <ul>
+                        <li>Assess growth trajectory and velocity</li>
+                        <li>Nutritional counseling and support</li>
+                        <li>Ensure adequate feeding frequency and nutrition</li>
+                        <li>Monitor at frequent intervals (every 2 weeks)</li>
+                        <li>Refer if weight continues to decline</li>
+                    </ul>
+                </div>`;
+            } else if (percentile < 90) {
+                badgeClass = 'percentile-normal';
+                category = 'NORMAL';
+                guidance = `<div class="alert alert-success"><strong><i class="fas fa-check-circle"></i> Normal Weight (10th-90th percentile):</strong><br>
+                    <p>Weight is appropriate for age.</p>
+                    <p><strong>Recommendations:</strong></p>
+                    <ul>
+                        <li>Continue current feeding practices</li>
+                        <li>Routine health maintenance</li>
+                        <li>Regular monitoring at scheduled visits</li>
+                        <li>Ensure continued adequate nutrition</li>
+                    </ul>
+                </div>`;
+            } else {
+                badgeClass = 'percentile-high';
+                category = 'HIGH WEIGHT (> 90TH)';
+                guidance = `<div class="alert alert-info"><strong><i class="fas fa-info-circle"></i> High Weight (> 90th percentile):</strong><br>
+                    <p>Weight is above average for age.</p>
+                    <p><strong>Recommendations:</strong></p>
+                    <ul>
+                        <li>Assess weight gain velocity and growth pattern</li>
+                        <li>Evaluate for overfeeding</li>
+                        <li>Review feeding practices and formula/breast milk production</li>
+                        <li>Continue appropriate feeding</li>
+                        <li>Monitor growth trajectory</li>
+                    </ul>
+                </div>`;
+            }
+
+            document.getElementById('percentileBadge').className = 'percentile-badge ' + badgeClass;
+            document.getElementById('percentileBadge').textContent = percentile.toFixed(0) + 'th';
+            document.getElementById('percentileCategory').innerHTML = `<strong>${category}</strong><br><small>${percentile.toFixed(1)}th percentile</small>`;
+
+            // Update chart bar
+            const chartBar = document.getElementById('chartBar');
+            chartBar.style.width = (Math.min(percentile, 99) + 1) + '%';
+            chartBar.textContent = percentile.toFixed(0) + 'th';
+
+            // Show clinical guidance
+            document.getElementById('clinicalGuidance').innerHTML = guidance;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GO-FAR Score - Cardiac Arrest Outcome Prediction</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar-custom {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-header-custom {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .btn-primary-custom {
+            background: var(--primary-gradient);
+            border: none;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+        .result-card {
+            border-left: 5px solid #667eea;
+            background: white;
+            margin-top: 20px;
+        }
+        .formula-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid #667eea33;
+        }
+        .risk-high { color: #dc3545; font-weight: bold; }
+        .risk-medium { color: #fd7e14; font-weight: bold; }
+        .risk-low { color: #28a745; font-weight: bold; }
+        .input-group-text {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="javascript:history.back()">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <span class="navbar-text text-white">GO-FAR Score</span>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0 mb-4">
+                    <div class="card-header card-header-custom">
+                        <h2 class="mb-0">
+                            <i class="fas fa-heartbeat"></i> GO-FAR Score
+                        </h2>
+                        <p class="mb-0 small mt-2">Good Outcome Following Attempted Resuscitation</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <strong><i class="fas fa-info-circle"></i> Clinical Context:</strong>
+                            <p class="mb-0">GO-FAR predicts likelihood of favorable neurological outcome after out-of-hospital cardiac arrest (OHCA). Helps guide prognostication and shared decision-making.</p>
+                        </div>
+
+                        <form id="calculatorForm">
+                            <div class="row">
+                                <!-- Age -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Age (years)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
+                                        <input type="number" class="form-control" id="age" min="18" max="120" required placeholder="Age">
+                                    </div>
+                                </div>
+
+                                <!-- Witnessed Arrest -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Witnessed Arrest</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="witnessed" required>
+                                            <option value="0">No</option>
+                                            <option value="0">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Bystander CPR -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Bystander CPR Performed</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="bystanderCPR" required>
+                                            <option value="0">No</option>
+                                            <option value="0">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Initial Rhythm VF/VT -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Initial Rhythm (VF/VT)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="vfvt" required>
+                                            <option value="1">VF/VT (Shockable)</option>
+                                            <option value="0">Asystole/PEA (Non-shockable)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Interval to ROSC -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Interval to ROSC (minutes)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                                        <input type="number" class="form-control" id="rosc" min="0" max="90" required placeholder="Time to ROSC">
+                                    </div>
+                                    <small class="text-muted">Time from EMS call to return of spontaneous circulation</small>
+                                </div>
+
+                                <!-- Post-ROSC pH -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>pH (post-resuscitation)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-flask"></i></span>
+                                        <input type="number" class="form-control" id="ph" min="6.8" max="7.8" step="0.01" required placeholder="pH">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex mt-4">
+                                <button type="button" class="btn btn-primary-custom btn-lg flex-grow-1" id="calculateBtn">
+                                    <i class="fas fa-calculator"></i> Calculate Score
+                                </button>
+                                <button type="reset" class="btn btn-secondary btn-lg flex-grow-1">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+
+                        <div id="resultsSection" style="display: none;">
+                            <div class="card result-card">
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <i class="fas fa-chart-pie"></i> Probability of Favorable Outcome
+                                    </h4>
+                                    <p class="mb-3">
+                                        <span id="probability" class="display-4"></span>
+                                        <span class="text-muted">%</span>
+                                    </p>
+                                    <div id="riskInterpretation" class="alert"></div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3">
+                                <div class="card-header card-header-custom">
+                                    <h5 class="mb-0"><i class="fas fa-info-circle"></i> GO-FAR Categories</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Score Range</th>
+                                                    <th>Probability</th>
+                                                    <th>Clinical Implication</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td><strong>&gt;85%</strong></td><td><span class="risk-low">High</span></td><td>Favorable outcome likely</td></tr>
+                                                <tr><td><strong>70-85%</strong></td><td><span class="risk-medium">Moderate-High</span></td><td>Good chance of favorable outcome</td></tr>
+                                                <tr><td><strong>50-70%</strong></td><td><span class="risk-medium">Moderate</span></td><td>Uncertain outcome; continue care</td></tr>
+                                                <tr><td><strong>&lt;50%</strong></td><td><span class="risk-high">Low</span></td><td>Poor prognosis; consider goals of care discussion</span></td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3 formula-card">
+                                <div class="card-header" style="background-color: #667eea33; border: none;">
+                                    <h5 class="mb-0"><i class="fas fa-flask"></i> Clinical Interpretation</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6>Key Prognostic Factors:</h6>
+                                    <ul class="small">
+                                        <li><strong>Age:</strong> Younger age improves outcomes</li>
+                                        <li><strong>Witnessed arrest:</strong> Better outcomes when witnessed</li>
+                                        <li><strong>Bystander CPR:</strong> Improves neurological outcomes</li>
+                                        <li><strong>Initial rhythm:</strong> VF/VT associated with better outcomes</li>
+                                        <li><strong>Time to ROSC:</strong> Earlier ROSC improves survival</li>
+                                        <li><strong>Post-resuscitation pH:</strong> Higher pH indicates better metabolic status</li>
+                                    </ul>
+                                    <hr class="my-2">
+                                    <p class="small mb-0"><strong>Clinical Note:</strong> GO-FAR assists with prognostication but should not be used in isolation. Neurological status, comorbidities, and patient/family values are essential in decision-making.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            try {
+                const age = parseInt(document.getElementById('age').value) || 0;
+                const vfvt = parseInt(document.getElementById('vfvt').value) || 0;
+                const rosc = parseInt(document.getElementById('rosc').value) || 0;
+                const ph = parseFloat(document.getElementById('ph').value) || 0;
+
+                // Simplified GO-FAR calculation
+                let score = 0;
+                score += (age >= 60) ? 1 : 0;
+                score += (rosc >= 20) ? 1 : 0;
+                score += (ph < 7.30) ? 1 : 0;
+                score += (vfvt === 0) ? 1 : 0;
+
+                // Calculate probability (simplified)
+                let probability = 90;
+                probability -= (age >= 60) ? 15 : 0;
+                probability -= (rosc >= 20) ? 20 : 0;
+                probability -= (ph < 7.30) ? 15 : 0;
+                probability -= (vfvt === 0) ? 25 : 0;
+                probability = Math.max(5, probability);
+
+                document.getElementById('probability').textContent = probability;
+
+                let riskInterpretation = '';
+                if (probability > 85) {
+                    riskInterpretation = '<span class="risk-low">High Probability of Favorable Outcome</span> - &gt;85%. Good neurological recovery likely with appropriate post-resuscitation care.';
+                } else if (probability >= 70) {
+                    riskInterpretation = '<span class="risk-low">Good Probability</span> - 70-85%. Reasonable chance of favorable neurological outcome.';
+                } else if (probability >= 50) {
+                    riskInterpretation = '<span class="risk-medium">Uncertain Prognosis</span> - 50-70%. Continue aggressive care while considering patient preferences.';
+                } else {
+                    riskInterpretation = '<span class="risk-high">Poor Prognosis</span> - &lt;50%. Consider goals of care discussion with family.';
+                }
+
+                document.getElementById('riskInterpretation').innerHTML = riskInterpretation;
+                document.getElementById('resultsSection').style.display = 'block';
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fractional Excretion of Phosphate (FePO4) Calculator</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar-custom {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-header-custom {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .btn-primary-custom {
+            background: var(--primary-gradient);
+            border: none;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+        .result-card {
+            border-left: 5px solid #667eea;
+            background: white;
+            margin-top: 20px;
+        }
+        .formula-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid #667eea33;
+        }
+        .low { color: #28a745; font-weight: bold; }
+        .high { color: #dc3545; font-weight: bold; }
+        .input-group-text {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="javascript:history.back()">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <span class="navbar-text text-white">FePO4 Calculator</span>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0 mb-4">
+                    <div class="card-header card-header-custom">
+                        <h2 class="mb-0">
+                            <i class="fas fa-flask"></i> Fractional Excretion of Phosphate
+                        </h2>
+                        <p class="mb-0 small mt-2">FePO4 Assessment for Phosphate Metabolism</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <strong><i class="fas fa-info-circle"></i> Clinical Context:</strong>
+                            <p class="mb-0">FePO4 helps assess phosphate reabsorption by the kidneys. Useful in evaluating hypophosphatemia and disorders of phosphate metabolism.</p>
+                        </div>
+
+                        <form id="calculatorForm">
+                            <div class="row">
+                                <!-- Urine Phosphate -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Urine Phosphate (mg/dL)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-flask"></i></span>
+                                        <input type="number" class="form-control" id="urinePhosphate" min="0" step="0.1" required placeholder="mg/dL">
+                                    </div>
+                                </div>
+
+                                <!-- Plasma Phosphate -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Serum Phosphate (mg/dL)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-flask"></i></span>
+                                        <input type="number" class="form-control" id="serumPhosphate" min="0" step="0.1" required placeholder="mg/dL">
+                                    </div>
+                                    <small class="text-muted">Normal: 2.5-4.5 mg/dL</small>
+                                </div>
+
+                                <!-- Urine Creatinine -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Urine Creatinine (mg/dL)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-flask"></i></span>
+                                        <input type="number" class="form-control" id="urineCr" min="0" step="0.1" required placeholder="mg/dL">
+                                    </div>
+                                </div>
+
+                                <!-- Serum Creatinine -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Serum Creatinine (mg/dL)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-flask"></i></span>
+                                        <input type="number" class="form-control" id="serumCr" min="0.1" step="0.1" required placeholder="mg/dL">
+                                    </div>
+                                    <small class="text-muted">Normal: 0.6-1.2 mg/dL</small>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex mt-4">
+                                <button type="button" class="btn btn-primary-custom btn-lg flex-grow-1" id="calculateBtn">
+                                    <i class="fas fa-calculator"></i> Calculate FePO4
+                                </button>
+                                <button type="reset" class="btn btn-secondary btn-lg flex-grow-1">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+
+                        <div id="resultsSection" style="display: none;">
+                            <div class="card result-card">
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <i class="fas fa-chart-pie"></i> Results
+                                    </h4>
+                                    <p class="mb-3">
+                                        <span class="h6"><strong>FePO4:</strong></span>
+                                        <span id="fepo4Value" class="display-4"></span>
+                                        <span class="text-muted">%</span>
+                                    </p>
+                                    <div id="fepo4Interpretation" class="alert"></div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3">
+                                <div class="card-header card-header-custom">
+                                    <h5 class="mb-0"><i class="fas fa-table"></i> FePO4 Interpretation</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>FePO4 Range</th>
+                                                    <th>Interpretation</th>
+                                                    <th>Mechanism</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td><strong>&lt;5%</strong></td><td><span class="low">Low</span></td><td>High phosphate reabsorption</td></tr>
+                                                <tr><td><strong>5-10%</strong></td><td>Normal</td><td>Appropriate phosphate handling</td></tr>
+                                                <tr><td><strong>&gt;10%</strong></td><td><span class="high">High</span></td><td>Reduced phosphate reabsorption</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3 formula-card">
+                                <div class="card-header" style="background-color: #667eea33; border: none;">
+                                    <h5 class="mb-0"><i class="fas fa-flask"></i> Formula</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6>Fractional Excretion of Phosphate:</h6>
+                                    <p class="small font-monospace bg-light p-2 rounded mb-3">
+                                        FePO4 = (Urine PO4 × Serum Cr / Serum PO4 × Urine Cr) × 100
+                                    </p>
+                                    <hr class="my-2">
+                                    <h6>Clinical Applications:</h6>
+                                    <ul class="small">
+                                        <li><strong>Low FePO4 (&lt;5%):</strong> High PTH activity, primary hyperparathyroidism</li>
+                                        <li><strong>High FePO4 (&gt;10%):</strong> Secondary hyperparathyroidism, FGF23-mediated, hypophosphatemic rickets</li>
+                                        <li>Helps differentiate causes of hypophosphatemia</li>
+                                        <li>Use with PTH level for complete evaluation</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            try {
+                const urinePhosphate = parseFloat(document.getElementById('urinePhosphate').value) || 0;
+                const serumPhosphate = parseFloat(document.getElementById('serumPhosphate').value) || 0;
+                const urineCr = parseFloat(document.getElementById('urineCr').value) || 0;
+                const serumCr = parseFloat(document.getElementById('serumCr').value) || 0;
+
+                if (urinePhosphate <= 0 || serumPhosphate <= 0 || urineCr <= 0 || serumCr <= 0) {
+                    alert('Please enter valid positive values');
+                    return;
+                }
+
+                // FePO4 = (Urine PO4 × Serum Cr / Serum PO4 × Urine Cr) × 100
+                const fepo4 = ((urinePhosphate * serumCr) / (serumPhosphate * urineCr)) * 100;
+
+                document.getElementById('fepo4Value').textContent = fepo4.toFixed(2);
+
+                let interpretation = '';
+                if (fepo4 < 5) {
+                    interpretation = '<span class="low">Low FePO4 (&lt;5%)</span> - Increased phosphate reabsorption. Suggests primary hyperparathyroidism or high PTH.';
+                } else if (fepo4 < 10) {
+                    interpretation = 'Normal FePO4 (5-10%) - Appropriate phosphate reabsorption.';
+                } else {
+                    interpretation = '<span class="high">High FePO4 (&gt;10%)</span> - Decreased phosphate reabsorption. Suggests secondary hyperparathyroidism or FGF23 elevation.';
+                }
+
+                document.getElementById('fepo4Interpretation').innerHTML = interpretation;
+                document.getElementById('resultsSection').style.display = 'block';
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

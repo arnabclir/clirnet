@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EER Calculator - Males (Birth to 18 Years)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        body { background: linear-gradient(to bottom, #f5f3ff 0%, #fff5fb 100%); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .calculator-header { background: var(--primary-gradient); color: white; padding: 2.5rem 0; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); }
+        .calculator-header h1 { font-weight: 700; margin-bottom: 0.5rem; }
+        .calculator-card { background: white; border: none; border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); margin-bottom: 2rem; }
+        .section-header { background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-left: 4px solid #667eea; padding: 1rem; margin-bottom: 1.5rem; border-radius: 4px; }
+        .section-header h5 { color: #764ba2; font-weight: 600; margin: 0; }
+        .input-group-text { background: var(--primary-gradient); color: white; border: none; font-weight: 600; }
+        .form-control:focus { border-color: #667eea; box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25); }
+        .btn-primary { background: var(--primary-gradient); border: none; padding: 0.75rem 2rem; font-weight: 600; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); }
+        .result-box { background: linear-gradient(135deg, #d4edda 0%, #a8e6c9 100%); border-left: 4px solid #28a745; padding: 2rem; border-radius: 8px; margin-top: 2rem; }
+        .result-score { font-size: 2.5rem; font-weight: 700; color: #28a745; margin-bottom: 0.5rem; }
+        .result-details { background: white; border-radius: 8px; padding: 1rem; margin-top: 1rem; }
+        .detail-row { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #e9ecef; }
+        .detail-row:last-child { border-bottom: none; }
+        label { color: #333; font-weight: 500; margin-bottom: 0.5rem; }
+        .alert-info { background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%); border: none; border-left: 4px solid #0c5460; color: #0c5460; }
+        .reference-box { background: #f8f9fa; border-left: 4px solid #667eea; padding: 1rem; border-radius: 6px; margin-top: 1rem; }
+        .formula-box { background: #f5f7fa; border: 2px solid #667eea; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; font-family: monospace; text-align: center; font-weight: bold; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="calculator-header">
+        <div class="container">
+            <h1><i class="fas fa-child"></i> Estimated Energy Requirement (EER) - Males</h1>
+            <p>Caloric Requirement Estimation (Birth to 18 Years)</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <i class="fas fa-info-circle"></i> <strong>Pediatric Nutrition:</strong> Calculate daily caloric requirements for male children and adolescents
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="calculator-card">
+                    <div class="card-body p-4">
+                        <div class="section-header">
+                            <h5><i class="fas fa-user"></i> Patient Information</h5>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="age" class="form-label">Age (years)</label>
+                                <input type="number" class="form-control form-control-lg" id="age" placeholder="12" min="0" max="18" step="0.1" onchange="calculateEER()">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="height" class="form-label">Height (cm)</label>
+                                <div class="input-group input-group-lg">
+                                    <input type="number" class="form-control" id="height" placeholder="150" min="40" max="210" step="0.1" onchange="calculateEER()">
+                                    <span class="input-group-text">cm</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="weight" class="form-label">Weight (kg)</label>
+                                <div class="input-group input-group-lg">
+                                    <input type="number" class="form-control" id="weight" placeholder="40" min="2" max="160" step="0.1" onchange="calculateEER()">
+                                    <span class="input-group-text">kg</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="activity" class="form-label">Activity Level</label>
+                                <select class="form-select form-select-lg" id="activity" onchange="calculateEER()">
+                                    <option value="1.0">Sedentary</option>
+                                    <option value="1.13" selected>Low Active</option>
+                                    <option value="1.26">Active</option>
+                                    <option value="1.42">Very Active</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="button" class="btn btn-primary btn-lg w-100" onclick="calculateEER()">
+                            <i class="fas fa-calculator"></i> Calculate EER
+                        </button>
+
+                        <div id="resultsContainer"></div>
+                    </div>
+                </div>
+
+                <div class="calculator-card">
+                    <div class="card-body p-4">
+                        <h5 class="mb-3"><i class="fas fa-book"></i> About EER</h5>
+
+                        <p>Estimated Energy Requirement (EER) is the average dietary energy intake that is predicted to maintain energy balance in a healthy person of a defined age, gender, weight, height, and level of physical activity.</p>
+
+                        <h6 class="mt-3 mb-2">Activity Levels:</h6>
+                        <div class="reference-box">
+                            <p class="mb-1"><strong>Sedentary (1.0):</strong> Little or no exercise</p>
+                            <p class="mb-1"><strong>Low Active (1.13):</strong> Light activity 1-3 days/week</p>
+                            <p class="mb-1"><strong>Active (1.26):</strong> Moderate activity 3-5 days/week</p>
+                            <p class="mb-0"><strong>Very Active (1.42):</strong> Vigorous activity 6-7 days/week</p>
+                        </div>
+
+                        <h6 class="mt-3 mb-2">Formula Used:</h6>
+                        <div class="formula-box">
+                            Age 3-8: EER = 88.5 - 61.9×age + AF×(26.7×weight + 903×height) + 20<br>
+                            Age 9-18: EER = 88.5 - 61.9×age + AF×(26.7×weight + 903×height) + 20<br>
+                            (AF = Activity Factor)
+                        </div>
+
+                        <h6 class="mt-3 mb-2">Macronutrient Distribution:</h6>
+                        <div class="reference-box">
+                            <p class="mb-1"><strong>Carbohydrates:</strong> 45-65% of total calories</p>
+                            <p class="mb-1"><strong>Protein:</strong> 10-30% of total calories (ages 1-3: 5-20%)</p>
+                            <p class="mb-0"><strong>Fat:</strong> 25-35% of total calories (ages 0-3: 30-40%)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function calculateEER() {
+            const age = parseFloat(document.getElementById('age').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const activity = parseFloat(document.getElementById('activity').value);
+
+            if (isNaN(age) || isNaN(height) || isNaN(weight) || age < 0 || height <= 0 || weight <= 0) {
+                document.getElementById('resultsContainer').innerHTML = '';
+                return;
+            }
+
+            let eer;
+            const heightM = height / 100;
+
+            if (age >= 0 && age < 3) {
+                // For infants and toddlers
+                if (age < 1) {
+                    eer = weight < 6 ? (89 * weight - 100) : (1000 + 35 * (weight - 6));
+                } else {
+                    eer = (89 * weight - 100) + (weight > 10 ? 25 * (weight - 10) : 0);
+                }
+            } else if (age >= 3 && age < 9) {
+                // Males 3-8 years
+                eer = 88.5 - (61.9 * age) + activity * (26.7 * weight + 903 * heightM) + 20;
+            } else {
+                // Males 9-18 years
+                eer = 88.5 - (61.9 * age) + activity * (26.7 * weight + 903 * heightM) + 20;
+            }
+
+            eer = Math.round(eer);
+
+            const resultsHTML = `
+                <div class="result-box">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="result-score">${eer} kcal/day</div>
+                            <h5>Daily Energy Requirement</h5>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-size: 3rem; color: #28a745;">
+                                <i class="fas fa-apple-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-details">
+                        <div class="detail-row">
+                            <span><strong>Age:</strong></span>
+                            <span>${age.toFixed(1)} years</span>
+                        </div>
+                        <div class="detail-row">
+                            <span><strong>Weight:</strong></span>
+                            <span>${weight.toFixed(1)} kg</span>
+                        </div>
+                        <div class="detail-row">
+                            <span><strong>Height:</strong></span>
+                            <span>${height.toFixed(1)} cm</span>
+                        </div>
+                        <div class="detail-row">
+                            <span><strong>Activity Factor:</strong></span>
+                            <span>${activity.toFixed(2)}</span>
+                        </div>
+                        <div class="detail-row" style="border-bottom: 2px solid #28a745; padding-top: 1rem;">
+                            <span><strong>EER:</strong></span>
+                            <span style="color: #28a745; font-weight: 700; font-size: 1.1rem;">${eer} kcal/day</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('resultsContainer').innerHTML = resultsHTML;
+        }
+    </script>
+</body>
+</html>

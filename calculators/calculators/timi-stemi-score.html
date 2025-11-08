@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIMI Score for ST Elevation MI - 30-Day Mortality Prediction</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar-custom {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-header-custom {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .btn-primary-custom {
+            background: var(--primary-gradient);
+            border: none;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+        .result-card {
+            border-left: 5px solid #667eea;
+            background: white;
+            margin-top: 20px;
+        }
+        .formula-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid #667eea33;
+        }
+        .risk-high { color: #dc3545; font-weight: bold; }
+        .risk-medium { color: #fd7e14; font-weight: bold; }
+        .risk-low { color: #28a745; font-weight: bold; }
+        .input-group-text {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="javascript:history.back()">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <span class="navbar-text text-white">TIMI Score for STEMI</span>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0 mb-4">
+                    <div class="card-header card-header-custom">
+                        <h2 class="mb-0">
+                            <i class="fas fa-heart"></i> TIMI Risk Score for ST Elevation MI
+                        </h2>
+                        <p class="mb-0 small mt-2">Predict 30-day mortality and complications in acute STEMI</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <strong><i class="fas fa-info-circle"></i> Clinical Context:</strong>
+                            <p class="mb-0">TIMI Risk Score for STEMI helps identify high-risk patients requiring more intensive management and closer monitoring during acute MI.</p>
+                        </div>
+
+                        <form id="calculatorForm">
+                            <div class="row">
+                                <!-- Age -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Age</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
+                                        <input type="number" class="form-control" id="age" min="0" max="120" required placeholder="Age in years">
+                                    </div>
+                                    <small class="text-muted">&lt;40: 0 pts; 40-49: 1 pt; 50-59: 2 pts; 60-69: 3 pts; 70-79: 4 pts; ≥80: 5 pts</small>
+                                </div>
+
+                                <!-- Weight -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Weight (kg)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-weight"></i></span>
+                                        <input type="number" class="form-control" id="weight" min="30" max="300" required placeholder="Weight in kg">
+                                    </div>
+                                </div>
+
+                                <!-- Heart Rate -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Heart Rate (bpm)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-heartbeat"></i></span>
+                                        <input type="number" class="form-control" id="heartRate" min="20" max="200" required placeholder="Heart rate">
+                                    </div>
+                                    <small class="text-muted">&lt;100: 0 pts; ≥100: 1 pt</small>
+                                </div>
+
+                                <!-- Systolic BP -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Systolic BP (mmHg)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-tachometer-alt"></i></span>
+                                        <input type="number" class="form-control" id="sbp" min="40" max="250" required placeholder="Systolic BP">
+                                    </div>
+                                    <small class="text-muted">&lt;100: 3 pts; 100-119: 1 pt; ≥120: 0 pts</small>
+                                </div>
+
+                                <!-- Killip Class -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Killip Classification</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="killip" required>
+                                            <option value="0">I (No CHF)</option>
+                                            <option value="1">II (Crackles)</option>
+                                            <option value="2">III (Pulmonary edema)</option>
+                                            <option value="3">IV (Cardiogenic shock)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Anterior MI -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Anterior MI Location</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="anteriorMI" required>
+                                            <option value="0">No (Inferior/Other)</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Diabetes -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Diabetes or Prior Angina</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="diabetesOrAngina" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex mt-4">
+                                <button type="button" class="btn btn-primary-custom btn-lg flex-grow-1" id="calculateBtn">
+                                    <i class="fas fa-calculator"></i> Calculate Score
+                                </button>
+                                <button type="reset" class="btn btn-secondary btn-lg flex-grow-1">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+
+                        <div id="resultsSection" style="display: none;">
+                            <div class="card result-card">
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <i class="fas fa-chart-pie"></i> Your TIMI Risk Score
+                                    </h4>
+                                    <p class="mb-3">
+                                        <span id="totalScore" class="display-4"></span>
+                                        <span class="text-muted">/14</span>
+                                    </p>
+                                    <div id="riskInterpretation" class="alert"></div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3">
+                                <div class="card-header card-header-custom">
+                                    <h5 class="mb-0"><i class="fas fa-table"></i> Mortality Risk by Score</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Score</th>
+                                                    <th>Risk Category</th>
+                                                    <th>30-Day Mortality (%)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td><strong>0</strong></td><td><span class="risk-low">Very Low</span></td><td>0.8%</td></tr>
+                                                <tr><td><strong>1</strong></td><td><span class="risk-low">Very Low</span></td><td>1.6%</td></tr>
+                                                <tr><td><strong>2</strong></td><td><span class="risk-low">Low</span></td><td>2.2%</td></tr>
+                                                <tr><td><strong>3</strong></td><td><span class="risk-low">Low</span></td><td>3.2%</td></tr>
+                                                <tr><td><strong>4</strong></td><td><span class="risk-medium">Moderate</span></td><td>4.4%</td></tr>
+                                                <tr><td><strong>5</strong></td><td><span class="risk-medium">Moderate</span></td><td>6.1%</td></tr>
+                                                <tr><td><strong>6</strong></td><td><span class="risk-medium">Moderate</span></td><td>7.3%</td></tr>
+                                                <tr><td><strong>7</strong></td><td><span class="risk-high">High</span></td><td>9.2%</td></tr>
+                                                <tr><td><strong>≥8</strong></td><td><span class="risk-high">Very High</span></td><td>&gt;12%</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3 formula-card">
+                                <div class="card-header" style="background-color: #667eea33; border: none;">
+                                    <h5 class="mb-0"><i class="fas fa-flask"></i> Scoring Reference</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6>Age-Based Points:</h6>
+                                    <ul class="small mb-3">
+                                        <li>&lt;40 years: 0 points</li>
+                                        <li>40-49 years: 1 point</li>
+                                        <li>50-59 years: 2 points</li>
+                                        <li>60-69 years: 3 points</li>
+                                        <li>70-79 years: 4 points</li>
+                                        <li>≥80 years: 5 points</li>
+                                    </ul>
+                                    <hr class="my-2">
+                                    <p class="small mb-0"><strong>Clinical Note:</strong> Used to identify high-risk STEMI patients for targeted intervention and closer monitoring.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            try {
+                const age = parseInt(document.getElementById('age').value) || 0;
+                const weight = parseInt(document.getElementById('weight').value) || 0;
+                const heartRate = parseInt(document.getElementById('heartRate').value) || 0;
+                const sbp = parseInt(document.getElementById('sbp').value) || 0;
+                const killip = parseInt(document.getElementById('killip').value) || 0;
+                const anteriorMI = parseInt(document.getElementById('anteriorMI').value) || 0;
+                const diabetesOrAngina = parseInt(document.getElementById('diabetesOrAngina').value) || 0;
+
+                if (age < 0 || age > 120) {
+                    alert('Please enter a valid age');
+                    return;
+                }
+
+                // Calculate age points
+                let agePoints = 0;
+                if (age < 40) agePoints = 0;
+                else if (age < 50) agePoints = 1;
+                else if (age < 60) agePoints = 2;
+                else if (age < 70) agePoints = 3;
+                else if (age < 80) agePoints = 4;
+                else agePoints = 5;
+
+                // Heart rate points
+                let hrPoints = heartRate >= 100 ? 1 : 0;
+
+                // SBP points
+                let sbpPoints = 0;
+                if (sbp < 100) sbpPoints = 3;
+                else if (sbp < 120) sbpPoints = 1;
+                else sbpPoints = 0;
+
+                // Killip points
+                const killipPoints = killip;
+
+                // Total score
+                let totalScore = agePoints + hrPoints + sbpPoints + killipPoints + anteriorMI + diabetesOrAngina;
+
+                document.getElementById('totalScore').textContent = totalScore;
+
+                let riskInterpretation = '';
+                if (totalScore <= 2) {
+                    riskInterpretation = '<span class="risk-low">Low Risk</span> - 0.8-2.2% 30-day mortality. Standard post-MI management.';
+                } else if (totalScore <= 6) {
+                    riskInterpretation = '<span class="risk-medium">Moderate Risk</span> - 3.2-7.3% 30-day mortality. Enhanced monitoring recommended.';
+                } else {
+                    riskInterpretation = '<span class="risk-high">High Risk</span> - 9.2%+ 30-day mortality. Intensive care management warranted. Consider mechanical support if cardiogenic shock present.';
+                }
+
+                document.getElementById('riskInterpretation').innerHTML = riskInterpretation;
+                document.getElementById('resultsSection').style.display = 'block';
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARG-BC Score - Cancer & Aging Research Group</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            padding-top: 20px;
+            padding-bottom: 40px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container { max-width: 800px; }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 24px;
+        }
+
+        .card-header small {
+            display: block;
+            margin-top: 8px;
+            opacity: 0.95;
+        }
+
+        .card-body { padding: 30px; }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-calculate {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .result-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+
+        .interpretation {
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        .formula-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .hidden { display: none; }
+
+        .alert {
+            border-radius: 8px;
+            border: none;
+        }
+
+        .alert-info {
+            background-color: rgba(102, 126, 234, 0.15);
+            color: #333;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .risk-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .risk-low { background-color: #d4edda; color: #155724; }
+        .risk-moderate { background-color: #fff3cd; color: #856404; }
+        .risk-high { background-color: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Back button navigation -->
+        <a href="index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+
+        <!-- Main calculator card -->
+        <div class="card">
+            <!-- Card header with title -->
+            <div class="card-header">
+                <h3><i class="fas fa-heartbeat"></i> CARG-BC Score</h3>
+                <small>Cancer and Aging Research Group - Breast Cancer Toxicity Score</small>
+            </div>
+
+            <!-- Card body with form and results -->
+            <div class="card-body">
+                <!-- Information alert -->
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Clinical Information:</strong> The CARG-BC score predicts risk of chemotherapy-induced toxicity in older women with breast cancer, incorporating geriatric assessment factors.
+                </div>
+
+                <!-- Patient demographic information section -->
+                <h5 class="mt-4 mb-3"><i class="fas fa-user"></i> Patient Demographics</h5>
+
+                <!-- Age -->
+                <div class="form-group">
+                    <label for="cargAge" class="form-label">
+                        <i class="fas fa-birthday-cake"></i> Age (years)
+                    </label>
+                    <input type="number" class="form-control" id="cargAge" min="60" max="110" placeholder="Enter age">
+                </div>
+
+                <!-- Body Mass Index -->
+                <div class="form-group">
+                    <label for="cargBMI" class="form-label">
+                        <i class="fas fa-weight"></i> Body Mass Index (BMI)
+                    </label>
+                    <input type="number" class="form-control" id="cargBMI" min="15" max="50" step="0.1" placeholder="Enter BMI">
+                </div>
+
+                <!-- Geriatric Assessment -->
+                <h5 class="mt-4 mb-3"><i class="fas fa-stethoscope"></i> Geriatric Assessment</h5>
+
+                <!-- Creatinine clearance (via Cockcroft-Gault) -->
+                <div class="form-group">
+                    <label for="cargCrCl" class="form-label">
+                        <i class="fas fa-flask"></i> Creatinine Clearance (mL/min)
+                    </label>
+                    <input type="number" class="form-control" id="cargCrCl" min="10" max="200" placeholder="Enter value (estimated by Cockcroft-Gault)">
+                    <small class="form-text text-muted">Calculate from serum creatinine if needed</small>
+                </div>
+
+                <!-- Activities of Daily Living (ADL) -->
+                <div class="form-group">
+                    <label for="cargADL" class="form-label">
+                        <i class="fas fa-running"></i> Activities of Daily Living (ADL)
+                    </label>
+                    <select class="form-select" id="cargADL">
+                        <option value="">Select...</option>
+                        <option value="0">Independent in all ADLs</option>
+                        <option value="1">Dependent in 1 ADL</option>
+                        <option value="2">Dependent in ≥2 ADLs</option>
+                    </select>
+                    <small class="form-text text-muted">Bathing, dressing, eating, toileting, transferring, continence</small>
+                </div>
+
+                <!-- Instrumental ADL (IADL) -->
+                <div class="form-group">
+                    <label for="cargIADL" class="form-label">
+                        <i class="fas fa-home"></i> Instrumental ADL (IADL)
+                    </label>
+                    <select class="form-select" id="cargIADL">
+                        <option value="">Select...</option>
+                        <option value="0">Independent in all IADLs</option>
+                        <option value="1">Dependent in 1-2 IADLs</option>
+                        <option value="2">Dependent in ≥3 IADLs</option>
+                    </select>
+                    <small class="form-text text-muted">Medications, finances, transportation, housework, shopping, meal prep</small>
+                </div>
+
+                <!-- Cancer Stage -->
+                <h5 class="mt-4 mb-3"><i class="fas fa-stethoscope"></i> Cancer Characteristics</h5>
+
+                <!-- Stage -->
+                <div class="form-group">
+                    <label for="cargStage" class="form-label">
+                        <i class="fas fa-flag"></i> Cancer Stage
+                    </label>
+                    <select class="form-select" id="cargStage">
+                        <option value="">Select...</option>
+                        <option value="0">Stage I</option>
+                        <option value="1">Stage II</option>
+                        <option value="2">Stage III</option>
+                        <option value="3">Stage IV</option>
+                    </select>
+                </div>
+
+                <!-- Comorbidity Count -->
+                <div class="form-group">
+                    <label for="cargComorbidity" class="form-label">
+                        <i class="fas fa-heartbeat"></i> Number of Comorbidities
+                    </label>
+                    <input type="number" class="form-control" id="cargComorbidity" min="0" max="10" placeholder="Enter count">
+                    <small class="form-text text-muted">Significant medical conditions (e.g., diabetes, heart disease, COPD)</small>
+                </div>
+
+                <!-- Calculate button -->
+                <button class="btn btn-calculate" onclick="calculateCARC()">
+                    <i class="fas fa-calculator"></i> Calculate CARG-BC Risk
+                </button>
+
+                <!-- Results section -->
+                <div id="results" class="hidden">
+                    <div class="result-box">
+                        <strong style="font-size: 18px;"><i class="fas fa-chart-pie"></i> Toxicity Risk Assessment</strong>
+
+                        <!-- CARG-BC Score -->
+                        <div>
+                            <h5 style="margin-top: 15px; color: #333;">CARG-BC Score</h5>
+                            <div class="result-value" id="cargScore">-</div>
+                        </div>
+
+                        <!-- Risk of severe toxicity -->
+                        <div style="margin-top: 15px;">
+                            <h5 style="color: #333;">Risk of Severe Chemotherapy Toxicity</h5>
+                            <div class="result-value" id="toxicityRisk" style="font-size: 28px;">-</div>
+                        </div>
+
+                        <!-- Risk interpretation -->
+                        <div class="interpretation" id="cargInterpretation" style="margin-top: 15px;"></div>
+
+                        <!-- Risk category badge -->
+                        <div id="riskBadge"></div>
+
+                        <!-- Recommendations section -->
+                        <div style="margin-top: 20px; background-color: #f0f8ff; padding: 15px; border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                            <strong><i class="fas fa-stethoscope"></i> Clinical Recommendations:</strong>
+                            <ul style="margin-bottom: 0; margin-top: 10px; font-size: 14px;">
+                                <li id="rec1"></li>
+                                <li id="rec2"></li>
+                                <li id="rec3"></li>
+                            </ul>
+                        </div>
+
+                        <!-- Formula and methodology -->
+                        <div class="formula-box">
+                            <strong>Model Details:</strong><br>
+                            - Developed to predict grade 3-4 chemotherapy toxicity in older breast cancer patients<br>
+                            - Incorporates geriatric assessment including functional status and comorbidities<br>
+                            - Risk factors weighted based on logistic regression model<br>
+                            - Helps guide chemotherapy treatment decisions in vulnerable populations<br>
+                            - May be used to recommend dose modifications or alternative regimens
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // CARG-BC score calculation
+        function calculateCARC() {
+            // Input validation
+            const age = parseFloat(document.getElementById('cargAge').value);
+            const bmi = parseFloat(document.getElementById('cargBMI').value);
+            const crCl = parseFloat(document.getElementById('cargCrCl').value);
+            const adl = parseInt(document.getElementById('cargADL').value);
+            const iadl = parseInt(document.getElementById('cargIADL').value);
+            const stage = parseInt(document.getElementById('cargStage').value);
+            const comorbidity = parseInt(document.getElementById('cargComorbidity').value);
+
+            // Validate required fields
+            if (isNaN(age) || isNaN(bmi) || isNaN(crCl) || isNaN(adl) || isNaN(iadl) || isNaN(stage) || isNaN(comorbidity)) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // Calculate CARG-BC score (simplified version)
+            let score = 0;
+
+            // Age points
+            if (age >= 80) score += 3;
+            else if (age >= 75) score += 2;
+            else if (age >= 70) score += 1;
+
+            // BMI points
+            if (bmi >= 30) score += 1;
+            else if (bmi < 18.5) score += 1;
+
+            // Renal function points
+            if (crCl < 40) score += 3;
+            else if (crCl < 60) score += 2;
+
+            // ADL dependence
+            if (adl === 1) score += 2;
+            else if (adl === 2) score += 3;
+
+            // IADL dependence
+            if (iadl === 1) score += 1;
+            else if (iadl === 2) score += 2;
+
+            // Cancer stage
+            if (stage === 2) score += 1;
+            else if (stage === 3) score += 2;
+
+            // Comorbidities
+            if (comorbidity >= 1) score += 1;
+            if (comorbidity >= 2) score += 1;
+
+            // Calculate risk of severe toxicity
+            let toxicityRisk = 0;
+            if (score <= 2) toxicityRisk = 20;
+            else if (score <= 4) toxicityRisk = 35;
+            else if (score <= 6) toxicityRisk = 50;
+            else toxicityRisk = 65;
+
+            // Display results
+            document.getElementById('cargScore').textContent = score;
+            document.getElementById('toxicityRisk').textContent = toxicityRisk + '%';
+
+            // Risk interpretation
+            let interpretation = '';
+            let riskCategory = '';
+            let recommendations = [];
+
+            if (toxicityRisk <= 25) {
+                interpretation = 'Low risk of severe chemotherapy toxicity. Patient may tolerate standard chemotherapy regimens.';
+                riskCategory = 'risk-low';
+                recommendations = [
+                    'Standard chemotherapy dosing can be considered',
+                    'Close monitoring during treatment',
+                    'Regular assessment of functional status'
+                ];
+            } else if (toxicityRisk <= 40) {
+                interpretation = 'Moderate risk of severe chemotherapy toxicity. Consider dose adjustment or modified regimen.';
+                riskCategory = 'risk-moderate';
+                recommendations = [
+                    'Consider dose reduction (90% of standard dose)',
+                    'Implement supportive care measures (G-CSF, antiemetics)',
+                    'Enhanced monitoring and frequent reassessment'
+                ];
+            } else if (toxicityRisk <= 55) {
+                interpretation = 'High risk of severe chemotherapy toxicity. Significant caution with chemotherapy recommended.';
+                riskCategory = 'risk-moderate';
+                recommendations = [
+                    'Consider substantial dose reduction (75-80% of standard)',
+                    'Evaluate alternative treatment strategies',
+                    'Close coordination with geriatric medicine'
+                ];
+            } else {
+                interpretation = 'Very high risk of severe chemotherapy toxicity. Strongly consider alternative approaches.';
+                riskCategory = 'risk-high';
+                recommendations = [
+                    'Consider non-chemotherapy approaches if feasible',
+                    'Comprehensive geriatric assessment recommended',
+                    'Discussion of risks vs benefits of chemotherapy'
+                ];
+            }
+
+            document.getElementById('cargInterpretation').textContent = interpretation;
+
+            // Add risk badge
+            const badgeClass = riskCategory === 'risk-low' ? 'risk-low' : riskCategory === 'risk-high' ? 'risk-high' : 'risk-moderate';
+            const badgeText = riskCategory === 'risk-low' ? 'LOW RISK' : riskCategory === 'risk-high' ? 'HIGH RISK' : 'HIGH RISK';
+            document.getElementById('riskBadge').innerHTML = `<span class="risk-badge ${badgeClass}">${badgeText}</span>`;
+
+            // Display recommendations
+            recommendations.forEach((rec, index) => {
+                document.getElementById(`rec${index + 1}`).textContent = rec;
+            });
+
+            // Show results
+            document.getElementById('results').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

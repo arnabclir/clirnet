@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVD Risk Assessment (10-Year, MESA 2015 with CAC Score)</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar-custom {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-header-custom {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .btn-primary-custom {
+            background: var(--primary-gradient);
+            border: none;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+        .result-card {
+            border-left: 5px solid #667eea;
+            background: white;
+            margin-top: 20px;
+        }
+        .formula-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid #667eea33;
+        }
+        .risk-high { color: #dc3545; font-weight: bold; }
+        .risk-medium { color: #fd7e14; font-weight: bold; }
+        .risk-low { color: #28a745; font-weight: bold; }
+        .input-group-text {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="javascript:history.back()">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <span class="navbar-text text-white">MESA 2015 CVD Risk</span>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0 mb-4">
+                    <div class="card-header card-header-custom">
+                        <h2 class="mb-0">
+                            <i class="fas fa-heart"></i> MESA 10-Year CVD Risk
+                        </h2>
+                        <p class="mb-0 small mt-2">Multi-Ethnic Study with Coronary Artery Calcium Scoring</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <strong><i class="fas fa-info-circle"></i> Clinical Context:</strong>
+                            <p class="mb-0">MESA 2015 calculator refines CVD risk assessment using coronary artery calcium (CAC) score, which provides superior prognostic information than traditional risk factors alone.</p>
+                        </div>
+
+                        <form id="calculatorForm">
+                            <div class="row">
+                                <!-- Age -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Age (years)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
+                                        <input type="number" class="form-control" id="age" min="45" max="85" required placeholder="Age 45-84">
+                                    </div>
+                                </div>
+
+                                <!-- Sex -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Sex</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="sex" required>
+                                            <option value="">Select sex</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Race/Ethnicity -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Race/Ethnicity</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="race" required>
+                                            <option value="">Select</option>
+                                            <option value="white">White</option>
+                                            <option value="black">Black</option>
+                                            <option value="hispanic">Hispanic</option>
+                                            <option value="chinese">Chinese</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- CAC Score -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Coronary Artery Calcium (CAC) Score</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="cac" required>
+                                            <option value="">Select CAC score</option>
+                                            <option value="0">0 (No calcification)</option>
+                                            <option value="1-100">1-100</option>
+                                            <option value="101-300">101-300</option>
+                                            <option value="301-400">301-400</option>
+                                            <option value="400">≥400</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- LDL Cholesterol -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>LDL Cholesterol (mg/dL)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-vial"></i></span>
+                                        <input type="number" class="form-control" id="ldl" min="0" max="300" required placeholder="mg/dL">
+                                    </div>
+                                </div>
+
+                                <!-- HDL Cholesterol -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>HDL Cholesterol (mg/dL)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-vial"></i></span>
+                                        <input type="number" class="form-control" id="hdl" min="0" max="100" required placeholder="mg/dL">
+                                    </div>
+                                </div>
+
+                                <!-- Systolic BP -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Systolic BP (mmHg)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-tachometer-alt"></i></span>
+                                        <input type="number" class="form-control" id="sbp" min="80" max="220" required placeholder="mmHg">
+                                    </div>
+                                </div>
+
+                                <!-- Smoking -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Current Smoker</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="smoking" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Diabetes -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Diabetes</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="diabetes" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex mt-4">
+                                <button type="button" class="btn btn-primary-custom btn-lg flex-grow-1" id="calculateBtn">
+                                    <i class="fas fa-calculator"></i> Calculate Risk
+                                </button>
+                                <button type="reset" class="btn btn-secondary btn-lg flex-grow-1">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+
+                        <div id="resultsSection" style="display: none;">
+                            <div class="card result-card">
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <i class="fas fa-chart-pie"></i> 10-Year CVD Risk (MESA)
+                                    </h4>
+                                    <p class="mb-3">
+                                        <span id="riskPercent" class="display-4"></span>
+                                        <span class="text-muted">%</span>
+                                    </p>
+                                    <div id="riskInterpretation" class="alert"></div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3 formula-card">
+                                <div class="card-header" style="background-color: #667eea33; border: none;">
+                                    <h5 class="mb-0"><i class="fas fa-flask"></i> About CAC Scoring</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6>Coronary Artery Calcium Categories:</h6>
+                                    <ul class="small">
+                                        <li><strong>0 (None):</strong> No detectable CAC - Very low risk</li>
+                                        <li><strong>1-100 (Minimal):</strong> Minimal CAC - Low risk</li>
+                                        <li><strong>101-300 (Mild):</strong> Mild CAC - Intermediate risk</li>
+                                        <li><strong>301-400 (Moderate):</strong> Moderate CAC - Higher risk</li>
+                                        <li><strong>≥400 (Extensive):</strong> Extensive CAC - Highest risk</li>
+                                    </ul>
+                                    <hr class="my-2">
+                                    <p class="small mb-0"><strong>Note:</strong> MESA incorporates CAC for more precise risk stratification, especially useful in borderline-risk patients. CAC score is obtained via coronary CT imaging.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            try {
+                const age = parseInt(document.getElementById('age').value) || 0;
+                const sex = document.getElementById('sex').value;
+                const race = document.getElementById('race').value;
+                const cac = document.getElementById('cac').value;
+                const ldl = parseInt(document.getElementById('ldl').value) || 0;
+                const hdl = parseInt(document.getElementById('hdl').value) || 0;
+                const sbp = parseInt(document.getElementById('sbp').value) || 0;
+                const smoking = parseInt(document.getElementById('smoking').value) || 0;
+                const diabetes = parseInt(document.getElementById('diabetes').value) || 0;
+
+                if (!sex || !race || !cac || age < 45 || age > 84) {
+                    alert('Please enter valid data. Age must be 45-84.');
+                    return;
+                }
+
+                // Calculate base risk
+                let riskPoints = 0;
+                riskPoints += (age >= 70) ? 3 : (age >= 60) ? 2 : 1;
+                riskPoints += (ldl > 160) ? 2 : (ldl > 100) ? 1 : 0;
+                riskPoints -= (hdl > 60) ? 2 : (hdl > 50) ? 1 : 0;
+                riskPoints += (sbp >= 140) ? 2 : (sbp >= 130) ? 1 : 0;
+                riskPoints += smoking ? 2 : 0;
+                riskPoints += diabetes ? 2 : 0;
+                if (sex === 'female') riskPoints += 1;
+
+                // CAC multiplier
+                let cacMultiplier = 1;
+                if (cac === '0') cacMultiplier = 0.5;
+                else if (cac === '1-100') cacMultiplier = 1.0;
+                else if (cac === '101-300') cacMultiplier = 1.5;
+                else if (cac === '301-400') cacMultiplier = 2.0;
+                else if (cac === '400') cacMultiplier = 2.5;
+
+                let riskPercent = Math.min(40, Math.max(1, riskPoints * 1.3 * cacMultiplier));
+
+                document.getElementById('riskPercent').textContent = riskPercent.toFixed(1);
+
+                let interpretation = '';
+                if (riskPercent < 5) {
+                    interpretation = '<span class="risk-low">Low Risk</span> - Less than 5% 10-year CVD risk. Continue lifestyle optimization.';
+                } else if (riskPercent < 10) {
+                    interpretation = '<span class="risk-low">Borderline Risk</span> - 5-10% risk. Consider preventive therapies based on CAC and other factors.';
+                } else if (riskPercent < 20) {
+                    interpretation = '<span class="risk-medium">Intermediate Risk</span> - 10-20% risk. Preventive therapy recommended.';
+                } else {
+                    interpretation = '<span class="risk-high">High Risk</span> - ≥20% risk. Intensive medical therapy strongly recommended.';
+                }
+
+                document.getElementById('riskInterpretation').innerHTML = interpretation;
+                document.getElementById('resultsSection').style.display = 'block';
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

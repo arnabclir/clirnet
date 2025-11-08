@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smoking Cost Calculator - Health Economics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Main body styling with purple gradient background */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        /* Container wrapper with max width */
+        .container-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Card styling with shadow and border radius */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        /* Card header with purple gradient */
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-bottom: none;
+        }
+
+        /* Calculator title styling */
+        .calculator-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Subtitle text styling */
+        .calculator-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        /* Header badges container */
+        .header-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Badge styling */
+        .badge {
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        /* Navigation back link */
+        .nav-back {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .nav-back a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-back a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Card body styling */
+        .card-body {
+            padding: 30px;
+            background-color: #f8f9fa;
+        }
+
+        /* Form group styling */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        /* Form label styling */
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Form control styling */
+        .form-control {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* Button styling */
+        .btn-calculate {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 12px 40px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        /* Result container styling */
+        .result-container {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .result-container.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        /* Slide in animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Results grid styling */
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        /* Result card styling */
+        .result-card {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-label {
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .result-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        /* Interpretation box styling */
+        .interpretation {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .interpretation.moderate {
+            background-color: #fef3cd;
+            color: #856404;
+            border-left: 4px solid #ffc107;
+        }
+
+        .interpretation.high {
+            background-color: #f8d7da;
+            color: #842029;
+            border-left: 4px solid #dc3545;
+        }
+
+        /* Two column layout */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Formula section styling */
+        .formula-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 2px dashed #667eea;
+        }
+
+        /* Formula title styling */
+        .formula-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Formula content styling */
+        .formula-content {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        /* Info box styling */
+        .info-box {
+            background-color: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        /* Responsive design for mobile */
+        @media (max-width: 768px) {
+            .calculator-title {
+                font-size: 22px;
+            }
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-wrapper">
+        <!-- Navigation back button -->
+        <div class="nav-back">
+            <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        </div>
+
+        <!-- Main calculator card -->
+        <div class="card">
+            <div class="card-header">
+                <h1 class="calculator-title">
+                    <i class="fas fa-dollar-sign"></i>
+                    Smoking Cost Calculator
+                </h1>
+                <p class="calculator-subtitle">
+                    Calculate financial and health impact of smoking - A motivational tool for smoking cessation
+                </p>
+                <div class="header-badges">
+                    <span class="badge"><i class="fas fa-heartbeat"></i> Prevention</span>
+                    <span class="badge"><i class="fas fa-chart-line"></i> Economics</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <!-- Information box -->
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    This calculator helps visualize the financial and health impact of smoking by estimating total costs based on current smoking patterns. Use this as a motivational tool for smoking cessation counseling.
+                </div>
+
+                <!-- Smoking cost form -->
+                <form id="smokingForm">
+                    <div class="two-column">
+                        <!-- Cigarettes per day -->
+                        <div class="form-group">
+                            <label class="form-label">Cigarettes per day</label>
+                            <input type="number" class="form-control" id="cigarettesPerDay" min="1" max="200" placeholder="e.g., 20" value="20">
+                        </div>
+
+                        <!-- Years smoking -->
+                        <div class="form-group">
+                            <label class="form-label">Years of smoking</label>
+                            <input type="number" class="form-control" id="yearsSmoking" min="0" max="100" placeholder="e.g., 10" value="10">
+                        </div>
+
+                        <!-- Cost per pack -->
+                        <div class="form-group">
+                            <label class="form-label">Cost per cigarette pack ($)</label>
+                            <input type="number" class="form-control" id="costPerPack" step="0.01" min="1" max="50" placeholder="e.g., 6.00" value="6.00">
+                        </div>
+
+                        <!-- Cigarettes per pack -->
+                        <div class="form-group">
+                            <label class="form-label">Cigarettes per pack</label>
+                            <input type="number" class="form-control" id="cigarettesPerPack" min="1" max="50" placeholder="e.g., 20" value="20">
+                        </div>
+                    </div>
+
+                    <!-- Calculate button -->
+                    <button type="submit" class="btn btn-calculate">
+                        <i class="fas fa-calculator"></i> Calculate Cost & Impact
+                    </button>
+                </form>
+
+                <!-- Results section -->
+                <div id="resultContainer" class="result-container">
+                    <h4><i class="fas fa-star"></i> Cost & Impact Analysis</h4>
+
+                    <!-- Results grid -->
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <div class="result-label">Total Cigarettes Smoked</div>
+                            <div class="result-value"><span id="totalCigarettes">0</span></div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-label">Lifetime Cost</div>
+                            <div class="result-value">$<span id="totalCost">0</span></div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-label">Annual Cost</div>
+                            <div class="result-value">$<span id="annualCost">0</span></div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-label">Monthly Cost</div>
+                            <div class="result-value">$<span id="monthlyCost">0</span></div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-label">Health Risk Years</div>
+                            <div class="result-value"><span id="lifeYearsLost">0</span> yrs</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-label">Daily Cost</div>
+                            <div class="result-value">$<span id="dailyCost">0</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Interpretation message -->
+                    <div id="interpretationBox"></div>
+                </div>
+
+                <!-- Clinical information section -->
+                <div class="formula-section">
+                    <div class="formula-title">
+                        <i class="fas fa-flask"></i> Calculation Methods & Health Impact
+                    </div>
+                    <div class="formula-content">
+Smoking Cost Calculation:
+
+Daily Cost = (Cigarettes per day / Cigarettes per pack) × Cost per pack
+Annual Cost = Daily Cost × 365
+Total Cost = Annual Cost × Years smoking
+
+Health Impact Estimates:
+- Reduces life expectancy by ~10 years
+- Increases cardiovascular disease risk by 2-4x
+- Increases cancer risk by 10-25x (depending on cancer type)
+- Increases COPD risk by 10-15x
+- Reduces average lifespan: ~15 minutes per cigarette
+- Secondhand smoke exposure affects family members
+
+Smoking Cessation Benefits:
+- Year 1: Risk of coronary disease drops significantly
+- Year 2: Stroke risk approaches non-smoker level
+- Year 10: Lung cancer mortality risk drops to 50% of smoker
+- 10+ years: Can gain back most lost life years
+
+Financial Motivation:
+Use these estimates to help patients understand the
+financial burden of smoking and benefits of cessation.
+Many quit successfully with proper support.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Form submission handler
+        document.getElementById('smokingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculateSmokingCost();
+        });
+
+        // Smoking cost calculation function
+        function calculateSmokingCost() {
+            const cigarettesPerDay = parseFloat(document.getElementById('cigarettesPerDay').value);
+            const yearsSmoking = parseFloat(document.getElementById('yearsSmoking').value);
+            const costPerPack = parseFloat(document.getElementById('costPerPack').value);
+            const cigarettesPerPack = parseFloat(document.getElementById('cigarettesPerPack').value);
+
+            // Input validation
+            if (isNaN(cigarettesPerDay) || isNaN(yearsSmoking) || isNaN(costPerPack) || isNaN(cigarettesPerPack)) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Calculate costs
+            const dailyCost = (cigarettesPerDay / cigarettesPerPack) * costPerPack;
+            const annualCost = dailyCost * 365;
+            const totalCost = annualCost * yearsSmoking;
+            const monthlyCost = annualCost / 12;
+
+            // Calculate total cigarettes smoked
+            const totalCigarettes = cigarettesPerDay * 365 * yearsSmoking;
+
+            // Estimate life years lost (approximately 10 years for lifetime smoker)
+            const lifeYearsLost = Math.min(yearsSmoking * 0.15, 10);
+
+            // Display results
+            document.getElementById('totalCigarettes').textContent = totalCigarettes.toLocaleString();
+            document.getElementById('totalCost').textContent = totalCost.toFixed(2);
+            document.getElementById('annualCost').textContent = annualCost.toFixed(2);
+            document.getElementById('monthlyCost').textContent = monthlyCost.toFixed(2);
+            document.getElementById('dailyCost').textContent = dailyCost.toFixed(2);
+            document.getElementById('lifeYearsLost').textContent = lifeYearsLost.toFixed(1);
+
+            // Prepare interpretation message
+            let interpretation = '';
+
+            if (yearsSmoking >= 10) {
+                interpretation = '<strong>Significant Health Risk</strong><br>' +
+                    `You've spent approximately <strong>$${totalCost.toFixed(2)}</strong> on smoking over ${yearsSmoking} years. ` +
+                    `That's <strong>$${annualCost.toFixed(2)}</strong> per year! ` +
+                    `Smoking cessation can add back years to your life and improve quality of life. Seek support from your healthcare provider.`;
+            } else if (yearsSmoking >= 5) {
+                interpretation = '<strong>Moderate Health Risk</strong><br>' +
+                    `Over ${yearsSmoking} years, you've spent approximately <strong>$${totalCost.toFixed(2)}</strong> on cigarettes. ` +
+                    `Now is an excellent time to quit before health consequences worsen. Your body can begin to heal within months.`;
+            } else {
+                interpretation = '<strong>Growing Health Risk</strong><br>' +
+                    `You're spending <strong>$${annualCost.toFixed(2)}</strong> annually on smoking. ` +
+                    `Early intervention is highly successful. Consider quitting now before the habit becomes harder to break.`;
+            }
+
+            document.getElementById('interpretationBox').innerHTML =
+                `<div class="interpretation moderate"><i class="fas fa-exclamation-triangle"></i> ${interpretation}</div>`;
+
+            // Show results section with animation
+            document.getElementById('resultContainer').classList.add('show');
+        }
+    </script>
+</body>
+</html>

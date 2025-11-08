@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Percentiles Calculator - Males 2-20 Years</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ==========================================
+           CUSTOM STYLING & PURPLE GRADIENT THEME
+           ========================================== */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            --secondary-gradient: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%);
+            --text-dark: #2d3748;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+
+        /* Navigation Header */
+        .nav-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .nav-header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+
+        /* Main Container */
+        .calculator-container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 0 1rem 2rem 1rem;
+        }
+
+        /* Card Styling */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.15);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 2rem 1.5rem;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        .card-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.95;
+            font-size: 0.9rem;
+        }
+
+        /* Form Controls */
+        .form-control, .form-select {
+            border: 2px solid #e9d5ff;
+            border-radius: 10px;
+            padding: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 0.2rem rgba(139, 92, 246, 0.25);
+        }
+
+        .form-label {
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Input Group */
+        .input-group-text {
+            background-color: #f3e8ff;
+            border: 2px solid #e9d5ff;
+            color: #6d28d9;
+            font-weight: 600;
+        }
+
+        /* Buttons */
+        .btn-calculate {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            color: white;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+            color: white;
+        }
+
+        .btn-reset {
+            background: #e9d5ff;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            color: #6d28d9;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reset:hover {
+            background: #ddd6fe;
+            color: #5b21b6;
+        }
+
+        /* Result Box */
+        .result-box {
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-left: 5px solid #8b5cf6;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #6d28d9;
+            margin: 1rem 0;
+        }
+
+        /* Interpretation Boxes */
+        .interpretation-box {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-left: 4px solid #8b5cf6;
+        }
+
+        .interpretation-title {
+            color: #6d28d9;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .interpretation-text {
+            color: #4b5563;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #f0f4ff;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-left: 4px solid #8b5cf6;
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+
+        .info-box i {
+            color: #8b5cf6;
+            margin-right: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-header h1 {
+                font-size: 1.4rem;
+            }
+
+            .card-header {
+                padding: 1.5rem 1rem;
+            }
+
+            .card-header h2 {
+                font-size: 1.3rem;
+            }
+
+            .result-score {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <div class="nav-header">
+        <div class="container">
+            <h1><i class="fas fa-child"></i> BMI Percentiles Calculator</h1>
+            <p>Males Ages 2-20 Years - Patient Education</p>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="calculator-container">
+        <!-- Instruction Card -->
+        <div class="card">
+            <div class="card-body">
+                <div class="alert alert-info" role="alert">
+                    <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> Enter age in years, weight in kilograms, and height in centimeters. BMI percentile will be calculated based on CDC growth charts for males.
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculator Form -->
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-ruler-combined"></i> BMI Percentile Calculation</h2>
+                <p>For males ages 2-20 years (metric units)</p>
+            </div>
+            <div class="card-body">
+                <form id="bmiForm">
+                    <!-- Age Input -->
+                    <div class="mb-4">
+                        <label for="age" class="form-label">
+                            <i class="fas fa-birthday-cake"></i> Age
+                        </label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="age" placeholder="Enter age" step="0.1" min="2" max="20" required>
+                            <span class="input-group-text">years</span>
+                        </div>
+                        <small class="text-muted">Enter age in years (2-20)</small>
+                    </div>
+
+                    <!-- Weight Input -->
+                    <div class="mb-4">
+                        <label for="weight" class="form-label">
+                            <i class="fas fa-weight-scale"></i> Weight
+                        </label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="weight" placeholder="Enter weight" step="0.1" min="0" required>
+                            <span class="input-group-text">kg</span>
+                        </div>
+                        <small class="text-muted">Enter your weight in kilograms</small>
+                    </div>
+
+                    <!-- Height Input -->
+                    <div class="mb-4">
+                        <label for="height" class="form-label">
+                            <i class="fas fa-ruler"></i> Height
+                        </label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="height" placeholder="Enter height" step="0.1" min="0" required>
+                            <span class="input-group-text">cm</span>
+                        </div>
+                        <small class="text-muted">Enter your height in centimeters</small>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-calculate w-100" onclick="calculateBMI()">
+                                <i class="fas fa-calculator"></i> Calculate BMI Percentile
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="reset" class="btn btn-reset w-100">
+                                <i class="fas fa-redo"></i> Clear Form
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="result-box" id="resultBox">
+            <h3><i class="fas fa-chart-pie"></i> Your BMI Results</h3>
+            <div class="result-score" id="scoreValue">0</div>
+
+            <!-- Interpretation -->
+            <div class="interpretation-box" id="interpretationBox"></div>
+
+            <!-- Clinical Notes -->
+            <div class="info-box">
+                <i class="fas fa-stethoscope"></i>
+                <strong>Health Information:</strong> BMI percentile accounts for age and gender differences in body composition. Discuss results with your pediatrician for personalized growth assessment.
+            </div>
+        </div>
+
+        <!-- BMI Percentile Categories -->
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-book"></i> BMI Percentile Categories (Ages 2-20)</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead style="background-color: #f3e8ff;">
+                        <tr>
+                            <th>BMI Percentile</th>
+                            <th>Category</th>
+                            <th>Health Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Less than 5th percentile</strong></td>
+                            <td><span class="badge bg-info">Underweight</span></td>
+                            <td>Below healthy weight range</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5th to less than 85th percentile</strong></td>
+                            <td><span class="badge bg-success">Healthy Weight</span></td>
+                            <td>Healthy weight range for age and sex</td>
+                        </tr>
+                        <tr>
+                            <td><strong>85th percentile to less than 95th</strong></td>
+                            <td><span class="badge bg-warning text-dark">Overweight</span></td>
+                            <td>At risk of overweight</td>
+                        </tr>
+                        <tr>
+                            <td><strong>95th percentile and above</strong></td>
+                            <td><span class="badge bg-danger">Obese</span></td>
+                            <td>Obese; health risks present</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Note about Percentiles -->
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-lightbulb"></i> About BMI Percentiles</h4>
+            </div>
+            <div class="card-body">
+                <p><strong>Why Percentiles for Children?</strong></p>
+                <p>BMI percentiles are used for children and teens because body composition changes as children grow. A percentile shows how a child's BMI compares to other children of the same age and sex.</p>
+                <ul>
+                    <li><strong>Age and Gender Specific:</strong> Takes into account normal growth patterns</li>
+                    <li><strong>CDC Growth Charts:</strong> Based on nationally representative data</li>
+                    <li><strong>Developmental Consideration:</strong> Accounts for changes during puberty</li>
+                </ul>
+                <p class="mt-3">For the most accurate assessment, consult with a pediatrician.</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="card mt-3">
+            <div class="card-body text-center text-muted small">
+                <p>Based on CDC growth charts. For patient education purposes only. Not a substitute for professional medical evaluation.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /**
+         * Simplified BMI Percentile Calculation for Males 2-20
+         * Note: This uses approximate percentile ranges based on CDC data
+         * For clinical use, refer to actual CDC growth charts
+         */
+        function calculateBMI() {
+            // Get input values
+            const age = parseFloat(document.getElementById('age').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+
+            // Validate inputs
+            if (!age || !weight || !height || age < 2 || age > 20 || weight <= 0 || height <= 0) {
+                alert('Please enter valid age (2-20), weight, and height values');
+                return;
+            }
+
+            // Convert height from cm to meters
+            const heightM = height / 100;
+
+            // Calculate BMI
+            const bmi = weight / (heightM * heightM);
+
+            // Display BMI
+            document.getElementById('scoreValue').textContent = bmi.toFixed(1);
+
+            // Simplified percentile estimation (approximate ranges based on CDC data)
+            // This is not a substitute for actual CDC growth charts
+            let percentile = calculateApproximatePercentile(age, bmi);
+            let category = '';
+            let badgeClass = '';
+            let interpretation = '';
+
+            if (percentile < 5) {
+                category = 'Underweight';
+                badgeClass = 'bg-info';
+                interpretation = '<strong style="color: #0891b2;">Underweight (< 5th percentile)</strong><br>Weight is below the healthy range for age and sex. Consult a pediatrician about nutrition and growth.';
+            } else if (percentile < 85) {
+                category = 'Healthy Weight';
+                badgeClass = 'bg-success';
+                interpretation = '<strong style="color: #10b981;">Healthy Weight (5th - 84th percentile)</strong><br>Weight is within healthy range for age and sex. Continue healthy habits with balanced nutrition and physical activity.';
+            } else if (percentile < 95) {
+                category = 'Overweight';
+                badgeClass = 'bg-warning';
+                interpretation = '<strong style="color: #f59e0b;">Overweight (85th - 94th percentile)</strong><br>Child is at risk of becoming overweight. Pediatrician consultation recommended for weight management guidance.';
+            } else {
+                category = 'Obese';
+                badgeClass = 'bg-danger';
+                interpretation = '<strong style="color: #ef4444;">Obese (95th percentile and above)</strong><br>Child has obesity. Consultation with pediatrician is recommended for evaluation and management plan.';
+            }
+
+            // Display interpretation
+            document.getElementById('interpretationBox').innerHTML =
+                `<div class="interpretation-title"><span class="badge ${badgeClass}">${category}</span> - Approximately ${percentile.toFixed(0)}th percentile</div><div class="interpretation-text">${interpretation}</div>`;
+
+            // Show result box
+            document.getElementById('resultBox').classList.add('show');
+        }
+
+        /**
+         * Approximate percentile calculation based on age (Males)
+         * Note: This is simplified. For clinical use, consult CDC growth charts
+         */
+        function calculateApproximatePercentile(age, bmi) {
+            // Age-adjusted BMI percentile approximation for males
+            // This uses simplified curves based on typical CDC data patterns
+
+            // Define approximate 50th, 85th, 95th percentile BMI values by age (males)
+            const percentileData = {
+                2: { p50: 16.8, p85: 18.3, p95: 19.8 },
+                3: { p50: 16.5, p85: 18.1, p95: 19.5 },
+                4: { p50: 16.3, p85: 17.9, p95: 19.3 },
+                5: { p50: 16.1, p85: 17.9, p95: 19.3 },
+                6: { p50: 16.0, p85: 18.0, p95: 19.5 },
+                7: { p50: 16.1, p85: 18.3, p95: 19.9 },
+                8: { p50: 16.3, p85: 18.7, p95: 20.5 },
+                9: { p50: 16.6, p85: 19.3, p95: 21.2 },
+                10: { p50: 17.0, p85: 19.9, p95: 22.0 },
+                12: { p50: 17.9, p85: 21.1, p95: 23.3 },
+                14: { p50: 19.0, p85: 22.4, p95: 24.7 },
+                16: { p50: 20.2, p85: 23.5, p95: 25.9 },
+                18: { p50: 21.3, p85: 24.3, p95: 26.8 },
+                20: { p50: 21.8, p85: 24.8, p95: 27.3 }
+            };
+
+            // Interpolate based on age
+            const ageFloor = Math.floor(age);
+            const ageCeil = Math.ceil(age);
+            const ageFraction = age - ageFloor;
+
+            let p50, p85, p95;
+
+            if (ageFloor === ageCeil) {
+                p50 = percentileData[ageFloor]?.p50 || 16.8;
+                p85 = percentileData[ageFloor]?.p85 || 18.3;
+                p95 = percentileData[ageFloor]?.p95 || 19.8;
+            } else {
+                const data1 = percentileData[ageFloor] || percentileData[2];
+                const data2 = percentileData[ageCeil] || percentileData[20];
+                p50 = data1.p50 + (data2.p50 - data1.p50) * ageFraction;
+                p85 = data1.p85 + (data2.p85 - data1.p85) * ageFraction;
+                p95 = data1.p95 + (data2.p95 - data1.p95) * ageFraction;
+            }
+
+            // Estimate percentile based on BMI compared to reference points
+            if (bmi < p50) {
+                return (bmi / p50) * 50;
+            } else if (bmi < p85) {
+                return 50 + ((bmi - p50) / (p85 - p50)) * 35;
+            } else if (bmi < p95) {
+                return 85 + ((bmi - p85) / (p95 - p85)) * 10;
+            } else {
+                return Math.min(99, 95 + ((bmi - p95) / p95) * 4);
+            }
+        }
+
+        /**
+         * Initialize form
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('bmiForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                calculateBMI();
+            });
+        });
+    </script>
+</body>
+</html>

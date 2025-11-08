@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fractional Excretion of Phosphate (FEPi) - Nephrology Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .container-main {
+            max-width: 1000px;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            padding: 2rem;
+            border: none;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .card-subtitle {
+            color: rgba(255,255,255,0.9);
+            margin-top: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-control {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 0.75rem;
+        }
+
+        .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-calculate {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-calculate:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 1rem 0;
+        }
+
+        .result-label {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .interpretation {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .interpretation-text {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #2196F3;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+            color: #1565c0;
+        }
+
+        .formula-box {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .card-title {
+                font-size: 1.4rem;
+            }
+
+            .result-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/calculators/calculators/index.html">
+                <i class="fas fa-calculator"></i> Nephrology Calculators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/calculators/calculators/index.html">
+                            <i class="fas fa-home"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <i class="fas fa-flask"></i> Calculators
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-main">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">
+                    <i class="fas fa-flask-vial"></i> Fractional Excretion of Phosphate (FEPi)
+                </h1>
+                <p class="card-subtitle">Renal Phosphate Handling Assessment</p>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Input Section -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <label class="input-label">
+                                <i class="fas fa-flask-vial"></i> Urine Phosphate
+                            </label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="urinePi" placeholder="Enter value" step="0.1">
+                                <select class="form-select" id="urinePiUnit">
+                                    <option value="mg/dL">mg/dL</option>
+                                    <option value="mmol/L">mmol/L</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <label class="input-label">
+                                <i class="fas fa-flask-vial"></i> Serum Phosphate
+                            </label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="serumPi" placeholder="Enter value" step="0.1">
+                                <select class="form-select" id="serumPiUnit">
+                                    <option value="mg/dL">mg/dL</option>
+                                    <option value="mmol/L">mmol/L</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <label class="input-label">
+                                <i class="fas fa-flask-vial"></i> Urine Creatinine
+                            </label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="urineCr" placeholder="Enter value" step="0.1">
+                                <select class="form-select" id="urineCrUnit">
+                                    <option value="mg/dL">mg/dL</option>
+                                    <option value="mmol/L">mmol/L</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <label class="input-label">
+                                <i class="fas fa-flask-vial"></i> Serum Creatinine
+                            </label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="serumCr" placeholder="Enter value" step="0.01">
+                                <select class="form-select" id="serumCrUnit">
+                                    <option value="mg/dL">mg/dL</option>
+                                    <option value="mmol/L">mmol/L</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Use:</strong> FEPi helps evaluate renal tubular handling of phosphate and is useful in differentiating causes of hypophosphatemia.
+                </div>
+
+                <div class="formula-box">
+                    <strong>Formula:</strong><br>
+                    FEPi (%) = [(Urine Pi × Serum Cr) / (Serum Pi × Urine Cr)] × 100
+                </div>
+
+                <button class="btn btn-calculate btn-lg w-100" onclick="calculateFEPi()">
+                    <i class="fas fa-calculator"></i> Calculate FEPi
+                </button>
+
+                <!-- Results Section -->
+                <div id="resultsSection" class="hidden">
+                    <div class="result-card">
+                        <div class="result-label">Fractional Excretion of Phosphate</div>
+                        <div class="result-value" id="fepiResult">-</div>
+                        <div class="result-label">%</div>
+                    </div>
+
+                    <div class="interpretation">
+                        <div class="interpretation-title">
+                            <i class="fas fa-stethoscope"></i> Clinical Interpretation
+                        </div>
+                        <div class="interpretation-text" id="interpretationText">
+                            Select all parameters and click Calculate
+                        </div>
+                    </div>
+
+                    <div class="interpretation">
+                        <div class="interpretation-title">
+                            <i class="fas fa-clipboard-list"></i> FEPi Categories
+                        </div>
+                        <div class="interpretation-text">
+                            <strong>&lt;5%:</strong> Appropriate phosphate conservation<br>
+                            <strong>5-10%:</strong> Reduced phosphate reabsorption<br>
+                            <strong>&gt;10%:</strong> Significant phosphate wasting
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-4 text-muted">
+        <small>&copy; 2024 Nephrology Calculators. For educational and clinical reference only.</small>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /**
+         * Calculate Fractional Excretion of Phosphate
+         * FEPi (%) = [(Urine Pi × Serum Cr) / (Serum Pi × Urine Cr)] × 100
+         */
+        function calculateFEPi() {
+            const urinePi = parseFloat(document.getElementById('urinePi').value);
+            const urinePiUnit = document.getElementById('urinePiUnit').value;
+            const serumPi = parseFloat(document.getElementById('serumPi').value);
+            const serumPiUnit = document.getElementById('serumPiUnit').value;
+            const urineCr = parseFloat(document.getElementById('urineCr').value);
+            const urineCrUnit = document.getElementById('urineCrUnit').value;
+            const serumCr = parseFloat(document.getElementById('serumCr').value);
+            const serumCrUnit = document.getElementById('serumCrUnit').value;
+
+            // Validate inputs
+            if (!urinePi || !serumPi || !urineCr || !serumCr) {
+                alert('Please enter all required values');
+                return;
+            }
+
+            // Convert units if necessary
+            let urinePiConv = urinePi;
+            if (urinePiUnit === 'mmol/L') {
+                urinePiConv = urinePi * 3.097; // Convert to mg/dL
+            }
+
+            let serumPiConv = serumPi;
+            if (serumPiUnit === 'mmol/L') {
+                serumPiConv = serumPi * 3.097; // Convert to mg/dL
+            }
+
+            let urineCrConv = urineCr;
+            if (urineCrUnit === 'mmol/L') {
+                urineCrConv = urineCr * 0.0113; // Convert to mg/dL
+            }
+
+            let serumCrConv = serumCr;
+            if (serumCrUnit === 'mmol/L') {
+                serumCrConv = serumCr * 0.0113; // Convert to mg/dL
+            }
+
+            // Calculate FEPi
+            const fepi = ((urinePiConv * serumCrConv) / (serumPiConv * urineCrConv)) * 100;
+
+            // Display results
+            document.getElementById('fepiResult').textContent = fepi.toFixed(2);
+
+            let interpretation = '';
+            if (fepi < 5) {
+                interpretation = '<strong>FEPi &lt;5%:</strong> Appropriate phosphate conservation. Kidneys are appropriately retaining phosphate.';
+            } else if (fepi < 10) {
+                interpretation = '<strong>FEPi 5-10%:</strong> Reduced phosphate reabsorption. Suggests mild-to-moderate phosphate wasting or secondary hyperparathyroidism.';
+            } else {
+                interpretation = '<strong>FEPi &gt;10%:</strong> Significant phosphate wasting. Indicates renal tubular disease or conditions affecting phosphate reabsorption (Fanconi syndrome, vitamin D deficiency, etc.).';
+            }
+
+            document.getElementById('interpretationText').innerHTML = interpretation;
+            document.getElementById('resultsSection').classList.remove('hidden');
+        }
+
+        // Allow Enter key to calculate
+        document.querySelectorAll('.form-control, .form-select').forEach(input => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') calculateFEPi();
+            });
+        });
+    </script>
+</body>
+</html>

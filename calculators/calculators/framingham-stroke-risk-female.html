@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for responsiveness and character encoding -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Framingham Stroke Risk Profile for Females">
+    <title>Framingham Stroke Risk - Females (55-84 years)</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* Root color variables with purple gradient theme */
+        :root {
+            --primary-purple: #6f42c1;
+            --secondary-purple: #8b5fcf;
+            --light-purple: #f8f7ff;
+            --dark-purple: #4a1a7a;
+        }
+
+        /* Body styling with gradient background */
+        body {
+            background: linear-gradient(135deg, var(--light-purple) 0%, #ffffff 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        /* Header navigation styling */
+        .navbar {
+            background: linear-gradient(90deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: white !important;
+        }
+
+        /* Main container padding */
+        .container-main {
+            padding: 2rem 0;
+        }
+
+        /* Card styling with shadow and border */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(111, 66, 193, 0.15);
+            margin-bottom: 2rem;
+        }
+
+        /* Card header with gradient background */
+        .card-header {
+            background: linear-gradient(90deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            color: white;
+            border-radius: 12px 12px 0 0 !important;
+            border: none;
+            padding: 1.5rem;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .card-header .icon {
+            font-size: 1.8rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Card body styling */
+        .card-body {
+            padding: 2rem;
+        }
+
+        /* Input group styling */
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-purple);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.25);
+        }
+
+        /* Help text styling */
+        .help-text {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 0.25rem;
+            display: block;
+        }
+
+        /* Button styling */
+        .btn-calculate {
+            background: linear-gradient(90deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(111, 66, 193, 0.4);
+            color: white;
+        }
+
+        .btn-reset {
+            background-color: #6c757d;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-reset:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        /* Result section styling */
+        .result-section {
+            display: none;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-purple);
+        }
+
+        .result-section.show {
+            display: block;
+            animation: slideIn 0.3s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-purple);
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* Risk level badges */
+        .risk-low {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 5px solid #28a745;
+        }
+
+        .risk-moderate {
+            background-color: #cfe2ff;
+            color: #084298;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 5px solid #0d6efd;
+        }
+
+        .risk-high {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 5px solid #ffc107;
+        }
+
+        .risk-very-high {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 5px solid #dc3545;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .card-body {
+                padding: 1rem;
+            }
+
+            .result-score {
+                font-size: 2rem;
+            }
+
+            .btn-calculate, .btn-reset {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/calculators/">
+                <i class="fas fa-calculator"></i> Medical Calculators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/calculators/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/calculators/catalog.html">Catalog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container container-main">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- Calculator Card -->
+                <div class="card">
+                    <!-- Card Header with Title -->
+                    <div class="card-header">
+                        <h3>
+                            <i class="fas fa-venus icon"></i>Framingham Stroke Risk - Female
+                        </h3>
+                        <small class="text-white-50">5-year stroke risk assessment for women (55-84 years)</small>
+                    </div>
+
+                    <!-- Card Body with Form -->
+                    <div class="card-body">
+                        <form id="framinghamFemaleForm">
+                            <!-- Instruction -->
+                            <div class="alert alert-info mb-4">
+                                <i class="fas fa-info-circle"></i>
+                                <strong>Inclusion Criteria:</strong> Women aged 55-84 years without prior stroke or TIA
+                            </div>
+
+                            <!-- Age Input -->
+                            <div class="input-group">
+                                <label class="form-label" for="age">
+                                    <i class="fas fa-user"></i> Age
+                                </label>
+                                <input type="number" class="form-control" id="age" placeholder="Enter age (55-84)" min="55" max="84">
+                                <span class="help-text">Age in years (must be 55-84)</span>
+                            </div>
+
+                            <!-- Systolic Blood Pressure -->
+                            <div class="input-group">
+                                <label class="form-label" for="sbp">
+                                    <i class="fas fa-heart"></i> Systolic Blood Pressure (SBP)
+                                </label>
+                                <input type="number" class="form-control" id="sbp" placeholder="Enter SBP in mmHg" min="0" max="250">
+                                <span class="help-text">Measured in mmHg</span>
+                            </div>
+
+                            <!-- Hypertension Treatment -->
+                            <div class="input-group">
+                                <label class="form-label">
+                                    <i class="fas fa-pills"></i> Currently on Hypertension Treatment
+                                </label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="antihtnNo" name="antihtn" value="0" checked>
+                                    <label class="form-check-label" for="antihtnNo">
+                                        No
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="antihtnYes" name="antihtn" value="1">
+                                    <label class="form-check-label" for="antihtnYes">
+                                        Yes
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Diabetes -->
+                            <div class="input-group">
+                                <label class="form-label">
+                                    <i class="fas fa-file-medical"></i> Diabetes
+                                </label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="diabetesNo" name="diabetes" value="0" checked>
+                                    <label class="form-check-label" for="diabetesNo">
+                                        No
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="diabetesYes" name="diabetes" value="1">
+                                    <label class="form-check-label" for="diabetesYes">
+                                        Yes
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Smoking Status -->
+                            <div class="input-group">
+                                <label class="form-label">
+                                    <i class="fas fa-smoking"></i> Current Smoking
+                                </label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="smokingNo" name="smoking" value="0" checked>
+                                    <label class="form-check-label" for="smokingNo">
+                                        No
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="smokingYes" name="smoking" value="1">
+                                    <label class="form-check-label" for="smokingYes">
+                                        Yes
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Atrial Fibrillation -->
+                            <div class="input-group">
+                                <label class="form-label">
+                                    <i class="fas fa-heart"></i> Atrial Fibrillation
+                                </label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="afibNo" name="afib" value="0" checked>
+                                    <label class="form-check-label" for="afibNo">
+                                        No
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="afibYes" name="afib" value="1">
+                                    <label class="form-check-label" for="afibYes">
+                                        Yes
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Left Ventricular Hypertrophy (LVH) -->
+                            <div class="input-group">
+                                <label class="form-label">
+                                    <i class="fas fa-heartbeat"></i> Left Ventricular Hypertrophy (LVH)
+                                </label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="lvhNo" name="lvh" value="0" checked>
+                                    <label class="form-check-label" for="lvhNo">
+                                        No
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="lvhYes" name="lvh" value="1">
+                                    <label class="form-check-label" for="lvhYes">
+                                        Yes (on ECG)
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Button Group -->
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-calculate w-100" onclick="calculateFraminghamFemale()">
+                                        <i class="fas fa-calculator"></i> Calculate Risk
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-reset w-100" onclick="resetForm()">
+                                        <i class="fas fa-redo"></i> Reset
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Results Section -->
+                        <div id="resultSection" class="result-section">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="text-center">
+                                        <strong>Risk Score Points</strong>
+                                    </p>
+                                    <div class="result-score" id="scoreResult">-</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="text-center">
+                                        <strong>5-Year Stroke Risk</strong>
+                                    </p>
+                                    <div class="result-score" id="riskPercentResult">-</div>
+                                </div>
+                            </div>
+
+                            <div id="interpretationResult" class="mt-3"></div>
+
+                            <hr>
+
+                            <!-- Clinical Interpretation -->
+                            <div class="alert alert-info">
+                                <h5><i class="fas fa-info-circle"></i> Risk Stratification</h5>
+                                <ul class="mb-0">
+                                    <li><strong>Low Risk:</strong> &lt;4% 5-year stroke risk</li>
+                                    <li><strong>Moderate Risk:</strong> 4-7% 5-year stroke risk</li>
+                                    <li><strong>High Risk:</strong> &gt;7% 5-year stroke risk</li>
+                                </ul>
+                            </div>
+
+                            <!-- References -->
+                            <div class="alert alert-secondary mt-3">
+                                <h5><i class="fas fa-book"></i> Reference</h5>
+                                <p class="mb-0">Wolf PA, et al. Framingham stroke risk profile and prediction of stroke in women. J Stroke Cerebrovasc Dis. 2002;11(1):14-21.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Calculator Logic -->
+    <script>
+        /**
+         * Framingham Risk Scoring for Females
+         * Based on Wolf et al., 2002
+         */
+
+        /**
+         * Calculate Framingham Stroke Risk for Females
+         */
+        function calculateFraminghamFemale() {
+            // Get input values
+            const age = parseFloat(document.getElementById('age').value);
+            const sbp = parseFloat(document.getElementById('sbp').value);
+            const antihtn = parseInt(document.querySelector('input[name="antihtn"]:checked').value);
+            const diabetes = parseInt(document.querySelector('input[name="diabetes"]:checked').value);
+            const smoking = parseInt(document.querySelector('input[name="smoking"]:checked').value);
+            const afib = parseInt(document.querySelector('input[name="afib"]:checked').value);
+            const lvh = parseInt(document.querySelector('input[name="lvh"]:checked').value);
+
+            // Validate required inputs
+            if (isNaN(age) || age < 55 || age > 84 || isNaN(sbp) || sbp <= 0) {
+                alert('Please enter valid age (55-84) and blood pressure values');
+                return;
+            }
+
+            // Calculate points based on Framingham scoring
+            let points = 0;
+
+            // Age points (base points start at 54 for females)
+            const agePoints = Math.round((age - 54) * 0.5);
+            points += agePoints;
+
+            // SBP points (for untreated SBP)
+            let sbpPoints = 0;
+            if (sbp >= 130 && sbp < 140) sbpPoints = 1;
+            else if (sbp >= 140 && sbp < 160) sbpPoints = 2;
+            else if (sbp >= 160) sbpPoints = 3;
+            points += sbpPoints;
+
+            // Hypertension treatment adjustment
+            if (antihtn) points += 1;
+
+            // Diabetes points
+            if (diabetes) points += 2;
+
+            // Smoking points
+            if (smoking) points += 1;
+
+            // Atrial Fibrillation points
+            if (afib) points += 3;
+
+            // LVH points
+            if (lvh) points += 1;
+
+            // Calculate 5-year stroke risk percentage based on points
+            let riskPercent = calculateRiskFromPoints(points);
+
+            // Display results
+            showResults(points, riskPercent);
+        }
+
+        /**
+         * Convert points to 5-year stroke risk percentage for females
+         * Based on Framingham data
+         */
+        function calculateRiskFromPoints(points) {
+            // Framingham risk mapping for females
+            const riskMap = {
+                '-3': 0.5, '-2': 0.6, '-1': 0.7, '0': 0.8, '1': 1.0, '2': 1.1, '3': 1.3,
+                '4': 1.6, '5': 1.9, '6': 2.3, '7': 2.8, '8': 3.4, '9': 4.1, '10': 5.0,
+                '11': 6.0, '12': 7.3, '13': 8.8, '14': 10.5, '15': 12.5
+            };
+
+            // Cap points at reasonable ranges
+            if (points < -3) points = -3;
+            if (points > 15) points = 15;
+
+            return riskMap[points] || 12.5;
+        }
+
+        /**
+         * Display results with risk interpretation
+         */
+        function showResults(points, riskPercent) {
+            const resultSection = document.getElementById('resultSection');
+            const scoreResult = document.getElementById('scoreResult');
+            const riskPercentResult = document.getElementById('riskPercentResult');
+            const interpretationResult = document.getElementById('interpretationResult');
+
+            // Set results
+            scoreResult.textContent = points;
+            riskPercentResult.textContent = riskPercent.toFixed(1) + '%';
+
+            // Determine risk level
+            let interpretation = '';
+
+            if (riskPercent < 4) {
+                interpretation = '<div class="risk-low"><strong>Low Risk</strong><br>Less than 4% risk of stroke in 5 years. Continue current preventive measures.</div>';
+            } else if (riskPercent <= 7) {
+                interpretation = '<div class="risk-moderate"><strong>Moderate Risk</strong><br>4-7% risk of stroke in 5 years. Optimize cardiovascular risk factors.</div>';
+            } else {
+                interpretation = '<div class="risk-high"><strong>High Risk</strong><br>Greater than 7% risk of stroke in 5 years. Aggressive risk factor management recommended.</div>';
+            }
+
+            interpretationResult.innerHTML = interpretation;
+            resultSection.classList.add('show');
+        }
+
+        /**
+         * Reset form to initial state
+         */
+        function resetForm() {
+            document.getElementById('framinghamFemaleForm').reset();
+            document.getElementById('resultSection').classList.remove('show');
+            document.getElementById('antihtnNo').checked = true;
+            document.getElementById('diabetesNo').checked = true;
+            document.getElementById('smokingNo').checked = true;
+            document.getElementById('afibNo').checked = true;
+            document.getElementById('lvhNo').checked = true;
+        }
+
+        // Initialize - Set focus on first input when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('age').focus();
+        });
+    </script>
+</body>
+</html>

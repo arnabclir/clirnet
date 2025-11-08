@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pediatric Ulcerative Colitis Activity Index (PUCAI) Calculator</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
+        body {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .card-header {
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .score-badge {
+            display: inline-block;
+            font-size: 36px;
+            font-weight: bold;
+            padding: 15px 25px;
+            border-radius: 10px;
+            color: white;
+            margin: 10px 0;
+        }
+
+        .activity-remission {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .activity-mild {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .activity-moderate {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        }
+
+        .activity-severe {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .form-check {
+            padding: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark mb-4" style="background: transparent;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html" style="color: white;">
+                    <i class="fas fa-calculator"></i> Pediatric Calculators
+                </a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">
+                    <i class="fas fa-hospital"></i> PUCAI Score Calculator
+                </h1>
+                <small>Pediatric Ulcerative Colitis Activity Index</small>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Instructions -->
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> Score each component of disease activity.
+                    PUCAI is used to assess disease severity in pediatric ulcerative colitis.
+                </div>
+
+                <!-- Input Form -->
+                <form id="pucaiForm">
+                    <!-- Abdominal Pain -->
+                    <div class="mb-4">
+                        <h6>1. Abdominal Pain</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="pain" value="0" id="pain0">
+                            <label class="form-check-label" for="pain0">None (0)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="pain" value="5" id="pain5">
+                            <label class="form-check-label" for="pain5">Mild (5)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="pain" value="10" id="pain10">
+                            <label class="form-check-label" for="pain10">Moderate to severe (10)</label>
+                        </div>
+                    </div>
+
+                    <!-- Rectal Bleeding -->
+                    <div class="mb-4">
+                        <h6>2. Rectal Bleeding</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="bleeding" value="0" id="bleeding0">
+                            <label class="form-check-label" for="bleeding0">None (0)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="bleeding" value="10" id="bleeding10">
+                            <label class="form-check-label" for="bleeding10">Visible bleeding (10)</label>
+                        </div>
+                    </div>
+
+                    <!-- Bowel Frequency -->
+                    <div class="mb-4">
+                        <h6>3. Bowel Frequency (mean daily)</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="bowels" value="0" id="bowels0">
+                            <label class="form-check-label" for="bowels0">≤ 4 stools/day (0)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="bowels" value="5" id="bowels5">
+                            <label class="form-check-label" for="bowels5">5-7 stools/day (5)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="bowels" value="10" id="bowels10">
+                            <label class="form-check-label" for="bowels10">≥ 8 stools/day (10)</label>
+                        </div>
+                    </div>
+
+                    <!-- Nocturnal Bowel Movements -->
+                    <div class="mb-4">
+                        <h6>4. Nocturnal Bowel Movements</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="nocturnal" value="0" id="nocturnal0">
+                            <label class="form-check-label" for="nocturnal0">None (0)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="nocturnal" value="5" id="nocturnal5">
+                            <label class="form-check-label" for="nocturnal5">Yes (5)</label>
+                        </div>
+                    </div>
+
+                    <!-- Activity Limitation -->
+                    <div class="mb-4">
+                        <h6>5. Activity Level</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="activity" value="0" id="activity0">
+                            <label class="form-check-label" for="activity0">No limitation (0)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="activity" value="5" id="activity5">
+                            <label class="form-check-label" for="activity5">Some limitation (5)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="activity" value="10" id="activity10">
+                            <label class="form-check-label" for="activity10">Severe limitation (10)</label>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="calculatePUCAI()">
+                            <i class="fas fa-calculator"></i> Calculate Score
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results -->
+                <div id="resultBox" class="result-box">
+                    <h4 class="text-center mb-4"><i class="fas fa-check-circle"></i> PUCAI Score Result</h4>
+
+                    <div class="text-center">
+                        <div class="score-badge" id="scoreBadge">--</div>
+                        <p id="scoreCategory" class="text-center font-weight-bold mt-2"></p>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Clinical Guidance -->
+                    <div id="clinicalGuidance"></div>
+
+                    <!-- Severity Table -->
+                    <div class="alert alert-light mt-4">
+                        <strong><i class="fas fa-chart-bar"></i> PUCAI Score Severity Categories:</strong>
+                        <table class="table table-sm mt-2">
+                            <tbody>
+                                <tr>
+                                    <td><strong>Remission</strong></td>
+                                    <td>0-10</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Mild Activity</strong></td>
+                                    <td>11-30</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Moderate Activity</strong></td>
+                                    <td>31-60</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Severe Activity</strong></td>
+                                    <td>&gt; 60</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate PUCAI score
+        function calculatePUCAI() {
+            const pain = parseInt(document.querySelector('input[name="pain"]:checked')?.value || '-1');
+            const bleeding = parseInt(document.querySelector('input[name="bleeding"]:checked')?.value || '-1');
+            const bowels = parseInt(document.querySelector('input[name="bowels"]:checked')?.value || '-1');
+            const nocturnal = parseInt(document.querySelector('input[name="nocturnal"]:checked')?.value || '-1');
+            const activity = parseInt(document.querySelector('input[name="activity"]:checked')?.value || '-1');
+
+            if (pain < 0 || bleeding < 0 || bowels < 0 || nocturnal < 0 || activity < 0) {
+                alert('Please complete all scoring components');
+                return;
+            }
+
+            const totalScore = pain + bleeding + bowels + nocturnal + activity;
+
+            // Display results
+            displayPUCAIScore(totalScore);
+            document.getElementById('resultBox').classList.add('show');
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Display PUCAI score results
+        function displayPUCAIScore(score) {
+            let badgeClass, severity, guidance;
+
+            if (score <= 10) {
+                badgeClass = 'activity-remission';
+                severity = 'REMISSION';
+                guidance = `<div class="alert alert-success"><strong><i class="fas fa-check-circle"></i> Remission (0-10):</strong><br>
+                    <p>Disease activity is minimal or absent.</p>
+                    <p><strong>Management:</strong></p>
+                    <ul class="mt-2 mb-0">
+                        <li>Continue current maintenance therapy</li>
+                        <li>Regular follow-up (every 3-6 months)</li>
+                        <li>Monitor for relapse symptoms</li>
+                        <li>Maintain nutritional adequacy</li>
+                        <li>Age-appropriate screening (bone density, cancer surveillance)</li>
+                    </ul>
+                </div>`;
+            } else if (score <= 30) {
+                badgeClass = 'activity-mild';
+                severity = 'MILD ACTIVITY';
+                guidance = `<div class="alert alert-info"><strong><i class="fas fa-info-circle"></i> Mild Activity (11-30):</strong><br>
+                    <p>Disease activity is mild.</p>
+                    <p><strong>Management:</strong></p>
+                    <ul class="mt-2 mb-0">
+                        <li>Consider optimization of current therapy</li>
+                        <li>May add/increase aminosalicylates or topical steroids</li>
+                        <li>Increase monitoring frequency (every 2-4 weeks)</li>
+                        <li>Patient education on relapse triggers</li>
+                        <li>Ensure adequate nutrition and hydration</li>
+                    </ul>
+                </div>`;
+            } else if (score <= 60) {
+                badgeClass = 'activity-moderate';
+                severity = 'MODERATE ACTIVITY';
+                guidance = `<div class="alert alert-warning"><strong><i class="fas fa-exclamation-triangle"></i> Moderate Activity (31-60):</strong><br>
+                    <p>Disease activity is moderate.</p>
+                    <p><strong>Management:</strong></p>
+                    <ul class="mt-2 mb-0">
+                        <li>Consider systemic corticosteroids (prednisone 0.5-1 mg/kg)</li>
+                        <li>Optimize immunosuppressive therapy</li>
+                        <li>Close monitoring (weekly or bi-weekly)</li>
+                        <li>Screen for complications</li>
+                        <li>Consider hospitalization if not tolerating PO</li>
+                    </ul>
+                </div>`;
+            } else {
+                badgeClass = 'activity-severe';
+                severity = 'SEVERE ACTIVITY';
+                guidance = `<div class="alert alert-danger"><strong><i class="fas fa-times-circle"></i> Severe Activity (> 60):</strong><br>
+                    <p>Disease activity is severe.</p>
+                    <p><strong>URGENT Management:</strong></p>
+                    <ul class="mt-2 mb-0">
+                        <li><strong>Consider hospitalization</strong></li>
+                        <li>IV corticosteroids (methylprednisolone 1 g/day)</li>
+                        <li>May require biologic therapy (infliximab, vedolizumab)</li>
+                        <li>NPO or clear liquid diet; may need TPN</li>
+                        <li>Blood transfusion if severe anemia</li>
+                        <li>Monitor for toxic megacolon and perforation</li>
+                        <li>Frequent reassessment (daily)</li>
+                    </ul>
+                </div>`;
+            }
+
+            document.getElementById('scoreBadge').className = 'score-badge ' + badgeClass;
+            document.getElementById('scoreBadge').textContent = score;
+            document.getElementById('scoreCategory').innerHTML = `<strong>${severity}</strong><br><small>PUCAI Score: ${score}/85</small>`;
+            document.getElementById('clinicalGuidance').innerHTML = guidance;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PaO2/FiO2 Ratio Calculator - Oxygenation Assessment</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-dark: #2d3748;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .nav-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1rem 0;
+        }
+        .calculator-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 2rem 1.5rem;
+        }
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+        }
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 5px solid #667eea;
+        }
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 1rem 0;
+        }
+        .interpretation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+        .formula-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+        .score-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .risk-low { color: #28a745; font-weight: 600; }
+        .risk-moderate { color: #ffc107; font-weight: 600; }
+        .risk-high { color: #dc3545; font-weight: 600; }
+        .info-badge {
+            display: inline-block;
+            background: #e7f3ff;
+            color: #0066cc;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="mb-0"><i class="fas fa-heartbeat"></i> Critical Care Calculators</h1>
+                    <small>Pulmonary & Critical Care Medicine</small>
+                </div>
+                <a href="index.html" class="btn btn-light btn-sm"><i class="fas fa-home"></i> Home</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="calculator-container">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-lungs"></i> PaO2/FiO2 Ratio</h2>
+                <p>Oxygenation Assessment - ARDS Severity Classification</p>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="info-badge">
+                    <i class="fas fa-exclamation-circle"></i> Primary criterion for ARDS diagnosis and severity grading
+                </div>
+
+                <div class="score-item">
+                    <label><strong>PaO₂ (mmHg)</strong></label>
+                    <input type="number" id="pao2" class="form-control" placeholder="Enter PaO2 from ABG" step="0.1" min="20" max="500">
+                    <small>Normal: 75-100 mmHg on room air at sea level</small>
+                </div>
+
+                <div class="score-item">
+                    <label><strong>FiO₂ (%)</strong></label>
+                    <input type="number" id="fio2" class="form-control" placeholder="Enter FiO2 %" min="21" max="100" step="1">
+                    <small>21% = room air, 40-100% = supplemental oxygen/mechanical ventilation</small>
+                </div>
+
+                <button onclick="calculatePFRatio()" class="btn btn-primary btn-lg w-100 mt-4">
+                    <i class="fas fa-calculator"></i> Calculate P/F Ratio
+                </button>
+
+                <div id="result" style="display:none;" class="result-box">
+                    <h4><i class="fas fa-chart-pie"></i> PaO2/FiO2 Ratio Result</h4>
+                    <div class="result-score" id="pfValue">--</div>
+                    <div class="interpretation">
+                        <h5>ARDS Classification:</h5>
+                        <p id="ardsClass"></p>
+                    </div>
+                    <div class="interpretation">
+                        <h5>Clinical Interpretation:</h5>
+                        <p id="interpretation"></p>
+                    </div>
+                </div>
+
+                <div class="formula-section">
+                    <h5><i class="fas fa-book"></i> P/F Ratio Assessment</h5>
+                    <p><strong>P/F Ratio = PaO₂ (mmHg) / FiO₂ (as fraction)</strong></p>
+                    <p><strong>Example: PaO₂ 60 mmHg on FiO₂ 40% = 60/0.4 = 150</strong></p>
+                    <ul class="small mb-0">
+                        <li>P/F >300: Normal oxygenation</li>
+                        <li>P/F 200-300: Mild hypoxemia</li>
+                        <li>P/F 100-200: Moderate to severe ARDS</li>
+                        <li>P/F <100: Severe ARDS with high mortality</li>
+                        <li>Core criterion for ARDS diagnosis (Berlin definition)</li>
+                        <li>Must have bilateral opacities on imaging and appropriate clinical context</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate P/F Ratio
+        function calculatePFRatio() {
+            const pao2 = parseFloat(document.getElementById('pao2').value);
+            const fio2 = parseFloat(document.getElementById('fio2').value);
+
+            if (isNaN(pao2) || isNaN(fio2)) {
+                alert('Please enter valid values for both PaO2 and FiO2');
+                return;
+            }
+
+            // Calculate P/F ratio (FiO2 as fraction, not percentage)
+            const fio2Fraction = fio2 / 100;
+            const pfRatio = pao2 / fio2Fraction;
+
+            let ardsClass = '';
+            let interpretation = '';
+
+            if (pfRatio > 300) {
+                ardsClass = '<span class="risk-low"><i class="fas fa-check-circle"></i> Normal Oxygenation</span>';
+                interpretation = 'P/F >300: Normal oxygenation. No evidence of ARDS. Lungs appear adequately oxygenated.';
+            } else if (pfRatio > 200) {
+                ardsClass = '<span class="risk-moderate"><i class="fas fa-exclamation-triangle"></i> Mild Hypoxemia / Mild ARDS</span>';
+                interpretation = 'P/F 200-300: Mild respiratory dysfunction. May indicate mild ARDS or other lung disease. Monitor closely, optimize ventilation if mechanically ventilated.';
+            } else if (pfRatio > 100) {
+                ardsClass = '<span class="risk-high"><i class="fas fa-times-circle"></i> Moderate to Severe ARDS</span>';
+                interpretation = 'P/F 100-200: Moderate to severe ARDS. High mortality risk. Requires ICU-level care with lung-protective ventilation, PEEP optimization, and consideration of prone positioning and advanced support.';
+            } else {
+                ardsClass = '<span class="risk-high"><i class="fas fa-times-circle"></i> Very Severe ARDS</span>';
+                interpretation = 'P/F <100: Severe ARDS with high mortality (>40%). Urgent need for aggressive management: lung-protective ventilation, optimal PEEP, prone positioning, potential ECMO candidacy. Discuss prognosis with patient/family.';
+            }
+
+            document.getElementById('pfValue').textContent = pfRatio.toFixed(0);
+            document.getElementById('ardsClass').innerHTML = ardsClass;
+            document.getElementById('interpretation').innerHTML = interpretation;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revised Venous Clinical Severity Score Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-dark: #2d3748;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .nav-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .calculator-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 2rem 1.5rem;
+        }
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .card-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 5px solid #667eea;
+        }
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 1rem 0;
+        }
+        .interpretation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+        .formula-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+        .formula-section h5 {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .score-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .score-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+        }
+        .range-display {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+        .risk-low { color: #28a745; font-weight: 600; }
+        .risk-moderate { color: #ffc107; font-weight: 600; }
+        .risk-high { color: #dc3545; font-weight: 600; }
+        .info-badge {
+            display: inline-block;
+            background: #e7f3ff;
+            color: #0066cc;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <div class="nav-header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="mb-0"><i class="fas fa-hospital"></i> Hospital Medicine Calculators</h1>
+                    <small>Inpatient Management Tools</small>
+                </div>
+                <a href="index.html" class="btn btn-light btn-sm"><i class="fas fa-home"></i> Home</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="calculator-container">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-calculator"></i> REVCS Score</h2>
+                <p>Revised Venous Clinical Severity Score</p>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="info-badge">
+                    <i class="fas fa-info-circle"></i> Assesses severity of chronic venous disease symptoms and signs
+                </div>
+
+                <!-- Clinical Symptoms -->
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-list-check"></i> Clinical Symptoms</div>
+
+                    <div class="form-check">
+                        <input type="checkbox" id="pain" class="form-check-input" value="1">
+                        <label class="form-check-label" for="pain">Pain, aching, heaviness (1 point)</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" id="fatigue" class="form-check-input" value="1">
+                        <label class="form-check-label" for="fatigue">Fatigue, heaviness of legs (1 point)</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" id="pruritus" class="form-check-input" value="1">
+                        <label class="form-check-label" for="pruritus">Pruritus (itching) (1 point)</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" id="paresthesia" class="form-check-input" value="1">
+                        <label class="form-check-label" for="paresthesia">Paresthesia (tingling/numbness) (1 point)</label>
+                    </div>
+                </div>
+
+                <!-- Clinical Signs -->
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-stethoscope"></i> Clinical Signs</div>
+
+                    <div class="form-check">
+                        <input type="checkbox" id="edema" class="form-check-input" value="1">
+                        <label class="form-check-label" for="edema">Edema (1 point)</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" id="skin_changes" class="form-check-input" value="1">
+                        <label class="form-check-label" for="skin_changes">Skin pigmentation changes (1 point)</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" id="lipodermatosclerosis" class="form-check-input" value="1">
+                        <label class="form-check-label" for="lipodermatosclerosis">Lipodermatosclerosis (1 point)</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" id="active_ulcer" class="form-check-input" value="3">
+                        <label class="form-check-label" for="active_ulcer">Active ulcer (3 points)</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input type="checkbox" id="healed_ulcer" class="form-check-input" value="1">
+                        <label class="form-check-label" for="healed_ulcer">Healed ulcer (1 point)</label>
+                    </div>
+                </div>
+
+                <!-- Varicosities -->
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-droplet"></i> Varicosities</div>
+                    <select id="varicosities" class="form-select">
+                        <option value="0">None (0 points)</option>
+                        <option value="1">Varicose veins present (1 point)</option>
+                    </select>
+                    <div class="range-display">Assess presence of abnormal veins</div>
+                </div>
+
+                <!-- Venous Reflux -->
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-arrow-down"></i> Venous Reflux (by ultrasound)</div>
+                    <select id="reflux" class="form-select">
+                        <option value="0">None (0 points)</option>
+                        <option value="1">Superficial reflux (1 point)</option>
+                        <option value="2">Deep reflux (2 points)</option>
+                        <option value="3">Both superficial and deep reflux (3 points)</option>
+                    </select>
+                    <div class="range-display">Based on duplex ultrasound findings</div>
+                </div>
+
+                <!-- Venous Obstruction -->
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-ban"></i> Venous Obstruction (by ultrasound)</div>
+                    <select id="obstruction" class="form-select">
+                        <option value="0">None (0 points)</option>
+                        <option value="2">Superficial obstruction (2 points)</option>
+                        <option value="4">Deep obstruction (4 points)</option>
+                        <option value="5">Both superficial and deep obstruction (5 points)</option>
+                    </select>
+                    <div class="range-display">Based on duplex ultrasound findings</div>
+                </div>
+
+                <button onclick="calculateREVCS()" class="btn btn-primary btn-lg w-100 mt-4">
+                    <i class="fas fa-calculator"></i> Calculate REVCS Score
+                </button>
+
+                <!-- Results Section -->
+                <div id="result" style="display:none;" class="result-box">
+                    <h4><i class="fas fa-chart-pie"></i> REVCS Score Result</h4>
+                    <div class="result-score" id="scoreValue">--</div>
+                    <div class="interpretation">
+                        <h5>Disease Severity Class:</h5>
+                        <p id="severityClass"></p>
+                    </div>
+                    <div class="interpretation">
+                        <h5>Clinical Interpretation:</h5>
+                        <p id="interpretation"></p>
+                    </div>
+                </div>
+
+                <!-- Formula Section -->
+                <div class="formula-section">
+                    <h5><i class="fas fa-book"></i> REVCS Score Classification</h5>
+                    <p><strong>Score Range: 0-36 points</strong></p>
+                    <p><strong>Severity Classification:</strong></p>
+                    <ul class="small mb-0">
+                        <li><strong>0-2:</strong> No disease - Normal venous examination</li>
+                        <li><strong>3-7:</strong> Mild disease - Early signs of venous disease</li>
+                        <li><strong>8-19:</strong> Moderate disease - Significant venous insufficiency</li>
+                        <li><strong>≥20:</strong> Severe disease - Advanced CVD with complications</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Note:</strong> Score ≥1 point with active ulcer = severe disease</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate REVCS Score
+        function calculateREVCS() {
+            let score = 0;
+
+            // Get symptom checkboxes
+            const symptomCheckboxes = [
+                document.getElementById('pain'),
+                document.getElementById('fatigue'),
+                document.getElementById('pruritus'),
+                document.getElementById('paresthesia')
+            ];
+            symptomCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    score += parseInt(checkbox.value);
+                }
+            });
+
+            // Get clinical sign checkboxes
+            const signCheckboxes = [
+                document.getElementById('edema'),
+                document.getElementById('skin_changes'),
+                document.getElementById('lipodermatosclerosis'),
+                document.getElementById('active_ulcer'),
+                document.getElementById('healed_ulcer')
+            ];
+            signCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    score += parseInt(checkbox.value);
+                }
+            });
+
+            // Add varicosities
+            const varicosities = parseInt(document.getElementById('varicosities').value);
+            score += varicosities;
+
+            // Add reflux
+            const reflux = parseInt(document.getElementById('reflux').value);
+            score += reflux;
+
+            // Add obstruction
+            const obstruction = parseInt(document.getElementById('obstruction').value);
+            score += obstruction;
+
+            // Determine severity class
+            let severityClass = '';
+            let interpretation = '';
+
+            const hasActiveUlcer = document.getElementById('active_ulcer').checked;
+
+            if (score === 0) {
+                severityClass = '<span class="risk-low"><i class="fas fa-check-circle"></i> No Disease</span>';
+                interpretation = 'Score 0: No clinical or hemodynamic evidence of venous disease. Normal examination and findings.';
+            } else if (score >= 1 && score <= 2) {
+                severityClass = '<span class="risk-low"><i class="fas fa-check-circle"></i> Mild Disease</span>';
+                interpretation = 'Score 1-2: Minimal venous disease with few symptoms or signs. Conservative management typically sufficient.';
+            } else if (score >= 3 && score <= 7) {
+                severityClass = '<span class="risk-moderate"><i class="fas fa-exclamation-circle"></i> Mild-Moderate Disease</span>';
+                interpretation = 'Score 3-7: Early venous insufficiency with symptoms and some clinical findings. Consider compression therapy and lifestyle modifications.';
+            } else if (score >= 8 && score <= 19) {
+                severityClass = '<span class="risk-high"><i class="fas fa-warning"></i> Moderate-Severe Disease</span>';
+                interpretation = 'Score 8-19: Significant chronic venous disease. Requires compression therapy, elevation, and possible interventional treatment consideration.';
+            } else {
+                severityClass = '<span class="risk-high"><i class="fas fa-times-circle"></i> Severe Disease</span>';
+                interpretation = 'Score ≥20: Advanced CVD with significant complications. May require specialist evaluation and interventional management.';
+            }
+
+            if (hasActiveUlcer && score >= 1) {
+                severityClass = '<span class="risk-high"><i class="fas fa-times-circle"></i> Severe Disease</span>';
+                interpretation = 'Active venous ulcer present: Severe disease requiring intensive management including compression, wound care, and vascular specialist evaluation.';
+            }
+
+            // Display results
+            document.getElementById('scoreValue').textContent = score;
+            document.getElementById('severityClass').innerHTML = severityClass;
+            document.getElementById('interpretation').innerHTML = interpretation;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Allow Enter key to calculate
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') calculateREVCS();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSAT Calculator - Transferrin Saturation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        body { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 100vh; }
+        .navbar { background: var(--primary-gradient) !important; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .container-main { max-width: 900px; margin: 30px auto; }
+        .card { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .card-header { background: var(--primary-gradient); color: white; padding: 25px; }
+        .card-header h1 { font-size: 28px; margin: 0; font-weight: 700; }
+        .form-section { padding: 25px; border-bottom: 1px solid #e0e0e0; }
+        .form-label { font-weight: 600; color: #333; margin-bottom: 12px; }
+        .btn-calculate { background: var(--primary-gradient); border: none; padding: 12px 40px; font-weight: 600; }
+        .btn-calculate:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3); color: white; }
+        .result-section { background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%); padding: 25px; border-radius: 10px; margin-top: 25px; display: none; }
+        .result-section.show { display: block; animation: slideIn 0.3s ease-in; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .result-display { font-size: 36px; font-weight: 700; color: #667eea; margin: 15px 0; }
+        .interpretation { padding: 15px; border-radius: 8px; margin-top: 15px; font-weight: 500; }
+        .interpretation.low { background-color: #d4edda; border-left: 4px solid #28a745; color: #155724; }
+        .interpretation.elevated { background-color: #f8d7da; border-left: 4px solid #dc3545; color: #721c24; }
+        .form-control { border: 1px solid #ddd; border-radius: 6px; }
+        .form-control:focus { border-color: #667eea; box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25); }
+        .formula-note { padding: 10px; background-color: #f0f0f0; border-left: 4px solid #667eea; margin: 10px 0; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><i class="fas fa-calculator"></i> Clinical Calculators</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#hematology"><i class="fas fa-blood"></i> Hematology</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container container-main">
+        <div class="card">
+            <div class="card-header">
+                <h1><i class="fas fa-flask"></i> TSAT Calculator</h1>
+                <p>Transferrin Saturation - Iron Metabolism Assessment</p>
+            </div>
+
+            <div class="card-body">
+                <form id="calculatorForm">
+                    <div class="formula-note">
+                        <strong><i class="fas fa-info-circle"></i> Formula:</strong> TSAT = (Serum Iron ÷ Total Iron Binding Capacity) × 100
+                    </div>
+
+                    <!-- Serum Iron -->
+                    <div class="form-section">
+                        <label class="form-label"><i class="fas fa-flask"></i> Serum Iron</label>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="serumIron" placeholder="Enter serum iron (μg/dL)" min="0" step="0.1" required>
+                            <small class="text-muted">Normal: 60-170 μg/dL</small>
+                        </div>
+                    </div>
+
+                    <!-- Total Iron Binding Capacity -->
+                    <div class="form-section">
+                        <label class="form-label"><i class="fas fa-flask"></i> Total Iron Binding Capacity (TIBC)</label>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="tibc" placeholder="Enter TIBC (μg/dL)" min="0" step="0.1" required>
+                            <small class="text-muted">Normal: 250-450 μg/dL</small>
+                        </div>
+                    </div>
+
+                    <!-- Calculate Button -->
+                    <div class="form-section">
+                        <button type="button" class="btn btn-calculate" onclick="calculateTSAT()">
+                            <i class="fas fa-calculator"></i> Calculate TSAT
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Result Section -->
+                <div class="result-section" id="resultSection">
+                    <h4><i class="fas fa-chart-pie"></i> Iron Metabolism Assessment</h4>
+                    <div class="result-display" id="resultDisplay">0</div>
+                    <p id="resultUnit" style="font-size: 14px; color: #666;">%</p>
+
+                    <div class="interpretation low" id="interpretation">
+                        <strong>Iron Status:</strong>
+                        <span id="resultInterpretation">Normal</span>
+                    </div>
+
+                    <div id="clinicalGuidance" style="margin-top: 15px; padding: 15px; background-color: #f9f9f9; border-radius: 8px;">
+                        <strong><i class="fas fa-lightbulb"></i> Clinical Interpretation:</strong>
+                        <p id="guidance" style="margin-top: 10px;"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate TSAT
+        function calculateTSAT() {
+            const serumIron = parseFloat(document.getElementById('serumIron').value);
+            const tibc = parseFloat(document.getElementById('tibc').value);
+
+            if (isNaN(serumIron) || isNaN(tibc)) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            if (serumIron < 0 || tibc <= 0) {
+                alert('Please enter valid values');
+                return;
+            }
+
+            // Calculate TSAT percentage
+            const tsat = (serumIron / tibc) * 100;
+            document.getElementById('resultDisplay').textContent = tsat.toFixed(1);
+
+            let interpretation, guidance, className;
+
+            // TSAT Classification
+            if (tsat < 16) {
+                interpretation = 'Low Transferrin Saturation (Iron Deficiency)';
+                guidance = '<strong>TSAT <16%:</strong> Low iron stores. Indicates iron deficiency or iron deficiency anemia. Evaluate for bleeding source, malabsorption, or inadequate intake. Consider iron supplementation.';
+                className = 'low';
+            } else if (tsat <= 45) {
+                interpretation = 'Normal Transferrin Saturation';
+                guidance = '<strong>TSAT 16-45%:</strong> Normal iron metabolism. Iron stores and utilization appropriate. No iron deficiency or overload.';
+                className = 'low';
+            } else if (tsat <= 50) {
+                interpretation = 'Mildly Elevated Transferrin Saturation';
+                guidance = '<strong>TSAT 45-50%:</strong> Mildly elevated. Consider evaluation for iron overload conditions. Monitor ferritin and clinical status.';
+                className = 'elevated';
+            } else if (tsat <= 60) {
+                interpretation = 'Elevated Transferrin Saturation';
+                guidance = '<strong>TSAT 50-60%:</strong> Elevated saturation. Concerning for iron overload. Rule out hemochromatosis, multiple transfusions, or chronic liver disease. Check ferritin level.';
+                className = 'elevated';
+            } else {
+                interpretation = 'Severely Elevated Transferrin Saturation';
+                guidance = '<strong>TSAT >60%:</strong> Severely elevated. High risk for iron overload toxicity affecting liver, heart, and pancreas. Evaluate for hemochromatosis. Consider phlebotomy or chelation therapy.';
+                className = 'elevated';
+            }
+
+            const interpretationEl = document.getElementById('interpretation');
+            interpretationEl.className = 'interpretation ' + className;
+            interpretationEl.innerHTML = `<strong>Iron Status:</strong> ${interpretation}`;
+            document.getElementById('guidance').innerHTML = guidance;
+            document.getElementById('resultSection').classList.add('show');
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.getElementById('calculatorForm').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                calculateTSAT();
+            }
+        });
+    </script>
+</body>
+</html>

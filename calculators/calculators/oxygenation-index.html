@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oxygenation Index Calculator - Hypoxemia Severity</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-dark: #2d3748;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .nav-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1rem 0;
+        }
+        .calculator-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 2rem 1.5rem;
+        }
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+        }
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 5px solid #667eea;
+        }
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 1rem 0;
+        }
+        .interpretation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+        .formula-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+        .score-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .risk-low { color: #28a745; font-weight: 600; }
+        .risk-moderate { color: #ffc107; font-weight: 600; }
+        .risk-high { color: #dc3545; font-weight: 600; }
+        .info-badge {
+            display: inline-block;
+            background: #e7f3ff;
+            color: #0066cc;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="mb-0"><i class="fas fa-heartbeat"></i> Critical Care Calculators</h1>
+                    <small>Pulmonary & Critical Care Medicine</small>
+                </div>
+                <a href="index.html" class="btn btn-light btn-sm"><i class="fas fa-home"></i> Home</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="calculator-container">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-chart-line"></i> Oxygenation Index</h2>
+                <p>Severity of Hypoxemia on Mechanical Ventilation</p>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="info-badge">
+                    <i class="fas fa-exclamation-circle"></i> Measures severity of hypoxemia in ventilated patients
+                </div>
+
+                <div class="score-item">
+                    <label><strong>Mean Airway Pressure (MAP, cmH₂O)</strong></label>
+                    <input type="number" id="map" class="form-control" placeholder="Typical range: 5-25 cmH₂O" step="0.1" min="0">
+                    <small>Can be calculated from ventilator parameters or measured directly</small>
+                </div>
+
+                <div class="score-item">
+                    <label><strong>FiO₂ (%)</strong></label>
+                    <input type="number" id="fio2" class="form-control" placeholder="Enter FiO2 %" min="21" max="100" step="1">
+                </div>
+
+                <div class="score-item">
+                    <label><strong>PaO₂ (mmHg)</strong></label>
+                    <input type="number" id="pao2" class="form-control" placeholder="Enter PaO2 from ABG" step="0.1" min="20" max="500">
+                </div>
+
+                <button onclick="calculateOI()" class="btn btn-primary btn-lg w-100 mt-4">
+                    <i class="fas fa-calculator"></i> Calculate Oxygenation Index
+                </button>
+
+                <div id="result" style="display:none;" class="result-box">
+                    <h4><i class="fas fa-chart-pie"></i> Oxygenation Index Result</h4>
+                    <div class="result-score" id="oiValue">--</div>
+                    <div class="interpretation">
+                        <h5>Hypoxemia Severity:</h5>
+                        <p id="severity"></p>
+                    </div>
+                    <div class="interpretation">
+                        <h5>Clinical Significance:</h5>
+                        <p id="interpretation"></p>
+                    </div>
+                </div>
+
+                <div class="formula-section">
+                    <h5><i class="fas fa-book"></i> Oxygenation Index Formula</h5>
+                    <p><strong>OI = (FiO₂ × MAP) / PaO₂</strong></p>
+                    <ul class="small mb-0">
+                        <li>OI <5: Mild hypoxemia, good prognosis</li>
+                        <li>OI 5-10: Moderate hypoxemia, intermediate prognosis</li>
+                        <li>OI 10-15: Severe hypoxemia, poor prognosis</li>
+                        <li>OI >15: Very severe hypoxemia, likely fatal without support</li>
+                        <li>Incorporates ventilator settings and blood gas; more comprehensive than P/F ratio</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate Oxygenation Index
+        function calculateOI() {
+            const map = parseFloat(document.getElementById('map').value);
+            const fio2 = parseFloat(document.getElementById('fio2').value);
+            const pao2 = parseFloat(document.getElementById('pao2').value);
+
+            if (isNaN(map) || isNaN(fio2) || isNaN(pao2)) {
+                alert('Please enter valid values for all fields');
+                return;
+            }
+
+            // Calculate OI
+            const oi = (fio2 * map) / pao2;
+
+            let severity = '';
+            let interpretation = '';
+
+            if (oi < 5) {
+                severity = '<span class="risk-low"><i class="fas fa-check-circle"></i> Mild Hypoxemia</span>';
+                interpretation = 'OI <5 indicates mild hypoxemia. Prognosis generally good. Continue current ventilator strategy with monitoring.';
+            } else if (oi < 10) {
+                severity = '<span class="risk-moderate"><i class="fas fa-exclamation-triangle"></i> Moderate Hypoxemia</span>';
+                interpretation = 'OI 5-10 indicates moderate hypoxemia. Intermediate prognosis. Consider optimizing ventilation, PEEP titration, and prone positioning if ARDS.';
+            } else if (oi < 15) {
+                severity = '<span class="risk-high"><i class="fas fa-times-circle"></i> Severe Hypoxemia</span>';
+                interpretation = 'OI 10-15 indicates severe hypoxemia with poor prognosis. Consider advanced support: higher PEEP, inhaled nitric oxide, prone positioning, or ECMO evaluation.';
+            } else {
+                severity = '<span class="risk-high"><i class="fas fa-times-circle"></i> Very Severe Hypoxemia</span>';
+                interpretation = 'OI >15 indicates very severe hypoxemia with high mortality risk. Urgent consideration for ECMO support or other advanced therapies. Discuss with patient/family regarding goals of care.';
+            }
+
+            document.getElementById('oiValue').textContent = oi.toFixed(2);
+            document.getElementById('severity').innerHTML = severity;
+            document.getElementById('interpretation').innerHTML = interpretation;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Head Circumference for Age Percentiles - CDC (0-36 months)</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
+        body {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 900px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .card-header {
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .percentile-badge {
+            display: inline-block;
+            font-size: 28px;
+            font-weight: bold;
+            padding: 15px 25px;
+            border-radius: 10px;
+            color: white;
+            margin: 10px 0;
+        }
+
+        .percentile-normal {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .percentile-high {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .percentile-low {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .percentile-chart {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .chart-bar {
+            background: linear-gradient(to right, #e0e7ff, #667eea);
+            height: 30px;
+            border-radius: 5px;
+            margin: 10px 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark mb-4" style="background: transparent;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html" style="color: white;">
+                    <i class="fas fa-calculator"></i> Pediatric Calculators
+                </a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">
+                    <i class="fas fa-head-side-virus"></i> Head Circumference for Age Percentiles
+                </h1>
+                <small>CDC Growth Chart (0-36 months)</small>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Instructions -->
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> Enter the infant's age in months and head circumference in centimeters.
+                    Based on CDC growth standards for children 0-36 months.
+                </div>
+
+                <!-- Input Form -->
+                <form id="hcForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-birthday-cake"></i> Age (months)
+                            </label>
+                            <input type="number" class="form-control" id="age" placeholder="0-36" min="0" max="36" step="0.1" required>
+                            <small class="text-muted">Range: 0-36 months</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-ruler"></i> Head Circumference (cm)
+                            </label>
+                            <input type="number" class="form-control" id="hc" placeholder="Head circumference in cm" min="25" max="55" step="0.1" required>
+                            <small class="text-muted">Range: 25-55 cm</small>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="calculateHCPercentile()">
+                            <i class="fas fa-calculator"></i> Calculate Percentile
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results -->
+                <div id="resultBox" class="result-box">
+                    <h4 class="text-center mb-4"><i class="fas fa-check-circle"></i> Head Circumference Percentile</h4>
+
+                    <div class="text-center">
+                        <p class="text-muted"><small>HC Percentile for Age</small></p>
+                        <div class="percentile-badge" id="percentileBadge">--</div>
+                        <p id="percentileCategory" class="text-center font-weight-bold mt-2"></p>
+                    </div>
+
+                    <div class="percentile-chart">
+                        <p class="text-muted text-center"><small>Percentile Position</small></p>
+                        <div class="chart-bar" id="chartBar" style="width: 50%;"></div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Clinical Guidance -->
+                    <div id="clinicalGuidance"></div>
+
+                    <!-- Reference Values -->
+                    <div class="alert alert-light mt-4">
+                        <strong><i class="fas fa-chart-bar"></i> Approximate HC by Age (CDC):</strong>
+                        <table class="table table-sm mt-2">
+                            <tbody>
+                                <tr>
+                                    <td><strong>Birth</strong></td>
+                                    <td>5th: 31.7 cm</td>
+                                    <td>50th: 34.3 cm</td>
+                                    <td>95th: 36.9 cm</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3 months</strong></td>
+                                    <td>5th: 37.5 cm</td>
+                                    <td>50th: 40.3 cm</td>
+                                    <td>95th: 43.1 cm</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>6 months</strong></td>
+                                    <td>5th: 40.8 cm</td>
+                                    <td>50th: 43.8 cm</td>
+                                    <td>95th: 46.8 cm</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>12 months</strong></td>
+                                    <td>5th: 43.3 cm</td>
+                                    <td>50th: 46.4 cm</td>
+                                    <td>95th: 49.5 cm</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>24 months</strong></td>
+                                    <td>5th: 46.1 cm</td>
+                                    <td>50th: 49.2 cm</td>
+                                    <td>95th: 52.3 cm</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>36 months</strong></td>
+                                    <td>5th: 47.6 cm</td>
+                                    <td>50th: 50.8 cm</td>
+                                    <td>95th: 54.0 cm</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Head circumference percentile reference data by age (CDC, approximation)
+        const cdcHCData = {
+            0: {5: 31.7, 50: 34.3, 95: 36.9},
+            1: {5: 34.3, 50: 37.0, 95: 39.6},
+            2: {5: 36.0, 50: 38.9, 95: 41.8},
+            3: {5: 37.3, 50: 40.3, 95: 43.1},
+            4: {5: 38.3, 50: 41.4, 95: 44.4},
+            5: {5: 39.2, 50: 42.4, 95: 45.4},
+            6: {5: 40.0, 50: 43.3, 95: 46.3},
+            7: {5: 40.7, 50: 44.1, 95: 47.1},
+            8: {5: 41.4, 50: 44.9, 95: 47.9},
+            9: {5: 42.0, 50: 45.6, 95: 48.6},
+            10: {5: 42.5, 50: 46.2, 95: 49.2},
+            11: {5: 43.0, 50: 46.8, 95: 49.8},
+            12: {5: 43.4, 50: 47.3, 95: 50.3},
+            13: {5: 43.9, 50: 47.8, 95: 50.8},
+            14: {5: 44.3, 50: 48.3, 95: 51.2},
+            15: {5: 44.7, 50: 48.8, 95: 51.7},
+            18: {5: 45.4, 50: 49.5, 95: 52.5},
+            24: {5: 46.2, 50: 49.9, 95: 52.8},
+            30: {5: 47.0, 50: 50.5, 95: 53.7},
+            36: {5: 47.6, 50: 50.8, 95: 54.0}
+        };
+
+        // Calculate head circumference percentile
+        function calculateHCPercentile() {
+            const age = parseFloat(document.getElementById('age').value);
+            const hc = parseFloat(document.getElementById('hc').value);
+
+            if (age === '' || hc === '') {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Get reference data for age
+            const ageRounded = Math.round(age);
+            const refData = cdcHCData[ageRounded];
+
+            if (!refData) {
+                // Interpolate if exact age not found
+                const ages = Object.keys(cdcHCData).map(Number).sort((a, b) => a - b);
+                let refData1, refData2, age1, age2;
+
+                for (let i = 0; i < ages.length - 1; i++) {
+                    if (ageRounded > ages[i] && ageRounded < ages[i + 1]) {
+                        age1 = ages[i];
+                        age2 = ages[i + 1];
+                        refData1 = cdcHCData[age1];
+                        refData2 = cdcHCData[age2];
+                        break;
+                    }
+                }
+
+                if (!refData1) {
+                    alert('Age must be between 0 and 36 months');
+                    return;
+                }
+
+                // Interpolate
+                const factor = (ageRounded - age1) / (age2 - age1);
+                const refData = {
+                    5: refData1[5] + (refData2[5] - refData1[5]) * factor,
+                    50: refData1[50] + (refData2[50] - refData1[50]) * factor,
+                    95: refData1[95] + (refData2[95] - refData1[95]) * factor
+                };
+
+                calculatePercentile(hc, refData);
+            } else {
+                calculatePercentile(hc, refData);
+            }
+        }
+
+        function calculatePercentile(hc, refData) {
+            // Calculate percentile
+            let percentile;
+            if (hc < refData[5]) {
+                percentile = Math.max(1, (hc / refData[5]) * 5);
+            } else if (hc < refData[50]) {
+                percentile = 5 + ((hc - refData[5]) / (refData[50] - refData[5])) * 45;
+            } else if (hc < refData[95]) {
+                percentile = 50 + ((hc - refData[50]) / (refData[95] - refData[50])) * 45;
+            } else {
+                percentile = Math.min(99, 95 + ((hc - refData[95]) / refData[95]) * 4);
+            }
+
+            // Display results
+            displayHCResult(hc, percentile);
+            document.getElementById('resultBox').classList.add('show');
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Display head circumference result
+        function displayHCResult(hc, percentile) {
+            let badgeClass, category, guidance;
+
+            if (percentile < 3) {
+                badgeClass = 'percentile-low';
+                category = 'BELOW 3RD PERCENTILE';
+                guidance = `<div class="alert alert-warning"><strong><i class="fas fa-exclamation-triangle"></i> Small Head Circumference (< 3rd percentile):</strong><br>
+                    <p>Head circumference is below the 3rd percentile for age.</p>
+                    <p><strong>Considerations:</strong></p>
+                    <ul>
+                        <li>Evaluate for microcephaly</li>
+                        <li>Assess growth parameters and trajectoryAssess developmental milestones</li>
+                        <li>Consider genetic, infectious, or metabolic causes</li>
+                        <li>May require neuroimaging (cranial ultrasound, MRI)</li>
+                        <li>Refer to pediatric neurology if indicated</li>
+                    </ul>
+                </div>`;
+            } else if (percentile < 10) {
+                badgeClass = 'percentile-low';
+                category = 'LOW (3RD-10TH PERCENTILE)';
+                guidance = `<div class="alert alert-info"><strong><i class="fas fa-info-circle"></i> Small Head Circumference (3rd-10th percentile):</strong><br>
+                    <p>Head circumference is small for age but not pathologic.</p>
+                    <p><strong>Recommendations:</strong></p>
+                    <ul>
+                        <li>Plot on growth chart to assess trajectory</li>
+                        <li>Compare with parental head circumference</li>
+                        <li>Assess growth velocity (trend is important)</li>
+                        <li>Regular follow-up at routine visits</li>
+                    </ul>
+                </div>`;
+            } else if (percentile < 90) {
+                badgeClass = 'percentile-normal';
+                category = 'NORMAL';
+                guidance = `<div class="alert alert-success"><strong><i class="fas fa-check-circle"></i> Normal Head Circumference (10th-90th percentile):</strong><br>
+                    <p>Head circumference is within normal range for age.</p>
+                    <p><strong>Recommendations:</strong></p>
+                    <ul>
+                        <li>Continue routine monitoring</li>
+                        <li>Ensure adequate growth and development</li>
+                        <li>Regular health maintenance visits</li>
+                    </ul>
+                </div>`;
+            } else if (percentile < 97) {
+                badgeClass = 'percentile-high';
+                category = 'HIGH (90TH-97TH PERCENTILE)';
+                guidance = `<div class="alert alert-info"><strong><i class="fas fa-info-circle"></i> Large Head Circumference (90th-97th percentile):</strong><br>
+                    <p>Head circumference is large for age but not pathologic.</p>
+                    <p><strong>Recommendations:</strong></p>
+                    <ul>
+                        <li>Compare with parental head circumference</li>
+                        <li>Assess growth trajectory</li>
+                        <li>Normal variant if growth velocity appropriate</li>
+                        <li>Neurologic examination should be normal</li>
+                    </ul>
+                </div>`;
+            } else {
+                badgeClass = 'percentile-high';
+                category = 'ABOVE 97TH PERCENTILE';
+                guidance = `<div class="alert alert-warning"><strong><i class="fas fa-exclamation-triangle"></i> Large Head Circumference (> 97th percentile):</strong><br>
+                    <p>Head circumference is above the 97th percentile for age.</p>
+                    <p><strong>Considerations:</strong></p>
+                    <ul>
+                        <li>Evaluate for hydrocephalus</li>
+                        <li>Assess for developmental delays</li>
+                        <li>Examine fontanelle (in infants < 2 years)</li>
+                        <li>Compare with parental measurements and family history</li>
+                        <li>Consider neuroradiology if clinically indicated</li>
+                        <li>Refer to neurology if abnormal exam</li>
+                    </ul>
+                </div>`;
+            }
+
+            document.getElementById('percentileBadge').className = 'percentile-badge ' + badgeClass;
+            document.getElementById('percentileBadge').textContent = percentile.toFixed(0) + 'th';
+            document.getElementById('percentileCategory').innerHTML = `<strong>${category}</strong><br><small>${percentile.toFixed(1)}th percentile</small>`;
+
+            // Update chart bar
+            const chartBar = document.getElementById('chartBar');
+            chartBar.style.width = (Math.min(percentile, 99) + 1) + '%';
+            chartBar.textContent = percentile.toFixed(0) + 'th';
+
+            // Show clinical guidance
+            document.getElementById('clinicalGuidance').innerHTML = guidance;
+        }
+    </script>
+</body>
+</html>

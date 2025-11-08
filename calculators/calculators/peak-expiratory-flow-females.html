@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peak Expiratory Flow Prediction - Females (5-18 years)</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
+        body {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 900px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .card-header {
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pef-value {
+            font-size: 48px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 15px 0;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .result-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .result-data {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark mb-4" style="background: transparent;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html" style="color: white;">
+                    <i class="fas fa-calculator"></i> Pediatric Calculators
+                </a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">
+                    <i class="fas fa-lungs"></i> Peak Expiratory Flow Prediction
+                </h1>
+                <small>Females 5-18 years (Normal Values)</small>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Instructions -->
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> Enter the girl's age in years and height in centimeters.
+                    The calculator predicts normal PEF values for comparison with actual measurements.
+                </div>
+
+                <!-- Input Form -->
+                <form id="pefForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-birthday-cake"></i> Age (years)
+                            </label>
+                            <input type="number" class="form-control" id="age" placeholder="5-18" min="5" max="18" step="0.1" required>
+                            <small class="text-muted">Range: 5-18 years</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-ruler-vertical"></i> Height (cm)
+                            </label>
+                            <input type="number" class="form-control" id="height" placeholder="Height in cm" min="100" max="190" step="0.1" required>
+                            <small class="text-muted">Range: 100-190 cm</small>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="calculatePEF()">
+                            <i class="fas fa-calculator"></i> Calculate Predicted PEF
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results -->
+                <div id="resultBox" class="result-box">
+                    <h4 class="text-center mb-4"><i class="fas fa-check-circle"></i> Peak Expiratory Flow Prediction</h4>
+
+                    <div class="result-item">
+                        <div class="result-label">Predicted PEF</div>
+                        <div class="result-data" id="pefValue">-- L/min</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">Normal Range (±20%)</div>
+                        <div class="result-data" id="pefRange">-- L/min</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">80% of Predicted (Yellow Zone)</div>
+                        <div style="color: #ffc107; font-size: 18px; font-weight: bold;" id="pefYellow">-- L/min</div>
+                    </div>
+
+                    <div class="result-item">
+                        <div class="result-label">50% of Predicted (Red Zone)</div>
+                        <div style="color: #dc3545; font-size: 18px; font-weight: bold;" id="pefRed">-- L/min</div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Clinical Guidance -->
+                    <div id="clinicalGuidance"></div>
+
+                    <!-- PEF Action Plan -->
+                    <div class="alert alert-light mt-4">
+                        <strong><i class="fas fa-clipboard-list"></i> Asthma Action Plan - PEF Zones:</strong>
+                        <table class="table table-sm mt-2">
+                            <tbody>
+                                <tr>
+                                    <td><strong>GREEN Zone</strong></td>
+                                    <td>> 80% predicted</td>
+                                    <td><small>Doing well, continue normal activities</small></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>YELLOW Zone</strong></td>
+                                    <td>50-80% predicted</td>
+                                    <td><small>Caution, increase medication, monitor closely</small></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>RED Zone</strong></td>
+                                    <td>< 50% predicted</td>
+                                    <td><small>Medical alert, seek immediate care</small></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate PEF for females
+        function calculatePEF() {
+            const age = parseFloat(document.getElementById('age').value);
+            const height = parseFloat(document.getElementById('height').value);
+
+            if (!age || !height) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // PEF prediction for females (Polgar and Promadhat formula approximation)
+            // Simplified formula for girls 5-18 years
+            const pefPredicted = (height * 0.89) - 39;
+
+            // Calculate zones
+            const yellow = pefPredicted * 0.80;
+            const red = pefPredicted * 0.50;
+            const normalHigh = pefPredicted * 1.20;
+            const normalLow = pefPredicted * 0.80;
+
+            // Display results
+            displayPEFResults(pefPredicted, normalLow, normalHigh, yellow, red);
+            document.getElementById('resultBox').classList.add('show');
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Display PEF results
+        function displayPEFResults(predicted, low, high, yellow, red) {
+            document.getElementById('pefValue').textContent = predicted.toFixed(0) + ' L/min';
+            document.getElementById('pefRange').textContent = low.toFixed(0) + ' - ' + high.toFixed(0) + ' L/min';
+            document.getElementById('pefYellow').textContent = yellow.toFixed(0) + ' L/min';
+            document.getElementById('pefRed').textContent = red.toFixed(0) + ' L/min';
+
+            const guidance = `<div class="alert alert-info"><strong><i class="fas fa-info-circle"></i> Clinical Use of PEF:</strong><br>
+                <p><strong>Predicted PEF: ${predicted.toFixed(0)} L/min</strong></p>
+                <ul class="mt-2 mb-0">
+                    <li>Use as baseline for asthma management</li>
+                    <li>Compare actual PEF to predicted values</li>
+                    <li>Monitor trends over time (morning vs evening)</li>
+                    <li>Helps assess asthma control</li>
+                    <li>Guide for medication adjustments</li>
+                    <li>Part of comprehensive asthma action plan</li>
+                </ul>
+                <p class="mt-3"><strong>Important Notes:</strong></p>
+                <ul>
+                    <li>PEF can vary by 15-20% throughout the day</li>
+                    <li>Best effort required for accurate measurement</li>
+                    <li>Record best of 3 attempts</li>
+                    <li>Morning PEF typically lower than evening</li>
+                </ul>
+            </div>`;
+
+            document.getElementById('clinicalGuidance').innerHTML = guidance;
+        }
+    </script>
+</body>
+</html>

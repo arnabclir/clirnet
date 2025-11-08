@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIB-4 Index - Liver Fibrosis Marker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%); --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%); }
+        body { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 100vh; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .navbar { background: var(--primary-gradient); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .navbar-brand { font-weight: bold; font-size: 1.3rem; }
+        .calculator-container { margin-top: 30px; margin-bottom: 30px; }
+        .calculator-card { background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .card-header { background: var(--primary-gradient); color: white; padding: 25px; }
+        .btn-calculate { background: var(--primary-gradient); border: none; color: white; font-weight: bold; padding: 12px 40px; }
+        .result-section { margin-top: 30px; display: none; }
+        .result-section.show { display: block; }
+        .result-box { background: var(--secondary-gradient); color: white; padding: 25px; border-radius: 10px; text-align: center; }
+        .result-score { font-size: 3rem; font-weight: bold; margin: 15px 0; }
+        .risk-low { background-color: #28a745; }
+        .risk-high { background-color: #dc3545; }
+        .section-label { background: rgba(102, 126, 234, 0.1); padding: 10px 15px; border-radius: 5px; font-weight: bold; color: #667eea; margin-top: 20px; }
+        .footer { background: var(--primary-gradient); color: white; text-align: center; padding: 20px; margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-calculator"></i> Gastro Calculator</a>
+        </div>
+    </nav>
+
+    <div class="container calculator-container">
+        <div class="calculator-card">
+            <div class="card-header">
+                <h2><i class="fas fa-liver"></i> FIB-4 Index</h2>
+                <div class="subtitle">Liver Fibrosis Marker - Non-Invasive Assessment</div>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="section-label"><i class="fas fa-user"></i> Patient Information</div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="age" class="form-label">Age (years)</label>
+                        <input type="number" class="form-control" id="age" placeholder="Enter age" step="1" min="0">
+                    </div>
+                </div>
+
+                <div class="section-label"><i class="fas fa-vial"></i> Laboratory Values</div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="ast" class="form-label">AST (U/L)</label>
+                        <input type="number" class="form-control" id="ast" placeholder="Enter AST" step="1" min="0">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="alt" class="form-label">ALT (U/L)</label>
+                        <input type="number" class="form-control" id="alt" placeholder="Enter ALT" step="1" min="0">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="platelet" class="form-label">Platelet Count (x10^9/L)</label>
+                        <input type="number" class="form-control" id="platelet" placeholder="Enter platelets" step="1" min="0">
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
+                    <button class="btn btn-calculate" onclick="calculateFIB4()"><i class="fas fa-calculator"></i> Calculate</button>
+                    <button class="btn btn-secondary" onclick="resetForm()"><i class="fas fa-redo"></i> Reset</button>
+                </div>
+
+                <div id="resultSection" class="result-section">
+                    <div class="result-box">
+                        <div style="font-size: 0.9rem; opacity: 0.9;">FIB-4 INDEX</div>
+                        <div class="result-score" id="scoreDisplay">0.00</div>
+                        <div id="fibrosis" class="badge badge-lg" style="font-size: 1.1rem;"></div>
+                    </div>
+                    <div style="background: white; color: #333; padding: 20px; border-radius: 10px; border-left: 5px solid #667eea; margin-top: 15px;">
+                        <div id="interpretationText"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Gastroenterology Calculator Suite</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /**
+         * FIB-4 Calculator
+         * Formula: (Age x AST) / (Platelet count x sqrt(ALT))
+         * Used to estimate likelihood of advanced fibrosis in chronic liver disease
+         */
+        function calculateFIB4() {
+            const age = parseInt(document.getElementById('age').value);
+            const ast = parseInt(document.getElementById('ast').value);
+            const alt = parseInt(document.getElementById('alt').value);
+            const platelet = parseInt(document.getElementById('platelet').value);
+
+            if (!age || !ast || !alt || !platelet) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const fib4 = (age * ast) / (platelet * Math.sqrt(alt));
+            displayResults(fib4);
+        }
+
+        function displayResults(fib4) {
+            document.getElementById('scoreDisplay').textContent = fib4.toFixed(2);
+            const elem = document.getElementById('fibrosis');
+            const text = document.getElementById('interpretationText');
+
+            let fib = '', cls = '', interp = '';
+            if (fib4 < 1.30) {
+                fib = 'LOW FIBROSIS RISK';
+                cls = 'risk-low';
+                interp = 'FIB-4 <1.30: Low probability of advanced fibrosis (F3-F4). No significant fibrosis likely.';
+            } else if (fib4 <= 2.67) {
+                fib = 'INDETERMINATE';
+                cls = 'risk-moderate';
+                interp = 'FIB-4 1.30-2.67: Indeterminate. Consider additional testing (elastography or biopsy).';
+            } else {
+                fib = 'HIGH FIBROSIS RISK';
+                cls = 'risk-high';
+                interp = 'FIB-4 >2.67: High probability of advanced fibrosis (F3-F4). Recommend elastography or liver biopsy confirmation.';
+            }
+
+            elem.className = 'badge badge-lg ' + cls;
+            elem.textContent = fib;
+            text.textContent = interp;
+            document.getElementById('resultSection').classList.add('show');
+        }
+
+        function resetForm() {
+            document.getElementById('age').value = '';
+            document.getElementById('ast').value = '';
+            document.getElementById('alt').value = '';
+            document.getElementById('platelet').value = '';
+            document.getElementById('resultSection').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

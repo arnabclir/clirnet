@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANC Calculator - Absolute Neutrophil Count</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        body { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 100vh; }
+        .navbar { background: var(--primary-gradient) !important; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .container-main { max-width: 900px; margin: 30px auto; }
+        .card { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .card-header { background: var(--primary-gradient); color: white; padding: 25px; }
+        .card-header h1 { font-size: 28px; margin: 0; font-weight: 700; }
+        .form-section { padding: 25px; border-bottom: 1px solid #e0e0e0; }
+        .form-label { font-weight: 600; color: #333; margin-bottom: 12px; }
+        .btn-calculate { background: var(--primary-gradient); border: none; padding: 12px 40px; font-weight: 600; }
+        .btn-calculate:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3); color: white; }
+        .result-section { background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%); padding: 25px; border-radius: 10px; margin-top: 25px; display: none; }
+        .result-section.show { display: block; animation: slideIn 0.3s ease-in; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .result-display { font-size: 36px; font-weight: 700; color: #667eea; margin: 15px 0; }
+        .interpretation { padding: 15px; border-radius: 8px; margin-top: 15px; font-weight: 500; }
+        .interpretation.low { background-color: #f8d7da; border-left: 4px solid #dc3545; color: #721c24; }
+        .interpretation.normal { background-color: #d4edda; border-left: 4px solid #28a745; color: #155724; }
+        .form-control, .form-select { border: 1px solid #ddd; border-radius: 6px; }
+        .form-control:focus { border-color: #667eea; box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25); }
+        .formula-note { padding: 10px; background-color: #f0f0f0; border-left: 4px solid #667eea; margin: 10px 0; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><i class="fas fa-calculator"></i> Clinical Calculators</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#hematology"><i class="fas fa-blood"></i> Hematology</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container container-main">
+        <div class="card">
+            <div class="card-header">
+                <h1><i class="fas fa-flask"></i> ANC Calculator</h1>
+                <p>Absolute Neutrophil Count Assessment</p>
+            </div>
+
+            <div class="card-body">
+                <form id="calculatorForm">
+                    <div class="formula-note">
+                        <strong><i class="fas fa-info-circle"></i> Formula:</strong> ANC = WBC (K/μL) × (% Segments + % Bands)
+                    </div>
+
+                    <!-- WBC Count -->
+                    <div class="form-section">
+                        <label class="form-label"><i class="fas fa-flask"></i> Total WBC Count</label>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="wbc" placeholder="Enter WBC in K/μL (e.g., 7.5)" step="0.1" required>
+                            <small class="text-muted">Normal: 4.5-11.0 K/μL</small>
+                        </div>
+                    </div>
+
+                    <!-- Segments -->
+                    <div class="form-section">
+                        <label class="form-label"><i class="fas fa-percent"></i> % Segmented Neutrophils</label>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="segments" placeholder="Enter percentage (0-100)" min="0" max="100" step="0.1" required>
+                            <small class="text-muted">Normal: 50-70%</small>
+                        </div>
+                    </div>
+
+                    <!-- Bands -->
+                    <div class="form-section">
+                        <label class="form-label"><i class="fas fa-percent"></i> % Band Neutrophils</label>
+                        <div class="form-group">
+                            <input type="number" class="form-control" id="bands" placeholder="Enter percentage (0-100)" min="0" max="100" step="0.1" required>
+                            <small class="text-muted">Normal: 0-5%</small>
+                        </div>
+                    </div>
+
+                    <!-- Calculate Button -->
+                    <div class="form-section">
+                        <button type="button" class="btn btn-calculate" onclick="calculateANC()">
+                            <i class="fas fa-calculator"></i> Calculate ANC
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Result Section -->
+                <div class="result-section" id="resultSection">
+                    <h4><i class="fas fa-chart-pie"></i> Results</h4>
+                    <div class="result-display" id="resultDisplay">0</div>
+                    <p id="resultUnit" style="font-size: 14px; color: #666;">K/μL</p>
+
+                    <div class="interpretation normal" id="interpretation">
+                        <strong>Classification:</strong>
+                        <span id="resultInterpretation">Normal</span>
+                    </div>
+
+                    <div id="clinicalGuidance" style="margin-top: 15px; padding: 15px; background-color: #f9f9f9; border-radius: 8px;">
+                        <strong><i class="fas fa-lightbulb"></i> Clinical Guidance:</strong>
+                        <p id="guidance" style="margin-top: 10px;"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate ANC
+        function calculateANC() {
+            const wbc = parseFloat(document.getElementById('wbc').value);
+            const segments = parseFloat(document.getElementById('segments').value);
+            const bands = parseFloat(document.getElementById('bands').value);
+
+            if (isNaN(wbc) || isNaN(segments) || isNaN(bands)) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            if (wbc < 0 || segments < 0 || segments > 100 || bands < 0 || bands > 100) {
+                alert('Please enter valid values');
+                return;
+            }
+
+            // Calculate ANC: WBC × (Segments + Bands) / 100
+            const anc = wbc * ((segments + bands) / 100);
+            document.getElementById('resultDisplay').textContent = anc.toFixed(2);
+
+            let interpretation, guidance, className;
+
+            // ANC Classification
+            if (anc >= 2.5) {
+                interpretation = 'Normal Neutrophil Count';
+                guidance = '<strong>ANC ≥2.5 K/μL:</strong> Normal range. No neutropenia. Standard infection risk management.';
+                className = 'normal';
+            } else if (anc >= 2.0) {
+                interpretation = 'Low Normal';
+                guidance = '<strong>ANC 2.0-2.5 K/μL:</strong> Low-normal range. Monitor for trends. Standard precautions appropriate.';
+                className = 'normal';
+            } else if (anc >= 1.5) {
+                interpretation = 'Mild Neutropenia';
+                guidance = '<strong>ANC 1.5-2.0 K/μL:</strong> Mild neutropenia. Increased infection risk. Monitor for signs of infection.';
+                className = 'low';
+            } else if (anc >= 1.0) {
+                interpretation = 'Moderate Neutropenia';
+                guidance = '<strong>ANC 1.0-1.5 K/μL:</strong> Moderate neutropenia. Significantly increased infection risk. Prophylactic antibiotics may be considered. Strict infection control measures.';
+                className = 'low';
+            } else if (anc >= 0.5) {
+                interpretation = 'Severe Neutropenia';
+                guidance = '<strong>ANC 0.5-1.0 K/μL:</strong> Severe neutropenia. High infection risk. Prophylactic antibiotics indicated. Strict protective measures. Avoid crowds and potential infection sources.';
+                className = 'low';
+            } else {
+                interpretation = 'Profound Neutropenia';
+                guidance = '<strong>ANC <0.5 K/μL:</strong> Profound neutropenia. Critical infection risk. Immediate intervention required. Hospitalization may be necessary. G-CSF therapy consideration.';
+                className = 'low';
+            }
+
+            const interpretationEl = document.getElementById('interpretation');
+            interpretationEl.className = 'interpretation ' + className;
+            interpretationEl.innerHTML = `<strong>Classification:</strong> ${interpretation}`;
+            document.getElementById('guidance').innerHTML = guidance;
+            document.getElementById('resultSection').classList.add('show');
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.getElementById('calculatorForm').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                calculateANC();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COPD Assessment Test (CAT) Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-dark: #2d3748;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .nav-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .calculator-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 2rem 1.5rem;
+        }
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+        }
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 5px solid #667eea;
+        }
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 1rem 0;
+        }
+        .interpretation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+        .formula-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+        .score-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .score-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            color: #6c757d;
+        }
+        .risk-low { color: #28a745; font-weight: 600; }
+        .risk-moderate { color: #ffc107; font-weight: 600; }
+        .risk-high { color: #dc3545; font-weight: 600; }
+        .info-badge {
+            display: inline-block;
+            background: #e7f3ff;
+            color: #0066cc;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="mb-0"><i class="fas fa-heartbeat"></i> Critical Care Calculators</h1>
+                    <small>Pulmonary & Critical Care Medicine</small>
+                </div>
+                <a href="index.html" class="btn btn-light btn-sm"><i class="fas fa-home"></i> Home</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="calculator-container">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-list"></i> COPD Assessment Test (CAT)</h2>
+                <p>COPD Symptom Burden and Health Impact Assessment</p>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="info-badge">
+                    <i class="fas fa-exclamation-circle"></i> 8-item questionnaire measuring COPD symptom impact
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label">1. I cough</div>
+                    <div class="scale-labels">
+                        <span>I never cough</span>
+                        <span>I cough all the time</span>
+                    </div>
+                    <input type="range" id="q1" class="form-range" min="0" max="5" step="1">
+                    <div class="text-center mt-2"><small>Score: <strong id="s1">0</strong>/5</small></div>
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label">2. I have phlegm/mucus in my chest</div>
+                    <div class="scale-labels">
+                        <span>No phlegm</span>
+                        <span>Lots of phlegm</span>
+                    </div>
+                    <input type="range" id="q2" class="form-range" min="0" max="5" step="1">
+                    <div class="text-center mt-2"><small>Score: <strong id="s2">0</strong>/5</small></div>
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label">3. I have chest tightness</div>
+                    <div class="scale-labels">
+                        <span>No tightness</span>
+                        <span>Very tight</span>
+                    </div>
+                    <input type="range" id="q3" class="form-range" min="0" max="5" step="1">
+                    <div class="text-center mt-2"><small>Score: <strong id="s3">0</strong>/5</small></div>
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label">4. When I walk uphill or hurry, I get short of breath</div>
+                    <div class="scale-labels">
+                        <span>Not at all</span>
+                        <span>Very much</span>
+                    </div>
+                    <input type="range" id="q4" class="form-range" min="0" max="5" step="1">
+                    <div class="text-center mt-2"><small>Score: <strong id="s4">0</strong>/5</small></div>
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label">5. When I walk on flat ground, I get short of breath</div>
+                    <div class="scale-labels">
+                        <span>Not at all</span>
+                        <span>Very much</span>
+                    </div>
+                    <input type="range" id="q5" class="form-range" min="0" max="5" step="1">
+                    <div class="text-center mt-2"><small>Score: <strong id="s5">0</strong>/5</small></div>
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label">6. I am limited in doing activities at home</div>
+                    <div class="scale-labels">
+                        <span>Not limited</span>
+                        <span>Very limited</span>
+                    </div>
+                    <input type="range" id="q6" class="form-range" min="0" max="5" step="1">
+                    <div class="text-center mt-2"><small>Score: <strong id="s6">0</strong>/5</small></div>
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label">7. I am confident that I can control my symptoms</div>
+                    <div class="scale-labels">
+                        <span>Very confident</span>
+                        <span>Not confident</span>
+                    </div>
+                    <input type="range" id="q7" class="form-range" min="0" max="5" step="1">
+                    <div class="text-center mt-2"><small>Score: <strong id="s7">0</strong>/5</small></div>
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label">8. I am energetic</div>
+                    <div class="scale-labels">
+                        <span>Very energetic</span>
+                        <span>Not energetic</span>
+                    </div>
+                    <input type="range" id="q8" class="form-range" min="0" max="5" step="1">
+                    <div class="text-center mt-2"><small>Score: <strong id="s8">0</strong>/5</small></div>
+                </div>
+
+                <!-- Dynamic score display -->
+                <script>
+                    for (let i = 1; i <= 8; i++) {
+                        document.getElementById('q' + i).addEventListener('input', function() {
+                            document.getElementById('s' + i).textContent = this.value;
+                        });
+                    }
+                </script>
+
+                <button onclick="calculateCAT()" class="btn btn-primary btn-lg w-100 mt-4">
+                    <i class="fas fa-calculator"></i> Calculate CAT Score
+                </button>
+
+                <div id="result" style="display:none;" class="result-box">
+                    <h4><i class="fas fa-chart-pie"></i> CAT Score Result</h4>
+                    <div class="result-score" id="scoreValue">--</div>
+                    <div class="interpretation">
+                        <h5>Impact Level:</h5>
+                        <p id="impact"></p>
+                    </div>
+                    <div class="interpretation">
+                        <h5>Clinical Interpretation:</h5>
+                        <p id="interpretation"></p>
+                    </div>
+                </div>
+
+                <div class="formula-section">
+                    <h5><i class="fas fa-book"></i> CAT Scoring Guide</h5>
+                    <p><strong>CAT = Sum of 8 items (0-5 each)</strong></p>
+                    <p>Total Score Range: 0-40 points</p>
+                    <ul class="small mb-0">
+                        <li>0-10: Minimal impact</li>
+                        <li>11-20: Mild impact</li>
+                        <li>21-30: Moderate impact</li>
+                        <li>31-40: Very high impact</li>
+                        <li>Used to guide treatment intensity and monitor response to therapy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate CAT Score
+        function calculateCAT() {
+            let total = 0;
+            for (let i = 1; i <= 8; i++) {
+                total += parseInt(document.getElementById('q' + i).value);
+            }
+
+            let impact = '';
+            let interpretation = '';
+
+            if (total <= 10) {
+                impact = '<span class="risk-low"><i class="fas fa-check-circle"></i> Minimal Impact</span>';
+                interpretation = 'COPD has minimal impact on daily life. Continue current therapy. Monitor regularly for changes.';
+            } else if (total <= 20) {
+                impact = '<span class="risk-low"><i class="fas fa-check-circle"></i> Mild Impact</span>';
+                interpretation = 'COPD symptoms have mild impact. Review current therapy adequacy. Consider lifestyle interventions and pulmonary rehabilitation if not already engaged.';
+            } else if (total <= 30) {
+                impact = '<span class="risk-moderate"><i class="fas fa-exclamation-triangle"></i> Moderate Impact</span>';
+                interpretation = 'COPD significantly impacts daily activities. Optimize pharmacotherapy. Pulmonary rehabilitation strongly recommended. Consider referral to pulmonologist if not already being managed by one.';
+            } else {
+                impact = '<span class="risk-high"><i class="fas fa-times-circle"></i> Very High Impact</span>';
+                interpretation = 'COPD severely impacts quality of life and function. Requires comprehensive assessment and aggressive management. Pulmonary rehabilitation essential. Consider referral for advanced therapies or transplant evaluation if appropriate.';
+            }
+
+            document.getElementById('scoreValue').textContent = total;
+            document.getElementById('impact').innerHTML = impact;
+            document.getElementById('interpretation').innerHTML = interpretation;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

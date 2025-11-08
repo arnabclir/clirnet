@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apgar Score Calculator - Pediatrics</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
+        body {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .card-header {
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .score-badge {
+            display: inline-block;
+            font-size: 36px;
+            font-weight: bold;
+            padding: 15px 25px;
+            border-radius: 10px;
+            color: white;
+            margin: 10px 0;
+        }
+
+        .score-excellent {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .score-good {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .score-moderate {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        }
+
+        .score-poor {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+        }
+
+        .apgar-table {
+            width: 100%;
+            margin: 15px 0;
+            border-collapse: collapse;
+        }
+
+        .apgar-table th,
+        .apgar-table td {
+            border: 2px solid #667eea;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .apgar-table th {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .select-option {
+            padding: 10px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark mb-4" style="background: transparent;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html" style="color: white;">
+                    <i class="fas fa-calculator"></i> Pediatric Calculators
+                </a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">
+                    <i class="fas fa-baby"></i> Apgar Score Calculator
+                </h1>
+                <small>Newborn assessment at 1, 5, and 10 minutes</small>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Instructions -->
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> Score each component at 1, 5, and 10 minutes of life.
+                    The Apgar score ranges from 0-10, with higher scores indicating better condition.
+                </div>
+
+                <!-- Apgar Score Table Reference -->
+                <div class="mb-4">
+                    <h5 class="text-center mb-3">Apgar Score Components</h5>
+                    <table class="apgar-table">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>0 Points</th>
+                                <th>1 Point</th>
+                                <th>2 Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Appearance</strong> (Skin color)</td>
+                                <td>Blue, Pale</td>
+                                <td>Body pink, Extremities blue</td>
+                                <td>Completely pink</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pulse</strong> (Heart rate)</td>
+                                <td>Absent</td>
+                                <td>&lt; 100 bpm</td>
+                                <td>≥ 100 bpm</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Grimace</strong> (Reflex irritability)</td>
+                                <td>No response</td>
+                                <td>Grimace/weak cry</td>
+                                <td>Cough/cry/pull away</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Activity</strong> (Muscle tone)</td>
+                                <td>Limp</td>
+                                <td>Some flexion</td>
+                                <td>Active movement</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Respiration</strong></td>
+                                <td>Absent</td>
+                                <td>Weak/irregular</td>
+                                <td>Strong/cry</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Input Form -->
+                <form id="apgarForm">
+                    <!-- 1 Minute Assessment -->
+                    <div class="section-divider mb-4">
+                        <h5><i class="fas fa-hourglass-start"></i> 1-Minute Assessment</h5>
+                        <hr>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">Appearance (Skin Color)</label>
+                            <select class="form-select apgar-1" id="appearance1" required>
+                                <option value="">-- Select --</option>
+                                <option value="0">Blue or Pale (0)</option>
+                                <option value="1">Body pink, Extremities blue (1)</option>
+                                <option value="2">Completely pink (2)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Pulse (Heart Rate)</label>
+                            <select class="form-select apgar-1" id="pulse1" required>
+                                <option value="">-- Select --</option>
+                                <option value="0">Absent (0)</option>
+                                <option value="1">&lt; 100 bpm (1)</option>
+                                <option value="2">≥ 100 bpm (2)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">Grimace (Reflex Irritability)</label>
+                            <select class="form-select apgar-1" id="grimace1" required>
+                                <option value="">-- Select --</option>
+                                <option value="0">No response (0)</option>
+                                <option value="1">Grimace/weak cry (1)</option>
+                                <option value="2">Cough/cry/pull away (2)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Activity (Muscle Tone)</label>
+                            <select class="form-select apgar-1" id="activity1" required>
+                                <option value="">-- Select --</option>
+                                <option value="0">Limp (0)</option>
+                                <option value="1">Some flexion (1)</option>
+                                <option value="2">Active movement (2)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">Respiration</label>
+                            <select class="form-select apgar-1" id="respiration1" required>
+                                <option value="">-- Select --</option>
+                                <option value="0">Absent (0)</option>
+                                <option value="1">Weak/irregular (1)</option>
+                                <option value="2">Strong/cry (2)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- 5 Minute Assessment -->
+                    <div class="section-divider mb-4 mt-4">
+                        <h5><i class="fas fa-hourglass-half"></i> 5-Minute Assessment</h5>
+                        <hr>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">Appearance (Skin Color)</label>
+                            <select class="form-select apgar-5" id="appearance5" required>
+                                <option value="">-- Select --</option>
+                                <option value="0">Blue or Pale (0)</option>
+                                <option value="1">Body pink, Extremities blue (1)</option>
+                                <option value="2">Completely pink (2)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Pulse (Heart Rate)</label>
+                            <select class="form-select apgar-5" id="pulse5" required>
+                                <option value="">-- Select --</option>
+                                <option value="0">Absent (0)</option>
+                                <option value="1">&lt; 100 bpm (1)</option>
+                                <option value="2">≥ 100 bpm (2)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">Grimace (Reflex Irritability)</label>
+                            <select class="form-select apgar-5" id="grimace5" required>
+                                <option value="">-- Select --</option>
+                                <option value="0">No response (0)</option>
+                                <option value="1">Grimace/weak cry (1)</option>
+                                <option value="2">Cough/cry/pull away (2)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Activity (Muscle Tone)</label>
+                            <select class="form-select apgar-5" id="activity5" required>
+                                <option value="">-- Select --</option>
+                                <option value="0">Limp (0)</option>
+                                <option value="1">Some flexion (1)</option>
+                                <option value="2">Active movement (2)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">Respiration</label>
+                            <select class="form-select apgar-5" id="respiration5" required>
+                                <option value="">-- Select --</option>
+                                <option value="0">Absent (0)</option>
+                                <option value="1">Weak/irregular (1)</option>
+                                <option value="2">Strong/cry (2)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- 10 Minute Assessment (Optional) -->
+                    <div class="section-divider mb-4 mt-4">
+                        <h5><i class="fas fa-hourglass-end"></i> 10-Minute Assessment (Optional)</h5>
+                        <hr>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">Appearance (Skin Color)</label>
+                            <select class="form-select apgar-10" id="appearance10">
+                                <option value="">-- Select --</option>
+                                <option value="0">Blue or Pale (0)</option>
+                                <option value="1">Body pink, Extremities blue (1)</option>
+                                <option value="2">Completely pink (2)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Pulse (Heart Rate)</label>
+                            <select class="form-select apgar-10" id="pulse10">
+                                <option value="">-- Select --</option>
+                                <option value="0">Absent (0)</option>
+                                <option value="1">&lt; 100 bpm (1)</option>
+                                <option value="2">≥ 100 bpm (2)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">Grimace (Reflex Irritability)</label>
+                            <select class="form-select apgar-10" id="grimace10">
+                                <option value="">-- Select --</option>
+                                <option value="0">No response (0)</option>
+                                <option value="1">Grimace/weak cry (1)</option>
+                                <option value="2">Cough/cry/pull away (2)</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Activity (Muscle Tone)</label>
+                            <select class="form-select apgar-10" id="activity10">
+                                <option value="">-- Select --</option>
+                                <option value="0">Limp (0)</option>
+                                <option value="1">Some flexion (1)</option>
+                                <option value="2">Active movement (2)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">Respiration</label>
+                            <select class="form-select apgar-10" id="respiration10">
+                                <option value="">-- Select --</option>
+                                <option value="0">Absent (0)</option>
+                                <option value="1">Weak/irregular (1)</option>
+                                <option value="2">Strong/cry (2)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="calculateApgar()">
+                            <i class="fas fa-calculator"></i> Calculate Scores
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results -->
+                <div id="resultBox" class="result-box">
+                    <h4 class="text-center mb-4"><i class="fas fa-check-circle"></i> Apgar Score Results</h4>
+
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <div>
+                                <p class="text-muted"><small>1-Minute Score</small></p>
+                                <div class="score-badge" id="score1Badge"></div>
+                                <p id="interpretation1" class="text-muted"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div>
+                                <p class="text-muted"><small>5-Minute Score</small></p>
+                                <div class="score-badge" id="score5Badge"></div>
+                                <p id="interpretation5" class="text-muted"></p>
+                            </div>
+                        </div>
+                        <div class="col-md-4" id="score10Col" style="display: none;">
+                            <div>
+                                <p class="text-muted"><small>10-Minute Score</small></p>
+                                <div class="score-badge" id="score10Badge"></div>
+                                <p id="interpretation10" class="text-muted"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Clinical Guidance -->
+                    <div id="clinicalGuidance"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate Apgar Score
+        function calculateApgar() {
+            // Get 1-minute values
+            const app1 = parseInt(document.getElementById('appearance1').value) || 0;
+            const pul1 = parseInt(document.getElementById('pulse1').value) || 0;
+            const gri1 = parseInt(document.getElementById('grimace1').value) || 0;
+            const act1 = parseInt(document.getElementById('activity1').value) || 0;
+            const res1 = parseInt(document.getElementById('respiration1').value) || 0;
+            const score1 = app1 + pul1 + gri1 + act1 + res1;
+
+            // Get 5-minute values
+            const app5 = parseInt(document.getElementById('appearance5').value) || 0;
+            const pul5 = parseInt(document.getElementById('pulse5').value) || 0;
+            const gri5 = parseInt(document.getElementById('grimace5').value) || 0;
+            const act5 = parseInt(document.getElementById('activity5').value) || 0;
+            const res5 = parseInt(document.getElementById('respiration5').value) || 0;
+            const score5 = app5 + pul5 + gri5 + act5 + res5;
+
+            // Get 10-minute values (if provided)
+            const app10 = parseInt(document.getElementById('appearance10').value);
+            const pul10 = parseInt(document.getElementById('pulse10').value);
+            const gri10 = parseInt(document.getElementById('grimace10').value);
+            const act10 = parseInt(document.getElementById('activity10').value);
+            const res10 = parseInt(document.getElementById('respiration10').value);
+
+            let score10 = null;
+            let has10Min = false;
+
+            if (!isNaN(app10) && !isNaN(pul10) && !isNaN(gri10) && !isNaN(act10) && !isNaN(res10)) {
+                score10 = app10 + pul10 + gri10 + act10 + res10;
+                has10Min = true;
+            }
+
+            // Display scores
+            displayApgarScore(score1, '1', 'score1Badge', 'interpretation1');
+            displayApgarScore(score5, '5', 'score5Badge', 'interpretation5');
+
+            if (has10Min) {
+                document.getElementById('score10Col').style.display = 'block';
+                displayApgarScore(score10, '10', 'score10Badge', 'interpretation10');
+            } else {
+                document.getElementById('score10Col').style.display = 'none';
+            }
+
+            // Show clinical guidance
+            showApgarGuidance(score1, score5, score10);
+
+            // Show result box
+            document.getElementById('resultBox').classList.add('show');
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Display individual score with interpretation
+        function displayApgarScore(score, minute, badgeId, interpretId) {
+            const badge = document.getElementById(badgeId);
+            const interpret = document.getElementById(interpretId);
+
+            badge.textContent = score;
+
+            if (score >= 8) {
+                badge.className = 'score-badge score-excellent';
+                interpret.textContent = 'Normal - Reassuring';
+            } else if (score >= 5) {
+                badge.className = 'score-badge score-moderate';
+                interpret.textContent = 'Moderate depression';
+            } else {
+                badge.className = 'score-badge score-poor';
+                interpret.textContent = 'Severe depression';
+            }
+        }
+
+        // Show clinical guidance
+        function showApgarGuidance(score1, score5, score10) {
+            let guidance = '<div class="alert alert-warning"><strong>Clinical Interpretation:</strong><br>';
+
+            // Interpretation based on 5-minute score (most important)
+            if (score5 >= 8) {
+                guidance += `<p><i class="fas fa-check"></i> <strong>Normal newborn:</strong> No intervention needed beyond routine care. Continue monitoring.</p>`;
+            } else if (score5 >= 5) {
+                guidance += `<p><i class="fas fa-exclamation-triangle"></i> <strong>Moderate depression:</strong> Provide stimulation and oxygen. May require further intervention.</p>`;
+                guidance += `<p>- Dry and warm the infant</p>`;
+                guidance += `<p>- Provide blow-by oxygen if available</p>`;
+                guidance += `<p>- Reassess in 5 minutes</p>`;
+            } else {
+                guidance += `<p><i class="fas fa-exclamation-circle"></i> <strong>Severe depression:</strong> Requires immediate resuscitation.</p>`;
+                guidance += `<p>- Begin positive pressure ventilation</p>`;
+                guidance += `<p>- Consider chest compressions if HR &lt; 60</p>`;
+                guidance += `<p>- Consider epinephrine per PALS guidelines</p>`;
+            }
+
+            // Add trend information
+            guidance += `<hr>`;
+            if (score1 < score5) {
+                guidance += `<p><i class="fas fa-arrow-up"></i> <strong>Positive trend:</strong> Score improved from 1 to 5 minutes (good prognostic sign)</p>`;
+            } else if (score1 > score5) {
+                guidance += `<p><i class="fas fa-arrow-down"></i> <strong>Concerning trend:</strong> Score decreased from 1 to 5 minutes (requires investigation)</p>`;
+            } else {
+                guidance += `<p><i class="fas fa-equals"></i> <strong>Stable:</strong> Score unchanged from 1 to 5 minutes</p>`;
+            }
+
+            guidance += `</div>`;
+            document.getElementById('clinicalGuidance').innerHTML = guidance;
+        }
+    </script>
+</body>
+</html>

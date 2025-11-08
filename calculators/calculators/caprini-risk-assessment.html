@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caprini VTE Risk Assessment Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-dark: #2d3748;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .nav-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .calculator-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 2rem 1.5rem;
+        }
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+        }
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 5px solid #667eea;
+        }
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 1rem 0;
+        }
+        .interpretation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+        .formula-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+        .score-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .risk-low { color: #28a745; font-weight: 600; }
+        .risk-moderate { color: #ffc107; font-weight: 600; }
+        .risk-high { color: #dc3545; font-weight: 600; }
+        .info-badge {
+            display: inline-block;
+            background: #e7f3ff;
+            color: #0066cc;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="mb-0"><i class="fas fa-heartbeat"></i> Critical Care Calculators</h1>
+                    <small>Pulmonary & Critical Care Medicine</small>
+                </div>
+                <a href="index.html" class="btn btn-light btn-sm"><i class="fas fa-home"></i> Home</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="calculator-container">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-check-circle"></i> Caprini VTE Risk Assessment</h2>
+                <p>Venous Thromboembolism Risk in Surgical Patients</p>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="info-badge">
+                    <i class="fas fa-exclamation-circle"></i> Preoperative VTE risk stratification
+                </div>
+
+                <p><strong>Patient Factors (1 point each):</strong></p>
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="age41to60" class="form-check-input">
+                        <label for="age41to60">Age 41-60 years (1)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="age61to74" class="form-check-input">
+                        <label for="age61to74">Age 61-74 years (2)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="age75plus" class="form-check-input">
+                        <label for="age75plus">Age >75 years (3)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="bmi" class="form-check-input">
+                        <label for="bmi">BMI >25 kg/m² (1)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="ocp" class="form-check-input">
+                        <label for="ocp">Oral contraceptives/HRT (1)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="varices" class="form-check-input">
+                        <label for="varices">Varicose veins (1)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="edema" class="form-check-input">
+                        <label for="edema">Lower extremity edema (1)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="dvtpe" class="form-check-input">
+                        <label for="dvtpe">History of DVT/PE (2)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="thrombophilia" class="form-check-input">
+                        <label for="thrombophilia">Thrombophilia (2)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="immobility" class="form-check-input">
+                        <label for="immobility">Immobility >1 week (1)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="malignancy2" class="form-check-input">
+                        <label for="malignancy2">Malignancy (2)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="pneumonia" class="form-check-input">
+                        <label for="pneumonia">Pneumonia (1)</label>
+                    </div>
+                </div>
+
+                <p class="mt-4"><strong>Surgical Factors (1 point each):</strong></p>
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="arthro" class="form-check-input">
+                        <label for="arthro">Arthroscopic surgery (1)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="cancer_surg" class="form-check-input">
+                        <label for="cancer_surg">Cancer surgery (2)</label>
+                    </div>
+                </div>
+
+                <div class="score-item">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="major_surg" class="form-check-input">
+                        <label for="major_surg">Major surgery >60 min (1)</label>
+                    </div>
+                </div>
+
+                <button onclick="calculateCaprini()" class="btn btn-primary btn-lg w-100 mt-4">
+                    <i class="fas fa-calculator"></i> Calculate Caprini Score
+                </button>
+
+                <div id="result" style="display:none;" class="result-box">
+                    <h4><i class="fas fa-chart-pie"></i> Caprini Risk Result</h4>
+                    <div class="result-score" id="scoreValue">--</div>
+                    <div class="interpretation">
+                        <h5>VTE Risk Category:</h5>
+                        <p id="riskCategory"></p>
+                    </div>
+                    <div class="interpretation">
+                        <h5>Recommended Prophylaxis:</h5>
+                        <p id="prophylaxis"></p>
+                    </div>
+                </div>
+
+                <div class="formula-section">
+                    <h5><i class="fas fa-book"></i> Caprini Score Risk Stratification</h5>
+                    <ul class="small mb-0">
+                        <li>Score 0: Minimal risk - Early mobilization</li>
+                        <li>Score 1-2: Low risk - Mechanical prophylaxis</li>
+                        <li>Score 3-4: Moderate risk - Pharmacologic ± mechanical prophylaxis</li>
+                        <li>Score ≥5: High risk - Aggressive pharmacologic + mechanical prophylaxis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate Caprini Score
+        function calculateCaprini() {
+            let score = 0;
+
+            if (document.getElementById('age41to60').checked) score += 1;
+            if (document.getElementById('age61to74').checked) score += 2;
+            if (document.getElementById('age75plus').checked) score += 3;
+            if (document.getElementById('bmi').checked) score += 1;
+            if (document.getElementById('ocp').checked) score += 1;
+            if (document.getElementById('varices').checked) score += 1;
+            if (document.getElementById('edema').checked) score += 1;
+            if (document.getElementById('dvtpe').checked) score += 2;
+            if (document.getElementById('thrombophilia').checked) score += 2;
+            if (document.getElementById('immobility').checked) score += 1;
+            if (document.getElementById('malignancy2').checked) score += 2;
+            if (document.getElementById('pneumonia').checked) score += 1;
+            if (document.getElementById('arthro').checked) score += 1;
+            if (document.getElementById('cancer_surg').checked) score += 2;
+            if (document.getElementById('major_surg').checked) score += 1;
+
+            let riskCategory = '';
+            let prophylaxis = '';
+
+            if (score === 0) {
+                riskCategory = '<span class="risk-low"><i class="fas fa-check-circle"></i> Minimal Risk</span>';
+                prophylaxis = 'Early mobilization and leg exercises. No pharmacologic prophylaxis needed.';
+            } else if (score <= 2) {
+                riskCategory = '<span class="risk-low"><i class="fas fa-check-circle"></i> Low Risk</span>';
+                prophylaxis = 'Early mobilization, sequential compression devices, or graduated compression stockings. Avoid pharmacologic prophylaxis if possible.';
+            } else if (score <= 4) {
+                riskCategory = '<span class="risk-moderate"><i class="fas fa-exclamation-triangle"></i> Moderate Risk</span>';
+                prophylaxis = 'Mechanical prophylaxis (SCDs/GCS) AND consider pharmacologic prophylaxis (LMWH, fondaparinux, or warfarin) for extended duration.';
+            } else {
+                riskCategory = '<span class="risk-high"><i class="fas fa-times-circle"></i> High Risk</span>';
+                prophylaxis = 'Aggressive prophylaxis: Pharmacologic (LMWH, fondaparinux, apixaban, dabigatran) PLUS mechanical (SCDs/GCS). Extended prophylaxis post-op recommended (up to 35 days for major orthopedic surgery).';
+            }
+
+            document.getElementById('scoreValue').textContent = score;
+            document.getElementById('riskCategory').innerHTML = riskCategory;
+            document.getElementById('prophylaxis').innerHTML = prophylaxis;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

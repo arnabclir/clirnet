@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hematology Calculators - Complete Index</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background: var(--primary-gradient) !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .calculator-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            height: 100%;
+        }
+        .calculator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        }
+        .calculator-card .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .badge-risk {
+            font-size: 12px;
+            padding: 5px 10px;
+        }
+        .link-button {
+            background: var(--primary-gradient);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+            transition: transform 0.2s;
+        }
+        .link-button:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><i class="fas fa-calculator"></i> Clinical Calculators</a>
+        </div>
+    </nav>
+
+    <div class="header">
+        <h1><i class="fas fa-blood"></i> Hematology Specialty Calculators</h1>
+        <p>15 Evidence-Based Clinical Assessment Tools</p>
+    </div>
+
+    <div class="container" style="max-width: 1200px; margin-bottom: 40px;">
+        <div class="row g-4">
+            <!-- 1. 4 Ts Score -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card calculator-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-microscope"></i> 4 Ts Score</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted"><small>HIT Pretest Probability</small></p>
+                        <p><strong>Assessment:</strong> Heparin-induced thrombocytopenia risk</p>
+                        <p><strong>Components:</strong> 4 factors</p>
+                        <p><strong>Output:</strong> Low/Intermediate/High risk</p>
+                        <a href="calculators/4-ts-score.html" class="link-button"><i class="fas fa-external-link-alt"></i> Open Calculator</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. CNS-IPI -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card calculator-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-brain"></i> CNS-IPI</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted"><small>DLBCL CNS Relapse</small></p>
+                        <p><strong>Assessment:</strong> CNS relapse risk in DLBCL</p>
+                        <p><strong>Components:</strong> 5 factors</p>
+                        <p><strong>Output:</strong> 3-year relapse risk %</p>
+                        <a href="calculators/cns-ipi-score.html" class="link-button"><i class="fas fa-external-link-alt"></i> Open Calculator</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. CIBMTR -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card calculator-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-exchange"></i> CIBMTR</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted"><small>Chronic GVHD Risk</small></p>
+                        <p><strong>Assessment:</strong> Post-transplant GVHD</p>
+                        <p><strong>Components:</strong> 5 factors</p>
+                        <p><strong>Output:</strong> Risk stratification</p>
+                        <a href="calculators/cibmtr-chronic-gvhd-score.html" class="link-button"><i class="fas fa-external-link-alt"></i> Open Calculator</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. HAS-BLED -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card calculator-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-droplet"></i> HAS-BLED</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted"><small>Bleeding Risk</small></p>
+                        <p><strong>Assessment:</strong> Anticoagulation bleeding risk</p>
+                        <p><strong>Components:</strong> 8 factors</p>
+                        <p><strong>Output:</strong> 1-year bleed risk %</p>
+                        <a href="calculators/has-bled-score.html" class="link-button"><i class="fas fa-external-link-alt"></i> Open Calculator</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. DVT Wells -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card calculator-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-shoe-prints"></i> Wells Score</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted"><small>DVT Probability</small></p>
+                        <p><strong>Assessment:</strong> Deep vein thrombosis risk</p>
+                        <p><strong>Components:</strong> 8 factors</p>
+                        <p><strong>Output:</strong> Low/Intermediate/High</p>
+                        <a href="calculators/dvt-wells-score.html" class="link-button"><i class="fas fa-external-link-alt"></i> Open Calculator</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. GIPSS -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card calculator-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-bone"></i> GIPSS</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted"><small>Myelofibrosis</small></p>
+                        <p><strong>Assessment:</strong> Myelofibrosis prognosis</p>
+                        <p><strong>Components:</strong> 3 factors</p>
+                        <p><strong>Output:</strong> Risk + OS estimate</p>
+                        <a href="calculators/gipss-score.html" class="link-button"><i class="fas fa-external-link-alt"></i> Open Calculator</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. IPI NHL -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card calculator-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-lymph"></i> IPI (NHL)</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted"><small>Non-Hodgkin's</small></p>
+                        <p><strong>Assessment:</strong> NHL prognostic index</p>
+                        <p><strong>Components:</strong> 5 factors</p>
+                        <p><strong>Output:</strong> 5-year OS %</p>
+                        <a href="calculators/ipi-non-hodgkin-lymphoma.html" class="link-button"><i class="fas fa-external-link-alt"></i> Open Calculator</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. IPS HL -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card calculator-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-ribbon"></i> IPS (HL)</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted"><small>Hodgkin's</small></p>
+                        <p><strong>Assessment:</strong> Hodgkin lymphoma prognosis</p>
+                        <p><strong>Components:</strong> 6 factors</p>
+                        <p><strong>Output:</strong> 5-year FFP %</p>
+                        <a href="calculators/ips-hodgkin-lymphoma.html" class="link-button"><i class="fas fa-external-link-alt"></i> Open Calculator</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. Khorana -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card calculator-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-clot"></i> Khorana</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted"><small>Cancer VTE Risk</small></p>
+                        <p><strong>Assessment:</strong> VTE in cancer patients</p>
+                        <p><strong>Components:</strong> 5 factors</p>
+                        <p><strong>Output:</strong> VTE incidence %</p>
+                        <a href="calculators/khorana-score.html" class="link-button"><i class="fas fa-external-link-alt"></i> Open Calculator</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. ANC -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card calculator-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-flask"></i> ANC</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted"><small>Neutrophil Count</small></p>
+                        <p><strong>Calculation:</strong> Absolute neutrophil count</p>
+                        <p><strong>Formula:</strong> WBC × (% Segments + Bands)</p>
+                        <p><strong>Output:</strong> Neutropenia classification</p>
+                        <a href="calculators/anc-calculator.html" class="link-button"><i class="fas fa-external-link-alt"></i> Open Calculator</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. RPI -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card calculator-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-flask"></i> RPI</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted"><small>Reticulocyte Index</small></p>
+                        <p><strong>Calculation:</strong> Bone marrow response</p>
+                        <p><strong>Formula:</strong> Corrected reticulocyte</p>
+                        <p><strong>Output:</strong> Adequacy assessment</p>
+                        <a href="calculators/rpi-calculator.html" class="link-button"><i class="fas fa-external-link-alt"></i> Open Calculator</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12. TSAT -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card calculator-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-flask"></i> TSAT</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted"><small>Iron Status</small></p>
+                        <p><strong>Calculation:</strong> Transferrin saturation</p>
+                        <p><strong>Formula:</strong> Iron ÷ TIBC × 100</p>
+                        <p><strong>Output:</strong> Iron status classification</p>
+                        <a href="calculators/tsat-calculator.html" class="link-button"><i class="fas fa-external-link-alt"></i> Open Calculator</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 13. MIPI -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card calculator-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-lymph"></i> MIPI</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted"><small>Mantle Cell</small></p>
+                        <p><strong>Assessment:</strong> Mantle cell lymphoma</p>
+                        <p><strong>Components:</strong> 4 factors</p>
+                        <p><strong>Output:</strong> Risk + OS estimate</p>
+                        <a href="calculators/mipi-score.html" class="link-button"><i class="fas fa-external-link-alt"></i> Open Calculator</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 14. MDACC MDS -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card calculator-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-chart-line"></i> MDACC MDS</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted"><small>MDS Prognosis</small></p>
+                        <p><strong>Assessment:</strong> Myelodysplasia</p>
+                        <p><strong>Components:</strong> 5 factors</p>
+                        <p><strong>Output:</strong> Prognosis + guidance</p>
+                        <a href="calculators/mdacc-mds-score.html" class="link-button"><i class="fas fa-external-link-alt"></i> Open Calculator</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 15. IPSS-R -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card calculator-card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="fas fa-chart-bar"></i> IPSS-R</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted"><small>Revised MDS</small></p>
+                        <p><strong>Assessment:</strong> MDS prognostic score</p>
+                        <p><strong>Components:</strong> 4 factors</p>
+                        <p><strong>Output:</strong> 5-tier risk + OS</p>
+                        <a href="calculators/ipss-r-score.html" class="link-button"><i class="fas fa-external-link-alt"></i> Open Calculator</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="background: #f9f9f9; padding: 30px 20px; text-align: center; margin-top: 40px;">
+        <h4>Technical Specifications</h4>
+        <p>
+            <span class="badge bg-primary me-2"><i class="fas fa-code"></i> Pure HTML5/CSS3</span>
+            <span class="badge bg-success me-2"><i class="fas fa-responsive"></i> Responsive Design</span>
+            <span class="badge bg-info me-2"><i class="fas fa-bootstrap"></i> Bootstrap 5</span>
+            <span class="badge bg-warning me-2"><i class="fas fa-icons"></i> Font Awesome</span>
+        </p>
+        <p style="margin-top: 15px; font-size: 14px; color: #666;">
+            15 clinically validated calculators for comprehensive hematology assessment
+        </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

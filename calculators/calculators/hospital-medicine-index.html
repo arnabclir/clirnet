@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Medicine Calculators - Complete Index</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-dark: #2d3748;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .nav-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .nav-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        .container-main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .calculator-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border-left: 5px solid #667eea;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+        .calculator-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            border-left-color: #764ba2;
+        }
+        .card-header-custom {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            flex-shrink: 0;
+        }
+        .card-header-custom i {
+            margin-right: 0.5rem;
+            font-size: 1.3rem;
+        }
+        .card-header-custom h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        .card-body-custom {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .card-description {
+            font-size: 0.95rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+        .card-category {
+            display: inline-block;
+            background: #e7f3ff;
+            color: #0066cc;
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        .btn-calculator {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+            align-self: flex-start;
+            margin-top: auto;
+        }
+        .btn-calculator:hover {
+            transform: translateX(3px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+        .category-section {
+            margin-bottom: 3rem;
+        }
+        .category-title {
+            color: #667eea;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .category-title i {
+            font-size: 2rem;
+        }
+        .search-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        .search-input {
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .search-input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+        .footer-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 3rem;
+            border-left: 5px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="nav-header">
+        <div class="container-main">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1><i class="fas fa-hospital"></i> Hospital Medicine Calculators</h1>
+                    <p class="mb-0" style="font-size: 1.1rem; opacity: 0.95;">Complete Inpatient Management Tool Suite</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-main">
+        <!-- Statistics -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="stat-card">
+                    <div class="stat-number">20</div>
+                    <div class="stat-label">Clinical Calculators</div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Evidence-Based</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Section -->
+        <div class="search-section">
+            <h5 style="margin-bottom: 1rem;"><i class="fas fa-search"></i> Search Calculators</h5>
+            <input type="text" id="searchInput" class="search-input w-100" placeholder="Search by name, condition, or calculation type...">
+        </div>
+
+        <!-- Scoring Systems & Risk Stratification -->
+        <div class="category-section">
+            <div class="category-title">
+                <i class="fas fa-chart-line"></i> Severity Scoring & Risk Stratification
+            </div>
+            <div class="calculator-grid" id="category-scoring">
+                <!-- Apache II Score -->
+                <a href="apache-ii-score.html" class="calculator-card" data-name="APACHE II Score" data-keywords="apache severity icu">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> APACHE II Score</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-chart-bar"></i> Severity Score</span>
+                        <p class="card-description">ICU mortality prediction tool. Evaluates physiologic parameters to assess patient severity and prognosis.</p>
+                        <a href="apache-ii-score.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- CIWA-Ar Scale -->
+                <a href="ciwa-ar-scale.html" class="calculator-card" data-name="CIWA-Ar Alcohol Withdrawal" data-keywords="alcohol withdrawal ciwa tremor">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> CIWA-Ar Scale</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-exclamation-triangle"></i> Withdrawal Assessment</span>
+                        <p class="card-description">Alcohol withdrawal severity assessment. Guides treatment intensity for alcohol dependence and detoxification.</p>
+                        <a href="ciwa-ar-scale.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- Braden Score -->
+                <a href="pressure-ulcer-risk-braden.html" class="calculator-card" data-name="Braden Pressure Ulcer" data-keywords="braden pressure ulcer risk">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> Braden Scale</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-shield-alt"></i> Pressure Ulcer Risk</span>
+                        <p class="card-description">Pressure ulcer risk assessment. Identifies patients at risk for skin breakdown and pressure injuries.</p>
+                        <a href="pressure-ulcer-risk-braden.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- Wells DVT Score -->
+                <a href="wells-dvt-score.html" class="calculator-card" data-name="Wells DVT Score" data-keywords="dvt wells thromboembolism">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> Wells DVT Score</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-blood"></i> VTE Risk</span>
+                        <p class="card-description">Deep vein thrombosis probability assessment. Stratifies risk for DVT and guides diagnostic workup.</p>
+                        <a href="wells-dvt-score.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- Wells PE Score -->
+                <a href="pulmonary-embolism-wells.html" class="calculator-card" data-name="Pulmonary Embolism Wells" data-keywords="pe wells pulmonary embolism">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> Wells PE Score</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-lungs"></i> VTE Risk</span>
+                        <p class="card-description">Pulmonary embolism probability assessment. Stratifies PE risk and determines need for imaging.</p>
+                        <a href="pulmonary-embolism-wells.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- TIMI STEMI -->
+                <a href="timi-stemi-score.html" class="calculator-card" data-name="TIMI STEMI Score" data-keywords="timi stemi mi mortality">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> TIMI STEMI Score</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-heart"></i> MI Risk</span>
+                        <p class="card-description">ST-elevation MI mortality prediction. Risk stratification for acute coronary syndrome outcomes.</p>
+                        <a href="timi-stemi-score.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- TIMI NSTEMI -->
+                <a href="timi-nstemi-score.html" class="calculator-card" data-name="TIMI NSTEMI Score" data-keywords="timi nstemi unstable angina">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> TIMI NSTEMI Score</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-heart"></i> MI Risk</span>
+                        <p class="card-description">Unstable angina/NSTEMI risk assessment. Predicts major adverse cardiac events at 14 days.</p>
+                        <a href="timi-nstemi-score.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- PSI Score -->
+                <a href="community-acquired-pneumonia-psi.html" class="calculator-card" data-name="PSI Community-Acquired Pneumonia" data-keywords="psi pneumonia cap severity">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> PSI Score</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-lungs"></i> Pneumonia Risk</span>
+                        <p class="card-description">Community-acquired pneumonia severity index. Predicts mortality and guides admission decisions.</p>
+                        <a href="community-acquired-pneumonia-psi.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- REVCS Score -->
+                <a href="revised-venous-clinical-severity.html" class="calculator-card" data-name="Revised Venous Clinical Severity" data-keywords="revcs venous clinical severity">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> REVCS Score</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-droplet"></i> Venous Disease</span>
+                        <p class="card-description">Chronic venous disease severity assessment. Evaluates symptoms and clinical signs of venous insufficiency.</p>
+                        <a href="revised-venous-clinical-severity.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- Duke Criteria - Endocarditis -->
+                <a href="clinical-diagnosis-of-endocarditis.html" class="calculator-card" data-name="Duke Criteria Endocarditis" data-keywords="duke endocarditis bacterial infection">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> Duke Criteria</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-microbe"></i> Infection Diagnosis</span>
+                        <p class="card-description">Modified Duke criteria for infective endocarditis diagnosis. Diagnostic algorithm for suspected endocarditis.</p>
+                        <a href="clinical-diagnosis-of-endocarditis.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- Malignant Hyperthermia -->
+                <a href="malignant-hyperthermia-indicators.html" class="calculator-card" data-name="Malignant Hyperthermia" data-keywords="malignant hyperthermia anesthesia">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> Malignant Hyperthermia</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-exclamation-triangle"></i> Anesthesia Risk</span>
+                        <p class="card-description">Clinical indicators for malignant hyperthermia risk. Preoperative assessment and screening tool.</p>
+                        <a href="malignant-hyperthermia-indicators.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Calculation Tools -->
+        <div class="category-section">
+            <div class="category-title">
+                <i class="fas fa-flask"></i> Clinical Calculations & Lab Values
+            </div>
+            <div class="calculator-grid" id="category-calculations">
+                <!-- ANC Calculator -->
+                <a href="absolute-neutrophil-count.html" class="calculator-card" data-name="Absolute Neutrophil Count ANC" data-keywords="anc neutrophil infection">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> ANC Calculator</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-microscope"></i> Lab Calculation</span>
+                        <p class="card-description">Absolute neutrophil count calculation. Determines infection risk and need for prophylaxis.</p>
+                        <a href="absolute-neutrophil-count.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- A-a Gradient -->
+                <a href="aa-gradient.html" class="calculator-card" data-name="Alveolar Arterial Gradient" data-keywords="aa gradient pao2 hypoxemia">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> A-a Gradient</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-lungs"></i> Respiratory Calculation</span>
+                        <p class="card-description">Alveolar-arterial gradient calculation. Assesses lung gas exchange and hypoxemia etiology.</p>
+                        <a href="aa-gradient.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- Parkland Formula -->
+                <a href="burn-parkland-formula.html" class="calculator-card" data-name="Parkland Burn Resuscitation" data-keywords="parkland burn fluid resuscitation">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> Parkland Formula</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-fire"></i> Burn Resuscitation</span>
+                        <p class="card-description">Parkland formula for burn fluid resuscitation. Calculates IV fluid requirements for burn injuries.</p>
+                        <a href="burn-parkland-formula.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- Modified Brooke Formula -->
+                <a href="burn-brooke-formula.html" class="calculator-card" data-name="Modified Brooke Burn" data-keywords="brooke burn fluid resuscitation">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> Modified Brooke Formula</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-fire"></i> Burn Resuscitation</span>
+                        <p class="card-description">Modified Brooke formula for burn resuscitation. Alternative approach to fluid management in burns.</p>
+                        <a href="burn-brooke-formula.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- Calcium Correction -->
+                <a href="electrolyte-correction-calcium.html" class="calculator-card" data-name="Corrected Calcium" data-keywords="calcium correction albumin hypoalbuminemia">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> Calcium Correction</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-flask"></i> Electrolyte Correction</span>
+                        <p class="card-description">Corrected calcium calculation in hypoalbuminemia. Adjusts serum calcium for albumin levels.</p>
+                        <a href="electrolyte-correction-calcium.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- Cardiac Output -->
+                <a href="cardiac-output-calculation.html" class="calculator-card" data-name="Cardiac Output Calculation" data-keywords="cardiac output hemodynamics">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> Cardiac Output</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-heart"></i> Hemodynamics</span>
+                        <p class="card-description">Cardiac output and hemodynamic calculations. Assesses cardiovascular function and perfusion.</p>
+                        <a href="cardiac-output-calculation.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- Creatinine Clearance -->
+                <a href="creatinine-clearance-cockcroft-gault.html" class="calculator-card" data-name="Creatinine Clearance Cockcroft-Gault" data-keywords="creatinine clearance gfr renal">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> Creatinine Clearance</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-kidney"></i> Renal Function</span>
+                        <p class="card-description">Cockcroft-Gault creatinine clearance. Estimates kidney function for drug dosing.</p>
+                        <a href="creatinine-clearance-cockcroft-gault.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- FENa -->
+                <a href="fractional-excretion-sodium.html" class="calculator-card" data-name="Fractional Excretion Sodium" data-keywords="fena fractional excretion sodium acute kidney">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> FENa</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-kidney"></i> Renal Function</span>
+                        <p class="card-description">Fractional excretion of sodium. Differentiates prerenal from intrinsic kidney injury.</p>
+                        <a href="fractional-excretion-sodium.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+
+                <!-- Serum Osmolal Gap -->
+                <a href="serum-osmolal-gap.html" class="calculator-card" data-name="Serum Osmolal Gap" data-keywords="osmolal gap osmolality toxins">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-calculator"></i> Osmolal Gap</h3>
+                    </div>
+                    <div class="card-body-custom">
+                        <span class="card-category"><i class="fas fa-flask"></i> Toxicology</span>
+                        <p class="card-description">Serum osmolal gap calculation. Detects presence of osmotically active toxins.</p>
+                        <a href="serum-osmolal-gap.html" class="btn-calculator"><i class="fas fa-arrow-right"></i> Calculate</a>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-section">
+            <h5><i class="fas fa-info-circle"></i> About These Calculators</h5>
+            <p>This collection of 20 hospital medicine calculators provides evidence-based tools for inpatient management and clinical decision-making. All calculators are designed with:</p>
+            <ul>
+                <li><strong>Responsive Design:</strong> Works on desktop, tablet, and mobile devices</li>
+                <li><strong>Input Validation:</strong> Ensures accurate data entry and calculations</li>
+                <li><strong>Clinical Interpretation:</strong> Provides actionable clinical guidance for each result</li>
+                <li><strong>Purple Gradient Theme:</strong> Professional, accessible design with Font Awesome icons</li>
+            </ul>
+            <p style="margin-top: 1rem; color: #6c757d;">
+                <i class="fas fa-exclamation-triangle"></i> <strong>Disclaimer:</strong> These calculators are educational tools and should not replace clinical judgment. Always consult current guidelines and specialist recommendations for clinical decisions.
+            </p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const calculatorCards = document.querySelectorAll('.calculator-card');
+
+            calculatorCards.forEach(card => {
+                const name = card.getAttribute('data-name').toLowerCase();
+                const keywords = card.getAttribute('data-keywords').toLowerCase();
+
+                if (name.includes(searchTerm) || keywords.includes(searchTerm)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Smooth scroll for calculator links
+        document.querySelectorAll('.btn-calculator').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Allow default link behavior
+            });
+        });
+    </script>
+</body>
+</html>

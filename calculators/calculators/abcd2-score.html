@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for responsiveness and character encoding -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ABCD2 Score - Stroke risk prediction after TIA">
+    <title>ABCD2 Score Calculator - Stroke Risk After TIA</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* Root color variables with purple gradient theme */
+        :root {
+            --primary-purple: #6f42c1;
+            --secondary-purple: #8b5fcf;
+            --light-purple: #f8f7ff;
+            --dark-purple: #4a1a7a;
+        }
+
+        /* Body styling with gradient background */
+        body {
+            background: linear-gradient(135deg, var(--light-purple) 0%, #ffffff 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        /* Header navigation styling */
+        .navbar {
+            background: linear-gradient(90deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: white !important;
+        }
+
+        /* Main container padding */
+        .container-main {
+            padding: 2rem 0;
+        }
+
+        /* Card styling with shadow and border */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(111, 66, 193, 0.15);
+            margin-bottom: 2rem;
+        }
+
+        /* Card header with gradient background */
+        .card-header {
+            background: linear-gradient(90deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            color: white;
+            border-radius: 12px 12px 0 0 !important;
+            border: none;
+            padding: 1.5rem;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .card-header .icon {
+            font-size: 1.8rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Card body styling */
+        .card-body {
+            padding: 2rem;
+        }
+
+        /* Input group styling */
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-purple);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 0.75rem;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 0 0.2rem rgba(111, 66, 193, 0.25);
+        }
+
+        /* Button styling with gradient */
+        .btn-calculate {
+            background: linear-gradient(90deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(111, 66, 193, 0.4);
+            color: white;
+        }
+
+        .btn-reset {
+            background-color: #6c757d;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-reset:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        /* Result section styling */
+        .result-section {
+            display: none;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-purple);
+        }
+
+        .result-section.show {
+            display: block;
+            animation: slideIn 0.3s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-purple);
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* Risk level badges */
+        .risk-low {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 5px solid #28a745;
+        }
+
+        .risk-moderate {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 5px solid #ffc107;
+        }
+
+        .risk-high {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 5px solid #dc3545;
+        }
+
+        /* Helper text styling */
+        .help-text {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 0.25rem;
+            display: block;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .card-body {
+                padding: 1rem;
+            }
+
+            .result-score {
+                font-size: 2rem;
+            }
+
+            .btn-calculate, .btn-reset {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/calculators/">
+                <i class="fas fa-calculator"></i> Medical Calculators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/calculators/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/calculators/catalog.html">Catalog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container container-main">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- Calculator Card -->
+                <div class="card">
+                    <!-- Card Header with Title -->
+                    <div class="card-header">
+                        <h3>
+                            <i class="fas fa-brain icon"></i>ABCD2 Score
+                        </h3>
+                        <small class="text-white-50">Predicting stroke risk after TIA (Transient Ischemic Attack)</small>
+                    </div>
+
+                    <!-- Card Body with Form -->
+                    <div class="card-body">
+                        <form id="abcd2Form">
+                            <!-- Age Input -->
+                            <div class="input-group">
+                                <label class="form-label" for="age">
+                                    <i class="fas fa-user"></i> Age
+                                </label>
+                                <input type="number" class="form-control" id="age" placeholder="Enter age in years" min="0" max="150">
+                                <span class="help-text">Enter patient age in years</span>
+                            </div>
+
+                            <!-- Blood Pressure Selection -->
+                            <div class="input-group">
+                                <label class="form-label" for="bloodPressure">
+                                    <i class="fas fa-heart"></i> Blood Pressure at Presentation
+                                </label>
+                                <select class="form-select" id="bloodPressure">
+                                    <option value="">Select blood pressure category</option>
+                                    <option value="0">SBP <140 AND DBP <90 (0 points)</option>
+                                    <option value="1">SBP ≥140 OR DBP ≥90 (1 point)</option>
+                                </select>
+                                <span class="help-text">Select based on systolic and diastolic blood pressure</span>
+                            </div>
+
+                            <!-- Clinical Features -->
+                            <div class="input-group">
+                                <label class="form-label" for="clinicalFeatures">
+                                    <i class="fas fa-symptoms"></i> Clinical Features
+                                </label>
+                                <select class="form-select" id="clinicalFeatures">
+                                    <option value="">Select clinical feature</option>
+                                    <option value="0">Speech disturbance without weakness (0 points)</option>
+                                    <option value="1">Unilateral weakness (1 point)</option>
+                                </select>
+                                <span class="help-text">Assess neurological deficits during TIA</span>
+                            </div>
+
+                            <!-- Diabetes Status -->
+                            <div class="input-group">
+                                <label class="form-label">
+                                    <i class="fas fa-file-medical"></i> Diabetes History
+                                </label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="diabetesNo" name="diabetes" value="0" checked>
+                                    <label class="form-check-label" for="diabetesNo">
+                                        No (0 points)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="diabetesYes" name="diabetes" value="1">
+                                    <label class="form-check-label" for="diabetesYes">
+                                        Yes (1 point)
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Duration of Symptoms -->
+                            <div class="input-group">
+                                <label class="form-label" for="duration">
+                                    <i class="fas fa-hourglass-end"></i> Duration of Symptoms
+                                </label>
+                                <select class="form-select" id="duration">
+                                    <option value="">Select duration</option>
+                                    <option value="0">0-59 minutes (0 points)</option>
+                                    <option value="1">≥60 minutes (1 point)</option>
+                                </select>
+                                <span class="help-text">How long did symptoms last?</span>
+                            </div>
+
+                            <!-- Button Group -->
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-calculate w-100" onclick="calculateABCD2()">
+                                        <i class="fas fa-calculator"></i> Calculate Score
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-reset w-100" onclick="resetForm()">
+                                        <i class="fas fa-redo"></i> Reset
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Results Section -->
+                        <div id="resultSection" class="result-section">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="text-center">
+                                        <strong>Total ABCD2 Score</strong>
+                                    </p>
+                                    <div class="result-score" id="scoreResult">-</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="text-center">
+                                        <strong>Stroke Risk at 2 Days</strong>
+                                    </p>
+                                    <div class="result-score" id="riskResult">-</div>
+                                </div>
+                            </div>
+
+                            <div id="interpretationResult" class="mt-3"></div>
+
+                            <hr>
+
+                            <!-- Clinical Interpretation -->
+                            <div class="alert alert-info">
+                                <h5><i class="fas fa-info-circle"></i> Clinical Interpretation</h5>
+                                <ul class="mb-0">
+                                    <li><strong>Low Risk (0-3):</strong> 1% 2-day stroke risk, 2% 7-day risk</li>
+                                    <li><strong>Intermediate (4):</strong> 4% 2-day stroke risk, 8% 7-day risk</li>
+                                    <li><strong>High Risk (5-7):</strong> 8% 2-day stroke risk, 11% 7-day risk</li>
+                                </ul>
+                            </div>
+
+                            <!-- References -->
+                            <div class="alert alert-secondary mt-3">
+                                <h5><i class="fas fa-book"></i> Reference</h5>
+                                <p class="mb-0">Rothwell PM, et al. A simple score (ABCD) to identify individuals at high early risk of stroke after transient ischaemic attack. Lancet. 2005.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Calculator Logic -->
+    <script>
+        /**
+         * Calculate ABCD2 Score
+         * Combines age, blood pressure, clinical features, diabetes history, and symptom duration
+         */
+        function calculateABCD2() {
+            // Get input values
+            const age = parseFloat(document.getElementById('age').value);
+            const bloodPressure = parseInt(document.getElementById('bloodPressure').value);
+            const clinicalFeatures = parseInt(document.getElementById('clinicalFeatures').value);
+            const diabetes = parseInt(document.querySelector('input[name="diabetes"]:checked').value);
+            const duration = parseInt(document.getElementById('duration').value);
+
+            // Validate all inputs are provided
+            if (isNaN(age) || age < 0 || age > 150 ||
+                isNaN(bloodPressure) ||
+                isNaN(clinicalFeatures) ||
+                isNaN(duration)) {
+                alert('Please complete all fields correctly');
+                return;
+            }
+
+            // Calculate age component (A)
+            let ageScore = 0;
+            if (age >= 60) ageScore = 1;
+
+            // Calculate total score
+            const totalScore = ageScore + bloodPressure + clinicalFeatures + diabetes + duration;
+
+            // Display results
+            showResults(totalScore);
+        }
+
+        /**
+         * Display results with risk interpretation
+         */
+        function showResults(score) {
+            const resultSection = document.getElementById('resultSection');
+            const scoreResult = document.getElementById('scoreResult');
+            const riskResult = document.getElementById('riskResult');
+            const interpretationResult = document.getElementById('interpretationResult');
+
+            // Set score
+            scoreResult.textContent = score;
+
+            // Determine risk level and percentages
+            let riskClass = '';
+            let riskText = '';
+            let interpretation = '';
+
+            if (score <= 3) {
+                riskClass = 'risk-low';
+                riskText = '1% (2 days)<br>2% (7 days)';
+                interpretation = '<div class="risk-low"><strong>Low Risk</strong><br>Patient has low stroke risk. Standard care recommended.</div>';
+            } else if (score === 4) {
+                riskClass = 'risk-moderate';
+                riskText = '4% (2 days)<br>8% (7 days)';
+                interpretation = '<div class="risk-moderate"><strong>Intermediate Risk</strong><br>Patient requires urgent evaluation and consideration of preventive therapies.</div>';
+            } else {
+                riskClass = 'risk-high';
+                riskText = '8% (2 days)<br>11% (7 days)';
+                interpretation = '<div class="risk-high"><strong>High Risk</strong><br>Patient requires immediate hospitalization and aggressive preventive measures.</div>';
+            }
+
+            riskResult.innerHTML = riskText;
+            interpretationResult.innerHTML = interpretation;
+            resultSection.classList.add('show');
+        }
+
+        /**
+         * Reset form to initial state
+         */
+        function resetForm() {
+            document.getElementById('abcd2Form').reset();
+            document.getElementById('resultSection').classList.remove('show');
+            document.getElementById('diabetesNo').checked = true;
+        }
+
+        // Initialize - Set focus on first input when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('age').focus();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TOLAC Assessment Calculator - Predict success of trial of labor after cesarean">
+    <title>TOLAC Assessment Calculator</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Styles with Purple Gradient Theme -->
+    <style>
+        /* Root color variables */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #b88cd9 100%);
+        }
+
+        /* Body and overall layout */
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(102, 126, 234, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Main container */
+        .main-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        /* Card styling */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .card-header p {
+            margin: 10px 0 0 0;
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+
+        /* Form elements */
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px 12px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
+        }
+
+        /* Button styling */
+        .btn-calculate {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+
+        .btn-reset {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reset:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        /* Result section */
+        .result-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 25px;
+            display: none;
+            border-left: 5px solid #667eea;
+        }
+
+        .result-section.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 15px 0;
+        }
+
+        .interpretation-box {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .interpretation-text {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Clinical note section */
+        .clinical-note {
+            background: linear-gradient(135deg, #fff5e1 0%, #ffe8cc 100%);
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .clinical-note-title {
+            font-weight: 700;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        .clinical-note-text {
+            color: #856404;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Input group styling */
+        .input-group-text {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* Helper text */
+        .form-text {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        /* Icon styling */
+        .icon-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .icon-section i {
+            font-size: 3rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .card-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .result-value {
+                font-size: 1.5rem;
+            }
+
+            .main-container {
+                margin: 20px auto;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-heartbeat"></i> Medical Calculators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../catalog.html">Catalog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="card">
+            <!-- Card Header -->
+            <div class="card-header">
+                <h2><i class="fas fa-baby"></i> TOLAC Success Assessment</h2>
+                <p>Predict the probability of successful trial of labor after cesarean delivery</p>
+            </div>
+
+            <!-- Card Body -->
+            <div class="card-body">
+                <!-- Input Section -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="maternalAge" class="form-label">
+                                <i class="fas fa-calendar-alt"></i> Maternal Age (years)
+                            </label>
+                            <input type="number" class="form-control" id="maternalAge" placeholder="e.g., 32" min="18" max="50">
+                            <small class="form-text">Age at delivery</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="race" class="form-label">
+                                <i class="fas fa-users"></i> Race/Ethnicity
+                            </label>
+                            <select class="form-select" id="race">
+                                <option value="">-- Select --</option>
+                                <option value="white">White</option>
+                                <option value="black">Black</option>
+                                <option value="hispanic">Hispanic</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="bmi" class="form-label">
+                                <i class="fas fa-weight"></i> Body Mass Index (BMI)
+                            </label>
+                            <input type="number" class="form-control" id="bmi" placeholder="e.g., 25" min="10" max="60" step="0.1">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="vaginalDelivery" class="form-label">
+                                <i class="fas fa-history"></i> Prior Vaginal Delivery
+                            </label>
+                            <select class="form-select" id="vaginalDelivery">
+                                <option value="">-- Select --</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                            <small class="form-text">After initial cesarean</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="indication" class="form-label">
+                                <i class="fas fa-clipboard"></i> Indication for Prior Cesarean
+                            </label>
+                            <select class="form-select" id="indication">
+                                <option value="">-- Select --</option>
+                                <option value="failure">Failure to Progress / Labor Dystocia</option>
+                                <option value="fetal">Fetal Distress</option>
+                                <option value="other">Other Non-Recurrent</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="recurrentIndication" class="form-label">
+                                <i class="fas fa-exclamation-triangle"></i> Recurrent Indication
+                            </label>
+                            <select class="form-select" id="recurrentIndication">
+                                <option value="">-- Select --</option>
+                                <option value="yes">Yes (e.g., CPD, malpresentation)</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button Row -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <button class="btn btn-calculate" onclick="calculateTOLAC()">
+                            <i class="fas fa-calculator"></i> Calculate Success Rate
+                        </button>
+                        <button class="btn btn-reset ms-2" onclick="resetForm()">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div id="resultSection" class="result-section">
+                    <div class="result-title">
+                        <i class="fas fa-check-circle"></i> Success Rate Assessment
+                    </div>
+
+                    <div class="result-value" id="successRate">--</div>
+
+                    <div class="interpretation-box">
+                        <div class="interpretation-title">Clinical Interpretation:</div>
+                        <div class="interpretation-text" id="interpretation">--</div>
+                    </div>
+
+                    <div class="clinical-note">
+                        <div class="clinical-note-title">
+                            <i class="fas fa-lightbulb"></i> Clinical Considerations
+                        </div>
+                        <div class="clinical-note-text">
+                            <ul style="margin-bottom: 0; padding-left: 20px;">
+                                <li>Maternal age < 30 and White race associated with highest success rates (60-80%)</li>
+                                <li>Prior vaginal delivery significantly increases success to 70-90%</li>
+                                <li>BMI < 30 improves outcomes</li>
+                                <li>Recurrent indication (e.g., CPD) reduces success to ~40-50%</li>
+                                <li>Individualized counseling essential for informed consent</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Calculator Logic -->
+    <script>
+        /**
+         * Calculate TOLAC Success Rate
+         * Based on maternal characteristics and history
+         * Reference: Grobman et al. Obstet Gynecol. 2007
+         */
+        function calculateTOLAC() {
+            // Get input values
+            const age = parseFloat(document.getElementById('maternalAge').value);
+            const race = document.getElementById('race').value;
+            const bmi = parseFloat(document.getElementById('bmi').value);
+            const vaginalDelivery = document.getElementById('vaginalDelivery').value;
+            const indication = document.getElementById('indication').value;
+            const recurrentIndication = document.getElementById('recurrentIndication').value;
+
+            // Validation
+            if (!age || !race || !bmi || !vaginalDelivery || !indication || !recurrentIndication) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            if (age < 18 || age > 50) {
+                alert('Please enter a valid age (18-50)');
+                return;
+            }
+
+            if (bmi < 10 || bmi > 60) {
+                alert('Please enter a valid BMI (10-60)');
+                return;
+            }
+
+            // Base success rate
+            let successRate = 0.60;
+
+            // Age adjustment
+            if (age < 30) {
+                successRate += 0.05;
+            } else if (age >= 40) {
+                successRate -= 0.05;
+            }
+
+            // Race adjustment
+            if (race === 'white') {
+                successRate += 0.08;
+            } else if (race === 'black') {
+                successRate -= 0.08;
+            }
+
+            // BMI adjustment
+            if (bmi < 30) {
+                successRate += 0.03;
+            } else if (bmi >= 35) {
+                successRate -= 0.05;
+            }
+
+            // Prior vaginal delivery - major factor
+            if (vaginalDelivery === 'yes') {
+                successRate += 0.20;
+            }
+
+            // Indication for prior cesarean
+            if (indication === 'fetal') {
+                successRate += 0.05;
+            } else if (indication === 'failure') {
+                successRate -= 0.10;
+            }
+
+            // Recurrent indication
+            if (recurrentIndication === 'yes') {
+                successRate -= 0.15;
+            }
+
+            // Cap between 20% and 95%
+            successRate = Math.max(0.20, Math.min(0.95, successRate));
+
+            // Display results
+            displayResults(successRate);
+        }
+
+        /**
+         * Display TOLAC calculation results
+         */
+        function displayResults(successRate) {
+            const percentage = Math.round(successRate * 100);
+            const resultSection = document.getElementById('resultSection');
+            const successRateEl = document.getElementById('successRate');
+            const interpretationEl = document.getElementById('interpretation');
+
+            // Update result value
+            successRateEl.textContent = percentage + '%';
+
+            // Provide clinical interpretation
+            let interpretation = '';
+            if (percentage >= 70) {
+                interpretation = `<strong>Good candidate for TOLAC (${percentage}% success rate).</strong> This woman has favorable characteristics for attempting vaginal delivery after prior cesarean. Discuss benefits and risks, including labor dystocia and need for urgent cesarean delivery if complications arise.`;
+            } else if (percentage >= 50) {
+                interpretation = `<strong>Moderate candidate for TOLAC (${percentage}% success rate).</strong> Success is possible but less favorable than higher rates. Individualized counseling and careful monitoring during labor are essential. Have backup plan for cesarean delivery available.`;
+            } else if (percentage >= 30) {
+                interpretation = `<strong>Guarded candidate for TOLAC (${percentage}% success rate).</strong> Success rate is below average. Carefully discuss risks and potential need for repeat cesarean delivery. Close obstetric monitoring and low threshold for operative delivery recommended.`;
+            } else {
+                interpretation = `<strong>Poor candidate for TOLAC (${percentage}% success rate).</strong> Success rate is low. Repeat planned cesarean delivery may be safer option. Consider specialized counseling and high-risk obstetric care.`;
+            }
+
+            interpretationEl.innerHTML = interpretation;
+
+            // Show results section
+            resultSection.classList.add('show');
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        /**
+         * Reset the calculator form
+         */
+        function resetForm() {
+            document.getElementById('maternalAge').value = '';
+            document.getElementById('race').value = '';
+            document.getElementById('bmi').value = '';
+            document.getElementById('vaginalDelivery').value = '';
+            document.getElementById('indication').value = '';
+            document.getElementById('recurrentIndication').value = '';
+            document.getElementById('resultSection').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

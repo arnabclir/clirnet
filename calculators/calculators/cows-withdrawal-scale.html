@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COWS Withdrawal Scale</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        .container { max-width: 900px; }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-header h3 { margin: 0; font-weight: 700; }
+
+        .card-body { padding: 30px; }
+
+        .form-group { margin-bottom: 25px; }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+
+        .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-calculate {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .result-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+
+        .interpretation {
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .formula-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+
+        <div class="card">
+            <div class="card-header">
+                <h3><i class="fas fa-pills"></i> COWS Withdrawal Scale</h3>
+                <small>Clinical Opioid Withdrawal Scale</small>
+            </div>
+
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    COWS assesses opioid withdrawal severity to guide treatment decisions in emergency patients.
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-eye"></i> Resting Pulse Rate
+                    </label>
+                    <select class="form-select" id="pulseRate">
+                        <option value="">Select pulse rate</option>
+                        <option value="0">&lt;80 = 0</option>
+                        <option value="2">81-120 = 2</option>
+                        <option value="4">&gt;120 = 4</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-droplet"></i> Sweating
+                    </label>
+                    <select class="form-select" id="sweating">
+                        <option value="">Select sweating level</option>
+                        <option value="0">No sweating = 0</option>
+                        <option value="1">Barely perceptible = 1</option>
+                        <option value="2">Beads of sweat = 2</option>
+                        <option value="3">Sweat streaming off face = 3</option>
+                        <option value="4">Drenching sweats = 4</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-nausea"></i> Nausea/Vomiting
+                    </label>
+                    <select class="form-select" id="nausea">
+                        <option value="">Select nausea level</option>
+                        <option value="0">No nausea = 0</option>
+                        <option value="1">Mild nausea = 1</option>
+                        <option value="2">Nausea or loose stool = 2</option>
+                        <option value="3">Vomiting or diarrhea = 3</option>
+                        <option value="5">Multiple episodes = 5</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-dizziness"></i> Tremor Assessment
+                    </label>
+                    <select class="form-select" id="tremor">
+                        <option value="">Select tremor level</option>
+                        <option value="0">No tremor = 0</option>
+                        <option value="1">Tremor can be felt, not observed = 1</option>
+                        <option value="2">Slight tremor observed = 2</option>
+                        <option value="4">Gross tremor = 4</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-eye"></i> Eyelid Ptosis
+                    </label>
+                    <select class="form-select" id="ptosis">
+                        <option value="">Select eyelid status</option>
+                        <option value="0">No ptosis = 0</option>
+                        <option value="1">Subjective ptosis = 1</option>
+                        <option value="2">Pronounced ptosis = 2</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-eye"></i> Bone/Joint Ache
+                    </label>
+                    <select class="form-select" id="ache">
+                        <option value="">Select bone ache level</option>
+                        <option value="0">No ache = 0</option>
+                        <option value="1">Mild ache = 1</option>
+                        <option value="2">Patient reports severe diffuse ache = 2</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-brain"></i> Goose Flesh Skin
+                    </label>
+                    <select class="form-select" id="gooseFlesh">
+                        <option value="">Select goose flesh status</option>
+                        <option value="0">Skin smooth = 0</option>
+                        <option value="3">Barely perceptible bumps = 3</option>
+                        <option value="5">Prominent goose flesh = 5</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-clock"></i> Nose Itching
+                    </label>
+                    <select class="form-select" id="noseItch">
+                        <option value="">Select nose itching level</option>
+                        <option value="0">No itching = 0</option>
+                        <option value="1">Mild itching = 1</option>
+                        <option value="2">Frequent nose itching = 2</option>
+                        <option value="5">Constant nose itching = 5</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-dizziness"></i> GI Tract Status
+                    </label>
+                    <select class="form-select" id="giStatus">
+                        <option value="">Select GI status</option>
+                        <option value="0">Normal bowel movements = 0</option>
+                        <option value="1">Stomach cramps = 1</option>
+                        <option value="2">Loose stool = 2</option>
+                        <option value="5">Diarrhea or vomiting = 5</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-hand-fist"></i> Tremor Observation
+                    </label>
+                    <select class="form-select" id="tremor2">
+                        <option value="">Select tremor observation</option>
+                        <option value="0">Steady = 0</option>
+                        <option value="1">Can barely hold still = 1</option>
+                        <option value="2">Gross uncontrollable shaking = 2</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-calculate" onclick="calculateCOWS()">
+                    <i class="fas fa-calculator"></i> Calculate COWS Score
+                </button>
+
+                <div id="results" class="hidden">
+                    <div class="result-box">
+                        <strong style="font-size: 18px;">COWS Score Results</strong>
+                        <div class="result-value" id="scoreValue">-</div>
+                        <div class="interpretation" id="scoreInterpretation"></div>
+
+                        <div class="formula-box">
+                            <strong>Withdrawal Severity:</strong><br>
+                            - 5-12: Mild withdrawal<br>
+                            - 13-24: Moderate withdrawal<br>
+                            - 25-36: Moderately severe withdrawal<br>
+                            - >36: Severe withdrawal<br><br>
+                            Score ≥12 = Consider treatment intervention
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function calculateCOWS() {
+            const values = [
+                parseInt(document.getElementById('pulseRate').value),
+                parseInt(document.getElementById('sweating').value),
+                parseInt(document.getElementById('nausea').value),
+                parseInt(document.getElementById('tremor').value),
+                parseInt(document.getElementById('ptosis').value),
+                parseInt(document.getElementById('ache').value),
+                parseInt(document.getElementById('gooseFlesh').value),
+                parseInt(document.getElementById('noseItch').value),
+                parseInt(document.getElementById('giStatus').value),
+                parseInt(document.getElementById('tremor2').value)
+            ];
+
+            if (values.some(v => isNaN(v))) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const totalScore = values.reduce((a, b) => a + b, 0);
+
+            let severity = '';
+            let recommendation = '';
+
+            if (totalScore < 5) {
+                severity = 'Minimal or No Withdrawal';
+                recommendation = 'No pharmacological intervention needed. Supportive care only.';
+            } else if (totalScore <= 12) {
+                severity = 'Mild Withdrawal';
+                recommendation = 'Observation. May consider symptomatic treatment.';
+            } else if (totalScore <= 24) {
+                severity = 'Moderate Withdrawal';
+                recommendation = 'Treatment indicated. Consider buprenorphine or methadone.';
+            } else if (totalScore <= 36) {
+                severity = 'Moderately Severe Withdrawal';
+                recommendation = 'Significant treatment indicated. Hospital admission recommended.';
+            } else {
+                severity = 'Severe Withdrawal';
+                recommendation = 'Severe withdrawal. ICU admission may be necessary. High risk of complications.';
+            }
+
+            document.getElementById('scoreValue').textContent = totalScore;
+            document.getElementById('scoreInterpretation').innerHTML = `
+                <strong>${severity}</strong><br>
+                ${recommendation}
+            `;
+            document.getElementById('results').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

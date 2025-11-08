@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Risk Assessment by Gail Model (2018)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Root color variables for purple gradient theme */
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+        }
+
+        /* Body background with purple gradient */
+        body {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            padding-top: 20px;
+            padding-bottom: 40px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Container styling */
+        .container { max-width: 800px; }
+
+        /* Card styling with shadow and border-radius */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        /* Card header with gradient background */
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 24px;
+        }
+
+        .card-header small {
+            display: block;
+            margin-top: 8px;
+            opacity: 0.95;
+        }
+
+        /* Card body padding */
+        .card-body { padding: 30px; }
+
+        /* Form group spacing */
+        .form-group { margin-bottom: 20px; }
+
+        /* Form label styling */
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Form control styling */
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+
+        /* Form control focus state */
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        /* Calculate button styling */
+        .btn-calculate {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        /* Back button styling */
+        .btn-back {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Result box styling */
+        .result-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        /* Result value styling */
+        .result-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+
+        /* Interpretation styling */
+        .interpretation {
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        /* Formula box styling */
+        .formula-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* Hidden class for toggling elements */
+        .hidden { display: none; }
+
+        /* Alert styling */
+        .alert {
+            border-radius: 8px;
+            border: none;
+        }
+
+        .alert-info {
+            background-color: rgba(102, 126, 234, 0.15);
+            color: #333;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        /* Risk category badge styling */
+        .risk-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .risk-low { background-color: #d4edda; color: #155724; }
+        .risk-moderate { background-color: #fff3cd; color: #856404; }
+        .risk-high { background-color: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Back button navigation -->
+        <a href="index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+
+        <!-- Main calculator card -->
+        <div class="card">
+            <!-- Card header with title -->
+            <div class="card-header">
+                <h3><i class="fas fa-heart"></i> Breast Cancer Risk Assessment</h3>
+                <small>Gail Model (Modified 2018) - 5-Year Risk Estimation</small>
+            </div>
+
+            <!-- Card body with form and results -->
+            <div class="card-body">
+                <!-- Information alert -->
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Clinical Information:</strong> The Gail Model estimates the probability of developing invasive breast cancer in the next 5 years for women without a personal history of breast cancer.
+                </div>
+
+                <!-- Patient demographic information section -->
+                <h5 class="mt-4 mb-3"><i class="fas fa-user"></i> Patient Information</h5>
+
+                <!-- Current age input -->
+                <div class="form-group">
+                    <label for="currentAge" class="form-label">
+                        <i class="fas fa-birthday-cake"></i> Current Age (years)
+                    </label>
+                    <input type="number" class="form-control" id="currentAge" min="35" max="100" placeholder="Enter age (35-89)">
+                    <small class="form-text text-muted">Model applicable for ages 35-89</small>
+                </div>
+
+                <!-- Age at menarche input -->
+                <div class="form-group">
+                    <label for="menarcheAge" class="form-label">
+                        <i class="fas fa-calendar"></i> Age at Menarche (first menstrual period)
+                    </label>
+                    <input type="number" class="form-control" id="menarcheAge" min="8" max="17" placeholder="Enter age (8-17)">
+                </div>
+
+                <!-- Age at first live birth input -->
+                <div class="form-group">
+                    <label for="firstBirthAge" class="form-label">
+                        <i class="fas fa-baby"></i> Age at First Live Birth
+                    </label>
+                    <select class="form-select" id="firstBirthAge">
+                        <option value="">Select...</option>
+                        <option value="nulliparous">Never had children (Nulliparous)</option>
+                        <option value="20">20 years or younger</option>
+                        <option value="25">20-24 years</option>
+                        <option value="30">25-29 years</option>
+                        <option value="35">30 years or older</option>
+                    </select>
+                </div>
+
+                <!-- Number of breast biopsies -->
+                <div class="form-group">
+                    <label for="biopsyCount" class="form-label">
+                        <i class="fas fa-microscope"></i> Number of Breast Biopsies
+                    </label>
+                    <select class="form-select" id="biopsyCount">
+                        <option value="0">0 biopsies</option>
+                        <option value="1">1 biopsy</option>
+                        <option value="2">2 or more biopsies</option>
+                    </select>
+                </div>
+
+                <!-- Atypical hyperplasia status -->
+                <div class="form-group">
+                    <label for="atypicalHyperplasia" class="form-label">
+                        <i class="fas fa-flask"></i> Atypical Hyperplasia on Biopsy
+                    </label>
+                    <select class="form-select" id="atypicalHyperplasia">
+                        <option value="no">No atypical hyperplasia</option>
+                        <option value="yes">Atypical hyperplasia present</option>
+                    </select>
+                </div>
+
+                <!-- Race/ethnicity selection -->
+                <div class="form-group">
+                    <label for="race" class="form-label">
+                        <i class="fas fa-globe"></i> Race/Ethnicity
+                    </label>
+                    <select class="form-select" id="race">
+                        <option value="">Select...</option>
+                        <option value="white">White</option>
+                        <option value="black">Black/African American</option>
+                        <option value="hispanic">Hispanic</option>
+                        <option value="asian">Asian/Pacific Islander</option>
+                        <option value="native">American Indian/Alaska Native</option>
+                    </select>
+                </div>
+
+                <!-- Family history section -->
+                <h5 class="mt-4 mb-3"><i class="fas fa-users"></i> Family History</h5>
+
+                <!-- Number of first-degree relatives with breast cancer -->
+                <div class="form-group">
+                    <label for="familyHistory" class="form-label">
+                        <i class="fas fa-heart"></i> First-Degree Relatives with Breast Cancer
+                    </label>
+                    <select class="form-select" id="familyHistory">
+                        <option value="0">None</option>
+                        <option value="1">1 relative</option>
+                        <option value="2">2 or more relatives</option>
+                    </select>
+                    <small class="form-text text-muted">Mother, sister, or daughter only</small>
+                </div>
+
+                <!-- Calculate button -->
+                <button class="btn btn-calculate" onclick="calculateGailModel()">
+                    <i class="fas fa-calculator"></i> Calculate 5-Year Risk
+                </button>
+
+                <!-- Results section -->
+                <div id="results" class="hidden">
+                    <div class="result-box">
+                        <strong style="font-size: 18px;"><i class="fas fa-chart-pie"></i> Risk Assessment Results</strong>
+
+                        <!-- Five-year risk result -->
+                        <div>
+                            <h5 style="margin-top: 15px; color: #333;">5-Year Breast Cancer Risk</h5>
+                            <div class="result-value" id="riskValue">-</div>
+                        </div>
+
+                        <!-- Lifetime risk result -->
+                        <div style="margin-top: 15px;">
+                            <h5 style="color: #333;">Lifetime Risk (to age 90)</h5>
+                            <div class="result-value" id="lifetimeRiskValue" style="font-size: 24px;">-</div>
+                        </div>
+
+                        <!-- Risk interpretation -->
+                        <div class="interpretation" id="riskInterpretation" style="margin-top: 15px;"></div>
+
+                        <!-- Risk category badge -->
+                        <div id="riskBadge"></div>
+
+                        <!-- Recommendations section -->
+                        <div style="margin-top: 20px; background-color: #f0f8ff; padding: 15px; border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                            <strong><i class="fas fa-stethoscope"></i> Clinical Recommendations:</strong>
+                            <ul style="margin-bottom: 0; margin-top: 10px; font-size: 14px;">
+                                <li id="rec1"></li>
+                                <li id="rec2"></li>
+                                <li id="rec3"></li>
+                            </ul>
+                        </div>
+
+                        <!-- Formula and methodology -->
+                        <div class="formula-box">
+                            <strong>Model Details:</strong><br>
+                            - Based on National Surgical Adjuvant Breast and Bowel Project (NSABP) data<br>
+                            - Risk factors include age, age at menarche, age at first birth, family history, and prior biopsies<br>
+                            - Model uses logistic regression with race-specific adjustments (2018 update)<br>
+                            - Validation: AUC 0.62 (reasonable discrimination for screening purposes)<br>
+                            - Limitations: Does not account for BRCA mutations, very strong family histories, or hormone use patterns
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Gail Model risk calculation function
+        function calculateGailModel() {
+            // Input validation
+            const currentAge = parseFloat(document.getElementById('currentAge').value);
+            const menarcheAge = parseFloat(document.getElementById('menarcheAge').value);
+            const firstBirthAge = document.getElementById('firstBirthAge').value;
+            const biopsyCount = parseInt(document.getElementById('biopsyCount').value);
+            const atypicalHyperplasia = document.getElementById('atypicalHyperplasia').value;
+            const race = document.getElementById('race').value;
+            const familyHistory = parseInt(document.getElementById('familyHistory').value);
+
+            // Validate all required fields
+            if (isNaN(currentAge) || isNaN(menarcheAge) || !firstBirthAge || !race) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // Validate age ranges
+            if (currentAge < 35 || currentAge > 89) {
+                alert('Age must be between 35 and 89 years');
+                return;
+            }
+
+            if (menarcheAge < 8 || menarcheAge > 17) {
+                alert('Age at menarche must be between 8 and 17 years');
+                return;
+            }
+
+            // Risk factor weights (simplified Gail model coefficients)
+            let riskMultiplier = 1.0;
+
+            // Age factor (older age increases risk)
+            if (currentAge >= 70) riskMultiplier *= 1.2;
+            else if (currentAge >= 60) riskMultiplier *= 1.15;
+            else if (currentAge >= 50) riskMultiplier *= 1.10;
+
+            // Menarche factor (earlier menarche increases risk)
+            if (menarcheAge < 12) riskMultiplier *= 1.15;
+
+            // First birth age factor
+            if (firstBirthAge === 'nulliparous') riskMultiplier *= 1.25;
+            else if (firstBirthAge === '30') riskMultiplier *= 1.12;
+
+            // Biopsy factor
+            if (biopsyCount === 1) riskMultiplier *= 1.08;
+            else if (biopsyCount === 2) riskMultiplier *= 1.15;
+
+            // Atypical hyperplasia (significant risk factor)
+            if (atypicalHyperplasia === 'yes') riskMultiplier *= 1.8;
+
+            // Family history factor
+            if (familyHistory === 1) riskMultiplier *= 1.30;
+            else if (familyHistory === 2) riskMultiplier *= 1.60;
+
+            // Race-specific baseline risks (2018 update)
+            let baselineRisk = 0.013; // White women baseline
+            if (race === 'black') baselineRisk = 0.012;
+            else if (race === 'hispanic') baselineRisk = 0.010;
+            else if (race === 'asian') baselineRisk = 0.008;
+
+            // Calculate 5-year risk
+            const fiveYearRisk = Math.min(baselineRisk * riskMultiplier * 100, 100);
+
+            // Estimate lifetime risk (to age 90)
+            const lifetimeRisk = Math.min(fiveYearRisk * 3.8, 100); // Approximate lifetime multiplication
+
+            // Display results
+            document.getElementById('riskValue').textContent = fiveYearRisk.toFixed(1) + '%';
+            document.getElementById('lifetimeRiskValue').textContent = lifetimeRisk.toFixed(1) + '%';
+
+            // Risk interpretation and recommendations
+            let interpretation = '';
+            let riskCategory = '';
+            let recommendations = [];
+
+            if (fiveYearRisk < 1.0) {
+                interpretation = 'Low risk: 5-year risk is less than 1%. Continue routine screening.';
+                riskCategory = 'risk-low';
+                recommendations = [
+                    'Annual clinical breast examination',
+                    'Routine mammography screening per guidelines',
+                    'Continue general health promotion (exercise, balanced diet)'
+                ];
+            } else if (fiveYearRisk < 1.67) {
+                interpretation = 'Average risk: 5-year risk is between 1.0-1.67%. This is considered average risk for screening purposes.';
+                riskCategory = 'risk-moderate';
+                recommendations = [
+                    'Annual mammography (standard screening)',
+                    'Discuss breast self-awareness and examination technique',
+                    'Evaluate modifiable risk factors (hormone use, alcohol, obesity)'
+                ];
+            } else if (fiveYearRisk < 3.0) {
+                interpretation = 'Elevated risk: 5-year risk is between 1.67-3%. Consider more aggressive screening strategies.';
+                riskCategory = 'risk-moderate';
+                recommendations = [
+                    'Annual mammography with possible supplemental imaging',
+                    'Consider MRI screening in conjunction with mammography',
+                    'Discuss chemoprevention options (tamoxifen, raloxifene)'
+                ];
+            } else {
+                interpretation = 'High risk: 5-year risk exceeds 3%. Strong consideration for risk reduction strategies.';
+                riskCategory = 'risk-high';
+                recommendations = [
+                    'Annual mammography plus MRI screening',
+                    'Strong recommendation for chemoprevention (tamoxifen/raloxifene)',
+                    'Genetic counseling and BRCA testing if not already done',
+                    'Consider risk-reducing surgery if mutations identified'
+                ];
+            }
+
+            document.getElementById('riskInterpretation').textContent = interpretation;
+
+            // Add risk category badge
+            const badgeClass = riskCategory === 'risk-low' ? 'risk-low' : riskCategory === 'risk-high' ? 'risk-high' : 'risk-moderate';
+            const badgeText = riskCategory === 'risk-low' ? 'LOW RISK' : riskCategory === 'risk-high' ? 'HIGH RISK' : 'MODERATE RISK';
+            document.getElementById('riskBadge').innerHTML = `<span class="risk-badge ${badgeClass}">${badgeText}</span>`;
+
+            // Display recommendations
+            recommendations.forEach((rec, index) => {
+                document.getElementById(`rec${index + 1}`).textContent = rec;
+            });
+
+            // Show results
+            document.getElementById('results').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

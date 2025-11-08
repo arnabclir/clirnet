@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Post-Test Probability Calculator - Calculate probability from likelihood ratios">
+    <title>Post-Test Probability Calculator</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #b88cd9 100%);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(102, 126, 234, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .main-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .card-header p {
+            margin: 10px 0 0 0;
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px 12px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
+        }
+
+        .btn-calculate {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+
+        .btn-reset {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reset:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .result-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 25px;
+            display: none;
+            border-left: 5px solid #667eea;
+        }
+
+        .result-section.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .result-card {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .interpretation-box {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .interpretation-text {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .likelihood-guide {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .likelihood-guide h5 {
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .likelihood-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 0.9rem;
+        }
+
+        .likelihood-row:last-child {
+            border-bottom: none;
+        }
+
+        .likelihood-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .likelihood-value {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .clinical-note {
+            background: linear-gradient(135deg, #fff5e1 0%, #ffe8cc 100%);
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .clinical-note-title {
+            font-weight: 700;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        .clinical-note-text {
+            color: #856404;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .form-text {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .info-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .card-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .result-value {
+                font-size: 1.5rem;
+            }
+
+            .likelihood-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-heartbeat"></i> Medical Calculators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../catalog.html">Catalog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="card">
+            <!-- Card Header -->
+            <div class="card-header">
+                <h2><i class="fas fa-chart-line"></i> Post-Test Probability Calculator</h2>
+                <p>Calculate disease probability using likelihood ratios and pre-test probability</p>
+            </div>
+
+            <!-- Card Body -->
+            <div class="card-body">
+                <!-- Input Section -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="preTestProb" class="form-label">
+                                <i class="fas fa-percent"></i> Pre-Test Probability (%)
+                                <span class="info-badge">0-100</span>
+                            </label>
+                            <input type="number" class="form-control" id="preTestProb" placeholder="e.g., 20" min="0" max="100" step="0.1">
+                            <small class="form-text">Probability before performing test (prior probability)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="testResult" class="form-label">
+                                <i class="fas fa-check-circle"></i> Test Result
+                            </label>
+                            <select class="form-select" id="testResult" onchange="updateLikelihoodGuide()">
+                                <option value="">-- Select --</option>
+                                <option value="positive">Positive Result (LR+)</option>
+                                <option value="negative">Negative Result (LR-)</option>
+                            </select>
+                            <small class="form-text">Outcome of the diagnostic test</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Likelihood Ratio Input -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="likelihoodRatio" class="form-label">
+                                <i class="fas fa-ratio"></i> Likelihood Ratio (LR)
+                            </label>
+                            <input type="number" class="form-control" id="likelihoodRatio" placeholder="e.g., 8.5" min="0.1" step="0.1">
+                            <small class="form-text" id="lrHint">Select test result above</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">
+                                <i class="fas fa-info-circle"></i> Interpretation Guide
+                            </label>
+                            <div class="likelihood-guide">
+                                <div class="likelihood-row">
+                                    <span class="likelihood-label">LR > 10:</span>
+                                    <span class="likelihood-value">Strong evidence for disease</span>
+                                </div>
+                                <div class="likelihood-row">
+                                    <span class="likelihood-label">LR 5-10:</span>
+                                    <span class="likelihood-value">Moderate evidence for</span>
+                                </div>
+                                <div class="likelihood-row">
+                                    <span class="likelihood-label">LR 1-5:</span>
+                                    <span class="likelihood-value">Weak evidence for</span>
+                                </div>
+                                <div class="likelihood-row">
+                                    <span class="likelihood-label">LR = 1:</span>
+                                    <span class="likelihood-value">No diagnostic value</span>
+                                </div>
+                                <div class="likelihood-row">
+                                    <span class="likelihood-label">LR < 0.5:</span>
+                                    <span class="likelihood-value">Evidence against disease</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button Row -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <button class="btn btn-calculate" onclick="calculatePostTestProb()">
+                            <i class="fas fa-calculator"></i> Calculate Post-Test Probability
+                        </button>
+                        <button class="btn btn-reset ms-2" onclick="resetForm()">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div id="resultSection" class="result-section">
+                    <div class="result-title">
+                        <i class="fas fa-chart-pie"></i> Post-Test Probability Results
+                    </div>
+
+                    <!-- Result Grid -->
+                    <div class="result-grid">
+                        <div class="result-card">
+                            <div class="result-label">Pre-Test Probability</div>
+                            <div class="result-value" id="preTestDisplay">--</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-label">Likelihood Ratio</div>
+                            <div class="result-value" id="lrDisplay">--</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-label">Post-Test Probability</div>
+                            <div class="result-value" id="postTestDisplay">--</div>
+                        </div>
+                    </div>
+
+                    <!-- Change in Probability -->
+                    <div class="interpretation-box">
+                        <div class="interpretation-title">Probability Change:</div>
+                        <div class="interpretation-text" id="probChange">--</div>
+                    </div>
+
+                    <!-- Clinical Interpretation -->
+                    <div class="interpretation-box">
+                        <div class="interpretation-title">Clinical Interpretation:</div>
+                        <div class="interpretation-text" id="interpretation">--</div>
+                    </div>
+
+                    <!-- Clinical Notes -->
+                    <div class="clinical-note">
+                        <div class="clinical-note-title">
+                            <i class="fas fa-lightbulb"></i> Clinical Application Notes
+                        </div>
+                        <div class="clinical-note-text">
+                            <ul style="margin-bottom: 0; padding-left: 20px;">
+                                <li><strong>Post-test probability (odds form):</strong> Pre-test odds × LR = Post-test odds</li>
+                                <li><strong>Pre-test odds:</strong> Probability ÷ (1 - Probability)</li>
+                                <li><strong>Post-test probability:</strong> Post-test odds ÷ (1 + Post-test odds)</li>
+                                <li>Use multiple tests sequentially to refine probability</li>
+                                <li>Treatment decisions typically considered at 50% probability threshold</li>
+                                <li>Different thresholds apply to different diseases and treatments</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Educational Information -->
+        <div class="card">
+            <div class="card-header" style="background: linear-gradient(135deg, #764ba2 0%, #b88cd9 100%);">
+                <h3 style="margin: 0; font-size: 1.3rem;">
+                    <i class="fas fa-book"></i> Understanding Likelihood Ratios
+                </h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 style="color: #667eea; font-weight: 700;">Likelihood Ratio Positive (LR+)</h5>
+                        <p>LR+ = Sensitivity ÷ (1 - Specificity)</p>
+                        <p style="font-size: 0.9rem; color: #666;">Tells how much the odds of disease increase with a positive test. Higher values indicate better diagnostic value.</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 style="color: #667eea; font-weight: 700;">Likelihood Ratio Negative (LR-)</h5>
+                        <p>LR- = (1 - Sensitivity) ÷ Specificity</p>
+                        <p style="font-size: 0.9rem; color: #666;">Tells how much the odds of disease decrease with a negative test. Lower values indicate better diagnostic value.</p>
+                    </div>
+                </div>
+
+                <hr style="margin: 20px 0;">
+
+                <h5 style="color: #667eea; font-weight: 700; margin-bottom: 15px;">Common Obstetric/Gynecology Test Examples:</h5>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+                    <div style="margin-bottom: 10px;"><strong>AFP for Down Syndrome Screening:</strong> LR+ 3.5-5.5, LR- 0.1-0.3</div>
+                    <div style="margin-bottom: 10px;"><strong>Quad Screen (all 4 markers):</strong> LR+ 45-250 (varies with age), LR- 0.01-0.1</div>
+                    <div style="margin-bottom: 10px;"><strong>Cell-free DNA (cfDNA):</strong> LR+ 100-1000+, LR- 0.001-0.1</div>
+                    <div style="margin-bottom: 10px;"><strong>Ultrasound for Down Syndrome markers:</strong> LR+ 5-10, LR- 0.1-0.5</div>
+                    <div><strong>Glucose Tolerance Test (GDM screening):</strong> LR+ 5-8, LR- 0.1-0.2</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Calculator Logic -->
+    <script>
+        /**
+         * Update likelihood ratio hint based on test result selection
+         */
+        function updateLikelihoodGuide() {
+            const testResult = document.getElementById('testResult').value;
+            const lrHint = document.getElementById('lrHint');
+
+            if (testResult === 'positive') {
+                lrHint.textContent = 'LR+ indicates how much positive result increases odds of disease';
+            } else if (testResult === 'negative') {
+                lrHint.textContent = 'LR- indicates how much negative result decreases odds of disease';
+            } else {
+                lrHint.textContent = 'Select test result above';
+            }
+        }
+
+        /**
+         * Calculate post-test probability using Bayes' theorem
+         * Post-test odds = Pre-test odds × Likelihood Ratio
+         * Post-test probability = Post-test odds / (1 + Post-test odds)
+         */
+        function calculatePostTestProb() {
+            // Get input values
+            const preTestProb = parseFloat(document.getElementById('preTestProb').value);
+            const testResult = document.getElementById('testResult').value;
+            const likelihoodRatio = parseFloat(document.getElementById('likelihoodRatio').value);
+
+            // Validation
+            if (preTestProb === '' || preTestProb < 0 || preTestProb > 100) {
+                alert('Please enter a valid pre-test probability (0-100%)');
+                return;
+            }
+
+            if (!testResult) {
+                alert('Please select a test result');
+                return;
+            }
+
+            if (!likelihoodRatio || likelihoodRatio <= 0) {
+                alert('Please enter a valid likelihood ratio (> 0)');
+                return;
+            }
+
+            // Convert percentage to probability (0-1)
+            const preProbDecimal = preTestProb / 100;
+
+            // Calculate pre-test odds
+            const preTestOdds = preProbDecimal / (1 - preProbDecimal);
+
+            // Calculate post-test odds
+            const postTestOdds = preTestOdds * likelihoodRatio;
+
+            // Calculate post-test probability
+            const postTestProb = postTestOdds / (1 + postTestOdds);
+            const postTestPercent = postTestProb * 100;
+
+            // Calculate change
+            const probChange = postTestPercent - preTestProb;
+
+            // Display results
+            displayResults(preTestProb, likelihoodRatio, postTestPercent, probChange);
+        }
+
+        /**
+         * Display post-test probability results
+         */
+        function displayResults(preTestProb, likelihoodRatio, postTestPercent, probChange) {
+            const resultSection = document.getElementById('resultSection');
+            const preTestDisplay = document.getElementById('preTestDisplay');
+            const lrDisplay = document.getElementById('lrDisplay');
+            const postTestDisplay = document.getElementById('postTestDisplay');
+            const probChangeEl = document.getElementById('probChange');
+            const interpretationEl = document.getElementById('interpretation');
+
+            // Update result values
+            preTestDisplay.textContent = preTestProb.toFixed(1) + '%';
+            lrDisplay.textContent = likelihoodRatio.toFixed(2);
+            postTestDisplay.textContent = postTestPercent.toFixed(1) + '%';
+
+            // Calculate probability change
+            const changeDirection = probChange > 0 ? 'increased' : probChange < 0 ? 'decreased' : 'unchanged';
+            const changeSign = probChange > 0 ? '+' : '';
+            probChangeEl.innerHTML = `Probability has <strong>${changeDirection}</strong> by ${changeSign}${probChange.toFixed(1)}% (from ${preTestProb.toFixed(1)}% to ${postTestPercent.toFixed(1)}%)`;
+
+            // Generate interpretation
+            let interpretation = '';
+            let strengthAssessment = '';
+
+            // Assess LR strength
+            if (likelihoodRatio > 10) {
+                strengthAssessment = 'strong ';
+            } else if (likelihoodRatio > 5) {
+                strengthAssessment = 'moderate ';
+            } else if (likelihoodRatio > 1) {
+                strengthAssessment = 'weak ';
+            }
+
+            // Interpret post-test probability
+            if (postTestPercent >= 90) {
+                interpretation = `<strong>High probability of disease (${postTestPercent.toFixed(1)}%):</strong> The test result provides ${strengthAssessment}evidence supporting the diagnosis. Disease is likely present. Consider confirming tests and initiating treatment.`;
+            } else if (postTestPercent >= 50) {
+                interpretation = `<strong>Moderate to high probability (${postTestPercent.toFixed(1)}%):</strong> The test result supports the diagnosis. Additional testing may be warranted to further clarify. Consider clinical context and patient factors.`;
+            } else if (postTestPercent >= 10) {
+                interpretation = `<strong>Low to moderate probability (${postTestPercent.toFixed(1)}%):</strong> The test result modestly affects the probability. Consider obtaining additional confirmatory tests. Clinical judgment remains important.`;
+            } else {
+                interpretation = `<strong>Low probability of disease (${postTestPercent.toFixed(1)}%):</strong> The test result provides evidence against the diagnosis. Disease is unlikely based on this test alone. No further testing may be needed unless clinical suspicion remains high.`;
+            }
+
+            interpretationEl.innerHTML = interpretation;
+
+            // Show results section
+            resultSection.classList.add('show');
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        /**
+         * Reset the calculator form
+         */
+        function resetForm() {
+            document.getElementById('preTestProb').value = '';
+            document.getElementById('testResult').value = '';
+            document.getElementById('likelihoodRatio').value = '';
+            document.getElementById('lrHint').textContent = 'Select test result above';
+            document.getElementById('resultSection').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

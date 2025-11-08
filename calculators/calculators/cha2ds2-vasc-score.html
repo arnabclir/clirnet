@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHA2DS2-VASc Score - Stroke Risk in Atrial Fibrillation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Purple gradient theme */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #a855a8 100%);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar-custom {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header-custom {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary-custom {
+            background: var(--primary-gradient);
+            border: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-card {
+            border-left: 5px solid #667eea;
+            background: white;
+            margin-top: 20px;
+        }
+
+        .formula-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid #667eea33;
+        }
+
+        .risk-high { color: #dc3545; font-weight: bold; }
+        .risk-medium { color: #fd7e14; font-weight: bold; }
+        .risk-low { color: #28a745; font-weight: bold; }
+
+        .input-group-text {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="javascript:history.back()">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <span class="navbar-text text-white">CHA2DS2-VASc Score</span>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <!-- Header Card -->
+                <div class="card shadow-lg border-0 mb-4">
+                    <div class="card-header card-header-custom">
+                        <h2 class="mb-0">
+                            <i class="fas fa-heartbeat"></i> CHA2DS2-VASc Risk Stratification Score
+                        </h2>
+                        <p class="mb-0 small mt-2">Predict stroke risk in patients with atrial fibrillation</p>
+                    </div>
+                    <div class="card-body">
+                        <!-- Clinical Context -->
+                        <div class="alert alert-info">
+                            <strong><i class="fas fa-info-circle"></i> Clinical Context:</strong>
+                            <p class="mb-0">The CHA2DS2-VASc score is used to assess stroke risk in atrial fibrillation patients and guide anticoagulation therapy decisions.</p>
+                        </div>
+
+                        <!-- Calculator Form -->
+                        <form id="calculatorForm">
+                            <div class="row">
+                                <!-- C: Congestive Heart Failure -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>C: Congestive Heart Failure</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="chf" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                    <small class="text-muted">Or LVEF ≤40%</small>
+                                </div>
+
+                                <!-- H: Hypertension -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>H: Hypertension</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="hypertension" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                    <small class="text-muted">On treatment or BP >140/90</small>
+                                </div>
+
+                                <!-- A: Age -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>A: Age</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
+                                        <input type="number" class="form-control" id="age" min="18" max="120" required placeholder="Age in years">
+                                    </div>
+                                    <small class="text-muted">≥75 years = 2 points; 65-74 years = 1 point</small>
+                                </div>
+
+                                <!-- D: Diabetes -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>D: Diabetes</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="diabetes" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- S: Stroke/TIA/Thromboembolism -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>S₁: Prior Stroke/TIA/Thromboembolism</strong>
+                                        <span class="badge bg-danger ms-2">2 points</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="stroke" required>
+                                            <option value="0">No</option>
+                                            <option value="2">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- V: Vascular Disease -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>V: Vascular Disease</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="vascular" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                    <small class="text-muted">MI, PAD, or aortic plaque</small>
+                                </div>
+
+                                <!-- A: Age Female -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>A₂: Female Sex</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="female" required>
+                                            <option value="0">Male</option>
+                                            <option value="1">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Sc: Sclerosis -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Sc: Vascular Disease (S₂)</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="sclerosis" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                    <small class="text-muted">Age ≥65 with HTN/DM/Female</small>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="d-grid gap-2 d-md-flex mt-4">
+                                <button type="button" class="btn btn-primary-custom btn-lg flex-grow-1" id="calculateBtn">
+                                    <i class="fas fa-calculator"></i> Calculate Score
+                                </button>
+                                <button type="reset" class="btn btn-secondary btn-lg flex-grow-1">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+
+                        <!-- Results Section -->
+                        <div id="resultsSection" style="display: none;">
+                            <div class="card result-card">
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <i class="fas fa-chart-pie"></i> Your CHA2DS2-VASc Score
+                                    </h4>
+                                    <p class="mb-3">
+                                        <span id="totalScore" class="display-4"></span>
+                                        <span class="text-muted">/9</span>
+                                    </p>
+                                    <div id="riskInterpretation" class="alert"></div>
+                                </div>
+                            </div>
+
+                            <!-- Stroke Risk Table -->
+                            <div class="card mt-3">
+                                <div class="card-header card-header-custom">
+                                    <h5 class="mb-0"><i class="fas fa-table"></i> Stroke Risk by Score</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Score</th>
+                                                    <th>Risk Category</th>
+                                                    <th>Annual Stroke Risk (%)</th>
+                                                    <th>Recommendation</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>0</strong></td>
+                                                    <td><span class="risk-low">Low</span></td>
+                                                    <td>0.2%</td>
+                                                    <td>No anticoagulation needed (consider aspirin)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>1</strong></td>
+                                                    <td><span class="risk-low">Low</span></td>
+                                                    <td>0.6%</td>
+                                                    <td>Anticoagulation or aspirin</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>2</strong></td>
+                                                    <td><span class="risk-medium">Intermediate</span></td>
+                                                    <td>2.2%</td>
+                                                    <td>Anticoagulation recommended</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>≥3</strong></td>
+                                                    <td><span class="risk-high">High</span></td>
+                                                    <td>≥2.2%</td>
+                                                    <td>Anticoagulation strongly recommended</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Formula and References -->
+                            <div class="card mt-3 formula-card">
+                                <div class="card-header" style="background-color: #667eea33; border: none;">
+                                    <h5 class="mb-0"><i class="fas fa-flask"></i> Formula & References</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6>Scoring System:</h6>
+                                    <ul class="small">
+                                        <li><strong>C:</strong> Congestive heart failure = 1 point</li>
+                                        <li><strong>H:</strong> Hypertension = 1 point</li>
+                                        <li><strong>A₁:</strong> Age ≥75 = 2 points; 65-74 = 1 point</li>
+                                        <li><strong>D:</strong> Diabetes = 1 point</li>
+                                        <li><strong>S₁:</strong> Prior stroke/TIA/thromboembolism = 2 points</li>
+                                        <li><strong>V:</strong> Vascular disease = 1 point</li>
+                                        <li><strong>A₂:</strong> Age 65-74 or Female sex = 1 point</li>
+                                        <li><strong>Sc:</strong> Age ≥65 with hypertension, diabetes, or female = 1 point</li>
+                                    </ul>
+                                    <hr class="my-2">
+                                    <p class="small mb-0"><strong>Clinical Note:</strong> This calculator aids in shared decision-making. Consider individual patient factors, bleeding risk (HAS-BLED), preferences, and drug interactions when recommending anticoagulation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate CHA2DS2-VASc Score
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            try {
+                // Get input values
+                const chf = parseInt(document.getElementById('chf').value) || 0;
+                const hypertension = parseInt(document.getElementById('hypertension').value) || 0;
+                const age = parseInt(document.getElementById('age').value) || 0;
+                const diabetes = parseInt(document.getElementById('diabetes').value) || 0;
+                const stroke = parseInt(document.getElementById('stroke').value) || 0;
+                const vascular = parseInt(document.getElementById('vascular').value) || 0;
+                const female = parseInt(document.getElementById('female').value) || 0;
+                const sclerosis = parseInt(document.getElementById('sclerosis').value) || 0;
+
+                // Validate age
+                if (age < 18 || age > 120) {
+                    alert('Please enter a valid age between 18 and 120');
+                    return;
+                }
+
+                // Calculate age component (A1)
+                let ageScore = 0;
+                if (age >= 75) ageScore = 2;
+                else if (age >= 65) ageScore = 1;
+
+                // Calculate total score
+                let totalScore = chf + hypertension + ageScore + diabetes + stroke + vascular + female + sclerosis;
+
+                // Display results
+                document.getElementById('totalScore').textContent = totalScore;
+
+                // Determine risk interpretation
+                let riskInterpretation = '';
+                if (totalScore === 0) {
+                    riskInterpretation = '<span class="risk-low">Low Risk</span> - 0.2% annual stroke risk';
+                } else if (totalScore === 1) {
+                    riskInterpretation = '<span class="risk-low">Low Risk</span> - 0.6% annual stroke risk';
+                } else if (totalScore === 2) {
+                    riskInterpretation = '<span class="risk-medium">Intermediate Risk</span> - 2.2% annual stroke risk';
+                } else {
+                    riskInterpretation = '<span class="risk-high">High Risk</span> - ≥2.2% annual stroke risk. Anticoagulation strongly recommended.';
+                }
+
+                document.getElementById('riskInterpretation').innerHTML = riskInterpretation;
+                document.getElementById('resultsSection').style.display = 'block';
+
+                // Scroll to results
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                alert('Error calculating score: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

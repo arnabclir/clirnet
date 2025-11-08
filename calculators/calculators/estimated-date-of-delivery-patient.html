@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>When Will My Baby Arrive? - Patient Guide</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Main body styling with purple gradient background */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        /* Container wrapper with max width */
+        .container-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Card styling with shadow and border radius */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        /* Card header with purple gradient */
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-bottom: none;
+        }
+
+        /* Calculator title styling */
+        .calculator-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Subtitle text styling */
+        .calculator-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+
+        /* Header badges container */
+        .header-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        /* Badge styling */
+        .badge {
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        /* Navigation back link */
+        .nav-back {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .nav-back a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-back a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Card body styling */
+        .card-body {
+            padding: 30px;
+            background-color: #f8f9fa;
+        }
+
+        /* Form group styling */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        /* Form label styling */
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+            font-size: 16px;
+        }
+
+        /* Form control styling */
+        .form-control {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* Button styling */
+        .btn-calculate {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 12px 40px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        /* Result container styling */
+        .result-container {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .result-container.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        /* Slide in animation */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Results grid styling */
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        /* Result card styling */
+        .result-card {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-label {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .result-value {
+            font-size: 26px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .result-desc {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* Info box styling */
+        .info-box {
+            background-color: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        /* Education section styling */
+        .education-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 2px dashed #667eea;
+        }
+
+        /* Education title styling */
+        .education-title {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+        }
+
+        /* Education content styling */
+        .education-content {
+            font-size: 14px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .education-content h3 {
+            color: #667eea;
+            font-weight: 600;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .education-content ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .education-content li {
+            margin-bottom: 8px;
+        }
+
+        /* Responsive design for mobile */
+        @media (max-width: 768px) {
+            .calculator-title {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container-wrapper">
+        <!-- Navigation back button -->
+        <div class="nav-back">
+            <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        </div>
+
+        <!-- Main calculator card -->
+        <div class="card">
+            <div class="card-header">
+                <h1 class="calculator-title">
+                    <i class="fas fa-baby-carriage"></i>
+                    When Will My Baby Arrive?
+                </h1>
+                <p class="calculator-subtitle">
+                    Patient-Friendly Guide to Your Due Date - Understand Your Pregnancy Timeline
+                </p>
+                <div class="header-badges">
+                    <span class="badge"><i class="fas fa-heart"></i> Pregnancy</span>
+                    <span class="badge"><i class="fas fa-book"></i> Patient Education</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <!-- Information box -->
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Welcome to your pregnancy journey!</strong> This tool helps you estimate when your baby might arrive based on when your last period started. Remember, this is just an estimate—only about 5% of babies arrive on their due date, but most arrive within 2 weeks of it.
+                </div>
+
+                <!-- Patient-friendly form -->
+                <form id="eddForm">
+                    <!-- Last menstrual period -->
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-calendar"></i> When did your last menstrual period start?
+                        </label>
+                        <input type="date" class="form-control" id="lmpDate" required>
+                        <small class="text-muted">This is the first day of your last period before you became pregnant.</small>
+                    </div>
+
+                    <!-- Calculate button -->
+                    <button type="submit" class="btn btn-calculate">
+                        <i class="fas fa-heartbeat"></i> Find My Baby's Due Date
+                    </button>
+                </form>
+
+                <!-- Results section -->
+                <div id="resultContainer" class="result-container">
+                    <h4><i class="fas fa-star"></i> Your Baby's Story</h4>
+
+                    <!-- Results grid -->
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <div class="result-label">Expected Due Date</div>
+                            <div class="result-value"><span id="eddDate">--</span></div>
+                            <div class="result-desc" id="eddDesc"></div>
+                        </div>
+
+                        <div class="result-card">
+                            <div class="result-label">Current Stage of Pregnancy</div>
+                            <div class="result-value"><span id="gestationalAge">--</span></div>
+                            <div class="result-desc" id="trimesterDesc"></div>
+                        </div>
+
+                        <div class="result-card">
+                            <div class="result-label">Time Remaining</div>
+                            <div class="result-value"><span id="daysRemaining">--</span></div>
+                            <div class="result-desc">weeks and days until due date</div>
+                        </div>
+                    </div>
+
+                    <!-- Patient message -->
+                    <div id="patientMessage"></div>
+                </div>
+
+                <!-- Patient education section -->
+                <div class="education-section">
+                    <div class="education-title">
+                        <i class="fas fa-book"></i> What You Should Know About Your Due Date
+                    </div>
+                    <div class="education-content">
+                        <h3>Is My Due Date Exact?</h3>
+                        <p>
+                            No! Your due date is just an estimate of when your baby might arrive. It's based on the assumption that pregnancy lasts 280 days (40 weeks) from the first day of your last period. In reality:
+                        </p>
+                        <ul>
+                            <li><strong>Only 5%</strong> of babies are born on their actual due date</li>
+                            <li><strong>About 90%</strong> of babies arrive within 2 weeks before or after the due date</li>
+                            <li><strong>Normal pregnancy</strong> can last anywhere from 37 to 42 weeks</li>
+                        </ul>
+
+                        <h3>What Affects My Due Date?</h3>
+                        <ul>
+                            <li><strong>Length of menstrual cycle:</strong> If your cycles are shorter or longer than 28 days, your due date may shift</li>
+                            <li><strong>First ultrasound:</strong> An early ultrasound (before 13 weeks) is the most accurate way to confirm your due date</li>
+                            <li><strong>Natural variation:</strong> Every pregnancy is unique—don't compare your timeline with other moms</li>
+                        </ul>
+
+                        <h3>Three Stages of Your Pregnancy</h3>
+                        <ul>
+                            <li><strong>First Trimester (Weeks 1-13):</strong> Rapid development, initial prenatal visits, prenatal vitamins</li>
+                            <li><strong>Second Trimester (Weeks 14-27):</strong> "Honeymoon" period, anatomy ultrasound, quickening (feeling baby move)</li>
+                            <li><strong>Third Trimester (Weeks 28-40+):</strong> Getting ready for birth, more frequent visits, final preparations</li>
+                        </ul>
+
+                        <h3>Signs Your Baby Might Be Coming Soon</h3>
+                        <ul>
+                            <li><strong>Regular contractions:</strong> Cramping or tightening that comes and goes in a pattern</li>
+                            <li><strong>Water breaking:</strong> Fluid leakage or gush (can be continuous)—head to hospital!</li>
+                            <li><strong>Bloody show:</strong> Pink, brownish, or blood-tinged mucus discharge</li>
+                            <li><strong>Dropped belly:</strong> Your baby moves lower into your pelvis</li>
+                        </ul>
+
+                        <h3>When Should I Call My Doctor?</h3>
+                        <ul>
+                            <li>Vaginal bleeding or spotting</li>
+                            <li>Severe abdominal pain</li>
+                            <li>Persistent contractions (every 5-10 minutes)</li>
+                            <li>Fluid leaking from vagina</li>
+                            <li>Decreased fetal movement (fewer kicks than usual)</li>
+                            <li>Severe headache, vision changes, or upper abdominal pain</li>
+                            <li>Any concerns or questions!</li>
+                        </ul>
+
+                        <h3>Preparing for Birth</h3>
+                        <ul>
+                            <li>Take childbirth education classes</li>
+                            <li>Discuss your birth preferences with your provider</li>
+                            <li>Pack your hospital bag around week 36</li>
+                            <li>Arrange childcare if you have other children</li>
+                            <li>Ensure reliable transportation to hospital</li>
+                            <li>Know the signs of labor</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Form submission handler
+        document.getElementById('eddForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculateEDD();
+        });
+
+        // EDD calculation function
+        function calculateEDD() {
+            const lmpString = document.getElementById('lmpDate').value;
+
+            if (!lmpString) {
+                alert('Please select a date');
+                return;
+            }
+
+            // Parse LMP date
+            const lmp = new Date(lmpString);
+
+            // Calculate EDD by adding 280 days to LMP
+            const edd = new Date(lmp);
+            edd.setDate(edd.getDate() + 280);
+
+            // Calculate current gestational age
+            const today = new Date();
+            const gestationalDays = Math.floor((today - lmp) / (1000 * 60 * 60 * 24));
+            const gestationalWeeks = Math.floor(gestationalDays / 7);
+            const gestationalDaysRemainder = gestationalDays % 7;
+
+            // Calculate days until EDD
+            const daysUntilEDD = Math.floor((edd - today) / (1000 * 60 * 60 * 24));
+            const weeksRemaining = Math.floor(daysUntilEDD / 7);
+            const daysRemaining = daysUntilEDD % 7;
+
+            // Determine trimester
+            let trimesterInfo = '';
+            let trimesterDesc = '';
+            if (gestationalWeeks < 13) {
+                trimesterInfo = 'First Trimester';
+                trimesterDesc = 'Weeks 1-13: Rapid development and early ultrasounds';
+            } else if (gestationalWeeks < 27) {
+                trimesterInfo = 'Second Trimester';
+                trimesterDesc = 'Weeks 14-27: The "honeymoon" of pregnancy';
+            } else if (gestationalWeeks < 37) {
+                trimesterInfo = 'Third Trimester (Preterm)';
+                trimesterDesc = 'Weeks 28-36: Getting ready but baby needs more development';
+            } else if (gestationalWeeks <= 42) {
+                trimesterInfo = 'Third Trimester (Full Term)';
+                trimesterDesc = 'Weeks 37-40+: Baby is ready to arrive!';
+            } else {
+                trimesterInfo = 'Post-term';
+                trimesterDesc = 'Beyond 40 weeks: Close monitoring recommended';
+            }
+
+            // Format dates
+            const eddFormatted = edd.toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            const daysLeftDesc = daysUntilEDD > 0 ? `${weeksRemaining} weeks and ${daysRemaining} days` : 'Past due date';
+
+            // Display results
+            document.getElementById('eddDate').textContent = eddFormatted;
+            document.getElementById('eddDesc').textContent = `That's approximately ${Math.ceil(daysUntilEDD / 7)} weeks away!`;
+            document.getElementById('gestationalAge').textContent = gestationalWeeks + '+' + gestationalDaysRemainder;
+            document.getElementById('trimesterDesc').textContent = trimesterDesc;
+            document.getElementById('daysRemaining').textContent = daysLeftDesc;
+
+            // Prepare patient message
+            let message = '';
+
+            if (gestationalWeeks < 13) {
+                message = '<strong>Congratulations!</strong> You\'re in your first trimester. ' +
+                    'This is an exciting time! Focus on prenatal vitamins, stay hydrated, and attend your prenatal appointments. ' +
+                    'Many women experience morning sickness during this time—this is normal and usually passes.';
+            } else if (gestationalWeeks < 27) {
+                message = '<strong>You\'re in the second trimester!</strong> ' +
+                    'Many women feel their best now. You should be feeling your baby move (quickening). ' +
+                    'Continue regular prenatal visits and prepare for your anatomy ultrasound if you haven\'t had it yet.';
+            } else if (gestationalWeeks < 37) {
+                message = '<strong>You\'re in the third trimester!</strong> ' +
+                    'Your baby is growing rapidly and will soon be ready to arrive. ' +
+                    'Start planning for labor and delivery. Stay active but get plenty of rest. Contact your provider if you notice decreased fetal movement.';
+            } else if (gestationalWeeks <= 42) {
+                message = '<strong>You\'re at your due date!</strong> ' +
+                    'Your baby could arrive any day now. Stay alert for labor signs: regular contractions, water breaking, or vaginal bleeding. ' +
+                    'Pack your hospital bag and have your provider\'s number handy.';
+            } else {
+                message = '<strong>Your due date has passed.</strong> ' +
+                    'This is not uncommon. Your provider will monitor you closely and may discuss induction. Continue close monitoring and report any concerns immediately.';
+            }
+
+            document.getElementById('patientMessage').innerHTML =
+                `<div class="info-box"><i class="fas fa-lightbulb"></i> ${message}</div>`;
+
+            // Show results section with animation
+            document.getElementById('resultContainer').classList.add('show');
+        }
+    </script>
+</body>
+</html>

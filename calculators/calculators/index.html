@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for responsive design and character encoding -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sleep Medicine Calculators - Clinical assessment tools for OSA screening and sleepiness evaluation">
+    <title>Sleep Medicine Calculators</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        /* Root variables for purple gradient theme */
+        :root {
+            --primary-purple: #6B46C1;
+            --secondary-purple: #9333EA;
+            --light-purple: #E9D5FF;
+            --dark-purple: #4C1D95;
+        }
+
+        /* Body styling with gradient background */
+        body {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Navigation bar styling */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid var(--primary-purple);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-purple) !important;
+            font-size: 1.5rem;
+        }
+
+        /* Hero section styling */
+        .hero-section {
+            padding: 60px 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        /* Calculator card styling */
+        .calculator-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            border-top: 4px solid var(--primary-purple);
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Card header with gradient background */
+        .card-header-gradient {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .card-header-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card-header-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .card-header-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+
+        /* Card body styling */
+        .calculator-card .card-body {
+            padding: 25px;
+        }
+
+        .card-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .calculator-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+
+        .calculator-features li {
+            padding: 8px 0;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .calculator-features li:before {
+            content: "✓ ";
+            color: var(--primary-purple);
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        /* Button styling */
+        .btn-launch {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-launch:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(107, 70, 193, 0.4);
+            color: white;
+        }
+
+        .btn-launch:active {
+            transform: scale(0.98);
+        }
+
+        /* Footer styling */
+        .footer {
+            background: rgba(0, 0, 0, 0.1);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-text {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .calculator-card {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-heart-pulse me-2"></i>Sleep Medicine
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i>Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-calculator me-1"></i>Calculators
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="stop-bang-osa-screening.html">STOP-Bang OSA</a></li>
+                            <li><a class="dropdown-item" href="epworth-sleepiness-scale.html">Epworth Sleepiness</a></li>
+                            <li><a class="dropdown-item" href="sleep-problems-questionnaire.html">Sleep Problems</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1 class="hero-title"><i class="fas fa-moon me-3"></i>Sleep Medicine Calculators</h1>
+        <p class="hero-subtitle">Clinical Assessment Tools for OSA Screening and Sleepiness Evaluation</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container py-5">
+        <div class="row g-4">
+            <!-- STOP-Bang Calculator Card -->
+            <div class="col-md-6 col-lg-4">
+                <div class="calculator-card">
+                    <div class="card-header-gradient">
+                        <i class="fas fa-lungs card-header-icon"></i>
+                        <h3 class="card-header-title">STOP-Bang OSA</h3>
+                        <p class="card-header-subtitle">Obstructive Sleep Apnea Screening</p>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Enhanced STOP-Bang questionnaire for comprehensive screening of obstructive sleep apnea in adult patients.
+                        </p>
+                        <ul class="calculator-features">
+                            <li>8 clinical assessment items</li>
+                            <li>Immediate risk stratification</li>
+                            <li>Evidence-based interpretation</li>
+                            <li>Referral recommendations</li>
+                        </ul>
+                        <a href="stop-bang-osa-screening.html" class="btn-launch">
+                            Launch Calculator <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Epworth Sleepiness Scale Card -->
+            <div class="col-md-6 col-lg-4">
+                <div class="calculator-card">
+                    <div class="card-header-gradient">
+                        <i class="fas fa-person-sleeping card-header-icon"></i>
+                        <h3 class="card-header-title">Epworth Scale</h3>
+                        <p class="card-header-subtitle">Daytime Sleepiness Assessment</p>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Validated 8-item scale measuring daytime sleepiness and propensity to fall asleep.
+                        </p>
+                        <ul class="calculator-features">
+                            <li>8 scenario-based questions</li>
+                            <li>0-24 point scoring system</li>
+                            <li>Severity classification</li>
+                            <li>Clinical recommendations</li>
+                        </ul>
+                        <a href="epworth-sleepiness-scale.html" class="btn-launch">
+                            Launch Calculator <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sleep Problems Questionnaire Card -->
+            <div class="col-md-6 col-lg-4">
+                <div class="calculator-card">
+                    <div class="card-header-gradient">
+                        <i class="fas fa-bed card-header-icon"></i>
+                        <h3 class="card-header-title">Sleep Problems</h3>
+                        <p class="card-header-subtitle">Comprehensive Sleep Assessment</p>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-description">
+                            Comprehensive evaluation of sleep quality, duration, and associated disturbances.
+                        </p>
+                        <ul class="calculator-features">
+                            <li>10 comprehensive assessment items</li>
+                            <li>Multi-domain evaluation</li>
+                            <li>Sleep disorder screening</li>
+                            <li>Personalized recommendations</li>
+                        </ul>
+                        <a href="sleep-problems-questionnaire.html" class="btn-launch">
+                            Launch Calculator <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Information Section -->
+        <div class="row mt-5">
+            <div class="col-lg-8 mx-auto">
+                <div class="alert alert-info" style="background: rgba(255, 255, 255, 0.95); border-left: 4px solid var(--primary-purple);">
+                    <h5><i class="fas fa-circle-info me-2"></i>Clinical Use</h5>
+                    <p class="mb-0">
+                        These calculators are designed for clinical and educational purposes. Results should be interpreted by qualified healthcare professionals and used in conjunction with clinical judgment and additional diagnostic testing when appropriate.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer mt-5">
+        <p class="footer-text"><i class="fas fa-copyright me-1"></i>2024 Sleep Medicine Calculators. All rights reserved.</p>
+        <p class="footer-text">Clinical Assessment Tools for Healthcare Professionals</p>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

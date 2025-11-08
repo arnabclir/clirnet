@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wells Score - DVT Probability</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        body { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 100vh; }
+        .navbar { background: var(--primary-gradient) !important; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .container-main { max-width: 900px; margin: 30px auto; }
+        .card { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .card-header { background: var(--primary-gradient); color: white; padding: 25px; }
+        .card-header h1 { font-size: 28px; margin: 0; font-weight: 700; }
+        .form-section { padding: 25px; border-bottom: 1px solid #e0e0e0; }
+        .form-label { font-weight: 600; color: #333; margin-bottom: 12px; }
+        .btn-calculate { background: var(--primary-gradient); border: none; padding: 12px 40px; font-weight: 600; }
+        .btn-calculate:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3); color: white; }
+        .result-section { background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%); padding: 25px; border-radius: 10px; margin-top: 25px; display: none; }
+        .result-section.show { display: block; animation: slideIn 0.3s ease-in; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .score-display { font-size: 36px; font-weight: 700; color: #667eea; margin: 15px 0; }
+        .interpretation { padding: 15px; border-radius: 8px; margin-top: 15px; font-weight: 500; }
+        .interpretation.low { background-color: #d4edda; border-left: 4px solid #28a745; color: #155724; }
+        .interpretation.intermediate { background-color: #fff3cd; border-left: 4px solid #ffc107; color: #856404; }
+        .interpretation.high { background-color: #f8d7da; border-left: 4px solid #dc3545; color: #721c24; }
+        .form-control, .form-select { border: 1px solid #ddd; border-radius: 6px; }
+        .form-control:focus, .form-select:focus { border-color: #667eea; box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25); }
+        .checkbox-label { display: flex; align-items: center; margin: 10px 0; }
+        .checkbox-label input { margin-right: 10px; width: 20px; height: 20px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><i class="fas fa-calculator"></i> Clinical Calculators</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#hematology"><i class="fas fa-blood"></i> Hematology</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container container-main">
+        <div class="card">
+            <div class="card-header">
+                <h1><i class="fas fa-shoe-prints"></i> Wells Score</h1>
+                <p>Deep Vein Thrombosis (DVT) Probability Assessment</p>
+            </div>
+
+            <div class="card-body">
+                <form id="calculatorForm">
+                    <!-- Clinical symptoms of DVT -->
+                    <div class="form-section">
+                        <label class="form-label"><i class="fas fa-stethoscope"></i> Clinical Symptoms of DVT</label>
+                        <div class="checkbox-label">
+                            <input type="checkbox" id="symptoms" class="form-check-input">
+                            <label for="symptoms" class="ms-2">Calf swelling & pain (3 points)</label>
+                        </div>
+                    </div>
+
+                    <!-- Unilateral edema -->
+                    <div class="form-section">
+                        <label class="form-label"><i class="fas fa-balance-scale"></i> Unilateral Edema</label>
+                        <div class="checkbox-label">
+                            <input type="checkbox" id="edema" class="form-check-input">
+                            <label for="edema" class="ms-2">One leg swollen more than the other (3 points)</label>
+                        </div>
+                    </div>
+
+                    <!-- Calf swelling -->
+                    <div class="form-section">
+                        <label class="form-label"><i class="fas fa-ruler"></i> Calf Swelling</label>
+                        <div class="checkbox-label">
+                            <input type="checkbox" id="calf" class="form-check-input">
+                            <label for="calf" class="ms-2">&gt;3 cm difference compared to other leg (2 points)</label>
+                        </div>
+                    </div>
+
+                    <!-- Pitting edema -->
+                    <div class="form-section">
+                        <label class="form-label"><i class="fas fa-hand-paper"></i> Pitting Edema</label>
+                        <div class="checkbox-label">
+                            <input type="checkbox" id="pitting" class="form-check-input">
+                            <label for="pitting" class="ms-2">Greater in symptomatic leg (2 points)</label>
+                        </div>
+                    </div>
+
+                    <!-- Collateral superficial veins -->
+                    <div class="form-section">
+                        <label class="form-label"><i class="fas fa-sitemap"></i> Collateral Superficial Veins</label>
+                        <div class="checkbox-label">
+                            <input type="checkbox" id="veins" class="form-check-input">
+                            <label for="veins" class="ms-2">Collateral superficial veins (2 points)</label>
+                        </div>
+                    </div>
+
+                    <!-- Immobilization -->
+                    <div class="form-section">
+                        <label class="form-label"><i class="fas fa-wheelchair"></i> Immobilization</label>
+                        <div class="checkbox-label">
+                            <input type="checkbox" id="immobilization" class="form-check-input">
+                            <label for="immobilization" class="ms-2">Bed rest >3 days or recent surgery (2 points)</label>
+                        </div>
+                    </div>
+
+                    <!-- Cancer history -->
+                    <div class="form-section">
+                        <label class="form-label"><i class="fas fa-ribbon"></i> Active Cancer</label>
+                        <div class="checkbox-label">
+                            <input type="checkbox" id="cancer" class="form-check-input">
+                            <label for="cancer" class="ms-2">Active cancer or within 6 months (1 point)</label>
+                        </div>
+                    </div>
+
+                    <!-- Alternative diagnosis -->
+                    <div class="form-section">
+                        <label class="form-label"><i class="fas fa-lightbulb"></i> Alternative Diagnosis Likely</label>
+                        <div class="checkbox-label">
+                            <input type="checkbox" id="alternative" class="form-check-input">
+                            <label for="alternative" class="ms-2">Alternative diagnosis as or more likely (-2 points)</label>
+                        </div>
+                    </div>
+
+                    <!-- Calculate Button -->
+                    <div class="form-section">
+                        <button type="button" class="btn btn-calculate" onclick="calculateScore()">
+                            <i class="fas fa-calculator"></i> Calculate DVT Risk
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Result Section -->
+                <div class="result-section" id="resultSection">
+                    <h4><i class="fas fa-chart-pie"></i> DVT Risk Assessment</h4>
+                    <div class="score-display" id="scoreDisplay">0</div>
+
+                    <div class="interpretation low" id="interpretation">
+                        <strong>Risk Category:</strong>
+                        <span id="riskCategory">Low Risk</span>
+                    </div>
+
+                    <div id="clinicalGuidance" style="margin-top: 15px; padding: 15px; background-color: #f9f9f9; border-radius: 8px;">
+                        <strong><i class="fas fa-lightbulb"></i> Clinical Recommendations:</strong>
+                        <p id="guidance" style="margin-top: 10px;"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate Wells Score
+        function calculateScore() {
+            let score = 0;
+
+            if (document.getElementById('symptoms').checked) score += 3;
+            if (document.getElementById('edema').checked) score += 3;
+            if (document.getElementById('calf').checked) score += 2;
+            if (document.getElementById('pitting').checked) score += 2;
+            if (document.getElementById('veins').checked) score += 2;
+            if (document.getElementById('immobilization').checked) score += 2;
+            if (document.getElementById('cancer').checked) score += 1;
+            if (document.getElementById('alternative').checked) score -= 2;
+
+            document.getElementById('scoreDisplay').textContent = score;
+
+            let risk, guidance, className;
+
+            // Wells Score Risk Stratification for DVT
+            if (score <= 0) {
+                risk = 'LOW RISK: 5% DVT Probability';
+                guidance = '<strong>Score ≤0:</strong> Low probability of DVT. No imaging (D-dimer alone sufficient) or compression ultrasound may be deferred. Clinical follow-up recommended.';
+                className = 'low';
+            } else if (score <= 2) {
+                risk = 'INTERMEDIATE RISK: 17% DVT Probability';
+                guidance = '<strong>Score 1-2:</strong> Intermediate probability of DVT. Perform compression ultrasound or venography. Consider D-dimer testing in low-risk cases.';
+                className = 'intermediate';
+            } else {
+                risk = 'HIGH RISK: 75% DVT Probability';
+                guidance = '<strong>Score ≥3:</strong> High probability of DVT. Immediate compression ultrasound required. Consider starting anticoagulation pending imaging results if high clinical suspicion.';
+                className = 'high';
+            }
+
+            const interpretationEl = document.getElementById('interpretation');
+            interpretationEl.className = 'interpretation ' + className;
+            interpretationEl.innerHTML = `<strong>Risk Category (Score = ${score}):</strong> ${risk}`;
+            document.getElementById('guidance').innerHTML = guidance;
+            document.getElementById('resultSection').classList.add('show');
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.getElementById('calculatorForm').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                calculateScore();
+            }
+        });
+    </script>
+</body>
+</html>

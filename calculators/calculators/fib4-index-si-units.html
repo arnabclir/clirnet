@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for responsiveness and character encoding -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FIB-4 Index (SI Units) Calculator for Liver Fibrosis">
+    <title>FIB-4 Index (SI Units) - Liver Fibrosis - Clinical Calculator</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Styles with Purple Gradient Theme -->
+    <style>
+        :root {
+            --primary-purple: #667eea;
+            --secondary-purple: #764ba2;
+            --light-purple: #f3f0ff;
+            --dark-purple: #4c2d7a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+        }
+
+        .navbar {
+            background: linear-gradient(90deg, var(--dark-purple) 0%, var(--primary-purple) 100%);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .container-main {
+            max-width: 900px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: white;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            color: white;
+            padding: 30px 20px;
+            border: none;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .card-subtitle {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .form-section {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-purple);
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-label i {
+            margin-right: 8px;
+            color: var(--primary-purple);
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-calculate {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            color: white;
+            border: none;
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .btn-reset {
+            background-color: #e0e0e0;
+            color: var(--dark-purple);
+            border: none;
+            padding: 10px 30px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .btn-reset:hover {
+            background-color: #d0d0d0;
+        }
+
+        .result-section {
+            padding: 30px;
+            background-color: var(--light-purple);
+            border-top: 3px solid var(--primary-purple);
+            display: none;
+        }
+
+        .result-section.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-box {
+            background: white;
+            border-left: 5px solid var(--primary-purple);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-purple);
+            margin-bottom: 10px;
+        }
+
+        .result-label {
+            font-size: 1.1rem;
+            color: var(--dark-purple);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .fibrosis-category {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .fibrosis-no {
+            background-color: #d4edda;
+            color: #155724;
+            border-left: 5px solid #28a745;
+        }
+
+        .fibrosis-moderate {
+            background-color: #fff3cd;
+            color: #856404;
+            border-left: 5px solid #ffc107;
+        }
+
+        .fibrosis-advanced {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-left: 5px solid #dc3545;
+        }
+
+        .info-box {
+            background-color: #e7f3ff;
+            border-left: 5px solid var(--primary-purple);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .info-box strong {
+            color: var(--dark-purple);
+        }
+
+        .interpretation {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .interpretation h5 {
+            color: var(--dark-purple);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .interpretation-item {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .interpretation-item::before {
+            content: "●";
+            position: absolute;
+            left: 0;
+            color: var(--primary-purple);
+            font-weight: bold;
+        }
+
+        .formula-box {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 5px solid var(--primary-purple);
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .card-title {
+                font-size: 1.4rem;
+            }
+
+            .form-section, .result-section {
+                padding: 20px;
+            }
+
+            .result-value {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="fas fa-virus-covid"></i> Clinical Calculators</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/calculators/calculators/index.html"><i class="fas fa-home"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#"><i class="fas fa-calculator"></i> Calculators</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container container-main">
+        <div class="card">
+            <!-- Card Header -->
+            <div class="card-header">
+                <div class="card-title"><i class="fas fa-liver"></i> FIB-4 Index (SI Units)</div>
+                <div class="card-subtitle">Fibrosis-4 Index for Liver Fibrosis Assessment</div>
+            </div>
+
+            <!-- Form Section -->
+            <div class="form-section">
+                <div class="info-box">
+                    <strong><i class="fas fa-info-circle"></i> About This Calculator:</strong> The FIB-4 index uses age, AST, ALT, and platelet count to assess liver fibrosis, particularly useful in HCV and HIV co-infection.
+                </div>
+
+                <!-- Formula Display -->
+                <div class="formula-box">
+                    <strong>Formula (SI Units):</strong><br>
+                    FIB-4 = (Age × AST [U/L]) / (Platelet Count [10⁹/L] × √ALT [U/L])
+                </div>
+
+                <!-- Input Form -->
+                <form id="fib4Form">
+                    <!-- Age -->
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-calendar"></i> Age (years)</label>
+                        <input type="number" class="form-control" id="age" min="0" max="150" required>
+                        <small class="form-text text-muted">Patient age in years</small>
+                    </div>
+
+                    <!-- AST -->
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-flask-vial"></i> AST (U/L)</label>
+                        <input type="number" class="form-control" id="ast" min="0" step="0.1" required>
+                        <small class="form-text text-muted">Serum AST level</small>
+                    </div>
+
+                    <!-- ALT -->
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-flask-vial"></i> ALT (U/L)</label>
+                        <input type="number" class="form-control" id="alt" min="0" step="0.1" required>
+                        <small class="form-text text-muted">Serum ALT level</small>
+                    </div>
+
+                    <!-- Platelet Count -->
+                    <div class="form-group">
+                        <label class="form-label"><i class="fas fa-droplet"></i> Platelet Count [10⁹/L]</label>
+                        <input type="number" class="form-control" id="platelets" min="0" step="0.1" required>
+                        <small class="form-text text-muted">Platelet count in SI units (10⁹/L)</small>
+                    </div>
+
+                    <!-- Buttons -->
+                    <button type="submit" class="btn-calculate"><i class="fas fa-calculator"></i> Calculate FIB-4 Index</button>
+                    <button type="reset" class="btn-reset"><i class="fas fa-redo"></i> Reset</button>
+                </form>
+            </div>
+
+            <!-- Result Section -->
+            <div class="result-section" id="resultSection">
+                <div class="result-box">
+                    <div class="result-label"><i class="fas fa-chart-pie"></i> FIB-4 Index</div>
+                    <div class="result-value" id="scoreResult">-</div>
+                    <div id="fibrositCategory" class="fibrosis-category"></div>
+                </div>
+
+                <div class="interpretation">
+                    <h5><i class="fas fa-stethoscope"></i> Fibrosis Stage Interpretation</h5>
+                    <div id="interpretationText"></div>
+                </div>
+
+                <div class="interpretation">
+                    <h5><i class="fas fa-clipboard"></i> Score Cutoff Values</h5>
+                    <div class="interpretation-item"><strong>FIB-4 < 1.30:</strong> Low risk of advanced fibrosis (AUROC ~0.80)</div>
+                    <div class="interpretation-item"><strong>FIB-4 1.30-2.67:</strong> Indeterminate - further assessment recommended</div>
+                    <div class="interpretation-item"><strong>FIB-4 > 2.67:</strong> High risk of advanced fibrosis (cirrhosis)</div>
+                </div>
+
+                <div class="interpretation">
+                    <h5><i class="fas fa-lightbulb"></i> Clinical Recommendations</h5>
+                    <div id="recommendationsText"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><i class="fas fa-shield-alt"></i> Disclaimer: This calculator is for educational purposes only. Always consult with a healthcare provider.</p>
+        <p>&copy; 2024 Clinical Calculator Series - Infectious Diseases</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Calculator Logic -->
+    <script>
+        // Event listener for form submission
+        document.getElementById('fib4Form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculateFIB4();
+        });
+
+        /**
+         * Calculate FIB-4 Index
+         * Formula: (Age × AST) / (Platelet count × √ALT)
+         */
+        function calculateFIB4() {
+            // Get input values
+            const age = parseFloat(document.getElementById('age').value);
+            const ast = parseFloat(document.getElementById('ast').value);
+            const alt = parseFloat(document.getElementById('alt').value);
+            const platelets = parseFloat(document.getElementById('platelets').value);
+
+            // Validate inputs
+            if (isNaN(age) || isNaN(ast) || isNaN(alt) || isNaN(platelets)) {
+                alert('Please fill all fields');
+                return;
+            }
+
+            if (platelets === 0 || alt === 0) {
+                alert('Platelet count and ALT cannot be zero');
+                return;
+            }
+
+            // Calculate FIB-4 index
+            const fib4Index = (age * ast) / (platelets * Math.sqrt(alt));
+
+            displayResults(fib4Index);
+        }
+
+        /**
+         * Display Results
+         */
+        function displayResults(score) {
+            const resultSection = document.getElementById('resultSection');
+            const scoreResult = document.getElementById('scoreResult');
+            const fibrositCategory = document.getElementById('fibrositCategory');
+            const interpretationText = document.getElementById('interpretationText');
+            const recommendationsText = document.getElementById('recommendationsText');
+
+            scoreResult.textContent = score.toFixed(2);
+
+            // Determine fibrosis stage
+            let category = '';
+            let categoryClass = '';
+            let interpretation = '';
+            let recommendations = '';
+
+            if (score < 1.30) {
+                category = '<i class="fas fa-shield-alt"></i> Low Risk (FIB-4 < 1.30)';
+                categoryClass = 'fibrosis-no';
+                interpretation = '<div class="interpretation-item"><strong>Low probability of advanced fibrosis (F3-F4).</strong> Advanced liver disease is unlikely.</div><div class="interpretation-item">Negative predictive value is high for excluding cirrhosis.</div>';
+                recommendations = '<div class="interpretation-item">Routine follow-up monitoring</div><div class="interpretation-item">Continue management of underlying liver disease</div><div class="interpretation-item">Repeat FIB-4 testing annually</div>';
+            } else if (score <= 2.67) {
+                category = '<i class="fas fa-exclamation-triangle"></i> Indeterminate Risk (1.30-2.67)';
+                categoryClass = 'fibrosis-moderate';
+                interpretation = '<div class="interpretation-item"><strong>Indeterminate risk for advanced fibrosis.</strong> Further assessment is needed to clarify fibrosis stage.</div>';
+                recommendations = '<div class="interpretation-item">Consider transient elastography (FIbroscan) for confirmation</div><div class="interpretation-item">Perform liver ultrasound for signs of portal hypertension</div><div class="interpretation-item">Repeat FIB-4 testing every 6-12 months</div><div class="interpretation-item">Consider clinical correlation with other markers</div>';
+            } else {
+                category = '<i class="fas fa-skull"></i> High Risk (FIB-4 > 2.67)';
+                categoryClass = 'fibrosis-advanced';
+                interpretation = '<div class="interpretation-item"><strong>High probability of advanced fibrosis or cirrhosis.</strong> Urgent assessment and management required.</div>';
+                recommendations = '<div class="interpretation-item"><strong>Urgent hepatology referral recommended</strong></div><div class="interpretation-item">Confirm with elastography and/or liver biopsy</div><div class="interpretation-item">Perform comprehensive evaluation for cirrhosis complications</div><div class="interpretation-item">Screen for esophageal varices</div><div class="interpretation-item">Implement HCC surveillance protocol if cirrhosis confirmed</div>';
+            }
+
+            fibrositCategory.innerHTML = category;
+            fibrositCategory.className = 'fibrosis-category ' + categoryClass;
+            interpretationText.innerHTML = interpretation;
+            recommendationsText.innerHTML = recommendations;
+
+            resultSection.classList.add('show');
+        }
+    </script>
+</body>
+</html>

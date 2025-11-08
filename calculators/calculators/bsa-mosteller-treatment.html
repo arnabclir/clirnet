@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for Responsive Design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Body Surface Area (BSA) Calculator - Mosteller Method - Treatment Planning">
+    <meta name="keywords" content="BSA, Body Surface Area, Mosteller, Treatment Planning, Dermatology">
+    <title>BSA (Mosteller) Calculator | Treatment Planning</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <style>
+        /* Purple Gradient Theme */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+            --light-purple: #f3f0ff;
+            --dark-purple: #5a4a8a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Header Navigation */
+        .navbar {
+            background: var(--primary-gradient);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Main Container */
+        .main-container {
+            min-height: 100vh;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, #f3f0ff 0%, #f8f9fa 100%);
+        }
+
+        /* Card Styling */
+        .calculator-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 30px;
+            border-bottom: none;
+        }
+
+        .card-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .card-header p {
+            margin: 0;
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .card-body {
+            padding: 40px;
+        }
+
+        /* Form Input Styling */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-purple);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .input-group-text {
+            background: var(--light-purple);
+            border: 2px solid #e9ecef;
+            color: var(--dark-purple);
+            font-weight: 600;
+        }
+
+        /* Button Styling */
+        .btn-calculate {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .btn-reset {
+            background: #6c757d;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reset:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        /* Result Section */
+        .result-section {
+            background: var(--light-purple);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 30px;
+            border-left: 5px solid #667eea;
+            display: none;
+        }
+
+        .result-section.show {
+            display: block;
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bsa-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #667eea;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .bsa-unit {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #764ba2;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .treatment-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .stat-box {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        /* Treatment Planning Box */
+        .treatment-box {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 2px solid #667eea;
+        }
+
+        .treatment-box h5 {
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .treatment-box p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .dose-example {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Information Box */
+        .info-box {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+        }
+
+        .info-box h5 {
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            margin: 0;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Error Styling */
+        .error-message {
+            color: #dc3545;
+            font-weight: 600;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        .is-invalid {
+            border-color: #dc3545 !important;
+        }
+
+        /* Icon Colors */
+        .icon-primary {
+            color: #667eea;
+            margin-right: 10px;
+        }
+
+        .icon-secondary {
+            color: #764ba2;
+            margin-right: 8px;
+        }
+
+        .treatment-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-purple);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .card-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .bsa-value {
+                font-size: 2.5rem;
+            }
+
+            .card-body {
+                padding: 25px;
+            }
+
+            .card-header {
+                padding: 20px;
+            }
+
+            .treatment-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../../index.html">
+                <i class="fas fa-hospital"></i> Medical Calculators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html">
+                            <i class="fas fa-home"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../catalog.html">
+                            <i class="fas fa-list"></i> Calculators
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bsa-mosteller-treatment.html">
+                            <i class="fas fa-calculator"></i> BSA (Mosteller)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="container">
+            <!-- Calculator Card -->
+            <div class="calculator-card">
+                <!-- Card Header -->
+                <div class="card-header">
+                    <h1><i class="fas fa-human"></i> Body Surface Area (BSA) Calculator</h1>
+                    <p><strong>Mosteller Method</strong> | Treatment Planning & Dosing</p>
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-body">
+                    <!-- Information Box -->
+                    <div class="info-box">
+                        <h5><i class="fas fa-info-circle icon-primary"></i> About Mosteller Formula</h5>
+                        <p><span class="treatment-badge">TREATMENT PLANNING</span>The Mosteller formula is one of the most commonly used BSA calculations for dermatological treatment planning. Formula: BSA (m²) = √(Height (cm) × Weight (kg) / 3600). Used for dosing phototherapy, topical treatments, and systemic agents.</p>
+                    </div>
+
+                    <!-- Input Form -->
+                    <form id="bsaForm" class="form">
+                        <!-- Weight Input -->
+                        <div class="form-group">
+                            <label for="weight" class="form-label">
+                                <i class="fas fa-weight-scale icon-secondary"></i> Weight (Kilograms)
+                            </label>
+                            <div class="input-group">
+                                <input
+                                    type="number"
+                                    id="weight"
+                                    class="form-control"
+                                    placeholder="0.0"
+                                    step="0.1"
+                                    min="0"
+                                    max="500"
+                                    required
+                                >
+                                <span class="input-group-text">kg</span>
+                            </div>
+                            <div class="error-message" id="weightError"></div>
+                        </div>
+
+                        <!-- Height Input -->
+                        <div class="form-group">
+                            <label for="height" class="form-label">
+                                <i class="fas fa-ruler-vertical icon-secondary"></i> Height (Centimeters)
+                            </label>
+                            <div class="input-group">
+                                <input
+                                    type="number"
+                                    id="height"
+                                    class="form-control"
+                                    placeholder="0.0"
+                                    step="0.1"
+                                    min="0"
+                                    max="300"
+                                    required
+                                >
+                                <span class="input-group-text">cm</span>
+                            </div>
+                            <div class="error-message" id="heightError"></div>
+                        </div>
+
+                        <!-- Button Group -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <button type="button" class="btn btn-calculate" id="calculateBtn">
+                                <i class="fas fa-calculator"></i> Calculate BSA
+                            </button>
+                            <button type="reset" class="btn btn-reset">
+                                <i class="fas fa-redo"></i> Clear
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Result Section -->
+                    <div class="result-section" id="resultSection">
+                        <h4 style="text-align: center; color: #667eea; font-weight: 700; margin-bottom: 20px;">
+                            <i class="fas fa-flask-vial icon-primary"></i> BSA Calculation Results
+                        </h4>
+
+                        <!-- BSA Value -->
+                        <div class="bsa-value" id="bsaValue">--</div>
+                        <div class="bsa-unit">Square Meters (m²)</div>
+
+                        <!-- Treatment Statistics -->
+                        <div class="treatment-stats">
+                            <div class="stat-box">
+                                <div class="stat-label">BSA Category</div>
+                                <div class="stat-value" id="bsaCategory" style="font-size: 1.2rem; color: #764ba2;">-</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-label">% of Adult BSA</div>
+                                <div class="stat-value" id="percentageAdult">-</div>
+                            </div>
+                        </div>
+
+                        <!-- Treatment Planning -->
+                        <div class="treatment-box">
+                            <h5><i class="fas fa-pills icon-secondary"></i> Treatment Planning</h5>
+                            <p id="treatmentGuidance">Based on BSA calculation, treatment dosing should follow established protocols for dermatological interventions.</p>
+
+                            <h5 style="margin-top: 20px;"><i class="fas fa-prescription-bottle icon-secondary"></i> Common Dosing Examples</h5>
+                            <div class="dose-example" id="doseExamples">
+                                Methotrexate (Psoriasis): mg/week = BSA × 0.3 to 0.5<br>
+                                Phototherapy UVB: J/cm² based on skin type and indication<br>
+                                PUVA: mJ/cm² adjusted for BSA involvement
+                            </div>
+
+                            <h5 style="margin-top: 20px;"><i class="fas fa-info-circle icon-secondary"></i> Clinical Notes</h5>
+                            <p id="clinicalNotes">Mosteller method provides accurate BSA estimation for treatment dosing. Always refer to current treatment guidelines and individual patient factors for final dosing decisions.</p>
+
+                            <hr>
+
+                            <h5 style="margin-top: 20px;"><i class="fas fa-chart-bar icon-secondary"></i> BSA Reference Ranges</h5>
+                            <table class="table table-sm table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>BSA Range (m²)</th>
+                                        <th>Clinical Note</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Very Small</strong></td>
+                                        <td>&lt; 1.0</td>
+                                        <td>Reduced dosing typically required</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Small</strong></td>
+                                        <td>1.0 - 1.5</td>
+                                        <td>Standard dosing with consideration</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Average</strong></td>
+                                        <td>1.5 - 2.0</td>
+                                        <td>Standard adult dosing</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Large</strong></td>
+                                        <td>2.0 - 2.5</td>
+                                        <td>Standard to increased dosing</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Very Large</strong></td>
+                                        <td>&gt; 2.5</td>
+                                        <td>Increased dosing may be required</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><i class="fas fa-copyright"></i> Dermatology Clinical Calculators | For treatment planning use only</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Calculator Script -->
+    <script>
+        // Get form elements
+        const form = document.getElementById('bsaForm');
+        const weightInput = document.getElementById('weight');
+        const heightInput = document.getElementById('height');
+        const calculateBtn = document.getElementById('calculateBtn');
+        const resultSection = document.getElementById('resultSection');
+        const bsaValue = document.getElementById('bsaValue');
+        const bsaCategory = document.getElementById('bsaCategory');
+        const percentageAdult = document.getElementById('percentageAdult');
+        const treatmentGuidance = document.getElementById('treatmentGuidance');
+        const clinicalNotes = document.getElementById('clinicalNotes');
+
+        // Average adult BSA
+        const AVERAGE_ADULT_BSA = 1.73; // m²
+
+        // Clear error messages when user starts typing
+        weightInput.addEventListener('input', () => {
+            document.getElementById('weightError').textContent = '';
+            weightInput.classList.remove('is-invalid');
+        });
+
+        heightInput.addEventListener('input', () => {
+            document.getElementById('heightError').textContent = '';
+            heightInput.classList.remove('is-invalid');
+        });
+
+        // Input validation function
+        function validateInputs() {
+            let isValid = true;
+            const weight = parseFloat(weightInput.value);
+            const height = parseFloat(heightInput.value);
+
+            // Validate weight
+            if (!weight || weight <= 0 || weight > 500) {
+                document.getElementById('weightError').textContent = 'Invalid weight. Enter 0-500 kg.';
+                weightInput.classList.add('is-invalid');
+                isValid = false;
+            }
+
+            // Validate height
+            if (!height || height <= 0 || height > 300) {
+                document.getElementById('heightError').textContent = 'Invalid height. Enter 0-300 cm.';
+                heightInput.classList.add('is-invalid');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // Calculate BSA using Mosteller formula
+        function calculateBSA() {
+            // Validate inputs
+            if (!validateInputs()) {
+                resultSection.classList.remove('show');
+                return;
+            }
+
+            // Get input values
+            const weight = parseFloat(weightInput.value);
+            const height = parseFloat(heightInput.value);
+
+            // Mosteller Formula: BSA = √(Height (cm) × Weight (kg) / 3600)
+            const bsa = Math.sqrt((height * weight) / 3600);
+
+            // Display BSA value
+            bsaValue.textContent = bsa.toFixed(2);
+
+            // Calculate percentage of adult BSA
+            const percentage = (bsa / AVERAGE_ADULT_BSA) * 100;
+            percentageAdult.textContent = percentage.toFixed(1) + '%';
+
+            // Determine category
+            let category = '';
+            let guidance = '';
+            let notes = '';
+
+            if (bsa < 1.0) {
+                category = 'Very Small';
+                guidance = 'Very small BSA (&lt; 1.0 m²). Significant dose reduction typically required for systemic therapies. Consider body weight-based dosing carefully. Phototherapy intensity should be reduced.';
+                notes = 'Smaller BSA may indicate pediatric patient or adult with small stature. Ensure all dosing is appropriately scaled. Monitor closely for treatment response and adverse effects.';
+            } else if (bsa >= 1.0 && bsa < 1.5) {
+                category = 'Small';
+                guidance = 'Small BSA (1.0-1.5 m²). Dosing should account for below-average surface area. Standard protocols may require adjustment downward. Monitor treatment efficacy.';
+                notes = 'Consider dose reduction factors for systemic medications. Phototherapy parameters may need adjustment. Document BSA with all treatment plans.';
+            } else if (bsa >= 1.5 && bsa < 2.0) {
+                category = 'Average';
+                guidance = 'Average BSA (1.5-2.0 m²). Standard adult treatment dosing applies. Follow established clinical protocols for dermatological interventions.';
+                notes = 'BSA is within typical adult range. Standard dosing protocols appropriate. Continue routine monitoring and follow-up.';
+            } else if (bsa >= 2.0 && bsa < 2.5) {
+                category = 'Large';
+                guidance = 'Large BSA (2.0-2.5 m²). May require standard to increased dosing depending on specific treatment. Monitor for adequate therapeutic response.';
+                notes = 'Above-average BSA may necessitate higher doses for some medications. Ensure adequate drug exposure while monitoring safety. Document dosing rationale.';
+            } else {
+                category = 'Very Large';
+                guidance = 'Very large BSA (&gt; 2.5 m²). Increased dosing may be required for therapeutic efficacy. Close monitoring essential. Consider weight-based dosing strategies.';
+                notes = 'Significantly larger BSA requires careful dosing consideration. May need dose escalation for medications that follow BSA-based protocols. Regular assessment of response and toxicity essential.';
+            }
+
+            // Update displays
+            bsaCategory.textContent = category;
+            treatmentGuidance.textContent = guidance;
+            clinicalNotes.textContent = notes;
+
+            // Show result section
+            resultSection.classList.add('show');
+        }
+
+        // Event listeners
+        calculateBtn.addEventListener('click', calculateBSA);
+
+        // Allow Enter key to calculate
+        form.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                calculateBSA();
+            }
+        });
+    </script>
+</body>
+</html>

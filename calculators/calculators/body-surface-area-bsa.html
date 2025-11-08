@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Surface Area (BSA) Calculator - Mosteller Method</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
+        body {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .card-header {
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bsa-value {
+            font-size: 48px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 15px 0;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .formula-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .clinical-box {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark mb-4" style="background: transparent;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html" style="color: white;">
+                    <i class="fas fa-calculator"></i> Pediatric Calculators
+                </a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">
+                    <i class="fas fa-expand"></i> Body Surface Area (BSA) Calculator
+                </h1>
+                <small>Mosteller Method</small>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Instructions -->
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> Enter the child's height in centimeters
+                    and weight in kilograms. The Mosteller method is the most commonly used formula for pediatric BSA calculation.
+                </div>
+
+                <!-- Formula Reference -->
+                <div class="formula-box">
+                    <strong>Mosteller Formula:</strong><br>
+                    BSA (m²) = √[(Height (cm) × Weight (kg)) / 3600]
+                </div>
+
+                <!-- Input Form -->
+                <form id="bsaForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-ruler-vertical"></i> Height (cm)
+                            </label>
+                            <input type="number" class="form-control" id="height" placeholder="Height in cm" min="30" max="220" step="0.1" required>
+                            <small class="text-muted">Range: 30-220 cm</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-weight"></i> Weight (kg)
+                            </label>
+                            <input type="number" class="form-control" id="weight" placeholder="Weight in kg" min="1" max="200" step="0.1" required>
+                            <small class="text-muted">Range: 1-200 kg</small>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="calculateBSA()">
+                            <i class="fas fa-calculator"></i> Calculate BSA
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results -->
+                <div id="resultBox" class="result-box">
+                    <h4 class="text-center mb-4"><i class="fas fa-check-circle"></i> Body Surface Area Result</h4>
+
+                    <div class="text-center">
+                        <p class="text-muted"><small>Calculated BSA</small></p>
+                        <div class="bsa-value" id="bsaValue">--</div>
+                        <p class="text-muted">m²</p>
+                    </div>
+
+                    <!-- Clinical Applications -->
+                    <div class="clinical-box">
+                        <strong><i class="fas fa-stethoscope"></i> Clinical Applications:</strong>
+                        <ul class="mt-2 mb-0">
+                            <li><strong>Chemotherapy dosing:</strong> Most anticancer drugs are dosed based on BSA</li>
+                            <li><strong>Fluid resuscitation:</strong> Used in burn calculations (Parkland formula)</li>
+                            <li><strong>Drug dosing:</strong> Used to calculate pediatric doses of many medications</li>
+                            <li><strong>Cardiac output:</strong> Used to calculate cardiac index</li>
+                            <li><strong>Renal function:</strong> Used in some renal function calculators</li>
+                        </ul>
+                    </div>
+
+                    <!-- Expected BSA by age -->
+                    <div class="alert alert-light mt-4">
+                        <strong><i class="fas fa-chart-bar"></i> Approximate BSA by Age:</strong>
+                        <table class="table table-sm mt-2">
+                            <tbody>
+                                <tr>
+                                    <td><strong>Newborn (3.5 kg)</strong></td>
+                                    <td>0.2 m²</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>6 months (8 kg)</strong></td>
+                                    <td>0.4 m²</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>1 year (10 kg)</strong></td>
+                                    <td>0.5 m²</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2 years (15 kg)</strong></td>
+                                    <td>0.6 m²</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>5 years (20 kg)</strong></td>
+                                    <td>0.8 m²</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>10 years (30 kg)</strong></td>
+                                    <td>1.1 m²</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Adult (70 kg)</strong></td>
+                                    <td>1.8 m²</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Important Notes -->
+                    <div class="alert alert-warning mt-4">
+                        <strong><i class="fas fa-exclamation-triangle"></i> Important Notes:</strong>
+                        <ul class="mb-0">
+                            <li>Always verify BSA values against institutional protocols before using for drug dosing</li>
+                            <li>The Mosteller method is most accurate in children between 30 and 200 cm in height</li>
+                            <li>For children with extreme measurements, consult pediatric specialists</li>
+                            <li>Different formulas (DuBois, Boyd, Haycock) may be used in specific situations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate Body Surface Area using Mosteller method
+        function calculateBSA() {
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+
+            if (!height || !weight) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Mosteller formula: BSA = sqrt((height * weight) / 3600)
+            const bsa = Math.sqrt((height * weight) / 3600);
+
+            // Display result
+            document.getElementById('bsaValue').textContent = bsa.toFixed(2);
+
+            // Show result box
+            document.getElementById('resultBox').classList.add('show');
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

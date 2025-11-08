@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QT Interval Correction - ECG Assessment</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar-custom {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-header-custom {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .btn-primary-custom {
+            background: var(--primary-gradient);
+            border: none;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+        .result-card {
+            border-left: 5px solid #667eea;
+            background: white;
+            margin-top: 20px;
+        }
+        .formula-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid #667eea33;
+        }
+        .normal { color: #28a745; font-weight: bold; }
+        .abnormal { color: #dc3545; font-weight: bold; }
+        .input-group-text {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="javascript:history.back()">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <span class="navbar-text text-white">QT Interval Correction</span>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0 mb-4">
+                    <div class="card-header card-header-custom">
+                        <h2 class="mb-0">
+                            <i class="fas fa-heartbeat"></i> QT Interval Correction
+                        </h2>
+                        <p class="mb-0 small mt-2">Bazett, Fridericia, and Framingham corrections</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <strong><i class="fas fa-info-circle"></i> Clinical Context:</strong>
+                            <p class="mb-0">QTc assessment is essential for arrhythmia risk stratification and medication safety. Prolonged QTc increases risk of torsades de pointes and sudden death.</p>
+                        </div>
+
+                        <form id="calculatorForm">
+                            <div class="row">
+                                <!-- QT Interval -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>QT Interval (milliseconds)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                                        <input type="number" class="form-control" id="qt" min="100" max="600" required placeholder="ms">
+                                    </div>
+                                    <small class="text-muted">Measure from Q wave to T wave end</small>
+                                </div>
+
+                                <!-- Heart Rate -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Heart Rate (bpm)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-heartbeat"></i></span>
+                                        <input type="number" class="form-control" id="hr" min="30" max="200" required placeholder="bpm">
+                                    </div>
+                                </div>
+
+                                <!-- RR Interval -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>RR Interval (milliseconds)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                                        <input type="number" class="form-control" id="rr" min="200" max="2000" placeholder="ms (auto-calculate from HR)" readonly>
+                                    </div>
+                                    <small class="text-muted">Auto-calculated from HR: RR = 60,000/HR</small>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex mt-4">
+                                <button type="button" class="btn btn-primary-custom btn-lg flex-grow-1" id="calculateBtn">
+                                    <i class="fas fa-calculator"></i> Calculate QTc
+                                </button>
+                                <button type="reset" class="btn btn-secondary btn-lg flex-grow-1">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+
+                        <div id="resultsSection" style="display: none;">
+                            <div class="card result-card">
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <i class="fas fa-chart-pie"></i> QTc Results
+                                    </h4>
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <p class="mb-2"><small><strong>Bazett's QTc:</strong></small></p>
+                                            <p><span id="bazettQTc" class="h6"></span> <span class="text-muted">ms</span></p>
+                                            <p id="bazettInterpretation" class="small"></p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p class="mb-2"><small><strong>Fridericia's QTc:</strong></small></p>
+                                            <p><span id="fridericiaQTc" class="h6"></span> <span class="text-muted">ms</span></p>
+                                            <p id="fridericiaInterpretation" class="small"></p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p class="mb-2"><small><strong>Framingham QTc:</strong></small></p>
+                                            <p><span id="framinghamQTc" class="h6"></span> <span class="text-muted">ms</span></p>
+                                            <p id="framinghamInterpretation" class="small"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3">
+                                <div class="card-header card-header-custom">
+                                    <h5 class="mb-0"><i class="fas fa-table"></i> QTc Interpretation</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>QTc Range</th>
+                                                    <th>Risk Level</th>
+                                                    <th>Clinical Implications</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td><strong>&lt;440 ms (M) / &lt;460 ms (F)</strong></td><td><span class="normal">Normal</span></td><td>Low arrhythmia risk</td></tr>
+                                                <tr><td><strong>440-480 ms</strong></td><td><span class="normal">Normal-Borderline</span></td><td>Monitor in context</td></tr>
+                                                <tr><td><strong>&gt;480-500 ms</strong></td><td><span class="abnormal">Prolonged</span></td><td>Increased TdP risk</td></tr>
+                                                <tr><td><strong>&gt;500 ms</strong></td><td><span class="abnormal">Severely Prolonged</span></td><td>High TdP risk; avoid QT-prolonging drugs</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3 formula-card">
+                                <div class="card-header" style="background-color: #667eea33; border: none;">
+                                    <h5 class="mb-0"><i class="fas fa-flask"></i> Correction Formulas</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6>Bazett's Formula (Most Common):</h6>
+                                    <p class="small font-monospace bg-light p-2 rounded mb-3">
+                                        QTc = QT / √(RR)
+                                    </p>
+                                    <h6>Fridericia's Formula:</h6>
+                                    <p class="small font-monospace bg-light p-2 rounded mb-3">
+                                        QTc = QT / ∛(RR)
+                                    </p>
+                                    <h6>Framingham Correction:</h6>
+                                    <p class="small font-monospace bg-light p-2 rounded mb-3">
+                                        QTc = QT + 0.154(1 - RR/1000)
+                                    </p>
+                                    <hr class="my-2">
+                                    <p class="small mb-0"><strong>Clinical Note:</strong> Bazett's is most widely used but overcorrects at high HR. Fridericia is more accurate. Use clinical judgment; proarrhythmic drugs should generally be avoided if QTc &gt;480 ms.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('hr').addEventListener('change', function() {
+            const hr = parseInt(this.value) || 0;
+            if (hr > 0) {
+                const rr = (60000 / hr).toFixed(0);
+                document.getElementById('rr').value = rr;
+            }
+        });
+
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            try {
+                const qt = parseFloat(document.getElementById('qt').value) || 0;
+                let hr = parseInt(document.getElementById('hr').value) || 0;
+                let rr = parseInt(document.getElementById('rr').value) || 0;
+
+                if (qt <= 0) {
+                    alert('Please enter valid QT interval');
+                    return;
+                }
+
+                if (rr <= 0) {
+                    if (hr <= 0) {
+                        alert('Please enter heart rate or RR interval');
+                        return;
+                    }
+                    rr = 60000 / hr;
+                }
+
+                // Bazett's formula: QTc = QT / sqrt(RR in seconds)
+                const rrSeconds = rr / 1000;
+                const bazettQTc = qt / Math.sqrt(rrSeconds);
+
+                // Fridericia: QTc = QT / (RR)^(1/3)
+                const fridericiaQTc = qt / Math.pow(rrSeconds, 1/3);
+
+                // Framingham: QTc = QT + 0.154(1 - RR in seconds)
+                const framinghamQTc = qt + (0.154 * (1000 - rr) / 1000) * 1000;
+
+                document.getElementById('bazettQTc').textContent = bazettQTc.toFixed(0);
+                document.getElementById('fridericiaQTc').textContent = fridericiaQTc.toFixed(0);
+                document.getElementById('framinghamQTc').textContent = framinghamQTc.toFixed(0);
+
+                // Interpretation
+                const isMale = true; // Assume male for 440ms cutoff
+                const normalCutoff = 440;
+
+                let getBazettInterpretation = (qtc) => {
+                    if (qtc < normalCutoff) return '<span class="normal">Normal</span>';
+                    else if (qtc < 480) return '<span class="normal">Borderline</span>';
+                    else if (qtc < 500) return '<span class="abnormal">Prolonged</span>';
+                    else return '<span class="abnormal">Severely Prolonged</span>';
+                };
+
+                document.getElementById('bazettInterpretation').innerHTML = getBazettInterpretation(bazettQTc);
+                document.getElementById('fridericiaInterpretation').innerHTML = getBazettInterpretation(fridericiaQTc);
+                document.getElementById('framinghamInterpretation').innerHTML = getBazettInterpretation(framinghamQTc);
+
+                document.getElementById('resultsSection').style.display = 'block';
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

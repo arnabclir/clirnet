@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corrected Age Calculator - Preterm Infants</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
+        body {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .card-header {
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .age-display {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .age-value {
+            font-size: 42px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .formula-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .clinical-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark mb-4" style="background: transparent;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html" style="color: white;">
+                    <i class="fas fa-calculator"></i> Pediatric Calculators
+                </a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">
+                    <i class="fas fa-calendar-alt"></i> Corrected Age Calculator
+                </h1>
+                <small>For Preterm Infants (Up to 24 months)</small>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Instructions -->
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> Enter the infant's gestational age at birth
+                    and current chronological age. The corrected (or adjusted) age accounts for prematurity and is used for developmental
+                    assessments until age 2-3 years.
+                </div>
+
+                <!-- Formula Reference -->
+                <div class="formula-box">
+                    <strong>Corrected Age Formula:</strong><br>
+                    Corrected Age = Chronological Age - (40 weeks - Gestational Age)<br>
+                    <small class="text-muted">Where 40 weeks is full term</small>
+                </div>
+
+                <!-- Input Form -->
+                <form id="ageForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-hourglass-start"></i> Gestational Age at Birth (weeks)
+                            </label>
+                            <input type="number" class="form-control" id="ga" placeholder="22-42" min="22" max="42" step="1" required>
+                            <small class="text-muted">Range: 22-42 weeks</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-birthday-cake"></i> Current Age (weeks)
+                            </label>
+                            <input type="number" class="form-control" id="currentAge" placeholder="Age in weeks" min="0" max="200" step="0.1" required>
+                            <small class="text-muted">Age since birth in weeks</small>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="calculateCorrectedAge()">
+                            <i class="fas fa-calculator"></i> Calculate Corrected Age
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results -->
+                <div id="resultBox" class="result-box">
+                    <h4 class="text-center mb-4"><i class="fas fa-check-circle"></i> Corrected Age Result</h4>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="age-display">
+                                <small class="text-white-50">Chronological Age</small>
+                                <div class="age-value" id="chronoValue">--</div>
+                                <small>weeks</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="age-display">
+                                <small class="text-white-50">Corrected Age</small>
+                                <div class="age-value" id="correctedValue">--</div>
+                                <small>weeks</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional info -->
+                    <div id="ageInfo" class="mt-4"></div>
+
+                    <!-- Clinical Guidance -->
+                    <div class="clinical-note">
+                        <strong><i class="fas fa-stethoscope"></i> Clinical Use:</strong>
+                        <ul class="mb-0 mt-2">
+                            <li>Use corrected age for developmental milestones and growth charts until 24-36 months</li>
+                            <li>Plot growth parameters (weight, length, head circumference) on corrected age</li>
+                            <li>Assess developmental milestones using corrected age</li>
+                            <li>Use for nutritional assessment and feeding guidelines</li>
+                            <li>Stop adjustment after age 3-4 years or when catch-up growth is complete</li>
+                        </ul>
+                    </div>
+
+                    <!-- Prematurity Categories -->
+                    <div class="alert alert-light mt-4">
+                        <strong><i class="fas fa-info-circle"></i> Prematurity Categories:</strong>
+                        <table class="table table-sm mt-2">
+                            <tbody>
+                                <tr>
+                                    <td><strong>Late preterm</strong></td>
+                                    <td>34+0 to 36+6 weeks</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Moderate preterm</strong></td>
+                                    <td>32+0 to 33+6 weeks</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Very preterm</strong></td>
+                                    <td>28+0 to 31+6 weeks</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Extremely preterm</strong></td>
+                                    <td>&lt; 28 weeks</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate corrected age
+        function calculateCorrectedAge() {
+            const ga = parseInt(document.getElementById('ga').value);
+            const currentAge = parseFloat(document.getElementById('currentAge').value);
+
+            if (!ga || currentAge < 0) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Calculate weeks born before term
+            const weeksBornEarly = 40 - ga;
+
+            // Calculate corrected age
+            const correctedAge = currentAge - weeksBornEarly;
+
+            // Display values
+            document.getElementById('chronoValue').textContent = currentAge.toFixed(1);
+            document.getElementById('correctedValue').textContent = correctedAge.toFixed(1);
+
+            // Generate additional info
+            let infoHtml = '<div class="alert alert-info">';
+            infoHtml += '<strong><i class="fas fa-calendar"></i> Age Breakdown:</strong><br>';
+            infoHtml += `<p class="mt-2"><strong>Gestational Age at Birth:</strong> ${ga} weeks (${Math.floor(weeksBornEarly)} weeks before term)</p>`;
+            infoHtml += `<p><strong>Chronological Age:</strong> ${currentAge.toFixed(1)} weeks = ${(currentAge / 4.345).toFixed(1)} months = ${(currentAge / 52.14).toFixed(2)} years</p>`;
+            infoHtml += `<p><strong>Corrected Age:</strong> ${correctedAge.toFixed(1)} weeks = ${(correctedAge / 4.345).toFixed(1)} months = ${(correctedAge / 52.14).toFixed(2)} years</p>`;
+
+            // Determine if still adjusting
+            if (correctedAge < 156) { // 156 weeks = 3 years
+                infoHtml += '<p class="text-success"><strong><i class="fas fa-check"></i> Still use corrected age for growth and developmental assessments</strong></p>';
+            } else {
+                infoHtml += '<p class="text-warning"><strong><i class="fas fa-clock"></i> Child may no longer require age correction</strong></p>';
+            }
+
+            infoHtml += '</div>';
+            document.getElementById('ageInfo').innerHTML = infoHtml;
+
+            // Show result box
+            document.getElementById('resultBox').classList.add('show');
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

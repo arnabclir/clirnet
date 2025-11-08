@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideal Body Weight and Adjusted Body Weight</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        .container { max-width: 800px; }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-header h3 { margin: 0; font-weight: 700; }
+
+        .card-body { padding: 30px; }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-calculate {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .result-item {
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .result-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .result-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .formula-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+
+        <div class="card">
+            <div class="card-header">
+                <h3><i class="fas fa-balance-scale"></i> Ideal & Adjusted Body Weight</h3>
+                <small>Calculate IBW and AdjBW for Anesthetic Dosing</small>
+            </div>
+
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    Ideal body weight is used for drug dosing, while adjusted body weight accounts for obesity.
+                </div>
+
+                <div class="form-group">
+                    <label for="gender" class="form-label">
+                        <i class="fas fa-user"></i> Gender
+                    </label>
+                    <select class="form-select" id="gender">
+                        <option value="">Select gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="height" class="form-label">
+                        <i class="fas fa-ruler-vertical"></i> Height (cm)
+                    </label>
+                    <input type="number" class="form-control" id="height" step="0.1" placeholder="Enter height in cm">
+                </div>
+
+                <div class="form-group">
+                    <label for="weight" class="form-label">
+                        <i class="fas fa-weight-hanging"></i> Actual Weight (kg)
+                    </label>
+                    <input type="number" class="form-control" id="weight" step="0.1" placeholder="Enter actual weight in kg">
+                </div>
+
+                <button class="btn btn-calculate" onclick="calculateIBW()">
+                    <i class="fas fa-calculator"></i> Calculate IBW and AdjBW
+                </button>
+
+                <div id="results" class="hidden">
+                    <div class="result-box">
+                        <strong style="font-size: 18px;">Body Weight Calculations</strong>
+
+                        <div class="result-item">
+                            <div class="result-label">Ideal Body Weight (IBW)</div>
+                            <div class="result-value" id="ibwValue">-</div>
+                        </div>
+
+                        <div class="result-item">
+                            <div class="result-label">Adjusted Body Weight (AdjBW)</div>
+                            <div class="result-value" id="adjbwValue">-</div>
+                        </div>
+
+                        <div class="result-item">
+                            <div class="result-label">Actual Body Weight</div>
+                            <div class="result-value" id="actualValue">-</div>
+                        </div>
+
+                        <div id="interpretation" style="padding: 15px; background: #f0f4ff; border-radius: 8px; margin-top: 15px;"></div>
+
+                        <div class="formula-box">
+                            <strong>Formulas:</strong><br><br>
+                            <strong>Ideal Body Weight (IBW):</strong><br>
+                            Males: IBW = 50 + 2.3 × (Height in inches - 60)<br>
+                            Females: IBW = 45.5 + 2.3 × (Height in inches - 60)<br><br>
+                            <strong>Adjusted Body Weight (AdjBW):</strong><br>
+                            AdjBW = IBW + 0.4 × (Actual Weight - IBW)<br><br>
+                            <strong>Clinical Applications:</strong><br>
+                            - Propofol dosing (use IBW)<br>
+                            - Rocuronium dosing (use IBW or AdjBW for obese)<br>
+                            - Cefazolin dosing (use AdjBW if >30% overweight)<br>
+                            - Ideal for BMI 20-30; consider AdjBW for BMI >30
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function calculateIBW() {
+            const gender = document.getElementById('gender').value;
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+
+            if (!gender || isNaN(height) || isNaN(weight)) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Convert cm to inches
+            const heightInches = height / 2.54;
+
+            // Calculate IBW using Devine formula (inches)
+            let ibw;
+            if (gender === 'male') {
+                ibw = 50 + 2.3 * (heightInches - 60);
+            } else {
+                ibw = 45.5 + 2.3 * (heightInches - 60);
+            }
+
+            // Calculate Adjusted Body Weight
+            const adjbw = ibw + 0.4 * (weight - ibw);
+
+            // Determine if overweight
+            const percentDifference = ((weight - ibw) / ibw) * 100;
+            const bmi = weight / ((height / 100) ** 2);
+
+            let interpretation = '';
+            let dosing = '';
+
+            if (percentDifference < -10) {
+                interpretation = '<strong>Underweight</strong><br>Use actual weight for dosing.';
+                dosing = 'Dosing: Use actual weight';
+            } else if (percentDifference < 10) {
+                interpretation = '<strong>Normal Weight</strong><br>Use IBW for most drugs.';
+                dosing = 'Dosing: Use IBW for propofol, rocuronium, etc.';
+            } else if (percentDifference < 30) {
+                interpretation = '<strong>Overweight</strong><br>Use IBW for most calculations.';
+                dosing = 'Dosing: Use IBW as primary; consider AdjBW for some antibiotics';
+            } else {
+                interpretation = '<strong>Obese</strong><br>Use Adjusted Body Weight for dosing.';
+                dosing = 'Dosing: Use AdjBW for propofol, antibiotics, and other drugs';
+            }
+
+            document.getElementById('ibwValue').textContent = ibw.toFixed(1) + ' kg';
+            document.getElementById('adjbwValue').textContent = adjbw.toFixed(1) + ' kg';
+            document.getElementById('actualValue').textContent = weight.toFixed(1) + ' kg';
+            document.getElementById('interpretation').innerHTML = `
+                <strong>BMI: ${bmi.toFixed(1)} kg/m²</strong><br>
+                Difference from IBW: ${percentDifference.toFixed(1)}%<br>
+                ${interpretation}<br>
+                <strong>${dosing}</strong>
+            `;
+            document.getElementById('results').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

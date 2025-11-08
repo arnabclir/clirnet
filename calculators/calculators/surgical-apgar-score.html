@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surgical Apgar Score - Surgical Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px 0; }
+        .container-wrapper { max-width: 900px; margin: 0 auto; padding: 0 15px; }
+        .card { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); overflow: hidden; margin-bottom: 20px; }
+        .card-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-bottom: none; }
+        .calculator-title { font-size: 28px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; }
+        .calculator-subtitle { font-size: 14px; opacity: 0.9; margin-bottom: 15px; }
+        .header-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+        .badge { background-color: rgba(255, 255, 255, 0.3); padding: 8px 15px; border-radius: 20px; font-size: 12px; }
+        .nav-back { display: inline-block; margin-bottom: 20px; }
+        .nav-back a { color: white; text-decoration: none; padding: 8px 16px; background-color: rgba(255, 255, 255, 0.2); border-radius: 20px; transition: all 0.3s ease; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; }
+        .nav-back a:hover { background-color: rgba(255, 255, 255, 0.3); }
+        .card-body { padding: 30px; background-color: #f8f9fa; }
+        .form-group { margin-bottom: 25px; }
+        .form-label { font-weight: 600; color: #333; margin-bottom: 10px; display: block; }
+        .form-select { border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px; font-size: 14px; }
+        .form-select:focus { border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
+        .btn-calculate { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; color: white; padding: 12px 40px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; font-size: 16px; width: 100%; }
+        .btn-calculate:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4); color: white; }
+        .result-container { display: none; margin-top: 30px; padding: 20px; background-color: white; border-radius: 10px; border-left: 5px solid #667eea; }
+        .result-container.show { display: block; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .score-display { font-size: 32px; font-weight: 700; color: #667eea; margin-bottom: 15px; }
+        .interpretation { padding: 15px; border-radius: 8px; margin-top: 15px; font-size: 14px; line-height: 1.6; }
+        .interpretation.excellent { background-color: #d1e7dd; color: #0f5132; border-left: 4px solid #198754; }
+        .interpretation.good { background-color: #cfe2ff; color: #084298; border-left: 4px solid #0d6efd; }
+        .interpretation.moderate { background-color: #fef3cd; color: #856404; border-left: 4px solid #ffc107; }
+        .interpretation.poor { background-color: #fee; color: #c33; border-left: 4px solid #c33; }
+        .formula-section { background-color: white; padding: 20px; border-radius: 10px; margin-top: 20px; border: 2px dashed #667eea; }
+        .formula-title { font-weight: 600; color: #667eea; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .formula-content { font-family: 'Courier New', monospace; font-size: 13px; background-color: #f8f9fa; padding: 12px; border-radius: 6px; overflow-x: auto; line-height: 1.6; }
+        .info-box { background-color: #e7f3ff; border-left: 4px solid #667eea; padding: 15px; border-radius: 6px; margin-bottom: 20px; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="container-wrapper">
+        <div class="nav-back">
+            <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="calculator-title">
+                    <i class="fas fa-stethoscope"></i>
+                    Surgical Apgar Score
+                </h1>
+                <p class="calculator-subtitle">
+                    Surgery outcome prediction - Intraoperative risk stratification for postoperative outcomes
+                </p>
+                <div class="header-badges">
+                    <span class="badge"><i class="fas fa-heartbeat"></i> Intraoperative</span>
+                    <span class="badge"><i class="fas fa-chart-line"></i> Outcome</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    Surgical Apgar score predicts major postoperative complications and mortality based on intraoperative factors.
+                </div>
+
+                <form id="suricalApgarForm">
+                    <div class="form-group">
+                        <label class="form-label">Estimated Blood Loss (mL)</label>
+                        <select class="form-select" id="ebl">
+                            <option value="">Select range</option>
+                            <option value="3">&lt; 100 mL (3)</option>
+                            <option value="2">100-499 mL (2)</option>
+                            <option value="1">500-999 mL (1)</option>
+                            <option value="0">&gt; 1000 mL (0)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Heart Rate</label>
+                        <select class="form-select" id="hr">
+                            <option value="">Select range</option>
+                            <option value="3">&lt; 55 bpm (3)</option>
+                            <option value="2">55-100 bpm (2)</option>
+                            <option value="1">> 100 bpm (1)</option>
+                            <option value="0">Uncontrolled (0)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Mean Arterial Pressure</label>
+                        <select class="form-select" id="map">
+                            <option value="">Select range</option>
+                            <option value="3">> 80 mmHg (3)</option>
+                            <option value="2">60-80 mmHg (2)</option>
+                            <option value="1">50-59 mmHg (1)</option>
+                            <option value="0">&lt; 50 mmHg (0)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Core Temperature</label>
+                        <select class="form-select" id="temp">
+                            <option value="">Select range</option>
+                            <option value="3">> 36.5°C (3)</option>
+                            <option value="2">36.5°C (2)</option>
+                            <option value="1">&lt; 36°C (1)</option>
+                            <option value="0">Profound hypothermia (0)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Serum Bicarbonate</label>
+                        <select class="form-select" id="hco3">
+                            <option value="">Select range</option>
+                            <option value="3">&gt; 35 mEq/L (3)</option>
+                            <option value="2">25-35 mEq/L (2)</option>
+                            <option value="1">20-24 mEq/L (1)</option>
+                            <option value="0">&lt; 20 mEq/L (0)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-calculate">
+                        <i class="fas fa-calculator"></i> Calculate Surgical Apgar Score
+                    </button>
+                </form>
+
+                <div id="resultContainer" class="result-container">
+                    <h4><i class="fas fa-star"></i> Your Score Results</h4>
+                    <div class="score-display">
+                        <span id="scoreValue">--</span> / 10
+                    </div>
+                    <div id="interpretationBox"></div>
+                </div>
+
+                <div class="formula-section">
+                    <div class="formula-title">
+                        <i class="fas fa-flask"></i> Surgical Apgar Score Components
+                    </div>
+                    <div class="formula-content">
+Surgical Apgar Score (0-10):
+
+Estimated Blood Loss:
+- < 100 mL: 3 points
+- 100-499 mL: 2 points
+- 500-999 mL: 1 point
+- > 1000 mL: 0 points
+
+Heart Rate, MAP, Temperature, Bicarbonate:
+- Each scored 0-3 based on ranges
+
+Score Interpretation:
+- 8-10: Excellent (0% complication rate)
+- 6-7: Good (1% mortality, 5% complications)
+- 4-5: Moderate (4% mortality, 11% complications)
+- ≤ 3: Poor (15% mortality, 40% complications)
+
+Predicts major complications and mortality
+Assessed at end of surgery
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('suricalApgarForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculateSurgicalApgar();
+        });
+
+        function calculateSurgicalApgar() {
+            const ebl = document.getElementById('ebl').value;
+            const hr = document.getElementById('hr').value;
+            const map = document.getElementById('map').value;
+            const temp = document.getElementById('temp').value;
+            const hco3 = document.getElementById('hco3').value;
+
+            if (ebl === '' || hr === '' || map === '' || temp === '' || hco3 === '') {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const score = parseInt(ebl) + parseInt(hr) + parseInt(map) + parseInt(temp) + parseInt(hco3);
+            document.getElementById('scoreValue').textContent = score;
+
+            let interpretation = '';
+            let className = '';
+
+            if (score >= 8) {
+                interpretation = '<strong>Excellent (0%)</strong><br>No major complications expected. Good hemostasis maintained throughout. Excellent surgical outcome predicted.';
+                className = 'excellent';
+            } else if (score >= 6) {
+                interpretation = '<strong>Good (1% mortality, 5% complications)</strong><br>Good intraoperative condition. Low risk of major postoperative complications.';
+                className = 'good';
+            } else if (score >= 4) {
+                interpretation = '<strong>Moderate (4% mortality, 11% complications)</strong><br>Moderate risk. Significant blood loss or hemodynamic instability. Enhanced monitoring postoperatively recommended.';
+                className = 'moderate';
+            } else {
+                interpretation = '<strong>Poor (15% mortality, 40% complications)</strong><br>High risk of major complications and mortality. Critical intraoperative factors. Intensive ICU-level postoperative care essential.';
+                className = 'poor';
+            }
+
+            document.getElementById('interpretationBox').innerHTML = `<div class="interpretation ${className}"><i class="fas fa-exclamation-triangle"></i> ${interpretation}</div>`;
+            document.getElementById('resultContainer').classList.add('show');
+        }
+    </script>
+</body>
+</html>

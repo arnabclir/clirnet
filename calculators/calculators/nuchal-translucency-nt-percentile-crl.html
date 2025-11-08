@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NT Percentile Calculator - Assess nuchal translucency against CRL for Down syndrome screening">
+    <title>Nuchal Translucency (NT) Percentile Calculator</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #b88cd9 100%);
+            --warning-color: #ffc107;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(102, 126, 234, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .main-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .card-header p {
+            margin: 10px 0 0 0;
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px 12px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
+        }
+
+        .btn-calculate {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+
+        .btn-reset {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reset:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .result-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 25px;
+            display: none;
+            border-left: 5px solid #667eea;
+        }
+
+        .result-section.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .result-card {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .result-label {
+            font-size: 0.8rem;
+            color: #6c757d;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .interpretation-box {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .interpretation-text {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .alert-box {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .alert-normal {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-left: 4px solid #28a745;
+            color: #155724;
+        }
+
+        .alert-warning {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+            border-left: 4px solid #ffc107;
+            color: #856404;
+        }
+
+        .alert-abnormal {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            border-left: 4px solid #dc3545;
+            color: #721c24;
+        }
+
+        .clinical-note {
+            background: linear-gradient(135deg, #fff5e1 0%, #ffe8cc 100%);
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .clinical-note-title {
+            font-weight: 700;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        .clinical-note-text {
+            color: #856404;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .form-text {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .info-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .card-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .result-value {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-heartbeat"></i> Medical Calculators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../catalog.html">Catalog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="card">
+            <!-- Card Header -->
+            <div class="card-header">
+                <h2><i class="fas fa-ultrasound"></i> Nuchal Translucency (NT) Percentile</h2>
+                <p>Assess NT measurements against CRL for aneuploidy risk screening</p>
+            </div>
+
+            <!-- Card Body -->
+            <div class="card-body">
+                <!-- Input Section -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="crl" class="form-label">
+                                <i class="fas fa-ruler"></i> Crown-Rump Length (CRL) (mm)
+                            </label>
+                            <input type="number" class="form-control" id="crl" placeholder="e.g., 65" min="38" max="84" step="0.1">
+                            <small class="form-text">Measured from crown to rump (11-14 weeks)</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="nt" class="form-label">
+                                <i class="fas fa-ruler"></i> Nuchal Translucency (NT) (mm)
+                            </label>
+                            <input type="number" class="form-control" id="nt" placeholder="e.g., 1.5" min="0.5" max="10" step="0.1">
+                            <small class="form-text">Thickness of nuchal fluid</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gestational Age -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <label for="gaWeeks" class="form-label">
+                                <i class="fas fa-calendar"></i> Gestational Age (weeks + days)
+                            </label>
+                            <small class="info-badge">11-14 weeks recommended</small>
+                            <div class="row">
+                                <div class="col-6">
+                                    <input type="number" class="form-control" id="gaWeeks" placeholder="Weeks" min="11" max="14">
+                                </div>
+                                <div class="col-6">
+                                    <input type="number" class="form-control" id="gaDays" placeholder="Days" min="0" max="6">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button Row -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <button class="btn btn-calculate" onclick="calculateNTPercentile()">
+                            <i class="fas fa-calculator"></i> Calculate NT Percentile
+                        </button>
+                        <button class="btn btn-reset ms-2" onclick="resetForm()">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div id="resultSection" class="result-section">
+                    <div class="result-title">
+                        <i class="fas fa-chart-line"></i> NT Percentile Results
+                    </div>
+
+                    <!-- Result Grid -->
+                    <div class="result-grid">
+                        <div class="result-card">
+                            <div class="result-label">NT/CRL Ratio</div>
+                            <div class="result-value" id="ntCrlRatio">--</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-label">Percentile</div>
+                            <div class="result-value" id="percentile">--</div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-label">Median (mm)</div>
+                            <div class="result-value" id="medianNT">--</div>
+                        </div>
+                    </div>
+
+                    <!-- Risk Assessment -->
+                    <div id="riskAssessment" class="alert-box"></div>
+
+                    <!-- Interpretation -->
+                    <div class="interpretation-box">
+                        <div class="interpretation-title">Clinical Interpretation:</div>
+                        <div class="interpretation-text" id="interpretation">--</div>
+                    </div>
+
+                    <!-- Clinical Notes -->
+                    <div class="clinical-note">
+                        <div class="clinical-note-title">
+                            <i class="fas fa-lightbulb"></i> Important Clinical Information
+                        </div>
+                        <div class="clinical-note-text">
+                            <ul style="margin-bottom: 0; padding-left: 20px;">
+                                <li><strong>NT screening window:</strong> 11 weeks 3 days to 14 weeks 3 days</li>
+                                <li><strong>CRL range:</strong> 38-84 mm corresponds to appropriate gestational age</li>
+                                <li><strong>Normal NT:</strong> Usually less than 3 mm, varies with CRL (proportional)</li>
+                                <li><strong>Increased NT:</strong> > 95th percentile or > 3.5 mm associated with higher aneuploidy risk</li>
+                                <li><strong>Combined screening:</strong> NT + maternal age + biomarkers (PAPP-A, hCG) improves detection</li>
+                                <li>Quality of ultrasound and operator experience critical for accurate measurement</li>
+                                <li>Additional testing (cfDNA, amniocentesis) recommended if abnormal</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Calculator Logic -->
+    <script>
+        /**
+         * Nuchal Translucency percentile calculation
+         * Based on normalized measurements for CRL
+         * Reference: Nicolaides, K. H. (2011)
+         */
+        function calculateNTPercentile() {
+            // Get input values
+            const crl = parseFloat(document.getElementById('crl').value);
+            const nt = parseFloat(document.getElementById('nt').value);
+            const gaWeeks = parseInt(document.getElementById('gaWeeks').value);
+            const gaDays = parseInt(document.getElementById('gaDays').value);
+
+            // Validation
+            if (!crl || !nt || isNaN(gaWeeks) || isNaN(gaDays)) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            if (crl < 38 || crl > 84) {
+                alert('CRL should be between 38-84 mm (11-14 weeks)');
+                return;
+            }
+
+            if (nt < 0.5 || nt > 10) {
+                alert('NT should be between 0.5-10 mm');
+                return;
+            }
+
+            if (gaWeeks < 11 || gaWeeks > 14) {
+                alert('Gestational age should be between 11-14 weeks for NT screening');
+                return;
+            }
+
+            // Calculate median NT for this CRL
+            // Simplified model: NT increases slightly with CRL
+            const medianNT = 1.3 + (crl - 38) * 0.015; // Approximate
+
+            // Calculate MoM (Multiples of Median)
+            const mom = nt / medianNT;
+
+            // Calculate percentile using normal distribution approximation
+            // Simplified percentile calculation
+            let percentile = 0;
+            if (mom <= 0.5) {
+                percentile = 5;
+            } else if (mom <= 0.7) {
+                percentile = 15;
+            } else if (mom <= 0.85) {
+                percentile = 30;
+            } else if (mom <= 0.95) {
+                percentile = 45;
+            } else if (mom <= 1.0) {
+                percentile = 50;
+            } else if (mom <= 1.2) {
+                percentile = 70;
+            } else if (mom <= 1.5) {
+                percentile = 85;
+            } else if (mom <= 2.0) {
+                percentile = 95;
+            } else if (mom <= 2.5) {
+                percentile = 98;
+            } else {
+                percentile = 99;
+            }
+
+            // Display results
+            displayResults(nt, medianNT, mom, percentile, crl);
+        }
+
+        /**
+         * Display NT percentile results
+         */
+        function displayResults(nt, medianNT, mom, percentile, crl) {
+            const resultSection = document.getElementById('resultSection');
+            const ntCrlRatio = document.getElementById('ntCrlRatio');
+            const percentileEl = document.getElementById('percentile');
+            const medianNTEl = document.getElementById('medianNT');
+            const interpretationEl = document.getElementById('interpretation');
+            const riskAssessmentEl = document.getElementById('riskAssessment');
+
+            // Update result values
+            ntCrlRatio.textContent = mom.toFixed(2) + ' MoM';
+            percentileEl.textContent = percentile + '%';
+            medianNTEl.textContent = medianNT.toFixed(2);
+
+            // Determine risk category and generate interpretation
+            let riskHTML = '';
+            let interpretation = '';
+
+            if (percentile < 95) {
+                // Normal NT
+                riskHTML = '<div class="alert-box alert-normal"><strong>Normal NT Measurement</strong><br>NT below 95th percentile. Low risk for aneuploidy at this measurement alone.</div>';
+                interpretation = `<strong>Normal NT (${percentile}th percentile, ${nt} mm):</strong> This NT measurement is within normal limits for the crown-rump length. The measurement suggests low risk for chromosomal abnormalities based on NT alone. Combined screening with maternal age and biochemical markers (PAPP-A, hCG) provides more accurate risk assessment. Follow routine prenatal care.`;
+            } else if (percentile < 99) {
+                // Borderline/increased NT
+                riskHTML = '<div class="alert-box alert-warning"><strong>Increased NT Measurement</strong><br>NT between 95-99th percentile. Increased aneuploidy risk. Further evaluation recommended.</div>';
+                interpretation = `<strong>Increased NT (${percentile}th percentile, ${nt} mm):</strong> The NT measurement is elevated compared to expected for CRL. This increases risk for chromosomal abnormalities (trisomy 21, 18, 13) and other conditions. Combined screening results and age-adjusted risk assessment essential. Consider cell-free DNA (cfDNA) testing or detailed ultrasound. Specialist consultation may be appropriate.`;
+            } else {
+                // Significantly increased NT
+                riskHTML = '<div class="alert-box alert-abnormal"><strong>Significantly Increased NT</strong><br>NT ≥ 99th percentile. Significantly elevated aneuploidy risk. Urgent further evaluation needed.</div>';
+                interpretation = `<strong>Significantly Increased NT (${percentile}th percentile, ${nt} mm):</strong> The NT measurement is markedly elevated for the CRL measurement, indicating substantially increased risk for chromosomal abnormalities and cardiac defects. Urgent further evaluation recommended including detailed echocardiography. Cell-free DNA testing or amniocentesis should be offered. Close specialist follow-up essential.`;
+            }
+
+            riskAssessmentEl.innerHTML = riskHTML;
+            interpretationEl.innerHTML = interpretation;
+
+            // Show results section
+            resultSection.classList.add('show');
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        /**
+         * Reset the calculator form
+         */
+        function resetForm() {
+            document.getElementById('crl').value = '';
+            document.getElementById('nt').value = '';
+            document.getElementById('gaWeeks').value = '';
+            document.getElementById('gaDays').value = '';
+            document.getElementById('resultSection').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

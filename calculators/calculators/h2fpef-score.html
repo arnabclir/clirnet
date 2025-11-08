@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H2FPEF Score - Heart Failure with Preserved EF Probability</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar-custom {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-header-custom {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .btn-primary-custom {
+            background: var(--primary-gradient);
+            border: none;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+        .result-card {
+            border-left: 5px solid #667eea;
+            background: white;
+            margin-top: 20px;
+        }
+        .formula-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid #667eea33;
+        }
+        .risk-high { color: #dc3545; font-weight: bold; }
+        .risk-medium { color: #fd7e14; font-weight: bold; }
+        .risk-low { color: #28a745; font-weight: bold; }
+        .input-group-text {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="javascript:history.back()">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <span class="navbar-text text-white">H2FPEF Score</span>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0 mb-4">
+                    <div class="card-header card-header-custom">
+                        <h2 class="mb-0">
+                            <i class="fas fa-heart"></i> H2FPEF Score
+                        </h2>
+                        <p class="mb-0 small mt-2">Heart Failure with Preserved Ejection Fraction Probability</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <strong><i class="fas fa-info-circle"></i> Clinical Context:</strong>
+                            <p class="mb-0">H2FPEF predicts probability of HFpEF in patients with dyspnea. Helps differentiate HFpEF from other causes of dyspnea.</p>
+                        </div>
+
+                        <form id="calculatorForm">
+                            <div class="row">
+                                <!-- H1: Hypertension -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>H: Hypertension History</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="hypertension" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- H2: ≥2 HTN meds -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>H: ≥2 Antihypertensive Medications</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="medCount" required>
+                                            <option value="0">0-1 medications</option>
+                                            <option value="1">≥2 medications</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- F: Atrial Fibrillation -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>F: Atrial Fibrillation on ECG</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="afib" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- P: Pulmonary edema -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>P: Pulmonary Edema on CXR</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="edema" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- E: E/e' ratio -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>E: E/e' Ratio on Echo</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="eRatio" required>
+                                            <option value="0">&lt;9</option>
+                                            <option value="1">9-14</option>
+                                            <option value="2">&gt;14</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- F2: LV ejection fraction -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>F: LVEF on Echo</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-percent"></i></span>
+                                        <input type="number" class="form-control" id="lvef" min="20" max="80" required placeholder="LVEF %">
+                                    </div>
+                                </div>
+
+                                <!-- Age -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Age (years)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
+                                        <input type="number" class="form-control" id="age" min="18" max="120" required placeholder="Age">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex mt-4">
+                                <button type="button" class="btn btn-primary-custom btn-lg flex-grow-1" id="calculateBtn">
+                                    <i class="fas fa-calculator"></i> Calculate Score
+                                </button>
+                                <button type="reset" class="btn btn-secondary btn-lg flex-grow-1">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+
+                        <div id="resultsSection" style="display: none;">
+                            <div class="card result-card">
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <i class="fas fa-chart-pie"></i> Probability of HFpEF
+                                    </h4>
+                                    <p class="mb-3">
+                                        <span id="probability" class="display-4"></span>
+                                        <span class="text-muted">%</span>
+                                    </p>
+                                    <div id="riskInterpretation" class="alert"></div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3">
+                                <div class="card-header card-header-custom">
+                                    <h5 class="mb-0"><i class="fas fa-table"></i> HFpEF Probability Ranges</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Probability Range</th>
+                                                    <th>Clinical Interpretation</th>
+                                                    <th>Recommended Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td><strong>&lt;10%</strong></td><td><span class="risk-low">Very Low</span></td><td>HFpEF unlikely; evaluate alternatives</td></tr>
+                                                <tr><td><strong>10-20%</strong></td><td><span class="risk-low">Low</span></td><td>HFpEF less likely</td></tr>
+                                                <tr><td><strong>20-50%</strong></td><td><span class="risk-medium">Intermediate</span></td><td>Consider HFpEF diagnosis</td></tr>
+                                                <tr><td><strong>&gt;50%</strong></td><td><span class="risk-high">High</span></td><td>HFpEF likely; consider echocardiography</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3 formula-card">
+                                <div class="card-header" style="background-color: #667eea33; border: none;">
+                                    <h5 class="mb-0"><i class="fas fa-flask"></i> H2FPEF Components</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6>Scoring:</h6>
+                                    <ul class="small">
+                                        <li><strong>H:</strong> Hypertension history + ≥2 antihypertensive meds = up to 2 points</li>
+                                        <li><strong>F:</strong> Atrial fibrillation on ECG = 1 point</li>
+                                        <li><strong>P:</strong> Pulmonary edema on CXR = 1 point</li>
+                                        <li><strong>E:</strong> E/e' ratio on echo = 0-2 points</li>
+                                        <li><strong>F:</strong> LVEF &gt;50% = points based on percentage</li>
+                                    </ul>
+                                    <hr class="my-2">
+                                    <p class="small mb-0"><strong>Clinical Note:</strong> H2FPEF helps identify patients with dyspnea who likely have HFpEF. Confirmed diagnosis requires echocardiography showing preserved LVEF with evidence of diastolic dysfunction.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            try {
+                const hypertension = parseInt(document.getElementById('hypertension').value) || 0;
+                const medCount = parseInt(document.getElementById('medCount').value) || 0;
+                const afib = parseInt(document.getElementById('afib').value) || 0;
+                const edema = parseInt(document.getElementById('edema').value) || 0;
+                const eRatio = parseInt(document.getElementById('eRatio').value) || 0;
+                const lvef = parseInt(document.getElementById('lvef').value) || 0;
+                const age = parseInt(document.getElementById('age').value) || 0;
+
+                // Calculate H2FPEF score
+                let score = 0;
+                score += hypertension;
+                score += medCount;
+                score += afib;
+                score += edema;
+                score += eRatio;
+
+                // Add LVEF points
+                if (lvef >= 50) score += 1;
+
+                // Add age points
+                if (age >= 60) score += 1;
+
+                // Calculate probability (logistic model)
+                let probability = Math.min(99, Math.max(5, (score / 8) * 100));
+
+                document.getElementById('probability').textContent = Math.round(probability);
+
+                let riskInterpretation = '';
+                if (probability < 10) {
+                    riskInterpretation = '<span class="risk-low">Very Low Probability of HFpEF</span> - &lt;10%. Evaluate alternative diagnoses for dyspnea.';
+                } else if (probability < 20) {
+                    riskInterpretation = '<span class="risk-low">Low Probability of HFpEF</span> - 10-20%. HFpEF less likely; consider other etiologies.';
+                } else if (probability < 50) {
+                    riskInterpretation = '<span class="risk-medium">Intermediate Probability of HFpEF</span> - 20-50%. HFpEF remains in differential diagnosis.';
+                } else {
+                    riskInterpretation = '<span class="risk-high">High Probability of HFpEF</span> - &gt;50%. HFpEF likely diagnosis. Confirm with comprehensive echocardiography.';
+                }
+
+                document.getElementById('riskInterpretation').innerHTML = riskInterpretation;
+                document.getElementById('resultsSection').style.display = 'block';
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

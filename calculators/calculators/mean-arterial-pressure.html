@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mean Arterial Pressure (MAP) Calculation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar-custom {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-header-custom {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .btn-primary-custom {
+            background: var(--primary-gradient);
+            border: none;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+        .result-card {
+            border-left: 5px solid #667eea;
+            background: white;
+            margin-top: 20px;
+        }
+        .formula-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid #667eea33;
+        }
+        .normal { color: #28a745; font-weight: bold; }
+        .abnormal { color: #dc3545; font-weight: bold; }
+        .input-group-text {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="javascript:history.back()">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <span class="navbar-text text-white">MAP Calculator</span>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0 mb-4">
+                    <div class="card-header card-header-custom">
+                        <h2 class="mb-0">
+                            <i class="fas fa-tachometer-alt"></i> Mean Arterial Pressure
+                        </h2>
+                        <p class="mb-0 small mt-2">MAP Calculation from Systolic and Diastolic BP</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <strong><i class="fas fa-info-circle"></i> Clinical Context:</strong>
+                            <p class="mb-0">MAP represents the average pressure in arteries during one cardiac cycle. Essential for hemodynamic assessment and shock evaluation. Critical threshold: MAP ≥65 mmHg for organ perfusion.</p>
+                        </div>
+
+                        <!-- Tabs for methods -->
+                        <ul class="nav nav-tabs mb-4" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="standard-tab" data-bs-toggle="tab" data-bs-target="#standard" type="button">
+                                    <i class="fas fa-calculator"></i> Standard Method
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="dart-tab" data-bs-toggle="tab" data-bs-target="#dart" type="button">
+                                    <i class="fas fa-thermometer-three-quarters"></i> From Mean Arterial Pressure
+                                </button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <!-- Standard Method -->
+                            <div class="tab-pane fade show active" id="standard" role="tabpanel">
+                                <form id="standardForm">
+                                    <div class="row">
+                                        <!-- Systolic BP -->
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">
+                                                <strong>Systolic BP (mmHg)</strong>
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fas fa-tachometer-alt"></i></span>
+                                                <input type="number" class="form-control" id="sbp" min="50" max="250" required placeholder="Systolic">
+                                            </div>
+                                        </div>
+
+                                        <!-- Diastolic BP -->
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">
+                                                <strong>Diastolic BP (mmHg)</strong>
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fas fa-tachometer-alt"></i></span>
+                                                <input type="number" class="form-control" id="dbp" min="20" max="200" required placeholder="Diastolic">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-grid gap-2 d-md-flex mt-4">
+                                        <button type="button" class="btn btn-primary-custom btn-lg flex-grow-1" id="standardCalculateBtn">
+                                            <i class="fas fa-calculator"></i> Calculate MAP
+                                        </button>
+                                        <button type="reset" class="btn btn-secondary btn-lg flex-grow-1">
+                                            <i class="fas fa-redo"></i> Reset
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- From Mean Arterial Pressure -->
+                            <div class="tab-pane fade" id="dart" role="tabpanel">
+                                <form id="dartForm">
+                                    <div class="row">
+                                        <!-- Systolic BP for alternate -->
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">
+                                                <strong>Systolic BP (mmHg)</strong>
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fas fa-tachometer-alt"></i></span>
+                                                <input type="number" class="form-control" id="sbpAlt" min="50" max="250" required placeholder="Systolic">
+                                            </div>
+                                        </div>
+
+                                        <!-- Diastolic BP for alternate -->
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">
+                                                <strong>Diastolic BP (mmHg)</strong>
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fas fa-tachometer-alt"></i></span>
+                                                <input type="number" class="form-control" id="dbpAlt" min="20" max="200" required placeholder="Diastolic">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-grid gap-2 d-md-flex mt-4">
+                                        <button type="button" class="btn btn-primary-custom btn-lg flex-grow-1" id="dartCalculateBtn">
+                                            <i class="fas fa-calculator"></i> Calculate Pulse Pressure
+                                        </button>
+                                        <button type="reset" class="btn btn-secondary btn-lg flex-grow-1">
+                                            <i class="fas fa-redo"></i> Reset
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Results Section -->
+                        <div id="resultsSection" style="display: none;">
+                            <div class="card result-card">
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <i class="fas fa-chart-pie"></i> Results
+                                    </h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p class="mb-2"><strong>Mean Arterial Pressure (MAP):</strong></p>
+                                            <p><span id="mapValue" class="h5"></span> <span class="text-muted">mmHg</span></p>
+                                            <p id="mapInterpretation"></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="mb-2"><strong>Pulse Pressure:</strong></p>
+                                            <p><span id="ppValue" class="h5"></span> <span class="text-muted">mmHg</span></p>
+                                            <p id="ppInterpretation"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3">
+                                <div class="card-header card-header-custom">
+                                    <h5 class="mb-0"><i class="fas fa-table"></i> Reference Ranges</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Parameter</th>
+                                                    <th>Normal/Optimal</th>
+                                                    <th>Critical</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td><strong>MAP</strong></td><td>70-100 mmHg</td><td>&lt;65 mmHg (inadequate perfusion)</td></tr>
+                                                <tr><td><strong>Pulse Pressure</strong></td><td>30-40 mmHg</td><td>&gt;60 mmHg (stiffness)</td></tr>
+                                                <tr><td><strong>Systolic BP</strong></td><td>&lt;120 mmHg</td><td>&gt;180 mmHg</td></tr>
+                                                <tr><td><strong>Diastolic BP</strong></td><td>&lt;80 mmHg</td><td>&gt;110 mmHg</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3 formula-card">
+                                <div class="card-header" style="background-color: #667eea33; border: none;">
+                                    <h5 class="mb-0"><i class="fas fa-flask"></i> Formulas</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6>Mean Arterial Pressure (Standard):</h6>
+                                    <p class="small font-monospace bg-light p-2 rounded mb-3">
+                                        MAP = DBP + 1/3(SBP - DBP)<br/>
+                                        OR<br/>
+                                        MAP = (SBP + 2×DBP) / 3
+                                    </p>
+                                    <h6>Pulse Pressure:</h6>
+                                    <p class="small font-monospace bg-light p-2 rounded mb-3">
+                                        PP = SBP - DBP
+                                    </p>
+                                    <hr class="my-2">
+                                    <p class="small mb-0"><strong>Clinical Notes:</strong></p>
+                                    <ul class="small">
+                                        <li>MAP &lt;65 mmHg: Risk of inadequate organ perfusion</li>
+                                        <li>MAP &gt;100 mmHg: Risk of end-organ damage</li>
+                                        <li>Pulse pressure &gt;60 mmHg: Vascular stiffness, increased CV risk</li>
+                                        <li>Essential for shock assessment and vasopressor titration</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('standardCalculateBtn').addEventListener('click', function() {
+            try {
+                const sbp = parseInt(document.getElementById('sbp').value) || 0;
+                const dbp = parseInt(document.getElementById('dbp').value) || 0;
+
+                if (sbp <= 0 || dbp <= 0 || sbp < dbp) {
+                    alert('Please enter valid BP values where SBP > DBP');
+                    return;
+                }
+
+                // Calculate MAP using formula: MAP = DBP + 1/3(SBP - DBP)
+                const map = dbp + (sbp - dbp) / 3;
+                const pp = sbp - dbp;
+
+                document.getElementById('mapValue').textContent = map.toFixed(0);
+                document.getElementById('ppValue').textContent = pp.toFixed(0);
+
+                let mapInterpretation = '';
+                if (map < 65) {
+                    mapInterpretation = '<span class="abnormal">Low - Risk of inadequate organ perfusion</span>';
+                } else if (map <= 100) {
+                    mapInterpretation = '<span class="normal">Normal - Adequate perfusion</span>';
+                } else {
+                    mapInterpretation = '<span class="abnormal">High - Risk of end-organ damage</span>';
+                }
+                document.getElementById('mapInterpretation').innerHTML = mapInterpretation;
+
+                let ppInterpretation = '';
+                if (pp < 30) {
+                    ppInterpretation = '<span class="abnormal">Low - Reduced compliance</span>';
+                } else if (pp <= 40) {
+                    ppInterpretation = '<span class="normal">Normal</span>';
+                } else if (pp <= 60) {
+                    ppInterpretation = '<span class="normal">Borderline elevated</span>';
+                } else {
+                    ppInterpretation = '<span class="abnormal">High - Vascular stiffness</span>';
+                }
+                document.getElementById('ppInterpretation').innerHTML = ppInterpretation;
+
+                document.getElementById('resultsSection').style.display = 'block';
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+
+        document.getElementById('dartCalculateBtn').addEventListener('click', function() {
+            try {
+                const sbp = parseInt(document.getElementById('sbpAlt').value) || 0;
+                const dbp = parseInt(document.getElementById('dbpAlt').value) || 0;
+
+                if (sbp <= 0 || dbp <= 0 || sbp < dbp) {
+                    alert('Please enter valid BP values where SBP > DBP');
+                    return;
+                }
+
+                const map = dbp + (sbp - dbp) / 3;
+                const pp = sbp - dbp;
+
+                document.getElementById('mapValue').textContent = map.toFixed(0);
+                document.getElementById('ppValue').textContent = pp.toFixed(0);
+
+                let mapInterpretation = '';
+                if (map < 65) {
+                    mapInterpretation = '<span class="abnormal">Low - Risk of inadequate organ perfusion</span>';
+                } else if (map <= 100) {
+                    mapInterpretation = '<span class="normal">Normal - Adequate perfusion</span>';
+                } else {
+                    mapInterpretation = '<span class="abnormal">High - Risk of end-organ damage</span>';
+                }
+                document.getElementById('mapInterpretation').innerHTML = mapInterpretation;
+
+                let ppInterpretation = '';
+                if (pp < 30) {
+                    ppInterpretation = '<span class="abnormal">Low - Reduced compliance</span>';
+                } else if (pp <= 40) {
+                    ppInterpretation = '<span class="normal">Normal</span>';
+                } else if (pp <= 60) {
+                    ppInterpretation = '<span class="normal">Borderline elevated</span>';
+                } else {
+                    ppInterpretation = '<span class="abnormal">High - Vascular stiffness</span>';
+                }
+                document.getElementById('ppInterpretation').innerHTML = ppInterpretation;
+
+                document.getElementById('resultsSection').style.display = 'block';
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

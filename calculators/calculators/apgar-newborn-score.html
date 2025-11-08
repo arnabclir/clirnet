@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for responsiveness and character encoding -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Apgar Score Calculator for Newborns">
+    <title>Apgar Score Calculator - Newborn Assessment</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        /* Root color variables with purple gradient theme */
+        :root {
+            --primary-purple: #6f42c1;
+            --secondary-purple: #8b5fcf;
+            --light-purple: #f8f7ff;
+            --dark-purple: #4a1a7a;
+        }
+
+        /* Body styling with gradient background */
+        body {
+            background: linear-gradient(135deg, var(--light-purple) 0%, #ffffff 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        /* Header navigation styling */
+        .navbar {
+            background: linear-gradient(90deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: white !important;
+        }
+
+        /* Main container padding */
+        .container-main {
+            padding: 2rem 0;
+        }
+
+        /* Card styling with shadow and border */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(111, 66, 193, 0.15);
+            margin-bottom: 2rem;
+        }
+
+        /* Card header with gradient background */
+        .card-header {
+            background: linear-gradient(90deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            color: white;
+            border-radius: 12px 12px 0 0 !important;
+            border: none;
+            padding: 1.5rem;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .card-header .icon {
+            font-size: 1.8rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Card body styling */
+        .card-body {
+            padding: 2rem;
+        }
+
+        /* Scoring section styling */
+        .scoring-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-purple);
+        }
+
+        .scoring-section h5 {
+            color: var(--dark-purple);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Button group for scoring */
+        .btn-score-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .btn-score {
+            flex: 1;
+            min-width: 60px;
+            padding: 0.5rem;
+            border: 2px solid #ddd;
+            background-color: white;
+            color: var(--primary-purple);
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-score:hover {
+            border-color: var(--primary-purple);
+            background-color: var(--light-purple);
+        }
+
+        .btn-score.active {
+            background: linear-gradient(90deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            color: white;
+            border-color: var(--primary-purple);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-purple);
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        /* Button styling with gradient */
+        .btn-calculate {
+            background: linear-gradient(90deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(111, 66, 193, 0.4);
+            color: white;
+        }
+
+        .btn-reset {
+            background-color: #6c757d;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-reset:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        /* Result section styling */
+        .result-section {
+            display: none;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-purple);
+        }
+
+        .result-section.show {
+            display: block;
+            animation: slideIn 0.3s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-purple);
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        /* Risk level badges */
+        .risk-excellent {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 5px solid #28a745;
+        }
+
+        .risk-low {
+            background-color: #cfe2ff;
+            color: #084298;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 5px solid #0d6efd;
+        }
+
+        .risk-moderate {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 5px solid #ffc107;
+        }
+
+        .risk-high {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 5px solid #dc3545;
+        }
+
+        /* Help text styling */
+        .help-text {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 0.25rem;
+            display: block;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .card-body {
+                padding: 1rem;
+            }
+
+            .result-score {
+                font-size: 2rem;
+            }
+
+            .btn-calculate, .btn-reset {
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+
+            .btn-score-group {
+                gap: 0.25rem;
+            }
+
+            .btn-score {
+                min-width: 50px;
+                padding: 0.4rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/calculators/">
+                <i class="fas fa-calculator"></i> Medical Calculators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/calculators/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/calculators/catalog.html">Catalog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container container-main">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <!-- Calculator Card -->
+                <div class="card">
+                    <!-- Card Header with Title -->
+                    <div class="card-header">
+                        <h3>
+                            <i class="fas fa-baby icon"></i>Apgar Score
+                        </h3>
+                        <small class="text-white-50">Newborn assessment at 1 and 5 minutes after birth</small>
+                    </div>
+
+                    <!-- Card Body with Form -->
+                    <div class="card-body">
+                        <form id="apgarForm">
+                            <!-- Appearance (Color) -->
+                            <div class="scoring-section">
+                                <label class="form-label" for="appearance">
+                                    <i class="fas fa-palette"></i> Appearance (Skin Color)
+                                </label>
+                                <p class="help-text">Color of skin</p>
+                                <div class="btn-score-group" id="appearanceGroup">
+                                    <button type="button" class="btn-score" data-value="0" onclick="selectScore('appearance', 0)">
+                                        0: Blue/Pale
+                                    </button>
+                                    <button type="button" class="btn-score" data-value="1" onclick="selectScore('appearance', 1)">
+                                        1: Body pink, Extremities blue
+                                    </button>
+                                    <button type="button" class="btn-score" data-value="2" onclick="selectScore('appearance', 2)">
+                                        2: Completely pink
+                                    </button>
+                                </div>
+                                <input type="hidden" id="appearance" value="">
+                            </div>
+
+                            <!-- Pulse (Heart Rate) -->
+                            <div class="scoring-section">
+                                <label class="form-label" for="pulse">
+                                    <i class="fas fa-heart"></i> Pulse (Heart Rate)
+                                </label>
+                                <p class="help-text">Beats per minute (umbilical artery)</p>
+                                <div class="btn-score-group" id="pulseGroup">
+                                    <button type="button" class="btn-score" data-value="0" onclick="selectScore('pulse', 0)">
+                                        0: Absent
+                                    </button>
+                                    <button type="button" class="btn-score" data-value="1" onclick="selectScore('pulse', 1)">
+                                        1: &lt; 100
+                                    </button>
+                                    <button type="button" class="btn-score" data-value="2" onclick="selectScore('pulse', 2)">
+                                        2: ≥ 100
+                                    </button>
+                                </div>
+                                <input type="hidden" id="pulse" value="">
+                            </div>
+
+                            <!-- Grimace Response (Reflex Irritability) -->
+                            <div class="scoring-section">
+                                <label class="form-label" for="grimace">
+                                    <i class="fas fa-face-grimace"></i> Grimace Response (Reflex Irritability)
+                                </label>
+                                <p class="help-text">Response to stimulation</p>
+                                <div class="btn-score-group" id="grimaceGroup">
+                                    <button type="button" class="btn-score" data-value="0" onclick="selectScore('grimace', 0)">
+                                        0: No response
+                                    </button>
+                                    <button type="button" class="btn-score" data-value="1" onclick="selectScore('grimace', 1)">
+                                        1: Grimace
+                                    </button>
+                                    <button type="button" class="btn-score" data-value="2" onclick="selectScore('grimace', 2)">
+                                        2: Cry/Cough
+                                    </button>
+                                </div>
+                                <input type="hidden" id="grimace" value="">
+                            </div>
+
+                            <!-- Activity (Muscle Tone) -->
+                            <div class="scoring-section">
+                                <label class="form-label" for="activity">
+                                    <i class="fas fa-person-running"></i> Activity (Muscle Tone)
+                                </label>
+                                <p class="help-text">Movement and muscle tone</p>
+                                <div class="btn-score-group" id="activityGroup">
+                                    <button type="button" class="btn-score" data-value="0" onclick="selectScore('activity', 0)">
+                                        0: Limp
+                                    </button>
+                                    <button type="button" class="btn-score" data-value="1" onclick="selectScore('activity', 1)">
+                                        1: Some flexion
+                                    </button>
+                                    <button type="button" class="btn-score" data-value="2" onclick="selectScore('activity', 2)">
+                                        2: Active motion
+                                    </button>
+                                </div>
+                                <input type="hidden" id="activity" value="">
+                            </div>
+
+                            <!-- Respiration (Respiratory Effort) -->
+                            <div class="scoring-section">
+                                <label class="form-label" for="respiration">
+                                    <i class="fas fa-wind"></i> Respiration (Respiratory Effort)
+                                </label>
+                                <p class="help-text">Breathing effort</p>
+                                <div class="btn-score-group" id="respirationGroup">
+                                    <button type="button" class="btn-score" data-value="0" onclick="selectScore('respiration', 0)">
+                                        0: Absent
+                                    </button>
+                                    <button type="button" class="btn-score" data-value="1" onclick="selectScore('respiration', 1)">
+                                        1: Weak/Irregular
+                                    </button>
+                                    <button type="button" class="btn-score" data-value="2" onclick="selectScore('respiration', 2)">
+                                        2: Strong
+                                    </button>
+                                </div>
+                                <input type="hidden" id="respiration" value="">
+                            </div>
+
+                            <!-- Button Group -->
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-calculate w-100" onclick="calculateApgar()">
+                                        <i class="fas fa-calculator"></i> Calculate Score
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-reset w-100" onclick="resetForm()">
+                                        <i class="fas fa-redo"></i> Reset
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Results Section -->
+                        <div id="resultSection" class="result-section">
+                            <div class="text-center">
+                                <p>
+                                    <strong>Total Apgar Score</strong>
+                                </p>
+                                <div class="result-score" id="scoreResult">-</div>
+                            </div>
+
+                            <div id="interpretationResult" class="mt-3"></div>
+
+                            <hr>
+
+                            <!-- Clinical Interpretation -->
+                            <div class="alert alert-info">
+                                <h5><i class="fas fa-info-circle"></i> Clinical Interpretation</h5>
+                                <ul class="mb-0">
+                                    <li><strong>8-10:</strong> Normal - No intervention needed</li>
+                                    <li><strong>5-7:</strong> Moderately abnormal - May need intervention</li>
+                                    <li><strong>0-4:</strong> Severely abnormal - Immediate intervention required</li>
+                                    <li><strong>Note:</strong> Score should be reassessed at 5 and 10 minutes</li>
+                                </ul>
+                            </div>
+
+                            <!-- References -->
+                            <div class="alert alert-secondary mt-3">
+                                <h5><i class="fas fa-book"></i> Reference</h5>
+                                <p class="mb-0">Apgar V. A proposal for a new method of evaluation of the newborn infant. Curr Res Anesth Analg. 1952;32(4):260-267.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Calculator Logic -->
+    <script>
+        /**
+         * Select and highlight score button
+         */
+        function selectScore(category, value) {
+            // Set hidden input value
+            document.getElementById(category).value = value;
+
+            // Update button styling
+            const buttons = document.getElementById(category + 'Group').querySelectorAll('.btn-score');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (parseInt(btn.getAttribute('data-value')) === value) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        /**
+         * Calculate Apgar Score
+         * Sum of: Appearance + Pulse + Grimace + Activity + Respiration
+         */
+        function calculateApgar() {
+            // Get values from all categories
+            const appearance = parseInt(document.getElementById('appearance').value);
+            const pulse = parseInt(document.getElementById('pulse').value);
+            const grimace = parseInt(document.getElementById('grimace').value);
+            const activity = parseInt(document.getElementById('activity').value);
+            const respiration = parseInt(document.getElementById('respiration').value);
+
+            // Validate all inputs are provided
+            if (isNaN(appearance) || isNaN(pulse) || isNaN(grimace) || isNaN(activity) || isNaN(respiration)) {
+                alert('Please select all components before calculating');
+                return;
+            }
+
+            // Calculate total score
+            const totalScore = appearance + pulse + grimace + activity + respiration;
+
+            // Display results
+            showResults(totalScore);
+        }
+
+        /**
+         * Display results with clinical interpretation
+         */
+        function showResults(score) {
+            const resultSection = document.getElementById('resultSection');
+            const scoreResult = document.getElementById('scoreResult');
+            const interpretationResult = document.getElementById('interpretationResult');
+
+            // Set score
+            scoreResult.textContent = score;
+
+            // Determine interpretation based on score
+            let interpretation = '';
+
+            if (score >= 8) {
+                interpretation = '<div class="risk-excellent"><strong>Normal (8-10)</strong><br>Newborn is in excellent condition. Routine care recommended.</div>';
+            } else if (score >= 5) {
+                interpretation = '<div class="risk-low"><strong>Moderately Abnormal (5-7)</strong><br>Newborn may require intervention. Close monitoring and supportive care needed.</div>';
+            } else {
+                interpretation = '<div class="risk-high"><strong>Severely Abnormal (0-4)</strong><br>Immediate intervention required. Resuscitation may be necessary.</div>';
+            }
+
+            interpretationResult.innerHTML = interpretation;
+            resultSection.classList.add('show');
+        }
+
+        /**
+         * Reset form to initial state
+         */
+        function resetForm() {
+            document.getElementById('apgarForm').reset();
+
+            // Clear all hidden inputs
+            document.getElementById('appearance').value = '';
+            document.getElementById('pulse').value = '';
+            document.getElementById('grimace').value = '';
+            document.getElementById('activity').value = '';
+            document.getElementById('respiration').value = '';
+
+            // Remove active class from all buttons
+            document.querySelectorAll('.btn-score').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            document.getElementById('resultSection').classList.remove('show');
+        }
+
+        // Initialize - Set focus when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.btn-score').focus();
+        });
+    </script>
+</body>
+</html>

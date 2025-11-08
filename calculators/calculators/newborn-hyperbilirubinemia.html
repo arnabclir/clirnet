@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newborn Hyperbilirubinemia Risk Assessment</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
+        body {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .card-header {
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .risk-badge {
+            display: inline-block;
+            font-size: 32px;
+            font-weight: bold;
+            padding: 15px 25px;
+            border-radius: 10px;
+            color: white;
+            margin: 10px 0;
+        }
+
+        .risk-low {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .risk-medium {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        }
+
+        .risk-high {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .form-check {
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark mb-4" style="background: transparent;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html" style="color: white;">
+                    <i class="fas fa-calculator"></i> Pediatric Calculators
+                </a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">
+                    <i class="fas fa-sun"></i> Newborn Hyperbilirubinemia Risk Assessment
+                </h1>
+                <small>AAP Phototherapy Threshold Assessment</small>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Instructions -->
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> Enter the infant's age in hours,
+                    total serum bilirubin (TSB) in mg/dL, and gestational age. The calculator will assess risk for phototherapy.
+                </div>
+
+                <!-- Input Form -->
+                <form id="bilirubinForm">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label">
+                                <i class="fas fa-hourglass-start"></i> Age (hours)
+                            </label>
+                            <input type="number" class="form-control" id="age" placeholder="0-168" min="0" max="168" step="0.5" required>
+                            <small class="text-muted">Range: 0-168 hours (0-7 days)</small>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">
+                                <i class="fas fa-flask"></i> TSB (mg/dL)
+                            </label>
+                            <input type="number" class="form-control" id="tsb" placeholder="0-30" min="0" max="30" step="0.1" required>
+                            <small class="text-muted">Total Serum Bilirubin</small>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">
+                                <i class="fas fa-calendar"></i> Gestational Age (weeks)
+                            </label>
+                            <input type="number" class="form-control" id="ga" placeholder="22-42" min="22" max="42" step="1" required>
+                            <small class="text-muted">Range: 22-42 weeks</small>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12">
+                            <label class="form-label">
+                                <i class="fas fa-check-square"></i> Risk Factors
+                            </label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="isoimmune" value="">
+                                <label class="form-check-label" for="isoimmune">
+                                    Isoimmune hemolytic disease
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="asphyxia" value="">
+                                <label class="form-check-label" for="asphyxia">
+                                    Asphyxia, significant lethargy, temperature instability, sepsis
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="acidosis" value="">
+                                <label class="form-check-label" for="acidosis">
+                                    Acidosis
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="calculateHyperbilirubinemia()">
+                            <i class="fas fa-calculator"></i> Assess Risk
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results -->
+                <div id="resultBox" class="result-box">
+                    <h4 class="text-center mb-4"><i class="fas fa-check-circle"></i> Hyperbilirubinemia Risk Assessment</h4>
+
+                    <div class="text-center">
+                        <p class="text-muted"><small>Risk Category</small></p>
+                        <div class="risk-badge" id="riskBadge">--</div>
+                        <p id="riskCategory" class="text-center font-weight-bold mt-2"></p>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Clinical Guidance -->
+                    <div id="clinicalGuidance"></div>
+
+                    <!-- AAP Treatment Thresholds -->
+                    <div class="alert alert-light mt-4">
+                        <strong><i class="fas fa-chart-bar"></i> AAP Phototherapy Thresholds (mg/dL):</strong>
+                        <table class="table table-sm mt-2">
+                            <thead>
+                                <tr>
+                                    <th>Age (hours)</th>
+                                    <th>&lt; 35 wks</th>
+                                    <th>35-37 6/7 wks</th>
+                                    <th>≥ 38 wks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>24</strong></td>
+                                    <td>11</td>
+                                    <td>13</td>
+                                    <td>18</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>48</strong></td>
+                                    <td>14</td>
+                                    <td>16</td>
+                                    <td>20</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>72+</strong></td>
+                                    <td>15</td>
+                                    <td>18</td>
+                                    <td>22</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Phototherapy thresholds by age and gestational age
+        const phototherapyThresholds = {
+            24: {35: 11, 36: 13, 38: 18},
+            48: {35: 14, 36: 16, 38: 20},
+            72: {35: 15, 36: 18, 38: 22},
+            96: {35: 15.5, 36: 19, 38: 23},
+            120: {35: 16, 36: 19.5, 38: 24},
+            144: {35: 16, 36: 20, 38: 24},
+            168: {35: 16, 36: 20, 38: 24}
+        };
+
+        // Calculate hyperbilirubinemia risk
+        function calculateHyperbilirubinemia() {
+            const age = parseFloat(document.getElementById('age').value);
+            const tsb = parseFloat(document.getElementById('tsb').value);
+            const ga = parseInt(document.getElementById('ga').value);
+
+            if (age === '' || tsb === '' || !ga) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Determine GA category
+            let gaCategory = 38; // >= 38 weeks default
+            if (ga < 35) gaCategory = 35;
+            else if (ga < 38) gaCategory = 36;
+
+            // Find closest age threshold
+            let ageThreshold = 24;
+            const ages = [24, 48, 72, 96, 120, 144, 168];
+            for (let i = 0; i < ages.length; i++) {
+                if (age <= ages[i]) {
+                    ageThreshold = ages[i];
+                    break;
+                }
+            }
+
+            const threshold = phototherapyThresholds[ageThreshold][gaCategory];
+
+            // Assess risk
+            let riskCategory = '';
+            let guidance = '';
+
+            if (tsb < threshold - 3) {
+                riskCategory = 'LOW RISK';
+                guidance = `<div class="alert alert-success"><strong><i class="fas fa-check-circle"></i> Low Risk:</strong><br>
+                    <p>TSB is well below phototherapy threshold.</p>
+                    <ul class="mt-2 mb-0">
+                        <li>Continue routine follow-up</li>
+                        <li>Feeding assessment and counseling</li>
+                        <li>Recheck bilirubin as clinically indicated</li>
+                    </ul>
+                </div>`;
+            } else if (tsb < threshold) {
+                riskCategory = 'MEDIUM RISK - OBSERVE';
+                guidance = `<div class="alert alert-warning"><strong><i class="fas fa-exclamation-triangle"></i> Medium Risk - Observe:</strong><br>
+                    <p>TSB approaching phototherapy threshold.</p>
+                    <ul class="mt-2 mb-0">
+                        <li>Recheck TSB in 6-12 hours</li>
+                        <li>Optimize feeding (breastfeeding assessment)</li>
+                        <li>Consider outpatient follow-up</li>
+                        <li>Educate parents on signs of kernicterus</li>
+                    </ul>
+                </div>`;
+            } else if (tsb < threshold + 2) {
+                riskCategory = 'HIGH RISK - PHOTOTHERAPY';
+                guidance = `<div class="alert alert-danger"><strong><i class="fas fa-exclamation-circle"></i> High Risk - Consider Phototherapy:</strong><br>
+                    <p>TSB at or near phototherapy threshold.</p>
+                    <ul class="mt-2 mb-0">
+                        <li><strong>Consider phototherapy initiation</strong></li>
+                        <li>Recheck TSB in 2-4 hours</li>
+                        <li>Optimize feeding immediately</li>
+                        <li>Ensure proper phototherapy if initiated</li>
+                        <li>Monitor for complications</li>
+                    </ul>
+                </div>`;
+            } else {
+                riskCategory = 'CRITICAL RISK - PHOTOTHERAPY REQUIRED';
+                guidance = `<div class="alert alert-danger"><strong><i class="fas fa-times-circle"></i> Critical Risk - Phototherapy Required:</strong><br>
+                    <p>TSB significantly exceeds phototherapy threshold.</p>
+                    <ul class="mt-2 mb-0">
+                        <li><strong>Initiate phototherapy immediately</strong></li>
+                        <li>Consider exchange transfusion if rapidly rising</li>
+                        <li>Recheck TSB frequently (every 2-4 hours)</li>
+                        <li>Optimal feeding and hydration</li>
+                        <li>Rule out hemolysis and other complications</li>
+                    </ul>
+                </div>`;
+            }
+
+            // Check for risk factors
+            if (document.getElementById('isoimmune').checked ||
+                document.getElementById('asphyxia').checked ||
+                document.getElementById('acidosis').checked) {
+                guidance += `<div class="alert alert-info mt-2"><strong>Additional Risk Factors Present:</strong><br>
+                    <p>Lower phototherapy thresholds apply. Consider phototherapy earlier.</p>
+                </div>`;
+            }
+
+            displayResults(tsb, threshold, riskCategory, guidance);
+            document.getElementById('resultBox').classList.add('show');
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Display results
+        function displayResults(tsb, threshold, category, guidance) {
+            let badgeClass = 'risk-low';
+            if (category.includes('MEDIUM')) badgeClass = 'risk-medium';
+            else if (category.includes('HIGH') || category.includes('CRITICAL')) badgeClass = 'risk-high';
+
+            document.getElementById('riskBadge').className = 'risk-badge ' + badgeClass;
+            document.getElementById('riskBadge').textContent = category.split(' - ')[0];
+            document.getElementById('riskCategory').innerHTML = `
+                <strong>${category}</strong><br>
+                <small>TSB: ${tsb.toFixed(1)} mg/dL | Threshold: ${threshold.toFixed(1)} mg/dL</small>
+            `;
+            document.getElementById('clinicalGuidance').innerHTML = guidance;
+        }
+    </script>
+</body>
+</html>

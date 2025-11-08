@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Pugh Score (Conventional Units) - Liver Disease Severity</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar { background: var(--primary-gradient); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .navbar-brand { font-weight: bold; font-size: 1.3rem; }
+
+        .calculator-container { margin-top: 30px; margin-bottom: 30px; }
+
+        .calculator-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .calculator-card:hover { transform: translateY(-5px); }
+
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-header h2 { margin: 0; font-size: 1.8rem; font-weight: bold; }
+        .card-header .subtitle { font-size: 0.9rem; opacity: 0.9; margin-top: 5px; }
+
+        .input-group-text { background: var(--primary-gradient); color: white; border: none; }
+        .form-control:focus { border-color: #667eea; box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25); }
+
+        .btn-calculate {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-calculate:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .btn-reset {
+            background: #6c757d;
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 12px 40px;
+        }
+
+        .result-section { margin-top: 30px; display: none; }
+        .result-section.show { display: block; }
+
+        .result-box {
+            background: var(--secondary-gradient);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .result-score { font-size: 3rem; font-weight: bold; margin: 15px 0; }
+
+        .result-interpretation {
+            background: white;
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            margin-top: 15px;
+        }
+
+        .interpretation-title { font-weight: bold; color: #667eea; margin-bottom: 10px; font-size: 1.1rem; }
+
+        .class-a { background-color: #28a745; }
+        .class-b { background-color: #ffc107; color: #333; }
+        .class-c { background-color: #dc3545; }
+
+        .section-label {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #667eea;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        .scoring-table {
+            width: 100%;
+            margin: 15px 0;
+            font-size: 0.9rem;
+            border-collapse: collapse;
+        }
+
+        .scoring-table th, .scoring-table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .scoring-table th { background-color: #f8f9fa; font-weight: bold; }
+
+        .footer { background: var(--primary-gradient); color: white; text-align: center; padding: 20px; margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-calculator"></i> Gastro Calculator</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalog.html"><i class="fas fa-list"></i> Calculators</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-stethoscope"></i> Current</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container calculator-container">
+        <div class="calculator-card">
+            <div class="card-header">
+                <h2><i class="fas fa-liver"></i> Child Pugh Score (Conventional Units)</h2>
+                <div class="subtitle">Liver Disease Severity Classification</div>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Bilirubin -->
+                <div class="section-label"><i class="fas fa-vial"></i> Bilirubin (mg/dL)</div>
+                <table class="scoring-table">
+                    <tr><th>Value</th><th>Points</th></tr>
+                    <tr><td>&lt; 2 mg/dL</td><td>1</td></tr>
+                    <tr><td>2-3 mg/dL</td><td>2</td></tr>
+                    <tr><td>&gt; 3 mg/dL</td><td>3</td></tr>
+                </table>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="bili" class="form-label">Total Bilirubin</label>
+                        <input type="number" class="form-control" id="bili" placeholder="Enter bilirubin (mg/dL)" step="0.1" min="0">
+                    </div>
+                </div>
+
+                <!-- Albumin -->
+                <div class="section-label"><i class="fas fa-droplet"></i> Albumin (g/dL)</div>
+                <table class="scoring-table">
+                    <tr><th>Value</th><th>Points</th></tr>
+                    <tr><td>&gt; 3.5 g/dL</td><td>1</td></tr>
+                    <tr><td>2.8-3.5 g/dL</td><td>2</td></tr>
+                    <tr><td>&lt; 2.8 g/dL</td><td>3</td></tr>
+                </table>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="alb" class="form-label">Serum Albumin</label>
+                        <input type="number" class="form-control" id="alb" placeholder="Enter albumin (g/dL)" step="0.1" min="0">
+                    </div>
+                </div>
+
+                <!-- INR -->
+                <div class="section-label"><i class="fas fa-heartbeat"></i> INR (Prothrombin Time)</div>
+                <table class="scoring-table">
+                    <tr><th>Value</th><th>Points</th></tr>
+                    <tr><td>&lt; 1.3</td><td>1</td></tr>
+                    <tr><td>1.3-1.6</td><td>2</td></tr>
+                    <tr><td>&gt; 1.6</td><td>3</td></tr>
+                </table>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="inr" class="form-label">INR</label>
+                        <input type="number" class="form-control" id="inr" placeholder="Enter INR" step="0.1" min="0.5">
+                    </div>
+                </div>
+
+                <!-- Ascites -->
+                <div class="section-label"><i class="fas fa-fluid"></i> Ascites</div>
+                <table class="scoring-table">
+                    <tr><th>Grade</th><th>Points</th></tr>
+                    <tr><td>None</td><td>1</td></tr>
+                    <tr><td>Slight</td><td>2</td></tr>
+                    <tr><td>Moderate to Severe</td><td>3</td></tr>
+                </table>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="ascites" class="form-label">Ascites</label>
+                        <select class="form-select" id="ascites">
+                            <option value="">Select ascites grade</option>
+                            <option value="1">None (1)</option>
+                            <option value="2">Slight (2)</option>
+                            <option value="3">Moderate to Severe (3)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Encephalopathy -->
+                <div class="section-label"><i class="fas fa-brain"></i> Hepatic Encephalopathy</div>
+                <table class="scoring-table">
+                    <tr><th>Grade</th><th>Points</th></tr>
+                    <tr><td>None</td><td>1</td></tr>
+                    <tr><td>Grade I-II</td><td>2</td></tr>
+                    <tr><td>Grade III-IV</td><td>3</td></tr>
+                </table>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="enceph" class="form-label">Encephalopathy</label>
+                        <select class="form-select" id="enceph">
+                            <option value="">Select encephalopathy grade</option>
+                            <option value="1">None (1)</option>
+                            <option value="2">Grade I-II (2)</option>
+                            <option value="3">Grade III-IV (3)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
+                    <button class="btn btn-calculate" onclick="calculateChildPugh()">
+                        <i class="fas fa-calculator"></i> Calculate Score
+                    </button>
+                    <button class="btn btn-reset" onclick="resetForm()">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                </div>
+
+                <!-- Results Section -->
+                <div id="resultSection" class="result-section">
+                    <div class="result-box">
+                        <div style="font-size: 0.9rem; opacity: 0.9;">CHILD PUGH SCORE</div>
+                        <div class="result-score" id="scoreDisplay">0</div>
+                        <div id="classDisplay" class="badge badge-lg" style="font-size: 1.1rem;"></div>
+                    </div>
+
+                    <div class="result-interpretation">
+                        <div class="interpretation-title"><i class="fas fa-info-circle"></i> Classification</div>
+                        <div id="interpretationText"></div>
+                        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.1); font-size: 0.9rem;">
+                            <strong>Score Ranges:</strong><br>
+                            Class A: 5-6 points | Class B: 7-9 points | Class C: 10-15 points<br><br>
+                            <strong>Note:</strong> Child Pugh predicts liver disease severity, mortality risk, and surgical risk in cirrhotic patients.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Gastroenterology Calculator Suite | Clinical Tools for Medical Professionals</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        /**
+         * Child Pugh Score Calculator (Conventional Units)
+         * Assesses severity of liver disease
+         * Scores: 5-6 (A), 7-9 (B), 10-15 (C)
+         */
+
+        function calculateChildPugh() {
+            // Get values
+            const bili = parseFloat(document.getElementById('bili').value);
+            const alb = parseFloat(document.getElementById('alb').value);
+            const inr = parseFloat(document.getElementById('inr').value);
+            const ascites = parseInt(document.getElementById('ascites').value);
+            const enceph = parseInt(document.getElementById('enceph').value);
+
+            // Validate
+            if (!bili || !alb || !inr || !ascites || !enceph) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            let score = 0;
+
+            // Bilirubin (mg/dL)
+            if (bili < 2) score += 1;
+            else if (bili <= 3) score += 2;
+            else score += 3;
+
+            // Albumin (g/dL)
+            if (alb > 3.5) score += 1;
+            else if (alb >= 2.8) score += 2;
+            else score += 3;
+
+            // INR
+            if (inr < 1.3) score += 1;
+            else if (inr <= 1.6) score += 2;
+            else score += 3;
+
+            // Ascites and Encephalopathy (already scored)
+            score += ascites + enceph;
+
+            displayResults(score);
+        }
+
+        function displayResults(score) {
+            document.getElementById('scoreDisplay').textContent = score;
+            const classElement = document.getElementById('classDisplay');
+            const interpretationElement = document.getElementById('interpretationText');
+
+            let interpretation = '';
+            let classification = '';
+            let riskClass = '';
+
+            if (score <= 6) {
+                classification = 'CLASS A';
+                interpretation = 'Mild liver disease. 1-year mortality ~1.5%, 2-year mortality ~5%. Generally good prognosis.';
+                riskClass = 'class-a';
+            } else if (score <= 9) {
+                classification = 'CLASS B';
+                interpretation = 'Moderate liver disease. 1-year mortality ~10%, 2-year mortality ~20%. Increased morbidity and mortality.';
+                riskClass = 'class-b';
+            } else {
+                classification = 'CLASS C';
+                interpretation = 'Severe liver disease. 1-year mortality ~45%, 2-year mortality ~60%. Very high risk. Consider transplantation.';
+                riskClass = 'class-c';
+            }
+
+            classElement.className = `badge badge-lg ${riskClass}`;
+            classElement.textContent = classification;
+            interpretationElement.textContent = interpretation;
+
+            document.getElementById('resultSection').classList.add('show');
+        }
+
+        function resetForm() {
+            document.getElementById('bili').value = '';
+            document.getElementById('alb').value = '';
+            document.getElementById('inr').value = '';
+            document.getElementById('ascites').value = '';
+            document.getElementById('enceph').value = '';
+            document.getElementById('resultSection').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

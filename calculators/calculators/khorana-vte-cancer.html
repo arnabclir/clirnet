@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khorana VTE Risk Score - Surgical Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px 0; }
+        .container-wrapper { max-width: 900px; margin: 0 auto; padding: 0 15px; }
+        .card { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); overflow: hidden; margin-bottom: 20px; }
+        .card-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-bottom: none; }
+        .calculator-title { font-size: 28px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; }
+        .calculator-subtitle { font-size: 14px; opacity: 0.9; margin-bottom: 15px; }
+        .header-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+        .badge { background-color: rgba(255, 255, 255, 0.3); padding: 8px 15px; border-radius: 20px; font-size: 12px; }
+        .nav-back { display: inline-block; margin-bottom: 20px; }
+        .nav-back a { color: white; text-decoration: none; padding: 8px 16px; background-color: rgba(255, 255, 255, 0.2); border-radius: 20px; transition: all 0.3s ease; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; }
+        .nav-back a:hover { background-color: rgba(255, 255, 255, 0.3); }
+        .card-body { padding: 30px; background-color: #f8f9fa; }
+        .form-group { margin-bottom: 20px; }
+        .form-label { font-weight: 600; color: #333; margin-bottom: 10px; display: block; }
+        .form-check { margin-bottom: 10px; }
+        .form-check-input { cursor: pointer; }
+        .form-select { border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px; font-size: 14px; }
+        .form-select:focus { border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
+        .btn-calculate { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; color: white; padding: 12px 40px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; font-size: 16px; width: 100%; }
+        .btn-calculate:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4); color: white; }
+        .result-container { display: none; margin-top: 30px; padding: 20px; background-color: white; border-radius: 10px; border-left: 5px solid #667eea; }
+        .result-container.show { display: block; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .score-display { font-size: 32px; font-weight: 700; color: #667eea; margin-bottom: 15px; }
+        .interpretation { padding: 15px; border-radius: 8px; margin-top: 15px; font-size: 14px; line-height: 1.6; }
+        .interpretation.low { background-color: #d1e7dd; color: #0f5132; border-left: 4px solid #198754; }
+        .interpretation.moderate { background-color: #cfe2ff; color: #084298; border-left: 4px solid #0d6efd; }
+        .interpretation.high { background-color: #fef3cd; color: #856404; border-left: 4px solid #ffc107; }
+        .formula-section { background-color: white; padding: 20px; border-radius: 10px; margin-top: 20px; border: 2px dashed #667eea; }
+        .formula-title { font-weight: 600; color: #667eea; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .formula-content { font-family: 'Courier New', monospace; font-size: 13px; background-color: #f8f9fa; padding: 12px; border-radius: 6px; overflow-x: auto; line-height: 1.6; }
+        .info-box { background-color: #e7f3ff; border-left: 4px solid #667eea; padding: 15px; border-radius: 6px; margin-bottom: 20px; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="container-wrapper">
+        <div class="nav-back">
+            <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="calculator-title">
+                    <i class="fas fa-clot"></i>
+                    Khorana VTE Risk Score
+                </h1>
+                <p class="calculator-subtitle">
+                    VTE risk in cancer patients - Chemotherapy-related thrombosis prediction
+                </p>
+                <div class="header-badges">
+                    <span class="badge"><i class="fas fa-clot"></i> VTE</span>
+                    <span class="badge"><i class="fas fa-chart-line"></i> Cancer</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    Khorana score predicts VTE risk in cancer patients undergoing chemotherapy to guide prophylaxis.
+                </div>
+
+                <form id="khoranaForm">
+                    <div class="form-group">
+                        <label class="form-label">Cancer Type</label>
+                        <select class="form-select" id="cancer">
+                            <option value="">Select type</option>
+                            <option value="0">Very low risk (prostate, colorectal)</option>
+                            <option value="1">Low risk (lung, ovarian, lymphoma)</option>
+                            <option value="2">High risk (gastric, pancreatic, brain)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Platelet Count</label>
+                        <select class="form-select" id="platelets">
+                            <option value="">Select</option>
+                            <option value="0">Normal or low</option>
+                            <option value="1">> ULN (≥ 350 x 10^9/L)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Hemoglobin</label>
+                        <select class="form-select" id="hemoglobin">
+                            <option value="">Select</option>
+                            <option value="0">Normal</option>
+                            <option value="1">Low or on epoetin</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Leukocyte Count</label>
+                        <select class="form-select" id="leukocyte">
+                            <option value="">Select</option>
+                            <option value="0">Normal</option>
+                            <option value="1">> ULN (≥ 11 x 10^9/L)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">BMI</label>
+                        <select class="form-select" id="bmi">
+                            <option value="">Select</option>
+                            <option value="0">< 25</option>
+                            <option value="1">≥ 25</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-calculate">
+                        <i class="fas fa-calculator"></i> Calculate Khorana Score
+                    </button>
+                </form>
+
+                <div id="resultContainer" class="result-container">
+                    <h4><i class="fas fa-star"></i> Your Score Results</h4>
+                    <div class="score-display">
+                        <span id="scoreValue">--</span>
+                    </div>
+                    <div id="interpretationBox"></div>
+                </div>
+
+                <div class="formula-section">
+                    <div class="formula-title">
+                        <i class="fas fa-flask"></i> Khorana VTE Risk Score
+                    </div>
+                    <div class="formula-content">
+Khorana Score Components (1 point each):
+
+Cancer type:
+- High-risk: gastric, pancreatic, brain (2 pts)
+- Low-risk: lung, ovarian, lymphoma (1 pt)
+- Very low-risk: prostate, colorectal (0 pts)
+
+Laboratory values:
+- Platelet > 350 x 10^9/L (1 pt)
+- Hemoglobin < 10 g/dL or on epoetin (1 pt)
+- Leukocyte > 11 x 10^9/L (1 pt)
+
+Demographics:
+- BMI ≥ 25 (1 pt)
+
+Score Interpretation:
+- 0: Low risk (0.3% at 2.5 months)
+- 1-2: Intermediate risk (0.8%)
+- ≥ 3: High risk (2.2%)
+
+High-risk patients benefit from thromboprophylaxis.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('khoranaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculateKhorana();
+        });
+
+        function calculateKhorana() {
+            const cancer = parseInt(document.getElementById('cancer').value);
+            const platelets = parseInt(document.getElementById('platelets').value);
+            const hemoglobin = parseInt(document.getElementById('hemoglobin').value);
+            const leukocyte = parseInt(document.getElementById('leukocyte').value);
+            const bmi = parseInt(document.getElementById('bmi').value);
+
+            if (isNaN(cancer) || platelets === '' || hemoglobin === '' || leukocyte === '' || bmi === '') {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const score = cancer + platelets + hemoglobin + leukocyte + bmi;
+            document.getElementById('scoreValue').textContent = score;
+
+            let interpretation = '';
+            let className = '';
+
+            if (score === 0) {
+                interpretation = '<strong>Low Risk (0.3%)</strong><br>Minimal VTE risk at 2.5 months. No pharmacologic prophylaxis needed. Monitor.';
+                className = 'low';
+            } else if (score <= 2) {
+                interpretation = '<strong>Intermediate Risk (0.8%)</strong><br>Moderate VTE risk. Consider thromboprophylaxis based on other clinical factors.';
+                className = 'moderate';
+            } else {
+                interpretation = '<strong>High Risk (2.2%)</strong><br>High VTE risk during chemotherapy. Pharmacologic prophylaxis recommended (apixaban, enoxaparin).';
+                className = 'high';
+            }
+
+            document.getElementById('interpretationBox').innerHTML = `<div class="interpretation ${className}"><i class="fas fa-exclamation-triangle"></i> ${interpretation}</div>`;
+            document.getElementById('resultContainer').classList.add('show');
+        }
+    </script>
+</body>
+</html>

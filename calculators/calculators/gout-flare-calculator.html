@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gout Flare Calculator - Clinical Diagnostic Rule</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Purple gradient theme for Rheumatology */
+        :root {
+            --purple-gradient-start: #667eea;
+            --purple-gradient-end: #764ba2;
+            --purple-light: #f3e9ff;
+            --purple-dark: #4a235a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--purple-gradient-start) 0%, var(--purple-gradient-end) 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Navigation styling */
+        .navbar {
+            background: linear-gradient(90deg, var(--purple-gradient-start) 0%, var(--purple-gradient-end) 100%);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            transition: color 0.3s ease;
+            margin: 0 5px;
+        }
+
+        .nav-link:hover {
+            color: white !important;
+        }
+
+        /* Main container styling */
+        .container-main {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        /* Header with purple gradient */
+        .header-section {
+            background: linear-gradient(135deg, var(--purple-gradient-start) 0%, var(--purple-gradient-end) 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header-section h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .header-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin: 0;
+        }
+
+        /* Form section */
+        .form-section {
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--purple-dark);
+            margin-bottom: 10px;
+            font-size: 1rem;
+            display: block;
+        }
+
+        .form-group .help-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        /* Checkbox styling */
+        .form-check {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            background: #f9f9f9;
+        }
+
+        .form-check:hover {
+            background: var(--purple-light);
+            border-color: var(--purple-gradient-start);
+        }
+
+        .form-check-input {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--purple-gradient-start);
+            border-radius: 4px;
+            cursor: pointer;
+            accent-color: var(--purple-gradient-end);
+        }
+
+        .form-check-label {
+            margin-left: 10px;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+
+        /* Input styling */
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--purple-gradient-start);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        /* Button styling */
+        .btn-calculate {
+            background: linear-gradient(135deg, var(--purple-gradient-start) 0%, var(--purple-gradient-end) 100%);
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .btn-reset {
+            background: #f0f0f0;
+            color: var(--purple-dark);
+            border: 2px solid var(--purple-gradient-start);
+            font-weight: bold;
+            padding: 10px 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-reset:hover {
+            background: var(--purple-light);
+        }
+
+        /* Results section */
+        .results-section {
+            background: var(--purple-light);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+            display: none;
+        }
+
+        .results-section.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-box {
+            background: white;
+            border-left: 5px solid var(--purple-gradient-end);
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--purple-gradient-end);
+        }
+
+        /* Interpretation boxes */
+        .interpretation-box {
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 5px solid;
+        }
+
+        .interpretation-box.positive {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #842029;
+        }
+
+        .interpretation-box.negative {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .interpretation-box.probable {
+            background: #fff3cd;
+            border-color: #ffc107;
+            color: #664d03;
+        }
+
+        .interpretation-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        /* Score card */
+        .score-card {
+            background: white;
+            border: 2px solid var(--purple-gradient-start);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .score-card .score-title {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .score-card .score-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--purple-gradient-end);
+        }
+
+        /* Table styling for reference */
+        .reference-table {
+            margin-top: 20px;
+            font-size: 0.95rem;
+        }
+
+        .reference-table th {
+            background: linear-gradient(135deg, var(--purple-gradient-start) 0%, var(--purple-gradient-end) 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .reference-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .reference-table tbody tr:hover {
+            background-color: var(--purple-light);
+        }
+
+        /* Footer */
+        .footer-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .footer-section a {
+            color: var(--purple-gradient-start);
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-section {
+                padding: 20px;
+            }
+
+            .header-section h1 {
+                font-size: 1.5rem;
+            }
+
+            .result-value {
+                font-size: 1.8rem;
+            }
+
+            .score-card .score-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="fas fa-clinic-medical"></i> Rheumatology Calculators</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="basdai-calculator.html"><i class="fas fa-chart-line"></i> BASDAI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="gout-flare-calculator.html"><i class="fas fa-fire"></i> Gout Flare</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cdai-calculator.html"><i class="fas fa-calculator"></i> CDAI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="das28-crp-calculator.html"><i class="fas fa-vial"></i> DAS28-CRP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="das28-esr-calculator.html"><i class="fas fa-vial-virus"></i> DAS28-ESR</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sdai-calculator.html"><i class="fas fa-list-check"></i> SDAI</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container mt-4">
+        <div class="container-main">
+            <!-- Header Section -->
+            <div class="header-section">
+                <h1><i class="fas fa-fire"></i> Gout Flare Calculator</h1>
+                <p>Clinical Diagnostic Rule for Initial Gout Flare</p>
+            </div>
+
+            <!-- Form Section -->
+            <div class="form-section">
+                <form id="goutFlareForm">
+                    <!-- Introduction -->
+                    <div class="alert alert-info" role="alert">
+                        <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> Answer all clinical criteria questions to assess likelihood of gout flare diagnosis.
+                    </div>
+
+                    <!-- Clinical Criteria Section -->
+                    <div class="alert alert-light border-2" role="alert">
+                        <h5><i class="fas fa-stethoscope"></i> Clinical Presentation Criteria</h5>
+                        <p class="mb-0">Select features present during the acute episode:</p>
+                    </div>
+
+                    <!-- Criterion 1: Onset in lower limb joint -->
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="lowerLimbOnset" value="1">
+                        <label class="form-check-label" for="lowerLimbOnset">
+                            <i class="fas fa-human-leg"></i> <strong>Onset in lower limb joint(s)</strong>
+                            <div class="help-text">Flare affecting ankle, midfoot, or toe joints</div>
+                        </label>
+                    </div>
+
+                    <!-- Criterion 2: Redness present -->
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="rednessPresent" value="1">
+                        <label class="form-check-label" for="rednessPresent">
+                            <i class="fas fa-exclamation-circle" style="color: #dc3545;"></i> <strong>Redness present over affected joint(s)</strong>
+                            <div class="help-text">Observable erythema in the joint area</div>
+                        </label>
+                    </div>
+
+                    <!-- Criterion 3: First MTP joint involved -->
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="mtpJoint" value="1">
+                        <label class="form-check-label" for="mtpJoint">
+                            <i class="fas fa-foot"></i> <strong>First metatarsophalangeal (MTP) joint ever involved</strong>
+                            <div class="help-text">Current or past involvement of the big toe joint</div>
+                        </label>
+                    </div>
+
+                    <!-- Criterion 4: Hypertension or cardiovascular disease -->
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="hypertension" value="1">
+                        <label class="form-check-label" for="hypertension">
+                            <i class="fas fa-heart"></i> <strong>Hypertension and/or cardiovascular disease</strong>
+                            <div class="help-text">Medical history of hypertension or cardiac disease</div>
+                        </label>
+                    </div>
+
+                    <!-- Criterion 5: Serum urate level -->
+                    <div class="form-group">
+                        <label for="serumUrate"><i class="fas fa-flask"></i> Serum urate level (if available)</label>
+                        <select class="form-select" id="serumUrate">
+                            <option value="0">Not available / Unknown</option>
+                            <option value="0">≤ 6 mg/dL or ≤ 0.36 mmol/L (Normal)</option>
+                            <option value="1">> 6 mg/dL or > 0.36 mmol/L (Elevated)</option>
+                        </select>
+                        <div class="help-text">Select based on recent lab results</div>
+                    </div>
+
+                    <!-- Criterion 6: Acute onset -->
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="acuteOnset" value="1">
+                        <label class="form-check-label" for="acuteOnset">
+                            <i class="fas fa-bolt"></i> <strong>Acute onset (symptoms peaked within 24 hours)</strong>
+                            <div class="help-text">Maximum pain and swelling reached within first day</div>
+                        </label>
+                    </div>
+
+                    <!-- Criterion 7: Oligoarticular attack -->
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="oligoarticular" value="1">
+                        <label class="form-check-label" for="oligoarticular">
+                            <i class="fas fa-minus-circle"></i> <strong>Oligoarticular attack (4 or fewer joints)</strong>
+                            <div class="help-text">Number of joints affected in this flare</div>
+                        </label>
+                    </div>
+
+                    <!-- Criterion 8: Monoarticular attack -->
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="monoarticular" value="1">
+                        <label class="form-check-label" for="monoarticular">
+                            <i class="fas fa-circle"></i> <strong>Monoarticular attack (only 1 joint)</strong>
+                            <div class="help-text">Flare affecting a single joint only</div>
+                        </label>
+                    </div>
+
+                    <!-- Button Group -->
+                    <div class="d-flex gap-2 mt-4">
+                        <button type="button" class="btn-calculate" onclick="calculateGoutFlare()">
+                            <i class="fas fa-calculator"></i> Calculate Risk
+                        </button>
+                        <button type="reset" class="btn-reset" onclick="resetForm()">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results Section -->
+                <div id="resultsSection" class="results-section">
+                    <div class="score-card">
+                        <div class="score-title">Total Criteria Met:</div>
+                        <div class="score-number" id="criteriaScore">-</div>
+                    </div>
+
+                    <div id="interpretationBox" class="interpretation-box"></div>
+
+                    <!-- Scoring Information -->
+                    <div class="alert alert-light mt-4">
+                        <h5><i class="fas fa-info-circle"></i> Scoring Guide</h5>
+                        <p><strong>≥6 criteria:</strong> Gout diagnosis very likely</p>
+                        <p><strong>4-5 criteria:</strong> Gout diagnosis likely</p>
+                        <p><strong>≤3 criteria:</strong> Gout diagnosis less likely</p>
+                    </div>
+
+                    <!-- Reference Table -->
+                    <div>
+                        <h5 class="mt-4"><i class="fas fa-book"></i> Diagnostic Criteria Reference</h5>
+                        <table class="table reference-table">
+                            <thead>
+                                <tr>
+                                    <th>Criterion</th>
+                                    <th>Description</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Onset in lower limb joint</td>
+                                    <td>1 point</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Redness present</td>
+                                    <td>1 point</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>First MTP joint ever involved</td>
+                                    <td>1 point</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Hypertension or cardiovascular disease</td>
+                                    <td>1 point</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Serum urate > 6 mg/dL</td>
+                                    <td>1 point</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Acute onset (peaked in 24 hours)</td>
+                                    <td>1 point</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Oligoarticular attack</td>
+                                    <td>1 point</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Monoarticular attack</td>
+                                    <td>1 point</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Section -->
+            <div class="footer-section">
+                <p><i class="fas fa-disclaimer"></i> <strong>Disclaimer:</strong> This calculator is for educational purposes only and should not replace professional medical judgment. Joint fluid aspiration with crystal analysis remains the gold standard for gout diagnosis.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Calculator Script -->
+    <script>
+        // Gout Flare Calculation Function
+        function calculateGoutFlare() {
+            // Count checked criteria
+            const criteria = [
+                'lowerLimbOnset',
+                'rednessPresent',
+                'mtpJoint',
+                'hypertension',
+                'acuteOnset',
+                'oligoarticular',
+                'monoarticular'
+            ];
+
+            let score = 0;
+
+            // Count checked checkboxes
+            criteria.forEach(id => {
+                if (document.getElementById(id).checked) {
+                    score++;
+                }
+            });
+
+            // Add serum urate if elevated
+            const serumUrate = parseInt(document.getElementById('serumUrate').value) || 0;
+            score += serumUrate;
+
+            // Display results
+            displayResults(score);
+        }
+
+        // Display Results Function
+        function displayResults(score) {
+            document.getElementById('criteriaScore').textContent = score;
+
+            // Determine interpretation
+            let interpretation = '';
+            let className = '';
+
+            if (score >= 6) {
+                interpretation = `
+                    <div class="d-flex">
+                        <i class="fas fa-check-circle interpretation-icon" style="color: #dc3545;"></i>
+                        <div>
+                            <strong>Gout Diagnosis VERY LIKELY</strong>
+                            <p class="mb-0">Patient meets ≥6 criteria. Gout is the probable diagnosis. Clinical management should be initiated with appropriate anti-inflammatory therapy and consideration of uric acid lowering agents.</p>
+                        </div>
+                    </div>
+                `;
+                className = 'positive';
+            } else if (score >= 4) {
+                interpretation = `
+                    <div class="d-flex">
+                        <i class="fas fa-exclamation-circle interpretation-icon" style="color: #ffc107;"></i>
+                        <div>
+                            <strong>Gout Diagnosis LIKELY</strong>
+                            <p class="mb-0">Patient meets 4-5 criteria. Gout is suspected. Consider joint aspiration for definitive diagnosis if clinically indicated. Initiate empiric treatment if high suspicion.</p>
+                        </div>
+                    </div>
+                `;
+                className = 'probable';
+            } else {
+                interpretation = `
+                    <div class="d-flex">
+                        <i class="fas fa-times-circle interpretation-icon" style="color: #28a745;"></i>
+                        <div>
+                            <strong>Gout Diagnosis LESS LIKELY</strong>
+                            <p class="mb-0">Patient meets ≤3 criteria. Alternative diagnoses should be considered. Further investigation with joint fluid analysis may be warranted to rule out other arthropathies.</p>
+                        </div>
+                    </div>
+                `;
+                className = 'negative';
+            }
+
+            // Update interpretation box
+            const interpretationBox = document.getElementById('interpretationBox');
+            interpretationBox.innerHTML = interpretation;
+            interpretationBox.className = `interpretation-box ${className}`;
+
+            // Show results section
+            document.getElementById('resultsSection').classList.add('show');
+
+            // Scroll to results
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Reset Form Function
+        function resetForm() {
+            document.getElementById('goutFlareForm').reset();
+            document.getElementById('resultsSection').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

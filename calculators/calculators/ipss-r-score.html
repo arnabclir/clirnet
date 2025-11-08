@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPSS-R Score - Revised MDS Prognosis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        body { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); min-height: 100vh; }
+        .navbar { background: var(--primary-gradient) !important; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .container-main { max-width: 900px; margin: 30px auto; }
+        .card { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .card-header { background: var(--primary-gradient); color: white; padding: 25px; }
+        .card-header h1 { font-size: 28px; margin: 0; font-weight: 700; }
+        .form-section { padding: 25px; border-bottom: 1px solid #e0e0e0; }
+        .form-label { font-weight: 600; color: #333; margin-bottom: 12px; }
+        .btn-calculate { background: var(--primary-gradient); border: none; padding: 12px 40px; font-weight: 600; }
+        .btn-calculate:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3); color: white; }
+        .result-section { background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%); padding: 25px; border-radius: 10px; margin-top: 25px; display: none; }
+        .result-section.show { display: block; animation: slideIn 0.3s ease-in; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .score-display { font-size: 36px; font-weight: 700; color: #667eea; margin: 15px 0; }
+        .interpretation { padding: 15px; border-radius: 8px; margin-top: 15px; font-weight: 500; }
+        .interpretation.very-low { background-color: #d4edda; border-left: 4px solid #28a745; color: #155724; }
+        .interpretation.low { background-color: #cfe9f3; border-left: 4px solid #0c5460; color: #0c5460; }
+        .interpretation.intermediate { background-color: #fff3cd; border-left: 4px solid #ffc107; color: #856404; }
+        .interpretation.high { background-color: #f8d7da; border-left: 4px solid #dc3545; color: #721c24; }
+        .interpretation.very-high { background-color: #d63031; color: white; border-left: 4px solid #8b0000; }
+        .form-control, .form-select { border: 1px solid #ddd; border-radius: 6px; }
+        .form-control:focus, .form-select:focus { border-color: #667eea; box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25); }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><i class="fas fa-calculator"></i> Clinical Calculators</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/#hematology"><i class="fas fa-blood"></i> Hematology</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container container-main">
+        <div class="card">
+            <div class="card-header">
+                <h1><i class="fas fa-chart-bar"></i> IPSS-R Score</h1>
+                <p>Revised International Prognostic Scoring System for MDS</p>
+            </div>
+
+            <div class="card-body">
+                <form id="calculatorForm">
+                    <!-- Cytopenia -->
+                    <div class="form-section">
+                        <label class="form-label"><i class="fas fa-droplet"></i> Cytopenia Severity</label>
+                        <div class="form-group">
+                            <select class="form-select" id="cytopenia" required>
+                                <option value="">Select worst cytopenia...</option>
+                                <option value="0">No cytopenias (0 points)</option>
+                                <option value="1">1 cytopenia (1 point)</option>
+                                <option value="2">2 cytopenias (2 points)</option>
+                                <option value="3">3 cytopenias (3 points)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Blasts -->
+                    <div class="form-section">
+                        <label class="form-label"><i class="fas fa-percent"></i> Bone Marrow Blasts (%)</label>
+                        <div class="form-group">
+                            <select class="form-select" id="blasts" required>
+                                <option value="">Select blast percentage...</option>
+                                <option value="0"><2% (0 points)</option>
+                                <option value="1">2-4% (1 point)</option>
+                                <option value="2">5-10% (2 points)</option>
+                                <option value="3">>10% (3 points)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Ring Sideroblasts -->
+                    <div class="form-section">
+                        <label class="form-label"><i class="fas fa-ring"></i> Ring Sideroblasts</label>
+                        <div class="form-group">
+                            <select class="form-select" id="ringsider" required>
+                                <option value="">Select ring sideroblast status...</option>
+                                <option value="0">No RS (0 points)</option>
+                                <option value="1">Mild (1 point)</option>
+                                <option value="2">Moderate to severe (2 points)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Karyotype -->
+                    <div class="form-section">
+                        <label class="form-label"><i class="fas fa-dna"></i> Cytogenetics</label>
+                        <div class="form-group">
+                            <select class="form-select" id="karyotype" required>
+                                <option value="">Select cytogenetics...</option>
+                                <option value="0">Very good (0 points)</option>
+                                <option value="1">Good (1 point)</option>
+                                <option value="2">Intermediate (2 points)</option>
+                                <option value="3">Poor (3 points)</option>
+                                <option value="4">Very poor (4 points)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Calculate Button -->
+                    <div class="form-section">
+                        <button type="button" class="btn btn-calculate" onclick="calculateScore()">
+                            <i class="fas fa-calculator"></i> Calculate IPSS-R Score
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Result Section -->
+                <div class="result-section" id="resultSection">
+                    <h4><i class="fas fa-chart-pie"></i> MDS Prognostic Assessment</h4>
+                    <div class="score-display" id="scoreDisplay">0</div>
+
+                    <div class="interpretation very-low" id="interpretation">
+                        <strong>Risk Category:</strong>
+                        <span id="riskCategory">Very Low Risk</span>
+                    </div>
+
+                    <div id="clinicalGuidance" style="margin-top: 15px; padding: 15px; background-color: #f9f9f9; border-radius: 8px;">
+                        <strong><i class="fas fa-lightbulb"></i> Clinical Management:</strong>
+                        <p id="guidance" style="margin-top: 10px;"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate IPSS-R Score
+        function calculateScore() {
+            const cytopenia = parseInt(document.getElementById('cytopenia').value);
+            const blasts = parseInt(document.getElementById('blasts').value);
+            const ringsider = parseInt(document.getElementById('ringsider').value);
+            const karyotype = parseInt(document.getElementById('karyotype').value);
+
+            if (isNaN(cytopenia) || isNaN(blasts) || isNaN(ringsider) || isNaN(karyotype)) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const score = cytopenia + blasts + ringsider + karyotype;
+            document.getElementById('scoreDisplay').textContent = score;
+
+            let risk, guidance, className;
+
+            // IPSS-R Risk Stratification
+            if (score <= 2) {
+                risk = 'VERY LOW RISK';
+                guidance = '<strong>Score ≤2:</strong> Very low-risk MDS. Median OS >10 years. Supportive care, growth factors PRN. Monitor CBC every 3 months. Excellent long-term prognosis.';
+                className = 'very-low';
+            } else if (score <= 4) {
+                risk = 'LOW RISK';
+                guidance = '<strong>Score 3-4:</strong> Low-risk MDS. Median OS 5-10 years. Supportive transfusions/growth factors. EPO or lenalidomide consideration. Regular monitoring.';
+                className = 'low';
+            } else if (score <= 6) {
+                risk = 'INTERMEDIATE RISK';
+                guidance = '<strong>Score 5-6:</strong> Intermediate-risk MDS. Median OS 1-5 years. Growth factors, lenalidomide (del 5q), or hypomethylating agents. Monitor for AML progression.';
+                className = 'intermediate';
+            } else if (score <= 8) {
+                risk = 'HIGH RISK';
+                guidance = '<strong>Score 7-8:</strong> High-risk MDS. Median OS 0.5-1 year. Hypomethylating agents (azacitidine/decitabine) or intensive chemotherapy. Stem cell transplant for eligible patients.';
+                className = 'high';
+            } else {
+                risk = 'VERY HIGH RISK';
+                guidance = '<strong>Score >8:</strong> Very high-risk MDS. Median OS <0.5 years. Urgent treatment with hypomethylating agents or intensive chemotherapy. Stem cell transplant strongly encouraged. Consider clinical trials.';
+                className = 'very-high';
+            }
+
+            const interpretationEl = document.getElementById('interpretation');
+            interpretationEl.className = 'interpretation ' + className;
+            interpretationEl.innerHTML = `<strong>Risk Category (Score = ${score}):</strong> ${risk}`;
+            document.getElementById('guidance').innerHTML = guidance;
+            document.getElementById('resultSection').classList.add('show');
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        document.getElementById('calculatorForm').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                calculateScore();
+            }
+        });
+    </script>
+</body>
+</html>

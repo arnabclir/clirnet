@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SI to Conventional Unit Converter - Chemistry & Endocrine</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --light-bg: #f8f9fa;
+        }
+
+        body {
+            background: var(--light-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 20px;
+        }
+
+        .gradient-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .gradient-header h1 {
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .gradient-header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin: 0;
+        }
+
+        .calculator-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group-text {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: #667eea;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-calculate {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .results-section {
+            display: none;
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+        }
+
+        .results-section.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .result-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .error-message {
+            display: none;
+            padding: 15px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            color: #721c24;
+            margin-bottom: 20px;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .reference-box {
+            background: #f0f4ff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .reference-box h5 {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .conversion-table {
+            margin-top: 15px;
+            overflow-x: auto;
+        }
+
+        .conversion-table table {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        .conversion-table th {
+            background-color: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            font-weight: 600;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .conversion-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .back-button {
+            margin-bottom: 20px;
+        }
+
+        .back-button a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.2s;
+        }
+
+        .back-button a:hover {
+            gap: 12px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #999;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-button">
+            <a href="/index.html" title="Return to main dashboard">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+        </div>
+
+        <div class="gradient-header">
+            <h1>
+                <i class="fas fa-flask-vial"></i>
+                SI to Conventional Unit Converter
+            </h1>
+            <p>Chemistry and Endocrine Tests Unit Conversion</p>
+        </div>
+
+        <div class="calculator-container">
+            <!-- Error Message -->
+            <div class="error-message" id="errorMessage" role="alert">
+                <i class="fas fa-exclamation-circle"></i> <span id="errorText"></span>
+            </div>
+
+            <!-- Input Section -->
+            <div class="mb-4">
+                <label for="testSelect" class="form-label">
+                    <i class="fas fa-list"></i> Select Test
+                </label>
+                <select class="form-select form-select-lg" id="testSelect" onchange="updateConversionInfo()">
+                    <option value="">-- Select a test --</option>
+                    <option value="glucose">Glucose (mmol/L → mg/dL)</option>
+                    <option value="calcium">Calcium (mmol/L → mg/dL)</option>
+                    <option value="magnesium">Magnesium (mmol/L → mg/dL)</option>
+                    <option value="phosphate">Phosphate (mmol/L → mg/dL)</option>
+                    <option value="creatinine">Creatinine (μmol/L → mg/dL)</option>
+                    <option value="urea">Urea (mmol/L → mg/dL)</option>
+                    <option value="cholesterol">Cholesterol (mmol/L → mg/dL)</option>
+                    <option value="triglycerides">Triglycerides (mmol/L → mg/dL)</option>
+                    <option value="sodium">Sodium (mmol/L → mEq/L)</option>
+                    <option value="potassium">Potassium (mmol/L → mEq/L)</option>
+                    <option value="chloride">Chloride (mmol/L → mEq/L)</option>
+                    <option value="bicarbonate">Bicarbonate (mmol/L → mEq/L)</option>
+                    <option value="iron">Iron (μmol/L → μg/dL)</option>
+                    <option value="t3">T3 (nmol/L → ng/dL)</option>
+                    <option value="t4">T4 (nmol/L → μg/dL)</option>
+                    <option value="cortisol">Cortisol (nmol/L → μg/dL)</option>
+                </select>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <label for="siValue" class="form-label">
+                        <i class="fas fa-input-numeric"></i> SI Value
+                    </label>
+                    <div class="input-group">
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="siValue"
+                            placeholder="Enter value"
+                            step="0.01"
+                        >
+                        <span class="input-group-text" id="siUnit">Unit</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-lg btn-calculate" onclick="convertToConventional()">
+                <i class="fas fa-exchange-alt"></i> Convert to Conventional Units
+            </button>
+
+            <!-- Results Section -->
+            <div class="results-section" id="resultsSection">
+                <h3 class="mb-4">
+                    <i class="fas fa-chart-line"></i> Conversion Result
+                </h3>
+
+                <div class="result-card">
+                    <p class="fw-bold">Test:</p>
+                    <p id="testName"></p>
+                </div>
+
+                <div class="result-card">
+                    <p class="fw-bold">Conversion Factor:</p>
+                    <code id="conversionFormula" class="d-block"></code>
+                </div>
+
+                <div class="result-card">
+                    <p class="fw-bold">Conventional Value:</p>
+                    <div class="result-value" id="conventionalResult"></div>
+                    <p class="text-muted" id="conventionalUnit"></p>
+                </div>
+
+                <div class="result-card">
+                    <p class="fw-bold">Normal Range (Conventional):</p>
+                    <p id="normalRange"></p>
+                </div>
+            </div>
+
+            <!-- Reference Section -->
+            <div class="reference-box">
+                <h5>
+                    <i class="fas fa-book"></i> Conversion Reference Table
+                </h5>
+                <div class="conversion-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Test</th>
+                                <th>SI</th>
+                                <th>Conventional</th>
+                                <th>Conversion Factor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Glucose</td>
+                                <td>mmol/L</td>
+                                <td>mg/dL</td>
+                                <td>× 18.018</td>
+                            </tr>
+                            <tr>
+                                <td>Calcium</td>
+                                <td>mmol/L</td>
+                                <td>mg/dL</td>
+                                <td>× 4.008</td>
+                            </tr>
+                            <tr>
+                                <td>Magnesium</td>
+                                <td>mmol/L</td>
+                                <td>mg/dL</td>
+                                <td>× 2.431</td>
+                            </tr>
+                            <tr>
+                                <td>Phosphate</td>
+                                <td>mmol/L</td>
+                                <td>mg/dL</td>
+                                <td>× 3.097</td>
+                            </tr>
+                            <tr>
+                                <td>Creatinine</td>
+                                <td>μmol/L</td>
+                                <td>mg/dL</td>
+                                <td>÷ 88.4</td>
+                            </tr>
+                            <tr>
+                                <td>Urea</td>
+                                <td>mmol/L</td>
+                                <td>mg/dL</td>
+                                <td>× 2.801</td>
+                            </tr>
+                            <tr>
+                                <td>Cholesterol</td>
+                                <td>mmol/L</td>
+                                <td>mg/dL</td>
+                                <td>× 38.67</td>
+                            </tr>
+                            <tr>
+                                <td>Triglycerides</td>
+                                <td>mmol/L</td>
+                                <td>mg/dL</td>
+                                <td>× 88.57</td>
+                            </tr>
+                            <tr>
+                                <td>T4</td>
+                                <td>nmol/L</td>
+                                <td>μg/dL</td>
+                                <td>÷ 12.87</td>
+                            </tr>
+                            <tr>
+                                <td>Cortisol</td>
+                                <td>nmol/L</td>
+                                <td>μg/dL</td>
+                                <td>÷ 27.59</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>
+                    <i class="fas fa-clock"></i> Last Updated: <span id="timestamp"></span>
+                </p>
+                <p style="font-size: 0.85rem; margin-top: 10px;">
+                    Medical Calculators for Allergy and Immunology | Bidirectional unit conversion support
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /**
+         * Conversion factors and reference ranges (SI to Conventional)
+         */
+        const conversions = {
+            glucose: {
+                name: 'Glucose',
+                factor: 18.018,
+                siUnit: 'mmol/L',
+                conventionalUnit: 'mg/dL',
+                formula: 'mmol/L × 18.018 = mg/dL',
+                normalSI: '3.9-5.6 mmol/L (fasting)',
+                normalConventional: '70-100 mg/dL (fasting)'
+            },
+            calcium: {
+                name: 'Calcium',
+                factor: 4.008,
+                siUnit: 'mmol/L',
+                conventionalUnit: 'mg/dL',
+                formula: 'mmol/L × 4.008 = mg/dL',
+                normalSI: '2.15-2.55 mmol/L',
+                normalConventional: '8.6-10.2 mg/dL'
+            },
+            magnesium: {
+                name: 'Magnesium',
+                factor: 2.431,
+                siUnit: 'mmol/L',
+                conventionalUnit: 'mg/dL',
+                formula: 'mmol/L × 2.431 = mg/dL',
+                normalSI: '0.70-1.00 mmol/L',
+                normalConventional: '1.7-2.2 mg/dL'
+            },
+            phosphate: {
+                name: 'Phosphate',
+                factor: 3.097,
+                siUnit: 'mmol/L',
+                conventionalUnit: 'mg/dL',
+                formula: 'mmol/L × 3.097 = mg/dL',
+                normalSI: '0.80-1.45 mmol/L',
+                normalConventional: '2.5-4.5 mg/dL'
+            },
+            creatinine: {
+                name: 'Creatinine',
+                factor: 1 / 88.4,
+                siUnit: 'μmol/L',
+                conventionalUnit: 'mg/dL',
+                formula: 'μmol/L ÷ 88.4 = mg/dL',
+                normalSI: '60-110 μmol/L (adult)',
+                normalConventional: '0.7-1.3 mg/dL (adult)'
+            },
+            urea: {
+                name: 'Urea/BUN',
+                factor: 2.801,
+                siUnit: 'mmol/L',
+                conventionalUnit: 'mg/dL',
+                formula: 'mmol/L × 2.801 = mg/dL',
+                normalSI: '2.5-7.1 mmol/L',
+                normalConventional: '7-20 mg/dL'
+            },
+            cholesterol: {
+                name: 'Total Cholesterol',
+                factor: 38.67,
+                siUnit: 'mmol/L',
+                conventionalUnit: 'mg/dL',
+                formula: 'mmol/L × 38.67 = mg/dL',
+                normalSI: '<5.2 mmol/L (optimal)',
+                normalConventional: '<200 mg/dL (optimal)'
+            },
+            triglycerides: {
+                name: 'Triglycerides',
+                factor: 88.57,
+                siUnit: 'mmol/L',
+                conventionalUnit: 'mg/dL',
+                formula: 'mmol/L × 88.57 = mg/dL',
+                normalSI: '<1.7 mmol/L (normal)',
+                normalConventional: '<150 mg/dL (normal)'
+            },
+            sodium: {
+                name: 'Sodium',
+                factor: 1,
+                siUnit: 'mmol/L',
+                conventionalUnit: 'mEq/L',
+                formula: 'mmol/L = mEq/L (1:1)',
+                normalSI: '136-145 mmol/L',
+                normalConventional: '136-145 mEq/L'
+            },
+            potassium: {
+                name: 'Potassium',
+                factor: 1,
+                siUnit: 'mmol/L',
+                conventionalUnit: 'mEq/L',
+                formula: 'mmol/L = mEq/L (1:1)',
+                normalSI: '3.5-5.0 mmol/L',
+                normalConventional: '3.5-5.0 mEq/L'
+            },
+            chloride: {
+                name: 'Chloride',
+                factor: 1,
+                siUnit: 'mmol/L',
+                conventionalUnit: 'mEq/L',
+                formula: 'mmol/L = mEq/L (1:1)',
+                normalSI: '98-107 mmol/L',
+                normalConventional: '98-107 mEq/L'
+            },
+            bicarbonate: {
+                name: 'Bicarbonate',
+                factor: 1,
+                siUnit: 'mmol/L',
+                conventionalUnit: 'mEq/L',
+                formula: 'mmol/L = mEq/L (1:1)',
+                normalSI: '23-29 mmol/L',
+                normalConventional: '23-29 mEq/L'
+            },
+            iron: {
+                name: 'Iron',
+                factor: 1 / 0.1791,
+                siUnit: 'μmol/L',
+                conventionalUnit: 'μg/dL',
+                formula: 'μmol/L ÷ 0.1791 = μg/dL',
+                normalSI: '11-29 μmol/L (adult)',
+                normalConventional: '60-170 μg/dL (adult)'
+            },
+            t3: {
+                name: 'T3',
+                factor: 1 / 0.01536,
+                siUnit: 'nmol/L',
+                conventionalUnit: 'ng/dL',
+                formula: 'nmol/L ÷ 0.01536 = ng/dL',
+                normalSI: '3.5-7.8 nmol/L',
+                normalConventional: '230-510 ng/dL'
+            },
+            t4: {
+                name: 'T4',
+                factor: 1 / 12.87,
+                siUnit: 'nmol/L',
+                conventionalUnit: 'μg/dL',
+                formula: 'nmol/L ÷ 12.87 = μg/dL',
+                normalSI: '70-150 nmol/L',
+                normalConventional: '5.5-12 μg/dL'
+            },
+            cortisol: {
+                name: 'Cortisol',
+                factor: 1 / 27.59,
+                siUnit: 'nmol/L',
+                conventionalUnit: 'μg/dL',
+                formula: 'nmol/L ÷ 27.59 = μg/dL',
+                normalSI: '138-635 nmol/L (morning)',
+                normalConventional: '5-23 μg/dL (morning)'
+            }
+        };
+
+        /**
+         * Update conversion info when test is selected
+         */
+        function updateConversionInfo() {
+            const testSelect = document.getElementById('testSelect');
+            const testValue = testSelect.value;
+
+            if (testValue && conversions[testValue]) {
+                const conv = conversions[testValue];
+                document.getElementById('siUnit').textContent = conv.siUnit;
+            }
+        }
+
+        /**
+         * Convert SI value to conventional units
+         */
+        function convertToConventional() {
+            const testSelect = document.getElementById('testSelect');
+            const testValue = testSelect.value;
+            const siInput = parseFloat(document.getElementById('siValue').value);
+            const errorDiv = document.getElementById('errorMessage');
+            const resultsSection = document.getElementById('resultsSection');
+
+            // Validation
+            if (!testValue) {
+                showError('Please select a test');
+                resultsSection.classList.remove('show');
+                return;
+            }
+
+            if (!siInput || isNaN(siInput)) {
+                showError('Please enter a valid value');
+                resultsSection.classList.remove('show');
+                return;
+            }
+
+            if (siInput < 0) {
+                showError('Value must be greater than or equal to 0');
+                resultsSection.classList.remove('show');
+                return;
+            }
+
+            const conv = conversions[testValue];
+
+            // Calculate conventional value
+            const conventionalValue = siInput * conv.factor;
+
+            // Display results
+            errorDiv.classList.remove('show');
+            document.getElementById('testName').textContent = conv.name;
+            document.getElementById('conversionFormula').textContent = conv.formula;
+            document.getElementById('conventionalResult').textContent = conventionalValue.toFixed(4);
+            document.getElementById('conventionalUnit').textContent = conv.conventionalUnit;
+            document.getElementById('normalRange').textContent = conv.normalConventional;
+
+            resultsSection.classList.add('show');
+        }
+
+        /**
+         * Show error message
+         */
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            errorText.textContent = message;
+            errorDiv.classList.add('show');
+        }
+
+        /**
+         * Update timestamp
+         */
+        function updateTimestamp() {
+            const now = new Date();
+            document.getElementById('timestamp').textContent = now.toLocaleString();
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', updateTimestamp);
+
+        // Allow Enter key to convert
+        document.getElementById('siValue').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') convertToConventional();
+        });
+    </script>
+</body>
+</html>

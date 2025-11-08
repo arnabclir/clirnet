@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAS28-CRP Calculator - Rheumatoid Arthritis Disease Activity Score</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Purple gradient theme for Rheumatology */
+        :root {
+            --purple-gradient-start: #667eea;
+            --purple-gradient-end: #764ba2;
+            --purple-light: #f3e9ff;
+            --purple-dark: #4a235a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--purple-gradient-start) 0%, var(--purple-gradient-end) 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Navigation styling */
+        .navbar {
+            background: linear-gradient(90deg, var(--purple-gradient-start) 0%, var(--purple-gradient-end) 100%);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            transition: color 0.3s ease;
+            margin: 0 5px;
+        }
+
+        .nav-link:hover {
+            color: white !important;
+        }
+
+        /* Main container styling */
+        .container-main {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        /* Header with purple gradient */
+        .header-section {
+            background: linear-gradient(135deg, var(--purple-gradient-start) 0%, var(--purple-gradient-end) 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header-section h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .header-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin: 0;
+        }
+
+        /* Form section */
+        .form-section {
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--purple-dark);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .form-group .help-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        /* Input styling */
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--purple-gradient-start);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        /* Button styling */
+        .btn-calculate {
+            background: linear-gradient(135deg, var(--purple-gradient-start) 0%, var(--purple-gradient-end) 100%);
+            border: none;
+            color: white;
+            font-weight: bold;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .btn-reset {
+            background: #f0f0f0;
+            color: var(--purple-dark);
+            border: 2px solid var(--purple-gradient-start);
+            font-weight: bold;
+            padding: 10px 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-reset:hover {
+            background: var(--purple-light);
+        }
+
+        /* Results section */
+        .results-section {
+            background: var(--purple-light);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+            display: none;
+        }
+
+        .results-section.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-box {
+            background: white;
+            border-left: 5px solid var(--purple-gradient-end);
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--purple-gradient-end);
+        }
+
+        /* Interpretation boxes */
+        .interpretation-box {
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 5px solid;
+        }
+
+        .interpretation-box.remission {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .interpretation-box.low-activity {
+            background: #cfe2ff;
+            border-color: #0d6efd;
+            color: #084298;
+        }
+
+        .interpretation-box.moderate-activity {
+            background: #fff3cd;
+            border-color: #ffc107;
+            color: #664d03;
+        }
+
+        .interpretation-box.high-activity {
+            background: #f8d7da;
+            border-color: #dc3545;
+            color: #842029;
+        }
+
+        .interpretation-icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        /* Component breakdown */
+        .component-breakdown {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .component-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .component-row:last-child {
+            border-bottom: none;
+        }
+
+        .component-label {
+            color: #666;
+        }
+
+        .component-value {
+            font-weight: bold;
+            color: var(--purple-gradient-end);
+        }
+
+        /* Table styling for reference */
+        .reference-table {
+            margin-top: 20px;
+            font-size: 0.95rem;
+        }
+
+        .reference-table th {
+            background: linear-gradient(135deg, var(--purple-gradient-start) 0%, var(--purple-gradient-end) 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .reference-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .reference-table tbody tr:hover {
+            background-color: var(--purple-light);
+        }
+
+        /* Footer */
+        .footer-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .footer-section a {
+            color: var(--purple-gradient-start);
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-section {
+                padding: 20px;
+            }
+
+            .header-section h1 {
+                font-size: 1.5rem;
+            }
+
+            .result-value {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="fas fa-clinic-medical"></i> Rheumatology Calculators</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="basdai-calculator.html"><i class="fas fa-chart-line"></i> BASDAI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gout-flare-calculator.html"><i class="fas fa-fire"></i> Gout Flare</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cdai-calculator.html"><i class="fas fa-calculator"></i> CDAI</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="das28-crp-calculator.html"><i class="fas fa-vial"></i> DAS28-CRP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="das28-esr-calculator.html"><i class="fas fa-vial-virus"></i> DAS28-ESR</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="sdai-calculator.html"><i class="fas fa-list-check"></i> SDAI</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container mt-4">
+        <div class="container-main">
+            <!-- Header Section -->
+            <div class="header-section">
+                <h1><i class="fas fa-vial"></i> DAS28-CRP Calculator</h1>
+                <p>Disease Activity Score with C-Reactive Protein</p>
+            </div>
+
+            <!-- Form Section -->
+            <div class="form-section">
+                <form id="das28crpForm">
+                    <!-- Introduction -->
+                    <div class="alert alert-info" role="alert">
+                        <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> DAS28-CRP uses 4 clinical variables and CRP to assess rheumatoid arthritis activity.
+                    </div>
+
+                    <!-- Swollen Joints Count -->
+                    <div class="form-group">
+                        <label for="swollenJoints"><i class="fas fa-water"></i> Number of Swollen Joints (0-28)</label>
+                        <input type="number" class="form-control" id="swollenJoints" min="0" max="28" value="0" placeholder="Enter number">
+                        <div class="help-text">Count: Shoulders (2), elbows (2), wrists (2), MCP joints (10), PIP joints (8), knees (2)</div>
+                    </div>
+
+                    <!-- Tender Joints Count -->
+                    <div class="form-group">
+                        <label for="tenderJoints"><i class="fas fa-hand-holding-heart"></i> Number of Tender Joints (0-28)</label>
+                        <input type="number" class="form-control" id="tenderJoints" min="0" max="28" value="0" placeholder="Enter number">
+                        <div class="help-text">Same 28 joints as above</div>
+                    </div>
+
+                    <!-- Patient Global Assessment -->
+                    <div class="form-group">
+                        <label for="patientGlobal"><i class="fas fa-person"></i> Patient Global Assessment (0-100 VAS)</label>
+                        <input type="number" class="form-control" id="patientGlobal" min="0" max="100" step="0.1" value="0" placeholder="Enter score">
+                        <div class="help-text">0 = Very well, 100 = Very poor</div>
+                    </div>
+
+                    <!-- Evaluator Global Assessment -->
+                    <div class="form-group">
+                        <label for="evaluatorGlobal"><i class="fas fa-stethoscope"></i> Evaluator Global Assessment (0-100 VAS)</label>
+                        <input type="number" class="form-control" id="evaluatorGlobal" min="0" max="100" step="0.1" value="0" placeholder="Enter score">
+                        <div class="help-text">0 = No disease activity, 100 = Maximum disease activity</div>
+                    </div>
+
+                    <!-- CRP Level -->
+                    <div class="form-group">
+                        <label for="crpLevel"><i class="fas fa-flask-vial"></i> C-Reactive Protein (CRP) Level</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="crpLevel" min="0" step="0.1" value="0" placeholder="Enter CRP value">
+                            <select class="form-select" id="crpUnit" style="max-width: 100px;">
+                                <option value="mg/dl">mg/dL</option>
+                                <option value="mg/l">mg/L</option>
+                            </select>
+                        </div>
+                        <div class="help-text">Normal CRP: &lt;3 mg/L or &lt;0.3 mg/dL</div>
+                    </div>
+
+                    <!-- Button Group -->
+                    <div class="d-flex gap-2 mt-4">
+                        <button type="button" class="btn-calculate" onclick="calculateDAS28CRP()">
+                            <i class="fas fa-calculator"></i> Calculate DAS28-CRP
+                        </button>
+                        <button type="reset" class="btn-reset" onclick="resetForm()">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results Section -->
+                <div id="resultsSection" class="results-section">
+                    <div class="result-box">
+                        <div class="result-label"><i class="fas fa-chart-pie"></i> DAS28-CRP Score:</div>
+                        <div class="result-value" id="das28Score">-</div>
+                        <div class="help-text mt-2">Scale: 0 - 10 (higher = greater disease activity)</div>
+                    </div>
+
+                    <!-- Component Breakdown -->
+                    <div class="component-breakdown">
+                        <h6><i class="fas fa-list"></i> Score Breakdown</h6>
+                        <div class="component-row">
+                            <span class="component-label">ln(SJC) component:</span>
+                            <span class="component-value" id="breakdownSJC">0</span>
+                        </div>
+                        <div class="component-row">
+                            <span class="component-label">ln(TJC) component:</span>
+                            <span class="component-value" id="breakdownTJC">0</span>
+                        </div>
+                        <div class="component-row">
+                            <span class="component-label">ln(CRP) component:</span>
+                            <span class="component-value" id="breakdownCRP">0</span>
+                        </div>
+                        <div class="component-row">
+                            <span class="component-label">Patient Global component:</span>
+                            <span class="component-value" id="breakdownPG">0</span>
+                        </div>
+                    </div>
+
+                    <div id="interpretationBox" class="interpretation-box"></div>
+
+                    <!-- Reference Table -->
+                    <div>
+                        <h5 class="mt-4"><i class="fas fa-book"></i> DAS28-CRP Interpretation</h5>
+                        <table class="table reference-table">
+                            <thead>
+                                <tr>
+                                    <th>DAS28-CRP Score</th>
+                                    <th>Disease Activity Level</th>
+                                    <th>Clinical Recommendation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>≤2.6</td>
+                                    <td>Remission</td>
+                                    <td>Target state, continue current therapy</td>
+                                </tr>
+                                <tr>
+                                    <td>2.7-3.2</td>
+                                    <td>Low Disease Activity</td>
+                                    <td>Good control, monitor and reassess</td>
+                                </tr>
+                                <tr>
+                                    <td>3.3-5.1</td>
+                                    <td>Moderate Disease Activity</td>
+                                    <td>May consider therapy adjustment</td>
+                                </tr>
+                                <tr>
+                                    <td>>5.1</td>
+                                    <td>High Disease Activity</td>
+                                    <td>Treatment intensification recommended</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Section -->
+            <div class="footer-section">
+                <p><i class="fas fa-disclaimer"></i> <strong>Disclaimer:</strong> This calculator is for educational purposes only and should not replace professional medical judgment. Always consult with a qualified rheumatologist for clinical decision-making.</p>
+                <p><small>DAS28-CRP = 0.56×√(TJC) + 0.28×√(SJC) + 0.36×ln(CRP+1) + 0.014×PG + 0.96</small></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Calculator Script -->
+    <script>
+        // Input validation
+        function validateInputs() {
+            const swollenJoints = parseFloat(document.getElementById('swollenJoints').value) || 0;
+            const tenderJoints = parseFloat(document.getElementById('tenderJoints').value) || 0;
+            const patientGlobal = parseFloat(document.getElementById('patientGlobal').value) || 0;
+            const evaluatorGlobal = parseFloat(document.getElementById('evaluatorGlobal').value) || 0;
+            const crpLevel = parseFloat(document.getElementById('crpLevel').value) || 0;
+
+            if (swollenJoints < 0 || swollenJoints > 28) {
+                alert('Swollen joints must be between 0 and 28');
+                return false;
+            }
+            if (tenderJoints < 0 || tenderJoints > 28) {
+                alert('Tender joints must be between 0 and 28');
+                return false;
+            }
+            if (patientGlobal < 0 || patientGlobal > 100) {
+                alert('Patient global must be between 0 and 100');
+                return false;
+            }
+            if (evaluatorGlobal < 0 || evaluatorGlobal > 100) {
+                alert('Evaluator global must be between 0 and 100');
+                return false;
+            }
+            if (crpLevel < 0) {
+                alert('CRP level cannot be negative');
+                return false;
+            }
+
+            return true;
+        }
+
+        // DAS28-CRP Calculation Function
+        function calculateDAS28CRP() {
+            if (!validateInputs()) return;
+
+            // Get input values
+            const swollenJoints = parseFloat(document.getElementById('swollenJoints').value) || 0;
+            const tenderJoints = parseFloat(document.getElementById('tenderJoints').value) || 0;
+            const patientGlobal = parseFloat(document.getElementById('patientGlobal').value) || 0;
+            const evaluatorGlobal = parseFloat(document.getElementById('evaluatorGlobal').value) || 0;
+            let crpLevel = parseFloat(document.getElementById('crpLevel').value) || 0;
+            const crpUnit = document.getElementById('crpUnit').value;
+
+            // Convert CRP to mg/L if necessary
+            if (crpUnit === 'mg/dl') {
+                crpLevel = crpLevel * 10;
+            }
+
+            // DAS28-CRP = 0.56×√(TJC) + 0.28×√(SJC) + 0.36×ln(CRP+1) + 0.014×PG + 0.96
+            const tjcComponent = 0.56 * Math.sqrt(tenderJoints);
+            const sjcComponent = 0.28 * Math.sqrt(swollenJoints);
+            const crpComponent = 0.36 * Math.log(crpLevel + 1);
+            const pgComponent = 0.014 * patientGlobal;
+            const constant = 0.96;
+
+            const das28Score = tjcComponent + sjcComponent + crpComponent + pgComponent + constant;
+
+            // Display results
+            displayResults(das28Score.toFixed(2), tjcComponent, sjcComponent, crpComponent, pgComponent);
+        }
+
+        // Display Results Function
+        function displayResults(score, tjc, sjc, crp, pg) {
+            document.getElementById('das28Score').textContent = score;
+
+            // Update component breakdown
+            document.getElementById('breakdownTJC').textContent = tjc.toFixed(3);
+            document.getElementById('breakdownSJC').textContent = sjc.toFixed(3);
+            document.getElementById('breakdownCRP').textContent = crp.toFixed(3);
+            document.getElementById('breakdownPG').textContent = pg.toFixed(3);
+
+            // Determine interpretation
+            let interpretation = '';
+            let className = '';
+            const scoreNum = parseFloat(score);
+
+            if (scoreNum <= 2.6) {
+                interpretation = `
+                    <div class="d-flex">
+                        <i class="fas fa-check-circle interpretation-icon" style="color: #28a745;"></i>
+                        <div>
+                            <strong>Remission</strong>
+                            <p class="mb-0">Your DAS28-CRP score indicates remission with excellent disease control. This is the target state for rheumatoid arthritis management. Continue current therapeutic regimen and maintain regular monitoring.</p>
+                        </div>
+                    </div>
+                `;
+                className = 'remission';
+            } else if (scoreNum <= 3.2) {
+                interpretation = `
+                    <div class="d-flex">
+                        <i class="fas fa-check-circle interpretation-icon" style="color: #0d6efd;"></i>
+                        <div>
+                            <strong>Low Disease Activity</strong>
+                            <p class="mb-0">Your DAS28-CRP score indicates low disease activity with good control. Maintain current treatment and monitor regularly to achieve remission.</p>
+                        </div>
+                    </div>
+                `;
+                className = 'low-activity';
+            } else if (scoreNum <= 5.1) {
+                interpretation = `
+                    <div class="d-flex">
+                        <i class="fas fa-exclamation-circle interpretation-icon" style="color: #ffc107;"></i>
+                        <div>
+                            <strong>Moderate Disease Activity</strong>
+                            <p class="mb-0">Your DAS28-CRP score indicates moderate disease activity. Consider discussing treatment optimization or intensification with your rheumatologist.</p>
+                        </div>
+                    </div>
+                `;
+                className = 'moderate-activity';
+            } else {
+                interpretation = `
+                    <div class="d-flex">
+                        <i class="fas fa-alert interpretation-icon" style="color: #dc3545;"></i>
+                        <div>
+                            <strong>High Disease Activity</strong>
+                            <p class="mb-0">Your DAS28-CRP score indicates high disease activity. Prompt consultation with your rheumatologist for treatment intensification is strongly recommended.</p>
+                        </div>
+                    </div>
+                `;
+                className = 'high-activity';
+            }
+
+            // Update interpretation box
+            const interpretationBox = document.getElementById('interpretationBox');
+            interpretationBox.innerHTML = interpretation;
+            interpretationBox.className = `interpretation-box ${className}`;
+
+            // Show results section
+            document.getElementById('resultsSection').classList.add('show');
+
+            // Scroll to results
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Reset Form Function
+        function resetForm() {
+            document.getElementById('das28crpForm').reset();
+            document.getElementById('resultsSection').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gupta Postoperative Pneumonia Risk Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-dark: #2d3748;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .nav-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1rem 0;
+        }
+        .calculator-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 2rem 1.5rem;
+        }
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+        }
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 5px solid #667eea;
+        }
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 1rem 0;
+        }
+        .interpretation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+        .formula-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+        .score-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .risk-low { color: #28a745; font-weight: 600; }
+        .risk-moderate { color: #ffc107; font-weight: 600; }
+        .risk-high { color: #dc3545; font-weight: 600; }
+        .info-badge {
+            display: inline-block;
+            background: #e7f3ff;
+            color: #0066cc;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="mb-0"><i class="fas fa-heartbeat"></i> Critical Care Calculators</h1>
+                    <small>Pulmonary & Critical Care Medicine</small>
+                </div>
+                <a href="index.html" class="btn btn-light btn-sm"><i class="fas fa-home"></i> Home</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="calculator-container">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-lungs"></i> Gupta Postoperative Pneumonia Risk</h2>
+                <p>Prediction of Postoperative Pneumonia in Surgical Patients</p>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="info-badge">
+                    <i class="fas fa-exclamation-circle"></i> Preoperative prediction of pneumonia risk
+                </div>
+
+                <div class="score-item">
+                    <label><strong>Age (years)</strong></label>
+                    <input type="number" id="age" class="form-control" placeholder="Enter age" min="0" max="120">
+                    <small>Risk increases with age >65</small>
+                </div>
+
+                <div class="score-item">
+                    <label><strong>ASA Physical Status Class</strong></label>
+                    <select id="asa" class="form-select">
+                        <option value="">Select ASA class</option>
+                        <option value="1">1 - Healthy</option>
+                        <option value="2">2 - Mild systemic disease</option>
+                        <option value="3">3 - Severe systemic disease</option>
+                        <option value="4">4 - Life-threatening disease</option>
+                    </select>
+                </div>
+
+                <div class="score-item">
+                    <label><strong>Functional Status</strong></label>
+                    <select id="funcStatus" class="form-select">
+                        <option value="">Select functional status</option>
+                        <option value="0">Independent</option>
+                        <option value="1">Partially dependent</option>
+                        <option value="2">Totally dependent</option>
+                    </select>
+                </div>
+
+                <div class="score-item">
+                    <label><strong>Type of Surgery</strong></label>
+                    <select id="surgeryType" class="form-select">
+                        <option value="">Select type</option>
+                        <option value="0">Minor</option>
+                        <option value="1">Major</option>
+                    </select>
+                </div>
+
+                <button onclick="calculateGuptaPneumonia()" class="btn btn-primary btn-lg w-100 mt-4">
+                    <i class="fas fa-calculator"></i> Calculate Pneumonia Risk
+                </button>
+
+                <div id="result" style="display:none;" class="result-box">
+                    <h4><i class="fas fa-chart-pie"></i> Pneumonia Risk Result</h4>
+                    <div class="result-score" id="riskPercent">--%</div>
+                    <div class="interpretation">
+                        <h5>Risk Category:</h5>
+                        <p id="riskCategory"></p>
+                    </div>
+                    <div class="interpretation">
+                        <h5>Recommendation:</h5>
+                        <p id="recommendation"></p>
+                    </div>
+                </div>
+
+                <div class="formula-section">
+                    <h5><i class="fas fa-book"></i> Pneumonia Risk Factors</h5>
+                    <ul class="small mb-0">
+                        <li>Age >65: Increases risk significantly</li>
+                        <li>Higher ASA score: Indicates more comorbidities</li>
+                        <li>Dependent functional status: Impaired recovery</li>
+                        <li>Major surgery: Prolonged anesthesia, blood loss</li>
+                        <li>Baseline risk ~1%; can reach >20% with multiple factors</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate Gupta Pneumonia Risk
+        function calculateGuptaPneumonia() {
+            const age = parseInt(document.getElementById('age').value);
+            const asa = parseInt(document.getElementById('asa').value);
+            const funcStatus = parseInt(document.getElementById('funcStatus').value);
+            const surgeryType = parseInt(document.getElementById('surgeryType').value);
+
+            if (isNaN(age) || isNaN(asa) || isNaN(funcStatus) || isNaN(surgeryType)) {
+                alert('Please enter valid values for all fields');
+                return;
+            }
+
+            // Simplified model: baseline + age factor + ASA + functional status + surgery type
+            let baselineRisk = 1.0; // ~1% baseline
+            
+            if (age > 65) baselineRisk += (age - 65) * 0.15;
+            baselineRisk += asa * 0.8;
+            baselineRisk += funcStatus * 1.5;
+            baselineRisk += surgeryType * 2.0;
+
+            // Cap at reasonable maximum
+            let riskPercent = Math.min(baselineRisk, 25);
+
+            let riskCategory = '';
+            let recommendation = '';
+
+            if (riskPercent < 2) {
+                riskCategory = '<span class="risk-low"><i class="fas fa-check-circle"></i> Low Risk</span>';
+                recommendation = 'Standard perioperative care. Encourage deep breathing/coughing. No prophylactic antibiotics beyond standard surgical prophylaxis.';
+            } else if (riskPercent < 5) {
+                riskCategory = '<span class="risk-moderate"><i class="fas fa-exclamation-triangle"></i> Moderate Risk</span>';
+                recommendation = 'Optimize pulmonary function preoperatively. Aggressive postop mobilization and breathing exercises. Consider extended antibiotic prophylaxis if risk factors present.';
+            } else {
+                riskCategory = '<span class="risk-high"><i class="fas fa-times-circle"></i> High Risk</span>';
+                recommendation = 'Preop optimization: pulmonary rehabilitation, smoking cessation, comorbidity control. Minimally invasive approach if feasible. Aggressive postop respiratory support and monitoring.';
+            }
+
+            document.getElementById('riskPercent').textContent = riskPercent.toFixed(1) + '%';
+            document.getElementById('riskCategory').innerHTML = riskCategory;
+            document.getElementById('recommendation').innerHTML = recommendation;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

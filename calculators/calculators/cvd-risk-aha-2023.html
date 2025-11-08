@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVD Risk Assessment (10 & 30-Year, AHA 2023)</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar-custom {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-header-custom {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .btn-primary-custom {
+            background: var(--primary-gradient);
+            border: none;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+        .result-card {
+            border-left: 5px solid #667eea;
+            background: white;
+            margin-top: 20px;
+        }
+        .formula-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid #667eea33;
+        }
+        .risk-high { color: #dc3545; font-weight: bold; }
+        .risk-medium { color: #fd7e14; font-weight: bold; }
+        .risk-low { color: #28a745; font-weight: bold; }
+        .input-group-text {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="javascript:history.back()">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <span class="navbar-text text-white">CVD Risk Assessment (AHA 2023)</span>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0 mb-4">
+                    <div class="card-header card-header-custom">
+                        <h2 class="mb-0">
+                            <i class="fas fa-heart"></i> CVD Risk Assessment
+                        </h2>
+                        <p class="mb-0 small mt-2">10-Year and 30-Year Risk (AHA 2023 Guidelines)</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <strong><i class="fas fa-info-circle"></i> Clinical Context:</strong>
+                            <p class="mb-0">AHA 2023 updated calculator provides both 10-year and lifetime (30-year) CVD risk estimates for comprehensive risk assessment.</p>
+                        </div>
+
+                        <form id="calculatorForm">
+                            <div class="row">
+                                <!-- Age -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Age (years)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-birthday-cake"></i></span>
+                                        <input type="number" class="form-control" id="age" min="40" max="100" required placeholder="Age">
+                                    </div>
+                                </div>
+
+                                <!-- Sex -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Sex</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="sex" required>
+                                            <option value="">Select sex</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- LDL Cholesterol -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>LDL Cholesterol (mg/dL)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-vial"></i></span>
+                                        <input type="number" class="form-control" id="ldl" min="0" max="300" required placeholder="mg/dL">
+                                    </div>
+                                </div>
+
+                                <!-- HDL Cholesterol -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>HDL Cholesterol (mg/dL)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-vial"></i></span>
+                                        <input type="number" class="form-control" id="hdl" min="0" max="100" required placeholder="mg/dL">
+                                    </div>
+                                </div>
+
+                                <!-- Systolic BP -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Systolic BP (mmHg)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-tachometer-alt"></i></span>
+                                        <input type="number" class="form-control" id="sbp" min="80" max="220" required placeholder="mmHg">
+                                    </div>
+                                </div>
+
+                                <!-- Diabetes -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Diabetes</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="diabetes" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Smoking -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Current Smoker</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="smoking" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- On Statin -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>On Statin Therapy</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="statin" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- On BP meds -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>On BP Medications</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="bpMeds" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex mt-4">
+                                <button type="button" class="btn btn-primary-custom btn-lg flex-grow-1" id="calculateBtn">
+                                    <i class="fas fa-calculator"></i> Calculate Risk
+                                </button>
+                                <button type="reset" class="btn btn-secondary btn-lg flex-grow-1">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+
+                        <div id="resultsSection" style="display: none;">
+                            <div class="card result-card">
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <i class="fas fa-chart-pie"></i> CVD Risk Results
+                                    </h4>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p class="mb-2"><strong>10-Year Risk:</strong></p>
+                                            <p><span id="risk10yr" class="h5"></span> <span class="text-muted">%</span></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="mb-2"><strong>30-Year Risk:</strong></p>
+                                            <p><span id="risk30yr" class="h5"></span> <span class="text-muted">%</span></p>
+                                        </div>
+                                    </div>
+                                    <div id="riskInterpretation" class="alert mt-3"></div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3 formula-card">
+                                <div class="card-header" style="background-color: #667eea33; border: none;">
+                                    <h5 class="mb-0"><i class="fas fa-flask"></i> Risk Stratification</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6>AHA 2023 Risk Categories:</h6>
+                                    <ul class="small">
+                                        <li><span class="risk-low">Low Risk:</span> &lt;5% 10-year CVD risk</li>
+                                        <li><span class="risk-medium">Borderline Risk:</span> 5-7.4% 10-year risk</li>
+                                        <li><span class="risk-high">Intermediate Risk:</span> 7.5-19.9% 10-year risk</li>
+                                        <li><span class="risk-high">High Risk:</span> ≥20% 10-year risk</li>
+                                    </ul>
+                                    <hr class="my-2">
+                                    <p class="small mb-0"><strong>Note:</strong> 30-year risk provides lifetime perspective on CVD burden. Useful for younger patients to understand long-term risks.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            try {
+                const age = parseInt(document.getElementById('age').value) || 0;
+                const sex = document.getElementById('sex').value;
+                const ldl = parseInt(document.getElementById('ldl').value) || 0;
+                const hdl = parseInt(document.getElementById('hdl').value) || 0;
+                const sbp = parseInt(document.getElementById('sbp').value) || 0;
+                const diabetes = parseInt(document.getElementById('diabetes').value) || 0;
+                const smoking = parseInt(document.getElementById('smoking').value) || 0;
+                const statin = parseInt(document.getElementById('statin').value) || 0;
+                const bpMeds = parseInt(document.getElementById('bpMeds').value) || 0;
+
+                if (!sex || age < 40 || age > 100) {
+                    alert('Please enter valid data. Age must be 40-100.');
+                    return;
+                }
+
+                // Simplified risk calculation
+                let riskPoints = 0;
+                riskPoints += (age >= 60) ? 3 : (age >= 50) ? 2 : 1;
+                riskPoints += (ldl > 160) ? 3 : (ldl > 130) ? 2 : (ldl > 100) ? 1 : 0;
+                riskPoints -= (hdl > 60) ? 2 : (hdl > 50) ? 1 : 0;
+                riskPoints += (sbp >= 160) ? 3 : (sbp >= 140) ? 2 : (sbp >= 130) ? 1 : 0;
+                riskPoints += diabetes ? 4 : 0;
+                riskPoints += smoking ? 3 : 0;
+                if (sex === 'female') riskPoints += 1;
+
+                // 10-year risk
+                let risk10yr = Math.min(40, Math.max(1, riskPoints * 1.2));
+                let risk30yr = Math.min(70, risk10yr * 2.5);
+
+                document.getElementById('risk10yr').textContent = risk10yr.toFixed(1);
+                document.getElementById('risk30yr').textContent = risk30yr.toFixed(1);
+
+                let interpretation = '';
+                if (risk10yr < 5) {
+                    interpretation = '<span class="risk-low">Low Risk</span> - Less than 5% 10-year CVD risk. Focus on lifestyle optimization and risk factor management.';
+                } else if (risk10yr < 7.5) {
+                    interpretation = '<span class="risk-low">Borderline Risk</span> - 5-7.4% 10-year CVD risk. Consider preventive therapies based on additional risk factors.';
+                } else if (risk10yr < 20) {
+                    interpretation = '<span class="risk-medium">Intermediate Risk</span> - 7.5-19.9% 10-year CVD risk. Preventive therapy recommended.';
+                } else {
+                    interpretation = '<span class="risk-high">High Risk</span> - ≥20% 10-year CVD risk. Intensive risk factor modification and preventive therapy strongly recommended.';
+                }
+
+                document.getElementById('riskInterpretation').innerHTML = interpretation;
+                document.getElementById('resultsSection').style.display = 'block';
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

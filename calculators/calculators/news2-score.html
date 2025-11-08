@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEWS2 Score - Surgical Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px 0; }
+        .container-wrapper { max-width: 900px; margin: 0 auto; padding: 0 15px; }
+        .card { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); overflow: hidden; margin-bottom: 20px; }
+        .card-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-bottom: none; }
+        .calculator-title { font-size: 28px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; }
+        .calculator-subtitle { font-size: 14px; opacity: 0.9; margin-bottom: 15px; }
+        .header-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+        .badge { background-color: rgba(255, 255, 255, 0.3); padding: 8px 15px; border-radius: 20px; font-size: 12px; }
+        .nav-back { display: inline-block; margin-bottom: 20px; }
+        .nav-back a { color: white; text-decoration: none; padding: 8px 16px; background-color: rgba(255, 255, 255, 0.2); border-radius: 20px; transition: all 0.3s ease; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; }
+        .nav-back a:hover { background-color: rgba(255, 255, 255, 0.3); }
+        .card-body { padding: 30px; background-color: #f8f9fa; }
+        .form-group { margin-bottom: 25px; }
+        .form-label { font-weight: 600; color: #333; margin-bottom: 10px; display: block; }
+        .form-control, .form-select { border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px; font-size: 14px; }
+        .form-control:focus, .form-select:focus { border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
+        .btn-calculate { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; color: white; padding: 12px 40px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; font-size: 16px; width: 100%; }
+        .btn-calculate:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4); color: white; }
+        .result-container { display: none; margin-top: 30px; padding: 20px; background-color: white; border-radius: 10px; border-left: 5px solid #667eea; }
+        .result-container.show { display: block; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .score-display { font-size: 32px; font-weight: 700; color: #667eea; margin-bottom: 15px; }
+        .interpretation { padding: 15px; border-radius: 8px; margin-top: 15px; font-size: 14px; line-height: 1.6; }
+        .interpretation.low { background-color: #d1e7dd; color: #0f5132; border-left: 4px solid #198754; }
+        .interpretation.moderate { background-color: #cfe2ff; color: #084298; border-left: 4px solid #0d6efd; }
+        .interpretation.high { background-color: #fef3cd; color: #856404; border-left: 4px solid #ffc107; }
+        .interpretation.critical { background-color: #fee; color: #c33; border-left: 4px solid #c33; }
+        .formula-section { background-color: white; padding: 20px; border-radius: 10px; margin-top: 20px; border: 2px dashed #667eea; }
+        .formula-title { font-weight: 600; color: #667eea; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .formula-content { font-family: 'Courier New', monospace; font-size: 13px; background-color: #f8f9fa; padding: 12px; border-radius: 6px; overflow-x: auto; line-height: 1.6; }
+        .info-box { background-color: #e7f3ff; border-left: 4px solid #667eea; padding: 15px; border-radius: 6px; margin-bottom: 20px; font-size: 13px; }
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 768px) { .two-column { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container-wrapper">
+        <div class="nav-back">
+            <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="calculator-title">
+                    <i class="fas fa-heart-pulse"></i>
+                    NEWS2 Score
+                </h1>
+                <p class="calculator-subtitle">
+                    National Early Warning Score 2 - Acute illness severity assessment
+                </p>
+                <div class="header-badges">
+                    <span class="badge"><i class="fas fa-hospital"></i> Hospital</span>
+                    <span class="badge"><i class="fas fa-chart-line"></i> Risk</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    NEWS2 combines vital signs to assess acute illness severity and predict adverse outcomes.
+                </div>
+
+                <form id="news2Form">
+                    <div class="two-column">
+                        <div class="form-group">
+                            <label class="form-label">Heart Rate (beats/min)</label>
+                            <input type="number" class="form-control" id="hr" step="1" placeholder="Enter heart rate">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Respiratory Rate (breaths/min)</label>
+                            <input type="number" class="form-control" id="rr" step="1" placeholder="Enter respiratory rate">
+                        </div>
+                    </div>
+
+                    <div class="two-column">
+                        <div class="form-group">
+                            <label class="form-label">Systolic BP (mmHg)</label>
+                            <input type="number" class="form-control" id="sbp" step="1" placeholder="Enter SBP">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Oxygen Saturation (%)</label>
+                            <input type="number" class="form-control" id="spo2" step="0.1" min="0" max="100" placeholder="Enter SpO2">
+                        </div>
+                    </div>
+
+                    <div class="two-column">
+                        <div class="form-group">
+                            <label class="form-label">Temperature (°C)</label>
+                            <input type="number" class="form-control" id="temp" step="0.1" placeholder="Enter temperature">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Consciousness</label>
+                            <select class="form-select" id="consciousness">
+                                <option value="">Select</option>
+                                <option value="0">Alert (0)</option>
+                                <option value="3">Verbal/Pain/Unresponsive (3)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">On Supplemental Oxygen</label>
+                        <select class="form-select" id="oxygen">
+                            <option value="">Select</option>
+                            <option value="0">No (0)</option>
+                            <option value="2">Yes (2)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-calculate">
+                        <i class="fas fa-calculator"></i> Calculate NEWS2 Score
+                    </button>
+                </form>
+
+                <div id="resultContainer" class="result-container">
+                    <h4><i class="fas fa-star"></i> Your Score Results</h4>
+                    <div class="score-display">
+                        <span id="scoreValue">--</span>
+                    </div>
+                    <div id="interpretationBox"></div>
+                </div>
+
+                <div class="formula-section">
+                    <div class="formula-title">
+                        <i class="fas fa-flask"></i> NEWS2 Score Components
+                    </div>
+                    <div class="formula-content">
+NEWS2 Score Components (scoring based on vital sign abnormality):
+
+Respiration Rate: 0-3 points (by range)
+Oxygen Saturation: 0-3 points (by level)
+Temperature: 0-3 points (< 35, 35-36.1, 36.2-38, 38.1-39, ≥ 39.1)
+Heart Rate: 0-3 points (by range)
+Systolic BP: 0-3 points (by range)
+Consciousness: 0 or 3 points (Alert vs abnormal)
+Supplemental Oxygen: 0 or 2 points
+
+Score Interpretation:
+- 0-4: Low risk (routine care)
+- 5-6: Medium risk (urgent review)
+- ≥ 7: High risk (emergency review)
+
+Used for rapid assessment in emergency/hospital settings
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('news2Form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculateNEWS2();
+        });
+
+        function calculateNEWS2() {
+            const hr = parseFloat(document.getElementById('hr').value);
+            const rr = parseFloat(document.getElementById('rr').value);
+            const sbp = parseFloat(document.getElementById('sbp').value);
+            const spo2 = parseFloat(document.getElementById('spo2').value);
+            const temp = parseFloat(document.getElementById('temp').value);
+            const consciousness = document.getElementById('consciousness').value;
+            const oxygen = document.getElementById('oxygen').value;
+
+            if (isNaN(hr) || isNaN(rr) || isNaN(sbp) || isNaN(spo2) || isNaN(temp) || consciousness === '' || oxygen === '') {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            let score = 0;
+
+            // Respiration rate
+            if (rr < 9 || rr > 24) score += 3;
+            else if ((rr >= 9 && rr <= 11) || rr === 24) score += 1;
+
+            // Oxygen saturation
+            if (spo2 <= 91) score += 3;
+            else if ((spo2 >= 92 && spo2 <= 93) || spo2 >= 97) score += 1;
+
+            // Temperature
+            if (temp < 35.1) score += 3;
+            else if ((temp >= 35.1 && temp <= 36) || temp >= 39.1) score += 1;
+
+            // Heart rate
+            if (hr < 41 || hr > 130) score += 3;
+            else if ((hr >= 41 && hr <= 50) || (hr >= 111 && hr <= 130)) score += 1;
+
+            // Systolic BP
+            if (sbp < 91 || sbp > 219) score += 3;
+            else if ((sbp >= 91 && sbp <= 100) || (sbp >= 200 && sbp <= 219)) score += 1;
+
+            // Consciousness
+            score += parseInt(consciousness);
+
+            // Oxygen
+            score += parseInt(oxygen);
+
+            document.getElementById('scoreValue').textContent = score;
+
+            let interpretation = '';
+            let className = '';
+
+            if (score <= 4) {
+                interpretation = '<strong>Low Risk (0-4)</strong><br>Stable patient. Routine monitoring. Standard care plan.';
+                className = 'low';
+            } else if (score <= 6) {
+                interpretation = '<strong>Medium Risk (5-6)</strong><br>At-risk patient. Urgent clinical review within 1 hour. Escalate monitoring.';
+                className = 'moderate';
+            } else {
+                interpretation = '<strong>High Risk (≥7)</strong><br>Emergency assessment required. Immediately notify senior clinician. Consider ICU admission.';
+                className = 'critical';
+            }
+
+            document.getElementById('interpretationBox').innerHTML = `<div class="interpretation ${className}"><i class="fas fa-exclamation-triangle"></i> ${interpretation}</div>`;
+            document.getElementById('resultContainer').classList.add('show');
+        }
+    </script>
+</body>
+</html>

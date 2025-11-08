@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for Responsive Design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BMI (Quetelet's Index) Clinical Calculator for Adults - Professional Use">
+    <meta name="keywords" content="BMI, Quetelet Index, Clinical, Weight Assessment, Dermatology">
+    <title>BMI (Quetelet's Index) Clinical Calculator | Adults</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <style>
+        /* Purple Gradient Theme */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+            --light-purple: #f3f0ff;
+            --dark-purple: #5a4a8a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Header Navigation */
+        .navbar {
+            background: var(--primary-gradient);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Main Container */
+        .main-container {
+            min-height: 100vh;
+            padding: 40px 20px;
+            background: linear-gradient(180deg, #f3f0ff 0%, #f8f9fa 100%);
+        }
+
+        /* Card Styling */
+        .calculator-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 30px;
+            border-bottom: none;
+        }
+
+        .card-header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .card-header p {
+            margin: 0;
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        .card-body {
+            padding: 40px;
+        }
+
+        /* Form Input Styling */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-purple);
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .input-group-text {
+            background: var(--light-purple);
+            border: 2px solid #e9ecef;
+            color: var(--dark-purple);
+            font-weight: 600;
+        }
+
+        /* Button Styling */
+        .btn-calculate {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 40px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        .btn-reset {
+            background: #6c757d;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reset:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        /* Result Section */
+        .result-section {
+            background: var(--light-purple);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 30px;
+            border-left: 5px solid #667eea;
+            display: none;
+        }
+
+        .result-section.show {
+            display: block;
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bmi-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #667eea;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .clinical-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .stat-box {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            border: 2px solid #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .bmi-category {
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .category-underweight {
+            background-color: #cce5ff;
+            color: #0066cc;
+        }
+
+        .category-normal {
+            background-color: #ccffcc;
+            color: #008000;
+        }
+
+        .category-overweight {
+            background-color: #ffffcc;
+            color: #996600;
+        }
+
+        .category-obese {
+            background-color: #ffcccc;
+            color: #cc0000;
+        }
+
+        /* Clinical Interpretation Box */
+        .clinical-box {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            border: 2px solid #667eea;
+        }
+
+        .clinical-box h5 {
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .clinical-box p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Information Box */
+        .info-box {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+        }
+
+        .info-box h5 {
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            margin: 0;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Error Styling */
+        .error-message {
+            color: #dc3545;
+            font-weight: 600;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        .is-invalid {
+            border-color: #dc3545 !important;
+        }
+
+        /* Icon Colors */
+        .icon-primary {
+            color: #667eea;
+            margin-right: 10px;
+        }
+
+        .icon-secondary {
+            color: #764ba2;
+            margin-right: 8px;
+        }
+
+        .clinical-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-purple);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .card-header h1 {
+                font-size: 1.5rem;
+            }
+
+            .bmi-value {
+                font-size: 2.5rem;
+            }
+
+            .card-body {
+                padding: 25px;
+            }
+
+            .card-header {
+                padding: 20px;
+            }
+
+            .clinical-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../../index.html">
+                <i class="fas fa-hospital"></i> Medical Calculators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html">
+                            <i class="fas fa-home"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../catalog.html">
+                            <i class="fas fa-list"></i> Calculators
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bmi-quetelet-adult-clinical.html">
+                            <i class="fas fa-stethoscope"></i> BMI (Clinical)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="container">
+            <!-- Calculator Card -->
+            <div class="calculator-card">
+                <!-- Card Header -->
+                <div class="card-header">
+                    <h1><i class="fas fa-weight"></i> BMI (Quetelet's Index) Clinical Calculator</h1>
+                    <p><strong>Professional Clinical Use</strong> | Dermatology Assessment Tool</p>
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-body">
+                    <!-- Information Box -->
+                    <div class="info-box">
+                        <h5><i class="fas fa-info-circle icon-primary"></i> Clinical Information</h5>
+                        <p><span class="clinical-badge">CLINICAL USE</span>BMI (Quetelet's Index) = Weight (kg) / Height (m)². This clinical version provides detailed assessment metrics for dermatological evaluation, treatment planning, and patient assessment. Supports both metric inputs.</p>
+                    </div>
+
+                    <!-- Input Form -->
+                    <form id="bmiForm" class="form">
+                        <!-- Weight Input -->
+                        <div class="form-group">
+                            <label for="weight" class="form-label">
+                                <i class="fas fa-weight-scale icon-secondary"></i> Weight (Kilograms)
+                            </label>
+                            <div class="input-group">
+                                <input
+                                    type="number"
+                                    id="weight"
+                                    class="form-control"
+                                    placeholder="0.0"
+                                    step="0.1"
+                                    min="0"
+                                    max="500"
+                                    required
+                                >
+                                <span class="input-group-text">kg</span>
+                            </div>
+                            <div class="error-message" id="weightError"></div>
+                        </div>
+
+                        <!-- Height Input -->
+                        <div class="form-group">
+                            <label for="height" class="form-label">
+                                <i class="fas fa-ruler-vertical icon-secondary"></i> Height (Centimeters)
+                            </label>
+                            <div class="input-group">
+                                <input
+                                    type="number"
+                                    id="height"
+                                    class="form-control"
+                                    placeholder="0.0"
+                                    step="0.1"
+                                    min="0"
+                                    max="300"
+                                    required
+                                >
+                                <span class="input-group-text">cm</span>
+                            </div>
+                            <div class="error-message" id="heightError"></div>
+                        </div>
+
+                        <!-- Button Group -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <button type="button" class="btn btn-calculate" id="calculateBtn">
+                                <i class="fas fa-calculator"></i> Calculate BMI
+                            </button>
+                            <button type="reset" class="btn btn-reset">
+                                <i class="fas fa-redo"></i> Clear
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Result Section -->
+                    <div class="result-section" id="resultSection">
+                        <h4 style="text-align: center; color: #667eea; font-weight: 700; margin-bottom: 20px;">
+                            <i class="fas fa-flask-vial icon-primary"></i> Clinical Assessment Results
+                        </h4>
+
+                        <!-- BMI Value -->
+                        <div class="bmi-value" id="bmiValue">--</div>
+
+                        <!-- Clinical Statistics -->
+                        <div class="clinical-stats">
+                            <div class="stat-box">
+                                <div class="stat-label">Height (Meters)</div>
+                                <div class="stat-value" id="heightMeters">-</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-label">Weight Category</div>
+                                <div class="stat-value" id="weightCategory" style="font-size: 1.2rem; color: #764ba2;">-</div>
+                            </div>
+                        </div>
+
+                        <!-- BMI Category -->
+                        <div class="bmi-category" id="bmiCategory">Normal Weight</div>
+
+                        <!-- Clinical Interpretation -->
+                        <div class="clinical-box">
+                            <h5><i class="fas fa-stethoscope icon-secondary"></i> Clinical Interpretation</h5>
+                            <p id="clinicalInterpretation">Patient BMI is within normal range. Continue routine dermatological assessment and preventive care.</p>
+
+                            <hr>
+
+                            <h5 style="margin-top: 20px;"><i class="fas fa-clipboard-list icon-secondary"></i> Clinical Significance</h5>
+                            <p><strong>Dermatological Impact:</strong> <span id="dermatologicalSignificance">BMI influences treatment selection, wound healing, and skin condition management. Normal BMI typically supports optimal dermatological outcomes.</span></p>
+
+                            <hr>
+
+                            <h5 style="margin-top: 20px;"><i class="fas fa-book icon-secondary"></i> Reference Categories</h5>
+                            <table class="table table-sm table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Classification</th>
+                                        <th>BMI Range (kg/m²)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Underweight</strong></td>
+                                        <td>&lt; 18.5</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Normal Weight</strong></td>
+                                        <td>18.5 - 24.9</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Overweight</strong></td>
+                                        <td>25.0 - 29.9</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Obesity Class I</strong></td>
+                                        <td>30.0 - 34.9</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Obesity Class II</strong></td>
+                                        <td>35.0 - 39.9</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Obesity Class III (Severe)</strong></td>
+                                        <td>≥ 40.0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><i class="fas fa-copyright"></i> Dermatology Clinical Calculators | Clinical use only with professional medical judgment</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Calculator Script -->
+    <script>
+        // Get form elements
+        const form = document.getElementById('bmiForm');
+        const weightInput = document.getElementById('weight');
+        const heightInput = document.getElementById('height');
+        const calculateBtn = document.getElementById('calculateBtn');
+        const resultSection = document.getElementById('resultSection');
+        const bmiValue = document.getElementById('bmiValue');
+        const heightMetersDisplay = document.getElementById('heightMeters');
+        const weightCategoryDisplay = document.getElementById('weightCategory');
+        const bmiCategory = document.getElementById('bmiCategory');
+        const clinicalInterpretation = document.getElementById('clinicalInterpretation');
+        const dermatologicalSignificance = document.getElementById('dermatologicalSignificance');
+
+        // Clear error messages when user starts typing
+        weightInput.addEventListener('input', () => {
+            document.getElementById('weightError').textContent = '';
+            weightInput.classList.remove('is-invalid');
+        });
+
+        heightInput.addEventListener('input', () => {
+            document.getElementById('heightError').textContent = '';
+            heightInput.classList.remove('is-invalid');
+        });
+
+        // Input validation function
+        function validateInputs() {
+            let isValid = true;
+            const weight = parseFloat(weightInput.value);
+            const height = parseFloat(heightInput.value);
+
+            // Validate weight
+            if (!weight || weight <= 0 || weight > 500) {
+                document.getElementById('weightError').textContent = 'Invalid weight. Enter 0-500 kg.';
+                weightInput.classList.add('is-invalid');
+                isValid = false;
+            }
+
+            // Validate height
+            if (!height || height <= 0 || height > 300) {
+                document.getElementById('heightError').textContent = 'Invalid height. Enter 0-300 cm.';
+                heightInput.classList.add('is-invalid');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // Calculate BMI function
+        function calculateBMI() {
+            // Validate inputs
+            if (!validateInputs()) {
+                resultSection.classList.remove('show');
+                return;
+            }
+
+            // Get input values
+            const weight = parseFloat(weightInput.value);
+            const heightCM = parseFloat(heightInput.value);
+            const heightM = heightCM / 100; // Convert cm to meters
+
+            // Calculate BMI using Quetelet's formula: Weight (kg) / Height (m)²
+            const bmi = weight / (heightM * heightM);
+
+            // Display BMI value
+            bmiValue.textContent = bmi.toFixed(1);
+            heightMetersDisplay.textContent = heightM.toFixed(2);
+
+            // Determine category and provide clinical interpretation
+            let category = '';
+            let categoryClass = '';
+            let interpretation = '';
+            let dermatologicalNote = '';
+            let weightClass = '';
+
+            if (bmi < 18.5) {
+                category = 'Underweight';
+                categoryClass = 'category-underweight';
+                weightClass = 'Low';
+                interpretation = 'Patient BMI &lt; 18.5 (Underweight). Clinical consideration: Assess nutritional status, protein-calorie malnutrition risk. May impact wound healing and dermatological treatment tolerance.';
+                dermatologicalNote = 'Underweight status may compromise immune function and skin healing. Optimize nutritional support before elective dermatological procedures. Consider increased risk of delayed wound healing and infection.';
+            } else if (bmi >= 18.5 && bmi < 25) {
+                category = 'Normal Weight';
+                categoryClass = 'category-normal';
+                weightClass = 'Normal';
+                interpretation = 'Patient BMI 18.5-24.9 (Normal). Optimal weight range for general health. Standard dermatological protocols apply without weight-related modifications.';
+                dermatologicalNote = 'BMI is within normal range. Supports optimal dermatological outcomes and standard treatment protocols. No weight-related adjustments needed for most dermatological interventions.';
+            } else if (bmi >= 25 && bmi < 30) {
+                category = 'Overweight';
+                categoryClass = 'category-overweight';
+                weightClass = 'Elevated';
+                interpretation = 'Patient BMI 25.0-29.9 (Overweight). Monitor for metabolic complications. Consider skin fold assessment for dermatological procedures.';
+                dermatologicalNote = 'Overweight status may increase risk of intertrigo and folliculitis in skin fold areas. Enhanced skin care and moisture management recommended. May influence surgical site selection and healing.';
+            } else if (bmi >= 30 && bmi < 35) {
+                category = 'Obesity Class I';
+                categoryClass = 'category-obese';
+                weightClass = 'High';
+                interpretation = 'Patient BMI 30.0-34.9 (Obesity Class I). Assess comorbidities. Monitor for weight-related skin conditions and complications.';
+                dermatologicalNote = 'Obesity increases risk of skin conditions (dermatitis, infections in skin folds, delayed wound healing). Enhanced perioperative care, skin fold care, and infection prevention protocols essential.';
+            } else if (bmi >= 35 && bmi < 40) {
+                category = 'Obesity Class II';
+                categoryClass = 'category-obese';
+                weightClass = 'Very High';
+                interpretation = 'Patient BMI 35.0-39.9 (Obesity Class II). Significant metabolic and dermatological risk. Comprehensive assessment and monitoring required.';
+                dermatologicalNote = 'Severe obesity substantially impacts dermatological management. Increased wound healing complications, infection risk, and skin compromise. Require careful surgical planning, enhanced infection prevention, and close post-operative monitoring.';
+            } else {
+                category = 'Severe Obesity (Class III)';
+                categoryClass = 'category-obese';
+                weightClass = 'Critical';
+                interpretation = 'Patient BMI ≥ 40.0 (Class III/Severe Obesity). Critical risk assessment needed. Multiple comorbidities likely. Comprehensive perioperative management required.';
+                dermatologicalNote = 'Severe obesity presents substantial challenges for dermatological care. High risk of: poor wound healing, infection, skin breakdown, and surgical complications. Requires: specialized surgical positioning, enhanced monitoring, infection prevention protocols, and extended healing time expectations.';
+            }
+
+            // Update displays
+            bmiValue.textContent = bmi.toFixed(1);
+            weightCategoryDisplay.textContent = weightClass;
+            bmiCategory.textContent = category;
+            bmiCategory.className = 'bmi-category ' + categoryClass;
+            clinicalInterpretation.innerHTML = interpretation;
+            dermatologicalSignificance.innerHTML = dermatologicalNote;
+
+            // Show result section
+            resultSection.classList.add('show');
+        }
+
+        // Event listeners
+        calculateBtn.addEventListener('click', calculateBMI);
+
+        // Allow Enter key to calculate
+        form.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                calculateBMI();
+            }
+        });
+    </script>
+</body>
+</html>

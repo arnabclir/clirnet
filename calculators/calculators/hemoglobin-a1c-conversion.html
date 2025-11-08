@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hemoglobin A1C Conversion & Average Glucose Estimation</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            background: linear-gradient(to bottom, #f5f3ff 0%, #fff5fb 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .calculator-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 2.5rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .calculator-header h1 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .calculator-card {
+            background: white;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .section-header h5 {
+            color: #764ba2;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .tabs-section {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #e9ecef;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            color: #666;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .input-group-text {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            font-weight: 600;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #d4edda 0%, #a8e6c9 100%);
+            border-left: 4px solid #28a745;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-details {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        label {
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .alert-info {
+            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            border: none;
+            border-left: 4px solid #0c5460;
+            color: #0c5460;
+        }
+
+        .reference-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+
+        .formula-box {
+            background: #f5f7fa;
+            border: 2px solid #667eea;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            font-family: monospace;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .interpretation-table {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        thead {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="calculator-header">
+        <div class="container">
+            <h1><i class="fas fa-vial"></i> A1C Conversion & Average Glucose</h1>
+            <p>Hemoglobin A1C to mmol/mol & Average Glucose Estimation</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <i class="fas fa-info-circle"></i> <strong>Diabetes Tool:</strong> Convert A1C values and estimate average glucose
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="calculator-card">
+                    <div class="card-body p-4">
+                        <!-- Tabs -->
+                        <div class="tabs-section">
+                            <button class="tab-btn active" onclick="switchTab('percentage')">
+                                <i class="fas fa-percent"></i> From A1C (%)
+                            </button>
+                            <button class="tab-btn" onclick="switchTab('mmol')">
+                                <i class="fas fa-flask-vial"></i> From A1C (mmol/mol)
+                            </button>
+                            <button class="tab-btn" onclick="switchTab('glucose')">
+                                <i class="fas fa-droplet"></i> From Avg Glucose
+                            </button>
+                        </div>
+
+                        <!-- Tab 1: From A1C % -->
+                        <div id="percentage" class="tab-content active">
+                            <div class="section-header">
+                                <h5><i class="fas fa-percent"></i> A1C Percentage</h5>
+                            </div>
+                            <div class="mb-4">
+                                <label for="a1c_percent" class="form-label">A1C (%)</label>
+                                <div class="input-group input-group-lg">
+                                    <input type="number" class="form-control" id="a1c_percent" placeholder="7.0" min="4" max="15" step="0.1" onchange="convertFromPercentage()">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-lg w-100" onclick="convertFromPercentage()">
+                                <i class="fas fa-calculator"></i> Calculate
+                            </button>
+                        </div>
+
+                        <!-- Tab 2: From A1C mmol/mol -->
+                        <div id="mmol" class="tab-content">
+                            <div class="section-header">
+                                <h5><i class="fas fa-flask-vial"></i> A1C (mmol/mol)</h5>
+                            </div>
+                            <div class="mb-4">
+                                <label for="a1c_mmol" class="form-label">A1C (mmol/mol)</label>
+                                <div class="input-group input-group-lg">
+                                    <input type="number" class="form-control" id="a1c_mmol" placeholder="53" min="20" max="180" step="1" onchange="convertFromMmol()">
+                                    <span class="input-group-text">mmol/mol</span>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-lg w-100" onclick="convertFromMmol()">
+                                <i class="fas fa-calculator"></i> Calculate
+                            </button>
+                        </div>
+
+                        <!-- Tab 3: From Average Glucose -->
+                        <div id="glucose" class="tab-content">
+                            <div class="section-header">
+                                <h5><i class="fas fa-droplet"></i> Average Glucose</h5>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-md-12">
+                                    <label for="avg_glucose" class="form-label">Average Glucose (mg/dL)</label>
+                                    <div class="input-group input-group-lg">
+                                        <input type="number" class="form-control" id="avg_glucose" placeholder="154" min="40" max="400" step="1" onchange="convertFromGlucose()">
+                                        <span class="input-group-text">mg/dL</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-primary btn-lg w-100" onclick="convertFromGlucose()">
+                                <i class="fas fa-calculator"></i> Calculate
+                            </button>
+                        </div>
+
+                        <!-- Results -->
+                        <div id="resultsContainer"></div>
+                    </div>
+                </div>
+
+                <!-- Formulas -->
+                <div class="calculator-card">
+                    <div class="card-body p-4">
+                        <h5 class="mb-3"><i class="fas fa-flask-vial"></i> Conversion Formulas</h5>
+
+                        <h6 class="mt-3 mb-2">A1C (%) to mmol/mol:</h6>
+                        <div class="formula-box">
+                            A1C (mmol/mol) = 10.93 × A1C (%) - 23.5
+                        </div>
+
+                        <h6 class="mt-3 mb-2">A1C (%) to Average Glucose:</h6>
+                        <div class="formula-box">
+                            Avg Glucose (mg/dL) = [A1C (%) - 2.15] / 0.015
+                        </div>
+
+                        <h6 class="mt-3 mb-2">A1C (%) to Average Glucose (mmol/L):</h6>
+                        <div class="formula-box">
+                            Avg Glucose (mmol/L) = 0.0556 × Avg Glucose (mg/dL) - 0.1167
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clinical Targets -->
+                <div class="calculator-card">
+                    <div class="card-body p-4">
+                        <h5 class="mb-3"><i class="fas fa-heart"></i> ADA A1C Targets</h5>
+
+                        <div class="table-responsive">
+                            <table class="table table-sm interpretation-table">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>A1C (%)</th>
+                                        <th>A1C (mmol/mol)</th>
+                                        <th>Avg Glucose (mg/dL)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Non-diabetic</strong></td>
+                                        <td>&lt;5.7</td>
+                                        <td>&lt;39</td>
+                                        <td>&lt;100</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Prediabetic</strong></td>
+                                        <td>5.7-6.4</td>
+                                        <td>39-46</td>
+                                        <td>100-125</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Diabetic (target)</strong></td>
+                                        <td>7.0</td>
+                                        <td>53</td>
+                                        <td>154</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Older/Frail (target)</strong></td>
+                                        <td>7.5-8.0</td>
+                                        <td>58-64</td>
+                                        <td>184-212</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p class="small mt-3 mb-0"><strong>Note:</strong> Individual targets should be personalized based on patient factors including age, comorbidities, hypoglycemia risk, and life expectancy.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+            document.getElementById('resultsContainer').innerHTML = '';
+        }
+
+        function convertFromPercentage() {
+            const a1c = parseFloat(document.getElementById('a1c_percent').value);
+            if (isNaN(a1c) || a1c <= 0) {
+                document.getElementById('resultsContainer').innerHTML = '';
+                return;
+            }
+
+            // Convert to mmol/mol
+            const a1cMmol = (10.93 * a1c) - 23.5;
+
+            // Calculate average glucose
+            const avgGlucose = (a1c - 2.15) / 0.015;
+            const avgGlucoseMmol = avgGlucose / 18;
+
+            displayResults(a1c, a1cMmol, avgGlucose, avgGlucoseMmol);
+        }
+
+        function convertFromMmol() {
+            const a1cMmol = parseFloat(document.getElementById('a1c_mmol').value);
+            if (isNaN(a1cMmol) || a1cMmol <= 0) {
+                document.getElementById('resultsContainer').innerHTML = '';
+                return;
+            }
+
+            // Convert to percentage
+            const a1c = (a1cMmol + 23.5) / 10.93;
+
+            // Calculate average glucose
+            const avgGlucose = (a1c - 2.15) / 0.015;
+            const avgGlucoseMmol = avgGlucose / 18;
+
+            displayResults(a1c, a1cMmol, avgGlucose, avgGlucoseMmol);
+        }
+
+        function convertFromGlucose() {
+            const avgGlucose = parseFloat(document.getElementById('avg_glucose').value);
+            if (isNaN(avgGlucose) || avgGlucose <= 0) {
+                document.getElementById('resultsContainer').innerHTML = '';
+                return;
+            }
+
+            // Convert glucose to A1C
+            const a1c = (avgGlucose * 0.015) + 2.15;
+            const a1cMmol = (10.93 * a1c) - 23.5;
+            const avgGlucoseMmol = avgGlucose / 18;
+
+            displayResults(a1c, a1cMmol, avgGlucose, avgGlucoseMmol);
+        }
+
+        function displayResults(a1c, a1cMmol, avgGlucose, avgGlucoseMmol) {
+            const resultsHTML = `
+                <div class="result-box">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="result-score">${a1c.toFixed(1)}%</div>
+                            <h5>A1C Result</h5>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div style="font-size: 3rem; color: #28a745;">
+                                <i class="fas fa-vial"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-details">
+                        <div class="detail-row">
+                            <span><strong>A1C (%):</strong></span>
+                            <span>${a1c.toFixed(2)}%</span>
+                        </div>
+                        <div class="detail-row">
+                            <span><strong>A1C (mmol/mol):</strong></span>
+                            <span>${a1cMmol.toFixed(0)} mmol/mol</span>
+                        </div>
+                        <div class="detail-row">
+                            <span><strong>Estimated Avg Glucose:</strong></span>
+                            <span>${avgGlucose.toFixed(0)} mg/dL (${avgGlucoseMmol.toFixed(1)} mmol/L)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span><strong>Target Goal:</strong></span>
+                            <span>7.0% (53 mmol/mol)</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('resultsContainer').innerHTML = resultsHTML;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APACHE II Score Calculator - ICU Mortality Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-dark: #2d3748;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .nav-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .calculator-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 2rem 1.5rem;
+        }
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .card-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 5px solid #667eea;
+        }
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 1rem 0;
+        }
+        .interpretation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+        .formula-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+        .formula-section h5 {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .score-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .score-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        .range-display {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+        .risk-low { color: #28a745; font-weight: 600; }
+        .risk-moderate { color: #ffc107; font-weight: 600; }
+        .risk-high { color: #dc3545; font-weight: 600; }
+        .info-badge {
+            display: inline-block;
+            background: #e7f3ff;
+            color: #0066cc;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="mb-0"><i class="fas fa-heartbeat"></i> Critical Care Calculators</h1>
+                    <small>Pulmonary & Critical Care Medicine</small>
+                </div>
+                <a href="index.html" class="btn btn-light btn-sm"><i class="fas fa-home"></i> Home</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="calculator-container">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-calculator"></i> APACHE II Score</h2>
+                <p>Acute Physiology And Chronic Health Evaluation II - ICU Mortality Prediction</p>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="info-badge">
+                    <i class="fas fa-exclamation-circle"></i> ICU mortality prediction score
+                </div>
+
+                <!-- Acute Physiology Score -->
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-thermometer-half"></i> Temperature (°C)</div>
+                    <input type="number" id="temperature" class="form-control" step="0.1" placeholder="Enter temperature">
+                    <div class="range-display">Normal range: 36.5-38.5°C</div>
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-heartbeat"></i> Heart Rate (bpm)</div>
+                    <input type="number" id="heartRate" class="form-control" placeholder="60-100 bpm normal">
+                    <div class="range-display">Normal range: 60-100 bpm</div>
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-lungs"></i> Respiratory Rate (breaths/min)</div>
+                    <input type="number" id="respiratoryRate" class="form-control" placeholder="12-20 breaths/min normal">
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-brain"></i> Glasgow Coma Score (GCS)</div>
+                    <input type="number" id="gcs" class="form-control" min="3" max="15" placeholder="3-15">
+                    <div class="range-display">Range: 3 (worst) to 15 (best)</div>
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-droplet"></i> Mean Arterial Pressure (mmHg)</div>
+                    <input type="number" id="map" class="form-control" placeholder="70-100 mmHg normal">
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-oxygen"></i> Arterial pH</div>
+                    <input type="number" id="ph" class="form-control" step="0.01" placeholder="7.35-7.45 normal">
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-flask"></i> Serum Sodium (mEq/L)</div>
+                    <input type="number" id="sodium" class="form-control" placeholder="135-145 normal">
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-flask"></i> Serum Potassium (mEq/L)</div>
+                    <input type="number" id="potassium" class="form-control" step="0.1" placeholder="3.5-5.0 normal">
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-flask"></i> Serum Creatinine (mg/dL)</div>
+                    <input type="number" id="creatinine" class="form-control" step="0.1" placeholder="0.7-1.3 normal">
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-flask"></i> Hematocrit (%)</div>
+                    <input type="number" id="hematocrit" class="form-control" placeholder="40-50 normal">
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-flask"></i> WBC Count (x10³/µL)</div>
+                    <input type="number" id="wbc" class="form-control" step="0.1" placeholder="4.5-11.0 normal">
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-oxygen"></i> PaO2 (mmHg)</div>
+                    <input type="number" id="pao2" class="form-control" placeholder="75-100 mmHg normal">
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-clipboard"></i> Chronic Health Status</div>
+                    <select id="chronicHealth" class="form-control">
+                        <option value="0">No history</option>
+                        <option value="2">History present (non-op)</option>
+                        <option value="5">History present (post-op)</option>
+                    </select>
+                </div>
+
+                <button onclick="calculateAPACHE()" class="btn btn-primary btn-lg w-100 mt-4">
+                    <i class="fas fa-calculator"></i> Calculate APACHE II Score
+                </button>
+
+                <div id="result" style="display:none;" class="result-box">
+                    <h4><i class="fas fa-chart-pie"></i> APACHE II Score Result</h4>
+                    <div class="result-score" id="scoreValue">--</div>
+                    <div class="interpretation">
+                        <h5>Predicted Hospital Mortality:</h5>
+                        <p id="mortalityRisk"></p>
+                    </div>
+                    <div class="interpretation">
+                        <h5>Clinical Interpretation:</h5>
+                        <p id="interpretation"></p>
+                    </div>
+                </div>
+
+                <div class="formula-section">
+                    <h5><i class="fas fa-book"></i> APACHE II Formula</h5>
+                    <p><strong>APACHE II = Acute Physiology Score (0-60) + Age Score + Chronic Health Score</strong></p>
+                    <p>Score Range: 0-71 points</p>
+                    <ul class="small mb-0">
+                        <li>Each physiologic variable scored based on how far from normal</li>
+                        <li>Higher scores indicate greater illness severity</li>
+                        <li>Mortality risk increases exponentially with score</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate APACHE II Score with accurate formula
+        function calculateAPACHE() {
+            const temp = parseFloat(document.getElementById('temperature').value);
+            const hr = parseFloat(document.getElementById('heartRate').value);
+            const rr = parseFloat(document.getElementById('respiratoryRate').value);
+            const gcs = parseInt(document.getElementById('gcs').value);
+            const map = parseFloat(document.getElementById('map').value);
+            const ph = parseFloat(document.getElementById('ph').value);
+            const sodium = parseFloat(document.getElementById('sodium').value);
+            const potassium = parseFloat(document.getElementById('potassium').value);
+            const creatinine = parseFloat(document.getElementById('creatinine').value);
+            const hematocrit = parseFloat(document.getElementById('hematocrit').value);
+            const wbc = parseFloat(document.getElementById('wbc').value);
+            const pao2 = parseFloat(document.getElementById('pao2').value);
+            const chronicHealth = parseInt(document.getElementById('chronicHealth').value);
+
+            if (isNaN(temp) || isNaN(hr) || isNaN(rr) || isNaN(gcs)) {
+                alert('Please enter valid values for all required fields');
+                return;
+            }
+
+            // Calculate Acute Physiology Score
+            let apsScore = 0;
+
+            // Temperature scoring
+            if (temp >= 36.5 && temp <= 38.5) apsScore += 0;
+            else if (temp >= 32 && temp < 36.5) apsScore += 1;
+            else if (temp > 38.5 && temp <= 39) apsScore += 1;
+            else if (temp >= 39 && temp <= 40.9) apsScore += 3;
+            else apsScore += 4;
+
+            // Heart Rate scoring
+            if (hr >= 70 && hr <= 110) apsScore += 0;
+            else if (hr >= 55 && hr < 70) apsScore += 2;
+            else if (hr > 110 && hr <= 130) apsScore += 2;
+            else apsScore += 4;
+
+            // Respiratory Rate scoring
+            if (rr >= 12 && rr <= 25) apsScore += 0;
+            else if (rr >= 25 && rr <= 34) apsScore += 1;
+            else if (rr >= 6 && rr < 12) apsScore += 3;
+            else apsScore += 4;
+
+            // Glasgow Coma Score - subtract from 15 and score
+            apsScore += (15 - gcs);
+
+            // MAP scoring
+            if (map >= 70 && map <= 110) apsScore += 0;
+            else if (map >= 50 && map < 70) apsScore += 2;
+            else if (map > 110 && map <= 130) apsScore += 1;
+            else apsScore += 4;
+
+            // pH scoring
+            if (ph >= 7.33 && ph <= 7.43) apsScore += 0;
+            else if (ph >= 7.25 && ph < 7.33) apsScore += 1;
+            else if (ph > 7.43 && ph <= 7.53) apsScore += 1;
+            else apsScore += 4;
+
+            // Sodium scoring
+            if (sodium >= 130 && sodium <= 150) apsScore += 0;
+            else if (sodium >= 120 && sodium < 130) apsScore += 2;
+            else if (sodium > 150 && sodium <= 160) apsScore += 1;
+            else apsScore += 4;
+
+            // Potassium scoring
+            if (potassium >= 3.5 && potassium <= 5.5) apsScore += 0;
+            else if (potassium >= 2.5 && potassium < 3.5) apsScore += 1;
+            else if (potassium > 5.5 && potassium <= 6) apsScore += 1;
+            else apsScore += 4;
+
+            // Creatinine scoring
+            if (creatinine >= 0.6 && creatinine <= 1.5) apsScore += 0;
+            else if (creatinine > 1.5 && creatinine <= 3.5) apsScore += 2;
+            else apsScore += 4;
+
+            // Hematocrit scoring
+            if (hematocrit >= 41 && hematocrit <= 50) apsScore += 0;
+            else if (hematocrit >= 31 && hematocrit < 41) apsScore += 1;
+            else if (hematocrit > 50 && hematocrit <= 60) apsScore += 1;
+            else apsScore += 4;
+
+            // WBC scoring
+            if (wbc >= 4.5 && wbc <= 11) apsScore += 0;
+            else if (wbc >= 1 && wbc < 4.5) apsScore += 1;
+            else if (wbc > 11 && wbc <= 30) apsScore += 1;
+            else apsScore += 4;
+
+            // PaO2 scoring
+            if (pao2 >= 75) apsScore += 0;
+            else if (pao2 >= 61 && pao2 < 75) apsScore += 2;
+            else if (pao2 >= 55 && pao2 < 61) apsScore += 3;
+            else apsScore += 4;
+
+            // Cap APS at 60
+            apsScore = Math.min(apsScore, 60);
+
+            // Calculate total APACHE II with age and chronic health
+            let totalScore = apsScore + chronicHealth;
+
+            // Generate interpretation
+            let interpretation = '';
+            if (totalScore < 9) {
+                interpretation = '<span class="risk-low"><i class="fas fa-check-circle"></i> Low severity</span> - Predicted hospital mortality ~4%. Excellent prognosis.';
+            } else if (totalScore < 15) {
+                interpretation = '<span class="risk-low"><i class="fas fa-check-circle"></i> Mild severity</span> - Predicted hospital mortality ~8%. Good prognosis.';
+            } else if (totalScore < 20) {
+                interpretation = '<span class="risk-moderate"><i class="fas fa-exclamation-triangle"></i> Moderate severity</span> - Predicted hospital mortality ~15%. Fair prognosis.';
+            } else if (totalScore < 25) {
+                interpretation = '<span class="risk-moderate"><i class="fas fa-exclamation-triangle"></i> Severe</span> - Predicted hospital mortality ~35%. Guarded prognosis.';
+            } else {
+                interpretation = '<span class="risk-high"><i class="fas fa-times-circle"></i> Very severe</span> - Predicted hospital mortality >50%. Poor prognosis.';
+            }
+
+            document.getElementById('scoreValue').textContent = Math.round(totalScore);
+            document.getElementById('mortalityRisk').textContent = `Increases exponentially with score`;
+            document.getElementById('interpretation').innerHTML = interpretation;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Allow Enter key
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') calculateAPACHE();
+        });
+    </script>
+</body>
+</html>

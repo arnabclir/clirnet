@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIMI Score for Unstable Angina/NSTEMI - Risk Assessment</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar-custom {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-header-custom {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .btn-primary-custom {
+            background: var(--primary-gradient);
+            border: none;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+        .result-card {
+            border-left: 5px solid #667eea;
+            background: white;
+            margin-top: 20px;
+        }
+        .formula-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid #667eea33;
+        }
+        .risk-high { color: #dc3545; font-weight: bold; }
+        .risk-medium { color: #fd7e14; font-weight: bold; }
+        .risk-low { color: #28a745; font-weight: bold; }
+        .input-group-text {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="javascript:history.back()">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <span class="navbar-text text-white">TIMI Score for UA/NSTEMI</span>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0 mb-4">
+                    <div class="card-header card-header-custom">
+                        <h2 class="mb-0">
+                            <i class="fas fa-heart"></i> TIMI Risk Score for Unstable Angina/NSTEMI
+                        </h2>
+                        <p class="mb-0 small mt-2">Risk assessment and outcomes prediction for UA/NSTEMI patients</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <strong><i class="fas fa-info-circle"></i> Clinical Context:</strong>
+                            <p class="mb-0">TIMI Risk Score for UA/NSTEMI predicts risk of death, MI, or urgent revascularization. Guides intensity of treatment and need for invasive intervention.</p>
+                        </div>
+
+                        <form id="calculatorForm">
+                            <div class="row">
+                                <!-- Age ≥65 -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Age ≥65 years</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="age65" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- ≥3 CAD Risk Factors -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>≥3 CAD Risk Factors</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="cadRiskFactors" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                    <small class="text-muted">HTN, HLD, DM, smoking, family Hx</small>
+                                </div>
+
+                                <!-- Prior CAD -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Prior CAD</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="priorCAD" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                    <small class="text-muted">Stenosis ≥50%</small>
+                                </div>
+
+                                <!-- Aspirin Use -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Aspirin Use in Past 7 Days</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="aspirin" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Severe Angina -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Severe Angina (≥2 episodes/24h)</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="severeAngina" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- ST Elevation -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>ST Segment Elevation</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="stElevation" required>
+                                            <option value="0">No/Normal</option>
+                                            <option value="1">Yes (≥0.5mm)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Positive Troponin -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Positive Cardiac Markers</strong>
+                                        <span class="badge bg-danger ms-2">1 point</span>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                        <select class="form-select" id="troponin" required>
+                                            <option value="0">No</option>
+                                            <option value="1">Yes</option>
+                                        </select>
+                                    </div>
+                                    <small class="text-muted">Troponin or CK-MB elevated</small>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex mt-4">
+                                <button type="button" class="btn btn-primary-custom btn-lg flex-grow-1" id="calculateBtn">
+                                    <i class="fas fa-calculator"></i> Calculate Score
+                                </button>
+                                <button type="reset" class="btn btn-secondary btn-lg flex-grow-1">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+
+                        <div id="resultsSection" style="display: none;">
+                            <div class="card result-card">
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <i class="fas fa-chart-pie"></i> Your TIMI Risk Score
+                                    </h4>
+                                    <p class="mb-3">
+                                        <span id="totalScore" class="display-4"></span>
+                                        <span class="text-muted">/7</span>
+                                    </p>
+                                    <div id="riskInterpretation" class="alert"></div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3">
+                                <div class="card-header card-header-custom">
+                                    <h5 class="mb-0"><i class="fas fa-table"></i> Outcomes by Score</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Score</th>
+                                                    <th>Risk Category</th>
+                                                    <th>14-Day Event Rate (%)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td><strong>0-1</strong></td><td><span class="risk-low">Low</span></td><td>4.7%</td></tr>
+                                                <tr><td><strong>2</strong></td><td><span class="risk-low">Low</span></td><td>8.3%</td></tr>
+                                                <tr><td><strong>3</strong></td><td><span class="risk-medium">Intermediate</span></td><td>13.2%</td></tr>
+                                                <tr><td><strong>4</strong></td><td><span class="risk-medium">Intermediate</span></td><td>19.9%</td></tr>
+                                                <tr><td><strong>5</strong></td><td><span class="risk-high">High</span></td><td>26.2%</td></tr>
+                                                <tr><td><strong>6-7</strong></td><td><span class="risk-high">Very High</span></td><td>40.9%</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3 formula-card">
+                                <div class="card-header" style="background-color: #667eea33; border: none;">
+                                    <h5 class="mb-0"><i class="fas fa-flask"></i> Scoring Reference</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6>TIMI Risk Score Components (7 points total):</h6>
+                                    <ul class="small">
+                                        <li>Age ≥65 = 1 point</li>
+                                        <li>≥3 CAD risk factors = 1 point</li>
+                                        <li>Prior coronary stenosis = 1 point</li>
+                                        <li>Aspirin use in past 7 days = 1 point</li>
+                                        <li>Severe angina (≥2 episodes in 24h) = 1 point</li>
+                                        <li>ST changes ≥0.5mm = 1 point</li>
+                                        <li>Elevated cardiac markers = 1 point</li>
+                                    </ul>
+                                    <hr class="my-2">
+                                    <p class="small mb-0"><strong>Clinical Note:</strong> Higher scores indicate need for more aggressive antiplatelet therapy, anticoagulation, and consideration of early invasive strategy.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            try {
+                const age65 = parseInt(document.getElementById('age65').value) || 0;
+                const cadRiskFactors = parseInt(document.getElementById('cadRiskFactors').value) || 0;
+                const priorCAD = parseInt(document.getElementById('priorCAD').value) || 0;
+                const aspirin = parseInt(document.getElementById('aspirin').value) || 0;
+                const severeAngina = parseInt(document.getElementById('severeAngina').value) || 0;
+                const stElevation = parseInt(document.getElementById('stElevation').value) || 0;
+                const troponin = parseInt(document.getElementById('troponin').value) || 0;
+
+                const totalScore = age65 + cadRiskFactors + priorCAD + aspirin + severeAngina + stElevation + troponin;
+
+                document.getElementById('totalScore').textContent = totalScore;
+
+                let riskInterpretation = '';
+                if (totalScore <= 1) {
+                    riskInterpretation = '<span class="risk-low">Low Risk</span> - 4.7% 14-day event rate. Conservative management may be appropriate.';
+                } else if (totalScore === 2) {
+                    riskInterpretation = '<span class="risk-low">Low Risk</span> - 8.3% 14-day event rate. Consider stress testing or early intervention.';
+                } else if (totalScore <= 4) {
+                    riskInterpretation = '<span class="risk-medium">Intermediate Risk</span> - 13-20% 14-day event rate. Early invasive strategy recommended.';
+                } else {
+                    riskInterpretation = '<span class="risk-high">High Risk</span> - 26%+ 14-day event rate. Early invasive strategy with aggressive medical therapy strongly recommended.';
+                }
+
+                document.getElementById('riskInterpretation').innerHTML = riskInterpretation;
+                document.getElementById('resultsSection').style.display = 'block';
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

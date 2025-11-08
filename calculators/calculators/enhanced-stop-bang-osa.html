@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced STOP-Bang OSA Screening</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        .container { max-width: 900px; }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-header h3 { margin: 0; font-weight: 700; }
+
+        .card-body { padding: 30px; }
+
+        .form-group { margin-bottom: 25px; }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .form-check {
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .form-check-input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .form-check-label {
+            margin-left: 8px;
+            cursor: pointer;
+        }
+
+        .btn-calculate {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .result-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+
+        .interpretation {
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .formula-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+
+        <div class="card">
+            <div class="card-header">
+                <h3><i class="fas fa-moon"></i> Enhanced STOP-Bang OSA Screening</h3>
+                <small>Sleep Apnea Screening Questionnaire</small>
+            </div>
+
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    The STOP-Bang questionnaire is a sensitive screening tool for obstructive sleep apnea in surgical patients.
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-wind"></i> Do you SNORE loudly (louder than talking or heard through closed door)?
+                    </label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="snore" id="snore-yes" value="1">
+                        <label class="form-check-label" for="snore-yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="snore" id="snore-no" value="0">
+                        <label class="form-check-label" for="snore-no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-tired"></i> Do you often feel TIRED, fatigued, or sleepy during the daytime?
+                    </label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tired" id="tired-yes" value="1">
+                        <label class="form-check-label" for="tired-yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tired" id="tired-no" value="0">
+                        <label class="form-check-label" for="tired-no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-circle"></i> Has anyone OBSERVED you stop breathing during your sleep?
+                    </label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="observed" id="observed-yes" value="1">
+                        <label class="form-check-label" for="observed-yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="observed" id="observed-no" value="0">
+                        <label class="form-check-label" for="observed-no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-blood-pressure"></i> Do you have or are being treated for high blood PRESSURE?
+                    </label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="pressure" id="pressure-yes" value="1">
+                        <label class="form-check-label" for="pressure-yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="pressure" id="pressure-no" value="0">
+                        <label class="form-check-label" for="pressure-no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-weight"></i> BMI &gt; 35 kg/m²?
+                    </label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="bmi" id="bmi-yes" value="1">
+                        <label class="form-check-label" for="bmi-yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="bmi" id="bmi-no" value="0">
+                        <label class="form-check-label" for="bmi-no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-user"></i> AGE &gt; 50 years old?
+                    </label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="age" id="age-yes" value="1">
+                        <label class="form-check-label" for="age-yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="age" id="age-no" value="0">
+                        <label class="form-check-label" for="age-no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-vial"></i> NECK circumference &gt; 40 cm?
+                    </label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="neck" id="neck-yes" value="1">
+                        <label class="form-check-label" for="neck-yes">Yes</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="neck" id="neck-no" value="0">
+                        <label class="form-check-label" for="neck-no">No</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="fas fa-male"></i> GENDER = Male?
+                    </label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="gender-yes" value="1">
+                        <label class="form-check-label" for="gender-yes">Yes (Male)</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="gender-no" value="0">
+                        <label class="form-check-label" for="gender-no">No (Female)</label>
+                    </div>
+                </div>
+
+                <button class="btn btn-calculate" onclick="calculateSTOPBang()">
+                    <i class="fas fa-calculator"></i> Calculate STOP-Bang Score
+                </button>
+
+                <div id="results" class="hidden">
+                    <div class="result-box">
+                        <strong style="font-size: 18px;">STOP-Bang Score Results</strong>
+                        <div class="result-value" id="scoreValue">-</div>
+                        <div class="interpretation" id="scoreInterpretation"></div>
+
+                        <div class="formula-box">
+                            <strong>Risk Assessment:</strong><br>
+                            - Score 0-2: Low risk<br>
+                            - Score 3-4: Intermediate risk<br>
+                            - Score 5-8: High risk<br><br>
+                            Score ≥3 = Consider sleep apnea evaluation
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function calculateSTOPBang() {
+            const snore = parseInt(document.querySelector('input[name="snore"]:checked')?.value || -1);
+            const tired = parseInt(document.querySelector('input[name="tired"]:checked')?.value || -1);
+            const observed = parseInt(document.querySelector('input[name="observed"]:checked')?.value || -1);
+            const pressure = parseInt(document.querySelector('input[name="pressure"]:checked')?.value || -1);
+            const bmi = parseInt(document.querySelector('input[name="bmi"]:checked')?.value || -1);
+            const age = parseInt(document.querySelector('input[name="age"]:checked')?.value || -1);
+            const neck = parseInt(document.querySelector('input[name="neck"]:checked')?.value || -1);
+            const gender = parseInt(document.querySelector('input[name="gender"]:checked')?.value || -1);
+
+            if ([snore, tired, observed, pressure, bmi, age, neck, gender].includes(-1)) {
+                alert('Please answer all questions');
+                return;
+            }
+
+            const totalScore = snore + tired + observed + pressure + bmi + age + neck + gender;
+
+            let riskCategory = '';
+            let interpretation = '';
+            let recommendation = '';
+
+            if (totalScore <= 2) {
+                riskCategory = 'Low Risk';
+                interpretation = 'Low probability of obstructive sleep apnea (OSA).';
+                recommendation = 'Standard perioperative assessment and monitoring.';
+            } else if (totalScore <= 4) {
+                riskCategory = 'Intermediate Risk';
+                interpretation = 'Intermediate probability of OSA.';
+                recommendation = 'Consider further evaluation. Use enhanced monitoring perioperatively.';
+            } else {
+                riskCategory = 'High Risk';
+                interpretation = 'High probability of OSA.';
+                recommendation = 'Recommend sleep apnea evaluation preoperatively. Plan for enhanced airway management and postoperative monitoring.';
+            }
+
+            document.getElementById('scoreValue').textContent = totalScore;
+            document.getElementById('scoreInterpretation').innerHTML = `
+                <strong>${riskCategory}</strong><br>
+                ${interpretation}<br>
+                <strong>Recommendation:</strong> ${recommendation}
+            `;
+            document.getElementById('results').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

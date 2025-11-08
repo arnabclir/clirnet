@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardiac Output Calculation - Hemodynamic Assessment</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar-custom {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-header-custom {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .btn-primary-custom {
+            background: var(--primary-gradient);
+            border: none;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+        .result-card {
+            border-left: 5px solid #667eea;
+            background: white;
+            margin-top: 20px;
+        }
+        .formula-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid #667eea33;
+        }
+        .normal { color: #28a745; font-weight: bold; }
+        .abnormal { color: #dc3545; font-weight: bold; }
+        .input-group-text {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="javascript:history.back()">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <span class="navbar-text text-white">Cardiac Output Calculator</span>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0 mb-4">
+                    <div class="card-header card-header-custom">
+                        <h2 class="mb-0">
+                            <i class="fas fa-heartbeat"></i> Cardiac Output Calculation
+                        </h2>
+                        <p class="mb-0 small mt-2">Hemodynamic assessment using Fick method and others</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <strong><i class="fas fa-info-circle"></i> Clinical Context:</strong>
+                            <p class="mb-0">Cardiac output is the volume of blood pumped by the heart per minute. Essential for hemodynamic assessment and diagnosis of cardiogenic shock.</p>
+                        </div>
+
+                        <!-- Tabs for different methods -->
+                        <ul class="nav nav-tabs mb-4" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="fick-tab" data-bs-toggle="tab" data-bs-target="#fick" type="button">
+                                    <i class="fas fa-lungs"></i> Fick Method
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="hr-sv-tab" data-bs-toggle="tab" data-bs-target="#hr-sv" type="button">
+                                    <i class="fas fa-heartbeat"></i> HR × SV Method
+                                </button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <!-- Fick Method -->
+                            <div class="tab-pane fade show active" id="fick" role="tabpanel">
+                                <form id="fickForm">
+                                    <div class="row">
+                                        <!-- Oxygen consumption -->
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">
+                                                <strong>VO₂ (mL/min)</strong>
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fas fa-flask"></i></span>
+                                                <input type="number" class="form-control" id="vo2" min="0" required placeholder="Oxygen consumption">
+                                            </div>
+                                            <small class="text-muted">Normal: 200-250 mL/min (rest)</small>
+                                        </div>
+
+                                        <!-- Arterial O2 content -->
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">
+                                                <strong>CaO₂ (vol%)</strong>
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                                <input type="number" class="form-control" id="cao2" min="0" step="0.1" required placeholder="Arterial O2 content">
+                                            </div>
+                                            <small class="text-muted">Normal: 19-20 vol%</small>
+                                        </div>
+
+                                        <!-- Venous O2 content -->
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">
+                                                <strong>CvO₂ (vol%)</strong>
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fas fa-check"></i></span>
+                                                <input type="number" class="form-control" id="cvo2" min="0" step="0.1" required placeholder="Mixed venous O2 content">
+                                            </div>
+                                            <small class="text-muted">Normal: 14-15 vol%</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-grid gap-2 d-md-flex mt-4">
+                                        <button type="button" class="btn btn-primary-custom btn-lg flex-grow-1" id="fickCalculateBtn">
+                                            <i class="fas fa-calculator"></i> Calculate CO
+                                        </button>
+                                        <button type="reset" class="btn btn-secondary btn-lg flex-grow-1">
+                                            <i class="fas fa-redo"></i> Reset
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- HR × SV Method -->
+                            <div class="tab-pane fade" id="hr-sv" role="tabpanel">
+                                <form id="hrsvForm">
+                                    <div class="row">
+                                        <!-- Heart Rate -->
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">
+                                                <strong>Heart Rate (bpm)</strong>
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fas fa-heartbeat"></i></span>
+                                                <input type="number" class="form-control" id="hr" min="30" max="200" required placeholder="Heart rate">
+                                            </div>
+                                            <small class="text-muted">Normal: 60-100 bpm</small>
+                                        </div>
+
+                                        <!-- Stroke Volume -->
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label">
+                                                <strong>Stroke Volume (mL)</strong>
+                                            </label>
+                                            <div class="input-group">
+                                                <span class="input-group-text"><i class="fas fa-tint"></i></span>
+                                                <input type="number" class="form-control" id="sv" min="0" required placeholder="Stroke volume">
+                                            </div>
+                                            <small class="text-muted">Normal: 70 mL</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-grid gap-2 d-md-flex mt-4">
+                                        <button type="button" class="btn btn-primary-custom btn-lg flex-grow-1" id="hrsvCalculateBtn">
+                                            <i class="fas fa-calculator"></i> Calculate CO
+                                        </button>
+                                        <button type="reset" class="btn btn-secondary btn-lg flex-grow-1">
+                                            <i class="fas fa-redo"></i> Reset
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- Results Section -->
+                        <div id="resultsSection" style="display: none;">
+                            <div class="card result-card">
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <i class="fas fa-chart-pie"></i> Cardiac Output Results
+                                    </h4>
+                                    <p class="mb-2">
+                                        <span class="h5">Cardiac Output (CO):</span>
+                                        <span id="coValue" class="display-5"></span>
+                                        <span class="text-muted">L/min</span>
+                                    </p>
+                                    <p class="mb-3">
+                                        <span class="h6">Cardiac Index (CI):</span>
+                                        <span id="ciValue" class="h6 ms-2"></span>
+                                        <span class="text-muted">L/min/m²</span>
+                                    </p>
+                                    <div id="coInterpretation" class="alert"></div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3">
+                                <div class="card-header card-header-custom">
+                                    <h5 class="mb-0"><i class="fas fa-table"></i> Reference Values</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Parameter</th>
+                                                    <th>Normal Range</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td><strong>Cardiac Output (CO)</strong></td><td>4-8 L/min</td></tr>
+                                                <tr><td><strong>Cardiac Index (CI)</strong></td><td>2.5-4.0 L/min/m²</td></tr>
+                                                <tr><td><strong>Stroke Volume</strong></td><td>60-100 mL</td></tr>
+                                                <tr><td><strong>Heart Rate</strong></td><td>60-100 bpm</td></tr>
+                                                <tr><td><strong>Arterio-venous O₂ difference</strong></td><td>4-5 vol%</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3 formula-card">
+                                <div class="card-header" style="background-color: #667eea33; border: none;">
+                                    <h5 class="mb-0"><i class="fas fa-flask"></i> Formulas</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6>Fick Method:</h6>
+                                    <p class="small font-monospace bg-light p-2 rounded mb-3">
+                                        CO = VO₂ / (CaO₂ - CvO₂) × 10
+                                    </p>
+                                    <h6>Heart Rate × Stroke Volume Method:</h6>
+                                    <p class="small font-monospace bg-light p-2 rounded mb-3">
+                                        CO = HR × SV / 1000
+                                    </p>
+                                    <h6>Cardiac Index (BSA Method):</h6>
+                                    <p class="small font-monospace bg-light p-2 rounded">
+                                        CI = CO / BSA
+                                    </p>
+                                    <hr class="my-2">
+                                    <p class="small mb-0"><strong>Clinical Note:</strong> Low CO (&lt;4 L/min) may indicate cardiogenic shock or need for inotropic support. Always assess in context of clinical presentation.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('fickCalculateBtn').addEventListener('click', function() {
+            try {
+                const vo2 = parseFloat(document.getElementById('vo2').value) || 0;
+                const cao2 = parseFloat(document.getElementById('cao2').value) || 0;
+                const cvo2 = parseFloat(document.getElementById('cvo2').value) || 0;
+
+                if (vo2 <= 0 || cao2 <= 0 || cvo2 <= 0) {
+                    alert('Please enter valid values');
+                    return;
+                }
+
+                // Fick equation: CO = VO2 / (CaO2 - CvO2)
+                const avDiff = cao2 - cvo2;
+                if (avDiff <= 0) {
+                    alert('CaO2 must be greater than CvO2');
+                    return;
+                }
+
+                const co = vo2 / avDiff;
+                const ci = co / 1.8; // Assume average BSA of 1.8
+
+                document.getElementById('coValue').textContent = co.toFixed(2);
+                document.getElementById('ciValue').textContent = ci.toFixed(2);
+
+                let interpretation = '';
+                if (co >= 4 && co <= 8) {
+                    interpretation = '<span class="normal">Normal Cardiac Output</span> - Adequate tissue perfusion likely.';
+                } else if (co < 4) {
+                    interpretation = '<span class="abnormal">Low Cardiac Output</span> - May indicate cardiogenic shock or reduced contractility. Consider inotropic support.';
+                } else {
+                    interpretation = '<span class="abnormal">High Cardiac Output</span> - May indicate sepsis, hyperthyroidism, or other hypermetabolic state.';
+                }
+
+                document.getElementById('coInterpretation').innerHTML = interpretation;
+                document.getElementById('resultsSection').style.display = 'block';
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+
+        document.getElementById('hrsvCalculateBtn').addEventListener('click', function() {
+            try {
+                const hr = parseInt(document.getElementById('hr').value) || 0;
+                const sv = parseInt(document.getElementById('sv').value) || 0;
+
+                if (hr <= 0 || sv <= 0) {
+                    alert('Please enter valid values');
+                    return;
+                }
+
+                // CO = HR × SV / 1000
+                const co = (hr * sv) / 1000;
+                const ci = co / 1.8; // Assume average BSA of 1.8
+
+                document.getElementById('coValue').textContent = co.toFixed(2);
+                document.getElementById('ciValue').textContent = ci.toFixed(2);
+
+                let interpretation = '';
+                if (co >= 4 && co <= 8) {
+                    interpretation = '<span class="normal">Normal Cardiac Output</span> - Adequate tissue perfusion likely.';
+                } else if (co < 4) {
+                    interpretation = '<span class="abnormal">Low Cardiac Output</span> - May indicate cardiogenic shock. Consider inotropic support or other interventions.';
+                } else {
+                    interpretation = '<span class="abnormal">High Cardiac Output</span> - May indicate sepsis or other hypermetabolic state.';
+                }
+
+                document.getElementById('coInterpretation').innerHTML = interpretation;
+                document.getElementById('resultsSection').style.display = 'block';
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

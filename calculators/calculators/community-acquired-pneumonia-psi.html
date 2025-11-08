@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSI Score Calculator - Pneumonia Severity Index</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-dark: #2d3748;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .nav-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .calculator-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 2rem 1.5rem;
+        }
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .card-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 5px solid #667eea;
+        }
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 1rem 0;
+        }
+        .interpretation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+        .formula-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+        .formula-section h5 {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .score-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .score-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        .range-display {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+        .risk-low { color: #28a745; font-weight: 600; }
+        .risk-moderate { color: #ffc107; font-weight: 600; }
+        .risk-high { color: #dc3545; font-weight: 600; }
+        .info-badge {
+            display: inline-block;
+            background: #e7f3ff;
+            color: #0066cc;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <div class="nav-header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="mb-0"><i class="fas fa-hospital"></i> Hospital Medicine Calculators</h1>
+                    <small>Inpatient Management Tools</small>
+                </div>
+                <a href="index.html" class="btn btn-light btn-sm"><i class="fas fa-home"></i> Home</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="calculator-container">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-calculator"></i> PSI Score</h2>
+                <p>Community-Acquired Pneumonia Severity Index - Risk Stratification</p>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="info-badge">
+                    <i class="fas fa-info-circle"></i> Predicts mortality risk and need for hospitalization
+                </div>
+
+                <!-- Demographics Section -->
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-birthday-cake"></i> Age (years)</div>
+                    <input type="number" id="age" class="form-control" min="0" placeholder="Enter age">
+                    <div class="range-display">Points = patient's age in years</div>
+                </div>
+
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-venus-mars"></i> Sex</div>
+                    <select id="sex" class="form-select">
+                        <option value="">-- Select --</option>
+                        <option value="male">Male (0 points)</option>
+                        <option value="female">Female (subtract 10 points)</option>
+                    </select>
+                </div>
+
+                <!-- Comorbidities Section -->
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-heart"></i> Comorbidities</div>
+                    <div class="form-check">
+                        <input type="checkbox" id="neoplasm" class="form-check-input" value="30">
+                        <label class="form-check-label" for="neoplasm">Neoplasm history (30 points)</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="liver" class="form-check-input" value="20">
+                        <label class="form-check-label" for="liver">Liver disease (20 points)</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="renal" class="form-check-input" value="10">
+                        <label class="form-check-label" for="renal">Renal disease (10 points)</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="chf" class="form-check-input" value="10">
+                        <label class="form-check-label" for="chf">Congestive heart failure (10 points)</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="diabetes" class="form-check-input" value="10">
+                        <label class="form-check-label" for="diabetes">Diabetes mellitus (10 points)</label>
+                    </div>
+                </div>
+
+                <!-- Physical Exam Section -->
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-stethoscope"></i> Vital Signs / Physical Exam</div>
+                    <div class="form-check">
+                        <input type="checkbox" id="altered_mental" class="form-check-input" value="20">
+                        <label class="form-check-label" for="altered_mental">Altered mental status (20 points)</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="respiratory_rate" class="form-check-input" value="10">
+                        <label class="form-check-label" for="respiratory_rate">Respiratory rate ≥30/min (10 points)</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="systolic_bp" class="form-check-input" value="20">
+                        <label class="form-check-label" for="systolic_bp">Systolic BP <90 mmHg (20 points)</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="heart_rate" class="form-check-input" value="10">
+                        <label class="form-check-label" for="heart_rate">Heart rate ≥125/min (10 points)</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="temperature" class="form-check-input" value="15">
+                        <label class="form-check-label" for="temperature">Temperature <35°C or ≥40°C (15 points)</label>
+                    </div>
+                </div>
+
+                <!-- Lab Results Section -->
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-flask"></i> Laboratory Values</div>
+                    <div class="form-check">
+                        <input type="checkbox" id="arterial_ph" class="form-check-input" value="30">
+                        <label class="form-check-label" for="arterial_ph">Arterial pH <7.35 (30 points)</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="bun" class="form-check-input" value="20">
+                        <label class="form-check-label" for="bun">BUN ≥30 mg/dL (20 points)</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="glucose" class="form-check-input" value="10">
+                        <label class="form-check-label" for="glucose">Glucose ≥250 mg/dL (10 points)</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="hematocrit" class="form-check-input" value="10">
+                        <label class="form-check-label" for="hematocrit">Hematocrit <30% (10 points)</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="pao2" class="form-check-input" value="10">
+                        <label class="form-check-label" for="pao2">PaO2 <60 mmHg or SaO2 <90% (10 points)</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="pleural" class="form-check-input" value="10">
+                        <label class="form-check-label" for="pleural">Pleural effusion on imaging (10 points)</label>
+                    </div>
+                </div>
+
+                <button onclick="calculatePSI()" class="btn btn-primary btn-lg w-100 mt-4">
+                    <i class="fas fa-calculator"></i> Calculate PSI Score
+                </button>
+
+                <!-- Results Section -->
+                <div id="result" style="display:none;" class="result-box">
+                    <h4><i class="fas fa-chart-pie"></i> PSI Score Result</h4>
+                    <div class="result-score" id="scoreValue">--</div>
+                    <div class="interpretation">
+                        <h5>Risk Class:</h5>
+                        <p id="riskClass"></p>
+                    </div>
+                    <div class="interpretation">
+                        <h5>Mortality Rate:</h5>
+                        <p id="mortalityRate"></p>
+                    </div>
+                    <div class="interpretation">
+                        <h5>Clinical Recommendation:</h5>
+                        <p id="interpretation"></p>
+                    </div>
+                </div>
+
+                <!-- Formula Section -->
+                <div class="formula-section">
+                    <h5><i class="fas fa-book"></i> PSI Formula</h5>
+                    <p><strong>PSI Score = Age + Demographic/Comorbidity Points + Clinical Exam Points + Lab Points</strong></p>
+                    <p><strong>Risk Classes:</strong></p>
+                    <ul class="small mb-0">
+                        <li>Class I: Score <51 - ~0.1% mortality</li>
+                        <li>Class II: Score 51-70 - ~0.6% mortality</li>
+                        <li>Class III: Score 71-90 - ~2.8% mortality</li>
+                        <li>Class IV: Score 91-130 - ~8.2% mortality</li>
+                        <li>Class V: Score >130 - ~29.2% mortality</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate PSI Score
+        function calculatePSI() {
+            // Get age
+            const age = parseFloat(document.getElementById('age').value);
+            if (isNaN(age) || age < 0) {
+                alert('Please enter valid age');
+                return;
+            }
+
+            let score = age;
+
+            // Apply sex adjustment
+            const sex = document.getElementById('sex').value;
+            if (sex === 'female') {
+                score -= 10;
+            }
+
+            // Get checked comorbidities
+            const comorbidityCheckboxes = [
+                document.getElementById('neoplasm'),
+                document.getElementById('liver'),
+                document.getElementById('renal'),
+                document.getElementById('chf'),
+                document.getElementById('diabetes')
+            ];
+            comorbidityCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    score += parseInt(checkbox.value);
+                }
+            });
+
+            // Get physical exam findings
+            const physicalCheckboxes = [
+                document.getElementById('altered_mental'),
+                document.getElementById('respiratory_rate'),
+                document.getElementById('systolic_bp'),
+                document.getElementById('heart_rate'),
+                document.getElementById('temperature')
+            ];
+            physicalCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    score += parseInt(checkbox.value);
+                }
+            });
+
+            // Get lab values
+            const labCheckboxes = [
+                document.getElementById('arterial_ph'),
+                document.getElementById('bun'),
+                document.getElementById('glucose'),
+                document.getElementById('hematocrit'),
+                document.getElementById('pao2'),
+                document.getElementById('pleural')
+            ];
+            labCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    score += parseInt(checkbox.value);
+                }
+            });
+
+            // Determine risk class and outcomes
+            let riskClass = '';
+            let mortality = '';
+            let interpretation = '';
+
+            if (score < 51) {
+                riskClass = '<span class="risk-low"><i class="fas fa-check-circle"></i> Class I</span>';
+                mortality = '<span class="risk-low">~0.1% mortality</span>';
+                interpretation = 'Low risk. Outpatient management safe if reliable and able to take oral therapy. Can manage as outpatient or brief hospitalization.';
+            } else if (score <= 70) {
+                riskClass = '<span class="risk-low"><i class="fas fa-check-circle"></i> Class II</span>';
+                mortality = '<span class="risk-low">~0.6% mortality</span>';
+                interpretation = 'Low risk. Consider outpatient management if reliable. Most can be treated as outpatient with close follow-up.';
+            } else if (score <= 90) {
+                riskClass = '<span class="risk-moderate"><i class="fas fa-exclamation-circle"></i> Class III</span>';
+                mortality = '<span class="risk-moderate">~2.8% mortality</span>';
+                interpretation = 'Moderate risk. Short hospitalization or observation unit recommended. Consider IV antibiotics initially.';
+            } else if (score <= 130) {
+                riskClass = '<span class="risk-high"><i class="fas fa-warning"></i> Class IV</span>';
+                mortality = '<span class="risk-high">~8.2% mortality</span>';
+                interpretation = 'High risk. Hospital admission required. Consider ICU-level monitoring and aggressive management.';
+            } else {
+                riskClass = '<span class="risk-high"><i class="fas fa-times-circle"></i> Class V</span>';
+                mortality = '<span class="risk-high">~29.2% mortality</span>';
+                interpretation = 'Very high risk. ICU admission recommended. Requires intensive monitoring and support.';
+            }
+
+            // Display results
+            document.getElementById('scoreValue').textContent = Math.round(score);
+            document.getElementById('riskClass').innerHTML = riskClass;
+            document.getElementById('mortalityRate').innerHTML = mortality;
+            document.getElementById('interpretation').innerHTML = interpretation;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Allow Enter key to calculate
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') calculatePSI();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>French Endocarditis Score - Surgical Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px 0; }
+        .container-wrapper { max-width: 900px; margin: 0 auto; padding: 0 15px; }
+        .card { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); overflow: hidden; margin-bottom: 20px; }
+        .card-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-bottom: none; }
+        .calculator-title { font-size: 28px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; }
+        .calculator-subtitle { font-size: 14px; opacity: 0.9; margin-bottom: 15px; }
+        .header-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+        .badge { background-color: rgba(255, 255, 255, 0.3); padding: 8px 15px; border-radius: 20px; font-size: 12px; }
+        .nav-back { display: inline-block; margin-bottom: 20px; }
+        .nav-back a { color: white; text-decoration: none; padding: 8px 16px; background-color: rgba(255, 255, 255, 0.2); border-radius: 20px; transition: all 0.3s ease; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; }
+        .nav-back a:hover { background-color: rgba(255, 255, 255, 0.3); }
+        .card-body { padding: 30px; background-color: #f8f9fa; }
+        .form-group { margin-bottom: 20px; }
+        .form-label { font-weight: 600; color: #333; margin-bottom: 10px; display: block; }
+        .form-check { margin-bottom: 10px; }
+        .form-check-input { cursor: pointer; }
+        .btn-calculate { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; color: white; padding: 12px 40px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; font-size: 16px; width: 100%; }
+        .btn-calculate:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4); color: white; }
+        .result-container { display: none; margin-top: 30px; padding: 20px; background-color: white; border-radius: 10px; border-left: 5px solid #667eea; }
+        .result-container.show { display: block; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .score-display { font-size: 32px; font-weight: 700; color: #667eea; margin-bottom: 15px; }
+        .interpretation { padding: 15px; border-radius: 8px; margin-top: 15px; font-size: 14px; line-height: 1.6; }
+        .interpretation.low { background-color: #d1e7dd; color: #0f5132; border-left: 4px solid #198754; }
+        .interpretation.moderate { background-color: #cfe2ff; color: #084298; border-left: 4px solid #0d6efd; }
+        .interpretation.high { background-color: #fef3cd; color: #856404; border-left: 4px solid #ffc107; }
+        .formula-section { background-color: white; padding: 20px; border-radius: 10px; margin-top: 20px; border: 2px dashed #667eea; }
+        .formula-title { font-weight: 600; color: #667eea; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .formula-content { font-family: 'Courier New', monospace; font-size: 13px; background-color: #f8f9fa; padding: 12px; border-radius: 6px; overflow-x: auto; line-height: 1.6; }
+        .info-box { background-color: #e7f3ff; border-left: 4px solid #667eea; padding: 15px; border-radius: 6px; margin-bottom: 20px; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="container-wrapper">
+        <div class="nav-back">
+            <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="calculator-title">
+                    <i class="fas fa-heart"></i>
+                    French Endocarditis Score
+                </h1>
+                <p class="calculator-subtitle">
+                    Embolic risk assessment in endocarditis - Infectious disease risk stratification
+                </p>
+                <div class="header-badges">
+                    <span class="badge"><i class="fas fa-heartbeat"></i> Cardiac</span>
+                    <span class="badge"><i class="fas fa-chart-line"></i> Risk</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    French score predicts embolic risk in infective endocarditis to guide treatment decisions.
+                </div>
+
+                <form id="frenchForm">
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="large">
+                            <label class="form-check-label" for="large">
+                                Large vegetation (>10mm) (1 point)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="mitral">
+                            <label class="form-check-label" for="mitral">
+                                Mitral valve involvement (2 points)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="rheumatic">
+                            <label class="form-check-label" for="rheumatic">
+                                Rheumatic heart disease (1 point)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="staphAureus">
+                            <label class="form-check-label" for="staphAureus">
+                                Staphylococcus aureus infection (1 point)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="streptococcus">
+                            <label class="form-check-label" for="streptococcus">
+                                Streptococcus bovis infection (1 point)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="priorEmbolism">
+                            <label class="form-check-label" for="priorEmbolism">
+                                Prior systemic embolism (2 points)
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-calculate">
+                        <i class="fas fa-calculator"></i> Calculate French Score
+                    </button>
+                </form>
+
+                <div id="resultContainer" class="result-container">
+                    <h4><i class="fas fa-star"></i> Your Score Results</h4>
+                    <div class="score-display">
+                        <span id="scoreValue">--</span>
+                    </div>
+                    <div id="interpretationBox"></div>
+                </div>
+
+                <div class="formula-section">
+                    <div class="formula-title">
+                        <i class="fas fa-flask"></i> French Endocarditis Score
+                    </div>
+                    <div class="formula-content">
+Embolic Risk Factors in Infective Endocarditis:
+
+Points Awarded:
+- Large vegetation (>10mm): 1
+- Mitral valve involvement: 2
+- Rheumatic heart disease: 1
+- Staphylococcus aureus: 1
+- Streptococcus bovis: 1
+- Prior systemic embolism: 2
+
+Risk Stratification:
+- Score 0: Low risk (5-10% embolism rate)
+- Score 1-2: Moderate risk (15-25%)
+- Score ≥ 3: High risk (>30% embolism rate)
+
+Higher scores indicate need for:
+- Early surgical intervention
+- Careful monitoring for complications
+- Consider valve replacement
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('frenchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculateFrench();
+        });
+
+        function calculateFrench() {
+            let score = 0;
+
+            if (document.getElementById('large').checked) score += 1;
+            if (document.getElementById('mitral').checked) score += 2;
+            if (document.getElementById('rheumatic').checked) score += 1;
+            if (document.getElementById('staphAureus').checked) score += 1;
+            if (document.getElementById('streptococcus').checked) score += 1;
+            if (document.getElementById('priorEmbolism').checked) score += 2;
+
+            document.getElementById('scoreValue').textContent = score;
+
+            let interpretation = '';
+            let className = '';
+
+            if (score === 0) {
+                interpretation = '<strong>Low Embolic Risk (5-10%)</strong><br>Minimal embolic risk. Continue standard antibiotic therapy. Monitor clinically.';
+                className = 'low';
+            } else if (score <= 2) {
+                interpretation = '<strong>Moderate Embolic Risk (15-25%)</strong><br>Moderate risk of systemic embolism. Close monitoring and consider early surgery if complications develop.';
+                className = 'moderate';
+            } else {
+                interpretation = '<strong>High Embolic Risk (>30%)</strong><br>High risk of systemic embolism. Early surgical intervention often indicated. Cardiothoracic surgery consultation recommended.';
+                className = 'high';
+            }
+
+            document.getElementById('interpretationBox').innerHTML = `<div class="interpretation ${className}"><i class="fas fa-exclamation-triangle"></i> ${interpretation}</div>`;
+            document.getElementById('resultContainer').classList.add('show');
+        }
+    </script>
+</body>
+</html>

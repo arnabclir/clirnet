@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malignant Hyperthermia Indicators</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --primary-color: #667eea; --secondary-color: #764ba2; }
+        body { background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); min-height: 100vh; padding-top: 20px; padding-bottom: 40px; }
+        .container { max-width: 900px; }
+        .card { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); margin-bottom: 30px; }
+        .card-header { background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: white; border-radius: 15px 15px 0 0 !important; padding: 25px; border: none; }
+        .card-header h3 { margin: 0; font-weight: 700; }
+        .card-body { padding: 30px; }
+        .form-group { margin-bottom: 20px; }
+        .form-label { font-weight: 600; color: #333; margin-bottom: 10px; display: block; }
+        .form-check { padding: 12px; background: #f8f9fa; border-radius: 8px; margin-bottom: 8px; }
+        .form-check-input { width: 20px; height: 20px; cursor: pointer; }
+        .form-check-label { margin-left: 8px; cursor: pointer; }
+        .btn-calculate { background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        .btn-back { background: rgba(255, 255, 255, 0.2); color: white; border: 2px solid white; padding: 10px 20px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+        .btn-back:hover { background: white; color: var(--primary-color); }
+        .result-box { background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-left: 4px solid var(--primary-color); padding: 20px; border-radius: 8px; margin-top: 20px; }
+        .result-value { font-size: 28px; font-weight: 700; color: var(--primary-color); margin: 10px 0; }
+        .formula-box { background: #f8f9fa; border: 1px solid #dee2e6; padding: 15px; border-radius: 8px; margin-top: 20px; font-family: 'Courier New', monospace; font-size: 13px; }
+        .hidden { display: none; }
+        .danger-box { background: #fee; border-left: 4px solid #dc3545; padding: 15px; border-radius: 8px; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back</a>
+        <div class="card">
+            <div class="card-header"><h3><i class="fas fa-thermometer-full"></i> Malignant Hyperthermia Indicators</h3><small>Clinical Screening for Susceptibility</small></div>
+            <div class="card-body">
+                <div class="alert alert-warning"><i class="fas fa-exclamation-triangle"></i> Screens for potential malignant hyperthermia (MH) susceptibility. Positive history requires avoidance of triggering agents.</div>
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-dna"></i> Family History of Anesthetic Complications?</label>
+                    <div class="form-check"><input type="checkbox" name="indicator" value="1"><label>Yes</label></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-syringe"></i> Previous Unexplained High Temperature During Anesthesia?</label>
+                    <div class="form-check"><input type="checkbox" name="indicator" value="1"><label>Yes</label></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-heartbeat"></i> Unexplained Tachycardia/Arrhythmia During Surgery?</label>
+                    <div class="form-check"><input type="checkbox" name="indicator" value="1"><label>Yes</label></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-droplet"></i> Dark Urine or Elevated CK Postoperatively?</label>
+                    <div class="form-check"><input type="checkbox" name="indicator" value="1"><label>Yes</label></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-muscles"></i> Muscular Build/Hypertrophy?</label>
+                    <div class="form-check"><input type="checkbox" name="indicator" value="1"><label>Yes</label></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label"><i class="fas fa-child"></i> History of Adverse Anesthetic Events in Family?</label>
+                    <div class="form-check"><input type="checkbox" name="indicator" value="1"><label>Yes</label></div>
+                </div>
+                <button class="btn btn-calculate" onclick="calculateMH()"><i class="fas fa-calculator"></i> Assess MH Risk</button>
+                <div id="results" class="hidden">
+                    <div class="result-box">
+                        <strong>Malignant Hyperthermia Risk Assessment</strong>
+                        <div class="result-value" id="riskLevel">-</div>
+                        <div id="interpretation"></div>
+                        <div id="dangerBox"></div>
+                        <div class="formula-box">
+                            <strong>MH Risk Factors:</strong><br>
+                            - Family history (most important)<br>
+                            - Unexplained fever during anesthesia<br>
+                            - Tachycardia/arrhythmias<br>
+                            - Elevated CK, myoglobinuria<br>
+                            - Muscular build<br><br>
+                            <strong>Triggering Agents to AVOID:</strong><br>
+                            - ALL volatile anesthetics<br>
+                            - Succinylcholine<br><br>
+                            <strong>Safe Anesthesia:</strong><br>
+                            - IV induction (propofol)<br>
+                            - Non-depolarizing paralytics<br>
+                            - Non-volatile agents<br>
+                            - Dantrolene sodium available
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function calculateMH() {
+            const indicators = document.querySelectorAll('input[name="indicator"]:checked').length;
+            let risk = '', rec = '', danger = '';
+            if (indicators === 0) {
+                risk = 'Low Risk';
+                rec = 'Standard anesthetic technique acceptable. Maintain normal monitoring.';
+            } else if (indicators <= 2) {
+                risk = 'Moderate Risk';
+                rec = 'Consider MH susceptibility. Avoid triggering agents. Standard monitoring adequate.';
+                danger = '<strong style="color: #dc3545;">Recommend against volatile anesthetics and succinylcholine</strong>';
+            } else {
+                risk = 'HIGH RISK - Probable MH Susceptibility';
+                rec = 'MUST avoid all volatile anesthetics and succinylcholine. Use TIVA with propofol. Have dantrolene immediately available.';
+                danger = '<strong style="color: #dc3545;">CRITICAL: Triggering agents absolutely contraindicated. Genetic testing recommended.</strong>';
+            }
+            document.getElementById('riskLevel').textContent = risk + ' (' + indicators + ' indicators)';
+            document.getElementById('interpretation').innerHTML = rec;
+            if (danger) {
+                document.getElementById('dangerBox').innerHTML = '<div class="danger-box"><i class="fas fa-exclamation-triangle"></i> ' + danger + '</div>';
+            }
+            document.getElementById('results').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TI-RADS Score - Thyroid Nodule Malignancy Risk Assessment</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Purple gradient theme */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
+        body {
+            background: linear-gradient(to bottom, #f5f3ff 0%, #fff5fb 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .calculator-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 2.5rem 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .calculator-header h1 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .calculator-header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .calculator-card {
+            background: white;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .section-header h5 {
+            color: #764ba2;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .input-group-text {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-left: 4px solid #667eea;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .result-box.risk-low {
+            background: linear-gradient(135deg, #d4edda 0%, #a8e6c9 100%);
+            border-left-color: #28a745;
+        }
+
+        .result-box.risk-moderate {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffd89b 100%);
+            border-left-color: #ffc107;
+        }
+
+        .result-box.risk-high {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c2c7 100%);
+            border-left-color: #dc3545;
+        }
+
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .result-box.risk-low .result-score {
+            color: #28a745;
+        }
+
+        .result-box.risk-moderate .result-score {
+            color: #ffc107;
+        }
+
+        .result-box.risk-high .result-score {
+            color: #dc3545;
+        }
+
+        .interpretation {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .icon-badge {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50%;
+            line-height: 40px;
+            text-align: center;
+            margin-right: 0.5rem;
+        }
+
+        .modal-header {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .modal-header .btn-close {
+            filter: brightness(0) invert(1);
+        }
+
+        .alert-info {
+            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            border: none;
+            border-left: 4px solid #0c5460;
+            color: #0c5460;
+        }
+
+        label {
+            color: #333;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .checkbox-item {
+            padding: 0.75rem;
+            background: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            border-color: #667eea;
+            background: #f5f7fa;
+        }
+
+        .checkbox-item input[type="checkbox"]:checked + label {
+            color: #667eea;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="calculator-header">
+        <div class="container">
+            <h1><i class="fas fa-thyroid"></i> TI-RADS Score</h1>
+            <p class="subtitle">Thyroid Nodule Malignancy Risk Assessment</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Navigation Alert -->
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <i class="fas fa-info-circle"></i> <strong>Clinical Calculator</strong> - For use by healthcare professionals only
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <!-- Calculator Card -->
+                <div class="calculator-card">
+                    <div class="card-body p-4">
+                        <form id="tiRadsForm">
+                            <!-- Composition Section -->
+                            <div class="section-header">
+                                <h5><i class="fas fa-list"></i> Composition</h5>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label class="form-label">Nodule Composition</label>
+                                    <div class="checkbox-item">
+                                        <input class="form-check-input" type="radio" name="composition" value="0" id="comp0" onchange="updateCalculation()">
+                                        <label class="form-check-label" for="comp0">
+                                            Cystic or almost completely cystic <span class="badge bg-success">0 points</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input class="form-check-input" type="radio" name="composition" value="1" id="comp1" onchange="updateCalculation()">
+                                        <label class="form-check-label" for="comp1">
+                                            Spongiform <span class="badge bg-success">0 points</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input class="form-check-input" type="radio" name="composition" value="2" id="comp2" onchange="updateCalculation()">
+                                        <label class="form-check-label" for="comp2">
+                                            Mixed cystic and solid <span class="badge bg-warning">1 point</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input class="form-check-input" type="radio" name="composition" value="3" id="comp3" onchange="updateCalculation()">
+                                        <label class="form-check-label" for="comp3">
+                                            Solid or almost completely solid <span class="badge bg-danger">2 points</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Echogenicity Section -->
+                            <div class="section-header">
+                                <h5><i class="fas fa-images"></i> Echogenicity</h5>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label class="form-label">Nodule Echogenicity</label>
+                                    <div class="checkbox-item">
+                                        <input class="form-check-input" type="radio" name="echogenicity" value="0" id="echo0" onchange="updateCalculation()">
+                                        <label class="form-check-label" for="echo0">
+                                            Anechoic <span class="badge bg-success">0 points</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input class="form-check-input" type="radio" name="echogenicity" value="1" id="echo1" onchange="updateCalculation()">
+                                        <label class="form-check-label" for="echo1">
+                                            Hyperechoic or isoechoic <span class="badge bg-success">1 point</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input class="form-check-input" type="radio" name="echogenicity" value="2" id="echo2" onchange="updateCalculation()">
+                                        <label class="form-check-label" for="echo2">
+                                            Hypoechoic <span class="badge bg-warning">2 points</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input class="form-check-input" type="radio" name="echogenicity" value="3" id="echo3" onchange="updateCalculation()">
+                                        <label class="form-check-label" for="echo3">
+                                            Very hypoechoic <span class="badge bg-danger">3 points</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Shape Section -->
+                            <div class="section-header">
+                                <h5><i class="fas fa-circle-notch"></i> Shape</h5>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label class="form-label">Nodule Shape</label>
+                                    <div class="checkbox-item">
+                                        <input class="form-check-input" type="radio" name="shape" value="0" id="shape0" onchange="updateCalculation()">
+                                        <label class="form-check-label" for="shape0">
+                                            Wider than tall <span class="badge bg-success">0 points</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input class="form-check-input" type="radio" name="shape" value="3" id="shape1" onchange="updateCalculation()">
+                                        <label class="form-check-label" for="shape1">
+                                            Taller than wide <span class="badge bg-danger">3 points</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Margin Section -->
+                            <div class="section-header">
+                                <h5><i class="fas fa-border-outer"></i> Margin</h5>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label class="form-label">Nodule Margin</label>
+                                    <div class="checkbox-item">
+                                        <input class="form-check-input" type="radio" name="margin" value="0" id="margin0" onchange="updateCalculation()">
+                                        <label class="form-check-label" for="margin0">
+                                            Smooth <span class="badge bg-success">0 points</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input class="form-check-input" type="radio" name="margin" value="0" id="margin1" onchange="updateCalculation()">
+                                        <label class="form-check-label" for="margin1">
+                                            Ill-defined <span class="badge bg-success">0 points</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input class="form-check-input" type="radio" name="margin" value="3" id="margin2" onchange="updateCalculation()">
+                                        <label class="form-check-label" for="margin2">
+                                            Lobulated or irregular <span class="badge bg-danger">3 points</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input class="form-check-input" type="radio" name="margin" value="3" id="margin3" onchange="updateCalculation()">
+                                        <label class="form-check-label" for="margin3">
+                                            Extra-thyroidal extension <span class="badge bg-danger">3 points</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Echogenic Foci Section -->
+                            <div class="section-header">
+                                <h5><i class="fas fa-sparkles"></i> Echogenic Foci</h5>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-12">
+                                    <label class="form-label">Echogenic Foci</label>
+                                    <div class="checkbox-item">
+                                        <input class="form-check-input" type="radio" name="foci" value="0" id="foci0" onchange="updateCalculation()">
+                                        <label class="form-check-label" for="foci0">
+                                            None or large comet tail artifacts <span class="badge bg-success">0 points</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input class="form-check-input" type="radio" name="foci" value="1" id="foci1" onchange="updateCalculation()">
+                                        <label class="form-check-label" for="foci1">
+                                            Macrocalcifications <span class="badge bg-warning">1 point</span>
+                                        </label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input class="form-check-input" type="radio" name="foci" value="2" id="foci2" onchange="updateCalculation()">
+                                        <label class="form-check-label" for="foci2">
+                                            Punctate echogenic foci <span class="badge bg-warning">2 points</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Nodule Size -->
+                            <div class="section-header">
+                                <h5><i class="fas fa-ruler"></i> Nodule Size</h5>
+                            </div>
+
+                            <div class="row mb-4">
+                                <div class="col-md-12">
+                                    <label for="size" class="form-label">Nodule Size (mm)</label>
+                                    <input type="number" class="form-control form-control-lg" id="size" placeholder="Enter nodule size in mm" min="0" onchange="updateCalculation()">
+                                </div>
+                            </div>
+
+                            <!-- Calculate Button -->
+                            <button type="button" class="btn btn-primary btn-lg w-100" onclick="calculateTIRAS()">
+                                <i class="fas fa-calculator"></i> Calculate TI-RADS Score
+                            </button>
+                        </form>
+
+                        <!-- Results -->
+                        <div id="resultsContainer"></div>
+                    </div>
+                </div>
+
+                <!-- Information Section -->
+                <div class="calculator-card mt-4">
+                    <div class="card-body p-4">
+                        <h5 class="mb-3"><i class="fas fa-book-medical"></i> About TI-RADS</h5>
+                        <p>The Thyroid Imaging Reporting and Data System (TI-RADS) was developed to standardize the reporting of thyroid nodules and guide management recommendations. It combines ultrasound features to calculate a score that stratifies malignancy risk.</p>
+
+                        <h6 class="mt-4 mb-3">TI-RADS Categories:</h6>
+                        <ul>
+                            <li><strong>TR1 (0 points):</strong> Benign - No nodules with this pattern have been reported to be malignant</li>
+                            <li><strong>TR2 (2 points):</strong> Not Suspicious - Nodules with a minimal risk of malignancy (~2%)</li>
+                            <li><strong>TR3 (3 points):</strong> Mildly Suspicious - Nodules with a low risk of malignancy (~5%)</li>
+                            <li><strong>TR4 (4-6 points):</strong> Moderately Suspicious - Nodules with an intermediate risk of malignancy (~15-40%)</li>
+                            <li><strong>TR5 (7+ points):</strong> Highly Suspicious - Nodules with a high risk of malignancy (>50%)</li>
+                        </ul>
+
+                        <h6 class="mt-4 mb-3">Recommendation Guidance:</h6>
+                        <p class="small"><strong>TR1/TR2:</strong> Follow-up ultrasound not recommended<br>
+                        <strong>TR3:</strong> Follow-up ultrasound at 24 months<br>
+                        <strong>TR4:</strong> Follow-up ultrasound at 12 months or consider FNA at 1 cm<br>
+                        <strong>TR5:</strong> FNA recommended at 1 cm or greater</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Calculate TI-RADS Score
+        function calculateTIRAS() {
+            // Validate inputs
+            const composition = document.querySelector('input[name="composition"]:checked');
+            const echogenicity = document.querySelector('input[name="echogenicity"]:checked');
+            const shape = document.querySelector('input[name="shape"]:checked');
+            const margin = document.querySelector('input[name="margin"]:checked');
+            const foci = document.querySelector('input[name="foci"]:checked');
+            const size = parseFloat(document.getElementById('size').value);
+
+            if (!composition || !echogenicity || !shape || !margin || !foci) {
+                alert('Please complete all fields');
+                return;
+            }
+
+            if (isNaN(size) || size <= 0) {
+                alert('Please enter valid nodule size');
+                return;
+            }
+
+            // Calculate score
+            let score = parseInt(composition.value) + parseInt(echogenicity.value) +
+                       parseInt(shape.value) + parseInt(margin.value) + parseInt(foci.value);
+
+            // Determine category and risk
+            let category, risk, recommendation, riskClass;
+
+            if (score === 0) {
+                category = 'TR1';
+                risk = 'Benign';
+                riskClass = 'risk-low';
+                recommendation = 'No follow-up ultrasound recommended';
+            } else if (score <= 2) {
+                category = 'TR2';
+                risk = 'Not Suspicious (~2% malignancy risk)';
+                riskClass = 'risk-low';
+                recommendation = 'No follow-up ultrasound recommended';
+            } else if (score === 3) {
+                category = 'TR3';
+                risk = 'Mildly Suspicious (~5% malignancy risk)';
+                riskClass = 'risk-moderate';
+                recommendation = 'Follow-up ultrasound at 24 months';
+            } else if (score <= 6) {
+                category = 'TR4';
+                risk = 'Moderately Suspicious (15-40% malignancy risk)';
+                riskClass = 'risk-moderate';
+                recommendation = size >= 10 ? 'Consider FNA now' : 'Follow-up ultrasound at 12 months or FNA at 1 cm';
+            } else {
+                category = 'TR5';
+                risk = 'Highly Suspicious (>50% malignancy risk)';
+                riskClass = 'risk-high';
+                recommendation = size >= 10 ? 'FNA strongly recommended' : 'FNA recommended at 1 cm or greater';
+            }
+
+            // Display results
+            const resultsHTML = `
+                <div class="result-box ${riskClass}">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <div class="result-score">${score} points - ${category}</div>
+                            <h5 class="mb-2">${risk}</h5>
+                            <p class="mb-0"><strong>Recommendation:</strong> ${recommendation}</p>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="icon-badge" style="width: 80px; height: 80px; font-size: 2rem; line-height: 80px;">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="interpretation mt-3">
+                        <p class="small mb-0"><strong>Note:</strong> This score is based on ultrasound characteristics alone. Clinical context, patient factors, and risk stratification should guide management decisions.</p>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('resultsContainer').innerHTML = resultsHTML;
+        }
+
+        // Update calculation in real-time
+        function updateCalculation() {
+            // Can be triggered on change if needed
+        }
+    </script>
+</body>
+</html>

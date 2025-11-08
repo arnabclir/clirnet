@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadata -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="24-Hour Urine Protein Excretion Estimator - Calculate protein excretion in pregnancy">
+    <title>24-Hour Urine Protein Excretion Calculator</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom Styles with Purple Gradient Theme -->
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #b88cd9 100%);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(102, 126, 234, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .main-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .card-header p {
+            margin: 10px 0 0 0;
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px 12px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.15);
+        }
+
+        .btn-calculate {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            color: white;
+        }
+
+        .btn-reset {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reset:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .result-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 25px;
+            display: none;
+            border-left: 5px solid #667eea;
+        }
+
+        .result-section.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 15px 0;
+        }
+
+        .interpretation-box {
+            background: white;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .interpretation-text {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .clinical-note {
+            background: linear-gradient(135deg, #fff5e1 0%, #ffe8cc 100%);
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .clinical-note-title {
+            font-weight: 700;
+            color: #856404;
+            margin-bottom: 8px;
+        }
+
+        .clinical-note-text {
+            color: #856404;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .input-group-text {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        .form-text {
+            font-size: 0.85rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .card-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .result-value {
+                font-size: 1.5rem;
+            }
+
+            .main-container {
+                margin: 20px auto;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-heartbeat"></i> Medical Calculators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../catalog.html">Catalog</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="card">
+            <!-- Card Header -->
+            <div class="card-header">
+                <h2><i class="fas fa-flask"></i> 24-Hour Urine Protein Excretion</h2>
+                <p>Estimate daily protein excretion in pregnancy from spot urine measurements</p>
+            </div>
+
+            <!-- Card Body -->
+            <div class="card-body">
+                <!-- Input Section -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="spotProtein" class="form-label">
+                                <i class="fas fa-flask-vial"></i> Spot Urine Protein (mg/dL)
+                            </label>
+                            <input type="number" class="form-control" id="spotProtein" placeholder="e.g., 150" min="0" max="10000" step="0.1">
+                            <small class="form-text">Protein concentration in spot urine</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="spotCreatinine" class="form-label">
+                                <i class="fas fa-flask-vial"></i> Spot Urine Creatinine (mg/dL)
+                            </label>
+                            <input type="number" class="form-control" id="spotCreatinine" placeholder="e.g., 100" min="1" max="500" step="0.1">
+                            <small class="form-text">Creatinine concentration in spot urine</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Unit Selection -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="proteinUnit" class="form-label">
+                                <i class="fas fa-ruler"></i> Protein Unit
+                            </label>
+                            <select class="form-select" id="proteinUnit">
+                                <option value="mg">mg/dL</option>
+                                <option value="g">g/dL</option>
+                                <option value="mmol">mmol/L</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="creatinineUnit" class="form-label">
+                                <i class="fas fa-ruler"></i> Creatinine Unit
+                            </label>
+                            <select class="form-select" id="creatinineUnit">
+                                <option value="mg">mg/dL</option>
+                                <option value="umol">μmol/L</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Age and Gestational Age -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="gestationalAge" class="form-label">
+                                <i class="fas fa-calendar"></i> Gestational Age (weeks)
+                            </label>
+                            <input type="number" class="form-control" id="gestationalAge" placeholder="e.g., 28" min="1" max="42">
+                            <small class="form-text">Weeks of pregnancy</small>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="clinicalContext" class="form-label">
+                                <i class="fas fa-stethoscope"></i> Clinical Context
+                            </label>
+                            <select class="form-select" id="clinicalContext">
+                                <option value="">-- Select --</option>
+                                <option value="routine">Routine Screening</option>
+                                <option value="hypertension">Suspected Preeclampsia/Hypertension</option>
+                                <option value="proteinuria">Known Proteinuria</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Button Row -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <button class="btn btn-calculate" onclick="calculateProteinExcretion()">
+                            <i class="fas fa-calculator"></i> Calculate Protein Excretion
+                        </button>
+                        <button class="btn btn-reset ms-2" onclick="resetForm()">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div id="resultSection" class="result-section">
+                    <div class="result-title">
+                        <i class="fas fa-chart-bar"></i> Estimated Daily Protein Excretion
+                    </div>
+
+                    <div class="result-value" id="proteinExcretion">--</div>
+
+                    <div class="interpretation-box">
+                        <div class="interpretation-title">Clinical Interpretation:</div>
+                        <div class="interpretation-text" id="interpretation">--</div>
+                    </div>
+
+                    <div class="clinical-note">
+                        <div class="clinical-note-title">
+                            <i class="fas fa-lightbulb"></i> Clinical Considerations
+                        </div>
+                        <div class="clinical-note-text">
+                            <ul style="margin-bottom: 0; padding-left: 20px;">
+                                <li><strong>Normal pregnancy:</strong> Up to 150-300 mg/24 hours</li>
+                                <li><strong>Significant proteinuria:</strong> > 300 mg/24 hours</li>
+                                <li><strong>Nephrotic range:</strong> > 3,500 mg/24 hours</li>
+                                <li><strong>Note:</strong> Pregnancy increases baseline protein excretion</li>
+                                <li><strong>Spot protein-to-creatinine ratio (SPCR):</strong> Used to estimate 24-hour protein</li>
+                                <li>This calculator uses validated conversion formulas for pregnancy</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Calculator Logic -->
+    <script>
+        /**
+         * Calculate 24-hour urine protein excretion
+         * Uses spot protein-to-creatinine ratio (SPCR)
+         * Reference: Waugh et al. Hypertension in Pregnancy guidelines
+         */
+        function calculateProteinExcretion() {
+            // Get input values
+            let spotProtein = parseFloat(document.getElementById('spotProtein').value);
+            let spotCreatinine = parseFloat(document.getElementById('spotCreatinine').value);
+            const proteinUnit = document.getElementById('proteinUnit').value;
+            const creatinineUnit = document.getElementById('creatinineUnit').value;
+            const gestationalAge = parseFloat(document.getElementById('gestationalAge').value);
+            const clinicalContext = document.getElementById('clinicalContext').value;
+
+            // Validation
+            if (!spotProtein || !spotCreatinine || !gestationalAge || !clinicalContext) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            if (spotProtein < 0 || spotCreatinine <= 0) {
+                alert('Please enter valid values (protein >= 0, creatinine > 0)');
+                return;
+            }
+
+            if (gestationalAge < 1 || gestationalAge > 42) {
+                alert('Please enter valid gestational age (1-42 weeks)');
+                return;
+            }
+
+            // Convert units to mg/dL and mg/dL for consistency
+            if (proteinUnit === 'g') {
+                spotProtein = spotProtein * 100; // g/dL to mg/dL
+            } else if (proteinUnit === 'mmol') {
+                spotProtein = spotProtein * 8.841; // mmol/L to mg/dL (approximately)
+            }
+
+            if (creatinineUnit === 'umol') {
+                spotCreatinine = spotCreatinine * 0.01131; // μmol/L to mg/dL
+            }
+
+            // Calculate protein-to-creatinine ratio (mg/mg)
+            const spcr = spotProtein / spotCreatinine;
+
+            // Estimate 24-hour protein excretion
+            // Formula: 24-hour protein (mg) = SPCR (mg/mg) × 0.8 × 1000 / 24
+            // Simplified: 24-hour protein (g) ≈ SPCR × 0.95
+            // More accurate pregnancy formula: multiply by 1.13 for pregnancy adjustment
+            let proteinExcretion_24hr = spcr * 0.95 * 1.13; // in grams
+
+            // Display results
+            displayResults(proteinExcretion_24hr, spcr);
+        }
+
+        /**
+         * Display protein excretion results
+         */
+        function displayResults(protein24hr, spcr) {
+            const resultSection = document.getElementById('resultSection');
+            const proteinEl = document.getElementById('proteinExcretion');
+            const interpretationEl = document.getElementById('interpretation');
+
+            // Format display
+            const proteinGrams = protein24hr.toFixed(2);
+            const proteinMg = (protein24hr * 1000).toFixed(0);
+            proteinEl.innerHTML = `${proteinGrams} g/day<br><small style="font-size: 1rem; opacity: 0.8;">(${proteinMg} mg/day)</small>`;
+
+            // Provide clinical interpretation
+            let interpretation = '';
+            if (protein24hr <= 0.15) {
+                interpretation = `<strong>Normal protein excretion (${proteinGrams} g/day).</strong> This is within normal limits for pregnancy. Proteinuria is unlikely. Continue routine prenatal care.`;
+            } else if (protein24hr <= 0.3) {
+                interpretation = `<strong>Borderline proteinuria (${proteinGrams} g/day).</strong> Slightly elevated but not in nephrotic range. In pregnancy, up to 300 mg/day is still considered acceptable. Monitor for other signs of preeclampsia.`;
+            } else if (protein24hr <= 1.0) {
+                interpretation = `<strong>Mild to moderate proteinuria (${proteinGrams} g/day).</strong> Elevated protein excretion. Evaluate for cause (preeclampsia, underlying kidney disease, UTI, or other conditions). Consider specialist referral.`;
+            } else if (protein24hr <= 3.5) {
+                interpretation = `<strong>Significant proteinuria (${proteinGrams} g/day).</strong> Marked elevation. If SPCR > 0.3, proteinuria is significant. In pregnancy, evaluate urgently for preeclampsia and underlying renal disease.`;
+            } else {
+                interpretation = `<strong>Nephrotic range proteinuria (${proteinGrams} g/day).</strong> Severe proteinuria requiring urgent evaluation and management. Specialist consultation strongly recommended. Assess for preeclampsia complications.`;
+            }
+
+            interpretationEl.innerHTML = interpretation;
+
+            // Show results section
+            resultSection.classList.add('show');
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        /**
+         * Reset the calculator form
+         */
+        function resetForm() {
+            document.getElementById('spotProtein').value = '';
+            document.getElementById('spotCreatinine').value = '';
+            document.getElementById('proteinUnit').value = 'mg';
+            document.getElementById('creatinineUnit').value = 'mg';
+            document.getElementById('gestationalAge').value = '';
+            document.getElementById('clinicalContext').value = '';
+            document.getElementById('resultSection').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

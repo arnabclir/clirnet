@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Braden Score Calculator - Pressure Ulcer Risk</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --text-dark: #2d3748;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        .nav-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .calculator-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 2rem 1.5rem;
+        }
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        .card-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border-left: 5px solid #667eea;
+        }
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin: 1rem 0;
+        }
+        .interpretation {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: 8px;
+            border-left: 4px solid #764ba2;
+        }
+        .formula-section {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1.5rem;
+            border-left: 4px solid #667eea;
+        }
+        .formula-section h5 {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .score-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .score-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+        }
+        .risk-low { color: #28a745; font-weight: 600; }
+        .risk-moderate { color: #ffc107; font-weight: 600; }
+        .risk-high { color: #dc3545; font-weight: 600; }
+        .info-badge {
+            display: inline-block;
+            background: #e7f3ff;
+            color: #0066cc;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+        .option-group {
+            margin-bottom: 0.8rem;
+            padding: 0.8rem;
+            background: #f9f9f9;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option-group:hover {
+            background: #efefef;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <div class="nav-header">
+        <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h1 class="mb-0"><i class="fas fa-hospital"></i> Hospital Medicine Calculators</h1>
+                    <small>Inpatient Management Tools</small>
+                </div>
+                <a href="index.html" class="btn btn-light btn-sm"><i class="fas fa-home"></i> Home</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="calculator-container">
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-calculator"></i> Braden Scale</h2>
+                <p>Pressure Ulcer Risk Assessment</p>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="info-badge">
+                    <i class="fas fa-info-circle"></i> Identifies high-risk patients for pressure ulcer development
+                </div>
+
+                <!-- Sensory Perception -->
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-brain"></i> 1. Sensory Perception</div>
+                    <div class="option-group">
+                        <input type="radio" name="sensory" value="1" id="sensory1">
+                        <label for="sensory1" style="margin-bottom: 0;"><strong>(1) Completely limited:</strong> Unresponsive to painful stimuli</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="sensory" value="2" id="sensory2">
+                        <label for="sensory2" style="margin-bottom: 0;"><strong>(2) Very limited:</strong> Responds only to painful stimuli</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="sensory" value="3" id="sensory3">
+                        <label for="sensory3" style="margin-bottom: 0;"><strong>(3) Slightly limited:</strong> Responds to commands but may not feel all pressure</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="sensory" value="4" id="sensory4">
+                        <label for="sensory4" style="margin-bottom: 0;"><strong>(4) No impairment:</strong> Responds normally to sensory stimuli</label>
+                    </div>
+                </div>
+
+                <!-- Moisture -->
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-tint"></i> 2. Moisture</div>
+                    <div class="option-group">
+                        <input type="radio" name="moisture" value="1" id="moisture1">
+                        <label for="moisture1" style="margin-bottom: 0;"><strong>(1) Constantly moist:</strong> Skin kept moist almost constantly</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="moisture" value="2" id="moisture2">
+                        <label for="moisture2" style="margin-bottom: 0;"><strong>(2) Moist:</strong> Skin often moist but not constantly</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="moisture" value="3" id="moisture3">
+                        <label for="moisture3" style="margin-bottom: 0;"><strong>(3) Occasionally moist:</strong> Skin occasionally moist</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="moisture" value="4" id="moisture4">
+                        <label for="moisture4" style="margin-bottom: 0;"><strong>(4) Rarely moist:</strong> Skin usually dry</label>
+                    </div>
+                </div>
+
+                <!-- Activity -->
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-person-hiking"></i> 3. Activity</div>
+                    <div class="option-group">
+                        <input type="radio" name="activity" value="1" id="activity1">
+                        <label for="activity1" style="margin-bottom: 0;"><strong>(1) Bedfast:</strong> Confined to bed</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="activity" value="2" id="activity2">
+                        <label for="activity2" style="margin-bottom: 0;"><strong>(2) Chairfast:</strong> Confined to chair</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="activity" value="3" id="activity3">
+                        <label for="activity3" style="margin-bottom: 0;"><strong>(3) Walks occasionally:</strong> Walks with assistance</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="activity" value="4" id="activity4">
+                        <label for="activity4" style="margin-bottom: 0;"><strong>(4) Walks frequently:</strong> Walks without assistance</label>
+                    </div>
+                </div>
+
+                <!-- Mobility -->
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-wheelchair"></i> 4. Mobility</div>
+                    <div class="option-group">
+                        <input type="radio" name="mobility" value="1" id="mobility1">
+                        <label for="mobility1" style="margin-bottom: 0;"><strong>(1) Completely immobile:</strong> Does not make frequent changes in position</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="mobility" value="2" id="mobility2">
+                        <label for="mobility2" style="margin-bottom: 0;"><strong>(2) Very limited:</strong> Makes occasional position changes</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="mobility" value="3" id="mobility3">
+                        <label for="mobility3" style="margin-bottom: 0;"><strong>(3) Slightly limited:</strong> Makes frequent position changes</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="mobility" value="4" id="mobility4">
+                        <label for="mobility4" style="margin-bottom: 0;"><strong>(4) No limitation:</strong> Makes major position changes without assistance</label>
+                    </div>
+                </div>
+
+                <!-- Nutrition -->
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-apple"></i> 5. Nutrition</div>
+                    <div class="option-group">
+                        <input type="radio" name="nutrition" value="1" id="nutrition1">
+                        <label for="nutrition1" style="margin-bottom: 0;"><strong>(1) Very poor:</strong> Never eats, NPO, or very poor intake</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="nutrition" value="2" id="nutrition2">
+                        <label for="nutrition2" style="margin-bottom: 0;"><strong>(2) Probably inadequate:</strong> Eats less than ½ of meals offered</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="nutrition" value="3" id="nutrition3">
+                        <label for="nutrition3" style="margin-bottom: 0;"><strong>(3) Adequate:</strong> Eats more than ½ meals, high protein</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="nutrition" value="4" id="nutrition4">
+                        <label for="nutrition4" style="margin-bottom: 0;"><strong>(4) Excellent:</strong> Eats most meals, well-balanced diet</label>
+                    </div>
+                </div>
+
+                <!-- Friction/Shear -->
+                <div class="score-item">
+                    <div class="score-label"><i class="fas fa-grip-horizontal"></i> 6. Friction and Shear</div>
+                    <div class="option-group">
+                        <input type="radio" name="friction" value="1" id="friction1">
+                        <label for="friction1" style="margin-bottom: 0;"><strong>(1) Problem:</strong> Requires maximum assistance, slides frequently</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="friction" value="2" id="friction2">
+                        <label for="friction2" style="margin-bottom: 0;"><strong>(2) Potential problem:</strong> Moves weakly, requires assistance</label>
+                    </div>
+                    <div class="option-group">
+                        <input type="radio" name="friction" value="3" id="friction3">
+                        <label for="friction3" style="margin-bottom: 0;"><strong>(3) No apparent problem:</strong> Moves in bed and chair independently</label>
+                    </div>
+                </div>
+
+                <button onclick="calculateBraden()" class="btn btn-primary btn-lg w-100 mt-4">
+                    <i class="fas fa-calculator"></i> Calculate Braden Score
+                </button>
+
+                <!-- Results Section -->
+                <div id="result" style="display:none;" class="result-box">
+                    <h4><i class="fas fa-chart-pie"></i> Braden Score Result</h4>
+                    <div class="result-score" id="scoreValue">--</div>
+                    <div class="interpretation">
+                        <h5>Risk Level:</h5>
+                        <p id="riskLevel"></p>
+                    </div>
+                    <div class="interpretation">
+                        <h5>Clinical Recommendation:</h5>
+                        <p id="interpretation"></p>
+                    </div>
+                </div>
+
+                <!-- Formula Section -->
+                <div class="formula-section">
+                    <h5><i class="fas fa-book"></i> Braden Score Information</h5>
+                    <p><strong>Total Score Range: 6-23</strong></p>
+                    <p><strong>Risk Categories:</strong></p>
+                    <ul class="small mb-0">
+                        <li><strong>19-23:</strong> No identified risk - routine skin care</li>
+                        <li><strong>15-18:</strong> At risk - implement preventive measures</li>
+                        <li><strong>13-14:</strong> Moderate risk - more aggressive prevention</li>
+                        <li><strong>10-12:</strong> High risk - intensive prevention</li>
+                        <li><strong>≤9:</strong> Very high risk - aggressive, multifaceted prevention</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><strong>Prevention Strategies:</strong> Frequent repositioning, pressure relief devices, skin care, nutrition support, moisture management, mobility enhancement</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate Braden Score
+        function calculateBraden() {
+            // Get all selected values
+            const sensory = parseInt(document.querySelector('input[name="sensory"]:checked')?.value || 0);
+            const moisture = parseInt(document.querySelector('input[name="moisture"]:checked')?.value || 0);
+            const activity = parseInt(document.querySelector('input[name="activity"]:checked')?.value || 0);
+            const mobility = parseInt(document.querySelector('input[name="mobility"]:checked')?.value || 0);
+            const nutrition = parseInt(document.querySelector('input[name="nutrition"]:checked')?.value || 0);
+            const friction = parseInt(document.querySelector('input[name="friction"]:checked')?.value || 0);
+
+            // Validate all selections
+            if (sensory === 0 || moisture === 0 || activity === 0 || mobility === 0 || nutrition === 0 || friction === 0) {
+                alert('Please select an option for all six categories');
+                return;
+            }
+
+            const score = sensory + moisture + activity + mobility + nutrition + friction;
+
+            // Determine risk level and recommendations
+            let riskLevel = '';
+            let interpretation = '';
+
+            if (score >= 19) {
+                riskLevel = '<span class="risk-low"><i class="fas fa-check-circle"></i> No Identified Risk</span>';
+                interpretation = 'Score 19-23: Routine skin care and monitoring. No special pressure prevention needed unless other risk factors present.';
+            } else if (score >= 15) {
+                riskLevel = '<span class="risk-low"><i class="fas fa-check-circle"></i> At Risk</span>';
+                interpretation = 'Score 15-18: Implement prevention protocol. Frequent position changes (at least every 2 hours), pressure relief surface, skin inspection daily, moisture control, optimize nutrition.';
+            } else if (score >= 13) {
+                riskLevel = '<span class="risk-moderate"><i class="fas fa-exclamation-circle"></i> Moderate Risk</span>';
+                interpretation = 'Score 13-14: More aggressive prevention measures. Position changes every 1-2 hours, consider low-air-loss mattress, protective dressings on bony prominences, nutritional support, monitor closely.';
+            } else if (score >= 10) {
+                riskLevel = '<span class="risk-high"><i class="fas fa-warning"></i> High Risk</span>';
+                interpretation = 'Score 10-12: Intensive prevention protocol. Very frequent position changes (every 1 hour or continuous support), high-specification pressure-relieving mattress, protective barriers, aggressive nutrition/hydration support, daily skin checks.';
+            } else {
+                riskLevel = '<span class="risk-high"><i class="fas fa-times-circle"></i> Very High Risk</span>';
+                interpretation = 'Score ≤9: Very aggressive multifaceted prevention. Consider air-fluidized bed or dynamic air mattress, frequent repositioning with turn schedule, protective dressings, intensive nutritional support, wound care specialist consultation.';
+            }
+
+            // Display results
+            document.getElementById('scoreValue').textContent = score;
+            document.getElementById('riskLevel').innerHTML = riskLevel;
+            document.getElementById('interpretation').innerHTML = interpretation;
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Allow Enter key to calculate
+        document.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') calculateBraden();
+        });
+    </script>
+</body>
+</html>

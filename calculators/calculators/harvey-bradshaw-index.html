@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harvey-Bradshaw Index - Crohn Disease Activity</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar { background: var(--primary-gradient); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .navbar-brand { font-weight: bold; font-size: 1.3rem; }
+        .calculator-container { margin-top: 30px; margin-bottom: 30px; }
+        .calculator-card { background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .card-header { background: var(--primary-gradient); color: white; padding: 25px; }
+        .card-header h2 { margin: 0; font-size: 1.8rem; font-weight: bold; }
+        .btn-calculate { background: var(--primary-gradient); border: none; color: white; font-weight: bold; padding: 12px 40px; }
+        .result-section { margin-top: 30px; display: none; }
+        .result-section.show { display: block; }
+        .result-box { background: var(--secondary-gradient); color: white; padding: 25px; border-radius: 10px; text-align: center; }
+        .result-score { font-size: 3rem; font-weight: bold; margin: 15px 0; }
+        .remission { background-color: #28a745; }
+        .mild { background-color: #17a2b8; color: white; }
+        .moderate { background-color: #ffc107; color: #333; }
+        .severe { background-color: #dc3545; }
+        .section-label { background: rgba(102, 126, 234, 0.1); padding: 10px 15px; border-radius: 5px; font-weight: bold; color: #667eea; margin-top: 20px; }
+        .footer { background: var(--primary-gradient); color: white; text-align: center; padding: 20px; margin-top: 40px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-calculator"></i> Gastro Calculator</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalog.html"><i class="fas fa-list"></i> Calculators</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#"><i class="fas fa-stethoscope"></i> Current</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container calculator-container">
+        <div class="calculator-card">
+            <div class="card-header">
+                <h2><i class="fas fa-intestine"></i> Harvey-Bradshaw Index</h2>
+                <div class="subtitle">Simplified Crohn Disease Activity Score</div>
+            </div>
+
+            <div class="card-body p-4">
+                <div class="section-label"><i class="fas fa-symptoms"></i> Clinical Symptoms</div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="pain" class="form-label">Abdominal Pain</label>
+                        <select class="form-select" id="pain">
+                            <option value="">Select severity</option>
+                            <option value="0">None (0)</option>
+                            <option value="1">Mild (1)</option>
+                            <option value="2">Moderate/Severe (2)</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="stools" class="form-label">Liquid Stools/Day</label>
+                        <input type="number" class="form-control" id="stools" placeholder="Number" step="1" min="0">
+                    </div>
+                </div>
+
+                <div class="section-label"><i class="fas fa-face-smile"></i> General Well-Being</div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="wellbeing" class="form-label">Well-Being</label>
+                        <select class="form-select" id="wellbeing">
+                            <option value="">Select</option>
+                            <option value="0">Well (0)</option>
+                            <option value="1">Slightly Ill (1)</option>
+                            <option value="2">Moderately Ill (2)</option>
+                            <option value="3">Severely Ill (3)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="section-label"><i class="fas fa-stethoscope"></i> Physical Exam</div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="mass" class="form-label">Abdominal Mass</label>
+                        <select class="form-select" id="mass">
+                            <option value="0">None (0)</option>
+                            <option value="1">Uncertain (1)</option>
+                            <option value="2">Definite (2)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="section-label"><i class="fas fa-exclamation-triangle"></i> Extraintestinal Complications</div>
+                <div class="form-check"><input class="form-check-input" type="checkbox" id="comp1"><label class="form-check-label" for="comp1">Arthralgia/Arthritis</label></div>
+                <div class="form-check"><input class="form-check-input" type="checkbox" id="comp2"><label class="form-check-label" for="comp2">Uveitis/Iritis</label></div>
+                <div class="form-check"><input class="form-check-input" type="checkbox" id="comp3"><label class="form-check-label" for="comp3">Erythema Nodosum</label></div>
+                <div class="form-check"><input class="form-check-input" type="checkbox" id="comp4"><label class="form-check-label" for="comp4">Aphthous Ulceration</label></div>
+                <div class="form-check"><input class="form-check-input" type="checkbox" id="comp5"><label class="form-check-label" for="comp5">Anal Fissure/Fistula</label></div>
+
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
+                    <button class="btn btn-calculate" onclick="calculateHBI()"><i class="fas fa-calculator"></i> Calculate HBI</button>
+                    <button class="btn btn-secondary" onclick="resetForm()"><i class="fas fa-redo"></i> Reset</button>
+                </div>
+
+                <div id="resultSection" class="result-section">
+                    <div class="result-box">
+                        <div style="font-size: 0.9rem; opacity: 0.9;">HARVEY-BRADSHAW INDEX</div>
+                        <div class="result-score" id="scoreDisplay">0</div>
+                        <div id="activityLevel" class="badge badge-lg" style="font-size: 1.1rem;"></div>
+                    </div>
+                    <div style="background: white; color: #333; padding: 20px; border-radius: 10px; border-left: 5px solid #667eea; margin-top: 15px;">
+                        <div style="font-weight: bold; color: #667eea; margin-bottom: 10px;">Disease Activity</div>
+                        <div id="interpretationText"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Gastroenterology Calculator Suite</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function calculateHBI() {
+            const pain = parseInt(document.getElementById('pain').value);
+            const stools = parseInt(document.getElementById('stools').value) || 0;
+            const wellbeing = parseInt(document.getElementById('wellbeing').value);
+            const mass = parseInt(document.getElementById('mass').value) || 0;
+
+            if (pain === '' || wellbeing === '') {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            let score = pain + stools + wellbeing + mass;
+
+            if (document.getElementById('comp1').checked) score += 1;
+            if (document.getElementById('comp2').checked) score += 1;
+            if (document.getElementById('comp3').checked) score += 1;
+            if (document.getElementById('comp4').checked) score += 1;
+            if (document.getElementById('comp5').checked) score += 1;
+
+            displayResults(score);
+        }
+
+        function displayResults(score) {
+            document.getElementById('scoreDisplay').textContent = score;
+            const elem = document.getElementById('activityLevel');
+            const text = document.getElementById('interpretationText');
+
+            let activity = '', cls = '', interp = '';
+            if (score <= 4) {
+                activity = 'REMISSION';
+                cls = 'remission';
+                interp = 'Clinical remission. Continue current therapy and monitor.';
+            } else if (score <= 7) {
+                activity = 'MILD';
+                cls = 'mild';
+                interp = 'Mild disease activity. Optimize current therapy.';
+            } else if (score <= 16) {
+                activity = 'MODERATE';
+                cls = 'moderate';
+                interp = 'Moderate disease activity. Escalate therapy with steroids or biologics.';
+            } else {
+                activity = 'SEVERE';
+                cls = 'severe';
+                interp = 'Severe disease activity. Hospitalization or IV therapy may be required.';
+            }
+
+            elem.className = 'badge badge-lg ' + cls;
+            elem.textContent = activity;
+            text.textContent = interp;
+            document.getElementById('resultSection').classList.add('show');
+        }
+
+        function resetForm() {
+            document.getElementById('pain').value = '';
+            document.getElementById('stools').value = '';
+            document.getElementById('wellbeing').value = '';
+            document.getElementById('mass').value = '0';
+            document.querySelectorAll('input[type=checkbox]').forEach(cb => cb.checked = false);
+            document.getElementById('resultSection').classList.remove('show');
+        }
+    </script>
+</body>
+</html>

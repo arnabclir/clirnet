@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSA Du Bois Method</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        .container { max-width: 700px; }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-header h3 { margin: 0; font-weight: 700; }
+
+        .card-body { padding: 30px; }
+
+        .form-group { margin-bottom: 20px; }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-control {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-calculate {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .result-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+
+        .interpretation {
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .formula-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+
+        <div class="card">
+            <div class="card-header">
+                <h3><i class="fas fa-ruler"></i> BSA Calculator (Du Bois)</h3>
+                <small>Body Surface Area - Du Bois Method</small>
+            </div>
+
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    The Du Bois method is an alternative BSA formula, historically important and still used in some clinical settings.
+                </div>
+
+                <div class="form-group">
+                    <label for="weight" class="form-label">
+                        <i class="fas fa-weight-hanging"></i> Weight (kg)
+                    </label>
+                    <input type="number" class="form-control" id="weight" step="0.1" placeholder="Enter weight in kg">
+                </div>
+
+                <div class="form-group">
+                    <label for="height" class="form-label">
+                        <i class="fas fa-ruler-vertical"></i> Height (cm)
+                    </label>
+                    <input type="number" class="form-control" id="height" step="0.1" placeholder="Enter height in cm">
+                </div>
+
+                <button class="btn btn-calculate" onclick="calculateBSA()">
+                    <i class="fas fa-calculator"></i> Calculate BSA (Du Bois)
+                </button>
+
+                <div id="results" class="hidden">
+                    <div class="result-box">
+                        <strong style="font-size: 18px;">BSA Calculation Results</strong>
+                        <div class="result-value" id="bsaValue">-</div>
+                        <div class="interpretation" id="bsaInterpretation"></div>
+
+                        <div class="formula-box">
+                            <strong>Du Bois Formula:</strong><br>
+                            BSA (m²) = 0.007184 × Height(cm)^0.725 × Weight(kg)^0.425<br><br>
+                            <strong>Formula Comparison:</strong><br>
+                            - Du Bois: More precise for extremes of body composition<br>
+                            - Mosteller: Simpler, more commonly used<br><br>
+                            <strong>Clinical Applications:</strong><br>
+                            - Chemotherapy dosing<br>
+                            - Burn fluid resuscitation<br>
+                            - Hemodynamic calculations<br>
+                            - Drug dosing adjustments
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function calculateBSA() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+
+            if (isNaN(weight) || isNaN(height)) {
+                alert('Please enter valid weight and height');
+                return;
+            }
+
+            // Du Bois formula: BSA = 0.007184 × Height^0.725 × Weight^0.425
+            const bsa = 0.007184 * Math.pow(height, 0.725) * Math.pow(weight, 0.425);
+
+            let interpretation = '';
+            if (bsa < 1.2) {
+                interpretation = 'Small body surface area. Typical for children or small adults.';
+            } else if (bsa < 1.5) {
+                interpretation = 'Below average body surface area.';
+            } else if (bsa < 2.0) {
+                interpretation = 'Normal body surface area for adults.';
+            } else if (bsa < 2.5) {
+                interpretation = 'Above average body surface area.';
+            } else {
+                interpretation = 'Large body surface area.';
+            }
+
+            document.getElementById('bsaValue').textContent = bsa.toFixed(2) + ' m²';
+            document.getElementById('bsaInterpretation').innerHTML = interpretation;
+            document.getElementById('results').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

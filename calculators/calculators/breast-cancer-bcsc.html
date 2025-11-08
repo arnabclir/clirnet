@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Risk BCSC 2015 - With Breast Density</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Root color variables for purple gradient theme */
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+        }
+
+        /* Body background with purple gradient */
+        body {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            padding-top: 20px;
+            padding-bottom: 40px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Container styling */
+        .container { max-width: 800px; }
+
+        /* Card styling with shadow and border-radius */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        /* Card header with gradient background */
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 24px;
+        }
+
+        .card-header small {
+            display: block;
+            margin-top: 8px;
+            opacity: 0.95;
+        }
+
+        /* Card body padding */
+        .card-body { padding: 30px; }
+
+        /* Form group spacing */
+        .form-group { margin-bottom: 20px; }
+
+        /* Form label styling */
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Form control styling */
+        .form-control, .form-select {
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px 15px;
+            font-size: 16px;
+        }
+
+        /* Form control focus state */
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        /* Calculate button styling */
+        .btn-calculate {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        /* Back button styling */
+        .btn-back {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Result box styling */
+        .result-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        /* Result value styling */
+        .result-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+
+        /* Interpretation styling */
+        .interpretation {
+            font-size: 16px;
+            color: #333;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        /* Formula box styling */
+        .formula-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #555;
+        }
+
+        /* Hidden class for toggling elements */
+        .hidden { display: none; }
+
+        /* Alert styling */
+        .alert {
+            border-radius: 8px;
+            border: none;
+        }
+
+        .alert-info {
+            background-color: rgba(102, 126, 234, 0.15);
+            color: #333;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        /* Risk category badge styling */
+        .risk-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .risk-low { background-color: #d4edda; color: #155724; }
+        .risk-moderate { background-color: #fff3cd; color: #856404; }
+        .risk-high { background-color: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Back button navigation -->
+        <a href="index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+
+        <!-- Main calculator card -->
+        <div class="card">
+            <!-- Card header with title -->
+            <div class="card-header">
+                <h3><i class="fas fa-mammogram"></i> Breast Cancer Risk Assessment</h3>
+                <small>BCSC Model (2015) - Including Breast Density</small>
+            </div>
+
+            <!-- Card body with form and results -->
+            <div class="card-body">
+                <!-- Information alert -->
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Clinical Information:</strong> The BCSC (Breast Cancer Surveillance Consortium) Model incorporates breast density from mammography to provide improved risk stratification for developing breast cancer.
+                </div>
+
+                <!-- Patient demographic information section -->
+                <h5 class="mt-4 mb-3"><i class="fas fa-user"></i> Patient Information</h5>
+
+                <!-- Age at screening -->
+                <div class="form-group">
+                    <label for="screeningAge" class="form-label">
+                        <i class="fas fa-birthday-cake"></i> Age at Screening (years)
+                    </label>
+                    <input type="number" class="form-control" id="screeningAge" min="40" max="95" placeholder="Enter age (40-95)">
+                </div>
+
+                <!-- Race/ethnicity -->
+                <div class="form-group">
+                    <label for="ethnicity" class="form-label">
+                        <i class="fas fa-globe"></i> Race/Ethnicity
+                    </label>
+                    <select class="form-select" id="ethnicity">
+                        <option value="">Select...</option>
+                        <option value="white">White</option>
+                        <option value="black">Black/African American</option>
+                        <option value="hispanic">Hispanic</option>
+                        <option value="asian">Asian/Pacific Islander</option>
+                    </select>
+                </div>
+
+                <!-- Body mass index -->
+                <div class="form-group">
+                    <label for="bmi" class="form-label">
+                        <i class="fas fa-weight"></i> Body Mass Index (BMI)
+                    </label>
+                    <input type="number" class="form-control" id="bmi" min="15" max="50" step="0.1" placeholder="Enter BMI (kg/m²)">
+                </div>
+
+                <!-- Menopausal status -->
+                <div class="form-group">
+                    <label for="menopausal" class="form-label">
+                        <i class="fas fa-calendar"></i> Menopausal Status
+                    </label>
+                    <select class="form-select" id="menopausal">
+                        <option value="">Select...</option>
+                        <option value="premenopausal">Premenopausal</option>
+                        <option value="postmenopausal">Postmenopausal</option>
+                        <option value="unknown">Unknown</option>
+                    </select>
+                </div>
+
+                <!-- Breast density BI-RADS -->
+                <div class="form-group">
+                    <label for="breastDensity" class="form-label">
+                        <i class="fas fa-mammogram"></i> Breast Density (BI-RADS)
+                    </label>
+                    <select class="form-select" id="breastDensity">
+                        <option value="">Select...</option>
+                        <option value="fatty">Category A: Almost Entirely Fatty</option>
+                        <option value="scattered">Category B: Scattered Fibroglandular Tissue</option>
+                        <option value="heterogeneous">Category C: Heterogeneously Dense</option>
+                        <option value="extreme">Category D: Extremely Dense</option>
+                    </select>
+                    <small class="form-text text-muted">From recent mammography report (BI-RADS assessment)</small>
+                </div>
+
+                <!-- Family history -->
+                <h5 class="mt-4 mb-3"><i class="fas fa-users"></i> Medical History</h5>
+
+                <!-- History of breast biopsy -->
+                <div class="form-group">
+                    <label for="breastBiopsy" class="form-label">
+                        <i class="fas fa-microscope"></i> History of Breast Biopsy
+                    </label>
+                    <select class="form-select" id="breastBiopsy">
+                        <option value="no">No prior biopsy</option>
+                        <option value="benign">Benign biopsy</option>
+                        <option value="atypia">Biopsy with atypia</option>
+                    </select>
+                </div>
+
+                <!-- First-degree family history of breast cancer -->
+                <div class="form-group">
+                    <label for="familyHistoryBc" class="form-label">
+                        <i class="fas fa-heart"></i> First-Degree Relative with Breast Cancer
+                    </label>
+                    <select class="form-select" id="familyHistoryBc">
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                    <small class="form-text text-muted">Mother, sister, or daughter</small>
+                </div>
+
+                <!-- Hormone replacement therapy -->
+                <div class="form-group">
+                    <label for="hrtUse" class="form-label">
+                        <i class="fas fa-pills"></i> Current Hormone Replacement Therapy
+                    </label>
+                    <select class="form-select" id="hrtUse">
+                        <option value="never">Never used</option>
+                        <option value="former">Former user</option>
+                        <option value="current">Current user</option>
+                    </select>
+                </div>
+
+                <!-- Calculate button -->
+                <button class="btn btn-calculate" onclick="calculateBCSC()">
+                    <i class="fas fa-calculator"></i> Calculate 5-Year Risk
+                </button>
+
+                <!-- Results section -->
+                <div id="results" class="hidden">
+                    <div class="result-box">
+                        <strong style="font-size: 18px;"><i class="fas fa-chart-pie"></i> Risk Assessment Results</strong>
+
+                        <!-- Five-year risk result -->
+                        <div>
+                            <h5 style="margin-top: 15px; color: #333;">5-Year Breast Cancer Risk</h5>
+                            <div class="result-value" id="riskValue">-</div>
+                        </div>
+
+                        <!-- Risk compared to average -->
+                        <div style="margin-top: 15px;">
+                            <h5 style="color: #333;">Risk Compared to Average Woman</h5>
+                            <div id="riskComparison" style="font-size: 16px; font-weight: 600; color: #667eea;">-</div>
+                        </div>
+
+                        <!-- Risk interpretation -->
+                        <div class="interpretation" id="riskInterpretation" style="margin-top: 15px;"></div>
+
+                        <!-- Risk category badge -->
+                        <div id="riskBadge"></div>
+
+                        <!-- Density impact note -->
+                        <div style="margin-top: 15px; background-color: #fff9e6; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
+                            <strong><i class="fas fa-lightbulb"></i> Breast Density Impact:</strong>
+                            <p id="densityImpact" style="margin-bottom: 0; margin-top: 10px; font-size: 14px;"></p>
+                        </div>
+
+                        <!-- Recommendations section -->
+                        <div style="margin-top: 20px; background-color: #f0f8ff; padding: 15px; border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                            <strong><i class="fas fa-stethoscope"></i> Clinical Recommendations:</strong>
+                            <ul style="margin-bottom: 0; margin-top: 10px; font-size: 14px;">
+                                <li id="rec1"></li>
+                                <li id="rec2"></li>
+                                <li id="rec3"></li>
+                            </ul>
+                        </div>
+
+                        <!-- Formula and methodology -->
+                        <div class="formula-box">
+                            <strong>Model Details:</strong><br>
+                            - BCSC (Breast Cancer Surveillance Consortium) consortium data from 1,304,147 screening mammograms<br>
+                            - Risk factors: age, BMI, race/ethnicity, breast density, menopausal status, family history, HRT use<br>
+                            - Breast density is a significant independent risk factor<br>
+                            - Model validation: AUC 0.69 (improved discrimination over Gail model)<br>
+                            - Applied to asymptomatic women undergoing screening mammography
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // BCSC risk calculation function
+        function calculateBCSC() {
+            // Input validation
+            const screeningAge = parseFloat(document.getElementById('screeningAge').value);
+            const ethnicity = document.getElementById('ethnicity').value;
+            const bmi = parseFloat(document.getElementById('bmi').value);
+            const menopausal = document.getElementById('menopausal').value;
+            const breastDensity = document.getElementById('breastDensity').value;
+            const breastBiopsy = document.getElementById('breastBiopsy').value;
+            const familyHistoryBc = document.getElementById('familyHistoryBc').value;
+            const hrtUse = document.getElementById('hrtUse').value;
+
+            // Validate all required fields
+            if (isNaN(screeningAge) || !ethnicity || isNaN(bmi) || !menopausal || !breastDensity) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            // Validate age
+            if (screeningAge < 40 || screeningAge > 95) {
+                alert('Age must be between 40 and 95 years');
+                return;
+            }
+
+            // Base risk (average 50-year-old woman)
+            let riskMultiplier = 1.0;
+
+            // Age adjustment
+            const ageFactors = {
+                40: 0.8, 45: 0.9, 50: 1.0, 55: 1.1, 60: 1.15, 65: 1.18, 70: 1.20
+            };
+
+            if (screeningAge >= 70) riskMultiplier *= 1.20;
+            else if (screeningAge >= 65) riskMultiplier *= 1.18;
+            else if (screeningAge >= 60) riskMultiplier *= 1.15;
+            else if (screeningAge >= 55) riskMultiplier *= 1.10;
+
+            // Ethnicity adjustment
+            if (ethnicity === 'black') riskMultiplier *= 1.10;
+            else if (ethnicity === 'hispanic') riskMultiplier *= 0.95;
+            else if (ethnicity === 'asian') riskMultiplier *= 0.85;
+
+            // BMI adjustment
+            if (menopausal === 'postmenopausal' && bmi > 25) riskMultiplier *= (1 + (bmi - 25) * 0.02);
+            else if (bmi < 22) riskMultiplier *= 0.95;
+
+            // Breast density - significant risk factor
+            let densityMultiplier = 1.0;
+            let densityDescription = '';
+            if (breastDensity === 'fatty') {
+                densityMultiplier = 0.8;
+                densityDescription = 'Lower risk due to fatty breast tissue, which may reduce cancer risk and improve mammography sensitivity.';
+            } else if (breastDensity === 'scattered') {
+                densityMultiplier = 1.1;
+                densityDescription = 'Slightly elevated risk. Scattered fibroglandular density is associated with modest risk increase.';
+            } else if (breastDensity === 'heterogeneous') {
+                densityMultiplier = 1.5;
+                densityDescription = 'Significantly elevated risk. Heterogeneous density substantially increases cancer risk and reduces mammography sensitivity.';
+            } else if (breastDensity === 'extreme') {
+                densityMultiplier = 2.2;
+                densityDescription = 'Very high risk. Extremely dense breast tissue is associated with marked increase in cancer risk and reduced mammography sensitivity.';
+            }
+            riskMultiplier *= densityMultiplier;
+
+            // Family history
+            if (familyHistoryBc === 'yes') riskMultiplier *= 1.4;
+
+            // Biopsy history
+            if (breastBiopsy === 'benign') riskMultiplier *= 1.08;
+            else if (breastBiopsy === 'atypia') riskMultiplier *= 1.6;
+
+            // HRT use
+            if (hrtUse === 'current') riskMultiplier *= 1.2;
+
+            // Baseline 5-year risk (approximately 1.3% for average 50-year-old)
+            const baselineRisk = 1.3;
+            const fiveYearRisk = Math.min(baselineRisk * riskMultiplier, 100);
+
+            // Display results
+            document.getElementById('riskValue').textContent = fiveYearRisk.toFixed(2) + '%';
+
+            // Risk comparison to average
+            const riskRatio = fiveYearRisk / 1.3;
+            let comparison = '';
+            if (riskRatio < 0.8) comparison = `${(riskRatio).toFixed(1)}x the average risk (LOWER)`;
+            else if (riskRatio < 1.2) comparison = `Similar to average risk`;
+            else if (riskRatio < 2.0) comparison = `${(riskRatio).toFixed(1)}x the average risk (ELEVATED)`;
+            else comparison = `${(riskRatio).toFixed(1)}x the average risk (SIGNIFICANTLY ELEVATED)`;
+
+            document.getElementById('riskComparison').textContent = comparison;
+
+            // Risk interpretation and recommendations
+            let interpretation = '';
+            let riskCategory = '';
+            let recommendations = [];
+
+            if (fiveYearRisk < 1.3) {
+                interpretation = 'Low to average risk: 5-year risk is below the population average. Standard screening recommended.';
+                riskCategory = 'risk-low';
+                recommendations = [
+                    'Annual mammography (standard screening)',
+                    'Breast self-awareness and clinical examination',
+                    'General health maintenance with focus on modifiable risk factors'
+                ];
+            } else if (fiveYearRisk < 2.0) {
+                interpretation = 'Slightly elevated risk: 5-year risk is moderately above average. Enhanced monitoring recommended.';
+                riskCategory = 'risk-moderate';
+                recommendations = [
+                    'Annual mammography',
+                    'Consider supplemental imaging if breast density is high',
+                    'Discuss modification of HRT use if applicable'
+                ];
+            } else if (fiveYearRisk < 3.5) {
+                interpretation = 'Elevated risk: 5-year risk is significantly above average. Proactive screening strategy recommended.';
+                riskCategory = 'risk-moderate';
+                recommendations = [
+                    'Annual mammography with supplemental ultrasound if dense breasts',
+                    'Discuss potential MRI screening (especially if density is heterogeneous/extreme)',
+                    'Consider chemoprevention (tamoxifen/raloxifene) if no contraindications'
+                ];
+            } else {
+                interpretation = 'High risk: 5-year risk exceeds 3.5%. Comprehensive risk reduction recommended.';
+                riskCategory = 'risk-high';
+                recommendations = [
+                    'Annual mammography plus MRI screening (preferred for dense breasts)',
+                    'Strong recommendation for chemoprevention (tamoxifen/raloxifene)',
+                    'Genetic counseling and BRCA testing if not yet performed'
+                ];
+            }
+
+            document.getElementById('riskInterpretation').textContent = interpretation;
+            document.getElementById('densityImpact').textContent = densityDescription;
+
+            // Add risk category badge
+            const badgeClass = riskCategory === 'risk-low' ? 'risk-low' : riskCategory === 'risk-high' ? 'risk-high' : 'risk-moderate';
+            const badgeText = riskCategory === 'risk-low' ? 'LOW RISK' : riskCategory === 'risk-high' ? 'HIGH RISK' : 'ELEVATED RISK';
+            document.getElementById('riskBadge').innerHTML = `<span class="risk-badge ${badgeClass}">${badgeText}</span>`;
+
+            // Display recommendations
+            recommendations.forEach((rec, index) => {
+                if (index < 3) document.getElementById(`rec${index + 1}`).textContent = rec;
+            });
+
+            // Show results
+            document.getElementById('results').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

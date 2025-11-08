@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CIWA-Ar Scale - Surgical Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px 0; }
+        .container-wrapper { max-width: 900px; margin: 0 auto; padding: 0 15px; }
+        .card { border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); overflow: hidden; margin-bottom: 20px; }
+        .card-header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-bottom: none; }
+        .calculator-title { font-size: 28px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 15px; }
+        .calculator-subtitle { font-size: 14px; opacity: 0.9; margin-bottom: 15px; }
+        .header-badges { display: flex; gap: 10px; flex-wrap: wrap; }
+        .badge { background-color: rgba(255, 255, 255, 0.3); padding: 8px 15px; border-radius: 20px; font-size: 12px; }
+        .nav-back { display: inline-block; margin-bottom: 20px; }
+        .nav-back a { color: white; text-decoration: none; padding: 8px 16px; background-color: rgba(255, 255, 255, 0.2); border-radius: 20px; transition: all 0.3s ease; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; }
+        .nav-back a:hover { background-color: rgba(255, 255, 255, 0.3); }
+        .card-body { padding: 30px; background-color: #f8f9fa; }
+        .form-group { margin-bottom: 25px; }
+        .form-label { font-weight: 600; color: #333; margin-bottom: 10px; display: block; }
+        .form-control, .form-select { border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px; font-size: 14px; transition: border-color 0.3s ease; }
+        .form-control:focus, .form-select:focus { border-color: #667eea; box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1); }
+        .btn-calculate { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; color: white; padding: 12px 40px; font-weight: 600; border-radius: 8px; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; font-size: 16px; width: 100%; }
+        .btn-calculate:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4); color: white; }
+        .result-container { display: none; margin-top: 30px; padding: 20px; background-color: white; border-radius: 10px; border-left: 5px solid #667eea; }
+        .result-container.show { display: block; animation: slideIn 0.3s ease; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .score-display { font-size: 32px; font-weight: 700; color: #667eea; margin-bottom: 15px; }
+        .interpretation { padding: 15px; border-radius: 8px; margin-top: 15px; font-size: 14px; line-height: 1.6; }
+        .interpretation.minimal { background-color: #d1e7dd; color: #0f5132; border-left: 4px solid #198754; }
+        .interpretation.mild { background-color: #cfe2ff; color: #084298; border-left: 4px solid #0d6efd; }
+        .interpretation.moderate { background-color: #fef3cd; color: #856404; border-left: 4px solid #ffc107; }
+        .interpretation.severe { background-color: #fee; color: #c33; border-left: 4px solid #c33; }
+        .formula-section { background-color: white; padding: 20px; border-radius: 10px; margin-top: 20px; border: 2px dashed #667eea; }
+        .formula-title { font-weight: 600; color: #667eea; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .formula-content { font-family: 'Courier New', monospace; font-size: 13px; background-color: #f8f9fa; padding: 12px; border-radius: 6px; overflow-x: auto; line-height: 1.6; }
+        .info-box { background-color: #e7f3ff; border-left: 4px solid #667eea; padding: 15px; border-radius: 6px; margin-bottom: 20px; font-size: 13px; }
+    </style>
+</head>
+<body>
+    <div class="container-wrapper">
+        <div class="nav-back">
+            <a href="../index.html"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="calculator-title">
+                    <i class="fas fa-brain"></i>
+                    CIWA-Ar Scale
+                </h1>
+                <p class="calculator-subtitle">
+                    Clinical Institute Withdrawal Assessment for Alcohol Scale - Withdrawal severity assessment
+                </p>
+                <div class="header-badges">
+                    <span class="badge"><i class="fas fa-heart"></i> Substance</span>
+                    <span class="badge"><i class="fas fa-chart-line"></i> Withdrawal</span>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    CIWA-Ar quantifies alcohol withdrawal severity to guide treatment and prevent complications in surgical patients.
+                </div>
+
+                <form id="ciwaForm">
+                    <div class="form-group">
+                        <label class="form-label">Nausea/Vomiting (0-7)</label>
+                        <select class="form-select" id="nausea">
+                            <option value="">Select</option>
+                            <option value="0">0 - No nausea, no vomiting</option>
+                            <option value="1">1 - Mild nausea</option>
+                            <option value="4">4 - Intermittent nausea</option>
+                            <option value="7">7 - Constant nausea or vomiting</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Tremor (0-4)</label>
+                        <select class="form-select" id="tremor">
+                            <option value="">Select</option>
+                            <option value="0">0 - No tremor</option>
+                            <option value="1">1 - Not visible, can be felt</option>
+                            <option value="2">2 - Mild visible</option>
+                            <option value="4">4 - Moderate to severe visible</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Paroxysmal Sweats (0-3)</label>
+                        <select class="form-select" id="sweats">
+                            <option value="">Select</option>
+                            <option value="0">0 - No sweats</option>
+                            <option value="1">1 - Barely perceptible</option>
+                            <option value="2">2 - Beads on brow</option>
+                            <option value="3">3 - Drenching sweats</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Anxiety (0-4)</label>
+                        <select class="form-select" id="anxiety">
+                            <option value="">Select</option>
+                            <option value="0">0 - None</option>
+                            <option value="1">1 - Mild</option>
+                            <option value="2">2 - Moderate</option>
+                            <option value="4">4 - Severe/Panic</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Agitation (0-4)</label>
+                        <select class="form-select" id="agitation">
+                            <option value="">Select</option>
+                            <option value="0">0 - Normal</option>
+                            <option value="1">1 - Mildly agitated</option>
+                            <option value="2">2 - Moderately agitated</option>
+                            <option value="4">4 - Very agitated/Violent</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Tactile Disturbances (0-5)</label>
+                        <select class="form-select" id="tactile">
+                            <option value="">Select</option>
+                            <option value="0">0 - None</option>
+                            <option value="1">1 - Very mild</option>
+                            <option value="2">2 - Mild</option>
+                            <option value="3">3 - Moderate</option>
+                            <option value="5">5 - Severe hallucinations</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Auditory Disturbances (0-5)</label>
+                        <select class="form-select" id="auditory">
+                            <option value="">Select</option>
+                            <option value="0">0 - None</option>
+                            <option value="1">1 - Very mild harshness</option>
+                            <option value="2">2 - Mild difficulty</option>
+                            <option value="3">3 - Moderate difficulty</option>
+                            <option value="5">5 - Severe hallucinations</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Visual Disturbances (0-5)</label>
+                        <select class="form-select" id="visual">
+                            <option value="">Select</option>
+                            <option value="0">0 - None</option>
+                            <option value="1">1 - Very mild difficulty</option>
+                            <option value="2">2 - Mild difficulty</option>
+                            <option value="3">3 - Moderate difficulty</option>
+                            <option value="5">5 - Severe hallucinations</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Headache (0-4)</label>
+                        <select class="form-select" id="headache">
+                            <option value="">Select</option>
+                            <option value="0">0 - Not present</option>
+                            <option value="1">1 - Very mild</option>
+                            <option value="2">2 - Mild</option>
+                            <option value="3">3 - Moderate</option>
+                            <option value="4">4 - Severe</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Orientation/Clouding (0-4)</label>
+                        <select class="form-select" id="orientation">
+                            <option value="">Select</option>
+                            <option value="0">0 - Oriented, aware</option>
+                            <option value="1">1 - Slightly confused</option>
+                            <option value="2">2 - Moderately confused</option>
+                            <option value="4">4 - Disoriented/Delirious</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-calculate">
+                        <i class="fas fa-calculator"></i> Calculate CIWA-Ar Score
+                    </button>
+                </form>
+
+                <div id="resultContainer" class="result-container">
+                    <h4><i class="fas fa-star"></i> Your Score Results</h4>
+                    <div class="score-display">
+                        <span id="scoreValue">--</span> / 67
+                    </div>
+                    <div id="interpretationBox"></div>
+                </div>
+
+                <div class="formula-section">
+                    <div class="formula-title">
+                        <i class="fas fa-flask"></i> CIWA-Ar Assessment
+                    </div>
+                    <div class="formula-content">
+Clinical Institute Withdrawal Assessment for Alcohol Scale (CIWA-Ar)
+
+Total of 10 items scored
+Maximum possible score: 67
+
+Score Interpretation:
+- &lt; 5: Minimal to mild withdrawal - Supportive care only
+- 5-15: Mild to moderate withdrawal - Outpatient management
+- > 15: Moderate to severe withdrawal - Inpatient monitoring, pharmacotherapy
+
+Pharmacologic interventions indicated for scores > 15
+Monitor vital signs closely for delirium tremens risk
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('ciwaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculateCIWA();
+        });
+
+        function calculateCIWA() {
+            const nausea = parseInt(document.getElementById('nausea').value);
+            const tremor = parseInt(document.getElementById('tremor').value);
+            const sweats = parseInt(document.getElementById('sweats').value);
+            const anxiety = parseInt(document.getElementById('anxiety').value);
+            const agitation = parseInt(document.getElementById('agitation').value);
+            const tactile = parseInt(document.getElementById('tactile').value);
+            const auditory = parseInt(document.getElementById('auditory').value);
+            const visual = parseInt(document.getElementById('visual').value);
+            const headache = parseInt(document.getElementById('headache').value);
+            const orientation = parseInt(document.getElementById('orientation').value);
+
+            if (isNaN(nausea) || isNaN(tremor) || isNaN(sweats) || isNaN(anxiety) || isNaN(agitation) || isNaN(tactile) || isNaN(auditory) || isNaN(visual) || isNaN(headache) || isNaN(orientation)) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            const score = nausea + tremor + sweats + anxiety + agitation + tactile + auditory + visual + headache + orientation;
+            document.getElementById('scoreValue').textContent = score;
+
+            let interpretation = '';
+            let className = '';
+
+            if (score < 5) {
+                interpretation = '<strong>Minimal to Mild Withdrawal</strong><br>Supportive care only. No pharmacotherapy needed. Monitor patient closely.';
+                className = 'minimal';
+            } else if (score < 15) {
+                interpretation = '<strong>Mild to Moderate Withdrawal</strong><br>Can be managed as outpatient with support. Consider benzodiazepines if symptoms persist.';
+                className = 'mild';
+            } else if (score < 20) {
+                interpretation = '<strong>Moderate to Severe Withdrawal</strong><br>Requires inpatient monitoring and pharmacotherapy. Risk of progression to delirium tremens.';
+                className = 'moderate';
+            } else {
+                interpretation = '<strong>Severe Withdrawal</strong><br>High risk for seizures and delirium tremens. Immediate hospitalization and aggressive treatment required.';
+                className = 'severe';
+            }
+
+            document.getElementById('interpretationBox').innerHTML = `<div class="interpretation ${className}"><i class="fas fa-exclamation-triangle"></i> ${interpretation}</div>`;
+            document.getElementById('resultContainer').classList.add('show');
+        }
+    </script>
+</body>
+</html>

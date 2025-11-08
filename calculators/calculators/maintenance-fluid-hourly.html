@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Fluid Calculation - Hourly Requirements</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
+        body {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 900px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .card-header {
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fluid-value {
+            font-size: 48px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 15px 0;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .formula-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .result-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .result-data {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .quick-reference {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .method-selector {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .method-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .method-btn.active {
+            border-color: #667eea;
+            background: #f0f4ff;
+            color: #667eea;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark mb-4" style="background: transparent;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html" style="color: white;">
+                    <i class="fas fa-calculator"></i> Pediatric Calculators
+                </a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">
+                    <i class="fas fa-water"></i> Maintenance Fluid Calculation
+                </h1>
+                <small>Hourly Requirements (Simplified 4-2-1 Method)</small>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Instructions -->
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> Enter the child's weight in kilograms.
+                    Choose between the 4-2-1 rule (simplified) or Holliday-Segar (detailed calculation).
+                </div>
+
+                <!-- Formula Reference -->
+                <div class="formula-box">
+                    <strong>4-2-1 Rule (Simplified):</strong><br>
+                    <ul class="mb-0">
+                        <li>First 10 kg: 4 mL/kg/hr</li>
+                        <li>Next 10 kg: 2 mL/kg/hr</li>
+                        <li>Each kg above 20 kg: 1 mL/kg/hr</li>
+                    </ul>
+                </div>
+
+                <!-- Input Form -->
+                <form id="fluidForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-weight"></i> Weight (kg)
+                            </label>
+                            <input type="number" class="form-control" id="weight" placeholder="Weight in kg" min="1" max="100" step="0.1" required>
+                            <small class="text-muted">Range: 1-100 kg</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-flask"></i> Calculation Method
+                            </label>
+                            <select class="form-select" id="method" onchange="updateFormula()" required>
+                                <option value="421">4-2-1 Rule (Simplified)</option>
+                                <option value="hs">Holliday-Segar (Detailed)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="calculateHourlyFluid()">
+                            <i class="fas fa-calculator"></i> Calculate Hourly Requirements
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results -->
+                <div id="resultBox" class="result-box">
+                    <h4 class="text-center mb-4"><i class="fas fa-check-circle"></i> Hourly Fluid Requirements</h4>
+
+                    <div id="resultDetails"></div>
+
+                    <hr class="my-4">
+
+                    <!-- Quick reference table -->
+                    <div class="quick-reference">
+                        <strong><i class="fas fa-table"></i> Quick Reference by Weight:</strong>
+                        <table class="table table-sm mt-2 mb-0">
+                            <tbody>
+                                <tr>
+                                    <td><strong>10 kg infant</strong></td>
+                                    <td>40 mL/hr (4-2-1)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>20 kg child</strong></td>
+                                    <td>60 mL/hr (4-2-1)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>30 kg child</strong></td>
+                                    <td>80 mL/hr (4-2-1)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>70 kg adolescent</strong></td>
+                                    <td>100 mL/hr (4-2-1)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Clinical Guidance -->
+                    <div id="clinicalGuidance"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Update formula display
+        function updateFormula() {
+            const method = document.getElementById('method').value;
+            const formulaBox = document.querySelector('.formula-box');
+
+            if (method === '421') {
+                formulaBox.innerHTML = `<strong>4-2-1 Rule (Hourly):</strong><br>
+                    <ul class="mb-0">
+                        <li>First 10 kg: 4 mL/kg/hr</li>
+                        <li>Next 10 kg: 2 mL/kg/hr</li>
+                        <li>Each kg above 20 kg: 1 mL/kg/hr</li>
+                    </ul>`;
+            } else {
+                formulaBox.innerHTML = `<strong>Holliday-Segar Formula (Converted to Hourly):</strong><br>
+                    <ul class="mb-0">
+                        <li>First 10 kg: 100 mL/kg/day ÷ 24 = 4.17 mL/kg/hr</li>
+                        <li>Next 10 kg: 50 mL/kg/day ÷ 24 = 2.08 mL/kg/hr</li>
+                        <li>Above 20 kg: 20 mL/kg/day ÷ 24 = 0.83 mL/kg/hr</li>
+                    </ul>`;
+            }
+        }
+
+        // Calculate hourly maintenance fluids
+        function calculateHourlyFluid() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const method = document.getElementById('method').value;
+
+            if (!weight) {
+                alert('Please enter weight');
+                return;
+            }
+
+            let hourlyML = 0;
+            let breakdown = '';
+            let dailyTotal = 0;
+
+            if (method === '421') {
+                // 4-2-1 Rule
+                if (weight <= 10) {
+                    hourlyML = weight * 4;
+                    breakdown = `${weight} kg × 4 mL/kg/hr = ${hourlyML} mL/hr`;
+                } else if (weight <= 20) {
+                    hourlyML = (10 * 4) + ((weight - 10) * 2);
+                    breakdown = `(10 × 4) + (${weight - 10} × 2) = ${hourlyML} mL/hr`;
+                } else {
+                    hourlyML = (10 * 4) + (10 * 2) + ((weight - 20) * 1);
+                    breakdown = `(10 × 4) + (10 × 2) + (${weight - 20} × 1) = ${hourlyML} mL/hr`;
+                }
+            } else {
+                // Holliday-Segar
+                if (weight <= 10) {
+                    hourlyML = (weight * 100) / 24;
+                    breakdown = `${weight} kg × 100 mL/kg/day ÷ 24 hrs = ${hourlyML.toFixed(1)} mL/hr`;
+                } else if (weight <= 20) {
+                    hourlyML = ((10 * 100) + ((weight - 10) * 50)) / 24;
+                    breakdown = `[1000 + (${weight - 10} × 50)] ÷ 24 = ${hourlyML.toFixed(1)} mL/hr`;
+                } else {
+                    hourlyML = ((10 * 100) + (10 * 50) + ((weight - 20) * 20)) / 24;
+                    breakdown = `[1000 + 500 + (${weight - 20} × 20)] ÷ 24 = ${hourlyML.toFixed(1)} mL/hr`;
+                }
+            }
+
+            dailyTotal = hourlyML * 24;
+
+            // Display results
+            displayHourlyResults(hourlyML, dailyTotal, breakdown);
+            document.getElementById('resultBox').classList.add('show');
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Display hourly results
+        function displayHourlyResults(hourlyML, dailyTotal, breakdown) {
+            const resultHTML = `
+                <div class="result-item">
+                    <div class="result-label">Hourly Infusion Rate</div>
+                    <div class="result-data">${hourlyML.toFixed(1)} mL/hr</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Daily Total (24 hours)</div>
+                    <div class="result-data">${dailyTotal.toFixed(0)} mL/day</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Calculation</div>
+                    <div style="color: #666; font-size: 14px;">${breakdown}</div>
+                </div>
+            `;
+
+            const guidance = `<div class="alert alert-info"><strong><i class="fas fa-info-circle"></i> Clinical Pearls:</strong><br>
+                <ul class="mb-0">
+                    <li><strong>Standard maintenance solution:</strong> D5 1/5 NS or D5 0.2% NS</li>
+                    <li><strong>Add potassium:</strong> 20 mEq/L after urine output established</li>
+                    <li><strong>Route:</strong> IV (peripheral or central), enteral, or combination</li>
+                    <li><strong>Ongoing losses:</strong> Add losses from diarrhea, vomiting, drains</li>
+                    <li><strong>Fever:</strong> Add 12-13% for each °C > 37°C</li>
+                    <li><strong>Monitor:</strong> Urine output, weight, electrolytes, vital signs</li>
+                </ul>
+            </div>`;
+
+            document.getElementById('resultDetails').innerHTML = resultHTML;
+            document.getElementById('clinicalGuidance').innerHTML = guidance;
+        }
+    </script>
+</body>
+</html>

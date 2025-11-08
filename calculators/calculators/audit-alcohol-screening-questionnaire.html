@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUDIT Alcohol Screening Questionnaire - Patient Education</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ==========================================
+           CUSTOM STYLING & PURPLE GRADIENT THEME
+           ========================================== */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            --secondary-gradient: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%);
+            --text-dark: #2d3748;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+
+        /* Navigation Header */
+        .nav-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+            margin-bottom: 2rem;
+        }
+
+        .nav-header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .nav-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+
+        /* Main Container */
+        .calculator-container {
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 0 1rem 2rem 1rem;
+        }
+
+        /* Card Styling */
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(139, 92, 246, 0.15);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .card-header {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 2rem 1.5rem;
+        }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        .card-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.95;
+            font-size: 0.9rem;
+        }
+
+        /* Form Controls */
+        .form-control, .form-select {
+            border: 2px solid #e9d5ff;
+            border-radius: 10px;
+            padding: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 0.2rem rgba(139, 92, 246, 0.25);
+        }
+
+        .form-label {
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Question Group */
+        .question-group {
+            background: #fafaf9;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #8b5cf6;
+        }
+
+        .question-group label {
+            margin-bottom: 1rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .question-text {
+            font-size: 0.95rem;
+            color: #4b5563;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        /* Radio/Checkbox Options */
+        .form-check {
+            margin-bottom: 0.75rem;
+        }
+
+        .form-check-input {
+            border: 2px solid #d4d4d8;
+            border-radius: 5px;
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-top: 0.3rem;
+        }
+
+        .form-check-input:checked {
+            background-color: #8b5cf6;
+            border-color: #8b5cf6;
+        }
+
+        .form-check-label {
+            margin-left: 0.5rem;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        /* Buttons */
+        .btn-calculate {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            color: white;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+            color: white;
+        }
+
+        .btn-reset {
+            background: #e9d5ff;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            color: #6d28d9;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reset:hover {
+            background: #ddd6fe;
+            color: #5b21b6;
+        }
+
+        /* Result Box */
+        .result-box {
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-left: 5px solid #8b5cf6;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #6d28d9;
+            margin: 1rem 0;
+        }
+
+        /* Interpretation Boxes */
+        .interpretation-box {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border-left: 4px solid #8b5cf6;
+        }
+
+        .interpretation-title {
+            color: #6d28d9;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .interpretation-text {
+            color: #4b5563;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: #f0f4ff;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-left: 4px solid #8b5cf6;
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+
+        .info-box i {
+            color: #8b5cf6;
+            margin-right: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-header h1 {
+                font-size: 1.4rem;
+            }
+
+            .card-header {
+                padding: 1.5rem 1rem;
+            }
+
+            .card-header h2 {
+                font-size: 1.3rem;
+            }
+
+            .result-score {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <div class="nav-header">
+        <div class="container">
+            <h1><i class="fas fa-flask-vial"></i> AUDIT Alcohol Screening Questionnaire</h1>
+            <p>Patient Education - Assess alcohol use and related risks</p>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="calculator-container">
+        <!-- Instruction Card -->
+        <div class="card">
+            <div class="card-body">
+                <div class="alert alert-info" role="alert">
+                    <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> Answer the following 10 questions about your alcohol use. Each question has multiple choice answers with point values. Your total score will help determine your risk level.
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculator Form -->
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-question-circle"></i> AUDIT Questionnaire</h2>
+                <p>10-item screening tool for hazardous alcohol use</p>
+            </div>
+            <div class="card-body">
+                <form id="auditForm">
+                    <!-- Question 1 -->
+                    <div class="question-group">
+                        <div class="question-text"><strong>1. How often do you have a drink containing alcohol?</strong></div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q1" type="radio" name="q1" value="0" id="q1_0">
+                            <label class="form-check-label" for="q1_0">Never (0)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q1" type="radio" name="q1" value="1" id="q1_1">
+                            <label class="form-check-label" for="q1_1">Monthly or less (1)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q1" type="radio" name="q1" value="2" id="q1_2">
+                            <label class="form-check-label" for="q1_2">2-4 times a month (2)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q1" type="radio" name="q1" value="3" id="q1_3">
+                            <label class="form-check-label" for="q1_3">2-3 times a week (3)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q1" type="radio" name="q1" value="4" id="q1_4">
+                            <label class="form-check-label" for="q1_4">4 or more times a week (4)</label>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="question-group">
+                        <div class="question-text"><strong>2. How many drinks do you have on a typical day when you are drinking?</strong></div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q2" type="radio" name="q2" value="0" id="q2_0">
+                            <label class="form-check-label" for="q2_0">1 or 2 (0)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q2" type="radio" name="q2" value="1" id="q2_1">
+                            <label class="form-check-label" for="q2_1">3 or 4 (1)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q2" type="radio" name="q2" value="2" id="q2_2">
+                            <label class="form-check-label" for="q2_2">5 or 6 (2)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q2" type="radio" name="q2" value="3" id="q2_3">
+                            <label class="form-check-label" for="q2_3">7 to 9 (3)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q2" type="radio" name="q2" value="4" id="q2_4">
+                            <label class="form-check-label" for="q2_4">10 or more (4)</label>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="question-group">
+                        <div class="question-text"><strong>3. How often do you have 6 or more drinks on one occasion?</strong></div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q3" type="radio" name="q3" value="0" id="q3_0">
+                            <label class="form-check-label" for="q3_0">Never (0)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q3" type="radio" name="q3" value="1" id="q3_1">
+                            <label class="form-check-label" for="q3_1">Less than monthly (1)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q3" type="radio" name="q3" value="2" id="q3_2">
+                            <label class="form-check-label" for="q3_2">Monthly (2)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q3" type="radio" name="q3" value="3" id="q3_3">
+                            <label class="form-check-label" for="q3_3">Weekly (3)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q3" type="radio" name="q3" value="4" id="q3_4">
+                            <label class="form-check-label" for="q3_4">Daily or almost daily (4)</label>
+                        </div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="question-group">
+                        <div class="question-text"><strong>4. How often during the last year have you found that you were unable to stop drinking once you had started?</strong></div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q4" type="radio" name="q4" value="0" id="q4_0">
+                            <label class="form-check-label" for="q4_0">Never (0)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q4" type="radio" name="q4" value="1" id="q4_1">
+                            <label class="form-check-label" for="q4_1">Less than monthly (1)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q4" type="radio" name="q4" value="2" id="q4_2">
+                            <label class="form-check-label" for="q4_2">Monthly (2)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q4" type="radio" name="q4" value="3" id="q4_3">
+                            <label class="form-check-label" for="q4_3">Weekly (3)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q4" type="radio" name="q4" value="4" id="q4_4">
+                            <label class="form-check-label" for="q4_4">Daily or almost daily (4)</label>
+                        </div>
+                    </div>
+
+                    <!-- Question 5 -->
+                    <div class="question-group">
+                        <div class="question-text"><strong>5. How often during the last year have you neglected your responsibilities because of drinking?</strong></div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q5" type="radio" name="q5" value="0" id="q5_0">
+                            <label class="form-check-label" for="q5_0">Never (0)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q5" type="radio" name="q5" value="1" id="q5_1">
+                            <label class="form-check-label" for="q5_1">Less than monthly (1)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q5" type="radio" name="q5" value="2" id="q5_2">
+                            <label class="form-check-label" for="q5_2">Monthly (2)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q5" type="radio" name="q5" value="3" id="q5_3">
+                            <label class="form-check-label" for="q5_3">Weekly (3)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q5" type="radio" name="q5" value="4" id="q5_4">
+                            <label class="form-check-label" for="q5_4">Daily or almost daily (4)</label>
+                        </div>
+                    </div>
+
+                    <!-- Question 6 -->
+                    <div class="question-group">
+                        <div class="question-text"><strong>6. Have you or someone else been hurt because of your drinking?</strong></div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q6" type="radio" name="q6" value="0" id="q6_0">
+                            <label class="form-check-label" for="q6_0">No (0)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q6" type="radio" name="q6" value="2" id="q6_2">
+                            <label class="form-check-label" for="q6_2">Yes, but not in the last year (2)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q6" type="radio" name="q6" value="4" id="q6_4">
+                            <label class="form-check-label" for="q6_4">Yes, during the last year (4)</label>
+                        </div>
+                    </div>
+
+                    <!-- Question 7 -->
+                    <div class="question-group">
+                        <div class="question-text"><strong>7. Has a relative, doctor, or other health worker been concerned about your drinking or suggested you cut down?</strong></div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q7" type="radio" name="q7" value="0" id="q7_0">
+                            <label class="form-check-label" for="q7_0">No (0)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q7" type="radio" name="q7" value="2" id="q7_2">
+                            <label class="form-check-label" for="q7_2">Yes, but not in the last year (2)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q7" type="radio" name="q7" value="4" id="q7_4">
+                            <label class="form-check-label" for="q7_4">Yes, during the last year (4)</label>
+                        </div>
+                    </div>
+
+                    <!-- Question 8 -->
+                    <div class="question-group">
+                        <div class="question-text"><strong>8. Have you ever tried to cut down on drinking and found you could not?</strong></div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q8" type="radio" name="q8" value="0" id="q8_0">
+                            <label class="form-check-label" for="q8_0">No (0)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q8" type="radio" name="q8" value="2" id="q8_2">
+                            <label class="form-check-label" for="q8_2">Yes (2)</label>
+                        </div>
+                    </div>
+
+                    <!-- Question 9 -->
+                    <div class="question-group">
+                        <div class="question-text"><strong>9. Have you ever had a drink first thing in the morning to steady your nerves or get rid of a hangover?</strong></div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q9" type="radio" name="q9" value="0" id="q9_0">
+                            <label class="form-check-label" for="q9_0">No (0)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q9" type="radio" name="q9" value="4" id="q9_4">
+                            <label class="form-check-label" for="q9_4">Yes (4)</label>
+                        </div>
+                    </div>
+
+                    <!-- Question 10 -->
+                    <div class="question-group">
+                        <div class="question-text"><strong>10. Have you ever had memory blackouts or been unable to remember what happened the night before because of drinking?</strong></div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q10" type="radio" name="q10" value="0" id="q10_0">
+                            <label class="form-check-label" for="q10_0">No (0)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q10" type="radio" name="q10" value="1" id="q10_1">
+                            <label class="form-check-label" for="q10_1">Yes, less than monthly (1)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q10" type="radio" name="q10" value="2" id="q10_2">
+                            <label class="form-check-label" for="q10_2">Yes, monthly (2)</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input audit-q10" type="radio" name="q10" value="4" id="q10_4">
+                            <label class="form-check-label" for="q10_4">Yes, weekly or almost daily (4)</label>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <button type="button" class="btn btn-calculate w-100" onclick="calculateAUDIT()">
+                                <i class="fas fa-calculator"></i> Calculate Score
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="reset" class="btn btn-reset w-100">
+                                <i class="fas fa-redo"></i> Clear Form
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="result-box" id="resultBox">
+            <h3><i class="fas fa-chart-pie"></i> Your AUDIT Score</h3>
+            <div class="result-score" id="scoreValue">0</div>
+
+            <!-- Interpretation -->
+            <div class="interpretation-box" id="interpretationBox"></div>
+
+            <!-- Clinical Notes -->
+            <div class="info-box">
+                <i class="fas fa-stethoscope"></i>
+                <strong>Clinical Note:</strong> This is a screening tool for educational purposes. If you score 8 or above, consider speaking with your healthcare provider about your alcohol use.
+            </div>
+        </div>
+
+        <!-- Scoring Guide -->
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-book"></i> Scoring Guide</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead style="background-color: #f3e8ff;">
+                        <tr>
+                            <th>Score Range</th>
+                            <th>Risk Level</th>
+                            <th>Interpretation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>0-7</strong></td>
+                            <td><span class="badge bg-success">Low Risk</span></td>
+                            <td>Alcohol use is within safe limits</td>
+                        </tr>
+                        <tr>
+                            <td><strong>8-15</strong></td>
+                            <td><span class="badge bg-warning text-dark">Moderate Risk</span></td>
+                            <td>Hazardous alcohol use; consider reduction</td>
+                        </tr>
+                        <tr>
+                            <td><strong>16-19</strong></td>
+                            <td><span class="badge bg-danger">High Risk</span></td>
+                            <td>Harmful or dependent alcohol use; seek professional help</td>
+                        </tr>
+                        <tr>
+                            <td><strong>20+</strong></td>
+                            <td><span class="badge bg-danger">Very High Risk</span></td>
+                            <td>Likely alcohol dependence; urgent professional intervention needed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="card mt-3">
+            <div class="card-body text-center text-muted small">
+                <p><strong>AUDIT:</strong> Alcohol Use Disorders Identification Test</p>
+                <p>For patient education purposes only. Not a substitute for professional medical evaluation.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /**
+         * Calculate AUDIT Score
+         * Sums up all selected responses and displays interpretation
+         */
+        function calculateAUDIT() {
+            // Collect all form values
+            const q1 = parseInt(document.querySelector('input[name="q1"]:checked')?.value || 0);
+            const q2 = parseInt(document.querySelector('input[name="q2"]:checked')?.value || 0);
+            const q3 = parseInt(document.querySelector('input[name="q3"]:checked')?.value || 0);
+            const q4 = parseInt(document.querySelector('input[name="q4"]:checked')?.value || 0);
+            const q5 = parseInt(document.querySelector('input[name="q5"]:checked')?.value || 0);
+            const q6 = parseInt(document.querySelector('input[name="q6"]:checked')?.value || 0);
+            const q7 = parseInt(document.querySelector('input[name="q7"]:checked')?.value || 0);
+            const q8 = parseInt(document.querySelector('input[name="q8"]:checked')?.value || 0);
+            const q9 = parseInt(document.querySelector('input[name="q9"]:checked')?.value || 0);
+            const q10 = parseInt(document.querySelector('input[name="q10"]:checked')?.value || 0);
+
+            // Calculate total score
+            const totalScore = q1 + q2 + q3 + q4 + q5 + q6 + q7 + q8 + q9 + q10;
+
+            // Display score
+            document.getElementById('scoreValue').textContent = totalScore;
+
+            // Generate interpretation
+            let interpretation = '';
+            let riskLevel = '';
+            let badgeClass = '';
+
+            if (totalScore <= 7) {
+                riskLevel = 'Low Risk';
+                badgeClass = 'bg-success';
+                interpretation = '<strong style="color: #10b981;">Low Risk Alcohol Use</strong><br>Your alcohol consumption appears to be within safe limits. Continue to monitor your drinking habits.';
+            } else if (totalScore <= 15) {
+                riskLevel = 'Moderate Risk';
+                badgeClass = 'bg-warning';
+                interpretation = '<strong style="color: #f59e0b;">Moderate Risk - Hazardous Alcohol Use</strong><br>Your responses suggest hazardous alcohol use. Consider reducing your alcohol consumption and discussing with your healthcare provider.';
+            } else if (totalScore <= 19) {
+                riskLevel = 'High Risk';
+                badgeClass = 'bg-danger';
+                interpretation = '<strong style="color: #ef4444;">High Risk - Harmful or Dependent Alcohol Use</strong><br>Your responses suggest harmful alcohol use or dependency. It is strongly recommended to seek professional help and discuss treatment options with your healthcare provider.';
+            } else {
+                riskLevel = 'Very High Risk';
+                badgeClass = 'bg-danger';
+                interpretation = '<strong style="color: #ef4444;">Very High Risk - Likely Alcohol Dependence</strong><br>Your responses are highly concerning for alcohol dependence. Please seek immediate professional help from a substance abuse specialist or addiction medicine professional.';
+            }
+
+            // Display interpretation
+            document.getElementById('interpretationBox').innerHTML =
+                `<div class="interpretation-title"><span class="badge ${badgeClass}">${riskLevel}</span></div><div class="interpretation-text">${interpretation}</div>`;
+
+            // Show result box
+            document.getElementById('resultBox').classList.add('show');
+        }
+
+        /**
+         * Validate form before calculation
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form submission handling
+            document.getElementById('auditForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                calculateAUDIT();
+            });
+        });
+    </script>
+</body>
+</html>

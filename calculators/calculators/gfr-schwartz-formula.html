@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glomerular Filtration Rate (GFR) Calculator - Schwartz Formula</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
+        body {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 900px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .card-header {
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gfr-value {
+            font-size: 48px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 15px 0;
+        }
+
+        .kidney-function-badge {
+            display: inline-block;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: white;
+            margin: 10px 0;
+        }
+
+        .stage-normal {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .stage-1 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .stage-2 {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+        }
+
+        .stage-3a {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        }
+
+        .stage-3b {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .stage-4 {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+        }
+
+        .stage-5 {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .formula-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark mb-4" style="background: transparent;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html" style="color: white;">
+                    <i class="fas fa-calculator"></i> Pediatric Calculators
+                </a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">
+                    <i class="fas fa-kidney"></i> GFR Calculator (Schwartz Formula)
+                </h1>
+                <small>Glomerular Filtration Rate for Children 1-16 years</small>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Instructions -->
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> Enter the child's height in centimeters
+                    and serum creatinine in mg/dL. The Schwartz formula is commonly used for pediatric GFR estimation.
+                </div>
+
+                <!-- Formula Reference -->
+                <div class="formula-box">
+                    <strong>Schwartz Formula (Updated):</strong><br>
+                    eGFR (mL/min/1.73m²) = 0.413 × Height (cm) / Serum Creatinine (mg/dL)<br>
+                    <small class="text-muted">Original formula: eGFR = 0.41 × Height / SCr</small>
+                </div>
+
+                <!-- Input Form -->
+                <form id="gfrForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-ruler-vertical"></i> Height (cm)
+                            </label>
+                            <input type="number" class="form-control" id="height" placeholder="Height in cm" min="50" max="200" step="0.1" required>
+                            <small class="text-muted">Range: 50-200 cm</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-test-tubes"></i> Serum Creatinine (mg/dL)
+                            </label>
+                            <input type="number" class="form-control" id="creatinine" placeholder="Creatinine in mg/dL" min="0.1" max="10" step="0.01" required>
+                            <small class="text-muted">Normal: 0.3-0.8 mg/dL</small>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="calculateGFR()">
+                            <i class="fas fa-calculator"></i> Calculate GFR
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results -->
+                <div id="resultBox" class="result-box">
+                    <h4 class="text-center mb-4"><i class="fas fa-check-circle"></i> GFR Calculation Results</h4>
+
+                    <div class="text-center">
+                        <p class="text-muted"><small>Estimated GFR</small></p>
+                        <div class="gfr-value" id="gfrValue">--</div>
+                        <p class="text-muted">mL/min/1.73m²</p>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <p class="text-muted"><small>Kidney Function Stage</small></p>
+                        <div class="kidney-function-badge" id="stageBadge">--</div>
+                        <p id="stageCategory" class="text-center font-weight-bold mt-2"></p>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <!-- Clinical Guidance -->
+                    <div id="clinicalGuidance"></div>
+
+                    <!-- CKD Stages -->
+                    <div class="alert alert-light mt-4">
+                        <strong><i class="fas fa-chart-bar"></i> Chronic Kidney Disease (CKD) Stages:</strong>
+                        <table class="table table-sm mt-2">
+                            <tbody>
+                                <tr>
+                                    <td><strong>Stage 1</strong></td>
+                                    <td>&ge; 90 mL/min/1.73m²</td>
+                                    <td><small>Normal or high GFR</small></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Stage 2</strong></td>
+                                    <td>60-89 mL/min/1.73m²</td>
+                                    <td><small>Mildly decreased GFR</small></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Stage 3a</strong></td>
+                                    <td>45-59 mL/min/1.73m²</td>
+                                    <td><small>Mildly to moderately decreased</small></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Stage 3b</strong></td>
+                                    <td>30-44 mL/min/1.73m²</td>
+                                    <td><small>Moderately to severely decreased</small></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Stage 4</strong></td>
+                                    <td>15-29 mL/min/1.73m²</td>
+                                    <td><small>Severely decreased GFR</small></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Stage 5</strong></td>
+                                    <td>&lt; 15 mL/min/1.73m²</td>
+                                    <td><small>Kidney failure</small></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Important Notes -->
+                    <div class="alert alert-warning mt-4">
+                        <strong><i class="fas fa-exclamation-triangle"></i> Important Notes:</strong>
+                        <ul class="mb-0">
+                            <li>Schwartz formula is most accurate for children 1-16 years</li>
+                            <li>Consider cystatin C-based eGFR equations for greater accuracy</li>
+                            <li>Always correlate with clinical presentation and urinalysis</li>
+                            <li>In acute kidney injury, serum creatinine may not reflect true GFR</li>
+                            <li>Refer to nephrology if GFR &lt; 60 mL/min/1.73m²</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate GFR using Schwartz formula
+        function calculateGFR() {
+            const height = parseFloat(document.getElementById('height').value);
+            const creatinine = parseFloat(document.getElementById('creatinine').value);
+
+            if (!height || !creatinine) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Schwartz formula: eGFR = 0.413 × Height (cm) / SCr (mg/dL)
+            const gfr = (0.413 * height) / creatinine;
+
+            // Display result
+            displayGFRResult(gfr);
+            document.getElementById('resultBox').classList.add('show');
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Display GFR result with stage
+        function displayGFRResult(gfr) {
+            document.getElementById('gfrValue').textContent = gfr.toFixed(1);
+
+            let stageClass, stage, guidance;
+
+            if (gfr >= 90) {
+                stageClass = 'stage-normal';
+                stage = 'NORMAL (Stage 1)';
+                guidance = `<div class="alert alert-success"><strong><i class="fas fa-check-circle"></i> Normal Kidney Function (GFR ≥ 90 mL/min/1.73m²):</strong><br>
+                    <p>Estimated GFR is normal or high.</p>
+                    <p><strong>Management:</strong></p>
+                    <ul>
+                        <li>Continue routine health maintenance</li>
+                        <li>Monitor blood pressure</li>
+                        <li>Maintain healthy diet and hydration</li>
+                        <li>Routine annual screening if risk factors</li>
+                    </ul>
+                </div>`;
+            } else if (gfr >= 60) {
+                stageClass = 'stage-2';
+                stage = 'MILDLY DECREASED (Stage 2)';
+                guidance = `<div class="alert alert-info"><strong><i class="fas fa-info-circle"></i> Mildly Decreased GFR (60-89 mL/min/1.73m²):</strong><br>
+                    <p>Estimated GFR shows mild decline in kidney function.</p>
+                    <p><strong>Management:</strong></p>
+                    <ul>
+                        <li>Monitor kidney function regularly (annual)</li>
+                        <li>Control blood pressure</li>
+                        <li>Limit salt intake</li>
+                        <li>Monitor proteinuria</li>
+                        <li>Consider underlying etiology</li>
+                    </ul>
+                </div>`;
+            } else if (gfr >= 45) {
+                stageClass = 'stage-3a';
+                stage = 'MILDLY-MODERATELY DECREASED (Stage 3a)';
+                guidance = `<div class="alert alert-warning"><strong><i class="fas fa-exclamation-triangle"></i> Mildly-Moderately Decreased GFR (45-59 mL/min/1.73m²):</strong><br>
+                    <p>Estimated GFR shows moderate decline in kidney function.</p>
+                    <p><strong>Management:</strong></p>
+                    <ul>
+                        <li>Evaluate for underlying kidney disease</li>
+                        <li>Monitor GFR every 6 months</li>
+                        <li>Manage blood pressure aggressively (BP &lt; 50th percentile)</li>
+                        <li>Consider ACE inhibitor or ARB if proteinuria present</li>
+                        <li>Limit sodium, monitor potassium</li>
+                        <li>Consider nephrology referral</li>
+                    </ul>
+                </div>`;
+            } else if (gfr >= 30) {
+                stageClass = 'stage-3b';
+                stage = 'MODERATELY-SEVERELY DECREASED (Stage 3b)';
+                guidance = `<div class="alert alert-warning"><strong><i class="fas fa-exclamation-triangle"></i> Moderately-Severely Decreased GFR (30-44 mL/min/1.73m²):</strong><br>
+                    <p>Estimated GFR shows significant decline in kidney function.</p>
+                    <p><strong>Management:</strong></p>
+                    <ul>
+                        <li><strong>Refer to nephrology</strong></li>
+                        <li>Monitor GFR every 3-4 months</li>
+                        <li>Evaluate for complications (anemia, minerals, HTN)</li>
+                        <li>Aggressive blood pressure management</li>
+                        <li>Limit phosphorus and calcium</li>
+                        <li>Plan for renal replacement therapy</li>
+                    </ul>
+                </div>`;
+            } else if (gfr >= 15) {
+                stageClass = 'stage-4';
+                stage = 'SEVERELY DECREASED (Stage 4)';
+                guidance = `<div class="alert alert-danger"><strong><i class="fas fa-times-circle"></i> Severely Decreased GFR (15-29 mL/min/1.73m²):</strong><br>
+                    <p>Estimated GFR shows severe decline in kidney function.</p>
+                    <p><strong>Management:</strong></p>
+                    <ul>
+                        <li><strong>Urgent nephrology referral</strong></li>
+                        <li>Monitor GFR every 1-3 months</li>
+                        <li>Screen for and treat complications</li>
+                        <li>Plan dialysis or transplantation</li>
+                        <li>Strict dietary management</li>
+                    </ul>
+                </div>`;
+            } else {
+                stageClass = 'stage-5';
+                stage = 'KIDNEY FAILURE (Stage 5)';
+                guidance = `<div class="alert alert-danger"><strong><i class="fas fa-times-circle"></i> Kidney Failure (GFR &lt; 15 mL/min/1.73m²):</strong><br>
+                    <p>Estimated GFR indicates end-stage renal disease (ESRD).</p>
+                    <p><strong>Management:</strong></p>
+                    <ul>
+                        <li><strong>Immediate nephrology referral</strong></li>
+                        <li>Initiate dialysis or consider transplantation</li>
+                        <li>Comprehensive management of complications</li>
+                        <li>Strict dietary restrictions</li>
+                        <li>Medication adjustments for renal dosing</li>
+                    </ul>
+                </div>`;
+            }
+
+            document.getElementById('stageBadge').className = 'kidney-function-badge ' + stageClass;
+            document.getElementById('stageBadge').textContent = stage;
+            document.getElementById('stageCategory').innerHTML = `<strong>${stage}</strong><br><small>GFR: ${gfr.toFixed(1)} mL/min/1.73m²</small>`;
+            document.getElementById('clinicalGuidance').innerHTML = guidance;
+        }
+    </script>
+</body>
+</html>

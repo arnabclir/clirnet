@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for Responsive Design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sports Medicine Unit Converter - SI to Conventional for Chemistry and Endocrine Tests">
+    <meta name="keywords" content="medical calculator, unit conversion, SI units, chemistry">
+
+    <title>Sports Medicine: SI to Conventional - Chemistry & Endocrine</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome 6.4 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ===== ROOT COLOR VARIABLES ===== */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --light-bg: #f8f9fa;
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            --border-color: #e0e0e0;
+        }
+
+        /* ===== BASE STYLES ===== */
+        * {
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background: var(--light-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 20px;
+            padding-bottom: 40px;
+            color: #333;
+        }
+
+        /* ===== NAVIGATION MENU ===== */
+        .navbar-custom {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .navbar-custom .navbar-brand {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: white !important;
+        }
+
+        .navbar-custom .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            margin-left: 15px;
+            font-weight: 500;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: white !important;
+            text-decoration: underline;
+        }
+
+        /* ===== HEADER SECTION ===== */
+        .gradient-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 50px 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+        }
+
+        .gradient-header h1 {
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-size: 2.2rem;
+        }
+
+        .gradient-header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 10px;
+        }
+
+        .gradient-header .description {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .calculator-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+        }
+
+        /* ===== FORM SECTIONS ===== */
+        .form-section {
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            color: #667eea;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* ===== INPUT GROUPS ===== */
+        .input-group-wrapper {
+            margin-bottom: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* ===== UNIT BADGES ===== */
+        .unit-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        /* ===== RESULT SECTION ===== */
+        .result-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .result-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .result-value {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-value .label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .result-value .value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        /* ===== INTERPRETATION ===== */
+        .interpretation-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .interpretation-text {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .reference-range {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-convert {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-weight: 600;
+            border-radius: 8px;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .btn-convert:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-reset {
+            background: #e0e0e0;
+            color: #333;
+            border: none;
+            padding: 12px 35px;
+            font-weight: 600;
+            border-radius: 8px;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+
+        .btn-reset:hover {
+            background: #d0d0d0;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .button-group {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        /* ===== ERROR MESSAGES ===== */
+        .error-message {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* ===== REFERENCE TABLE ===== */
+        .reference-table {
+            overflow-x: auto;
+            margin-top: 30px;
+        }
+
+        .table {
+            border-collapse: collapse;
+        }
+
+        .table thead th {
+            background: var(--primary-gradient);
+            color: white;
+            font-weight: 600;
+            padding: 15px;
+            text-align: left;
+            border: none;
+        }
+
+        .table tbody tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .table tbody td {
+            padding: 12px 15px;
+            vertical-align: middle;
+        }
+
+        /* ===== HELP SECTION ===== */
+        .help-section {
+            background: #f0f4ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .help-section h5 {
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .help-section ul {
+            margin-bottom: 0;
+            padding-left: 20px;
+        }
+
+        .help-section li {
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        /* ===== ALERT MESSAGES ===== */
+        .alert-message {
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-info {
+            background: rgba(23, 162, 184, 0.1);
+            border: 1px solid #17a2b8;
+            color: #17a2b8;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .calculator-container {
+                padding: 25px;
+            }
+
+            .gradient-header {
+                padding: 30px 20px;
+                margin-bottom: 25px;
+            }
+
+            .gradient-header h1 {
+                font-size: 1.6rem;
+                flex-direction: column;
+            }
+
+            .input-group-wrapper {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .result-row {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn-reset {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .btn-convert {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .navbar-custom .nav-link {
+                margin-left: 0;
+                padding: 8px 0;
+            }
+
+            .unit-badge {
+                display: block;
+                margin: 8px 0 0 0;
+            }
+        }
+
+        /* ===== FOOTER ===== */
+        .footer-section {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border-color);
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .footer-section p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== NAVIGATION MENU ===== -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="fas fa-flask"></i> Sports Medicine Lab</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 30 30%22%3E%3Cpath stroke=%22rgba(255,255,255,0.55)%22 stroke-linecap=%22round%22 stroke-miterlimit=%2210%22 stroke-width=%222%22 d=%22M4 7h22M4 15h22M4 23h22%22/%3E%3C/svg%3E')"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#calculator"><i class="fas fa-calculator"></i> Calculator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reference"><i class="fas fa-table"></i> Reference</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#help"><i class="fas fa-question-circle"></i> Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN CONTAINER ===== -->
+    <div class="container">
+        <!-- ===== HEADER ===== -->
+        <div class="gradient-header" id="calculator">
+            <h1><i class="fas fa-flask-vial"></i> SI to Conventional Conversion</h1>
+            <div class="subtitle">Chemistry & Endocrine Laboratory Tests</div>
+            <div class="description">Convert SI (Système International) units to conventional units for clinical chemistry and endocrine tests used in sports medicine practice.</div>
+        </div>
+
+        <!-- ===== CALCULATOR FORM ===== -->
+        <div class="calculator-container">
+            <!-- ===== GLUCOSE SECTION ===== -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-droplet"></i> Glucose
+                </div>
+                <div class="input-group-wrapper">
+                    <div class="form-group">
+                        <label class="form-label">
+                            Glucose (mmol/L)
+                            <span class="unit-badge">SI Units</span>
+                        </label>
+                        <input type="number" class="form-control" id="glucose-mmol-l" placeholder="3.9-5.6" step="0.1">
+                        <div class="error-message" id="glucose-error"></div>
+                    </div>
+                </div>
+                <div id="glucose-result" class="result-card" style="display: none;">
+                    <div class="result-row">
+                        <div class="result-value">
+                            <div class="label">Input (mmol/L)</div>
+                            <div class="value" id="glucose-input-display">-</div>
+                        </div>
+                        <div class="result-value">
+                            <div class="label">Output (mg/dL)</div>
+                            <div class="value" id="glucose-output-display">-</div>
+                        </div>
+                    </div>
+                    <div class="interpretation-box">
+                        <div class="interpretation-title"><i class="fas fa-info-circle"></i> Clinical Interpretation</div>
+                        <div class="interpretation-text" id="glucose-interpretation">-</div>
+                        <div class="reference-range">
+                            <strong>Normal Fasting Range (Conv):</strong> 70-100 mg/dL | <strong>Sport Performance:</strong> Monitor for hypoglycemia during training
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== UREA SECTION ===== -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-vial"></i> Urea (BUN)
+                </div>
+                <div class="input-group-wrapper">
+                    <div class="form-group">
+                        <label class="form-label">
+                            Urea (mmol/L)
+                            <span class="unit-badge">SI Units</span>
+                        </label>
+                        <input type="number" class="form-control" id="urea-mmol-l" placeholder="2.5-7.1" step="0.1">
+                        <div class="error-message" id="urea-error"></div>
+                    </div>
+                </div>
+                <div id="urea-result" class="result-card" style="display: none;">
+                    <div class="result-row">
+                        <div class="result-value">
+                            <div class="label">Input (mmol/L)</div>
+                            <div class="value" id="urea-input-display">-</div>
+                        </div>
+                        <div class="result-value">
+                            <div class="label">Output (mg/dL)</div>
+                            <div class="value" id="urea-output-display">-</div>
+                        </div>
+                    </div>
+                    <div class="interpretation-box">
+                        <div class="interpretation-title"><i class="fas fa-info-circle"></i> Clinical Interpretation</div>
+                        <div class="interpretation-text" id="urea-interpretation">-</div>
+                        <div class="reference-range">
+                            <strong>Normal Range (Conv):</strong> 7-20 mg/dL | <strong>Sports Medicine:</strong> Elevated urea may indicate overtraining or dehydration
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== CREATININE SECTION ===== -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-flask"></i> Creatinine
+                </div>
+                <div class="input-group-wrapper">
+                    <div class="form-group">
+                        <label class="form-label">
+                            Creatinine (μmol/L)
+                            <span class="unit-badge">SI Units</span>
+                        </label>
+                        <input type="number" class="form-control" id="creatinine-umol-l" placeholder="53-106" step="1">
+                        <div class="error-message" id="creatinine-error"></div>
+                    </div>
+                </div>
+                <div id="creatinine-result" class="result-card" style="display: none;">
+                    <div class="result-row">
+                        <div class="result-value">
+                            <div class="label">Input (μmol/L)</div>
+                            <div class="value" id="creatinine-input-display">-</div>
+                        </div>
+                        <div class="result-value">
+                            <div class="label">Output (mg/dL)</div>
+                            <div class="value" id="creatinine-output-display">-</div>
+                        </div>
+                    </div>
+                    <div class="interpretation-box">
+                        <div class="interpretation-title"><i class="fas fa-info-circle"></i> Clinical Interpretation</div>
+                        <div class="interpretation-text" id="creatinine-interpretation">-</div>
+                        <div class="reference-range">
+                            <strong>Normal Range (Conv):</strong> 0.6-1.2 mg/dL | <strong>Sports Medicine:</strong> Baseline for assessing kidney function in athletes
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== SODIUM SECTION ===== -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-ion"></i> Sodium
+                </div>
+                <div class="input-group-wrapper">
+                    <div class="form-group">
+                        <label class="form-label">
+                            Sodium (mmol/L)
+                            <span class="unit-badge">SI Units</span>
+                        </label>
+                        <input type="number" class="form-control" id="sodium-mmol-l" placeholder="136-145" step="0.1">
+                        <div class="error-message" id="sodium-error"></div>
+                    </div>
+                </div>
+                <div id="sodium-result" class="result-card" style="display: none;">
+                    <div class="result-row">
+                        <div class="result-value">
+                            <div class="label">Input (mmol/L)</div>
+                            <div class="value" id="sodium-input-display">-</div>
+                        </div>
+                        <div class="result-value">
+                            <div class="label">Output (mEq/L)</div>
+                            <div class="value" id="sodium-output-display">-</div>
+                        </div>
+                    </div>
+                    <div class="interpretation-box">
+                        <div class="interpretation-title"><i class="fas fa-info-circle"></i> Clinical Interpretation</div>
+                        <div class="interpretation-text" id="sodium-interpretation">-</div>
+                        <div class="reference-range">
+                            <strong>Normal Range (Conv):</strong> 136-145 mEq/L | <strong>Sports Medicine:</strong> Critical for hydration status assessment during endurance events
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== POTASSIUM SECTION ===== -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-heart-pulse"></i> Potassium
+                </div>
+                <div class="input-group-wrapper">
+                    <div class="form-group">
+                        <label class="form-label">
+                            Potassium (mmol/L)
+                            <span class="unit-badge">SI Units</span>
+                        </label>
+                        <input type="number" class="form-control" id="potassium-mmol-l" placeholder="3.5-5.0" step="0.1">
+                        <div class="error-message" id="potassium-error"></div>
+                    </div>
+                </div>
+                <div id="potassium-result" class="result-card" style="display: none;">
+                    <div class="result-row">
+                        <div class="result-value">
+                            <div class="label">Input (mmol/L)</div>
+                            <div class="value" id="potassium-input-display">-</div>
+                        </div>
+                        <div class="result-value">
+                            <div class="label">Output (mEq/L)</div>
+                            <div class="value" id="potassium-output-display">-</div>
+                        </div>
+                    </div>
+                    <div class="interpretation-box">
+                        <div class="interpretation-title"><i class="fas fa-info-circle"></i> Clinical Interpretation</div>
+                        <div class="interpretation-text" id="potassium-interpretation">-</div>
+                        <div class="reference-range">
+                            <strong>Normal Range (Conv):</strong> 3.5-5.0 mEq/L | <strong>Sports Medicine:</strong> Monitor for hyperkalemia in intense training
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== CALCIUM SECTION ===== -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-bone"></i> Calcium (Total)
+                </div>
+                <div class="input-group-wrapper">
+                    <div class="form-group">
+                        <label class="form-label">
+                            Calcium (mmol/L)
+                            <span class="unit-badge">SI Units</span>
+                        </label>
+                        <input type="number" class="form-control" id="calcium-mmol-l" placeholder="2.12-2.62" step="0.01">
+                        <div class="error-message" id="calcium-error"></div>
+                    </div>
+                </div>
+                <div id="calcium-result" class="result-card" style="display: none;">
+                    <div class="result-row">
+                        <div class="result-value">
+                            <div class="label">Input (mmol/L)</div>
+                            <div class="value" id="calcium-input-display">-</div>
+                        </div>
+                        <div class="result-value">
+                            <div class="label">Output (mg/dL)</div>
+                            <div class="value" id="calcium-output-display">-</div>
+                        </div>
+                    </div>
+                    <div class="interpretation-box">
+                        <div class="interpretation-title"><i class="fas fa-info-circle"></i> Clinical Interpretation</div>
+                        <div class="interpretation-text" id="calcium-interpretation">-</div>
+                        <div class="reference-range">
+                            <strong>Normal Range (Conv):</strong> 8.5-10.5 mg/dL | <strong>Sports Medicine:</strong> Important for bone health in athletes
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== BUTTON GROUP ===== -->
+            <div class="button-group">
+                <button class="btn-convert" onclick="convertAllValues()">
+                    <i class="fas fa-exchange-alt"></i> Convert All Values
+                </button>
+                <button class="btn-reset" onclick="resetForm()">
+                    <i class="fas fa-redo"></i> Reset Form
+                </button>
+            </div>
+        </div>
+
+        <!-- ===== REFERENCE TABLE ===== -->
+        <div class="calculator-container" id="reference">
+            <h3 class="section-title" style="margin-bottom: 25px;">
+                <i class="fas fa-table"></i> Conversion Reference Table
+            </h3>
+            <div class="reference-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Test</th>
+                            <th>SI Unit</th>
+                            <th>Conventional Unit</th>
+                            <th>Conversion Factor</th>
+                            <th>Normal Range (Conventional)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Glucose</strong></td>
+                            <td>mmol/L</td>
+                            <td>mg/dL</td>
+                            <td>÷ 0.05551</td>
+                            <td>70-100</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Urea (BUN)</strong></td>
+                            <td>mmol/L</td>
+                            <td>mg/dL</td>
+                            <td>÷ 0.3567</td>
+                            <td>7-20</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Creatinine</strong></td>
+                            <td>μmol/L</td>
+                            <td>mg/dL</td>
+                            <td>÷ 88.42</td>
+                            <td>0.6-1.2</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sodium</strong></td>
+                            <td>mmol/L</td>
+                            <td>mEq/L</td>
+                            <td>÷ 1.0</td>
+                            <td>136-145</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Potassium</strong></td>
+                            <td>mmol/L</td>
+                            <td>mEq/L</td>
+                            <td>÷ 1.0</td>
+                            <td>3.5-5.0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Calcium (Total)</strong></td>
+                            <td>mmol/L</td>
+                            <td>mg/dL</td>
+                            <td>÷ 0.2495</td>
+                            <td>8.5-10.5</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ===== HELP SECTION ===== -->
+        <div class="calculator-container" id="help">
+            <div class="help-section">
+                <h5><i class="fas fa-lightbulb"></i> How to Use This Calculator</h5>
+                <ul>
+                    <li>Enter values in SI units (mmol/L, μmol/L, etc.)</li>
+                    <li>Click "Convert All Values" to see conventional unit conversions</li>
+                    <li>Review clinical interpretation for sports medicine context</li>
+                    <li>Compare results with provided normal ranges</li>
+                    <li>Use results for comparison with existing data or international standards</li>
+                </ul>
+            </div>
+
+            <div class="help-section" style="margin-top: 20px;">
+                <h5><i class="fas fa-stethoscope"></i> Sports Medicine Notes</h5>
+                <ul>
+                    <li><strong>Hydration Status:</strong> Monitor sodium and urea levels during endurance training</li>
+                    <li><strong>Overtraining Syndrome:</strong> Elevated urea/creatinine ratio may indicate overtraining</li>
+                    <li><strong>Bone Health:</strong> Calcium levels important for injury prevention and recovery</li>
+                    <li><strong>Electrolyte Balance:</strong> Critical for muscle function and cardiovascular performance</li>
+                    <li><strong>Kidney Function:</strong> Baseline creatinine important for athletes on supplements</li>
+                </ul>
+            </div>
+
+            <div class="alert-message alert-info" style="margin-top: 20px;">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <strong>Disclaimer:</strong> This calculator is for educational purposes only. All medical decisions should be made in consultation with qualified healthcare professionals.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer-section container">
+        <p><strong>Sports Medicine Laboratory Unit Converter</strong></p>
+        <p>Version 1.0 | Updated 2025 | For educational and clinical reference only</p>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- ===== CONVERSION CALCULATIONS ===== -->
+    <script>
+        // Conversion factors for SI to conventional
+        const conversionFactors = {
+            glucose: 1 / 0.05551,           // mmol/L to mg/dL
+            urea: 1 / 0.3567,              // mmol/L to mg/dL
+            creatinine: 1 / 88.42,         // μmol/L to mg/dL
+            sodium: 1.0,                   // mmol/L to mEq/L
+            potassium: 1.0,                // mmol/L to mEq/L
+            calcium: 1 / 0.2495            // mmol/L to mg/dL
+        };
+
+        // Reference ranges for clinical interpretation
+        const referenceRanges = {
+            glucose: { min: 70, max: 100, unit: 'mg/dL' },
+            urea: { min: 7, max: 20, unit: 'mg/dL' },
+            creatinine: { min: 0.6, max: 1.2, unit: 'mg/dL' },
+            sodium: { min: 136, max: 145, unit: 'mEq/L' },
+            potassium: { min: 3.5, max: 5.0, unit: 'mEq/L' },
+            calcium: { min: 8.5, max: 10.5, unit: 'mg/dL' }
+        };
+
+        /**
+         * Validate input value
+         * @param {number} value - Input value to validate
+         * @returns {boolean} - True if valid
+         */
+        function validateInput(value) {
+            return !isNaN(value) && value !== '' && value >= 0;
+        }
+
+        /**
+         * Get clinical interpretation based on value
+         * @param {number} value - Result value
+         * @param {object} range - Reference range
+         * @param {string} test - Test name
+         * @returns {string} - Interpretation text
+         */
+        function getInterpretation(value, range, test) {
+            const isLow = value < range.min;
+            const isHigh = value > range.max;
+
+            const interpretations = {
+                glucose: {
+                    low: 'Hypoglycemia - Risk during endurance activity. Monitor for symptoms.',
+                    normal: 'Normal fasting glucose. Good metabolic control.',
+                    high: 'Hyperglycemia - May indicate metabolic stress or poor recovery.'
+                },
+                urea: {
+                    low: 'Low urea - May indicate liver disease or malnutrition.',
+                    normal: 'Normal urea level. Adequate renal function.',
+                    high: 'Elevated urea - Possible dehydration, overtraining, or renal dysfunction.'
+                },
+                creatinine: {
+                    low: 'Low creatinine - May indicate muscle mass loss or malnutrition.',
+                    normal: 'Normal creatinine. Adequate renal function.',
+                    high: 'Elevated creatinine - Possible renal impairment or severe dehydration.'
+                },
+                sodium: {
+                    low: 'Hyponatremia - Critical in endurance sports. Risk of hyponatremic encephalopathy.',
+                    normal: 'Normal sodium. Adequate electrolyte balance.',
+                    high: 'Hypernatremia - Indicates dehydration. Increase fluid intake.'
+                },
+                potassium: {
+                    low: 'Hypokalemia - Risk of muscle weakness, cramps, and arrhythmias.',
+                    normal: 'Normal potassium. Optimal for muscle function.',
+                    high: 'Hyperkalemia - Risk during intense training. May cause arrhythmias.'
+                },
+                calcium: {
+                    low: 'Hypocalcemia - Risk of muscle cramps, tetany, and bone health issues.',
+                    normal: 'Normal calcium. Good bone health status.',
+                    high: 'Hypercalcemia - Rare in athletes. May indicate underlying condition.'
+                }
+            };
+
+            if (isLow) return interpretations[test].low;
+            if (isHigh) return interpretations[test].high;
+            return interpretations[test].normal;
+        }
+
+        /**
+         * Convert glucose from SI to conventional
+         */
+        function convertGlucose() {
+            const input = document.getElementById('glucose-mmol-l').value;
+            const errorDiv = document.getElementById('glucose-error');
+
+            if (!validateInput(input)) {
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter a valid number';
+                document.getElementById('glucose-result').style.display = 'none';
+                return;
+            }
+
+            errorDiv.innerHTML = '';
+            const value = parseFloat(input);
+            const result = (value * conversionFactors.glucose).toFixed(0);
+            const range = referenceRanges.glucose;
+            const interpretation = getInterpretation(result, range, 'glucose');
+
+            document.getElementById('glucose-input-display').textContent = value.toFixed(1);
+            document.getElementById('glucose-output-display').textContent = result;
+            document.getElementById('glucose-interpretation').textContent = interpretation;
+            document.getElementById('glucose-result').style.display = 'block';
+        }
+
+        /**
+         * Convert urea from SI to conventional
+         */
+        function convertUrea() {
+            const input = document.getElementById('urea-mmol-l').value;
+            const errorDiv = document.getElementById('urea-error');
+
+            if (!validateInput(input)) {
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter a valid number';
+                document.getElementById('urea-result').style.display = 'none';
+                return;
+            }
+
+            errorDiv.innerHTML = '';
+            const value = parseFloat(input);
+            const result = (value * conversionFactors.urea).toFixed(1);
+            const range = referenceRanges.urea;
+            const interpretation = getInterpretation(result, range, 'urea');
+
+            document.getElementById('urea-input-display').textContent = value.toFixed(1);
+            document.getElementById('urea-output-display').textContent = result;
+            document.getElementById('urea-interpretation').textContent = interpretation;
+            document.getElementById('urea-result').style.display = 'block';
+        }
+
+        /**
+         * Convert creatinine from SI to conventional
+         */
+        function convertCreatinine() {
+            const input = document.getElementById('creatinine-umol-l').value;
+            const errorDiv = document.getElementById('creatinine-error');
+
+            if (!validateInput(input)) {
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter a valid number';
+                document.getElementById('creatinine-result').style.display = 'none';
+                return;
+            }
+
+            errorDiv.innerHTML = '';
+            const value = parseFloat(input);
+            const result = (value * conversionFactors.creatinine).toFixed(2);
+            const range = referenceRanges.creatinine;
+            const interpretation = getInterpretation(result, range, 'creatinine');
+
+            document.getElementById('creatinine-input-display').textContent = value.toFixed(0);
+            document.getElementById('creatinine-output-display').textContent = result;
+            document.getElementById('creatinine-interpretation').textContent = interpretation;
+            document.getElementById('creatinine-result').style.display = 'block';
+        }
+
+        /**
+         * Convert sodium from SI to conventional
+         */
+        function convertSodium() {
+            const input = document.getElementById('sodium-mmol-l').value;
+            const errorDiv = document.getElementById('sodium-error');
+
+            if (!validateInput(input)) {
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter a valid number';
+                document.getElementById('sodium-result').style.display = 'none';
+                return;
+            }
+
+            errorDiv.innerHTML = '';
+            const value = parseFloat(input);
+            const result = (value * conversionFactors.sodium).toFixed(1);
+            const range = referenceRanges.sodium;
+            const interpretation = getInterpretation(result, range, 'sodium');
+
+            document.getElementById('sodium-input-display').textContent = value.toFixed(1);
+            document.getElementById('sodium-output-display').textContent = result;
+            document.getElementById('sodium-interpretation').textContent = interpretation;
+            document.getElementById('sodium-result').style.display = 'block';
+        }
+
+        /**
+         * Convert potassium from SI to conventional
+         */
+        function convertPotassium() {
+            const input = document.getElementById('potassium-mmol-l').value;
+            const errorDiv = document.getElementById('potassium-error');
+
+            if (!validateInput(input)) {
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter a valid number';
+                document.getElementById('potassium-result').style.display = 'none';
+                return;
+            }
+
+            errorDiv.innerHTML = '';
+            const value = parseFloat(input);
+            const result = (value * conversionFactors.potassium).toFixed(1);
+            const range = referenceRanges.potassium;
+            const interpretation = getInterpretation(result, range, 'potassium');
+
+            document.getElementById('potassium-input-display').textContent = value.toFixed(1);
+            document.getElementById('potassium-output-display').textContent = result;
+            document.getElementById('potassium-interpretation').textContent = interpretation;
+            document.getElementById('potassium-result').style.display = 'block';
+        }
+
+        /**
+         * Convert calcium from SI to conventional
+         */
+        function convertCalcium() {
+            const input = document.getElementById('calcium-mmol-l').value;
+            const errorDiv = document.getElementById('calcium-error');
+
+            if (!validateInput(input)) {
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter a valid number';
+                document.getElementById('calcium-result').style.display = 'none';
+                return;
+            }
+
+            errorDiv.innerHTML = '';
+            const value = parseFloat(input);
+            const result = (value * conversionFactors.calcium).toFixed(1);
+            const range = referenceRanges.calcium;
+            const interpretation = getInterpretation(result, range, 'calcium');
+
+            document.getElementById('calcium-input-display').textContent = value.toFixed(2);
+            document.getElementById('calcium-output-display').textContent = result;
+            document.getElementById('calcium-interpretation').textContent = interpretation;
+            document.getElementById('calcium-result').style.display = 'block';
+        }
+
+        /**
+         * Master conversion function
+         */
+        function convertAllValues() {
+            convertGlucose();
+            convertUrea();
+            convertCreatinine();
+            convertSodium();
+            convertPotassium();
+            convertCalcium();
+
+            const firstResult = document.querySelector('[id$="-result"]');
+            if (firstResult && firstResult.style.display !== 'none') {
+                firstResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        /**
+         * Reset form to initial state
+         */
+        function resetForm() {
+            document.getElementById('glucose-mmol-l').value = '';
+            document.getElementById('urea-mmol-l').value = '';
+            document.getElementById('creatinine-umol-l').value = '';
+            document.getElementById('sodium-mmol-l').value = '';
+            document.getElementById('potassium-mmol-l').value = '';
+            document.getElementById('calcium-mmol-l').value = '';
+
+            document.getElementById('glucose-result').style.display = 'none';
+            document.getElementById('urea-result').style.display = 'none';
+            document.getElementById('creatinine-result').style.display = 'none';
+            document.getElementById('sodium-result').style.display = 'none';
+            document.getElementById('potassium-result').style.display = 'none';
+            document.getElementById('calcium-result').style.display = 'none';
+
+            document.getElementById('glucose-error').innerHTML = '';
+            document.getElementById('urea-error').innerHTML = '';
+            document.getElementById('creatinine-error').innerHTML = '';
+            document.getElementById('sodium-error').innerHTML = '';
+            document.getElementById('potassium-error').innerHTML = '';
+            document.getElementById('calcium-error').innerHTML = '';
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /**
+         * Allow Enter key to trigger conversion
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = ['glucose-mmol-l', 'urea-mmol-l', 'creatinine-umol-l', 'sodium-mmol-l', 'potassium-mmol-l', 'calcium-mmol-l'];
+            inputs.forEach(id => {
+                document.getElementById(id).addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        convertAllValues();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

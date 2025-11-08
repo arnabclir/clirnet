@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Fluid Calculation - Daily Requirements</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+        }
+
+        body {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            max-width: 900px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            background: white;
+        }
+
+        .card-header {
+            background: var(--secondary-gradient);
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 25px;
+            border: none;
+        }
+
+        .card-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-gradient);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fluid-value {
+            font-size: 48px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 15px 0;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .formula-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .result-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-label {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .result-data {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark mb-4" style="background: transparent;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html" style="color: white;">
+                    <i class="fas fa-calculator"></i> Pediatric Calculators
+                </a>
+            </div>
+        </nav>
+
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">
+                    <i class="fas fa-water"></i> Maintenance Fluid Calculation
+                </h1>
+                <small>Daily Requirements (Holliday-Segar Method)</small>
+            </div>
+
+            <div class="card-body p-4">
+                <!-- Instructions -->
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i> <strong>Instructions:</strong> Enter the child's weight in kilograms.
+                    The calculator will compute daily maintenance fluid requirements using the Holliday-Segar method.
+                </div>
+
+                <!-- Formula Reference -->
+                <div class="formula-box">
+                    <strong>Holliday-Segar Formula (Daily):</strong><br>
+                    <ul class="mb-0">
+                        <li>First 10 kg: 100 mL/kg/day</li>
+                        <li>Next 10 kg: 50 mL/kg/day</li>
+                        <li>Each kg above 20 kg: 20 mL/kg/day</li>
+                    </ul>
+                </div>
+
+                <!-- Input Form -->
+                <form id="fluidForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-weight"></i> Weight (kg)
+                            </label>
+                            <input type="number" class="form-control" id="weight" placeholder="Weight in kg" min="1" max="100" step="0.1" required>
+                            <small class="text-muted">Range: 1-100 kg</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">
+                                <i class="fas fa-flask"></i> Select Fluid Type
+                            </label>
+                            <select class="form-select" id="fluidType" required>
+                                <option value="maint">Maintenance Fluids (5% D/0.2% NS)</option>
+                                <option value="dehydration">Moderate Dehydration (6-9%)</option>
+                                <option value="severe">Severe Dehydration (≥10%)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-4">
+                        <button type="button" class="btn btn-primary btn-lg" onclick="calculateFluid()">
+                            <i class="fas fa-calculator"></i> Calculate Daily Requirements
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Results -->
+                <div id="resultBox" class="result-box">
+                    <h4 class="text-center mb-4"><i class="fas fa-check-circle"></i> Daily Fluid Requirements</h4>
+
+                    <div id="resultDetails"></div>
+
+                    <hr class="my-4">
+
+                    <!-- Clinical Guidance -->
+                    <div id="clinicalGuidance"></div>
+
+                    <!-- Fluid composition reference -->
+                    <div class="alert alert-light mt-4">
+                        <strong><i class="fas fa-flask"></i> Common IV Fluids:</strong>
+                        <table class="table table-sm mt-2">
+                            <tbody>
+                                <tr>
+                                    <td><strong>Maintenance</strong></td>
+                                    <td>5% D/0.2% NS or D5/0.9% NS</td>
+                                    <td><small>140 mEq Na+ L, 20 mEq K+ L</small></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Bolus (dehydration)</strong></td>
+                                    <td>0.9% NS or LR</td>
+                                    <td><small>154 mEq Na+</small></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Maintenance</strong></td>
+                                    <td>D10 0.2% NS (neonates)</td>
+                                    <td><small>Special neonatal solution</small></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Calculate maintenance fluids
+        function calculateFluid() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const fluidType = document.getElementById('fluidType').value;
+
+            if (!weight) {
+                alert('Please enter weight');
+                return;
+            }
+
+            // Calculate maintenance requirement using Holliday-Segar
+            let maintenanceML = 0;
+            let breakdown = '';
+
+            if (weight <= 10) {
+                maintenanceML = weight * 100;
+                breakdown = `${weight} kg × 100 mL/kg = ${maintenanceML} mL`;
+            } else if (weight <= 20) {
+                maintenanceML = (10 * 100) + ((weight - 10) * 50);
+                breakdown = `(10 kg × 100) + (${weight - 10} kg × 50) = ${maintenanceML} mL`;
+            } else {
+                maintenanceML = (10 * 100) + (10 * 50) + ((weight - 20) * 20);
+                breakdown = `(10 × 100) + (10 × 50) + (${weight - 20} kg × 20) = ${maintenanceML} mL`;
+            }
+
+            // Display results
+            displayFluidResults(weight, maintenanceML, breakdown, fluidType);
+            document.getElementById('resultBox').classList.add('show');
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Display fluid results
+        function displayFluidResults(weight, maintenanceML, breakdown, fluidType) {
+            let resultHTML = '';
+            let guidance = '';
+
+            if (fluidType === 'maint') {
+                resultHTML = `
+                    <div class="result-item">
+                        <div class="result-label">Daily Maintenance Fluid Requirement</div>
+                        <div class="result-data">${maintenanceML} mL/day</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Hourly Rate (24-hour)</div>
+                        <div class="result-data">${(maintenanceML / 24).toFixed(1)} mL/hr</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Calculation Breakdown</div>
+                        <div style="color: #666; font-size: 14px;">${breakdown}</div>
+                    </div>
+                `;
+                guidance = `<div class="alert alert-info"><strong><i class="fas fa-info-circle"></i> Maintenance Fluids:</strong><br>
+                    <p><strong>Typical solution:</strong> D5 1/5 NS or D5 0.2% NS with 20 mEq K+/L (after urine output established)</p>
+                    <p><strong>Route:</strong> IV, oral, or enteral depending on clinical status</p>
+                    <p><strong>Ongoing losses:</strong> Add additional fluids for:</p>
+                    <ul>
+                        <li>Diarrhea: 10-25 mL/kg for each diarrheal stool</li>
+                        <li>Vomiting: Replace ml-for-ml</li>
+                        <li>Nasogastric drainage: Replace ml-for-ml</li>
+                        <li>Fever: Add 12-13% for each degree Celsius above 37°C</li>
+                    </ul>
+                </div>`;
+            } else if (fluidType === 'dehydration') {
+                const bolusVolume = weight * 20; // 20 mL/kg for moderate dehydration
+                resultHTML = `
+                    <div class="result-item">
+                        <div class="result-label">Daily Maintenance Requirement</div>
+                        <div class="result-data">${maintenanceML} mL/day</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Rehydration Bolus (Moderate 6-9%)</div>
+                        <div class="result-data">${bolusVolume} mL</div>
+                        <div style="color: #666; font-size: 13px; margin-top: 5px;">20 mL/kg IV bolus over 1 hour</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Total First Day (Bolus + Maintenance)</div>
+                        <div class="result-data">${(bolusVolume + maintenanceML)} mL</div>
+                    </div>
+                `;
+                guidance = `<div class="alert alert-warning"><strong><i class="fas fa-exclamation-triangle"></i> Moderate Dehydration (6-9%):</strong><br>
+                    <p><strong>Initial Bolus:</strong> 20 mL/kg 0.9% NS or LR IV over 60 minutes</p>
+                    <p><strong>After bolus:</strong> Reassess and provide maintenance + ongoing losses</p>
+                    <p><strong>Electrolyte replacement:</strong> Plan replacement over 48 hours</p>
+                    <ul>
+                        <li>Switch to hypotonic fluid after initial bolus</li>
+                        <li>Monitor urine output and vital signs</li>
+                        <li>May require ongoing boluses if clinical status doesn't improve</li>
+                    </ul>
+                </div>`;
+            } else {
+                const bolusVolume = weight * 30; // 30 mL/kg for severe dehydration
+                resultHTML = `
+                    <div class="result-item">
+                        <div class="result-label">Daily Maintenance Requirement</div>
+                        <div class="result-data">${maintenanceML} mL/day</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Rehydration Bolus (Severe ≥10%)</div>
+                        <div class="result-data">${bolusVolume} mL</div>
+                        <div style="color: #666; font-size: 13px; margin-top: 5px;">30 mL/kg IV bolus over 1 hour</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Total First Day (Bolus + Maintenance)</div>
+                        <div class="result-data">${(bolusVolume + maintenanceML)} mL</div>
+                    </div>
+                `;
+                guidance = `<div class="alert alert-danger"><strong><i class="fas fa-times-circle"></i> Severe Dehydration (≥10%):</strong><br>
+                    <p><strong>Initial Bolus:</strong> 30 mL/kg 0.9% NS or LR IV over 30-60 minutes</p>
+                    <p><strong>Reassess after bolus:</strong> May repeat if inadequate response</p>
+                    <p><strong>Critical considerations:</strong></p>
+                    <ul>
+                        <li>Monitor for signs of hypovolemic shock</li>
+                        <li>Check for electrolyte abnormalities</li>
+                        <li>May require ICU monitoring</li>
+                        <li>Plan ongoing replacement over 48 hours</li>
+                        <li>Continuous reassessment of fluid status</li>
+                    </ul>
+                </div>`;
+            }
+
+            document.getElementById('resultDetails').innerHTML = resultHTML;
+            document.getElementById('clinicalGuidance').innerHTML = guidance;
+        }
+    </script>
+</body>
+</html>

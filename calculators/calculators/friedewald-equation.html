@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friedewald Equation - LDL Cholesterol Estimation</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar-custom {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .card-header-custom {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .btn-primary-custom {
+            background: var(--primary-gradient);
+            border: none;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+        }
+        .result-card {
+            border-left: 5px solid #667eea;
+            background: white;
+            margin-top: 20px;
+        }
+        .formula-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 1px solid #667eea33;
+        }
+        .optimal { color: #28a745; font-weight: bold; }
+        .borderline { color: #fd7e14; font-weight: bold; }
+        .high { color: #dc3545; font-weight: bold; }
+        .input-group-text {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+        }
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="javascript:history.back()">
+                <i class="fas fa-arrow-left"></i> Back to Dashboard
+            </a>
+            <span class="navbar-text text-white">Friedewald Equation</span>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0 mb-4">
+                    <div class="card-header card-header-custom">
+                        <h2 class="mb-0">
+                            <i class="fas fa-flask"></i> Friedewald Equation
+                        </h2>
+                        <p class="mb-0 small mt-2">LDL Cholesterol Estimation from Lipid Panel</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <strong><i class="fas fa-info-circle"></i> Clinical Context:</strong>
+                            <p class="mb-0">Friedewald equation estimates LDL cholesterol from total cholesterol, HDL, and triglycerides. Direct LDL measurement is preferred for accurate assessment.</p>
+                        </div>
+
+                        <form id="calculatorForm">
+                            <div class="row">
+                                <!-- Total Cholesterol -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Total Cholesterol (mg/dL)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-vial"></i></span>
+                                        <input type="number" class="form-control" id="totalChol" min="50" max="600" required placeholder="mg/dL">
+                                    </div>
+                                </div>
+
+                                <!-- HDL Cholesterol -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>HDL Cholesterol (mg/dL)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-vial"></i></span>
+                                        <input type="number" class="form-control" id="hdl" min="20" max="150" required placeholder="mg/dL">
+                                    </div>
+                                    <small class="text-muted">Normal: &gt;40 mg/dL (M), &gt;50 mg/dL (F)</small>
+                                </div>
+
+                                <!-- Triglycerides -->
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">
+                                        <strong>Triglycerides (mg/dL)</strong>
+                                    </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-vial"></i></span>
+                                        <input type="number" class="form-control" id="triglycerides" min="0" max="1000" required placeholder="mg/dL">
+                                    </div>
+                                    <small class="text-muted">Normal: &lt;150 mg/dL</small>
+                                </div>
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex mt-4">
+                                <button type="button" class="btn btn-primary-custom btn-lg flex-grow-1" id="calculateBtn">
+                                    <i class="fas fa-calculator"></i> Calculate LDL
+                                </button>
+                                <button type="reset" class="btn btn-secondary btn-lg flex-grow-1">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+
+                        <div id="resultsSection" style="display: none;">
+                            <div class="card result-card">
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <i class="fas fa-chart-pie"></i> Results
+                                    </h4>
+                                    <p class="mb-3">
+                                        <span class="h6"><strong>Estimated LDL Cholesterol:</strong></span>
+                                        <span id="ldlValue" class="display-4"></span>
+                                        <span class="text-muted">mg/dL</span>
+                                    </p>
+                                    <div id="ldlInterpretation" class="alert"></div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3">
+                                <div class="card-header card-header-custom">
+                                    <h5 class="mb-0"><i class="fas fa-table"></i> LDL Cholesterol Goals</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>LDL Level</th>
+                                                    <th>Category</th>
+                                                    <th>Clinical Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr><td><strong>&lt;70 mg/dL</strong></td><td><span class="optimal">Optimal</span></td><td>For very high-risk ASCVD patients</td></tr>
+                                                <tr><td><strong>70-99 mg/dL</strong></td><td><span class="optimal">Optimal</span></td><td>Ideal for most people</td></tr>
+                                                <tr><td><strong>100-129 mg/dL</strong></td><td><span class="optimal">Near Optimal</span></td><td>Acceptable</td></tr>
+                                                <tr><td><strong>130-159 mg/dL</strong></td><td><span class="borderline">Borderline High</span></td><td>Consider statin therapy</td></tr>
+                                                <tr><td><strong>160-189 mg/dL</strong></td><td><span class="borderline">High</span></td><td>Statin therapy recommended</td></tr>
+                                                <tr><td><strong>≥190 mg/dL</strong></td><td><span class="high">Very High</span></td><td>Aggressive statin therapy needed</span></td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3 formula-card">
+                                <div class="card-header" style="background-color: #667eea33; border: none;">
+                                    <h5 class="mb-0"><i class="fas fa-flask"></i> Friedewald Formula</h5>
+                                </div>
+                                <div class="card-body">
+                                    <h6>LDL Calculation:</h6>
+                                    <p class="small font-monospace bg-light p-2 rounded mb-3">
+                                        LDL = Total Chol - HDL - (Triglycerides / 5)
+                                    </p>
+                                    <h6>VLDL Approximation:</h6>
+                                    <p class="small font-monospace bg-light p-2 rounded mb-3">
+                                        VLDL = Triglycerides / 5<br/>
+                                        (Valid when TG &lt; 400 mg/dL)
+                                    </p>
+                                    <hr class="my-2">
+                                    <p class="small mb-0"><strong>Clinical Notes:</strong></p>
+                                    <ul class="small">
+                                        <li>Valid only when triglycerides &lt; 400 mg/dL</li>
+                                        <li>Less accurate with very low or very high TG</li>
+                                        <li>Direct LDL measurement preferred for precise assessment</li>
+                                        <li>Use for screening and CVD risk assessment</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('calculateBtn').addEventListener('click', function() {
+            try {
+                const totalChol = parseInt(document.getElementById('totalChol').value) || 0;
+                const hdl = parseInt(document.getElementById('hdl').value) || 0;
+                const triglycerides = parseInt(document.getElementById('triglycerides').value) || 0;
+
+                if (totalChol <= 0 || hdl <= 0 || triglycerides < 0) {
+                    alert('Please enter valid positive values');
+                    return;
+                }
+
+                if (triglycerides > 400) {
+                    alert('Warning: Friedewald equation less accurate with triglycerides > 400 mg/dL. Direct LDL measurement recommended.');
+                }
+
+                // Friedewald equation: LDL = TC - HDL - (TG/5)
+                const vldl = triglycerides / 5;
+                const ldl = totalChol - hdl - vldl;
+
+                document.getElementById('ldlValue').textContent = Math.max(0, ldl).toFixed(0);
+
+                let interpretation = '';
+                if (ldl < 70) {
+                    interpretation = '<span class="optimal">Optimal (&lt;70 mg/dL)</span> - Excellent LDL level, especially for high-risk patients.';
+                } else if (ldl < 100) {
+                    interpretation = '<span class="optimal">Optimal (70-99 mg/dL)</span> - Good LDL level.';
+                } else if (ldl < 130) {
+                    interpretation = '<span class="optimal">Near Optimal (100-129 mg/dL)</span> - Acceptable level.';
+                } else if (ldl < 160) {
+                    interpretation = '<span class="borderline">Borderline High (130-159 mg/dL)</span> - Consider lipid-lowering therapy.';
+                } else if (ldl < 190) {
+                    interpretation = '<span class="borderline">High (160-189 mg/dL)</span> - Statin therapy recommended.';
+                } else {
+                    interpretation = '<span class="high">Very High (≥190 mg/dL)</span> - Aggressive medical therapy needed. Consider genetic hypercholesterolemia.';
+                }
+
+                document.getElementById('ldlInterpretation').innerHTML = interpretation;
+                document.getElementById('resultsSection').style.display = 'block';
+                document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

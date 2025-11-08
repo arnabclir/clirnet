@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for Responsive Design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dermatology Calculators - Clinical Assessment Tools for Skin Condition Management">
+    <meta name="keywords" content="Dermatology, BMI, BSA, Calculators, Clinical Tools">
+    <title>Dermatology Calculators | Clinical Assessment Tools</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Styles -->
+    <style>
+        /* Purple Gradient Theme */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #764ba2 0%, #f093fb 100%);
+            --light-purple: #f3f0ff;
+            --dark-purple: #5a4a8a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        /* Header Navigation */
+        .navbar {
+            background: var(--primary-gradient);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .hero-section p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 0;
+        }
+
+        /* Main Container */
+        .main-container {
+            padding: 60px 20px;
+            background: linear-gradient(180deg, #f3f0ff 0%, #f8f9fa 100%);
+        }
+
+        /* Calculator Grid */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        /* Calculator Card */
+        .calc-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .calc-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .calc-card-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .calc-card-header h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .calc-card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+            opacity: 0.95;
+        }
+
+        .calc-card-body {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .calc-card-body p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .badge-category {
+            display: inline-block;
+            background: var(--light-purple);
+            color: #667eea;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .calc-btn {
+            background: var(--primary-gradient);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px 25px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .calc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+        }
+
+        /* Category Section */
+        .category-section {
+            margin-bottom: 50px;
+        }
+
+        .category-section h2 {
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary-gradient);
+        }
+
+        /* Information Box */
+        .info-section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+            border-left: 5px solid #667eea;
+        }
+
+        .info-section h3 {
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .info-section p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            color: #555;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li i {
+            color: #667eea;
+            margin-right: 12px;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-purple);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.95rem;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../../index.html">
+                <i class="fas fa-hospital"></i> Medical Calculators
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html">
+                            <i class="fas fa-home"></i> Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../catalog.html">
+                            <i class="fas fa-list"></i> All Calculators
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="dermatology-index.html">
+                            <i class="fas fa-spa"></i> Dermatology
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <h1><i class="fas fa-spa"></i> Dermatology Calculators</h1>
+            <p>Clinical Assessment and Treatment Planning Tools for Skin Conditions</p>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="container">
+            <!-- BMI Calculators Section -->
+            <div class="category-section">
+                <h2><i class="fas fa-weight"></i> Body Mass Index (BMI) Calculators</h2>
+                <p style="color: #666; margin-bottom: 30px;">BMI is a fundamental measure of body composition used in dermatology to assess patient health status, inform treatment decisions, and evaluate disease risk factors. These calculators support both patient education and clinical assessment.</p>
+
+                <div class="calculator-grid">
+                    <!-- BMI Metric (Patient) -->
+                    <div class="calc-card">
+                        <div class="calc-card-header">
+                            <i class="fas fa-weight calc-card-icon"></i>
+                            <h3>BMI (Metric)</h3>
+                            <small>Patient Education</small>
+                        </div>
+                        <div class="calc-card-body">
+                            <span class="badge-category">Patient Tool</span>
+                            <p>Calculate BMI using metric units (kilograms and centimeters). Patient-friendly interface with educational content about healthy weight ranges and dermatological implications.</p>
+                            <a href="bmi-metric-adult-patient.html" class="calc-btn">
+                                <i class="fas fa-calculator"></i> Open Calculator
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- BMI Standard (Patient) -->
+                    <div class="calc-card">
+                        <div class="calc-card-header">
+                            <i class="fas fa-weight calc-card-icon"></i>
+                            <h3>BMI (Standard)</h3>
+                            <small>Patient Education</small>
+                        </div>
+                        <div class="calc-card-body">
+                            <span class="badge-category">Patient Tool</span>
+                            <p>Calculate BMI using imperial units (pounds and feet/inches). Ideal for patients in countries using standard measurements with intuitive weight category guidance.</p>
+                            <a href="bmi-standard-adult-patient.html" class="calc-btn">
+                                <i class="fas fa-calculator"></i> Open Calculator
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- BMI Quetelet (Clinical) -->
+                    <div class="calc-card">
+                        <div class="calc-card-header">
+                            <i class="fas fa-stethoscope calc-card-icon"></i>
+                            <h3>BMI (Quetelet)</h3>
+                            <small>Clinical Use</small>
+                        </div>
+                        <div class="calc-card-body">
+                            <span class="badge-category">Clinical Tool</span>
+                            <p>Professional clinical calculator using Quetelet's index formula. Provides detailed clinical interpretation with dermatological impact assessment for treatment planning.</p>
+                            <a href="bmi-quetelet-adult-clinical.html" class="calc-btn">
+                                <i class="fas fa-calculator"></i> Open Calculator
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BSA Calculators Section -->
+            <div class="category-section">
+                <h2><i class="fas fa-human"></i> Body Surface Area (BSA) Calculators</h2>
+                <p style="color: #666; margin-bottom: 30px;">BSA is critical for dosing chemotherapy, phototherapy, and systemic dermatological treatments. These calculators provide accurate BSA determination using clinically validated formulas for safe and effective treatment dosing.</p>
+
+                <div class="calculator-grid">
+                    <!-- BSA Mosteller -->
+                    <div class="calc-card">
+                        <div class="calc-card-header">
+                            <i class="fas fa-human calc-card-icon"></i>
+                            <h3>BSA (Mosteller)</h3>
+                            <small>Treatment Planning</small>
+                        </div>
+                        <div class="calc-card-body">
+                            <span class="badge-category">Treatment Tool</span>
+                            <p>Mosteller method for BSA calculation. Widely used for dermatological treatment planning, phototherapy dosing, and systemic agent calculations.</p>
+                            <a href="bsa-mosteller-treatment.html" class="calc-btn">
+                                <i class="fas fa-calculator"></i> Open Calculator
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- BSA Du Bois -->
+                    <div class="calc-card">
+                        <div class="calc-card-header">
+                            <i class="fas fa-flask-vial calc-card-icon"></i>
+                            <h3>BSA (Du Bois)</h3>
+                            <small>Chemotherapy Dosing</small>
+                        </div>
+                        <div class="calc-card-body">
+                            <span class="badge-category">Chemotherapy Tool</span>
+                            <p>Du Bois formula for precise BSA calculation. Gold standard for chemotherapy dosing with integrated dosing calculators for common agents.</p>
+                            <a href="bsa-dubois-chemotherapy.html" class="calc-btn">
+                                <i class="fas fa-calculator"></i> Open Calculator
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Information Section -->
+            <div class="info-section">
+                <h3><i class="fas fa-info-circle"></i> About These Dermatology Calculators</h3>
+                <p>This collection of dermatology calculators provides evidence-based clinical assessment tools for skin condition management and treatment planning. Each calculator is designed with healthcare professionals and patients in mind, offering both educational and clinical functionality.</p>
+
+                <h4 style="color: #667eea; margin-top: 25px; margin-bottom: 15px;">Key Features:</h4>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> Purple gradient theme for professional clinical appearance</li>
+                    <li><i class="fas fa-check"></i> Responsive design optimized for desktop and mobile devices</li>
+                    <li><i class="fas fa-check"></i> Comprehensive input validation with error messaging</li>
+                    <li><i class="fas fa-check"></i> Font Awesome icons for intuitive interface navigation</li>
+                    <li><i class="fas fa-check"></i> Clinical interpretation guidance for each calculation</li>
+                    <li><i class="fas fa-check"></i> Bootstrap 5 framework for consistent styling</li>
+                    <li><i class="fas fa-check"></i> Pure HTML5/CSS3/JavaScript - no external dependencies</li>
+                    <li><i class="fas fa-check"></i> Navigation menu linking all calculators</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin-top: 25px; margin-bottom: 15px;">Clinical Disclaimer:</h4>
+                <p style="color: #cc0000; font-weight: 600;">These calculators are for informational and educational purposes only. They should not replace professional medical judgment or established clinical protocols. Always consult with qualified healthcare professionals for treatment decisions, and verify all calculations with institutional guidelines before implementation.</p>
+            </div>
+
+            <!-- Quick Reference Section -->
+            <div class="info-section">
+                <h3><i class="fas fa-book"></i> Quick Reference Guide</h3>
+
+                <h4 style="color: #667eea; margin-top: 20px; margin-bottom: 15px;">When to Use BMI Calculators:</h4>
+                <ul class="feature-list">
+                    <li><i class="fas fa-arrow-right"></i> Assessing patient general health status</li>
+                    <li><i class="fas fa-arrow-right"></i> Evaluating risk factors for dermatological conditions</li>
+                    <li><i class="fas fa-arrow-right"></i> Patient education about healthy weight ranges</li>
+                    <li><i class="fas fa-arrow-right"></i> Documentation in patient assessment</li>
+                </ul>
+
+                <h4 style="color: #667eea; margin-top: 20px; margin-bottom: 15px;">When to Use BSA Calculators:</h4>
+                <ul class="feature-list">
+                    <li><i class="fas fa-arrow-right"></i> Dosing phototherapy treatments (UVB, PUVA)</li>
+                    <li><i class="fas fa-arrow-right"></i> Calculating chemotherapy agent doses</li>
+                    <li><i class="fas fa-arrow-right"></i> Systemic medication dosing</li>
+                    <li><i class="fas fa-arrow-right"></i> Treatment planning for extensive skin conditions</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><i class="fas fa-copyright"></i> Dermatology Clinical Calculators Collection</p>
+        <p><small>For clinical use with professional medical judgment. Always verify calculations against institutional protocols.</small></p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

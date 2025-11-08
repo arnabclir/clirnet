@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for Responsive Design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sports Medicine Unit Converter - SI to Conventional for Immunology Lab Values">
+    <meta name="keywords" content="medical calculator, unit conversion, SI units, immunology">
+
+    <title>Sports Medicine: SI to Conventional - Immunology</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome 6.4 Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ===== ROOT COLOR VARIABLES ===== */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --light-bg: #f8f9fa;
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            --border-color: #e0e0e0;
+        }
+
+        /* ===== BASE STYLES ===== */
+        * {
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background: var(--light-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 20px;
+            padding-bottom: 40px;
+            color: #333;
+        }
+
+        /* ===== NAVIGATION MENU ===== */
+        .navbar-custom {
+            background: var(--primary-gradient);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .navbar-custom .navbar-brand {
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: white !important;
+        }
+
+        .navbar-custom .nav-link {
+            color: rgba(255, 255, 255, 0.9) !important;
+            margin-left: 15px;
+            font-weight: 500;
+        }
+
+        .navbar-custom .nav-link:hover {
+            color: white !important;
+            text-decoration: underline;
+        }
+
+        /* ===== HEADER SECTION ===== */
+        .gradient-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 50px 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+        }
+
+        .gradient-header h1 {
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-size: 2.2rem;
+        }
+
+        .gradient-header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 10px;
+        }
+
+        .gradient-header .description {
+            font-size: 0.95rem;
+            opacity: 0.85;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .calculator-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: var(--card-shadow);
+        }
+
+        /* ===== FORM SECTIONS ===== */
+        .form-section {
+            margin-bottom: 35px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            color: #667eea;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* ===== INPUT GROUPS ===== */
+        .input-group-wrapper {
+            margin-bottom: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-control {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* ===== UNIT BADGES ===== */
+        .unit-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        /* ===== RESULT SECTION ===== */
+        .result-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .result-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .result-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .result-value {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+
+        .result-value .label {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .result-value .value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        /* ===== INTERPRETATION ===== */
+        .interpretation-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .interpretation-title {
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .interpretation-text {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .reference-range {
+            background: white;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-convert {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-weight: 600;
+            border-radius: 8px;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .btn-convert:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-reset {
+            background: #e0e0e0;
+            color: #333;
+            border: none;
+            padding: 12px 35px;
+            font-weight: 600;
+            border-radius: 8px;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            margin-left: 15px;
+        }
+
+        .btn-reset:hover {
+            background: #d0d0d0;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .button-group {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        /* ===== ERROR MESSAGES ===== */
+        .error-message {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* ===== REFERENCE TABLE ===== */
+        .reference-table {
+            overflow-x: auto;
+            margin-top: 30px;
+        }
+
+        .table {
+            border-collapse: collapse;
+        }
+
+        .table thead th {
+            background: var(--primary-gradient);
+            color: white;
+            font-weight: 600;
+            padding: 15px;
+            text-align: left;
+            border: none;
+        }
+
+        .table tbody tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .table tbody td {
+            padding: 12px 15px;
+            vertical-align: middle;
+        }
+
+        /* ===== HELP SECTION ===== */
+        .help-section {
+            background: #f0f4ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            border-left: 4px solid #667eea;
+        }
+
+        .help-section h5 {
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .help-section ul {
+            margin-bottom: 0;
+            padding-left: 20px;
+        }
+
+        .help-section li {
+            margin-bottom: 8px;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        /* ===== ALERT MESSAGES ===== */
+        .alert-message {
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-info {
+            background: rgba(23, 162, 184, 0.1);
+            border: 1px solid #17a2b8;
+            color: #17a2b8;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .calculator-container {
+                padding: 25px;
+            }
+
+            .gradient-header {
+                padding: 30px 20px;
+                margin-bottom: 25px;
+            }
+
+            .gradient-header h1 {
+                font-size: 1.6rem;
+                flex-direction: column;
+            }
+
+            .input-group-wrapper {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .result-row {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn-reset {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .btn-convert {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .navbar-custom .nav-link {
+                margin-left: 0;
+                padding: 8px 0;
+            }
+
+            .unit-badge {
+                display: block;
+                margin: 8px 0 0 0;
+            }
+        }
+
+        /* ===== FOOTER ===== */
+        .footer-section {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border-color);
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .footer-section p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== NAVIGATION MENU ===== -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="fas fa-shield-virus"></i> Sports Medicine Lab</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 30 30%22%3E%3Cpath stroke=%22rgba(255,255,255,0.55)%22 stroke-linecap=%22round%22 stroke-miterlimit=%2210%22 stroke-width=%222%22 d=%22M4 7h22M4 15h22M4 23h22%22/%3E%3C/svg%3E')"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#calculator"><i class="fas fa-calculator"></i> Calculator</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reference"><i class="fas fa-table"></i> Reference</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#help"><i class="fas fa-question-circle"></i> Help</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN CONTAINER ===== -->
+    <div class="container">
+        <!-- ===== HEADER ===== -->
+        <div class="gradient-header" id="calculator">
+            <h1><i class="fas fa-bacteria"></i> SI to Conventional Conversion</h1>
+            <div class="subtitle">Immunology Laboratory Values</div>
+            <div class="description">Convert SI (Système International) units to conventional units for immunology and immune function tests used in sports medicine practice.</div>
+        </div>
+
+        <!-- ===== CALCULATOR FORM ===== -->
+        <div class="calculator-container">
+            <!-- ===== WBC COUNT SECTION ===== -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-microscope"></i> Leukocyte (WBC) Count
+                </div>
+                <div class="input-group-wrapper">
+                    <div class="form-group">
+                        <label class="form-label">
+                            WBC (×10⁹/L)
+                            <span class="unit-badge">SI Units</span>
+                        </label>
+                        <input type="number" class="form-control" id="wbc-x10-l" placeholder="4.5-11.0" step="0.1">
+                        <div class="error-message" id="wbc-error"></div>
+                    </div>
+                </div>
+                <div id="wbc-result" class="result-card" style="display: none;">
+                    <div class="result-row">
+                        <div class="result-value">
+                            <div class="label">Input (×10⁹/L)</div>
+                            <div class="value" id="wbc-input-display">-</div>
+                        </div>
+                        <div class="result-value">
+                            <div class="label">Output (K/μL)</div>
+                            <div class="value" id="wbc-output-display">-</div>
+                        </div>
+                    </div>
+                    <div class="interpretation-box">
+                        <div class="interpretation-title"><i class="fas fa-info-circle"></i> Clinical Interpretation</div>
+                        <div class="interpretation-text" id="wbc-interpretation">-</div>
+                        <div class="reference-range">
+                            <strong>Normal Range (Conv):</strong> 4.5-11.0 K/μL | <strong>Sports Medicine:</strong> Monitor for exercise-induced leukocytosis
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== LYMPHOCYTE COUNT SECTION ===== -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-shield-alt"></i> Lymphocyte Count
+                </div>
+                <div class="input-group-wrapper">
+                    <div class="form-group">
+                        <label class="form-label">
+                            Lymphocytes (×10⁹/L)
+                            <span class="unit-badge">SI Units</span>
+                        </label>
+                        <input type="number" class="form-control" id="lymph-x10-l" placeholder="1.0-4.8" step="0.1">
+                        <div class="error-message" id="lymph-error"></div>
+                    </div>
+                </div>
+                <div id="lymph-result" class="result-card" style="display: none;">
+                    <div class="result-row">
+                        <div class="result-value">
+                            <div class="label">Input (×10⁹/L)</div>
+                            <div class="value" id="lymph-input-display">-</div>
+                        </div>
+                        <div class="result-value">
+                            <div class="label">Output (K/μL)</div>
+                            <div class="value" id="lymph-output-display">-</div>
+                        </div>
+                    </div>
+                    <div class="interpretation-box">
+                        <div class="interpretation-title"><i class="fas fa-info-circle"></i> Clinical Interpretation</div>
+                        <div class="interpretation-text" id="lymph-interpretation">-</div>
+                        <div class="reference-range">
+                            <strong>Normal Range (Conv):</strong> 1.0-4.8 K/μL | <strong>Sports Medicine:</strong> Influenced by training intensity
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== NEUTROPHIL COUNT SECTION ===== -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-shield"></i> Neutrophil Count
+                </div>
+                <div class="input-group-wrapper">
+                    <div class="form-group">
+                        <label class="form-label">
+                            Neutrophils (×10⁹/L)
+                            <span class="unit-badge">SI Units</span>
+                        </label>
+                        <input type="number" class="form-control" id="neutrophil-x10-l" placeholder="2.0-7.5" step="0.1">
+                        <div class="error-message" id="neutrophil-error"></div>
+                    </div>
+                </div>
+                <div id="neutrophil-result" class="result-card" style="display: none;">
+                    <div class="result-row">
+                        <div class="result-value">
+                            <div class="label">Input (×10⁹/L)</div>
+                            <div class="value" id="neutrophil-input-display">-</div>
+                        </div>
+                        <div class="result-value">
+                            <div class="label">Output (K/μL)</div>
+                            <div class="value" id="neutrophil-output-display">-</div>
+                        </div>
+                    </div>
+                    <div class="interpretation-box">
+                        <div class="interpretation-title"><i class="fas fa-info-circle"></i> Clinical Interpretation</div>
+                        <div class="interpretation-text" id="neutrophil-interpretation">-</div>
+                        <div class="reference-range">
+                            <strong>Normal Range (Conv):</strong> 2.0-7.5 K/μL | <strong>Sports Medicine:</strong> Transient rise during intense exercise
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== MONOCYTE COUNT SECTION ===== -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-virus"></i> Monocyte Count
+                </div>
+                <div class="input-group-wrapper">
+                    <div class="form-group">
+                        <label class="form-label">
+                            Monocytes (×10⁹/L)
+                            <span class="unit-badge">SI Units</span>
+                        </label>
+                        <input type="number" class="form-control" id="monocyte-x10-l" placeholder="0.2-0.9" step="0.01">
+                        <div class="error-message" id="monocyte-error"></div>
+                    </div>
+                </div>
+                <div id="monocyte-result" class="result-card" style="display: none;">
+                    <div class="result-row">
+                        <div class="result-value">
+                            <div class="label">Input (×10⁹/L)</div>
+                            <div class="value" id="monocyte-input-display">-</div>
+                        </div>
+                        <div class="result-value">
+                            <div class="label">Output (K/μL)</div>
+                            <div class="value" id="monocyte-output-display">-</div>
+                        </div>
+                    </div>
+                    <div class="interpretation-box">
+                        <div class="interpretation-title"><i class="fas fa-info-circle"></i> Clinical Interpretation</div>
+                        <div class="interpretation-text" id="monocyte-interpretation">-</div>
+                        <div class="reference-range">
+                            <strong>Normal Range (Conv):</strong> 0.2-0.9 K/μL | <strong>Sports Medicine:</strong> Immune response indicator
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== EOSINOPHIL COUNT SECTION ===== -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-blood"></i> Eosinophil Count
+                </div>
+                <div class="input-group-wrapper">
+                    <div class="form-group">
+                        <label class="form-label">
+                            Eosinophils (×10⁹/L)
+                            <span class="unit-badge">SI Units</span>
+                        </label>
+                        <input type="number" class="form-control" id="eosinophil-x10-l" placeholder="0.0-0.4" step="0.01">
+                        <div class="error-message" id="eosinophil-error"></div>
+                    </div>
+                </div>
+                <div id="eosinophil-result" class="result-card" style="display: none;">
+                    <div class="result-row">
+                        <div class="result-value">
+                            <div class="label">Input (×10⁹/L)</div>
+                            <div class="value" id="eosinophil-input-display">-</div>
+                        </div>
+                        <div class="result-value">
+                            <div class="label">Output (K/μL)</div>
+                            <div class="value" id="eosinophil-output-display">-</div>
+                        </div>
+                    </div>
+                    <div class="interpretation-box">
+                        <div class="interpretation-title"><i class="fas fa-info-circle"></i> Clinical Interpretation</div>
+                        <div class="interpretation-text" id="eosinophil-interpretation">-</div>
+                        <div class="reference-range">
+                            <strong>Normal Range (Conv):</strong> 0.0-0.4 K/μL | <strong>Sports Medicine:</strong> Elevated may indicate infection or allergy
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== IgG SECTION ===== -->
+            <div class="form-section">
+                <div class="section-title">
+                    <i class="fas fa-dna"></i> Immunoglobulin G (IgG)
+                </div>
+                <div class="input-group-wrapper">
+                    <div class="form-group">
+                        <label class="form-label">
+                            IgG (g/L)
+                            <span class="unit-badge">SI Units</span>
+                        </label>
+                        <input type="number" class="form-control" id="igg-g-l" placeholder="7-16" step="0.1">
+                        <div class="error-message" id="igg-error"></div>
+                    </div>
+                </div>
+                <div id="igg-result" class="result-card" style="display: none;">
+                    <div class="result-row">
+                        <div class="result-value">
+                            <div class="label">Input (g/L)</div>
+                            <div class="value" id="igg-input-display">-</div>
+                        </div>
+                        <div class="result-value">
+                            <div class="label">Output (mg/dL)</div>
+                            <div class="value" id="igg-output-display">-</div>
+                        </div>
+                    </div>
+                    <div class="interpretation-box">
+                        <div class="interpretation-title"><i class="fas fa-info-circle"></i> Clinical Interpretation</div>
+                        <div class="interpretation-text" id="igg-interpretation">-</div>
+                        <div class="reference-range">
+                            <strong>Normal Range (Conv):</strong> 700-1600 mg/dL | <strong>Sports Medicine:</strong> Indicates immune competence
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== BUTTON GROUP ===== -->
+            <div class="button-group">
+                <button class="btn-convert" onclick="convertAllValues()">
+                    <i class="fas fa-exchange-alt"></i> Convert All Values
+                </button>
+                <button class="btn-reset" onclick="resetForm()">
+                    <i class="fas fa-redo"></i> Reset Form
+                </button>
+            </div>
+        </div>
+
+        <!-- ===== REFERENCE TABLE ===== -->
+        <div class="calculator-container" id="reference">
+            <h3 class="section-title" style="margin-bottom: 25px;">
+                <i class="fas fa-table"></i> Conversion Reference Table
+            </h3>
+            <div class="reference-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Test</th>
+                            <th>SI Unit</th>
+                            <th>Conventional Unit</th>
+                            <th>Conversion Factor</th>
+                            <th>Normal Range (Conventional)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>WBC Count</strong></td>
+                            <td>×10⁹/L</td>
+                            <td>K/μL</td>
+                            <td>× 1.0</td>
+                            <td>4.5-11.0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lymphocytes</strong></td>
+                            <td>×10⁹/L</td>
+                            <td>K/μL</td>
+                            <td>× 1.0</td>
+                            <td>1.0-4.8</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Neutrophils</strong></td>
+                            <td>×10⁹/L</td>
+                            <td>K/μL</td>
+                            <td>× 1.0</td>
+                            <td>2.0-7.5</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Monocytes</strong></td>
+                            <td>×10⁹/L</td>
+                            <td>K/μL</td>
+                            <td>× 1.0</td>
+                            <td>0.2-0.9</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Eosinophils</strong></td>
+                            <td>×10⁹/L</td>
+                            <td>K/μL</td>
+                            <td>× 1.0</td>
+                            <td>0.0-0.4</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IgG</strong></td>
+                            <td>g/L</td>
+                            <td>mg/dL</td>
+                            <td>× 100</td>
+                            <td>700-1600</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ===== HELP SECTION ===== -->
+        <div class="calculator-container" id="help">
+            <div class="help-section">
+                <h5><i class="fas fa-lightbulb"></i> How to Use This Calculator</h5>
+                <ul>
+                    <li>Enter values in SI units (×10⁹/L, g/L, etc.)</li>
+                    <li>Click "Convert All Values" to see conventional unit conversions</li>
+                    <li>Review clinical interpretation for sports medicine context</li>
+                    <li>Compare results with provided normal ranges</li>
+                    <li>Use baseline values for training response assessment</li>
+                </ul>
+            </div>
+
+            <div class="help-section" style="margin-top: 20px;">
+                <h5><i class="fas fa-heartbeat"></i> Sports Medicine Immunology Notes</h5>
+                <ul>
+                    <li><strong>Exercise-Induced Leukocytosis:</strong> WBC elevation is normal during/after exercise</li>
+                    <li><strong>Open Window Hypothesis:</strong> Brief period of immune suppression post-exercise</li>
+                    <li><strong>Overtraining Markers:</strong> Chronic elevation of WBC/neutrophils may indicate overtraining</li>
+                    <li><strong>IgG Levels:</strong> Important for monitoring infection risk in endurance athletes</li>
+                    <li><strong>Training Adaptations:</strong> Serial monitoring helps assess immune adaptation to training</li>
+                </ul>
+            </div>
+
+            <div class="alert-message alert-info" style="margin-top: 20px;">
+                <i class="fas fa-info-circle"></i>
+                <div>
+                    <strong>Disclaimer:</strong> This calculator is for educational purposes only. All medical decisions should be made in consultation with qualified healthcare professionals.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <div class="footer-section container">
+        <p><strong>Sports Medicine Laboratory Unit Converter</strong></p>
+        <p>Version 1.0 | Updated 2025 | For educational and clinical reference only</p>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- ===== CONVERSION CALCULATIONS ===== -->
+    <script>
+        // Conversion factors for SI to conventional
+        const conversionFactors = {
+            wbc: 1.0,                  // ×10⁹/L to K/μL (same unit)
+            lymphocyte: 1.0,           // ×10⁹/L to K/μL
+            neutrophil: 1.0,           // ×10⁹/L to K/μL
+            monocyte: 1.0,             // ×10⁹/L to K/μL
+            eosinophil: 1.0,           // ×10⁹/L to K/μL
+            igg: 100                   // g/L to mg/dL
+        };
+
+        // Reference ranges for interpretation
+        const referenceRanges = {
+            wbc: { min: 4.5, max: 11.0, unit: 'K/μL' },
+            lymphocyte: { min: 1.0, max: 4.8, unit: 'K/μL' },
+            neutrophil: { min: 2.0, max: 7.5, unit: 'K/μL' },
+            monocyte: { min: 0.2, max: 0.9, unit: 'K/μL' },
+            eosinophil: { min: 0.0, max: 0.4, unit: 'K/μL' },
+            igg: { min: 700, max: 1600, unit: 'mg/dL' }
+        };
+
+        /**
+         * Validate input value
+         * @param {number} value - Input value to validate
+         * @returns {boolean} - True if valid
+         */
+        function validateInput(value) {
+            return !isNaN(value) && value !== '' && value >= 0;
+        }
+
+        /**
+         * Get clinical interpretation based on value
+         * @param {number} value - Result value
+         * @param {object} range - Reference range
+         * @param {string} test - Test name
+         * @returns {string} - Interpretation text
+         */
+        function getInterpretation(value, range, test) {
+            const isLow = value < range.min;
+            const isHigh = value > range.max;
+
+            const interpretations = {
+                wbc: {
+                    low: 'Leukopenia - Potential immune suppression. Consider rest and recovery.',
+                    normal: 'Normal WBC. Good immune response.',
+                    high: 'Leukocytosis - Normal after exercise. May indicate infection if persistent.'
+                },
+                lymphocyte: {
+                    low: 'Lymphopenia - May indicate intense training or infection.',
+                    normal: 'Normal lymphocyte count. Adequate cellular immunity.',
+                    high: 'Lymphocytosis - May indicate infection or immune response.'
+                },
+                neutrophil: {
+                    low: 'Neutropenia - Unusual. Consider medical evaluation.',
+                    normal: 'Normal neutrophil count.',
+                    high: 'Neutrophilia - Common post-exercise. May indicate infection if persistent.'
+                },
+                monocyte: {
+                    low: 'Monocytopenia - Rare. Usually not clinically significant.',
+                    normal: 'Normal monocyte count.',
+                    high: 'Monocytosis - May indicate chronic infection or inflammation.'
+                },
+                eosinophil: {
+                    low: 'Normal eosinophil count.',
+                    normal: 'Normal eosinophil count.',
+                    high: 'Eosinophilia - May indicate allergy, parasites, or overtraining.'
+                },
+                igg: {
+                    low: 'Low IgG - Increased infection risk. Assess recovery adequacy.',
+                    normal: 'Normal IgG. Adequate humoral immunity.',
+                    high: 'Elevated IgG - Possible recent infection or chronic inflammation.'
+                }
+            };
+
+            if (isLow) return interpretations[test].low;
+            if (isHigh) return interpretations[test].high;
+            return interpretations[test].normal;
+        }
+
+        /**
+         * Convert WBC count from SI to conventional
+         */
+        function convertWBC() {
+            const input = document.getElementById('wbc-x10-l').value;
+            const errorDiv = document.getElementById('wbc-error');
+
+            if (!validateInput(input)) {
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter a valid number';
+                document.getElementById('wbc-result').style.display = 'none';
+                return;
+            }
+
+            errorDiv.innerHTML = '';
+            const value = parseFloat(input);
+            const result = (value * conversionFactors.wbc).toFixed(1);
+            const range = referenceRanges.wbc;
+            const interpretation = getInterpretation(result, range, 'wbc');
+
+            document.getElementById('wbc-input-display').textContent = value.toFixed(1);
+            document.getElementById('wbc-output-display').textContent = result;
+            document.getElementById('wbc-interpretation').textContent = interpretation;
+            document.getElementById('wbc-result').style.display = 'block';
+        }
+
+        /**
+         * Convert lymphocyte count
+         */
+        function convertLymphocyte() {
+            const input = document.getElementById('lymph-x10-l').value;
+            const errorDiv = document.getElementById('lymph-error');
+
+            if (!validateInput(input)) {
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter a valid number';
+                document.getElementById('lymph-result').style.display = 'none';
+                return;
+            }
+
+            errorDiv.innerHTML = '';
+            const value = parseFloat(input);
+            const result = (value * conversionFactors.lymphocyte).toFixed(1);
+            const range = referenceRanges.lymphocyte;
+            const interpretation = getInterpretation(result, range, 'lymphocyte');
+
+            document.getElementById('lymph-input-display').textContent = value.toFixed(1);
+            document.getElementById('lymph-output-display').textContent = result;
+            document.getElementById('lymph-interpretation').textContent = interpretation;
+            document.getElementById('lymph-result').style.display = 'block';
+        }
+
+        /**
+         * Convert neutrophil count
+         */
+        function convertNeutrophil() {
+            const input = document.getElementById('neutrophil-x10-l').value;
+            const errorDiv = document.getElementById('neutrophil-error');
+
+            if (!validateInput(input)) {
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter a valid number';
+                document.getElementById('neutrophil-result').style.display = 'none';
+                return;
+            }
+
+            errorDiv.innerHTML = '';
+            const value = parseFloat(input);
+            const result = (value * conversionFactors.neutrophil).toFixed(1);
+            const range = referenceRanges.neutrophil;
+            const interpretation = getInterpretation(result, range, 'neutrophil');
+
+            document.getElementById('neutrophil-input-display').textContent = value.toFixed(1);
+            document.getElementById('neutrophil-output-display').textContent = result;
+            document.getElementById('neutrophil-interpretation').textContent = interpretation;
+            document.getElementById('neutrophil-result').style.display = 'block';
+        }
+
+        /**
+         * Convert monocyte count
+         */
+        function convertMonocyte() {
+            const input = document.getElementById('monocyte-x10-l').value;
+            const errorDiv = document.getElementById('monocyte-error');
+
+            if (!validateInput(input)) {
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter a valid number';
+                document.getElementById('monocyte-result').style.display = 'none';
+                return;
+            }
+
+            errorDiv.innerHTML = '';
+            const value = parseFloat(input);
+            const result = (value * conversionFactors.monocyte).toFixed(2);
+            const range = referenceRanges.monocyte;
+            const interpretation = getInterpretation(result, range, 'monocyte');
+
+            document.getElementById('monocyte-input-display').textContent = value.toFixed(2);
+            document.getElementById('monocyte-output-display').textContent = result;
+            document.getElementById('monocyte-interpretation').textContent = interpretation;
+            document.getElementById('monocyte-result').style.display = 'block';
+        }
+
+        /**
+         * Convert eosinophil count
+         */
+        function convertEosinophil() {
+            const input = document.getElementById('eosinophil-x10-l').value;
+            const errorDiv = document.getElementById('eosinophil-error');
+
+            if (!validateInput(input)) {
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter a valid number';
+                document.getElementById('eosinophil-result').style.display = 'none';
+                return;
+            }
+
+            errorDiv.innerHTML = '';
+            const value = parseFloat(input);
+            const result = (value * conversionFactors.eosinophil).toFixed(2);
+            const range = referenceRanges.eosinophil;
+            const interpretation = getInterpretation(result, range, 'eosinophil');
+
+            document.getElementById('eosinophil-input-display').textContent = value.toFixed(2);
+            document.getElementById('eosinophil-output-display').textContent = result;
+            document.getElementById('eosinophil-interpretation').textContent = interpretation;
+            document.getElementById('eosinophil-result').style.display = 'block';
+        }
+
+        /**
+         * Convert IgG
+         */
+        function convertIgG() {
+            const input = document.getElementById('igg-g-l').value;
+            const errorDiv = document.getElementById('igg-error');
+
+            if (!validateInput(input)) {
+                errorDiv.innerHTML = '<i class="fas fa-exclamation-circle"></i> Please enter a valid number';
+                document.getElementById('igg-result').style.display = 'none';
+                return;
+            }
+
+            errorDiv.innerHTML = '';
+            const value = parseFloat(input);
+            const result = (value * conversionFactors.igg).toFixed(0);
+            const range = referenceRanges.igg;
+            const interpretation = getInterpretation(result, range, 'igg');
+
+            document.getElementById('igg-input-display').textContent = value.toFixed(1);
+            document.getElementById('igg-output-display').textContent = result;
+            document.getElementById('igg-interpretation').textContent = interpretation;
+            document.getElementById('igg-result').style.display = 'block';
+        }
+
+        /**
+         * Master conversion function
+         */
+        function convertAllValues() {
+            convertWBC();
+            convertLymphocyte();
+            convertNeutrophil();
+            convertMonocyte();
+            convertEosinophil();
+            convertIgG();
+
+            const firstResult = document.querySelector('[id$="-result"]');
+            if (firstResult && firstResult.style.display !== 'none') {
+                firstResult.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        /**
+         * Reset form to initial state
+         */
+        function resetForm() {
+            document.getElementById('wbc-x10-l').value = '';
+            document.getElementById('lymph-x10-l').value = '';
+            document.getElementById('neutrophil-x10-l').value = '';
+            document.getElementById('monocyte-x10-l').value = '';
+            document.getElementById('eosinophil-x10-l').value = '';
+            document.getElementById('igg-g-l').value = '';
+
+            document.getElementById('wbc-result').style.display = 'none';
+            document.getElementById('lymph-result').style.display = 'none';
+            document.getElementById('neutrophil-result').style.display = 'none';
+            document.getElementById('monocyte-result').style.display = 'none';
+            document.getElementById('eosinophil-result').style.display = 'none';
+            document.getElementById('igg-result').style.display = 'none';
+
+            document.getElementById('wbc-error').innerHTML = '';
+            document.getElementById('lymph-error').innerHTML = '';
+            document.getElementById('neutrophil-error').innerHTML = '';
+            document.getElementById('monocyte-error').innerHTML = '';
+            document.getElementById('eosinophil-error').innerHTML = '';
+            document.getElementById('igg-error').innerHTML = '';
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /**
+         * Allow Enter key to trigger conversion
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = ['wbc-x10-l', 'lymph-x10-l', 'neutrophil-x10-l', 'monocyte-x10-l', 'eosinophil-x10-l', 'igg-g-l'];
+            inputs.forEach(id => {
+                document.getElementById(id).addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        convertAllValues();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags for responsive design and character encoding -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Weight Unit Converter - Convert between grams, kilograms, pounds, ounces, and stones">
+    <title>Weight Unit Converter</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ================================
+           Custom Styling - Purple Gradient Theme
+           ================================ */
+
+        :root {
+            --purple-primary: #7c3aed;
+            --purple-dark: #6d28d9;
+            --purple-light: #a78bfa;
+            --gradient-start: #7c3aed;
+            --gradient-end: #c084fc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        /* Navigation Bar Styling */
+        .navbar {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+            padding: 1rem 2rem;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar-brand i {
+            font-size: 1.8rem;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8) !important;
+            margin-left: 1rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+
+        /* Container and Card Styling */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .calculator-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(124, 58, 237, 0.15);
+            overflow: hidden;
+            border: 1px solid rgba(124, 58, 237, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(124, 58, 237, 0.25);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .card-header h1 {
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .card-header p {
+            margin-bottom: 0;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .card-body {
+            padding: 2.5rem;
+        }
+
+        /* Form Input Styling */
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--purple-primary);
+            margin-bottom: 0.7rem;
+            display: block;
+        }
+
+        .form-control {
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--purple-primary);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+            outline: none;
+        }
+
+        .input-group-text {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            color: white;
+            border: none;
+            border-radius: 0 10px 10px 0;
+            font-weight: 600;
+        }
+
+        /* Conversion Grid */
+        .conversion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .conversion-item {
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, rgba(192, 132, 252, 0.05) 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 2px solid rgba(124, 58, 237, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .conversion-item:hover {
+            border-color: var(--purple-light);
+            background: linear-gradient(135deg, rgba(124, 58, 237, 0.1) 0%, rgba(192, 132, 252, 0.1) 100%);
+        }
+
+        /* Button Styling */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4);
+            background: linear-gradient(135deg, #6d28d9 0%, #b06df7 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: var(--purple-primary);
+            border: 2px solid var(--purple-primary);
+            border-radius: 10px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--purple-primary);
+            color: white;
+        }
+
+        /* Error and Success Messages */
+        .alert {
+            border-radius: 10px;
+            border: none;
+            margin-bottom: 1.5rem;
+            animation: slideIn 0.3s ease;
+        }
+
+        .alert-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .alert-success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Reference Section */
+        .reference-section {
+            background: #f9fafb;
+            border: 2px dashed rgba(124, 58, 237, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .reference-title {
+            color: var(--purple-primary);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .reference-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            color: #4b5563;
+        }
+
+        /* Medical Note */
+        .medical-note {
+            background: #e0e7ff;
+            border-left: 4px solid var(--purple-primary);
+            padding: 1rem;
+            border-radius: 5px;
+            margin-top: 1.5rem;
+            color: #4c1d95;
+            font-size: 0.9rem;
+        }
+
+        .medical-note i {
+            margin-right: 0.5rem;
+            color: var(--purple-primary);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+            box-shadow: 0 -4px 15px rgba(124, 58, 237, 0.2);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px auto;
+            }
+
+            .card-header h1 {
+                font-size: 1.3rem;
+            }
+
+            .card-body {
+                padding: 1.5rem;
+            }
+
+            .conversion-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+
+            .nav-link {
+                margin-left: 0.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        .conversion-label {
+            color: var(--purple-primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .conversion-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--purple-dark);
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/calculators/index.html">
+                <i class="fas fa-calculator"></i>
+                Unit Converters
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="length-unit-converter.html">
+                        <i class="fas fa-ruler"></i> Length
+                    </a>
+                    <a class="nav-link" href="temperature-unit-converter.html">
+                        <i class="fas fa-thermometer-half"></i> Temperature
+                    </a>
+                    <a class="nav-link active" href="weight-unit-converter.html">
+                        <i class="fas fa-weight"></i> Weight
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="calculator-card">
+            <!-- Card Header -->
+            <div class="card-header">
+                <h1><i class="fas fa-weight-scale"></i> Weight Unit Converter</h1>
+                <p>Convert between grams, kilograms, pounds, ounces, and stones</p>
+            </div>
+
+            <!-- Card Body -->
+            <div class="card-body">
+                <!-- Error Alert -->
+                <div id="errorAlert" class="alert alert-danger d-none" role="alert">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="errorMessage"></span>
+                </div>
+
+                <!-- Input Section -->
+                <form id="conversionForm">
+                    <div class="row">
+                        <!-- Grams Input -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="conversion-item">
+                                <label for="grams" class="form-label">
+                                    <i class="fas fa-weight"></i> Grams (g)
+                                </label>
+                                <input
+                                    type="number"
+                                    id="grams"
+                                    class="form-control conversion-input"
+                                    placeholder="Enter value"
+                                    step="0.01"
+                                    min="0"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Kilograms Input -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="conversion-item">
+                                <label for="kilograms" class="form-label">
+                                    <i class="fas fa-weight"></i> Kilograms (kg)
+                                </label>
+                                <input
+                                    type="number"
+                                    id="kilograms"
+                                    class="form-control conversion-input"
+                                    placeholder="Enter value"
+                                    step="0.01"
+                                    min="0"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Pounds Input -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="conversion-item">
+                                <label for="pounds" class="form-label">
+                                    <i class="fas fa-weight"></i> Pounds (lb)
+                                </label>
+                                <input
+                                    type="number"
+                                    id="pounds"
+                                    class="form-control conversion-input"
+                                    placeholder="Enter value"
+                                    step="0.01"
+                                    min="0"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Ounces Input -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="conversion-item">
+                                <label for="ounces" class="form-label">
+                                    <i class="fas fa-weight"></i> Ounces (oz)
+                                </label>
+                                <input
+                                    type="number"
+                                    id="ounces"
+                                    class="form-control conversion-input"
+                                    placeholder="Enter value"
+                                    step="0.01"
+                                    min="0"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Stones Input -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="conversion-item">
+                                <label for="stones" class="form-label">
+                                    <i class="fas fa-weight"></i> Stones (st)
+                                </label>
+                                <input
+                                    type="number"
+                                    id="stones"
+                                    class="form-control conversion-input"
+                                    placeholder="Enter value"
+                                    step="0.01"
+                                    min="0"
+                                >
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Button Controls -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <button type="button" id="clearBtn" class="btn btn-secondary">
+                                <i class="fas fa-redo"></i> Clear All
+                            </button>
+                            <p class="text-muted mt-3 small">
+                                <i class="fas fa-info-circle"></i>
+                                Enter a value in any field to see conversions for all weight units
+                            </p>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Reference Section -->
+                <div class="reference-section">
+                    <div class="reference-title">
+                        <i class="fas fa-book"></i> Weight Conversion Factors
+                    </div>
+                    <div class="reference-item">
+                        <span>1 Kilogram (kg)</span>
+                        <span><strong>= 1000 grams</strong></span>
+                    </div>
+                    <div class="reference-item">
+                        <span>1 Pound (lb)</span>
+                        <span><strong>= 453.592 grams</strong></span>
+                    </div>
+                    <div class="reference-item">
+                        <span>1 Ounce (oz)</span>
+                        <span><strong>= 28.3495 grams</strong></span>
+                    </div>
+                    <div class="reference-item">
+                        <span>1 Stone (st)</span>
+                        <span><strong>= 6.35029 kilograms (14 pounds)</strong></span>
+                    </div>
+                </div>
+
+                <!-- Medical Note -->
+                <div class="medical-note">
+                    <i class="fas fa-stethoscope"></i>
+                    <strong>Medical Note:</strong> Weight conversions are crucial for medical dosing and patient assessments. Always verify critical weight measurements.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>Unit Conversion Tool</strong></p>
+        <p>Accurate conversions for medical and scientific measurements</p>
+        <p class="small mt-3">&copy; 2025 Clinical Calculators. All rights reserved.</p>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        /**
+         * WEIGHT UNIT CONVERTER
+         * Converts between: grams, kilograms, pounds, ounces, and stones
+         * All conversions are based on gram as the base unit
+         */
+
+        // Conversion factors (all converted to grams as base unit)
+        const CONVERSION_FACTORS = {
+            grams: 1,
+            kilograms: 1000,
+            pounds: 453.592,
+            ounces: 28.3495,
+            stones: 6350.29  // 1 stone = 6.35029 kg = 6350.29 grams
+        };
+
+        // Unit labels for display
+        const UNIT_LABELS = {
+            grams: 'Grams',
+            kilograms: 'Kilograms',
+            pounds: 'Pounds',
+            ounces: 'Ounces',
+            stones: 'Stones'
+        };
+
+        // Get all input elements
+        const inputs = document.querySelectorAll('.conversion-input');
+        const errorAlert = document.getElementById('errorAlert');
+        const errorMessage = document.getElementById('errorMessage');
+        const clearBtn = document.getElementById('clearBtn');
+
+        /**
+         * Convert weight value from source unit to all other units
+         * @param {string} sourceUnit - The unit to convert from
+         * @param {number} value - The value to convert
+         */
+        function convertWeight(sourceUnit, value) {
+            // Validate input
+            if (value === '' || value === null || isNaN(value)) {
+                resetAllInputs();
+                hideErrorAlert();
+                return;
+            }
+
+            if (value < 0) {
+                showErrorAlert('Please enter a positive weight value');
+                resetAllInputs();
+                return;
+            }
+
+            hideErrorAlert();
+
+            // Convert source value to grams (base unit)
+            const valueInGrams = value * CONVERSION_FACTORS[sourceUnit];
+
+            // Convert from grams to all other units
+            Object.keys(CONVERSION_FACTORS).forEach(unit => {
+                const result = valueInGrams / CONVERSION_FACTORS[unit];
+                const inputElement = document.getElementById(unit);
+
+                // Only update if it's not the source unit
+                if (unit !== sourceUnit) {
+                    // Round to appropriate decimal places based on unit
+                    const decimalPlaces = getDecimalPlaces(unit);
+                    inputElement.value = parseFloat(result.toFixed(decimalPlaces));
+                }
+            });
+        }
+
+        /**
+         * Determine appropriate decimal places for each unit
+         * Larger units (kg, st) need more decimal places for precision
+         * @param {string} unit - The unit to check
+         * @returns {number} Number of decimal places
+         */
+        function getDecimalPlaces(unit) {
+            const decimalMap = {
+                grams: 2,
+                kilograms: 3,
+                pounds: 2,
+                ounces: 2,
+                stones: 3
+            };
+            return decimalMap[unit] || 2;
+        }
+
+        /**
+         * Show error alert with message
+         * @param {string} message - Error message to display
+         */
+        function showErrorAlert(message) {
+            errorMessage.textContent = message;
+            errorAlert.classList.remove('d-none');
+        }
+
+        /**
+         * Hide error alert
+         */
+        function hideErrorAlert() {
+            errorAlert.classList.add('d-none');
+        }
+
+        /**
+         * Reset all input fields
+         */
+        function resetAllInputs() {
+            inputs.forEach(input => {
+                input.value = '';
+            });
+        }
+
+        /**
+         * Add event listeners to all input fields
+         * Triggers conversion on input change
+         */
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                const value = parseFloat(this.value);
+                const unit = this.id;
+
+                if (this.value === '') {
+                    resetAllInputs();
+                    hideErrorAlert();
+                } else {
+                    convertWeight(unit, value);
+                }
+            });
+        });
+
+        /**
+         * Clear button event listener
+         * Clears all inputs and error messages
+         */
+        clearBtn.addEventListener('click', function() {
+            resetAllInputs();
+            hideErrorAlert();
+        });
+
+        // Log initialization
+        console.log('Weight Unit Converter initialized successfully');
+    </script>
+</body>
+</html>
