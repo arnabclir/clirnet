@@ -1,0 +1,55 @@
+PALLIATIVE CARE CALCULATORS - QUICK REFERENCE GUIDE
+====================================================
+
+MAIN ENTRY POINT (START HERE):
+  /home/user/clirnet/calculators/calculators/palliative-care-index.html
+
+CLINICAL CALCULATORS (Direct Access):
+
+1. BODE Index (COPD Survival)
+   /home/user/clirnet/calculators/calculators/bode-index.html
+
+2. CIWA-Ar Scale (Alcohol Withdrawal)
+   /home/user/clirnet/calculators/calculators/ciwa-ar-scale.html
+
+3. Child Pugh Score (SI Units)
+   /home/user/clirnet/calculators/calculators/child-pugh-si.html
+
+4. Child Pugh Score (Conventional)
+   /home/user/clirnet/calculators/calculators/child-pugh-conventional.html
+
+5. PHQ-9 Depression Screening
+   /home/user/clirnet/calculators/calculators/phq-9-depression-screening.html
+
+6. Sleep Problems Questionnaire
+   /home/user/clirnet/calculators/calculators/sleep-problems-questionnaire.html
+
+7. Braden Score (Pressure Ulcer Risk)
+   /home/user/clirnet/calculators/calculators/pressure-ulcer-risk-braden.html
+
+8. ALBI Grade (HCC Survival)
+   /home/user/clirnet/calculators/calculators/albi-grade-hcc.html
+
+9. Conventional to SI Unit Conversion
+   /home/user/clirnet/calculators/calculators/conventional-to-si-unit-conversion-chemistry.html
+
+10. SI to Conventional Unit Conversion
+    /home/user/clirnet/calculators/calculators/si-to-conventional-unit-conversion-chemistry.html
+
+DOCUMENTATION:
+  /home/user/clirnet/calculators/calculators/PALLIATIVE_CARE_CALCULATORS.md
+  /home/user/clirnet/PALLIATIVE_CARE_BUILD_SUMMARY.md
+
+SPECIFICATIONS MET:
+  ✓ Pure HTML5/CSS3/Bootstrap 5
+  ✓ Responsive design (mobile, tablet, desktop)
+  ✓ Input validation with user-friendly errors
+  ✓ Clinical interpretation and recommendations
+  ✓ Purple gradient theme (#667eea to #764ba2)
+  ✓ Font Awesome 6.4.0 icons
+  ✓ Navigation menu and indexing
+  ✓ Kebab-case filenames
+  ✓ Comprehensive code comments
+
+BUILD DATE: November 8, 2024
+STATUS: ✓ PRODUCTION READY
