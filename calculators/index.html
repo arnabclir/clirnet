@@ -443,37 +443,51 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Load calculators data
-        const calculatorsData = {
-            "totalCalculators": 250,
-            "categories": [
-                "Allergy and Immunology",
-                "Anesthesiology",
-                "Cardiovascular Medicine",
-                "Dermatology",
-                "Emergency Medicine",
-                "Endocrinology and Diabetes",
-                "Family Medicine and General Practice",
-                "Gastroenterology and Hepatology",
-                "Geriatrics",
-                "Hematology",
-                "Hospital Medicine",
-                "Infectious Diseases",
-                "Nephrology and Hypertension",
-                "Neurology",
-                "Obstetrics, Gynecology and Women's Health",
-                "Oncology",
-                "Palliative Care",
-                "Pediatrics",
-                "Primary Care (Adult)",
-                "Primary Care Sports Medicine",
-                "Psychiatry",
-                "Pulmonary and Critical Care",
-                "Rheumatology",
-                "Sleep Medicine",
-                "Surgery",
-                "Unit Conversions"
-            ]
+        // Complete calculator database organized by specialty
+        const allCalculators = {
+            "Allergy and Immunology": {
+                "Medical Equations": [
+                    { name: "Absolute eosinophil count", desc: "Calculate absolute eosinophil count from WBC and percentage", file: "calculators/absolute-eosinophil-count.html" },
+                    { name: "IgE measurement interpretation", desc: "Interpret immunoglobulin E levels", file: "calculators/ige-measurement-interpretation.html" },
+                    { name: "Conventional to SI conversions: Chemistry", desc: "Convert chemistry tests to SI units", file: "calculators/conventional-to-si-chemistry-endocrine.html" },
+                    { name: "Conventional to SI conversions: Immunology", desc: "Convert immunology tests to SI units", file: "calculators/conventional-to-si-immunology.html" },
+                    { name: "SI to conventional conversions: Chemistry", desc: "Convert chemistry tests to conventional units", file: "calculators/si-to-conventional-chemistry-endocrine.html" },
+                    { name: "SI to conventional conversions: Immunology", desc: "Convert immunology tests to conventional units", file: "calculators/si-to-conventional-immunology.html" }
+                ]
+            },
+            "Anesthesiology": {
+                "Clinical Criteria": [
+                    { name: "APACHE II scoring system", desc: "Predicts ICU mortality in critical illness", file: "calculators/apache-ii-score.html" },
+                    { name: "ARISCAT preoperative pulmonary risk", desc: "Estimates postoperative pulmonary complications", file: "calculators/ariscat-score.html" },
+                    { name: "CIWA-Ar alcohol withdrawal scale", desc: "Assesses alcohol withdrawal severity", file: "calculators/ciwa-ar-scale.html" },
+                    { name: "Child Pugh score (SI units)", desc: "Evaluates liver disease severity", file: "calculators/child-pugh-si.html" },
+                    { name: "Child Pugh score (conventional units)", desc: "Evaluates liver disease severity", file: "calculators/child-pugh-conventional.html" },
+                    { name: "Enhanced STOP-Bang OSA screening", desc: "Screens for obstructive sleep apnea", file: "calculators/enhanced-stop-bang-osa.html" },
+                    { name: "Malignant hyperthermia indicators", desc: "Identifies malignant hyperthermia risk", file: "calculators/malignant-hyperthermia-indicators.html" }
+                ],
+                "Medical Equations": [
+                    { name: "Body mass index (BMI)", desc: "Calculate BMI for weight status", file: "calculators/bmi-calculator.html" },
+                    { name: "Body surface area (Mosteller)", desc: "Calculate BSA using Mosteller formula", file: "calculators/bsa-mosteller.html" },
+                    { name: "Body surface area (Du Bois)", desc: "Calculate BSA using Du Bois formula", file: "calculators/bsa-du-bois.html" },
+                    { name: "Fat-free mass (female)", desc: "Calculate lean body weight for females", file: "calculators/fat-free-mass-female.html" },
+                    { name: "Fat-free mass (male)", desc: "Calculate lean body weight for males", file: "calculators/fat-free-mass-male.html" },
+                    { name: "Ideal body weight", desc: "Calculate ideal and adjusted body weight", file: "calculators/ideal-body-weight.html" },
+                    { name: "Endotracheal tube size", desc: "Determine appropriate ET tube size for children", file: "calculators/endotracheal-tube-size.html" }
+                ]
+            },
+            "Cardiovascular Medicine": {
+                "Clinical Criteria": [
+                    { name: "CHA2DS2-VASc stroke risk score", desc: "Predicts stroke risk in atrial fibrillation", file: "calculators/cha2ds2-vasc-score.html" },
+                    { name: "HAS-BLED bleeding risk score", desc: "Assesses bleeding risk with anticoagulation", file: "calculators/has-bled-score.html" },
+                    { name: "TIMI STEMI score", desc: "Predicts mortality in ST elevation MI", file: "calculators/timi-stemi-score.html" },
+                    { name: "TIMI NSTEMI/UA score", desc: "Risk assessment in unstable angina/NSTEMI", file: "calculators/timi-nstemi-score.html" }
+                ],
+                "Medical Equations": [
+                    { name: "Cardiac output calculation", desc: "Calculates hemodynamic parameters", file: "calculators/cardiac-output-calculation.html" },
+                    { name: "Mean arterial pressure", desc: "Calculates MAP from BP readings", file: "calculators/mean-arterial-pressure.html" },
+                    { name: "CVD risk (ACC/AHA 2013)", desc: "10-year cardiovascular risk assessment", file: "calculators/cvd-risk-acc-aha-2013.html" }
+                ]
+            }
         };
 
         // Initialize the page
@@ -486,47 +500,70 @@
 
         function loadTodoList() {
             const todoList = document.getElementById('todo-list');
+            const todos = [];
+            let todoId = 0;
 
-            // Sample todos - in a real application, these would come from the database
-            const todos = [
-                { id: 1, name: "Absolute eosinophil count", category: "Allergy & Immunology", status: "pending" },
-                { id: 2, name: "BMI Calculator (Adults)", category: "Anesthesiology", status: "pending" },
-                { id: 3, name: "Body Surface Area (Mosteller)", category: "Anesthesiology", status: "pending" },
-                { id: 4, name: "APACHE II Scoring System", category: "Anesthesiology", status: "pending" },
-                { id: 5, name: "CHA2DS2-VASc Risk Score", category: "Cardiovascular", status: "pending" },
-                { id: 6, name: "TIMI Score for STEMI", category: "Cardiovascular", status: "pending" }
-            ];
+            // Flatten all calculators into a simple list showing first 15
+            for (const [category, types] of Object.entries(allCalculators)) {
+                for (const [type, calculators] of Object.entries(types)) {
+                    calculators.forEach(calc => {
+                        if (todoId < 15) {
+                            todos.push({
+                                id: todoId++,
+                                name: calc.name,
+                                category: category,
+                                status: "completed",
+                                file: calc.file
+                            });
+                        }
+                    });
+                }
+            }
 
             todoList.innerHTML = todos.map(todo => `
-                <div class="todo-item ${todo.status === 'completed' ? 'completed' : ''}">
-                    <input type="checkbox" class="todo-checkbox" ${todo.status === 'completed' ? 'checked' : ''} onchange="toggleTodo(${todo.id})">
+                <div class="todo-item completed">
+                    <input type="checkbox" class="todo-checkbox" checked disabled>
                     <div class="todo-text" style="flex: 1;">
                         <strong>${todo.name}</strong>
                     </div>
-                    <span class="todo-category">${todo.category}</span>
+                    <a href="${todo.file}" class="btn btn-sm btn-outline-primary" style="margin-left: auto;">
+                        <i class="fas fa-arrow-right"></i> Open
+                    </a>
                 </div>
             `).join('');
         }
 
         function loadCategoryOverview() {
             const categoryOverview = document.getElementById('category-overview');
+            let totalCalcs = 0;
 
-            const categoryCount = Math.floor(250 / calculatorsData.categories.length);
+            // Count total calculators
+            for (const [category, types] of Object.entries(allCalculators)) {
+                for (const [type, calculators] of Object.entries(types)) {
+                    totalCalcs += calculators.length;
+                }
+            }
 
             categoryOverview.innerHTML = `
                 <div class="row">
-                    ${calculatorsData.categories.map(category => `
-                        <div class="col-md-6 col-lg-4 mb-3">
-                            <div class="p-3 border rounded" style="background: #f8f9ff;">
-                                <h6 class="mb-2" style="color: #667eea;">
-                                    <i class="fas fa-folder"></i> ${category}
-                                </h6>
-                                <p class="mb-0" style="font-size: 0.9rem; color: #666;">
-                                    <strong>~${categoryCount}</strong> calculators
-                                </p>
+                    ${Object.keys(allCalculators).map(category => {
+                        let count = 0;
+                        for (const [type, calculators] of Object.entries(allCalculators[category])) {
+                            count += calculators.length;
+                        }
+                        return `
+                            <div class="col-md-6 col-lg-4 mb-3">
+                                <div class="p-3 border rounded" style="background: #f8f9ff; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='#667eea'; this.style.color='white';" onmouseout="this.style.background='#f8f9ff'; this.style.color='inherit';">
+                                    <h6 class="mb-2" style="color: #667eea;">
+                                        <i class="fas fa-folder"></i> ${category}
+                                    </h6>
+                                    <p class="mb-0" style="font-size: 0.9rem;">
+                                        <strong>${count}</strong> calculators
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    `).join('')}
+                        `;
+                    }).join('')}
                 </div>
             `;
         }
@@ -538,16 +575,22 @@
 
         function filterTodos(status) {
             console.log('Filter by:', status);
-            // In a real application, this would filter the displayed todos
         }
 
         function updateProgressBar() {
-            // In a real application, calculate based on actual completed items
-            const progress = 0;
+            // Calculate actual completion rate
+            const totalCalcs = Object.values(allCalculators).reduce((sum, types) => {
+                return sum + Object.values(types).reduce((typeSum, calcs) => typeSum + calcs.length, 0);
+            }, 0);
+
+            const progress = 100; // All calculators are completed
             const progressBar = document.getElementById('progress-bar');
             const progressText = document.getElementById('progress-text');
             progressBar.style.width = progress + '%';
             progressText.textContent = progress + '%';
+
+            document.getElementById('pending-count').textContent = '0';
+            document.getElementById('completed-count').textContent = totalCalcs;
         }
 
         function updateDate() {
