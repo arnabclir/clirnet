@@ -59,11 +59,23 @@
             margin-bottom: 1rem;
             border-radius: 8px;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            color: inherit;
         }
 
         .calculator-item:hover {
             background: #f8f9ff;
             transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .calculator-item-content {
+            flex: 1;
         }
 
         .calculator-item h5 {
@@ -205,6 +217,25 @@
             color: #666;
         }
 
+        .calculator-link-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .calculator-link-btn:hover {
+            background: #764ba2;
+            color: white;
+            text-decoration: none;
+            transform: scale(1.05);
+        }
+
         @media (max-width: 768px) {
             .calculator-stats {
                 grid-template-columns: repeat(2, 1fr);
@@ -217,6 +248,11 @@
 
             .category-count {
                 margin-left: 0;
+            }
+
+            .calculator-item {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
@@ -252,7 +288,7 @@
     <div class="header-section">
         <div class="container">
             <h1><i class="fas fa-book"></i> Calculator Catalog</h1>
-            <p>Browse all available medical calculators with descriptions</p>
+            <p>Browse all available medical calculators - click to launch</p>
         </div>
     </div>
 
@@ -260,7 +296,7 @@
         <!-- Statistics -->
         <div class="calculator-stats">
             <div class="stat">
-                <div class="number">250+</div>
+                <div class="number">234</div>
                 <div class="label">Total Calculators</div>
             </div>
             <div class="stat">
@@ -272,7 +308,7 @@
                 <div class="label">Clinical Criteria</div>
             </div>
             <div class="stat">
-                <div class="number">120</div>
+                <div class="number">104</div>
                 <div class="label">Equations</div>
             </div>
         </div>
@@ -295,79 +331,345 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Comprehensive calculator database
+        // Complete calculator database with actual filenames
         const allCalculators = {
             "Allergy and Immunology": {
                 "Medical Equations": [
-                    { name: "Absolute eosinophil count", desc: "Calculates absolute eosinophil count from WBC and percentage. Used to assess immune response and parasitic infections." },
-                    { name: "Conventional (gravimetric, imperial, US) unit to SI unit conversions: Chemistry and endocrine tests", desc: "Converts laboratory values from conventional to SI units for chemistry and endocrine tests." },
-                    { name: "Conventional (gravimetric, imperial, US) unit to SI unit conversions: Immunology lab values", desc: "Converts laboratory immunology values from conventional to SI units." },
-                    { name: "SI unit to conventional (gravimetric, imperial, US) unit conversions: Chemistry and endocrine tests", desc: "Converts chemistry and endocrine values from SI to conventional units." },
-                    { name: "SI unit to conventional (gravimetric, imperial, US) unit conversions: Immunology lab values", desc: "Converts immunology lab values from SI to conventional units." }
+                    { name: "Absolute eosinophil count", desc: "Calculate absolute eosinophil count from WBC and percentage", file: "calculators/absolute-eosinophil-count.html" },
+                    { name: "IgE measurement interpretation", desc: "Interpret immunoglobulin E levels", file: "calculators/ige-measurement-interpretation.html" },
+                    { name: "Conventional to SI conversions: Chemistry", desc: "Convert chemistry tests to SI units", file: "calculators/conventional-to-si-chemistry-endocrine.html" },
+                    { name: "Conventional to SI conversions: Immunology", desc: "Convert immunology tests to SI units", file: "calculators/conventional-to-si-immunology.html" },
+                    { name: "SI to conventional conversions: Chemistry", desc: "Convert chemistry tests to conventional units", file: "calculators/si-to-conventional-chemistry-endocrine.html" },
+                    { name: "SI to conventional conversions: Immunology", desc: "Convert immunology tests to conventional units", file: "calculators/si-to-conventional-immunology.html" }
                 ]
             },
             "Anesthesiology": {
                 "Clinical Criteria": [
-                    { name: "APACHE II scoring system by admission diagnosis in adults", desc: "Predicts hospital mortality in critically ill adult patients. Combines acute physiology, age, and chronic health factors." },
-                    { name: "ARISCAT (Canet) preoperative pulmonary risk index in adults", desc: "Predicts risk of postoperative pulmonary complications based on age, BMI, comorbidities, and surgery type." },
-                    { name: "CIWA-Ar Clinical Institute Withdrawal Assessment for Alcohol scale in adults", desc: "Assesses severity of alcohol withdrawal symptoms and guides pharmacological management." },
-                    { name: "Child Pugh score for severity of liver disease in adults (SI units)", desc: "Predicts prognosis in cirrhosis patients using bilirubin, albumin, INR, ascites, and encephalopathy." },
-                    { name: "Child Pugh score for severity of liver disease in adults (conventional units)", desc: "Predicts prognosis in cirrhosis patients using bilirubin, albumin, INR, ascites, and encephalopathy (conventional units)." },
-                    { name: "Clinical indicators for malignant hyperthermia in adults", desc: "Identifies risk factors for malignant hyperthermia reaction during anesthesia." },
-                    { name: "Enhanced STOP-Bang screening questionnaire for obstructive sleep apnea (OSA) in adults", desc: "Screens for obstructive sleep apnea risk in preoperative patients." }
+                    { name: "APACHE II scoring system", desc: "Predicts ICU mortality in critical illness", file: "calculators/apache-ii-score.html" },
+                    { name: "ARISCAT preoperative pulmonary risk", desc: "Estimates postoperative pulmonary complications", file: "calculators/ariscat-score.html" },
+                    { name: "CIWA-Ar alcohol withdrawal scale", desc: "Assesses alcohol withdrawal severity", file: "calculators/ciwa-ar-scale.html" },
+                    { name: "Child Pugh score (SI units)", desc: "Evaluates liver disease severity", file: "calculators/child-pugh-si.html" },
+                    { name: "Child Pugh score (conventional units)", desc: "Evaluates liver disease severity", file: "calculators/child-pugh-conventional.html" },
+                    { name: "Enhanced STOP-Bang OSA screening", desc: "Screens for obstructive sleep apnea", file: "calculators/enhanced-stop-bang-osa.html" },
+                    { name: "Malignant hyperthermia indicators", desc: "Identifies malignant hyperthermia risk", file: "calculators/malignant-hyperthermia-indicators.html" }
                 ],
                 "Medical Equations": [
-                    { name: "Body mass index (BMI; Quetelet's index) in adults", desc: "Calculates BMI using weight and height. Categories: Underweight, Normal, Overweight, Obese." },
-                    { name: "Body surface area (BSA) (Mosteller, square root method) in children and adults", desc: "Calculates BSA for drug dosing and metabolic assessment using the Mosteller method." },
-                    { name: "Body surface area (BSA) in adults (Du Bois method)", desc: "Alternative BSA calculation using the Du Bois formula for adult patients." },
-                    { name: "Fat-free mass (a measure of LBW, female adults)", desc: "Calculates lean body weight in adult females for drug dosing adjustments." },
-                    { name: "Fat-free mass (a measure of LBW, male adults)", desc: "Calculates lean body weight in adult males for drug dosing adjustments." },
-                    { name: "Ideal body weight and adjusted body weight for adults", desc: "Determines ideal and adjusted body weight for obese patients for accurate drug dosing." }
+                    { name: "Body mass index (BMI)", desc: "Calculate BMI for weight status", file: "calculators/bmi-calculator.html" },
+                    { name: "Body surface area (Mosteller)", desc: "Calculate BSA using Mosteller formula", file: "calculators/bsa-mosteller.html" },
+                    { name: "Body surface area (Du Bois)", desc: "Calculate BSA using Du Bois formula", file: "calculators/bsa-du-bois.html" },
+                    { name: "Fat-free mass (female)", desc: "Calculate lean body weight for females", file: "calculators/fat-free-mass-female.html" },
+                    { name: "Fat-free mass (male)", desc: "Calculate lean body weight for males", file: "calculators/fat-free-mass-male.html" },
+                    { name: "Ideal body weight", desc: "Calculate ideal and adjusted body weight", file: "calculators/ideal-body-weight.html" },
+                    { name: "Endotracheal tube size", desc: "Determine appropriate ET tube size for children", file: "calculators/endotracheal-tube-size.html" }
                 ]
             },
             "Cardiovascular Medicine": {
                 "Clinical Criteria": [
-                    { name: "CHA2DS2-VASc risk stratification score for estimation of stroke risk for nonvalvular atrial fibrillation in adults", desc: "Predicts stroke risk in atrial fibrillation. Guides anticoagulation decisions with score 0-9." },
-                    { name: "Clinical characteristics comprising the HAS-BLED bleeding risk score in adults", desc: "Assesses major bleeding risk in anticoagulated patients. Score 0-9 predicts bleeding risk." },
-                    { name: "Embolic risk (ER) French score in infective endocarditis in adults", desc: "Predicts risk of embolic complications in infective endocarditis." },
-                    { name: "Good Outcomes Following Attempted Resuscitation (GO-FAR) score", desc: "Predicts neurologically intact survival after in-hospital cardiac arrest." },
-                    { name: "Probability of heart failure with preserved ejection fraction (H2FPEF score) in adults with dyspnea", desc: "Calculates probability of HFpEF in dyspneic patients using clinical and echo parameters." },
-                    { name: "Thrombolysis in Myocardial Infarction (TIMI) score for ST elevation MI in adults", desc: "Predicts 30-day mortality in acute STEMI for risk stratification." },
-                    { name: "Thrombolysis in Myocardial Infarction (TIMI) score for unstable angina or non-ST elevation MI in adults", desc: "Predicts risk in unstable angina/NSTEMI using clinical and laboratory factors." }
-                ],
+                    { name: "CHA2DS2-VASc stroke risk score", desc: "Predicts stroke risk in atrial fibrillation", file: "calculators/cha2ds2-vasc-score.html" },
+                    { name: "HAS-BLED bleeding risk score", desc: "Assesses bleeding risk with anticoagulation", file: "calculators/has-bled-score.html" },
+                    { name: "TIMI STEMI score", desc: "Predicts mortality in ST elevation MI", file: "calculators/timi-stemi-score.html" },
+                    { name: "TIMI NSTEMI/UA score", desc: "Risk assessment in unstable angina/NSTEMI", file: "calculators/timi-nstemi-score.html" },
+                    { name: "Embolic risk French score", desc: "Predicts embolism in endocarditis", file: "calculators/embolic-risk-french-score.html" },
+                    { name: "GO-FAR score", desc: "Predicts cardiac arrest survival", file: "calculators/go-far-score.html" },
+                    { name: "H2FPEF score", desc: "Assesses HFpEF probability", file: "calculators/h2fpef-score.html" },
+                    { name: "Cardiac output calculation", desc: "Calculates hemodynamic parameters", file: "calculators/cardiac-output-calculation.html" },
+                    { name: "CVD risk (ACC/AHA 2013)", desc: "10-year cardiovascular risk assessment", file: "calculators/cvd-risk-acc-aha-2013.html" },
+                    { name: "CVD risk (AHA 2023)", desc: "10 and 30-year cardiovascular risk", file: "calculators/cvd-risk-aha-2023.html" },
+                    { name: "CVD risk (MESA 2015)", desc: "Cardiovascular risk with CAC score", file: "calculators/cvd-risk-mesa-2015.html" },
+                    { name: "PVR/PVRI calculation", desc: "Calculates pulmonary vascular resistance", file: "calculators/pvr-pvri-calculation.html" },
+                    { name: "Systemic vascular resistance", desc: "Calculates SVR from hemodynamics", file: "calculators/svr-calculation.html" },
+                    { name: "QT interval correction", desc: "Corrects QT interval for heart rate", file: "calculators/qt-interval-correction.html" },
+                    { name: "Friedewald equation", desc: "Estimates LDL cholesterol", file: "calculators/friedewald-equation.html" },
+                    { name: "Mean arterial pressure", desc: "Calculates MAP from BP readings", file: "calculators/mean-arterial-pressure.html" },
+                    { name: "Fractional excretion of phosphate", desc: "Calculates FePO4", file: "calculators/fractional-excretion-phosphate.html" }
+                ]
+            },
+            "Dermatology": {
                 "Medical Equations": [
-                    { name: "Cardiac output in adults (conventional and SI units)", desc: "Calculates cardiac output from heart rate and stroke volume for hemodynamic assessment." },
-                    { name: "Pulmonary vascular resistance (PVR) and pulmonary vascular resistance index (PVRI) in adults and children", desc: "Calculates PVR and PVRI from hemodynamic measurements." },
-                    { name: "Systemic vascular resistance in adults", desc: "Calculates systemic vascular resistance from hemodynamic parameters." },
-                    { name: "QT interval correction (ECG) in adults and children", desc: "Corrects QT interval for heart rate to assess for QT prolongation." },
-                    { name: "Friedewald Equation for Low Density Lipoprotein (LDL-C)", desc: "Estimates LDL cholesterol from triglycerides, total cholesterol, and HDL." }
+                    { name: "BMI (metric, patient education)", desc: "Patient-friendly BMI calculator", file: "calculators/bmi-metric-adult-patient.html" },
+                    { name: "BMI (standard, patient education)", desc: "BMI calculator with imperial units", file: "calculators/bmi-standard-adult-patient.html" },
+                    { name: "BMI (clinical version)", desc: "Clinical BMI with detailed interpretation", file: "calculators/bmi-quetelet-adult-clinical.html" },
+                    { name: "BSA (Mosteller method)", desc: "Body surface area for treatment planning", file: "calculators/bsa-mosteller-treatment.html" },
+                    { name: "BSA (Du Bois method)", desc: "Body surface area for chemotherapy dosing", file: "calculators/bsa-dubois-chemotherapy.html" }
                 ]
             },
             "Emergency Medicine": {
                 "Clinical Criteria": [
-                    { name: "Clinical Opioid Withdrawal Scale (COWS) for adults and adolescents", desc: "Assesses severity of opioid withdrawal symptoms to guide medication therapy." },
-                    { name: "Pulmonary Embolism Rule-Out Criteria (PERC) rule", desc: "Clinical criteria to rule out PE in low-risk patients without imaging." },
-                    { name: "Sequential Organ Failure Assessment (Quick) qSOFA score in adults", desc: "Rapid bedside assessment of organ dysfunction risk and sepsis prognosis." }
+                    { name: "Clinical Opioid Withdrawal Scale", desc: "Assesses opioid withdrawal severity", file: "calculators/cows-withdrawal-scale.html" },
+                    { name: "PERC rule", desc: "Pulmonary embolism rule-out criteria", file: "calculators/perc-rule.html" },
+                    { name: "qSOFA score", desc: "Quick sequential organ failure assessment", file: "calculators/qsofa-score.html" }
                 ],
                 "Medical Equations": [
-                    { name: "Blood ethanol concentration estimation", desc: "Calculates blood alcohol concentration from alcohol consumed and time." },
-                    { name: "Burn injury fluid resuscitation (Parkland crystalloid estimate) in adults", desc: "Calculates fluid requirements for burn management using Parkland formula." },
-                    { name: "Burn injury fluid resuscitation (modified Brooke crystalloid estimate) in adults", desc: "Calculates fluid requirements using modified Brooke formula." },
-                    { name: "Endotracheal tube size for children (1 to 8 years)", desc: "Predicts appropriate ET tube size based on child's age." }
+                    { name: "Blood ethanol concentration", desc: "Estimates BAC from alcohol consumed", file: "calculators/blood-ethanol-concentration.html" },
+                    { name: "Burn resuscitation (Parkland)", desc: "Calculates Parkland fluid requirements", file: "calculators/burn-parkland-formula.html" },
+                    { name: "Burn resuscitation (modified Brooke)", desc: "Calculates Brooke fluid requirements", file: "calculators/burn-brooke-formula.html" }
                 ]
             },
             "Endocrinology and Diabetes": {
                 "Clinical Criteria": [
-                    { name: "Thyroid Imaging Reporting and Data System (TI-RADS) with guidance on FNA of thyroid nodules in adults", desc: "Stratifies thyroid nodule malignancy risk and guides FNA recommendations." }
+                    { name: "TI-RADS thyroid nodule risk", desc: "Stratifies thyroid nodule malignancy risk", file: "calculators/ti-rads-score.html" }
                 ],
                 "Medical Equations": [
-                    { name: "Body mass index (BMI) for adults (Metric, Patient education)", desc: "Patient-friendly BMI calculator with metric units." },
-                    { name: "Body mass index (BMI) for adults (Patient education)", desc: "Patient-friendly BMI calculator with standard units." },
-                    { name: "Body mass index (BMI; Quetelet's index) in adults", desc: "Standard BMI calculation for weight status assessment." },
-                    { name: "Calcium correction in hypoalbuminemia in adults and children ≥1 year (SI units)", desc: "Corrects serum calcium for low albumin levels (SI units)." },
-                    { name: "Calcium correction in hypoalbuminemia in adults and children ≥1 year (conventional units)", desc: "Corrects serum calcium for low albumin levels (conventional units)." },
-                    { name: "Conversion of hemoglobin A1C from percent to mmol/mol and estimation of corresponding average glucose", desc: "Converts A1C between percent and mmol/mol and estimates average glucose." },
-                    { name: "Plasma sodium concentration correction for hyperglycemia in adults", desc: "Corrects serum sodium for hyperglycemia effects." }
+                    { name: "Hemoglobin A1C conversion", desc: "Converts A1C and estimates average glucose", file: "calculators/hemoglobin-a1c-conversion.html" },
+                    { name: "Calcium correction for hypoalbuminemia (SI)", desc: "Corrects calcium for low albumin", file: "calculators/calcium-correction-si-units.html" },
+                    { name: "Calcium correction (conventional)", desc: "Corrects calcium in conventional units", file: "calculators/calcium-correction-conventional.html" },
+                    { name: "Sodium correction for hyperglycemia", desc: "Corrects serum sodium for high glucose", file: "calculators/sodium-correction-hyperglycemia.html" },
+                    { name: "EER for females (birth-18 years)", desc: "Estimated energy requirement", file: "calculators/eer-females-birth-18.html" },
+                    { name: "EER for males (birth-18 years)", desc: "Estimated energy requirement", file: "calculators/eer-males-birth-18.html" }
+                ]
+            },
+            "Gastroenterology and Hepatology": {
+                "Clinical Criteria": [
+                    { name: "Blatchford score", desc: "GI bleeding severity assessment", file: "calculators/blatchford-score.html" },
+                    { name: "CLIF-SOFA score", desc: "Acute-on-chronic liver disease prognosis", file: "calculators/clif-sofa-score.html" },
+                    { name: "Crohn Disease Activity Index", desc: "CDAI disease activity scoring", file: "calculators/crohn-disease-activity-index.html" },
+                    { name: "Glasgow alcoholic hepatitis score", desc: "Prognostic assessment of hepatitis", file: "calculators/glasgow-alcoholic-hepatitis-score.html" },
+                    { name: "Harvey-Bradshaw index", desc: "Simplified Crohn's disease activity", file: "calculators/harvey-bradshaw-index.html" },
+                    { name: "Mayo score", desc: "Ulcerative colitis activity assessment", file: "calculators/mayo-score-ulcerative-colitis.html" },
+                    { name: "Ranson criteria", desc: "Pancreatitis prognosis assessment", file: "calculators/ranson-criteria-pancreatitis.html" },
+                    { name: "Rockall score", desc: "Upper GI bleeding risk assessment", file: "calculators/rockall-score-gi-bleeding.html" }
+                ],
+                "Medical Equations": [
+                    { name: "APRI score (SI units)", desc: "Liver fibrosis assessment", file: "calculators/apri-score-si-units.html" },
+                    { name: "APRI score (conventional)", desc: "Liver fibrosis in conventional units", file: "calculators/apri-score-conventional-units.html" },
+                    { name: "FIB-4 index (SI units)", desc: "Indirect liver fibrosis marker", file: "calculators/fib4-index-si-units.html" },
+                    { name: "FIB-4 index (conventional)", desc: "FIB-4 in conventional units", file: "calculators/fib4-index-conventional-units.html" },
+                    { name: "MELD/MELDNa score", desc: "Liver transplant prioritization", file: "calculators/meld-meldna-score.html" },
+                    { name: "MELD 3.0 score", desc: "Updated MELD scoring system", file: "calculators/meld-3-score.html" },
+                    { name: "Hepatitis discriminant function", desc: "Severe vs mild hepatitis assessment", file: "calculators/hepatitis-discriminant-function.html" }
+                ]
+            },
+            "Emergency Medicine & Critical Care": {
+                "Medical Equations": [
+                    { name: "A-a gradient", desc: "Alveolar-arterial oxygen gradient", file: "calculators/aa-gradient.html" }
+                ]
+            },
+            "Hematology": {
+                "Clinical Criteria": [
+                    { name: "4 Ts score", desc: "HIT pretest probability", file: "calculators/4-ts-score.html" },
+                    { name: "CNS-IPI score", desc: "CNS relapse risk in DLBCL", file: "calculators/cns-ipi-score.html" },
+                    { name: "CIBMTR GVHD risk", desc: "Chronic GVHD risk after transplant", file: "calculators/cibmtr-chronic-gvhd-score.html" },
+                    { name: "DVT Wells score", desc: "Deep vein thrombosis probability", file: "calculators/dvt-wells-score.html" },
+                    { name: "GIPSS score", desc: "Myelofibrosis prognostic index", file: "calculators/gipss-score.html" },
+                    { name: "IPI NHL", desc: "Non-Hodgkin lymphoma prognosis", file: "calculators/ipi-non-hodgkin-lymphoma.html" },
+                    { name: "IPS Hodgkin", desc: "Hodgkin lymphoma prognosis", file: "calculators/ips-hodgkin-lymphoma.html" },
+                    { name: "Khorana score", desc: "VTE risk in cancer patients", file: "calculators/khorana-score.html" },
+                    { name: "MIPI score", desc: "Mantle cell lymphoma prognosis", file: "calculators/mipi-score.html" },
+                    { name: "MDACC MDS score", desc: "MDS prognostic model", file: "calculators/mdacc-mds-score.html" },
+                    { name: "IPSS-R score", desc: "MDS revised prognostic score", file: "calculators/ipss-r-score.html" }
+                ],
+                "Medical Equations": [
+                    { name: "Absolute neutrophil count", desc: "Calculate ANC from differential", file: "calculators/absolute-neutrophil-count.html" },
+                    { name: "Reticulocyte production index", desc: "Assesses bone marrow response", file: "calculators/rpi-calculator.html" },
+                    { name: "Transferrin saturation", desc: "Iron metabolism assessment", file: "calculators/tsat-calculator.html" }
+                ]
+            },
+            "Hospital Medicine": {
+                "Clinical Criteria": [
+                    { name: "Community-acquired pneumonia PSI", desc: "Pneumonia severity index", file: "calculators/community-acquired-pneumonia-psi.html" },
+                    { name: "Clinical diagnosis of endocarditis", desc: "Modified Duke Criteria", file: "calculators/clinical-diagnosis-of-endocarditis.html" },
+                    { name: "PE Wells score", desc: "Pulmonary embolism risk assessment", file: "calculators/pulmonary-embolism-wells.html" },
+                    { name: "Pressure ulcer risk (Braden)", desc: "Pressure ulcer prevention", file: "calculators/pressure-ulcer-risk-braden.html" },
+                    { name: "Revised venous severity score", desc: "Venous disease severity", file: "calculators/revised-venous-clinical-severity.html" }
+                ],
+                "Medical Equations": [
+                    { name: "Creatinine clearance (Cockcroft-Gault)", desc: "Renal function estimation", file: "calculators/creatinine-clearance-cockcroft-gault.html" },
+                    { name: "Fractional excretion of sodium", desc: "FENa for kidney assessment", file: "calculators/fractional-excretion-sodium.html" },
+                    { name: "Serum osmolal gap", desc: "Detects toxic alcohols", file: "calculators/serum-osmolal-gap.html" },
+                    { name: "Electrolyte correction (calcium)", desc: "Adjust calcium for albumin", file: "calculators/electrolyte-correction-calcium.html" }
+                ]
+            },
+            "Infectious Diseases": {
+                "Clinical Criteria": [
+                    { name: "CURB-65 pneumonia score", desc: "CAP severity assessment", file: "calculators/curb-65-pneumonia-severity-score.html" },
+                    { name: "MASCC neutropenic fever", desc: "Cancer patient fever risk", file: "calculators/mascc-neutropenic-fever-risk.html" }
+                ],
+                "Medical Equations": [
+                    { name: "Adjusted CSF WBC count", desc: "Corrects for traumatic tap", file: "calculators/adjusted-csf-white-blood-cell-count.html" },
+                    { name: "Ideal body weight", desc: "For antibiotic dosing", file: "calculators/ideal-body-weight-drug-dosing.html" }
+                ]
+            },
+            "Nephrology and Hypertension": {
+                "Medical Equations": [
+                    { name: "Creatinine clearance (measured)", desc: "Direct renal function measurement", file: "calculators/creatinine-clearance-measured.html" },
+                    { name: "GFR (Schwartz formula)", desc: "Children's kidney function", file: "calculators/gfr-schwartz-formula.html" },
+                    { name: "GFR (race-free CKD-EPI Cr)", desc: "Adult GFR estimation", file: "calculators/gfr-race-free-ckd-epi-cr.html" },
+                    { name: "GFR (race-free CKD-EPI Cys)", desc: "GFR using cystatin C", file: "calculators/gfr-race-free-ckd-epi-cys.html" },
+                    { name: "GFR (race-free CKD-EPI Cr+Cys)", desc: "GFR combined equation", file: "calculators/gfr-race-free-ckd-epi-cr-cys.html" },
+                    { name: "GFR (CKiD U25)", desc: "Pediatric/young adult GFR", file: "calculators/gfr-ckid-u25.html" },
+                    { name: "Estimated albumin excretion", desc: "ACR-based estimation", file: "calculators/estimated-albumin-excretion-rate.html" },
+                    { name: "Spot urine ACR", desc: "Albumin-creatinine ratio", file: "calculators/spot-urine-albumin-creatinine-ratio.html" },
+                    { name: "Spot urine PCR (adults)", desc: "Protein-creatinine ratio", file: "calculators/spot-urine-protein-creatinine-ratio-adults.html" },
+                    { name: "Spot urine PCR (children)", desc: "PCR for pediatric patients", file: "calculators/spot-urine-protein-creatinine-ratio-children.html" },
+                    { name: "Fractional excretion of magnesium", desc: "Hypomagnesemia evaluation", file: "calculators/fractional-excretion-magnesium.html" },
+                    { name: "Urine anion gap", desc: "Hyperchloremic acidosis assessment", file: "calculators/urine-anion-gap.html" },
+                    { name: "Urine osmolal gap", desc: "Unmeasured osmoles detection", file: "calculators/urine-osmolal-gap.html" },
+                    { name: "Urine potassium-creatinine ratio", desc: "Potassium handling assessment", file: "calculators/urine-potassium-creatinine-ratio.html" },
+                    { name: "Serum anion gap", desc: "Metabolic acidosis assessment", file: "calculators/serum-anion-gap.html" },
+                    { name: "Kt/V dialysis dose", desc: "Dialysis adequacy assessment", file: "calculators/kt-v-dialysis-dose.html" },
+                    { name: "Residual kidney urea clearance", desc: "Residual renal function", file: "calculators/residual-kidney-urea-clearance.html" },
+                    { name: "Blood pressure percentiles", desc: "BP percentiles for children", file: "calculators/blood-pressure-percentiles.html" },
+                    { name: "Estimated protein excretion", desc: "PCR-based estimation", file: "calculators/estimated-protein-excretion-rate.html" }
+                ]
+            },
+            "Neurology": {
+                "Clinical Criteria": [
+                    { name: "ABCD2 score", desc: "Stroke risk after TIA", file: "calculators/abcd2-score.html" },
+                    { name: "Epworth Sleepiness Scale", desc: "Daytime sleepiness assessment", file: "calculators/epworth-sleepiness-scale.html" },
+                    { name: "NIHSS score", desc: "Stroke severity assessment", file: "calculators/nihss-score.html" },
+                    { name: "RoPE score", desc: "Paradoxical embolism risk", file: "calculators/rope-score.html" },
+                    { name: "Framingham stroke risk (female)", desc: "Stroke risk in women", file: "calculators/framingham-stroke-risk-female.html" },
+                    { name: "Framingham stroke risk (male)", desc: "Stroke risk in men", file: "calculators/framingham-stroke-risk-male.html" }
+                ],
+                "Medical Equations": [
+                    { name: "Apgar score", desc: "Newborn assessment", file: "calculators/apgar-newborn-score.html" }
+                ]
+            },
+            "OB/GYN": {
+                "Clinical Criteria": [
+                    { name: "TOLAC assessment", desc: "Trial of labor after cesarean", file: "calculators/trial-of-labor-after-cesarean-tolac-assessment.html" }
+                ],
+                "Medical Equations": [
+                    { name: "Estimated 24-hour urine protein", desc: "Pregnancy proteinuria assessment", file: "calculators/estimated-24-hour-urine-protein-pregnancy.html" },
+                    { name: "Estimated Date of Delivery", desc: "Clinical EDD calculator", file: "calculators/estimated-date-delivery-edd.html" },
+                    { name: "Estimated Date of Delivery (patient)", desc: "Patient-friendly EDD calculator", file: "calculators/estimated-date-delivery-edd-patient-education.html" },
+                    { name: "Gestational age from EDD", desc: "Calculate current gestational age", file: "calculators/gestational-age-from-edd.html" },
+                    { name: "Nuchal translucency percentile", desc: "Down syndrome screening", file: "calculators/nuchal-translucency-nt-percentile-crl.html" },
+                    { name: "Post-test probability", desc: "Bayesian test interpretation", file: "calculators/post-test-probability-likelihood-ratio.html" }
+                ]
+            },
+            "Oncology": {
+                "Clinical Criteria": [
+                    { name: "Breast cancer risk (Gail 2018)", desc: "5-year breast cancer risk", file: "calculators/breast-cancer-gail-model.html" },
+                    { name: "Breast cancer risk (BCSC 2015)", desc: "Risk with breast density", file: "calculators/breast-cancer-bcsc.html" },
+                    { name: "CARG-BC score", desc: "Chemotherapy toxicity risk", file: "calculators/carg-breast-cancer.html" },
+                    { name: "UCLA UISS RCC", desc: "Renal cell carcinoma prognosis", file: "calculators/ucla-integrated-staging-renal.html" }
+                ],
+                "Medical Equations": [
+                    { name: "ALBI grade", desc: "HCC survival estimation", file: "calculators/albi-grade-hcc.html" },
+                    { name: "MELD 3.0 score", desc: "Liver transplant prioritization", file: "calculators/meld-3-score.html" }
+                ]
+            },
+            "Palliative Care": {
+                "Clinical Criteria": [
+                    { name: "BODE Index", desc: "COPD survival prediction", file: "calculators/bode-index.html" },
+                    { name: "PHQ-9 depression screening", desc: "Depression severity assessment", file: "calculators/phq-9-depression-screening.html" },
+                    { name: "Sleep problems questionnaire", desc: "Sleep disturbance assessment", file: "calculators/sleep-problems-questionnaire.html" }
+                ],
+                "Medical Equations": [
+                ]
+            },
+            "Pediatrics": {
+                "Clinical Criteria": [
+                    { name: "Apgar score", desc: "Newborn assessment", file: "calculators/apgar-score.html" },
+                    { name: "Corrected age (preterm)", desc: "Adjusted age for prematurity", file: "calculators/corrected-age-preterm.html" },
+                    { name: "Newborn hyperbilirubinemia", desc: "Bilirubin risk assessment", file: "calculators/newborn-hyperbilirubinemia.html" },
+                    { name: "Pediatric UC activity", desc: "PUCAI disease activity", file: "calculators/pediatric-ulcerative-colitis-index.html" },
+                    { name: "Westley croup score", desc: "Croup severity assessment", file: "calculators/westley-croup-score.html" }
+                ],
+                "Medical Equations": [
+                    { name: "BMI percentiles (female)", desc: "Growth chart percentiles", file: "calculators/bmi-percentiles-females-2-20.html" },
+                    { name: "BMI percentiles (male)", desc: "Growth chart percentiles", file: "calculators/bmi-percentiles-males-2-20.html" },
+                    { name: "BSA (Mosteller)", desc: "Body surface area", file: "calculators/body-surface-area-bsa.html" },
+                    { name: "Head circumference (WHO)", desc: "0-24 month percentiles", file: "calculators/head-circumference-who.html" },
+                    { name: "Head circumference (CDC)", desc: "0-36 month percentiles", file: "calculators/head-circumference-cdc.html" },
+                    { name: "Height percentiles (female)", desc: "Growth assessment", file: "calculators/height-percentiles-females.html" },
+                    { name: "Height percentiles (male)", desc: "Growth assessment", file: "calculators/height-percentiles-males.html" },
+                    { name: "Length-for-age (WHO)", desc: "0-24 month percentiles", file: "calculators/length-age-who.html" },
+                    { name: "Maintenance fluid (daily)", desc: "Daily fluid requirements", file: "calculators/maintenance-fluid-daily.html" },
+                    { name: "Maintenance fluid (hourly)", desc: "Hourly fluid rates", file: "calculators/maintenance-fluid-hourly.html" },
+                    { name: "Weight-for-age (WHO)", desc: "0-24 month percentiles", file: "calculators/weight-age-who.html" },
+                    { name: "Peak expiratory flow (female)", desc: "PEF prediction", file: "calculators/peak-expiratory-flow-females.html" },
+                    { name: "Peak expiratory flow (male)", desc: "PEF prediction", file: "calculators/peak-expiratory-flow-males.html" }
+                ]
+            },
+            "Primary Care (Adult)": {
+                "Clinical Criteria": [
+                    { name: "AUDIT questionnaire", desc: "Alcohol screening tool", file: "calculators/audit-questionnaire.html" },
+                    { name: "AUA symptom score", desc: "Urinary symptom assessment", file: "calculators/aua-symptom-score.html" },
+                    { name: "Breast cancer risk (Gail 2018)", desc: "5-year breast cancer risk", file: "calculators/breast-cancer-gail-model.html" },
+                    { name: "Breast cancer risk (BCSC 2015)", desc: "Risk with breast density", file: "calculators/breast-cancer-bcsc.html" }
+                ]
+            },
+            "Primary Care Sports Medicine": {
+                "Medical Equations": [
+                    { name: "Chemistry conversions (Conv→SI)", desc: "Lab value conversions", file: "calculators/sports-medicine-conv-to-si-chemistry.html" },
+                    { name: "Immunology conversions (Conv→SI)", desc: "Lab value conversions", file: "calculators/sports-medicine-conv-to-si-immunology.html" },
+                    { name: "Chemistry conversions (SI→Conv)", desc: "Lab value conversions", file: "calculators/sports-medicine-si-to-conv-chemistry.html" },
+                    { name: "Immunology conversions (SI→Conv)", desc: "Lab value conversions", file: "calculators/sports-medicine-si-to-conv-immunology.html" }
+                ]
+            },
+            "Psychiatry": {
+                "Clinical Criteria": [
+                    { name: "PHQ-9 depression screening", desc: "Depression assessment", file: "calculators/phq-9-depression-screening.html" },
+                    { name: "GAD-7 anxiety scale", desc: "Anxiety disorder assessment", file: "calculators/gad-7-anxiety-scale.html" }
+                ],
+                "Medical Equations": [
+                    { name: "BMI (metric, patient ed)", desc: "Patient-friendly BMI", file: "calculators/bmi-metric-adults.html" },
+                    { name: "BMI (standard, patient ed)", desc: "Patient-friendly BMI", file: "calculators/bmi-standard-adults.html" },
+                    { name: "BMI percentiles (female, patient ed)", desc: "Growth percentiles", file: "calculators/bmi-percentiles-females.html" },
+                    { name: "BMI percentiles (male, patient ed)", desc: "Growth percentiles", file: "calculators/bmi-percentiles-males.html" }
+                ]
+            },
+            "Pulmonary and Critical Care": {
+                "Clinical Criteria": [
+                    { name: "APACHE II", desc: "ICU mortality prediction", file: "calculators/apache-ii-score.html" },
+                    { name: "BODE Index", desc: "COPD survival prediction", file: "calculators/bode-index.html" },
+                    { name: "COPD Assessment Test", desc: "Symptom burden assessment", file: "calculators/copd-assessment-test.html" },
+                    { name: "SOFA score", desc: "Multi-organ failure assessment", file: "calculators/sofa-score.html" },
+                    { name: "qSOFA score", desc: "Quick sepsis assessment", file: "calculators/qsofa-score.html" },
+                    { name: "NEWS2 score", desc: "Acute illness severity", file: "calculators/news2-score.html" },
+                    { name: "Modified Wells DVT", desc: "DVT risk assessment", file: "calculators/modified-wells-dvt.html" },
+                    { name: "Modified Wells PE", desc: "PE risk assessment", file: "calculators/modified-geneva-pe.html" },
+                    { name: "PERC rule", desc: "PE rule-out criteria", file: "calculators/perc-rule.html" },
+                    { name: "Caprini VTE risk", desc: "Surgical VTE prophylaxis", file: "calculators/caprini-risk-assessment.html" },
+                    { name: "Geneva VTE score", desc: "Medical VTE risk", file: "calculators/geneva-risk-score.html" },
+                    { name: "Padua VTE score", desc: "Hospitalized VTE risk", file: "calculators/padua-vte-score.html" },
+                    { name: "mMRC dyspnea scale", desc: "Dyspnea severity", file: "calculators/mmrc-dyspnea-scale.html" },
+                    { name: "Gupta pneumonia risk", desc: "Postop pneumonia risk", file: "calculators/gupta-pneumonia-risk.html" },
+                    { name: "Gupta respiratory failure", desc: "Postop respiratory risk", file: "calculators/gupta-respiratory-failure-risk.html" }
+                ],
+                "Medical Equations": [
+                    { name: "Oxygenation index", desc: "Hypoxemia severity", file: "calculators/oxygenation-index.html" },
+                    { name: "PaO2/FiO2 ratio", desc: "ARDS severity", file: "calculators/pao2-fio2-ratio.html" },
+                    { name: "Predicted body weight", desc: "Ventilation settings", file: "calculators/predicted-body-weight.html" }
+                ]
+            },
+            "Rheumatology": {
+                "Clinical Criteria": [
+                    { name: "BASDAI", desc: "Ankylosing spondylitis activity", file: "calculators/basdai-calculator.html" },
+                    { name: "Gout flare diagnostic rule", desc: "Gout diagnosis criterion", file: "calculators/gout-flare-calculator.html" },
+                    { name: "CDAI", desc: "RA disease activity", file: "calculators/cdai-calculator.html" },
+                    { name: "DAS28-CRP", desc: "RA activity with CRP", file: "calculators/das28-crp-calculator.html" },
+                    { name: "DAS28-ESR", desc: "RA activity with ESR", file: "calculators/das28-esr-calculator.html" },
+                    { name: "SDAI", desc: "Simplified RA activity", file: "calculators/sdai-calculator.html" }
+                ]
+            },
+            "Sleep Medicine": {
+                "Clinical Criteria": [
+                    { name: "Enhanced STOP-Bang OSA", desc: "OSA screening", file: "calculators/enhanced-stop-bang-osa.html" },
+                    { name: "Epworth Sleepiness", desc: "Daytime sleepiness", file: "calculators/epworth-sleepiness-scale.html" },
+                    { name: "Sleep problems questionnaire", desc: "Sleep disturbance", file: "calculators/sleep-problems-questionnaire.html" }
+                ]
+            },
+            "Surgery": {
+                "Clinical Criteria": [
+                    { name: "APACHE II", desc: "ICU mortality prediction", file: "calculators/apache-ii-score.html" },
+                    { name: "ARISCAT", desc: "Pulmonary risk", file: "calculators/ariscat-score.html" },
+                    { name: "Caprini VTE risk", desc: "Surgical VTE prophylaxis", file: "calculators/caprini-score.html" },
+                    { name: "Ranson criteria", desc: "Pancreatitis prognosis", file: "calculators/ranson-pancreatitis.html" },
+                    { name: "MESS score", desc: "Mangled extremity severity", file: "calculators/mess-score.html" },
+                    { name: "Eckardt score", desc: "Achalasia symptoms", file: "calculators/eckardt-score.html" },
+                    { name: "LARS score", desc: "Bowel dysfunction", file: "calculators/lars-score.html" },
+                    { name: "Michigan PICC risk", desc: "PICC thrombosis risk", file: "calculators/michigan-picc-thrombosis.html" },
+                    { name: "Surgical Apgar score", desc: "Surgery outcome prediction", file: "calculators/surgical-apgar-score.html" }
+                ]
+            },
+            "Unit Conversions": {
+                "Medical Equations": [
+                    { name: "Length converter", desc: "Convert mm, cm, m, inches, feet", file: "calculators/length-unit-converter.html" },
+                    { name: "Temperature converter", desc: "Convert °C, °F, K", file: "calculators/temperature-unit-converter.html" },
+                    { name: "Weight converter", desc: "Convert g, kg, lbs, oz, stones", file: "calculators/weight-unit-converter.html" }
                 ]
             }
         };
@@ -383,21 +685,20 @@
             let html = '';
 
             for (const [category, types] of Object.entries(allCalculators)) {
-                let categoryCalculators = [];
+                let categoryCount = 0;
+                const calculators = [];
 
-                for (const [type, calculators] of Object.entries(types)) {
-                    const typeClass = type.toLowerCase().replace(/\s+/g, '-');
-                    calculators.forEach(calc => {
-                        categoryCalculators.push({
+                for (const [type, items] of Object.entries(types)) {
+                    items.forEach(calc => {
+                        categoryCount++;
+                        calculators.push({
                             ...calc,
                             type: type,
-                            typeClass: typeClass,
                             category: category
                         });
                     });
                 }
 
-                const categoryCount = categoryCalculators.length;
                 html += `
                     <div class="category-header">
                         <div>
@@ -407,23 +708,27 @@
                     </div>
                 `;
 
-                categoryCalculators.forEach(calc => {
+                calculators.forEach(calc => {
                     const isClinic = calc.type === 'Clinical Criteria';
-                    const typeLabel = isClinic ? 'Clinical' : 'Equation';
-                    const typeBadgeClass = isClinic ? 'clinical' : 'equation';
+                    const typeLabel = isClinic ? 'clinical' : 'equation';
 
                     html += `
-                        <div class="calculator-item" data-type="${typeLabel.toLowerCase()}" data-search="${calc.name.toLowerCase()}">
-                            <h5>
-                                <i class="fas ${isClinic ? 'fa-stethoscope' : 'fa-calculator'}"></i>
-                                ${calc.name}
-                            </h5>
-                            <p>${calc.desc}</p>
-                            <div>
-                                <span class="calculator-type ${typeBadgeClass}">${calc.type}</span>
-                                <span class="calculator-type" style="background: #95a5a6;">${category}</span>
+                        <a href="${calc.file}" class="calculator-item" data-type="${typeLabel}" data-search="${calc.name.toLowerCase()}">
+                            <div class="calculator-item-content">
+                                <h5>
+                                    <i class="fas ${isClinic ? 'fa-stethoscope' : 'fa-calculator'}"></i>
+                                    ${calc.name}
+                                </h5>
+                                <p>${calc.desc}</p>
+                                <div>
+                                    <span class="calculator-type ${typeLabel === 'clinical' ? 'clinical' : 'equation'}">${calc.type}</span>
+                                    <span class="calculator-type" style="background: #95a5a6;">${category}</span>
+                                </div>
                             </div>
-                        </div>
+                            <button class="calculator-link-btn" onclick="event.preventDefault(); window.location.href='${calc.file}';">
+                                <i class="fas fa-arrow-right"></i> Open
+                            </button>
+                        </a>
                     `;
                 });
             }
@@ -450,7 +755,7 @@
                 const matchesSearch = item.dataset.search.includes(searchTerm);
                 const matchesType = currentFilter === 'all' || item.dataset.type === currentFilter;
 
-                item.style.display = (matchesSearch && matchesType) ? 'block' : 'none';
+                item.style.display = (matchesSearch && matchesType) ? 'flex' : 'none';
             });
         }
     </script>
