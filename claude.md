@@ -94,5 +94,7 @@ Design
 - Souvik
 
 **MLOps Team Tooling**
-- MlOps team primarily uses python for scripts and fastapi for creating servers.
-- uv is used for dependency management
+- MLOps team primarily uses python for scripts and fastapi for creating servers.
+- uv is used for dependency management and running python scripts by creating venvs
+- development is happening in python
+- a good design pattern is to run the scripts in background and continuously updating a file which can be monitored on the progress of the script
