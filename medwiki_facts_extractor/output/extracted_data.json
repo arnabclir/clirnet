@@ -1,0 +1,463 @@
+[
+  {
+    "medwiki_id": "1",
+    "title": "Bilateral nephrectomy was done in a critically ill male patient. He has the following clinical conditions: &bull; Patient is on dialysis every alternate day &bull; Organomegaly &bull; Exertion and chest pain &bull; Ascites and plural fluid What should be the course of treatment?",
+    "summary": "This medical article addresses the management of a critically ill male patient who underwent bilateral nephrectomy and presents with organomegaly, exertion, chest pain, ascites, and pleural effusion while on alternate-day dialysis. The treatment approach focuses on optimizing dialysis adequacy, particularly increasing duration to 12 hours and frequency to 4-5 times weekly if needed. If cardiac function is adequate, tuberculosis should be investigated as a potential cause. The article emphasizes the importance of pleural and ascitic fluid analysis for differential diagnosis and proper treatment planning.",
+    "key_facts": [
+      {
+        "fact": "The patient should continue dialysis and potentially increase treatment frequency to 4-5 times weekly",
+        "supporting_statement": "Ascites and pleural effusion indicate inadequate dialysis with insufficient removal of excess water from the patient's body."
+      },
+      {
+        "fact": "If dialysis quality is good, cardiac function assessment is the next priority",
+        "supporting_statement": "Poor ejection fraction or heart failure can cause fluid retention in pleural and peritoneal cavities, leading to ascites."
+      },
+      {
+        "fact": "Tuberculosis should be considered when cardiac function is adequate",
+        "supporting_statement": "The article states that tuberculosis could be a cause for developing ascites or pleural fluid if the heart is functioning well."
+      },
+      {
+        "fact": "Pleural and ascitic fluid should be sent for analysis",
+        "supporting_statement": "Fluid analysis is essential for differential diagnosis and determining the underlying cause of the patient's symptoms."
+      },
+      {
+        "fact": "Dialysis duration should be increased to 12 hours for better fluid removal",
+        "supporting_statement": "The article specifically recommends good quality dialysis for 12 hours to improve ultrafiltration and fluid removal."
+      },
+      {
+        "fact": "Organomegaly has multiple potential causes including fluid overload, tuberculosis, or malignancies",
+        "supporting_statement": "Organomegaly is described as a broad term that can relate to hepatomegaly, splenomegaly from fluid overload, tuberculosis, or other malignancies."
+      }
+    ],
+    "topics": [
+      "Nephrology",
+      "Dialysis",
+      "Fluid Management",
+      "Cardiology",
+      "Pulmonology",
+      "Infectious Disease"
+    ],
+    "keywords": [
+      "bilateral nephrectomy",
+      "dialysis",
+      "ascites",
+      "pleural effusion",
+      "organomegaly",
+      "ultrafiltration",
+      "cardiac function",
+      "tuberculosis",
+      "fluid overload",
+      "chest pain"
+    ]
+  },
+  {
+    "medwiki_id": "2",
+    "title": "What are the uses and effects of oral hypoglycemic agent in chronic renal failure? In type 2 diabetes mellitus, how should serum creatinine level be controlled if a patient&rsquo;s serum creatinine is 2.5mg/ dL?",
+    "summary": "In CKD patients with diabetes, oral hypoglycemic agents require careful selection: metformin is contraindicated below 30 mL/min GFR, long-acting sulfonylureas/insulins are avoided, while DPP-4 inhibitors (linagliptin/teneligliptin) and modified-dose sitagliptin are preferred. For patients with 2.5 mg/dL creatinine (GFR 20-30 mL/min), management focuses on stabilizing kidney function through strict protein restriction (0.8-1.0 g/kg/day), glycemic control, and blood pressure management. No drugs directly reduce creatinine; stable creatinine is achievable for 2+ years with optimized CKD care.",
+    "key_facts": [
+      {
+        "fact": "Metformin is contraindicated when GFR < 30 mL/min/1.73m²",
+        "supporting_statement": "High risk of lactic acidosis in severe renal impairment, as evidenced by Lipska et al. (2011) citing adverse outcomes below this threshold."
+      },
+      {
+        "fact": "Sitagliptin dose must be reduced: 100mg (GFR>50), 50mg (GFR 30-50), 25mg (GFR<20)",
+        "supporting_statement": "Clear dose-modification guidelines provided to prevent accumulation in reduced kidney function."
+      },
+      {
+        "fact": "Short-acting sulfonylureas (glipizide/gliclazide) and insulin (lispro/aspart) are preferred over long-acting agents",
+        "supporting_statement": "Reduced risk of prolonged hypoglycemia and drug accumulation in impaired renal clearance."
+      },
+      {
+        "fact": "Protein intake should be restricted to 0.8-1.0 g/kg/day in CKD stage 4-5",
+        "supporting_statement": "Prevents further nephron stress and hyperfiltration injury, slowing CKD progression."
+      },
+      {
+        "fact": "Managing blood sugar and blood pressure is paramount for stabilizing GFR/creatinine",
+        "supporting_statement": "Dual control reduces diabetic nephropathy progression and glomerular damage, even without creatinine-reducing drugs."
+      },
+      {
+        "fact": "Voglibose (alpha-glucosidase inhibitor) is considered safe in CKD",
+        "supporting_statement": "Minimal renal excretion as noted in Dabhi et al. (2013), making it suitable for renal-impaired patients."
+      }
+    ],
+    "topics": [
+      "Chronic Kidney Disease",
+      "Type 2 Diabetes Mellitus",
+      "Oral Hypoglycemic Agents",
+      "Renal Impairment",
+      "Medication Dosing",
+      "Glycemic Control"
+    ],
+    "keywords": [
+      "Metformin contraindication",
+      "CKD stage 4",
+      "GFR-based dosing",
+      "DPP-4 inhibitors",
+      "Short-acting insulin",
+      "Protein restriction",
+      "Blood pressure control",
+      "Lactic acidosis risk",
+      "Sitagliptin adjustment",
+      "Renal excretion"
+    ]
+  },
+  {
+    "medwiki_id": "3",
+    "title": "Which group of antihypertensive drugs has a long-term negative effect on kidneys? What is the best antihypertensive drug in T2DM? What is the sure sign of renal shut down? What is the treatment of acute anuria and its causes?",
+    "summary": "No antihypertensive drug class inherently causes long-term kidney damage if eGFR is monitored and BP is adequately controlled. ARBs are the preferred first-line antihypertensive for most patients with Type 2 Diabetes Mellitus. A definitive sign of renal shutdown is the absence of urine output despite a functional Foley catheter, accompanied by rising urea levels. Acute anuria has pre-renal (hypotension/dehydration), renal (ATN/ACN), and post-renal (obstruction) causes. Treatment focuses on correcting the underlying cause (e.g., fluids for pre-renal, relieving obstruction), managing BP and complications (e.g., Lasix for diuresis if hypertensive), monitoring kidney function (e.g., BUN, ABG), and considering renal replacement therapy. Long-term CKD management involves strict BP control, dietary modifications (protein/salt restriction), managing complications (anemia, bone disease, acidosis), and planning for ESRD (dialysis/transplant).",
+    "key_facts": [
+      {
+        "fact": "If eGFR is monitored and BP is controlled (<=140mmHg or SBP 130-140mmHg), no antihypertensive drug class has a proven long-term negative effect on kidney function.",
+        "supporting_statement": "ACE inhibitors can be continued for years if eGFR remains normal."
+      },
+      {
+        "fact": "Angiotensin Receptor Blockers (ARBs) are the preferred first-line antihypertensive for most patients with Type 2 Diabetes Mellitus and acceptable eGFR (>35 mL/min/1.73m²).",
+        "supporting_statement": "ACE inhibitors are preferred for T1DM. Beta-blockers are suggested for younger patients."
+      },
+      {
+        "fact": "A definitive sign of renal shutdown is absence of urine output despite a confirmed non-blocked Foley catheter.",
+        "supporting_statement": "If a functional Foley produces no urine after interventions (fluids, Lasix if BP controlled), kidneys are not functioning."
+      },
+      {
+        "fact": "The primary causes of acute anuria are pre-renal (hypotension, dehydration), renal (Acute Tubular Necrosis, Acute Cortical Necrosis), and post-renal (obstruction like stones or strictures).",
+        "supporting_statement": "Septic shock is the main cause of severe hypotension leading to pre-renal failure."
+      },
+      {
+        "fact": "Core principles for managing Chronic Kidney Disease (CKD) include strict blood pressure control, dietary protein/salt restriction, monitoring and managing complications (anemia, bone disease, acidosis), and timely planning for renal replacement therapy (dialysis/transplant).",
+        "supporting_statement": "Protein intake needs adjustment during dialysis/transplant phases."
+      },
+      {
+        "fact": "Urea (BUN) levels rise significantly in renal shutdown and are an important indicator of impaired kidney function.",
+        "supporting_statement": "Rising urea alongside low/no urine output confirms renal dysfunction."
+      }
+    ],
+    "topics": [
+      "Hypertension Management",
+      "Type 2 Diabetes",
+      "Antihypertensive Drugs",
+      "Renal Failure (Acute & Chronic)",
+      "Anuria",
+      "Kidney Function Tests (eGFR",
+      "BUN)",
+      "Dialysis",
+      "Renal Transplant",
+      "Diabetic Nephropathy"
+    ],
+    "keywords": [
+      "antihypertensive",
+      "ARBs",
+      "ACE inhibitors",
+      "eGFR",
+      "renal shutdown",
+      "anuria",
+      "urea",
+      "acute tubular necrosis (ATN)",
+      "acute cortical necrosis (ACN)",
+      "obstructive uropathy",
+      "CKD management",
+      "dialysis",
+      "Lasix",
+      "Foley catheter"
+    ]
+  },
+  {
+    "medwiki_id": "4",
+    "title": "How can glomerulonephritis be managed in children? What are the causes for glomerulonephritis?",
+    "summary": "Glomerulonephritis in children typically presents as acute nephritic syndrome, characterized by hematuria, oliguria, proteinuria, edema, and hypertension. The condition is often post-infectious or post-streptococcal in origin. Management focuses on supportive care including bed rest, infection control, and fluid management, with most acute cases resolving spontaneously within 2-10 days. Chronic glomerulonephritis requires ongoing dietary and protein management. Key causes include congenital factors, post-infectious/post-streptococcal processes, and IgA nephropathy.",
+    "key_facts": [
+      {
+        "fact": "Glomerulonephritis in children commonly presents as acute nephritic syndrome with RBCs and casts in urine, hematuria (micro/macro), oliguria, proteinuria (<3g/day), edema, and hypertension",
+        "supporting_statement": "The article describes these as characteristic signs and symptoms of glomerulonephritis in the pediatric population, particularly post-infectious or post-streptococcal cases."
+      },
+      {
+        "fact": "Acute glomerulonephritis management includes bed rest, antibiotics for infections, careful volume management, hydration, and nutritional support",
+        "supporting_statement": "The article specifies these as primary management approaches for acute episodes, emphasizing the importance of maintaining good hydration and nutritional status."
+      },
+      {
+        "fact": "Acute glomerulonephritis is typically self-limiting and resolves spontaneously within 2-10 days",
+        "supporting_statement": "This time frame for resolution is explicitly stated in the article, indicating the generally favorable prognosis of acute post-infectious cases."
+      },
+      {
+        "fact": "Ultrasound should be used in chronic glomerulonephritis cases with hypertension, renal dysfunction, and proteinuria (>3g/day)",
+        "supporting_statement": "The article specifies these criteria for when ultrasound imaging becomes indicated to assess chronic disease progression."
+      },
+      {
+        "fact": "Three common causes of glomerulonephritis in children are congenital factors, post-infectious/post-streptococcal glomerulonephritis, and IgA nephropathy",
+        "supporting_statement": "The article identifies these as the primary etiological categories responsible for glomerulonephritis in the pediatric population."
+      },
+      {
+        "fact": "Chronic glomerulonephritis is a progressive disease requiring ongoing dietary management and careful protein intake control",
+        "supporting_statement": "The article emphasizes the chronic nature of this condition and the need for long-term lifestyle and dietary modifications."
+      }
+    ],
+    "topics": [
+      "Pediatric Nephrology",
+      "Glomerulonephritis",
+      "Acute Nephritic Syndrome",
+      "Post-Streptococcal Glomerulonephritis",
+      "IgA Nephropathy",
+      "Renal Disease Management"
+    ],
+    "keywords": [
+      "glomerulonephritis",
+      "hematuria",
+      "proteinuria",
+      "nephritic syndrome",
+      "post-streptococcal glomerulonephritis",
+      "IgA nephropathy",
+      "oliguria",
+      "edema",
+      "hypertension",
+      "renal dysfunction",
+      "ultrasound imaging",
+      "self-limiting disease"
+    ]
+  },
+  {
+    "medwiki_id": "5",
+    "title": "What are the cardinal symptoms of acute and chronic nephritis?",
+    "summary": "Acute nephritis presents with distinct clinical features including flank or renal pain, urinary abnormalities such as hematuria (both microscopic and macroscopic forms), and oliguria. Patients typically exhibit proteinuria ranging from 2-3g daily, along with edema (anasarca) and hypertension. The condition has an abrupt onset and symptoms generally persist for 2-10 days. The article focuses solely on acute nephritis despite the title mentioning both acute and chronic forms.",
+    "key_facts": [
+      {
+        "fact": "Acute nephritis patients experience flank or renal pain as a primary symptom",
+        "supporting_statement": "The article states 'In acute nephritis, a patient suffers from flank or renal pain'"
+      },
+      {
+        "fact": "Hematuria in acute nephritis can be microscopic or macroscopic with RBCs and casts present",
+        "supporting_statement": "The description notes 'oliguria or hematuria, which can be microscopic or macroscopic. In microscopic hematuria, there would be RBCs and casts in urinary inflammation'"
+      },
+      {
+        "fact": "Proteinuria in acute nephritis typically ranges from 2-3g per day",
+        "supporting_statement": "The article specifies 'proteinuria (less than 2g/day or 3g/day)'"
+      },
+      {
+        "fact": "Acute nephritis presents with anasarca or edema and hypertension",
+        "supporting_statement": "The description lists 'anasarca or edema and hypertension' as key symptoms"
+      },
+      {
+        "fact": "Acute nephritis has an abrupt onset with symptoms lasting 2-10 days",
+        "supporting_statement": "The article states 'The onset is abrupt and the effects usually last over a period of 2-5 days or 3-10 days'"
+      }
+    ],
+    "topics": [
+      "Acute Nephritis",
+      "Kidney Disease",
+      "Renal Inflammation",
+      "Hematuria",
+      "Proteinuria"
+    ],
+    "keywords": [
+      "acute nephritis",
+      "hematuria",
+      "oliguria",
+      "proteinuria",
+      "anasarca",
+      "edema",
+      "hypertension",
+      "renal pain",
+      "flank pain",
+      "kidney inflammation"
+    ]
+  },
+  {
+    "medwiki_id": "6",
+    "title": "What is the relation between pulse rate and fever?",
+    "summary": "Fever generally causes an increase in pulse rate due to both direct and indirect mechanisms. The baseline resting pulse rate varies significantly among individuals, from about 40/min in athletes to 90-100/min in obese patients with sleep apnea. Typically, for each degree Celsius rise in body temperature, pulse rate increases by 8-20 beats per minute. However, exceptions exist, such as relative bradycardia in typhoid fever, where the expected pulse rate increase is blunted. Modern clinical practice often overlooks this relationship, despite its diagnostic value.",
+    "key_facts": [
+      {
+        "fact": "Fever generally causes an increase in pulse rate.",
+        "supporting_statement": "All cases of fever generally have an augmentation on the pulse rate."
+      },
+      {
+        "fact": "Baseline resting pulse rate varies significantly between individuals.",
+        "supporting_statement": "An athlete’s resting pulse rate would be around 40/min. A resting pulse rate in an obese person with sleep apnea would be 90 or even 100/min."
+      },
+      {
+        "fact": "Typically, pulse rate increases by 8-20 beats per minute for each degree Celsius rise in body temperature.",
+        "supporting_statement": "Depending on the basal pulse rate for every degree Celsius rise in temperature, the pulse rate would go up by 8 to 20/min."
+      },
+      {
+        "fact": "Certain infections like infective endocarditis or pericarditis cause higher-than-expected pulse rate increases with fever.",
+        "supporting_statement": "In certain patients with infection (e.g., infective endocarditis or pericarditis) the pulse rate augmentation is higher."
+      },
+      {
+        "fact": "Relative bradycardia, where pulse rate does not rise proportionally with fever, is characteristic of typhoid or enteric fever.",
+        "supporting_statement": "In certain patients with typhoid for example, there is relative bradycardia. Relative bradycardia is suggestive of typhoid or enteric fever."
+      },
+      {
+        "fact": "Modern clinical practice often does not emphasize the relationship between pulse rate and fever.",
+        "supporting_statement": "Nowadays importance is not given clinically for pulse rate and fever; there is generally an augmentation of heart rate with fever."
+      }
+    ],
+    "topics": [
+      "Fever",
+      "Pulse Rate",
+      "Relative Bradycardia",
+      "Infectious Diseases",
+      "Clinical Diagnostics"
+    ],
+    "keywords": [
+      "Pulse rate",
+      "Fever",
+      "Heart rate",
+      "Basal pulse",
+      "Relative bradycardia",
+      "Typhoid",
+      "Endocarditis",
+      "Pericarditis",
+      "Clinical importance",
+      "Temperature increase"
+    ]
+  },
+  {
+    "medwiki_id": "7",
+    "title": "What are the differential diagnoses and investigations in Pyrexia of Unknown Origin (PUO)?",
+    "summary": "PUO in India commonly involves infectious causes like malaria and typhoid, requiring antigen tests and blood cultures for diagnosis. Parasitic infections (especially amoebiasis without local signs), tuberculosis, and regionally prevalent diseases like scrub typhus and leptospira are key differentials. Self-medication can obscure findings. Prolonged PUO increases the likelihood of malignancy or connective tissue diseases like RA or SLE. Ultrasound may reveal hidden abscesses despite normal initial findings.",
+    "key_facts": [
+      {
+        "fact": "Could not parse facts",
+        "supporting_statement": ""
+      }
+    ],
+    "topics": [
+      "Pyrexia of Unknown Origin",
+      "Infectious Diseases",
+      "Differential Diagnosis",
+      "Tropical Medicine",
+      "Diagnostic Investigations"
+    ],
+    "keywords": [
+      "Pyrexia of Unknown Origin",
+      "Differential diagnosis",
+      "Malaria",
+      "Typhoid",
+      "Tuberculosis",
+      "Amoebiasis",
+      "Ultrasound",
+      "Scrub typhus",
+      "Connective tissue diseases",
+      "Lymphoma"
+    ]
+  },
+  {
+    "medwiki_id": "8",
+    "title": "In Pyrexia of Unknown Origin (PUO), what are the other investigations required after doing general and other investigations, including bone marrow CSF, PCR/CT Scan and MRI? When should a case of Pyrexia be labelled as PUO? What is the role of trial therapy in PUO?",
+    "summary": "Pyrexia of Unknown Origin (PUO) is defined as fever ≥101°F on two occasions lasting >3 weeks. After basic investigations (hemogram, liver function, cultures, imaging), clinicians should proceed to specialized tests like PET-CT, bone marrow biopsy, and lymph node sampling when diagnosis remains unclear. Tuberculosis frequently presents with minimal symptoms and should always be considered. The diagnostic approach emphasizes repeated clinical evaluation and targeted investigations based on specific findings rather than standardized protocols, recognizing that unusual presentations of common diseases are more likely than rare conditions.",
+    "key_facts": [
+      {
+        "fact": "PUO is defined as pyrexia of at least 101°F on two different occasions with fever persisting for more than three weeks",
+        "supporting_statement": "The article explicitly states these temperature and duration criteria for labeling a case as PUO, noting that the Petersdorf and Beeson criteria are not accepted."
+      },
+      {
+        "fact": "Basic investigations include complete hemogram, LDH, liver function tests, blood cultures, chest X-ray, and Mantoux test",
+        "supporting_statement": "The article lists these fundamental tests as the initial workup for PUO cases before proceeding to more specialized investigations."
+      },
+      {
+        "fact": "Bone marrow biopsy with immunohistochemistry is mandatory in all cases suspected of reticuloendothelial malignancy",
+        "supporting_statement": "The article emphasizes this as a critical investigation when malignancy of the blood-forming system is suspected, even when PET-CT fails to localize the illness."
+      },
+      {
+        "fact": "Tuberculosis can present with absolutely no signs and symptoms, with clear chest and normal abdominal CT",
+        "supporting_statement": "The article notes that TB may present silently, with only subtle findings like few mesenteric or mediastinal lymph nodes, and diagnosis may require bone marrow culture or fundoscopy."
+      },
+      {
+        "fact": "Uncommon presentations of common illnesses are more common than rare diseases in PUO",
+        "supporting_statement": "This fundamental diagnostic principle is stated as a 'rule of thumb' throughout the article, emphasizing that typical diseases with atypical presentations should be considered before rare diagnoses."
+      },
+      {
+        "fact": "Daily history and clinical examination are essential as lymph node changes may only appear on the fourth or fifth day",
+        "supporting_statement": "The article stresses repeated evaluation rather than relying solely on initial presentation, as diagnostic findings like lymph node enlargement may develop over time."
+      }
+    ],
+    "topics": [
+      "Pyrexia of Unknown Origin",
+      "Infectious Diseases",
+      "Tuberculosis",
+      "Malignancy",
+      "Collagen Vascular Diseases",
+      "Diagnostic Investigation"
+    ],
+    "keywords": [
+      "PUO",
+      "fever of unknown origin",
+      "pyrexia investigation",
+      "bone marrow biopsy",
+      "PET-CT scan",
+      "tuberculosis",
+      "lymphadenopathy",
+      "vasculitis",
+      "reticuloendothelial system",
+      "diagnostic approach"
+    ]
+  },
+  {
+    "medwiki_id": "9",
+    "title": "What are the main causes of Pyrexia of Unknown Origin (PUO) and treatment guidelines? What are the diagnostic procedures and treatment guidelines of afebrile PUO?",
+    "summary": "PUO causes vary with fever duration, transitioning from infections (malaria, TB, typhoid) to malignancies or autoimmune diseases as fever persists. Drug reactions and rare infections are also considered. Diagnosis relies heavily on meticulous physical examination (e.g., lymphadenopathy, organomegaly) followed by systematic testing: initial labs (hemogram, blood cultures, serology, imaging), then advanced tests (CT, bone marrow, PET-CT) if needed. Treatment is etiology-specific; no universal protocol exists. While afebrile PUO is queried, guidelines parallel standard PUO diagnostics but with tailored evaluations for atypical presentations. Key mentions include context-specific infections (leptospirosis, scrub typhus in India).",
+    "key_facts": [
+      {
+        "fact": "PUO etiology shifts with fever duration; longer fevers favor malignancy (e.g., lymphoma) or autoimmune disease (e.g., lupus, RA) over infection.",
+        "supporting_statement": "Rule of thumb states infective etiology decreases as fever duration increases."
+      },
+      {
+        "fact": "Physical examination is paramount for diagnosis, targeting signs like conjunctival pallor (anemia), sinus tenderness (sinusitis), splenomegaly (malaria/lymphoma), and sternal tenderness (hematopoietic disorders).",
+        "supporting_statement": "Guidelines emphasize examining lymph nodes, thyroid, heart (murmurs), abdomen (organomegaly), and sternum for clues to underlying disease."
+      },
+      {
+        "fact": "First-line diagnostics include complete hemogram, aerobic/anaerobic/fungal blood cultures, serology (typhoid, dengue, malaria), urine/sputum/stool cultures, ultrasound abdomen, and chest X-ray.",
+        "supporting_statement": "These tests screen for common infections and organ involvement before escalating to advanced imaging."
+      },
+      {
+        "fact": "Second-line diagnostics involve CT scan (chest/abdomen), bone marrow aspiration/biopsy, and PET-CT/gallium scans if initial tests fail to identify a cause.",
+        "supporting_statement": "Advanced imaging helps detect occult infections, malignancies, or inflammatory processes."
+      },
+      {
+        "fact": "Treatment is entirely dependent on the underlying cause (e.g., antibiotics for TB, antimalarials for malaria); there is no universal PUO therapy.",
+        "supporting_statement": "Guidelines state every fever has unique treatment, and physical findings guide etiology-specific management."
+      },
+      {
+        "fact": "Region-specific infections like leptospirosis, scrub typhus, and brucellosis should be considered in endemic areas like India.",
+        "supporting_statement": "Geographic context is essential, as shown by prevalence studies for scrub typhus in Andhra Pradesh."
+      }
+    ],
+    "topics": [
+      "Pyrexia of Unknown Origin",
+      "Infectious Diseases",
+      "Tuberculosis",
+      "Enteric Fever",
+      "Malignancies",
+      "Autoimmune Diseases",
+      "Diagnostic Imaging",
+      "Fever of Unknown Origin Investigation"
+    ],
+    "keywords": [
+      "PUO",
+      "Pyrexia of Unknown Origin",
+      "malaria",
+      "tuberculosis",
+      "enteric fever",
+      "lymphoma",
+      "PET-CT",
+      "scrub typhus",
+      "thyroiditis",
+      "splenomegaly"
+    ]
+  },
+  {
+    "medwiki_id": "10",
+    "title": "Which antibiotic is safe and preferable for fever of unknown origin? What is the first-line of treatment?",
+    "summary": "... text",
+    "key_facts": [
+      {
+        "fact": "Could not parse facts",
+        "supporting_statement": ""
+      }
+    ],
+    "topics": [
+      "... text"
+    ],
+    "keywords": [
+      "... text"
+    ]
+  }
+]

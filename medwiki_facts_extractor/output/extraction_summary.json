@@ -1,0 +1,77 @@
+{
+  "total_articles": 10,
+  "successful": 10,
+  "failed": 0,
+  "articles": [
+    {
+      "medwiki_id": "1",
+      "title": "Bilateral nephrectomy was done in a critically ill male patient. He has the following clinical conditions: &bull; Patient is on dialysis every alternate day &bull; Organomegaly &bull; Exertion and chest pain &bull; Ascites and plural fluid What should be the course of treatment?",
+      "success": true,
+      "error": null,
+      "processing_time": 0.49570393562316895
+    },
+    {
+      "medwiki_id": "2",
+      "title": "What are the uses and effects of oral hypoglycemic agent in chronic renal failure? In type 2 diabetes mellitus, how should serum creatinine level be controlled if a patient&rsquo;s serum creatinine is 2.5mg/ dL?",
+      "success": true,
+      "error": null,
+      "processing_time": 0.009245634078979492
+    },
+    {
+      "medwiki_id": "3",
+      "title": "Which group of antihypertensive drugs has a long-term negative effect on kidneys? What is the best antihypertensive drug in T2DM? What is the sure sign of renal shut down? What is the treatment of acute anuria and its causes?",
+      "success": true,
+      "error": null,
+      "processing_time": 0.007012128829956055
+    },
+    {
+      "medwiki_id": "4",
+      "title": "How can glomerulonephritis be managed in children? What are the causes for glomerulonephritis?",
+      "success": true,
+      "error": null,
+      "processing_time": 0.0075244903564453125
+    },
+    {
+      "medwiki_id": "5",
+      "title": "What are the cardinal symptoms of acute and chronic nephritis?",
+      "success": true,
+      "error": null,
+      "processing_time": 0.00900888442993164
+    },
+    {
+      "medwiki_id": "6",
+      "title": "What is the relation between pulse rate and fever?",
+      "success": true,
+      "error": null,
+      "processing_time": 0.008012771606445312
+    },
+    {
+      "medwiki_id": "7",
+      "title": "What are the differential diagnoses and investigations in Pyrexia of Unknown Origin (PUO)?",
+      "success": true,
+      "error": null,
+      "processing_time": 0.008235692977905273
+    },
+    {
+      "medwiki_id": "8",
+      "title": "In Pyrexia of Unknown Origin (PUO), what are the other investigations required after doing general and other investigations, including bone marrow CSF, PCR/CT Scan and MRI? When should a case of Pyrexia be labelled as PUO? What is the role of trial therapy in PUO?",
+      "success": true,
+      "error": null,
+      "processing_time": 0.007191658020019531
+    },
+    {
+      "medwiki_id": "9",
+      "title": "What are the main causes of Pyrexia of Unknown Origin (PUO) and treatment guidelines? What are the diagnostic procedures and treatment guidelines of afebrile PUO?",
+      "success": true,
+      "error": null,
+      "processing_time": 25.590502977371216
+    },
+    {
+      "medwiki_id": "10",
+      "title": "Which antibiotic is safe and preferable for fever of unknown origin? What is the first-line of treatment?",
+      "success": true,
+      "error": null,
+      "processing_time": 33.13529849052429
+    }
+  ]
+}

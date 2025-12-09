@@ -1,0 +1,19 @@
+1) Mandate ID collection during User signup
+
+Collected IDs at signup are made available now to the onboarding team so that they can validate them
+
+2) Email Validation -
+
+- We had difficulty with vendor with delivering emails
+- We have now implemented email address validation after user registers. Only when their email validation is successful, do we allow emails to be sent via the Backend Portal increasing our domain reputation.
+- We have also done a bulk validation of all previous email addresses available with the system. Here are the summary stats:
+
+status	count(uid)
+Error	905
+Deliverable	422267
+Not - Deliverable	66218
+
+3) User to Client ID Mapping
+
+- We now have the tech built out which maps users to clients. Once the data is provided, it will be visible in the Backend Portal against individual users
+- Work is on to prepare the data for tagging

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedWiki Facts Extractor - Visualization</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 MedWiki Facts Extractor</h1>
+            <p class="subtitle">Medical Article Facts & Knowledge Extraction</p>
+        </header>
+
+        <div class="controls">
+            <div class="search-section">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search articles by title..."
+                    class="search-input"
+                >
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-group">
+                    <label for="topicFilter">Filter by Topic:</label>
+                    <select id="topicFilter" class="filter-select">
+                        <option value="">-- All Topics --</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="keywordFilter">Filter by Keyword:</label>
+                    <select id="keywordFilter" class="filter-select">
+                        <option value="">-- All Keywords --</option>
+                    </select>
+                </div>
+
+                <button id="resetFilters" class="reset-btn">Reset Filters</button>
+            </div>
+
+            <div class="stats">
+                <span>Articles: <strong id="articleCount">0</strong></span>
+                <span>Showing: <strong id="visibleCount">0</strong></span>
+            </div>
+        </div>
+
+        <div id="articlesContainer" class="articles-container">
+            <!-- Articles will be inserted here -->
+        </div>
+
+        <div id="noResults" class="no-results" style="display: none;">
+            <p>No articles match your filters. Try adjusting your search.</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

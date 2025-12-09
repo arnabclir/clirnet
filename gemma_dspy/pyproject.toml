@@ -1,0 +1,9 @@
+[project]
+name = "gemma-dspy-test"
+version = "0.1.0"
+description = "Testing Gemma with DSPy"
+requires-python = ">=3.10"
+dependencies = [
+    "dspy-ai",
+    "litellm",
+]

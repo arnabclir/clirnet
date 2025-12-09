@@ -1,0 +1,482 @@
+AI_Agent_Calling[481,]{Email Openers,First Name,Middle Name,Last name,Phone Number,Owner,Call Date,FOLLOWUP DATE,Call Status,Reason (Not Connected),Search Box Feedback,Clirnet Feedback}:
+  drssbhatmjr@gmail.com,Sathya,Shankara,Bhat  P V,9400473020.0,Dipa,"2025-09-12T00:00:00",null,Connected,null,8075585215 Doctor is using this number only so asked to share the direct access link to this number,null
+  rat8455@gmail.com,Rajesh,ambalal,Trivedi,9824297687.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Incoming Call Not Available,null,null
+  nida1993khan@gmail.com,Nida,null,khan,9760622311.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  vjamalpuri@gmail.com,Vijayanand,null,Jamalpuri,9866157271.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,"The call was disconnected, and he mentioned that he would return the call",null
+  drshiwajipatil@gmail.com,Shiwaji,a,Patil,9422344947.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Connected,null,"The doctor, being elderly, did not find the app or website very convenient to use",null
+  ikechamba@gmail.com,Vishal,null,Mahajan,9418017173.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Connected,null,"Not interested, disconnected the call",null
+  kapur_ashok@hotmail.com,Ashok,null,Kapur,9810229160.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Incoming Call Not Available,null,null
+  dr.jkmeena@gmail.com,Jitendra,Kumar,Meena,9414178716.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  duttgurpreet@gmail.com,Gurpreet,null,Dutt,7986510548.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Switch Off,null,null
+  alpeshnp88@gmail.com,Alpesh,Nayneshbhai,Prajapati,9979846925.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Connected,null,Checking patients asked to call back at 5pm,null
+  vkj7799@gmail.com,Vijay,Kumar,Joseph,9989652230.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  riyasrikkus@gmail.com,Riyas,Abdul,Salam,9846906456.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  drcvlakshmi@gmail.com,Lakshmi,venkata,chavali,9848453845.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Connected,null,"At conference, call back later",null
+  kmedha11@gmail.com,Sumedha,satish,Kulkarni,9823017348.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Connected,null,Not Interested,null
+  rgholla@gmail.com,Ram,Gopal,Holla,9910474325.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Disconnected the call after hearing clirnet,null,null
+  bhawnams@hotmail.com,Bhawna,Malhotra,Singh,9450918503.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  ushavegiraju@gmail.com,N,Usha,Rani,9949817264.0,Dipa,"2025-09-12T00:00:00",null,Connected,null,"Not interested, disconnected the call",null
+  veenaseetharambhat@gmail.com,Veena,Seetharam,Bhat,9480353878.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Out of network,Not Interested,null
+  banerjee.madhumita1@gmail.com,Madhumita,sen,Banerjee,9845719366.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Out of network,Unavailable,null
+  kiranananya1@gmail.com,Kiran,Srivastava,kushwaha,9415313380.0,Dipa,"2025-09-12T00:00:00",null,Connected,null,"Not interested, after listen everything said ok and disconnected the call",null
+  drarunaaho@gmail.com,Aruna,Kumari,Gaut,8054022002.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Connected,null,"Not yet, will explore it ","All services were functioning smoothly, with no issues faced"
+  sanju5kumbhare@gmail.com,Sonal,someshwar,Kumbhare,8381048208.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Out of network,null,null
+  dr.ajantha1992@gmail.com,Sv,null,Ajantha,9787309177.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Out of network,null,null
+  skulandayan@gmail.com,K Indu,null,Indu,8056900322.0,Dipa,"2025-09-12T00:00:00",null,Connected,null," WA link needs to sent this Doctors WA number",null
+  drbandilpk@gmail.com,Pravin,Kumar,Bandil,9918156544.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Disconnected the call after hearing clirnet,null,null
+  gmanisharajesh@gmail.com,Manisha,Deore,Gandhewar,9967217878.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Connected,null,"Haven’t checked it yet, will explore later",Has not been using CLIRNET for attending CMEs lately
+  arora.manjeet@gmail.com,Manjeet,null,Arora,9818313414.0,Dipa,"2025-09-12T00:00:00",null,Not Connected,null,null,null
+  ushalokhandwala@gmail.com,Usha,yash,lokhandwala,9821167543.0,Dipa,"2025-09-12T00:00:00",null,Connected,null,"Busy, asked to call later",null
+  aparnanagpure@gmail.com,Aparna,Bhushan,Nagpure,9004234810.0,Dipa,"2025-09-12T00:00:00",null,Connected,null,"She will check later,",null
+  prakashkubsad@yahoo.com,Prakash,Ishwar,Kubsad,9822557456.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Connected,null,"Yet to explore, will do so shortly",Before telling this disconnected
+  amritasaluja@hotmail.com,Amrit,null,Parkash,9391017437.0,Dipa,"2025-09-12T00:00:00",null,Connected,null,Doctor asked to share the direct access link to her whatsapp number,null
+  shaliniananjai@gmail.com,Shalini,null,vasudeva,7042269194.0,Dipa,"2025-09-12T00:00:00",null,Connected,null,"Busy in Hospital, asked to call later",null
+  satishyadav52@gmail.com,Satish,Kumar,yadav,9335667917.0,Dipa,"2025-09-12T00:00:00",null,Connected,null,Disconnected after listen,null
+  saaluid786@gmail.com,Saud,null,Ali,9497360473.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Incoming Call Not Available,null,null
+  raradhikaag@gmail.com,Radhika,Ram,mohan,9818065527.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  gaurav.rmc@gmail.com,Gaurav,null,Singh,9919117755.0,Dipa,"2025-09-12T00:00:00",null,Connected,null,"Will check later, share the link through whatsapp",null
+  abcvaishnavi@gmail.com,vaishnavi,null,s,9597685939.0,Dipa,"2025-09-12T00:00:00",null,Connected,null,Share the link later,null
+  sadhna.jaiswal@gmail.com,Sadhna,null,jaiswal,null,Dipa,"2025-09-12T00:00:00",null,null,null,null,null
+  drlalita66@gmail.com,Lalita,Niranjan,Mayadeo,9869073748.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  hazeenaaramana@gmail.com,Hazeena,Abdulla Laila  haneef,Ramana,9562030274.0,Dipa,"2025-09-12T00:00:00",null,Connected,Disconnected the call after hearing clirnet,After listen disconneted,null
+  drsunilkonda@gmail.com,Sunilkumar,null,Konda,9849082875.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  radhamonyd@gmail.com,Radhamony,DEVAKY,Amma,9495407582.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Connected,null,j,There were no problems encountered regarding any of the services.
+  dreprabhu@gmail.com,Prabhu,null,Ethiraj,9382730296.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Disconnected the call after hearing clirnet,null,null
+  vjawanjal1312@gmail.com,vaishali,null,Athanere,null,Dipa,"2025-09-12T00:00:00",null,null,null,null,null
+  sushila2828@yahoo.co.in,Sushila,null,deswal,9810501159.0,Dipa,"2025-09-12T00:00:00",null,Connected,null,"Doctor will try it later, share the link",null
+  manojmallina9@gmail.com,Mallina,null,Manoj,8088912910.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Disconnected the call after hearing clirnet,null,null
+  ausvisamina@gmail.com,Samina,null,Ausvi,8956547375.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Out of network,null,null
+  rajeshjawale95@gmail.com,Rajesh,null,Jawale,9773083890.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Out of network,null,null
+  dharamchandchoudhari@yahoo.co.in,Dharamchand,Rekchand,Choudhari,9849889848.0,Dipa,"2025-09-12T00:00:00",null,Connected,null,Not Interested,null
+  babymohit@gmail.com,Pravin,Kumar,Lonsare,9826295138.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  viki.mmc@gmail.com,Vignesh,null,Karunakaran,9952095476.0,Dipa,"2025-09-12T00:00:00",null,Connected,null,"Share the joining link, Doctor will try it",null
+  drjacobkunnirickal@gmail.com,Jacob,null,Kunnirickel,9400525000.0,Dipa,"2025-09-12T00:00:00",null,Connected,null,Will try it later share the link through WhatsApp,null
+  rwarty@gmail.com,RUPALI,Suresh Deshpande,Warthy,9867357092.0,Dipa,"2025-09-12T00:00:00",null,Connected,null,Share the direct access link,null
+  nitin.nikki89@gmail.com,Nitin,null,Kumar,8295351033.0,Dipa,"2025-09-12T00:00:00",null,Connected,null,Will try it later share the link through WhatsApp,null
+  draswathyraveendran@gmail.com,Aswathy,Kottayil,Raveendran,9894989706.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  arunmani123@gmail.com,Arun,Mathai,Mani,9496291604.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Connected,null,"Yet to explore, will do so shortly","All services were functioning smoothly, with no issues faced"
+  bishnukinkarpaul@gmail.com,Vishnukinkar,null,Paul,8486905982.0,Dipa,"2025-09-12T00:00:00","2025-09-26T00:00:00",Connected,null,He found the search box feature useful,No issues were faced with any of the services.
+  arunabhasg@hotmail.com,Arunabha,null,Sengupta,9831076633.0,Dipa,"2025-09-12T00:00:00",null,Connected,Wrong Number,null,null
+  maiti.anol.edu@gmail.com,Anol,null,Maiti,9474017421.0,Dipa,"2025-09-12T00:00:00",null,Connected,Disconnected the call after hearing clirnet,After listen disconneted,null
+  kunalsh619@gmail.com,Kunal,null,Sharma,7014119800.0,Dipa,"2025-09-12T00:00:00",null,Connected,null,"Share the direct access link, would love to explore it",null
+  sidhusrun@gmail.com,Sidharth,Suresh,Babu,9400325341.0,Sayni,"2025-09-15T00:00:00","2025-09-26T00:00:00",Connected,null,"Travelling call after 5:30pm",null
+  rnagar48@gmail.com,Rai,Chand,Nagar,9413675462.0,Sayni,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  uyadu888@gmail.com,Udit,null,Yadu,9981531525.0,Sayni,"2025-09-15T00:00:00","2025-09-26T00:00:00",Connected,null,Busy not interested,null
+  drzameer2k@gmail.com,Zameer,null,Pasha,9843172552.0,Sayni,"2025-09-15T00:00:00",null,Connected,Disconnected the call after hearing clirnet,null,null
+  drchandakulkarni@gmail.com,Chanda,Naik,Kulkarni,9886116151.0,Sayni,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  shaharihegde17@gmail.com,Shahari,null,Hegde,8147332202.0,Sayni,"2025-09-15T00:00:00",null,Connected,Disconnected the call after hearing clirnet,null,null
+  shubhamkashyapm@gmail.com,Shubham,null,KASHYAP,9453261100.0,Sayni,"2025-09-15T00:00:00","2025-09-26T00:00:00",Connected,null,"Busy on duty, call later",null
+  adityatelkar8@gmail.com,Aditya,null,telkar,8147629299.0,Sayni,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  manishabais68@gmail.com,Manisha,null,Bais,9810873704.0,Sayni,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  yadavraks.yadav@gmail.com,Rakshitha,yadav,M,8762124169.0,Sayni,"2025-09-15T00:00:00","2025-09-26T00:00:00",Connected,null,Not Interested,null
+  pinkumultani@gmail.com,Pushtinder,null,Singh,9478727394.0,Sayni,"2025-09-15T00:00:00","2025-09-26T00:00:00",Connected,null,Will check later and then disconnected the call,null
+  hm2nazi@gmail.com,Harshal,Murlidhar,Mahajan,9028638656.0,Sayni,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,Disconnected the call after hearing clirnet,null,null
+  anurudh.kishore@gmail.com,Vatti,Anurudh,kishore,8019050215.0,Sayni,"2025-09-15T00:00:00",null,Connected,null,"The doctor said he has the email; he will check it out, Share the joining link.\n\n",null
+  saravanak9@gmail.com,Saravana,null,Kumar,9791179310.0,Sayni,"2025-09-15T00:00:00",null,Switched Off,null,null,null
+  skshaheen1994@gmail.com,Sk,null,Shaheen,8978447207.0,Sayni,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  sasitharan94@gmail.com,Sasitharan,null,Muthusamy,9490053395.0,Sayni,"2025-09-15T00:00:00",null,Connected,null,"The doctor said he tried to open the link but faced some error by opening the link, Share the joining link",null
+  pgr1311@gmail.com,Children,null,null,9821095393.0,Sayni,"2025-09-15T00:00:00",null,Connected,null,"The doctor hasn't checked yet; ask to send the link, and he will go through it.",null
+  vsaragur@yahoo.com,venkateshiah,null,V,9591441860.0,Sayni,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,Number Busy,null,null
+  arthi1681996@gmail.com,Arthi,null,R,9790885348.0,Sayni,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  rohitsangtani.rs@gmail.com,Rohit,null,Sangtani,9630277132.0,Sayni,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  dr.gtpatil8516@gmail.com,Ganpat,Tukaram,Patil,9822014464.0,Rajasmita,"2025-09-15T00:00:00",null,Connected,null,"Doctor is travelling now. ",null
+  drsunetharamar@gmail.com,Sunetha,null,Sachithanantham,9786337777.0,Rajasmita,"2025-09-15T00:00:00","2025-09-26T00:00:00",Connected,Ringing but not receiving,not speaking,null
+  devkrgupta@hotmail.com,Devkumar,null,gupta,7961880293.0,Rajasmita,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,Wrong Number,Invalid number,null
+  kunalsom8@gmail.com,Kunal,null,Som,9433606056.0,Rajasmita,"2025-09-15T00:00:00",null,Connected,null,"Share the joining link, Doctor will try it",null
+  dralekha781@gmail.com,ALEKHA,null,Pradhan,8456846845.0,Rajasmita,"2025-09-15T00:00:00",null,Switched Off,null,null,null
+  namitabajpai21@gmail.com,namita,null,Bajpai,9675396660.0,Rajasmita,"2025-09-15T00:00:00",null,Connected,null,"Share the joining link, Doctor will try it",null
+  tiwarikaruna1@gmail.com,Karuna,null,TIWARI,8827172107.0,Rajasmita,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  drbeenasenias@gmail.com,Beena,null,Sen,7976441615.0,Rajasmita,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  vaishnavigosavi777@gmail.com,vaishnavi,Vitthal,Gosavi,8830691186.0,Rajasmita,"2025-09-15T00:00:00",null,Connected,null,"Share the joining link, Doctor will try it",null
+  shaloopradeep@gmail.com,Shaloo,null,Garg,8800179070.0,Rajasmita,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,Disconnected the call after hearing clirnet,null,null
+  tejashreeb511@gmail.com,Tejashree,babarao,Bele,9370963610.0,Rajasmita,"2025-09-15T00:00:00",null,Connected,null,"Have the link, will check it out",null
+  ankit5129@gmail.com,Ankit,null,Arya,9990722296.0,Rajasmita,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,Number Busy,null,null
+  nehajainmd@gmail.com,Neha,null,Jain,9958013485.0,Rajasmita,"2025-09-15T00:00:00","2025-09-26T00:00:00",Connected,null,"Not available today, assistant received the call",null
+  pranshurules@gmail.com,pranshu,null,Pandey,9163043423.0,Rajasmita,"2025-09-15T00:00:00",null,Connected,null,"Share the joining link, Doctor will try it",null
+  manjusharay@gmail.com,Manjusha,null,Ray,9920722587.0,Rajasmita,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,Disconnected the call after hearing clirnet,null,null
+  electrads@gmail.com,Aditi,Dushyant,punwani,9820220400.0,Rajasmita,"2025-09-15T00:00:00",null,Connected,null,"Share the joining link, Doctor will try it",null
+  dr.raghurraman@gmail.com,RAGHURRAMAN,null,Krishnaswamy,9842436692.0,Rajasmita,"2025-09-15T00:00:00",null,Connected,null,Busy in OPD,null
+  jaffarullaha@gmail.com,Javid,Jaffarullah,Abdullah,9842143239.0,Rajasmita,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  faazilfz1@gmail.com,Faazil,null,mohammad,9080422939.0,Rajasmita,"2025-09-15T00:00:00",null,Connected,null,Not Interested,null
+  vaishnavi_bhave@yahoo.in,vaishnavi,Sanjay,bhave,8149699696.0,Rajasmita,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,Ringing but not receiving,null,null
+  jariwalavidisha@gmail.com,Vidisha,Pranav Anokhi,Jariwala,8692911392.0,Snehali,"2025-09-15T00:00:00","2025-09-26T00:00:00",Not Connected,null,Number does not exist,null
+  vickysurgeon@gmail.com,Vignes,anand,Srinivasalu,9952951005.0,Snehali,"2025-09-15T00:00:00","2025-09-26T00:00:00",Connected,null,"He mentioned that he has searched, though not extensively, and needs additional time to explore",all fine
+  akashkoppineedi@gmail.com,Koppineedi,null,Akash,9705848509.0,Snehali,"2025-09-15T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  padmanabansivakumar1@gmail.com,padmanaban,null,Sivakumar,7358979426.0,Snehali,"2025-09-15T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  avidhekale26@gmail.com,Avinash,null,Dhekale,8975784766.0,Snehali,"2025-09-15T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  rajubokan@gmail.com,Raju,null,Bokan,9518375484.0,Snehali,"2025-09-15T00:00:00",null,Not Connected,Number Busy,null,null
+  anuselvi2595@gmail.com,Anuselvi,null,Manickam,9698708256.0,Snehali,"2025-09-15T00:00:00",null,Connected,null,Doctor hasn’t checked it yet; she mentioned that she will check it later.,null
+  sivapraful777@gmail.com,Kanagarla,null,Sivapraful,9901211966.0,Snehali,"2025-09-15T00:00:00",null,Connected,null,Not Interested,null
+  drachmathur@gmail.com,Mathur,Amba,Chand,9828033353.0,Snehali,"2025-09-15T00:00:00",null,Connected,null,Doctor hasn’t checked yet (wants link via WhatsApp),null
+  drsunilraghoji@rediffmail.com,Sunil,S,Raghoji,9422644297.0,Snehali,"2025-09-15T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  jovitojames@gmail.com,Jovito,null,James,9656538441.0,Snehali,"2025-09-15T00:00:00",null,Not Connected,Number Busy,null,null
+  dr.ajmal999@gmail.com,Ajmal,bin,LATHEEF,9809087170.0,Snehali,"2025-09-15T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, he will check the usage of the search box mentioned to him.","Good Experience and receiving relatable content "
+  drrpmathur@hotmail.com,Rajwanth,Pratap,Mathur,9246523107.0,Snehali,"2025-09-15T00:00:00",null,Connected,null,Not Interested,null
+  dr.chakrabortysudipta@gmail.com,Sudipta,null,Chakraborty,8250564815.0,Snehali,"2025-09-15T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  sandeep.yankanchi@bldedu.ac.in,Sandeep,null,Yankanchi,8310247985.0,Snehali,"2025-09-15T00:00:00",null,Connected,Disconnected the call after hearing clirnet,null,null
+  handargule@gmail.com,Satish,Manik Rao,Handargule,9422468327.0,Snehali,"2025-09-15T00:00:00",null,Not Connected,Number Busy,null,null
+  muthu74@gmail.com,Muthukumar,null,Rajagopalan,9843505970.0,Snehali,"2025-09-15T00:00:00",null,Not Connected,Network issue,null,null
+  reddysanjivbdr@gmail.com,Sanjeev,manik,Reddy,9448333862.0,Snehali,"2025-09-15T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  anupamkumarhk@gmail.com,Anupam,null,Kumar,9903090362.0,Snehali,"2025-09-15T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  amalbhattacharya54@gmail.com,Amal,Kumar,Bhattacharya,9830279853.0,Snehali,"2025-09-15T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  shanmugaboopathy87@gmail.com,Shanmuga,null,Boopathy,9003191041.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  drsakthivel96@gmail.com,Sakthivel,null,Muthuchezhian,9791696447.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  drgvs.manyam@gmail.com,Dr,null,Gokavarapu,9848292525.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  drsaritagoyal@rediffmail.com,Sarita,null,Goyal,9466495400.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  kumkum.sharma2@gmail.com,Kumkum,null,Sharma,9899449191.0,Sayni,"2025-09-16T00:00:00",null,Connected,null,"The doctor hasn’t checked yet; I will share the link with her once again. ","Good Experience and receiving relatable content "
+  ismailghanchi1995@gmail.com,Ismail,null,ghanchi,9974484625.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  ashved999@hotmail.com,Ved,null,Prakash,9955990187.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  mallikarjunmicro76@gmail.com,Mallikarjun,Mippanna,Koppad,9611153388.0,Sayni,"2025-09-16T00:00:00",null,Connected,null,"The doctor is busy, so he hasn’t checked yet; I will share the link with her once again. ","Good Experience and receiving relatable content "
+  soumyasantra@gmail.com,Soumya,null,Santra,9831728399.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  drafzalimam@gmail.com,Afzal,Sk,imam,7763069281.0,Sayni,"2025-09-16T00:00:00",null,Connected,null,The doctor checked the email ; share the link once again.,"Good Experience and receiving relatable content "
+  vikastigadi27@gmail.com,Vikas,null,Tigadi,9886649376.0,Sayni,"2025-09-16T00:00:00",null,Call Back,null,null,null
+  drprasheen@gmail.com,Prasheen,null,Pradeep,9447688650.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  drbharatapatel@gmail.com,Bharat,ambalal,Patel,9825870832.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  kavitasmittal@gmail.com,Kavita,null,Mittal,null,Sumaiya,"2025-09-16T00:00:00",null,Connected,null,Disconnected the call after Clirnet.,null
+  sarusupi@gmail.com,sarumathi,null,Ezhilan,9585039737.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  chavda.dilip@gmail.com,Dilip,null,chavda,9820274816.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  rashidhaider22@gmail.com,Rashid,null,Haider,9503251931.0,Sayni,"2025-09-16T00:00:00",null,Call Back,null,null,null
+  saiprasanthrampally@gmail.com,Sai,Prashanth,Rampally,9441300100.0,Sayni,"2025-09-16T00:00:00",null,Connected,Disconnected the call after hearing clirnet,He wants to know about Clirnet and cuts the call.,null
+  plthakkar41@gmail.com,P,null,Thakkar,9426397176.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  manojkumardr25@gmail.com,Manoj,null,Kumar,8499826228.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  vikas.arora72@gmail.com,Vikas,Kumar,Arora,9560828907.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  dranilwaghmare79@gmail.com,Anil,raosaheb,Waghmare,8308815102.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Number Busy,null,null
+  drsunilhegde@hotmail.com,Sunil,Shantharam,Hegde,9820136731.0,Sayni,"2025-09-16T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, he will check the link,Share the joining link.",null
+  rohit.masih579@gmail.com,Rohit,null,Masih,8284849799.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  drpsh234@gmail.com,Satish,harikisan,Pawar,9699451272.0,Sayni,"2025-09-16T00:00:00",null,Call Back,null,null,null
+  katoch.shreya16@gmail.com,Shreya,null,Katoch,8219436129.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Switch Off,null,null
+  drrathodvinay@gmail.com,Vinaykumar,vijay,Rathod,7710892012.0,Sayni,"2025-09-16T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, he will check the link,Share the joining link.",null
+  drnagendra.sharma@gmail.com,Nagendra,null,Sharma,9411491166.0,Sayni,"2025-09-16T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, he will check the link,Share the joining link.",null
+  dr.r.n.prasad814112@gmail.com,Ram,Nath,Prasad,9431190559.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  shreedevidevaraj@gmail.com,Shreedevi,devaraj,Makkat,9820515611.0,Sayni,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  dr.aithashiva@gmail.com,Shiva,null,Aitha,9505151919.0,Sayni,"2025-09-16T00:00:00",null,Connected,Disconnected the call after hearing clirnet,null,null
+  rakheegoyalkumar@gmail.com,Rakhee,null,Goyal,7798225637.0,Sayni,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  neuminsahay2@gmail.com,Neumin,Selvin Jeyapandi,Sahay,9944812898.0,Sayni,"2025-09-18T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, she will check the link once she got some time.",Doctor is getting all services properly.
+  mpendekanti@hotmail.com,Pendekanti,null,Malleswari,9739157438.0,Sayni,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  nikhila.baddila@gmail.com,Nikhila,null,Baddila,9014837941.0,Sayni,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  drsanjeevscb@gmail.com,Sanjeev,null,Kumar,9504140350.0,Sayni,"2025-09-18T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, he will check the link once he got some time.",Doctor is getting all services properly.
+  smileysu.supraja@gmail.com,Supraja,null,Ponduru,8500974476.0,Sayni,"2025-09-18T00:00:00",null,Not Connected,Number Busy,null,null
+  spoorthi.reddy777@gmail.com,Spoorthi,null,Chappidi,9703433364.0,Sayni,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  bagde_suchit@yahoo.co.in,Suchit,ramchandra,bagde,9373641164.0,Sayni,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  shivamkundal98@gmail.com,Shivam,null,Kundal,9119136901.0,Sayni,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  drneelamgulati@gmail.com,Neelam,null,Gulati,9301530803.0,Sayni,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  drdeepashreemorale@gmail.com,Deepashri,Diliprao,Morale,7744007717.0,Sayni,"2025-09-18T00:00:00",null,Connected,Disconnected the call after hearing clirnet,null,null
+  komminenitilak12@gmail.com,Tilak,Kumar,kommineni,8008040483.0,Sayni,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  raul.chdh@gmail.com,Rahulsingh,null,Chadha,9404848555.0,Sayni,"2025-09-18T00:00:00",null,Call Back,null,null,null
+  bhatganand@gmail.com,Anand,null,Bhat,9480722844.0,Sayni,"2025-09-18T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, he will check the link.",Doctor is getting all services properly.
+  drrgh1971@gmail.com,Raghvendra,Naarayan,Singh,8295352890.0,Sayni,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  shanthikumarnani@gmail.com,Manda,null,Shanthi Kumar,7659820489.0,Sayni,"2025-09-18T00:00:00",null,Connected,Disconnected the call after hearing clirnet,null,null
+  nagvekarmegh@gmail.com,Megh,null,Nagvekar,9867975759.0,Sayni,"2025-09-18T00:00:00",null,Connected,Ringing but not receiving,null,null
+  hk.himabindu@gmail.com,hima,K.,Bindu,9573177229.0,Sayni,"2025-09-18T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, she will check the link.",The doctor wanted to attend MMC and KMC sessions and training courses on our platform.
+  hinijay@gmail.com,JAYESH,Mohanlal,Tamakuwala,9426141241.0,Sayni,"2025-09-18T00:00:00",null,Not Connected,null,null,null
+  srajeeshraj@gmail.com,Ajeesh,sr,Raj,8304852428.0,Sayni,"2025-09-18T00:00:00",null,Connected,null,"The doctor hasn't checked yet; ask to send the link, and he will go through it.",He has not gone through any content.
+  sajidahmadb@gmail.com,Sajid,Bayanthakath,Ahmad,9495989591.0,null,"2025-09-25T00:00:00",null,Connected,null,The search box is effective in finding the required information,"According to the doctor, the CME participation and certification process were completed without any issues"
+  rameshhemmige3@gmail.com,Ramesh,hemmige,s,6366696773.0,null,"2025-09-25T00:00:00",null,Connected,null,The search box is useful and helps in finding relevant information,null
+  chichaa1336@gmail.com,Chirag,null,Chawla,9921198488.0,null,"2025-09-25T00:00:00",null,Connected,null,"The search box is efficient in providing the information sought, though he is not finding the CME details for which he has registered for, that is the only concern received from Doctor","The doctor confirmed that everything went smoothly, with no difficulties experienced during CME participation or certification"
+  drmdmbbs@gmail.com,Dhamodaran,null,Madhavan,9585709905.0,null,"2025-09-25T00:00:00",null,Connected,null,"The doctor, being elderly, could not give much time but mentioned that CLIRNET is helpful",null
+  reshamsingh196947@gmail.com,Resham,null,Singh,7018486362.0,null,"2025-09-25T00:00:00",null,Connected,null,search box is effective in finding the required information,null
+  gowdakuval@gmail.com,kuval,H,j,8277777074.0,null,"2025-09-25T00:00:00",null,Connected,null,"He has not explored this feature yet. It has been a week since he visited the platform, and he mentioned that he will check it whenever he finds time.",null
+  adhithyantvr@gmail.com,adhithyan,null,Baskaran,9629304554.0,null,"2025-09-25T00:00:00",null,Connected,null,Not Interested,null
+  balasaisurendra855@gmail.com,Balasai,surendra,chodavarapu,8179720367.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  meganathan.mani@avmc.edu.in,Meganathan,null,Mani,9443252577.0,null,"2025-09-25T00:00:00",null,Connected,Wrong Number,null,null
+  priyasundhar25@gmail.com,S,Priya,Lakshmi,9787977500.0,null,"2025-09-25T00:00:00",null,Connected,null,Not yet will search it when she gets time,all fine
+  mmraj97@gmail.com,Mohan,Raj,Madheswaran,9445183500.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  drgosavisuhas@gmail.com,Suhas,Suryakant,Gosavi,8805231723.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  vigneshwr19@gmail.com,Vigneshwara,null,Nagarajan,9585197613.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  velant7@gmail.com,Velan,null,Thangaraj,8667409966.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  enteshwar@gmail.com,Eswara,Prasad,Bomminayuni,9553219179.0,null,"2025-09-25T00:00:00",null,Connected,null,"The search box makes it easy to access relevant information; however, he could not find journals on CLIRNET (Specialty – ENT)",The doctor reported that there were no problems encountered in either the CME participation or the certification process
+  dshome45215@gmail.com,Debaraj,Shome,Purkayastha,8638473899.0,null,"2025-09-25T00:00:00",null,Not Connected,Switch Off,null,null
+  gedammk16@gmail.com,Mohan,karnuji,Gedam,9423432049.0,null,"2025-09-25T00:00:00",null,Connected,null,In a meeting will talk later,null
+  munjigururaj11@gmail.com,Munji,null,gururaj,7207863500.0,null,"2025-09-25T00:00:00",null,Connected,null,The doctor found the search box useful and made use of it,"All services were functioning smoothly, with no issues faced"
+  dralokbanka@gmail.com,Alok,null,Banka,8095109332.0,null,"2025-09-25T00:00:00",null,Not Connected,Number Busy,null,null
+  benumadhab1234@gmail.com,Benumadhab,null,Ghosh,6296725382.0,null,"2025-09-25T00:00:00",null,Connected,null,"The search box has been checked, but not in detail; will review again",null
+  dpm349@gmail.com,Debapratik,null,Manna,9679879546.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  rashi.innani96@gmail.com,Rashi,Nawalkishor,Innani,8805477642.0,null,"2025-09-25T00:00:00",null,Not Connected,Number Busy,null,null
+  sureshsdiab@gmail.com,Suresh,Kumar,subramanian,9600250555.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  raagaveek@gmail.com,Raagave,null,Karunanithi,8531821893.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  deekshithreddy8743@gmail.com,Deekshith,reddy,mudimala,9951118743.0,null,"2025-09-25T00:00:00",null,Connected,null,Not interested,null
+  suneeta.mittal@gmail.com,suneeta,null,Mittal,9818542111.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  avinash.pandi5@gmail.com,Avinash,Saravani  Palanikumar,Pandi,9994603464.0,null,"2025-09-25T00:00:00",null,Connected,null,"While the search box is helpful, he asked if there is an iPad version available",No issues
+  rajpurohitnaresh168@gmail.com,Nareshsingh,null,Purohit,7600768806.0,null,"2025-09-25T00:00:00",null,Connected,null,"Not checked yet, will try later",No concerns were reported in relation to the services.
+  gawasaniket1@gmail.com,Aniket,vilas,Gawas,7066465446.0,null,"2025-09-25T00:00:00",null,Connected,null,"The search box is satisfactory; however, he is seeking more CPD-related CME sessions","All services were functioning smoothly, with no issues faced"
+  islamdaharul4@gmail.com,Daharul,null,ISLAM,1780189228.0,null,"2025-09-25T00:00:00",null,Not Connected,Wrong Number,null,null
+  aniljhaparas@gmail.com,Anil,Kumar,Jha,7783089735.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  swanfn123@gmail.com,Florence,Nightingale,Sagar,9340348797.0,null,"2025-09-25T00:00:00",null,Connected,Disconnected the call after hearing clirnet,null,null
+  dranant1943@gmail.com,Seshadrinathan,null,anant,9880343629.0,null,"2025-09-25T00:00:00",null,Connected,null,He found the search box helpful,He was out for few months will explore later
+  arnabghosh.doc@gmail.com,Arnab,Kumar,Ghosh,8017123055.0,null,"2025-09-25T00:00:00",null,Connected,null,Not Interested,null
+  sureshshapeti@gmail.com,Suresh,Siddappa,Shapeti,9845095613.0,null,"2025-09-25T00:00:00",null,Connected,null,Pretty good to find the contents,The doctor confirmed that no issues were experienced with any of the services
+  pinkymknth98@gmail.com,Divya,Namboothiripadu,Umakanth,9130480839.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  akhilchadala@gmail.com,Akhil,null,Chadala,9705838489.0,null,"2025-09-25T00:00:00",null,Not Connected,Switch Off,null,null
+  muhammed95387@gmail.com,mushtaq,null,ahmed,9538799180.0,null,"2025-09-25T00:00:00",null,Connected,null,"Not checked yet, will check later",No issues were faced with any of the services
+  prprajen@gmail.com,Rajendran,null,Govindarajalu,9994448558.0,null,"2025-09-25T00:00:00",null,Not Connected,Out of network,null,null
+  arpitarora55@gmail.com,Arpit,null,Arora,8708750687.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  dr.navinthakkar@gmail.com,Navin,Prabhuram,Thakkar,9825493013.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  subhamdey7624@gmail.com,Subham,null,Dey,8906358521.0,null,"2025-09-25T00:00:00",null,Connected,Disconnected the call after hearing clirnet,Not interested,null
+  mohamedhussain89@gmail.com,Mohamed,null,Hussain,9597471430.0,null,"2025-09-25T00:00:00",null,Not Connected,Incoming Call Not Available,null,null
+  abhijithlakshmank@gmail.com,abhijith,null,Lakshman,9663667061.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  dr.k.sudhakarbabu@gmail.com,Sudhakar,babu,koppulu,9491145175.0,null,"2025-09-25T00:00:00",null,Not Connected,Incoming Call Not Available,Not in service(Contact Number),null
+  premprakashgeela@gmail.com,Prem,Prakash,Geela,9460544927.0,null,"2025-09-25T00:00:00",null,Not Connected,Out of network,null,null
+  patrudugiyyar@gmail.com,Giyyar,Patrudu,Ruttala,9000310262.0,null,"2025-09-25T00:00:00",null,Connected,null,"The search box feature was found helpful; however, as he was with patients, he requested a later call",null
+  drvpsugumar@yahoo.co.in,Sugumar,Venaithertha,Perumal,9443710124.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  chandranrajnish@gmail.com,rajnish,null,Chandran,7033719377.0,null,"2025-09-25T00:00:00",null,Connected,null,"He does not recall whether he has searched yet, so he will explore the feature again and review it",No concerns were reported in relation to the services
+  manrajn@gmail.com,Manraj,null,Nagar,8949357625.0,null,"2025-09-25T00:00:00",null,Connected,null,He found the search box helpful,null
+  dilipnagargoje78@gmail.com,Dilip,Shridhar,Nagargoje,9422042418.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  kvbirua@gmail.com,vidyacharan,Kumar,Birua,9205141458.0,null,"2025-09-25T00:00:00",null,Not Connected,Number Busy,null,null
+  ponsamuel93@gmail.com,Pon,samuel,Athisayaraj,7418062683.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  drsantoshsinghpoli@gmail.com,Santosh,null,Kumar,9525947497.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  drknp1@gmail.com,Ketan,n,Parikh,9375949325.0,null,"2025-09-25T00:00:00",null,Not Connected,Out of network,null,null
+  anamit1997@gmail.com,NAMIT,null,Agarwal,9828315656.0,null,"2025-09-25T00:00:00",null,Connected,null,"He has searched but not in detail, so he needs more time to explore it and requested a call back tomorrow after 5:15 PM",null
+  drashokk88@gmail.com,Ashok,Krishnan,Kutty,9447322944.0,null,"2025-09-25T00:00:00",null,Not Connected,Out of network,null,null
+  rajarameshkv@gmail.com,RAMESHKUMAR,V Raja,kolla,9492713031.0,null,"2025-09-25T00:00:00",null,Connected,null,CALL BACK,null
+  roys32935@gmail.com,Sourav,null,Roy,9732589148.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Number Busy,null,null
+  drhumayun@rediffmail.com,Humayun,null,HASSAN,8826648258.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  dr.siva2k9@gmail.com,Arutchandiran,Siva,Sakthivel,9952801388.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  salman.s.ansari92@gmail.com,Salman,null,ansari,7738666515.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  sandeep.vemula111@gmail.com,V,null,Sandeep,8331043468.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  chandavolu.karthik@gmail.com,Venkata,s r k,chandavolu,8857866273.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Number Busy,null,null
+  sanchayita.sengupta@gmail.com,Sanchayita,null,Sengupta,9748540005.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  rmtripathi9161@gmail.com,Raj,mani,tripathi,9161238023.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  bodhanno1@gmail.com,Sai,bodhan,Mudili,9494775567.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Number Busy,null,null
+  ketang278@gmail.com,Ketan,null,gupta,7069696726.0,Rajasmita,"2025-09-16T00:00:00",null,Connected,null,"Do WP everything, Doctor is busy now",null
+  prashant.dhakane2@gmail.com,Prashant,prabhakar,Dhakane,9850286058.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  chandresh1371@gmail.com,Chandreshkumar,Ratilal,kathrotiya,7359766938.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  moobinashaikh@gmail.com,Moobinabanu,hasan nasreen,Shaikh,9820916096.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  prateikshinde73@gmail.com,Pratik,Bhaskar,Shinde,7709825425.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  sharon7479@gmail.com,Sharon,null,Joseph,9901517479.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  sagnilm@gmail.com,Sagnik,null,Mukherjee,7384847461.0,Rajasmita,"2025-09-16T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, he will check the usage of the search box mentioned to him.","Good Experience and receiving relatable content "
+  adityaedusms@gmail.com,Aditya,null,Mangal,9785076536.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  dineshlive7@gmail.com,Dinesh,null,Nayak,7978938512.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  ashug956@gmail.com,Prakhar,null,Goyal,7424933382.0,Rajasmita,"2025-09-16T00:00:00",null,Connected,Wrong Number,Not a doctor,null
+  ankitshonak28@gmail.com,Ankit,null,Sharma,8168157920.0,Rajasmita,"2025-09-16T00:00:00",null,Connected,Disconnected the call after hearing clirnet,null,null
+  mailmethulasiram@gmail.com,Tulasi,Ram,Nallam,7013148331.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  tanwar791@gmail.com,Hemant,null,Kumar,9028662001.0,Rajasmita,"2025-09-16T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, he will check the usage of the search box mentioned to him.","Good Experience and receiving relatable content "
+  dr.sunil1991@gmail.com,Sunil,Kumar,Vishwakarma,8080553550.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  shankarakshay1997@gmail.com,Akshay,null,Shankar,9304189395.0,Rajasmita,"2025-09-16T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, he will check the usage of the search box mentioned to him.","Good Experience and receiving relatable content "
+  ashgurbeen@gmail.com,Ashwani,Kumar,Malhotra,9810107054.0,Rajasmita,"2025-09-16T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, he will check the usage of the search box mentioned to him.","Good Experience and receiving relatable content "
+  siddharthvashistha2@gmail.com,siddharth,null,Vashistha,7340360396.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  subhratan713@gmail.com,Subh,Ratan,Gautam,9971454745.0,Rajasmita,"2025-09-16T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, he will check the usage of the search box mentioned to him.","Good Experience and receiving relatable content "
+  drgsonline@gmail.com,Gauri,null,Sankhla,9167779504.0,Rajasmita,"2025-09-16T00:00:00",null,Connected,null,Doctor is busy now,null
+  nagendrababumopidevi@gmail.com,Nagendra,babu,Mopidevi,9885116645.0,Rajasmita,"2025-09-16T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  g2greata95@gmail.com,Jose,null,Edwin,8921121808.0,Rajasmita,"2025-09-16T00:00:00",null,Connected,null,Doctor is sick. Call other time,null
+  shreysamant@gmail.com,shrey,Satyen,Samant,9422271989.0,Rajasmita,"2025-09-18T00:00:00",null,Connected,null,"Dr. said :  Not interested",null
+  ratna.raokhande@gmail.com,ratnachhaya,Shivdas,Pandurang,9930016822.0,Rajasmita,"2025-09-18T00:00:00",null,Not Connected,Number Busy,null,null
+  prasanthakhil75@gmail.com,Prasanth,Akhil,Palepu,8688373155.0,Rajasmita,"2025-09-18T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, he will check the usage of the search box mentioned to him.","Good Experience and receiving relatable content "
+  kctejasvi@gmail.com,Tejasvi,Kumar,Chikkalingaiah,9901400001.0,Rajasmita,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  ghatawatgaurav@gmail.com,Gaurav,Bhanwarlal,Ghatawat,9930628439.0,Rajasmita,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  sankalpgupta4@gmail.com,Sankalp,null,gupta,8979911266.0,Rajasmita,"2025-09-18T00:00:00",null,Not Connected,Number Busy,null,null
+  aradhanamsn@gmail.com,Aaradhana,null,gupta,9425138054.0,Rajasmita,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  rayamit455@gmail.com,Amit,null,sahu,8860479354.0,Rajasmita,"2025-09-18T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, he will check the usage of the search box mentioned to him.","Good Experience and receiving relatable content "
+  kaunainra@gmail.com,Md,Kaunain,RAZA,8670090186.0,Rajasmita,"2025-09-18T00:00:00",null,Connected,null,Busy in OPD,null
+  harshabluejay@gmail.com,Kandikonda,null,Sriharsha,8500584430.0,Rajasmita,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  nmanikath@gmail.com,neerat,null,Manikath,9447391055.0,Rajasmita,"2025-09-18T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, he will check the usage of the search box mentioned to him.","Good Experience and receiving relatable content "
+  drkkarthika@gmail.com,Karthika,null,Kutralingam,7358755652.0,Rajasmita,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  drtilakch@gmail.com,TC,null,Hazarika,9435040796.0,Rajasmita,"2025-09-18T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, he will check the usage of the search box mentioned to him.","Good Experience and receiving relatable content "
+  thomavar@hotmail.com,thomas,null,Varghese,9447053836.0,Rajasmita,"2025-09-18T00:00:00",null,Connected,null,"Doctor hasn’t checked yet, he will check the usage of the search box mentioned to him.","Good Experience and receiving relatable content "
+  subhashree.bbsr@gmail.com,subhashree,null,Samantaray,9438478537.0,Rajasmita,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  rupendramaitry13@gmail.com,rupendra,Singh,Maitry,8120939466.0,Rajasmita,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  subramanian_rajam@yahoo.in,Rajam,Iyer,subramanian,9922427774.0,Rajasmita,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  sandeepm7117@gmail.com,Sandeep,null,M,8970334571.0,Rajasmita,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  pravincutis@yahoo.co.in,Pravinkumar,r,Shetty,9822060266.0,Rajasmita,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  elakiyamanopriya@gmail.com,Elakiya,null,Manopriya,9940090246.0,Rajasmita,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  nag.gmc@gmail.com,Nagaraju,null,Venishetty,9030378242.0,null,"2025-09-24T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  drsharan25@gmail.com,Sharanjit,null,Kaur,8219423783.0,null,"2025-09-24T00:00:00",null,Connected,null,Not Interested,null
+  drkeshavadt@yahoo.co.in,Keshav,Kumar,aDT,9900918915.0,null,"2025-09-24T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  muneerakhan1@gmail.com,Muneera,Khusrau,khan,9767265289.0,null,"2025-09-24T00:00:00",null,Not Connected,Out of network,null,null
+  ssshubhamsc169@gmail.com,Shubham,Singh,Chauhan,9958843264.0,null,"2025-09-24T00:00:00",null,Not Connected,Number Busy,null,null
+  yyogi72@gmail.com,Venkat Yogesh,Naik,Bukya,9440350930.0,null,"2025-09-24T00:00:00",null,Connected,null,Asked to call back on Monday (09/27/25),null
+  saniamalik1299@gmail.com,Sonia,null,Malik,8708332316.0,null,"2025-09-24T00:00:00",null,Connected,null,"Haven’t checked yet, will do later",null
+  trujes25@gmail.com,Shalini,Subramanian,Nadar,8796712880.0,null,"2025-09-24T00:00:00",null,Connected,null,"The doctor expressed satisfaction with CLIRNET, not explored the search box that much, will check later",The doctor is happy with CLIRNET and only inquired about the process for receiving credit points
+  guruprasadkachhawa@gmail.com,Guru,null,Kachhawa,9462218893.0,null,"2025-09-24T00:00:00",null,Connected,null,The doctor found the search box helpful and used it,The doctor raised a complaint that the name on the certificates always appears in small letters
+  ravooribharathsimharao@gmail.com,Bharath,simharao,Ravoori,8008802304.0,null,"2025-09-24T00:00:00",null,Connected,null,Call back after 4pm,null
+  geetanjalivemulakonda@gmail.com,geetanjali,null,vemulakonda,9566074922.0,null,"2025-09-24T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  mahen.naik@gmail.com,Mahendra,Sharadchandra,Naik,9910127870.0,null,"2025-09-24T00:00:00",null,Connected,Disconnected the call after hearing clirnet,After listen disconnected,null
+  rohitmishra557@gmail.com,Rohit,null,Mishra,7011020542.0,null,"2025-09-24T00:00:00",null,Not Connected,null,Not Interested,null
+  rmkbpl@gmail.com,Riya,null,Maheshwari,7987677469.0,null,"2025-09-24T00:00:00",null,Not Connected,Disconnected the call after hearing clirnet,null,null
+  kumarroka22@gmail.com,KUMAR,null,ROKA,9841216553.0,null,"2025-09-24T00:00:00",null,Not Connected,Out of network,null,null
+  svreddy8146@gmail.com,vajrala,V v siva,Reddy,9515654796.0,null,"2025-09-24T00:00:00",null,Not Connected,Disconnected the call after hearing clirnet,null,null
+  neyaz@live.in,Neyaz,null,Ahmad,9973011830.0,null,"2025-09-24T00:00:00",null,Not Connected,Disconnected the call after hearing clirnet,null,null
+  preetham1996@gmail.com,Ezhilarasu,null,Preetham,9591366293.0,null,"2025-09-24T00:00:00",null,Not Connected,Number Busy,null,null
+  kishorlande228@gmail.com,Kishor,null,Lande,8806313212.0,null,"2025-09-24T00:00:00",null,Connected,null,The doctor mentioned that she had used it and would like to use it again.,Not received the credit points for CME on pain management so asked to credit it
+  smriti.saryan@gmail.com,Smriti,null,Saryan,8845968168.0,null,"2025-09-24T00:00:00",null,Not Connected,Incoming Call Not Available,null,null
+  pkz4yfbxig@zipcatfish.com,Subbu,null,ramunarrinia,9354165167.0,null,"2025-09-24T00:00:00",null,Not Connected,Out of network,null,null
+  sreelakshmirajeev13@gmail.com,Sreelakshmi,null,R,7306247125.0,null,"2025-09-24T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  jeyachandran_a@yahoo.com,Arunachalam.,null,Jeyachandran,9842130167.0,null,"2025-09-24T00:00:00",null,Not Connected,Incoming Call Not Available,null,null
+  varunanjarlekar@gmail.com,VARUN,Milan,anjarlekar,7276108440.0,null,"2025-09-24T00:00:00",null,Connected,null,Attending session right now so asked for call back after 2pm,null
+  dr.rakeshbagdi@gmail.com,Rakesh,null,bagdi,8802674098.0,null,"2025-09-24T00:00:00",null,Connected,null,"The search box is helpful, and the doctor has searched for a few topics related to paediatrics. He feels that paediatric content is limited compared to adult topics and has requested to increase paediatric content, as he is a paediatrician",The doctor mentioned that everything is fine and there were no issues with joining CMEs or receiving certificates.
+  nareshpuri@gmail.com,Naresh,null,Puri,9999803268.0,null,"2025-09-24T00:00:00",null,Connected,null,"Not searched yet, will check after saying this he disconnected the call",null
+  drnikhilsagar@gmail.com,Nikhil,null,Sagar,8668527283.0,null,"2025-09-24T00:00:00",null,Connected,null,The doctor searched the box randomly and will check it later for more searches before sharing feedback,The doctor mentioned that everything is fine and there were no issues with joining CMEs or receiving certificates.
+  drbramya@gmail.com,Ramya,null,Balasubramaniam,9841761558.0,null,"2025-09-24T00:00:00",null,Not Connected,Disconnected the call after hearing clirnet,null,null
+  rsingam51@gmail.com,Rajat,satish,Singam,7666776828.0,null,"2025-09-24T00:00:00",null,Connected,null,The doctor has not used the search yet but will review it and share feedback later.,"The doctor confirmed that everything is fine, with no issues faced during CME participation or certification."
+  drmanikp9397@gmail.com,Mani,null,KANDA,9677992685.0,null,"2025-09-24T00:00:00",null,Connected,null,null,null
+  pritiprosonna@gmail.com,Dr.,null,Pritiprosonna Roy,9775276705.0,null,"2025-09-24T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  venkitesh1313@gmail.com,Venkitesh,null,Muraleedharan,8698315667.0,null,"2025-09-24T00:00:00",null,Connected,null,The doctor has not used the search box yet,Doctor reported no issues; content and session joining were satisfactory.
+  shaziarahman281@gmail.com,Shazia,null,RAHMAN,7003574807.0,null,"2025-09-24T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  drdisha.delhi@gmail.com,Disha,null,Bansal,9548760828.0,null,"2025-09-24T00:00:00",null,Connected,null,Not explored yet asked to share direct access link on whatsapp,"The doctor confirmed that everything is fine, with no issues faced during CME participation or certification."
+  deepanshishokeen321@gmail.com,deepanshi,null,Shokeen,9557870082.0,null,"2025-09-24T00:00:00",null,Connected,null,Not Interested,null
+  mridula1498@gmail.com,Mridula,null,K,7902524821.0,null,"2025-09-24T00:00:00",null,Connected,null,"Not searched yet, will check later, busy with preparation",null
+  sdrdeepak@gmail.com,Deepak,kiran,siddavaram,9822037288.0,null,"2025-09-24T00:00:00",null,Not Connected,Network issue,null,null
+  praj8594@gmail.com,Prince,null,Raj,6203182953.0,null,"2025-09-24T00:00:00",null,Connected,null,Call back later,null
+  syedadil942@gmail.com,Syed,null,Adil,7338544085.0,null,"2025-09-24T00:00:00",null,Connected,null,The doctor is very satisfied with CLIRNET’s services and mentioned that search box is very helpful for both students and doctors.,null
+  laxmi.vasudevan@gmail.com,Lakshmi,null,Vasudevan,7506959179.0,null,"2025-09-24T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  mirudhu.gov@gmail.com,Mirudhubashini,null,Govindarajan,9843893939.0,null,"2025-09-24T00:00:00",null,Connected,null,"Doctor said he hasn’t checked yet, will check later, and disconnected the call.","The doctor confirmed that everything is fine, with no issues faced during CME participation or certification."
+  poonampanditpawar25@gmail.com,Poonam,Pandit,Pawar,8999399736.0,null,"2025-09-24T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  shubhendrasinghparmar491@gmail.com,Shubhendra,Singh,Parmar,9617891239.0,null,"2025-09-24T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  drsyedmaqbool@gmail.com,Maqbool,null,Shah,3336851291.0,null,"2025-09-24T00:00:00",null,Not Connected,Wrong Number,null,null
+  muhsenhassenfarah@gmail.com,muhsin,hassen," Farah",915787776.0,null,"2025-09-24T00:00:00",null,Not Connected,Wrong Number,null,null
+  vavilala@uw.edu,Monica,null,Vavilala,2067447235.0,null,"2025-09-24T00:00:00",null,Not Connected,Wrong Number,null,null
+  mrathee317@gmail.com,MAHESH,null,Rathee,9306123536.0,null,"2025-09-24T00:00:00",null,Not Connected,Out of network,Invalid Number,null
+  anzalnooromar@students.uonbi.ac.ke,OMAR ANZAL,null,Noor,7803433.0,null,"2025-09-25T00:00:00",null,Not Connected,Wrong Number,null,null
+  salman19hai94@gmail.com,Salman,null,Haider,9787643213.0,null,"2025-09-24T00:00:00",null,Connected,null,"Doctor searched randomly; will explore later, before asking any other feedback he said he is busy with work and disconnected",null
+  drrajsarvaiya@gmail.com,Rajesh,Jayantilal,sarvaiya,9820908815.0,null,"2025-09-25T00:00:00",null,Connected,null,The doctor found the search box useful and made use of it,"The doctor confirmed that everything went smoothly, with no difficulties experienced during CME participation or certification"
+  santhoshkumartvm9@gmail.com,Santhosh,Janardhanan Nair Radhamma,Kumar,9497690051.0,null,"2025-09-25T00:00:00",null,Connected,null,Not Interested,null
+  jkvirkaur@gmail.com,Jaskiranvir,null,Kaur,9174000008.0,null,"2025-09-25T00:00:00",null,Not Connected,Disconnected the call after hearing clirnet,null,null
+  surajbarne14@gmail.com,Suraj,null,Barne,8087371414.0,null,"2025-09-25T00:00:00",null,Not Connected,Disconnected the call after hearing clirnet,null,null
+  dryadavtarun@gmail.com,Tarun,Kumar,yadav,9719265338.0,null,"2025-09-25T00:00:00",null,Not Connected,Disconnected the call after hearing clirnet,null,null
+  devendra.monicav@gmail.com,Nayani,null,Monica,8639962679.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  shsharma811@gmail.com,Shitanshu,null,Sharma,9950557783.0,null,"2025-09-25T00:00:00",null,Connected,null,The doctor confirmed that the search box is helpful and subsequently disconnected,null
+  sidheek.57@gmail.com,Sidheek,null,thangalkunju,9995540057.0,null,"2025-09-25T00:00:00",null,Connected,null,The doctor acknowledged the usefulness of the search box and then asked to call back later,null
+  bethalorah28@gmail.com,Betha,Lorah," OTIENO",741132643.0,null,"2025-09-25T00:00:00",null,Not Connected,Wrong Number,null,null
+  anand.danand.drrd4@gmail.com,Anand,Baburao,Jain,9418026505.0,null,"2025-09-25T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  gitau.doc@gmail.com,Michael,null,Gitau,729444059.0,Sumaiya,"2025-09-18T00:00:00",null,Not Connected,Wrong Number,null,null
+  sunzen9818@gmail.com,Shivraj,null,Rathore,9818861783.0,Sumaiya,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  yokeshj94@gmail.com,Yokesh,null,jagannathan,9042844248.0,Sumaiya,"2025-09-18T00:00:00",null,Not Connected,Switch Off,null,null
+  kinfemichaeltes@gmail.com,Kinfemichael,Tesfaye," Shewage",506558561.0,null,"2025-09-18T00:00:00",null,Not Connected,Wrong Number,null,null
+  luqmankhan2@gmail.com,Luqman,null,omair,7518447174.0,Sumaiya,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  kapilkashikar55@gmail.com,Kapil,Rajesh,Kashikar,9492557711.0,Sumaiya,"2025-09-18T00:00:00",null,Connected,null,"Doctor informed that he has not checked yet, will review the link, and requested the joining link to be shared",Doctor mentioned that he is receiving all services properly
+  drglad2k18@gmail.com,Gladwin,jose,veldhaas,7200652545.0,Sumaiya,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  pujamole@gmail.com,puja,Pralhad,Mole,7219389577.0,Sumaiya,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  dr.krunalasuryavanshi@gmail.com,Krunal,Anil,Suryavanshi,9579633059.0,Sumaiya,"2025-09-18T00:00:00",null,Connected,null,"Doctor informed that he has not checked yet, will review the link, and requested the joining link to be shared",Doctor mentioned that he is receiving all services properly
+  drkaiwan94@gmail.com,Kaiwan,null,Randeria,9867344003.0,Sumaiya,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  dnyaneshwarrole1998@gmail.com,Dnyaneshwar,shatrughan,Role,8421314103.0,Sumaiya,"2025-09-18T00:00:00",null,Connected,null,"Doctor informed that he has not checked yet, will review the link, and requested the joining link to be shared","Good Experience and receiving relatable content "
+  toluilori97@gmail.com,Tolulope,null,Ilori,null,null,null,null,null,null,null,null
+  ebukac92@gmail.com,Igweagu,null,Chukwuebuka,null,null,null,null,null,null,null,null
+  mohammednamenkani@gmail.com,Mohammed,null,Namenkani,null,null,null,null,null,null,null,null
+  ajngane@gmail.com,LYONGA,null,Alfred,null,null,null,null,null,null,null,null
+  abdelazizbabiker82@gmail.com,Abdelaziz,null,Babiker,null,null,null,null,null,null,null,null
+  lucyakinsipe@gmail.com,Catherine,null,Akinsipe,8034498836.0,Sumaiya,"2025-09-18T00:00:00",null,Not Connected,Wrong Number,null,null
+  shelkeshantanu35@gmail.com,Shantanu,Ashok,Shelke,7021266029.0,Sumaiya,"2025-09-18T00:00:00",null,Connected,null,"Doctor mentioned that he is not interested in checking our search box launch/ (No whatsapp) ",Doctor mentioned that he is receiving all services properly
+  yyaarraa11122@gmail.com,Yara,null,Almukhlifi,null,null,null,null,null,null,null,null
+  mahaaam612@gmail.com,Maham,null,yousif,null,null,null,null,null,null,null,null
+  adiprada.13@gmail.com,Aditya,Prashant,Patil,9833429642.0,Sumaiya,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  aziz.f.r.s.n@gmail.com,Abdulaziz,null,alnuwaimi,null,null,null,null,null,null,null,null
+  dr.jayaagrahari.dja@gmail.com,Jaya,null,Agrahari,8103041140.0,Sumaiya,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  rajeeb1212@gmail.com,Rajeeb,null,Thapaliya,9841606297.0,Sumaiya,"2025-09-18T00:00:00",null,Not Connected,Number Busy,null,null
+  spotsho28@gmail.com,Pelumi,null,Somorin,8149309063.0,Sumaiya,"2025-09-18T00:00:00",null,Not Connected,Network issue,null,null
+  harie82@gmail.com,HARIKRISHNAN,null,Elangovan,9884904428.0,Sumaiya,"2025-09-18T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  wozntwayapelo@gmail.com,Wabotlhe,null,Ntwayapelo,74062534.0,null,null,null,null,null,null,null
+  93bhakti@gmail.com,Bhakti,Ravindra,Patil,8669331967.0,Sumaiya,"2025-09-18T00:00:00",null,Connected,null,Doctor mentioned that she is not interested in checking our search box launch,Doctor mentioned that he is receiving all services properly
+  daliaashruf1997@gmail.com,Dalia,Ashruf," Abdu",537526489.0,null,null,null,null,null,null,null
+  siddrdr6688@gmail.com,siddharth,null,Mishra,7976019014.0,Sumaiya,"2025-09-18T00:00:00",null,Not Connected,Number Busy,null,null
+  rafaa44adil@gmail.com,rafa,null,Adil,null,null,null,null,null,null,null,null
+  drtushar255@gmail.com,Tushar,Madhukarrao,Deshpande,9619662172.0,null,"2025-09-19T00:00:00",null,Connected,null,"As the doctor is quite busy at the moment, he/she has asked for the direct access link and will review it later.",null
+  annamunir84@gmail.com,Anna,null,Munir,null,null,null,null,null,null,null,null
+  sunderrajpdr@gmail.com,Sundara,Raj,p.k,9447147268.0,null,"2025-09-19T00:00:00",null,Connected,null,It is helpful but Doctor asked for direct access link on his email,null
+  haleeyah8@gmail.com,Alliyah,null,Fatogun,8093831078.0,null,"2025-09-19T00:00:00",null,Not Connected,Incoming Call Not Available,null,null
+  dr.vijiram@gmail.com,Vijayalakshmi,null,Ramachandran,9443325279.0,null,"2025-09-19T00:00:00",null,Connected,null,Call back after 30mins,null
+  nirbhays464@gmail.com,Nirbhay,null,Kumar,7507848636.0,null,"2025-09-19T00:00:00",null,Connected,Disconnected the call after hearing clirnet,"Listened to everything, then went silent; when called back, the call was not received",null
+  dr.akashrajghosh@gmail.com,Akashraj,null,Ghosh,9093911125.0,null,"2025-09-19T00:00:00",null,Connected,null,"The doctor mainly uses the search box to look for CME credit points. So far, he has not searched for anything related to medical guidelines or disease updates. If he does, we will let you know. ","He inquired about the medical councils and their credit hours, and mentioned that he is particularly interested in joining seminars conducted by the West Bengal Medical Council."
+  kuchalambal@gmail.com,Kuchalambal,null,Agadi,3312578862.0,null,"2025-09-19T00:00:00",null,Not Connected,Out of network,Number not existing,null
+  soumik.kalita@famphy.com,SOUMIK,null,kalita,9871455291.0,null,"2025-09-19T00:00:00",null,Connected,null,"Checking patients, so asked for call back(evening)",null
+  dr.ravitejaperumandla@gmail.com,Raviteja,null,Perumalla,9985555290.0,null,"2025-09-19T00:00:00",null,Not Connected,Number Busy,Speaking to someone else,null
+  nilesh813.dab@gmail.com,Nilesh,gulab,Dabhade,9834323325.0,null,"2025-09-19T00:00:00",null,Connected,null,Doctor is attending a conference/workshop and has requested to be called back on Monday,null
+  varish.ambiya@gmail.com,Varish,null,Ikbal,9939449898.0,null,"2025-09-19T00:00:00",null,Connected,null,Asked for call back and disconnected,null
+  ponisseryjayarajan@gmail.com,Jayarajan,null,Ponissery,9745067733.0,null,"2025-09-19T00:00:00",null,Connected,null,The doctor found it helpful and will explore it in the near future,null
+  dr.ankita1997@gmail.com,ankita,null,Goswami,7745938895.0,null,"2025-09-19T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  yadavmahin@gmail.com,Mahin,null,Motla,9527067986.0,null,"2025-09-19T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  mushtaqahmad2183@gmail.com,mushtaq,ahmad,Wani,7006747957.0,null,"2025-09-19T00:00:00",null,Not Connected,Out of network,null,null
+  drcgsharma@live.com,Chandrakant,null,Sharma,9376522270.0,null,"2025-09-19T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  dongre.sachin1@gmail.com,Sachin,Tarachand,Dongare,7798337222.0,null,"2025-09-19T00:00:00",null,Connected,Disconnected the call after hearing clirnet,null,null
+  vinay182222@gmail.com,Vinay,teja,Karabhuja,9912999394.0,null,"2025-09-19T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  indrajithchowdary2997@gmail.com,Valluru,Venkata meghanadh,Chowdari,9494245113.0,null,"2025-09-19T00:00:00",null,Not Connected,null,"The call was redirected to IVR, which stated that the doctor is not available, so I left a message",null
+  ymelashiri@gmail.com,Yousef,null,Elashiry,1554082330.0,null,null,null,null,null,null,null
+  dr.sachinrathi@gmail.com,Sachin,null,Rathi,7588189973.0,null,"2025-09-19T00:00:00",null,Connected,null,"Did not get much time to explore the search box, will check and let us know",null
+  jnfhaleedh4@gmail.com,Jeneeff,Haleedh,S.N,9629343886.0,null,"2025-09-19T00:00:00",null,Connected,null,The doctor has not had much time to explore the search box but will check,null
+  juileetigdi@gmail.com,Juilee,null,Tigdi,9136509336.0,null,"2025-09-19T00:00:00",null,Not Connected,Network issue,null,null
+  aditi29.jan22@aiims.edu,Aditi,null,Das,8638263040.0,null,"2025-09-19T00:00:00",null,Not Connected,Number Busy,null,null
+  nitish419deepak@gmail.com,NITISH,null,Kumar,9873375991.0,null,"2025-09-19T00:00:00",null,Not Connected,Switch Off,null,null
+  hala.ibrahim@alexu.edu.eg,Hala,Nouh," IBRAHIM",100868887.0,null,"2025-09-19T00:00:00",null,null,null,null,null
+  boobi1895@gmail.com,Boobalan,null,Ganesan,9486565348.0,null,"2025-09-19T00:00:00",null,Connected,null,The doctor has explored it but not much; he will explore further when he gets time and update us. He also asked for the certificate of the session he attended at the end of the previous month,He also asked for the certificate of the session he attended at the end of the previous month
+  karimarif786@gmail.com,Karim,Arif," Karim",998887766.0,null,"2025-09-19T00:00:00",null,Not Connected,null,"Incorrect number, 9 digits",null
+  lohitsakpal@yahoo.com,Lohitkumar,Madan,Sakpal,7020440070.0,null,"2025-09-19T00:00:00",null,Connected,null,"Not explored yet need time to check ",null
+  mayurij911@gmail.com,Mayuri,Sushilkumar,Jadhav,7744975127.0,null,"2025-09-19T00:00:00",null,Connected,null,Search box is useful,null
+  mayurnarkhede45@gmail.com,Mayur,Nilkanth,Narkhede,9075828013.0,null,"2025-09-19T00:00:00",null,Connected,Disconnected the call after hearing clirnet,after listen disconnected,null
+  drraghunathbhusare@gmail.com,raghunath,yewaji,Bhusare,9403131341.0,null,"2025-09-19T00:00:00",null,Not Connected,Disconnected the call after hearing clirnet,null,null
+  pawanpatil5497@gmail.com,Pawan,sharad,Patil,9867754435.0,null,"2025-09-19T00:00:00",null,Connected,null,Doctor will check later at his convenience; mail regarding the search box has been received,null
+  drvikashase@gmail.com,Vikas,Balaji,Hase,7447853769.0,null,"2025-09-19T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  drsumadhurahasini@gmail.com,Manda,null,Sumadhurahasini,9959881123.0,null,"2025-09-19T00:00:00",null,Connected,null,The search box has not been checked yet; it will be reviewed and feedback will be shared later,null
+  suvidharaut@gmail.com,Suvidha,sharad,Raut,9833826224.0,null,"2025-09-19T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  dr.seetaramamma@gmail.com,Seeta,ramamma,Jonnalagadda,8309558829.0,null,"2025-09-19T00:00:00",null,Not Connected,Out of network,null,null
+  archit.somani86@gmail.com,ARCHIT,Asish,Somani,9422333557.0,null,"2025-09-19T00:00:00",null,Connected,null,"The search box is helpful for searching. ","The doctor had another query about joining sessions, so I shared the support desk number for future assistance"
+  khandade@yahoo.co.in,Vikrant,Narsan,Khandade,9422543766.0,null,"2025-09-19T00:00:00",null,Not Connected,Network issue,null,null
+  anjanisurya23@gmail.com,Surya,Anjani  Krishna,pujari,9642706968.0,null,"2025-09-19T00:00:00",null,Connected,null,"The search box is helpful, and no improvements are required at this time.",null
+  oleenraj@gmail.com,Oleenraj,nageshwarrao,Dowari,7020800726.0,null,"2025-09-19T00:00:00",null,Connected,null,"The search box is helpful, and no improvements are required at this time.",null
+  aj5763@gmail.com,Jain,Ashis,Kumar,9969606421.0,null,"2025-09-19T00:00:00",null,Connected,null,"Right now, he has nothing to search, but requested the direct access link. He will use it if needed and share feedback later.",null
+  ablesavid3@gmail.com,Mohammad,null,Avid,8273985305.0,null,"2025-09-19T00:00:00",null,Connected,null,"The search box is useful, he will again search, no improvement needed",Not as such
+  tripathyrr@yahoo.co.in,Ramani,ranjan,Tripathy,9437005042.0,null,"2025-09-20T00:00:00",null,Not Connected,Out of network,null,null
+  fenilbosmiya@gmail.com,Bosamiya,null,Fenil Manishkumar,7016055189.0,null,"2025-09-20T00:00:00",null,Connected,null,"The doctor listened to the entire conversation and then disconnected, mentioning that the search box is fine",null
+  harish3248@gmail.com,Yaswanth,null,Thatikonda,8328518645.0,null,"2025-09-20T00:00:00",null,Not Connected,Disconnected the call after hearing clirnet,null,null
+  sou18aug@gmail.com,Soumya,null,Sadanala,7032119506.0,null,"2025-09-20T00:00:00",null,Connected,null,The doctor disconnected the call after hearing the information,null
+  dr.sant285@gmail.com,Santosh,null,BS,9036963994.0,null,"2025-09-20T00:00:00",null,Connected,null,"The doctor used the search box, but his main query was related to CME. I informed him that he can use it to search for queries such as medical guidelines, drug compositions, and disease updates","The doctor’s speciality is wrongly mentioned in CRM as Diabetology, whereas his actual speciality is Anaesthesia. Even after attempting to update it from his profile, he was unable to do so, as it keeps redirecting him as a Diabetologist. So I mailed the concerned department for change of speciality"
+  ashishmalali@gmail.com,Ashish,Kumar,D,9743619228.0,null,"2025-09-20T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  susan_nainan68@yahoo.co.in,Nainan,george,susan,8879841757.0,null,"2025-09-20T00:00:00",null,Connected,null,"The search box is useful, but the Doctor mainly search for Credit points CME",The doctor is happy with the services provided by CLIRNET and wishes to attend more CME sessions for credit points. She was very satisfied with the speaker’s presentation in the last session on Beta Blockers.
+  sayeeda.sameena@gmail.com,Sameena,null,Sayeeda,9966722590.0,null,"2025-09-20T00:00:00",null,Not Connected,Out of network,null,null
+  sofia.chkikar@usmba.ac.ma,Chkikar,null,Sofia,28715703.0,null,"2025-09-20T00:00:00",null,Not Connected,null,Two digits are missing from the phone number,null
+  ngs.asb@gmail.com,Sneha,n,G,8754381835.0,null,"2025-09-20T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  yoeaswark22@gmail.com,Easwar,null,Kg,8940069164.0,null,"2025-09-20T00:00:00",null,Connected,null,"As the doctor is busy, he has requested that the details be shared through WhatsApp for providing feedback",null
+  wandkarhospital@gmail.com,Manisha,Balasaheb,Chikodi,7498570355.0,null,"2025-09-20T00:00:00",null,Connected,null,"Doctor is out of town, asked to call after 4 days",null
+  sharangsardessai1995@gmail.com,Sharang,Devendra,Sardessai,8600315637.0,null,"2025-09-20T00:00:00",null,Connected,Ringing but not receiving,The doctor has used the search box initially but needs more time to explore it again,"Everything was fine except he faced joining issues for the Pain Management session on 29th Aug 2025; he could join after the 3rd attempt. He also raised a concern that credit points have not been credited yet, though he received the certificate on 12th Sept. He is From Maharashtra medical council."
+  hajrak17@gmail.com,null,null,null,null,null,"2025-09-20T00:00:00",null,null,null,null,null
+  desanth.nair@gmail.com,null,Desanth,null,9811158897.0,null,"2025-09-20T00:00:00",null,Not Connected,Disconnected the call after hearing clirnet,null,null
+  shailja15.ss@gmail.com,Shailja,null,Shah,9426409185.0,null,"2025-09-20T00:00:00",null,Connected,null,The doctor has explored it but not much; she will explore further when she gets time and update us,null
+  skm997@gmail.com,null,null,null,null,null,"2025-09-20T00:00:00",null,null,null,null,null
+  afrid.unani@gmail.com,null,null,null,9177143149.0,null,"2025-09-20T00:00:00",null,Connected,null,Doctor explored the search box and found it useful.,No issues reported; everything is fine with the content and session joining
+  chinmay_hazra@yahoo.com,null,null,null,8653386660.0,null,"2025-09-20T00:00:00",null,Connected,null,The doctor wants to check it out and will let us know,Not as such
+  shriram.d@siamcomputing.com,null,null,null,9080327104.0,null,"2025-09-20T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  nimain2@gmail.com,null,null,null,null,null,"2025-09-20T00:00:00",null,null,null,null,null
+  shubham.gemini99@yahoo.in,Shubham,Pradeep,Kulkarni,9511945402.0,null,"2025-09-20T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  emadabdu13@yahoo.com,Emad,null,Elshafey,566184336.0,null,"2025-09-20T00:00:00",null,Not Connected,Wrong Number,null,null
+  sara.almalek8@gmail.com,Sara,null,hamad,534095543.0,null,"2025-09-20T00:00:00",null,Not Connected,Wrong Number,null,null
+  jhamb.ananya713@gmail.com,Ananya,null,Jhamb,7219471903.0,null,"2025-09-20T00:00:00",null,Connected,Disconnected the call after hearing clirnet,null,null
+  getaye.sim@gmail.com,Getaye,Simachew," Meseret",92355467.0,null,"2025-09-20T00:00:00",null,Not Connected,Wrong Number,null,null
+  osamasaad485@gmail.com,Osama,null,Saad,null,null,"2025-09-20T00:00:00",null,null,null,null,null
+  shiblahmazrui@gmail.com,Hafswa,khamis," Nassor",null,null,"2025-09-20T00:00:00",null,null,null,null,null
+  enochdauda8@gmail.com,Enoch,null,Dauda,7034343468.0,null,"2025-09-20T00:00:00",null,Connected,null,He is not a Doctor,null
+  sagnik.sahadgp@gmail.com,Sagnik,null,saha,9434658506.0,null,"2025-09-20T00:00:00",null,Connected,null,"Not explored yet, will check and update",The doctor reported no issues; both the content and session joining experience were satisfactory.
+  h.vanthana@gmail.com,Vanthana,null,Haldurai,9944898335.0,null,"2025-09-20T00:00:00",null,Not Connected,Incoming Call Not Available,null,null
+  sathishakdr@gmail.com,Sathish,null,Kandambeth,1558195306.0,null,"2025-09-20T00:00:00",null,Not Connected,Wrong Number,null,null
+  phcsambepalli@gmail.com,Surya Narayana,reddy,A,9491360425.0,null,"2025-09-20T00:00:00",null,Connected,null,Not interested to listen,null
+  gowrie61@hotmail.com,Vaidynathan,null,gowri,9790757032.0,null,"2025-09-20T00:00:00",null,Not Connected,Incoming Call Not Available,null,null
+  axyz461@gmail.com,Mohsin,mukta,reza,6003466678.0,null,"2025-09-20T00:00:00",null,Not Connected,Disconnected the call after hearing clirnet,null,null
+  surendradhelia@gmail.com,Surendra,Kumar Ramkrishan,Dhelia,9820019872.0,null,"2025-09-20T00:00:00",null,Connected,null,Doctor is not able to find the search box so will share the direct access link to his whatsapp number,Before listen anything disconnected
+  dskushwaha2186@gmail.com,Kushwaha,null,Devendra Singh,9669692186.0,null,"2025-09-20T00:00:00",null,Connected,null,"The doctor listened to everything but did not share any feedback. Instead, he requested that any concerns be communicated via WhatsApp",null
+  aadeshtoday123@gmail.com,Aadesh,null,Patil,9890278722.0,null,"2025-09-20T00:00:00",null,Connected,null,"The doctor does not recall whether he searched anything in the search box, but he will inform us if he does.","He did not face any issues, except for one session. All other sessions were through Zoom, and he has not experienced any problems with joining or certificates."
+  rmamilla975@gmail.com,Rakesh,null,Chandola,9493184170.0,null,"2025-09-20T00:00:00",null,Connected,null,will share feedback if he performs a search.,"Not as such isues, everything is going fine"
+  styavagal@yahoo.co.in,Yavagal,null,S T,9845005350.0,null,"2025-09-20T00:00:00",null,Connected,null,The doctor will check and let us know the feedback,He did not face any issues
+  dr.rsgrewal@yahoo.in,Rajpal,Singh,Grewal,9815000937.0,null,"2025-09-20T00:00:00",null,Not Connected,null,null,null
+  drkusumadp@gmail.com,Kusuma,Sankeshwar,Parikh,9978918967.0,null,"2025-09-20T00:00:00",null,Connected,null,The search box is helpful for finding the required details.,"The doctor stated that CLIRNET is very good and helpful for doctors, and she did not face any issues"
+  drshafi82@gmail.com,Mohammad,null,Shafi,9902999449.0,null,"2025-09-20T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  vaishnavi.phalguni@gmail.com,Phalguni,M,Devi,9849647560.0,null,"2025-09-20T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  jeetenhundiwala@gmail.com,Jeetendra,Sureshchandra,hundiwala,9011808977.0,null,"2025-09-20T00:00:00",null,Connected,null,"As the doctor is occupied with OPD, he requested a follow-up call on Monday, 23rd September 2025",null
+  drshinyvictoria@gmail.com,Shiny,Victoria,Solomon,9003279657.0,null,"2025-09-20T00:00:00",null,Connected,null,Asked to call on Monday after10am,null
+  ramesh@mgims.ac.in,RAMESHKUMAR,Kanhaiyalal,Pandey,9422661972.0,null,"2025-09-20T00:00:00",null,Connected,null,"The doctor mentioned that the search box is helpful and provides concise, accurate information",He reported no issues in joining CMEs or receiving certifications.
+  karlekar@gmail.com,Anil,null,Karlekar,9810266905.0,null,"2025-09-20T00:00:00",null,Not Connected,Number Busy,null,null
+  jai.krishnaa1996@gmail.com,Jayakrishna,null,Parthi,9688047004.0,null,"2025-09-20T00:00:00",null,Not Connected,Network issue,null,null
+  adityamore252@gmail.com,Aditya,Pandit,More,9673636009.0,null,"2025-09-20T00:00:00",null,Connected,Disconnected the call after hearing clirnet,null,null
+  nishaecofriendly@gmail.com,Nishaa,null,sendur pandi,9940023227.0,null,"2025-09-20T00:00:00",null,Connected,null,Doctor is satisfied with the search box results,No issues reported; everything is fine with the content and session joining.
+  drlatikasharma@gmail.com,Latika,null,Sharma,9910044651.0,null,"2025-09-20T00:00:00",null,Not Connected,Number Busy,null,null
+  zadduswamy38@gmail.com,yerriswamy,Zatoute,Naik,9347910090.0,null,"2025-09-22T00:00:00",null,Connected,null,"Doctor mainly uses the app for seminars, not the website. Will check the website later and update",No issues have been faced with any other services from CLIRNET
+  radicalzreena@gmail.com,Reena,null,Sherene,9486959378.0,null,"2025-09-22T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  dvdsalvi94@gmail.com,Devendra,Ashok,Salvi,7261980579.0,null,"2025-09-22T00:00:00",null,Connected,null,"When I asked the doctor whether the feature is helpful, he replied, “Not really” then Disconnected",null
+  widhya12@gmail.com,Vidhya,Sri Ramulu,Kaviraj,9345198926.0,null,"2025-09-22T00:00:00",null,Connected,null,The doctor has not checked yet and needs some time; will update afterward,No issues with any services
+  yesyesbee@gmail.com,SSB,null,Sharma,9440936760.0,null,"2025-09-22T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  vijaydc81@gmail.com,Vijay,Dalpatbhai,chandramaniya,9930808078.0,null,"2025-09-22T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  sakhardandebhushan@gmail.com,Bhushan,ajay,Sakhardande,9867221915.0,null,"2025-09-22T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  islam.j9752@gmail.com,Islam,null,Gamal,1098668309.0,null,"2025-09-22T00:00:00",null,null,null,null,null
+  ayesha.aj85@gmail.com,Ayesha,null,Mirza,8419973196.0,null,"2025-09-22T00:00:00",null,Not Connected,Disconnected the call after hearing clirnet,null,null
+  sunildhingra@hotmail.com,Sunil,null,Dhingra,9999649506.0,null,"2025-09-22T00:00:00",null,Connected,null,Doctor found the search box helpful but wants to explore more before giving detailed feedback,Doctor has attended session on pain manage ment and not received the certificate yet
+  prabhjotbatti@gmail.com,Prabhjot,Kaur,Singh,9501044716.0,null,"2025-09-22T00:00:00",null,Connected,null,The doctor want to use it again as she used it randomly earlier,null
+  ghousiasultana21@gmail.com,Sultana,null,ghousia,9177371990.0,null,"2025-09-22T00:00:00",null,Not Connected,Ringing but not receiving,null,null
+  ruhelakrishan283@gmail.com,Krishan,null,Kumar,8104812283.0,null,"2025-09-22T00:00:00",null,Connected,null,"Doctor has explored it , the search box is helpful",Recently attended a session on CLIRNET platform
+  prernasikarwar8@gmail.com,Prerna,null,Sikarwar,7447628750.0,null,"2025-09-22T00:00:00",null,Connected,null,Call back after 1nhalf hour,null
+  ganessanr@yahoo.co.in,Ganessan,null,Ranganathan,9443439949.0,null,"2025-09-22T00:00:00",null,Connected,null,"Doctor have used it for an online meeting otherwise he is not using CLIRNET that much, he asked to drop an email",null
+  mjaquadri@aol.com,Md,juned ahmed,Quadri,8500300088.0,null,"2025-09-22T00:00:00",null,Not Connected,Disconnected the call after hearing clirnet,null,null

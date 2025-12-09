@@ -1,0 +1,392 @@
+
+================================================================================
+CODE CELL 1
+================================================================================
+# ============================================================================
+# 1) Install dependencies
+# ============================================================================
+!pip install -q dspy-ai beautifulsoup4 requests lxml pandas python-dotenv
+
+
+================================================================================
+CODE CELL 2
+================================================================================
+import json
+import dspy
+import requests
+import pandas as pd
+from bs4 import BeautifulSoup
+from typing import List, Dict
+from pydantic import BaseModel, Field
+from urllib.parse import urlparse
+import time
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
+================================================================================
+CODE CELL 3
+================================================================================
+# ============================================================================
+# SECTION 2: CONFIGURE DSPY WITH API KEY
+# ============================================================================
+API_KEY = os.getenv("APIKEY")nmain_lm = dspy.LM(
+    "openai/LongCat-Flash-Chat",
+    api_key=API_KEY,
+    api_base="https://api.longcat.chat/openai/v1"
+)
+dspy.settings.configure(lm=main_lm, adapter=dspy.XMLAdapter())
+print("DSPy configured successfully!")
+
+================================================================================
+CODE CELL 4
+================================================================================
+# Create output directory
+os.makedirs('output', exist_ok=True)
+print("Created 'output' directory")
+
+# ============================================================================
+# SECTION 3: ENTITY + ATTRIBUTE EXTRACTION
+# ============================================================================
+
+class EntityWithAttr(BaseModel):
+    entity: str = Field(description="the named entity")
+    attr_type: str = Field(description="semantic type (e.g. Drug, Disease, Concept, Process)")
+
+class ExtractEntities(dspy.Signature):
+    """From the paragraph extract all relevant entities and their semantic attribute types."""
+    paragraph: str = dspy.InputField(desc="input paragraph")
+    entities: List[EntityWithAttr] = dspy.OutputField(desc="list of entities and their types")
+
+extractor = dspy.Predict(ExtractEntities)
+
+# ============================================================================
+# SECTION 4: DEDUPLICATOR (recursive batching + confidence loop)
+# ============================================================================
+
+class DeduplicateEntities(dspy.Signature):
+    """Given a list of (entity, attr_type) decide which ones are duplicates.
+    Return a deduplicated list and a confidence that the remaining items are ALL distinct."""
+    items: List[EntityWithAttr] = dspy.InputField(desc="batch of entities to deduplicate")
+    deduplicated: List[EntityWithAttr] = dspy.OutputField(desc="deduplicated list")
+    confidence: float = dspy.OutputField(
+        desc="confidence (0-1) that every item is semantically distinct"
+    )
+
+dedup_predictor = dspy.ChainOfThought(DeduplicateEntities)
+
+def deduplicate_with_lm(
+    items: List[EntityWithAttr],
+    batch_size: int = 10,
+    target_confidence: float = 0.9,
+    max_attempts: int = 3
+) -> List[EntityWithAttr]:
+    """
+    Recursively deduplicate using the LM.
+    Works by:
+      1. splitting into batches of `batch_size`
+      2. for each batch asking the LM for duplicates + confidence
+      3. rerunning the batch until confidence >= target_confidence
+      4. concatenating results from all batches
+    """
+    if not items:
+        return []
+    # helper to process one batch
+    def _process_batch(batch: List[EntityWithAttr]) -> List[EntityWithAttr]:
+        for attempt in range(max_attempts):
+            try:   #using try except block instead for better handling
+                pred = dedup_predictor(items=batch)
+                if pred.confidence >= target_confidence:
+                    return pred.deduplicated
+            except Exception as e:
+                print(f"  Warning: Dedup attempt {attempt + 1} failed: {e}")
+                if attempt == max_attempts - 1:
+                    return batch  # Return original if all attempts fail
+        return batch
+
+    # split into batches and process
+    results = []
+    for i in range(0, len(items), batch_size):
+        batch = items[i : i + batch_size]
+        results.extend(_process_batch(batch))
+    return results
+
+# ============================================================================
+# SECTION 5: RELATION EXTRACTION
+# ============================================================================
+
+class Relation(BaseModel):
+    subj: str = Field(description="subject entity")
+    pred: str = Field(description="predicate/relation phrase")
+    obj: str = Field(description="object entity")
+
+class ExtractRelations(dspy.Signature):
+    """Given the original paragraph and a list of unique entities,
+    extract all factual (subject, predicate, object) triples that are explicitly stated or clearly implied."""
+    paragraph: str = dspy.InputField(desc="original paragraph")
+    entities: List[str] = dspy.InputField(desc="list of deduplicated entities")
+    relations: List[Relation] = dspy.OutputField(desc="subject-predicate-object triples")
+
+rel_predictor = dspy.ChainOfThought(ExtractRelations)
+
+# ============================================================================
+# SECTION 6: MERMAID SERIALISER  (revised)
+# ============================================================================
+
+def triples_to_mermaid(
+    triples: List[Relation],
+    entity_list: List[str],
+    max_label_len: int = 40
+) -> str:
+    """
+    Convert triples to a VALID Mermaid flowchart LR diagram.
+    """
+    entity_set = {e.strip().lower() for e in entity_list}
+    lines = ["flowchart LR"]
+
+    def _make_id(s: str) -> str:
+        # Create valid Mermaid node ID (no spaces or special chars)
+        return s.strip().replace(" ", "_").replace("(", "").replace(")", "").replace("-", "_").replace("/", "_")
+
+    for t in triples:
+        subj_norm = t.subj.strip().lower()
+        obj_norm = t.obj.strip().lower()
+
+        # Only include relations where both entities are in our list
+        if subj_norm in entity_set and obj_norm in entity_set:
+            src, dst, lbl = t.subj, t.obj, t.pred
+
+            # Sanitize label
+            lbl = lbl.strip()
+            if len(lbl) > max_label_len:
+                lbl = lbl[:max_label_len - 3] + "..."
+
+            # Generate Mermaid edge
+            src_id, dst_id = _make_id(src), _make_id(dst)
+            lines.append(f'    {src_id}["{src}"] -->|{lbl}| {dst_id}["{dst}"]')
+
+    return "\n".join(lines)
+
+def create_error_mermaid(url: str, error_msg: str) -> str:
+    """Create a Mermaid diagram showing error information"""
+    return f"""flowchart TD
+    Error[\"ERROR: Processing Failed\"]
+    URL[\"URL: {url[:50]}...\"]
+    Message[\"Error: {error_msg[:100]}...\"]
+
+    Error --> URL
+    Error --> Message"""
+
+# ============================================================================
+# SECTION 7: WEB SCRAPING FUNCTIONS
+# ============================================================================
+#setting a limit to avoid api error
+def scrape_url(url: str, max_chars: int = 15000) -> str:
+    """
+    Scrape text content from a URL.
+    """
+    try:
+
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+        response = requests.get(url, headers=headers, timeout=30)
+        response.raise_for_status()
+
+        # Parse HTML content
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        # Remove script and style elements
+        for script in soup(["script", "style", "nav", "footer", "header"]):
+            script.decompose()
+
+        # Get text
+        text = soup.get_text(separator=' ', strip=True)
+
+        # Clean up whitespace
+        lines = (line.strip() for line in text.splitlines())
+        chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+        text = ' '.join(chunk for chunk in chunks if chunk)
+
+        # Limit length to avoid api error
+        if len(text) > max_chars:
+            text = text[:max_chars]
+
+        return text
+
+    except Exception as e:
+        raise Exception(f"Scraping failed: {str(e)}")
+
+# ============================================================================
+# SECTION 8: MAIN PROCESSING PIPELINE
+# ============================================================================
+
+def process_url(url: str, url_index: int) -> Dict:
+    """
+    Complete pipeline for processing a single URL:
+    1. Scrape content
+    2. Extract entities
+    3. Deduplicate entities
+    4. Extract relations
+    5. Generate Mermaid diagram
+    """
+    print(f"\n{'='*80}")
+    print(f"Processing URL {url_index}: {url}")
+    print(f"{'='*80}")
+
+    error_message = None
+
+    try:
+        # Step 1: Scrape content
+        print("Scraping content...")
+        content = scrape_url(url)
+        print(f"Scraped {len(content)} characters")
+
+        # Step 2: Extract entities
+        print("Extracting entities...")
+        extracted = extractor(paragraph=content)
+        print(f"Extracted {len(extracted.entities)} entities")
+
+        # Step 3: Deduplicate entities
+        print("Deduplicating entities...")
+        unique = deduplicate_with_lm(extracted.entities, batch_size=10, target_confidence=0.85)
+        print(f"Deduplicated to {len(unique)} unique entities")
+
+        entity_strings = [e.entity for e in unique]
+
+        # Step 4: Extract relations (split content if too long)
+        print("Extracting relations...")
+        chunk_size = 8000
+        all_relations = []
+
+        for i in range(0, len(content), chunk_size):
+            chunk = content[i:i + chunk_size]
+            rel_out = rel_predictor(paragraph=chunk, entities=entity_strings)
+            all_relations.extend(rel_out.relations)
+        # Step 5: Generate Mermaid diagram
+        print("Generating Mermaid diagram...")
+        mermaid_code = triples_to_mermaid(all_relations, entity_strings)
+
+        return {
+            'url': url,
+            'entities': unique,
+            'relations': all_relations,
+            'mermaid': mermaid_code,
+            'error': None
+        }
+
+    except Exception as e:
+        error_message = str(e)
+        print(f"Processing failed: {error_message}")
+
+        # Return error result with error mermaid diagram
+        return {
+            'url': url,
+            'entities': [],
+            'relations': [],
+            'mermaid': create_error_mermaid(url, error_message),
+            'error': error_message
+        }
+
+# ============================================================================
+# SECTION 9: PROCESS ALL URLs
+# ============================================================================
+
+# Define the 10 URLs from the assignment
+URLS = [
+    "https://en.wikipedia.org/wiki/Sustainable_agriculture",
+    "https://www.nature.com/articles/d41586-025-03353-5",
+    "https://www.sciencedirect.com/science/article/pii/S1043661820315152",
+    "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10457221/",
+    "https://www.fao.org/3/y4671e/y4671e06.htm",
+    "https://www.medscape.com/viewarticle/time-reconsider-tramadol-chronic-pain-2025a1000ria",
+    "https://www.sciencedirect.com/science/article/pii/S0378378220307088",
+    "https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets",
+    "https://www.medscape.com/viewarticle/second-dose-boosts-shingles-protection-adults-aged-65-years-2025a1000ro7",
+    "https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india"
+]
+
+
+# Process all URLs
+print("Starting processing of 10 URLs...")
+print("This may take 15-30 minutes depending on API rate limits.\n")
+
+results = []
+for i, url in enumerate(URLS, 1):
+    result = process_url(url, i)
+    results.append(result)
+
+    # Rate limiting: wait between requests
+    if i < len(URLS):
+        print("\nWaiting 5 seconds before next URL...")
+        time.sleep(5)
+
+print(f"\n\n{'='*80}")
+successful = sum(1 for r in results if r['error'] is None)
+print(f"Processing complete! Successfully processed {successful}/{len(URLS)} URLs")
+print(f"{'='*80}\n")
+
+# ============================================================================
+# SECTION 10: SAVE MERMAID DIAGRAMS
+# ============================================================================
+
+print("Saving Mermaid diagrams to output/ directory...")
+for i, result in enumerate(results, 1):
+    filename = f"output/mermaid_{i}.md"
+    with open(filename, 'w', encoding='utf-8') as f:
+        f.write(f"# Knowledge Graph for URL {i}\n\n")
+        f.write(f"**Source:** {result['url']}\n\n")
+
+        if result['error']:
+            f.write(f"**Status:**  Processing Failed\n\n")
+            f.write(f"**Error Message:** {result['error']}\n\n")
+        else:
+            f.write(f"**Status:**  Successfully Processed\n\n")
+            f.write(f"**Entities Extracted:** {len(result['entities'])}\n\n")
+            f.write(f"**Relations Found:** {len(result['relations'])}\n\n")
+
+        f.write("```mermaid\n")
+        f.write(result['mermaid'])
+        f.write("\n```\n")
+    print(f"Saved {filename}")
+
+# ============================================================================
+# SECTION 11: CREATE CSV FILE
+# ============================================================================
+
+print("\nCreating tags.csv in output/ directory...")
+
+# Build CSV data (only from successful extractions)
+csv_data = []
+for result in results:
+    if result['error'] is None:  # Only include successful extractions
+        url = result['url']
+        for entity in result['entities']:
+            csv_data.append({
+                'link': url,
+                'tag': entity.entity,
+                'tag_type': entity.attr_type
+            })
+
+# Create DataFrame and save
+if csv_data:
+    df = pd.DataFrame(csv_data)
+    df.to_csv('output/tags.csv', index=False, encoding='utf-8')
+
+    print(f"Saved output/tags.csv with {len(csv_data)} rows")
+else:
+    print(" No successful extractions - CSV not created")
+
+print("\nAssignment complete! Ready for submission.")
+
+================================================================================
+CODE CELL 5
+================================================================================
+from google.colab import files
+import shutil
+
+# Zip the output directory
+shutil.make_archive('output', 'zip', 'output')
+
+# Download the zip file
+files.download('output.zip')

@@ -1,0 +1,25 @@
+Hello team,
+
+We had a discussion on the image generation of the CMS Generator module and had a discussion on the limitations currently:
+
+•	The team identified image generation as a significant bottleneck in the content pipeline.
+•	The "Realism" Issue: Attempts to generate "Real life" or highly scientific images using AI currently result in anatomical errors (specifically mentioned: malformed human fingers).
+•	Risk of Rejection: Using these flawed "real" images leads to content rejection during quality checks.
+•	Proposed Solution: The team proposed shifting the default style to "Illustration Style" (or Cartoonish/Graphic style). This style masks anatomical imperfections inherent in current AI technology and reduces the rejection rate.
+
+•	Specific examples were reviewed within the CMS (Reference ID: 8599201 - Topic: Vaginal birth after cesarean selection).
+•	Observations:
+o	The generated content is high quality but stylistically different from the "Scientific/Surgical" photos currently expected.
+o	The team noted that while the images are "Animated/Graphical," they are safer to use than defective photorealistic images.
+
+
+Editorial Guidelines
+•	There is a conflict between the current expectation for "Scientific/Real" images and the capabilities of the AI tools.
+•	Team needs to discuss and see if it is possible to officially update the Editorial Guidelines/Approach to accept "Illustration/Artistic" styles as the standard.
+•	Consensus Required: This change in style needs to be signed off by all stakeholders
+
+I have added a batch (~500) of the "Illustration Style" examples discussed (including the Heart Failure and C-Section examples) to the team for review including the link where they can review the content.
+
+Please let me know what you think.
+
+Arnab

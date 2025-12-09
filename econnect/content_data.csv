@@ -1,0 +1,825 @@
+content_id,content_old_id,content_name,content_description
+44736,35178,Conventional and novel therapies for treating iron deficiency anemia in ND-CKD,"Iron deficiency anemia (IDA) is a common complication in non-dialysis chronic kidney disease (ND-CKD) patients, often exacerbated by inflammation and impaired iron utilization. Treatment strategies involve identifying absolute vs. functional iron deficiency using indicators like TSAT and ferritin levels.[1] Conventional therapies include oral iron supplements and intravenous (IV) iron, but these come with risks such as iron overload and oxidative stress. Novel therapies include ferric citrate (FC), which regulates iron absorption and is FDA-approved for ND-CKD patients, ferric maltol for patients with inflammatory bowel disease, and ferric pyrophosphate citrate (FPC), which is delivered via dialysate for hemodialysis patients. Liposomal and Sucrosomial iron offer promising results by bypassing the gastrointestinal tract, reducing side effects, and improving hemoglobin levels.[2] These emerging therapies provide safer, more effective alternatives for managing IDA in CKD.
+
+
+
+Citation
+
+
+
+	^ https://karger.com/aha/article-abstract/142/1/44/15533/Iron-Deficiency-Anemia-in-Chronic-Kidney-Disease?redirectedFrom=fulltext&nbsp;
+	^ &nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC10305423/&nbsp;&nbsp;
+
+
+"
+44780,35225,Detection and evaluation of CKD,"Detection and evaluation of chronic kidney disease (CKD) primarily involves assessing glomerular filtration rate (GFR), which is now widely estimated based on serum creatinine levels.[1] Estimated GFR helps assess renal function, severity of disease, appropriate drug dosing, and renal involvement in systemic diseases. Renal function tests, including serum creatinine, plasma urea, urine volume, and minerals in urine, monitor renal damage and help determine the underlying etiology. The ideal GFR marker, such as inulin, is metabolically inert and cleared only by the kidneys.[2] Other markers like creatinine and urea are also used, though each has limitations. While creatinine clearance is useful, it can be inaccurate at low GFR and affected by drugs. Advanced methods, including radiolabeled compounds, can further assess kidney function.
+
+
+
+Citation
+
+
+
+	^ https://www.annlabmed.org/journal/view.html?uid=3514&amp;vmd=Full
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC11150208/&nbsp;&nbsp;
+
+
+"
+44843,35289,Estimation of GFR and KDIGO classification of CKD,"The estimation of glomerular filtration rate (GFR) is crucial for assessing kidney function. Measured GFR (mGFR) using exogenous markers, like urinary or plasma clearance of filtration substances, is the gold standard but is not routinely used due to its complexity. Renal function tests typically rely on estimated GFR (eGFR) using serum creatinine or creatinine clearance (Clcr), which, despite limitations, remains the most common method.[1] Emerging markers like cystatin C offer potential for improved accuracy and may become routine in the future. The KDIGO classification of chronic kidney disease (CKD) categorizes CKD into stages based on eGFR values, aiding in diagnosis and treatment planning.[2] While exogenous substances provide precise measurements, endogenous markers are being explored for better clinical integration.
+
+
+
+Citation
+
+
+
+	^ https://www.annlabmed.org/journal/view.html?uid=3514&amp;vmd=Full&nbsp;
+	^ https://www.kidney-international.org/article/S0085-2538(23)00766-4/fulltext&nbsp;&nbsp;
+
+
+"
+44845,35291,Hypertension management in chronic kidney disease and diabetes,"Hypertension (HTN) and chronic kidney disease (CKD) are closely interconnected, creating a cycle where declining kidney function leads to elevated blood pressure, and sustained hypertension accelerates kidney deterioration.[1] This bidirectional relationship contributes to the progression of both conditions, necessitating effective management strategies. In patients with CKD and diabetes, blood pressure control is critical to slowing kidney function decline and preventing cardiovascular complications. The management of hypertension often includes lifestyle modifications, such as weight loss, dietary changes, and regular exercise, along with pharmacologic interventions like ACE inhibitors, angiotensin receptor blockers (ARBs), and diuretics. Tight blood pressure control, especially below 130/80 mmHg, has been shown to reduce the risk of CKD progression and improve patient outcomes.[2] This requires individualized treatment approaches to address both CKD and diabetes-related factors.
+
+
+
+Citation
+
+
+
+	^ https://www.magonlinelibrary.com/doi/full/10.12968/hmed.2021.0440&nbsp;
+	^ https://www.sciencedirect.com/science/article/pii/S0929664624004431&nbsp;&nbsp;
+
+
+"
+44846,35292,"CKD screening in type 2 DM: when, why and how?","Chronic kidney disease (CKD) screening in individuals with Type 2 diabetes is essential to prevent progression to end-stage renal disease (ESRD). Diabetic patients are at an increased risk of CKD, yet a significant proportion remain undiagnosed. Early detection is critical, as it allows for timely intervention to slow disease progression.[1] Screening typically involves measuring urinary albumin excretion (UAE), which helps identify early signs of kidney damage. Regular monitoring of UAE and estimated glomerular filtration rate (eGFR) can aid in the early identification of CKD.[2] Screening should begin at diagnosis in Type 2 diabetes and continue annually, as early intervention with lifestyle changes and pharmacologic treatments, such as ACE inhibitors or ARBs, can significantly reduce the risk of ESRD and improve long-term outcomes.
+
+
+
+Citation
+
+
+
+	^ https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-022-02438-6&nbsp;
+	^ https://www.nature.com/articles/s41598-024-56765-0&nbsp;
+
+
+"
+44998,35388,Conventional and novel therapies for treating iron deficiency anemia in ND-CKD,"Iron deficiency anemia (IDA) is a common complication in non-dialysis chronic kidney disease (ND-CKD) patients, often exacerbated by inflammation and impaired iron utilization. Treatment strategies involve identifying absolute vs. functional iron deficiency using indicators like TSAT and ferritin levels.[1] Conventional therapies include oral iron supplements and intravenous (IV) iron, but these come with risks such as iron overload and oxidative stress. Novel therapies include ferric citrate (FC), which regulates iron absorption and is FDA-approved for ND-CKD patients, ferric maltol for patients with inflammatory bowel disease, and ferric pyrophosphate citrate (FPC), which is delivered via dialysate for hemodialysis patients. Liposomal and Sucrosomial iron offer promising results by bypassing the gastrointestinal tract, reducing side effects, and improving hemoglobin levels.[2] These emerging therapies provide safer, more effective alternatives for managing IDA in CKD.
+
+
+
+Citation
+
+
+
+	^ https://karger.com/aha/article-abstract/142/1/44/15533/Iron-Deficiency-Anemia-in-Chronic-Kidney-Disease?redirectedFrom=fulltext&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC10305423/&nbsp;
+
+
+"
+44999,35389,Chronic kidney disease and bone mineral disorders,"Chronic kidney disease (CKD) is considered one of the most prevalent noncommunicable diseases, affecting a significant portion of the global population. Bone mineral disorders associated with CKD are characterized by systemic disturbances in mineral and bone metabolism.[1] These disorders are manifested through abnormalities in calcium, phosphorus, parathyroid hormone (PTH), or vitamin D metabolism. Furthermore, disruptions in bone turnover, mineralization, volume, linear growth, or strength are commonly observed. Vascular or soft tissue calcification may also be present. The pathophysiology of these bone mineral disorders is linked to the impaired kidney function in CKD, which alters the regulation of key minerals and hormones, leading to significant skeletal and vascular complications.[2] Management typically involves addressing the underlying metabolic abnormalities to mitigate the progression of these disorders.
+
+
+
+Citation
+
+
+
+	^ https://www.mdpi.com/1422-0067/23/20/12223
+	^ https://physoc.onlinelibrary.wiley.com/doi/full/10.1113/EP092401&nbsp;&nbsp;
+
+
+"
+45001,35390,Chronic kidney disease and bone mineral disorders,"Chronic kidney disease (CKD) is considered one of the most prevalent noncommunicable diseases, affecting a significant portion of the global population. Bone mineral disorders associated with CKD are characterized by systemic disturbances in mineral and bone metabolism.[1] These disorders are manifested through abnormalities in calcium, phosphorus, parathyroid hormone (PTH), or vitamin D metabolism. Furthermore, disruptions in bone turnover, mineralization, volume, linear growth, or strength are commonly observed. Vascular or soft tissue calcification may also be present. The pathophysiology of these bone mineral disorders is linked to the impaired kidney function in CKD, which alters the regulation of key minerals and hormones, leading to significant skeletal and vascular complications.[2] Management typically involves addressing the underlying metabolic abnormalities to mitigate the progression of these disorders.
+
+
+
+Citation
+
+
+
+	^ https://www.mdpi.com/1422-0067/23/20/12223
+	^ https://physoc.onlinelibrary.wiley.com/doi/full/10.1113/EP092401&nbsp;&nbsp;
+
+
+"
+45002,35391,Chronic kidney disease and bone mineral disorders,"Chronic kidney disease (CKD) is considered one of the most prevalent noncommunicable diseases, affecting a significant portion of the global population. Bone mineral disorders associated with CKD are characterized by systemic disturbances in mineral and bone metabolism.[1] These disorders are manifested through abnormalities in calcium, phosphorus, parathyroid hormone (PTH), or vitamin D metabolism. Furthermore, disruptions in bone turnover, mineralization, volume, linear growth, or strength are commonly observed. Vascular or soft tissue calcification may also be present. The pathophysiology of these bone mineral disorders is linked to the impaired kidney function in CKD, which alters the regulation of key minerals and hormones, leading to significant skeletal and vascular complications.[2] Management typically involves addressing the underlying metabolic abnormalities to mitigate the progression of these disorders.
+
+
+
+Citation
+
+
+
+	^ https://www.mdpi.com/1422-0067/23/20/12223
+	^ https://physoc.onlinelibrary.wiley.com/doi/full/10.1113/EP092401&nbsp;&nbsp;
+
+
+"
+45009,35392,Chronic kidney disease and bone mineral disorders,"Chronic kidney disease (CKD) is considered one of the most prevalent noncommunicable diseases, affecting a significant portion of the global population. Bone mineral disorders associated with CKD are characterized by systemic disturbances in mineral and bone metabolism.[1] These disorders are manifested through abnormalities in calcium, phosphorus, parathyroid hormone (PTH), or vitamin D metabolism. Furthermore, disruptions in bone turnover, mineralization, volume, linear growth, or strength are commonly observed. Vascular or soft tissue calcification may also be present. The pathophysiology of these bone mineral disorders is linked to the impaired kidney function in CKD, which alters the regulation of key minerals and hormones, leading to significant skeletal and vascular complications.[2] Management typically involves addressing the underlying metabolic abnormalities to mitigate the progression of these disorders.
+
+
+
+Citation
+
+
+
+	^ https://www.mdpi.com/1422-0067/23/20/12223
+	^ https://physoc.onlinelibrary.wiley.com/doi/full/10.1113/EP092401
+
+
+"
+45010,35393,Conventional and novel therapies for treating iron deficiency anemia in ND-CKD,"Iron deficiency anemia (IDA) is a common complication in non-dialysis chronic kidney disease (ND-CKD) patients, often exacerbated by inflammation and impaired iron utilization. Treatment strategies involve identifying absolute vs. functional iron deficiency using indicators like TSAT and ferritin levels.[1] Conventional therapies include oral iron supplements and intravenous (IV) iron, but these come with risks such as iron overload and oxidative stress. Novel therapies include ferric citrate (FC), which regulates iron absorption and is FDA-approved for ND-CKD patients, ferric maltol for patients with inflammatory bowel disease, and ferric pyrophosphate citrate (FPC), which is delivered via dialysate for hemodialysis patients. Liposomal and Sucrosomial iron offer promising results by bypassing the gastrointestinal tract, reducing side effects, and improving hemoglobin levels.[2] These emerging therapies provide safer, more effective alternatives for managing IDA in CKD.
+
+
+
+Citation
+
+
+
+	^ https://karger.com/aha/article-abstract/142/1/44/15533/Iron-Deficiency-Anemia-in-Chronic-Kidney-Disease?redirectedFrom=fulltext&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC10305423/&nbsp;
+
+
+"
+45011,35394,Chronic kidney disease and bone mineral disorders,"Chronic kidney disease (CKD) is considered one of the most prevalent noncommunicable diseases, affecting a significant portion of the global population. Bone mineral disorders associated with CKD are characterized by systemic disturbances in mineral and bone metabolism.[1] These disorders are manifested through abnormalities in calcium, phosphorus, parathyroid hormone (PTH), or vitamin D metabolism. Furthermore, disruptions in bone turnover, mineralization, volume, linear growth, or strength are commonly observed. Vascular or soft tissue calcification may also be present. The pathophysiology of these bone mineral disorders is linked to the impaired kidney function in CKD, which alters the regulation of key minerals and hormones, leading to significant skeletal and vascular complications.[2] Management typically involves addressing the underlying metabolic abnormalities to mitigate the progression of these disorders.
+
+
+
+Citation
+
+
+
+	^ https://www.mdpi.com/1422-0067/23/20/12223
+	^ https://physoc.onlinelibrary.wiley.com/doi/full/10.1113/EP092401&nbsp;&nbsp;
+
+
+"
+45018,35395,Hypertension management in chronic kidney disease and diabetes,"Hypertension (HTN) and chronic kidney disease (CKD) are closely interconnected, creating a cycle where declining kidney function leads to elevated blood pressure, and sustained hypertension accelerates kidney deterioration.[1] This bidirectional relationship contributes to the progression of both conditions, necessitating effective management strategies. In patients with CKD and diabetes, blood pressure control is critical to slowing kidney function decline and preventing cardiovascular complications. The management of hypertension often includes lifestyle modifications, such as weight loss, dietary changes, and regular exercise, along with pharmacologic interventions like ACE inhibitors, angiotensin receptor blockers (ARBs), and diuretics. Tight blood pressure control, especially below 130/80 mmHg, has been shown to reduce the risk of CKD progression and improve patient outcomes.[2] This requires individualized treatment approaches to address both CKD and diabetes-related factors.
+
+
+
+Citation
+
+
+
+	^ https://www.magonlinelibrary.com/doi/full/10.12968/hmed.2021.0440&nbsp;
+	^ https://www.sciencedirect.com/science/article/pii/S0929664624004431&nbsp;
+
+
+"
+45020,35396,Glomerular diseases,"Hypertension (HTN) and chronic kidney disease (CKD) are closely interconnected, creating a cycle where declining kidney function leads to elevated blood pressure, and sustained hypertension accelerates kidney deterioration.[1] This bidirectional relationship contributes to the progression of both conditions, necessitating effective management strategies. In patients with CKD and diabetes, blood pressure control is critical to slowing kidney function decline and preventing cardiovascular complications. The management of hypertension often includes lifestyle modifications, such as weight loss, dietary changes, and regular exercise, along with pharmacologic interventions like ACE inhibitors, angiotensin receptor blockers (ARBs), and diuretics. Tight blood pressure control, especially below 130/80 mmHg, has been shown to reduce the risk of CKD progression and improve patient outcomes.[2] This requires individualized treatment approaches to address both CKD and diabetes-related factors.
+
+
+
+Citation
+
+
+
+	^ https://www.magonlinelibrary.com/doi/full/10.12968/hmed.2021.0440&nbsp;
+	^ https://www.sciencedirect.com/science/article/pii/S0929664624004431&nbsp;
+
+
+"
+45022,35398,Hypertension management in chronic kidney disease and diabetes,"Hypertension (HTN) and chronic kidney disease (CKD) are closely interconnected, creating a cycle where declining kidney function leads to elevated blood pressure, and sustained hypertension accelerates kidney deterioration.[1] This bidirectional relationship contributes to the progression of both conditions, necessitating effective management strategies. In patients with CKD and diabetes, blood pressure control is critical to slowing kidney function decline and preventing cardiovascular complications. The management of hypertension often includes lifestyle modifications, such as weight loss, dietary changes, and regular exercise, along with pharmacologic interventions like ACE inhibitors, angiotensin receptor blockers (ARBs), and diuretics. Tight blood pressure control, especially below 130/80 mmHg, has been shown to reduce the risk of CKD progression and improve patient outcomes.[2] This requires individualized treatment approaches to address both CKD and diabetes-related factors.
+
+
+
+Citation
+
+
+
+	^ https://www.magonlinelibrary.com/doi/full/10.12968/hmed.2021.0440&nbsp;
+	^ https://www.sciencedirect.com/science/article/pii/S0929664624004431&nbsp;
+
+
+"
+45044,35405,Conventional and novel therapies for treating iron deficiency anemia in ND-CKD,"Iron deficiency anemia (IDA) is a common complication in non-dialysis chronic kidney disease (ND-CKD) patients, often exacerbated by inflammation and impaired iron utilization. Treatment strategies involve identifying absolute vs. functional iron deficiency using indicators like TSAT and ferritin levels.[1] Conventional therapies include oral iron supplements and intravenous (IV) iron, but these come with risks such as iron overload and oxidative stress. Novel therapies include ferric citrate (FC), which regulates iron absorption and is FDA-approved for ND-CKD patients, ferric maltol for patients with inflammatory bowel disease, and ferric pyrophosphate citrate (FPC), which is delivered via dialysate for hemodialysis patients. Liposomal and Sucrosomial iron offer promising results by bypassing the gastrointestinal tract, reducing side effects, and improving hemoglobin levels.[2] These emerging therapies provide safer, more effective alternatives for managing IDA in CKD.
+
+
+
+Citation
+
+
+
+	^ https://karger.com/aha/article-abstract/142/1/44/15533/Iron-Deficiency-Anemia-in-Chronic-Kidney-Disease?redirectedFrom=fulltext&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC10305423/&nbsp;
+
+
+"
+45045,35406,Anemia in CKD,"Anemia is a common complication in chronic kidney disease (CKD), affecting a significant portion of patients with advanced stages. It primarily results from decreased erythropoietin production by the kidneys, which is essential for red blood cell production.[1] Additionally, CKD often leads to iron deficiency, inflammation, and shortened red blood cell lifespan, all contributing to anemia. Symptoms include fatigue, weakness, and pallor. Management includes erythropoiesis-stimulating agents (ESAs) to stimulate red blood cell production, alongside iron supplementation to address iron deficiency.[2] In some cases, blood transfusions may be necessary. Early detection and treatment are crucial to improving quality of life and preventing complications like cardiovascular disease. Regular monitoring of hemoglobin levels is important for optimal management in CKD patients.
+
+
+
+Citation
+
+
+
+	^ https://www.frontiersin.org/journals/medicine/articles/10.3389/fmed.2021.642296/full&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC9924302/&nbsp;&nbsp;
+
+
+"
+45046,35407,Challenges and best practices for managing anemia in non-dialysis CKD patients,"Managing anemia in non-dialysis chronic kidney disease (CKD) patients presents several challenges. These include identifying the underlying causes, such as erythropoietin deficiency, iron deficiency, and inflammation, which often coexist.[1] Additionally, balancing the use of erythropoiesis-stimulating agents (ESAs) and iron supplementation without overcorrection is complex, as excessive treatment can lead to cardiovascular risks. Monitoring hemoglobin levels and iron stores regularly is essential to avoid complications. Best practices involve a personalized approach, considering the patient&#39;s stage of CKD, comorbidities, and response to treatment.[2] Multidisciplinary care, including nephrologists and dietitians, is critical for optimizing nutrition and iron intake. Regular assessment of renal function and appropriate dose adjustments for ESAs and iron are key to effective anemia management and improving patient outcomes.
+
+
+
+Citation
+
+
+
+	^ https://www.mdpi.com/2227-9059/12/6/1191&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC10608484/&nbsp;&nbsp;
+
+
+"
+45048,35409,Nephrotic syndrome: an update,"Nephrotic syndrome is a kidney disorder characterized by heavy proteinuria, hypoalbuminemia, edema, and hyperlipidemia. It results from damage to the glomeruli, leading to increased permeability and loss of protein in the urine.[1] Common causes include minimal change disease, focal segmental glomerulosclerosis, and membranous nephropathy. Recent advances in treatment focus on corticosteroids, immunosuppressive agents, and newer therapies like calcineurin inhibitors and monoclonal antibodies. Early diagnosis and management are crucial to preventing complications such as infection, thrombosis, and progressive kidney failure. Regular monitoring of proteinuria, kidney function, and lipid levels is essential for effective management.[2] Advances in genetic research and biomarkers hold promise for personalized treatment, improving outcomes and reducing the long-term impact of nephrotic syndrome on kidney health.
+
+
+
+Citation
+
+
+
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC10924861/&nbsp;
+	^ https://www.kidney-international.org/article/S0085-2538(23)00766-4/fulltext&nbsp;&nbsp;
+
+
+"
+45049,35410,Proteinuria in chronic kidney disease,"Proteinuria, the presence of excess protein in urine, is a significant marker of kidney damage in chronic kidney disease (CKD). It results from glomerular injury, leading to increased permeability of the filtration barrier, allowing proteins like albumin to pass into the urine.[1] Proteinuria is both a sign of kidney dysfunction and a risk factor for disease progression. The amount of proteinuria correlates with the severity of kidney damage and can predict the progression to end-stage renal disease. Managing proteinuria involves controlling blood pressure, particularly with angiotensin-converting enzyme inhibitors (ACE inhibitors) or angiotensin receptor blockers (ARBs), which help reduce protein leakage.[2] Tight glycemic control in diabetic patients and lifestyle modifications are also crucial. Regular monitoring of protein levels is essential for assessing CKD progression and treatment effectiveness.
+
+
+
+Citation
+
+
+
+	^ https://www.nature.com/articles/s41598-024-64833-8&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC9380095/&nbsp;&nbsp;
+
+
+"
+45050,35411,Chronic kidney disease and bone mineral disorders,"Chronic kidney disease (CKD) is considered one of the most prevalent noncommunicable diseases, affecting a significant portion of the global population. Bone mineral disorders associated with CKD are characterized by systemic disturbances in mineral and bone metabolism.[1] These disorders are manifested through abnormalities in calcium, phosphorus, parathyroid hormone (PTH), or vitamin D metabolism. Furthermore, disruptions in bone turnover, mineralization, volume, linear growth, or strength are commonly observed. Vascular or soft tissue calcification may also be present. The pathophysiology of these bone mineral disorders is linked to the impaired kidney function in CKD, which alters the regulation of key minerals and hormones, leading to significant skeletal and vascular complications.[2] Management typically involves addressing the underlying metabolic abnormalities to mitigate the progression of these disorders.
+
+
+
+Citation
+
+
+
+	^ https://www.mdpi.com/1422-0067/23/20/12223
+	^ https://physoc.onlinelibrary.wiley.com/doi/full/10.1113/EP092401
+
+
+"
+45051,35412,Chronic kidney disease and bone mineral disorders,"Chronic kidney disease (CKD) is considered one of the most prevalent noncommunicable diseases, affecting a significant portion of the global population. Bone mineral disorders associated with CKD are characterized by systemic disturbances in mineral and bone metabolism.[1] These disorders are manifested through abnormalities in calcium, phosphorus, parathyroid hormone (PTH), or vitamin D metabolism. Furthermore, disruptions in bone turnover, mineralization, volume, linear growth, or strength are commonly observed. Vascular or soft tissue calcification may also be present. The pathophysiology of these bone mineral disorders is linked to the impaired kidney function in CKD, which alters the regulation of key minerals and hormones, leading to significant skeletal and vascular complications.[2] Management typically involves addressing the underlying metabolic abnormalities to mitigate the progression of these disorders.
+
+
+
+Citation
+
+
+
+	^ https://www.mdpi.com/1422-0067/23/20/12223
+	^ https://physoc.onlinelibrary.wiley.com/doi/full/10.1113/EP092401
+
+
+"
+45052,35413,Detection and evaluation of CKD,"Detection and evaluation of chronic kidney disease (CKD) primarily involves assessing glomerular filtration rate (GFR), which is now widely estimated based on serum creatinine levels.[1] Estimated GFR helps assess renal function, severity of disease, appropriate drug dosing, and renal involvement in systemic diseases. Renal function tests, including serum creatinine, plasma urea, urine volume, and minerals in urine, monitor renal damage and help determine the underlying etiology. The ideal GFR marker, such as inulin, is metabolically inert and cleared only by the kidneys.[2] Other markers like creatinine and urea are also used, though each has limitations. While creatinine clearance is useful, it can be inaccurate at low GFR and affected by drugs. Advanced methods, including radiolabeled compounds, can further assess kidney function.
+
+
+
+Citation
+
+
+
+	^ https://www.annlabmed.org/journal/view.html?uid=3514&amp;vmd=Full
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC11150208/&nbsp;
+
+
+"
+45101,35431,Chronic kidney disease and bone mineral disorders,"Chronic kidney disease (CKD) is considered one of the most prevalent noncommunicable diseases, affecting a significant portion of the global population. Bone mineral disorders associated with CKD are characterized by systemic disturbances in mineral and bone metabolism.[1] These disorders are manifested through abnormalities in calcium, phosphorus, parathyroid hormone (PTH), or vitamin D metabolism. Furthermore, disruptions in bone turnover, mineralization, volume, linear growth, or strength are commonly observed. Vascular or soft tissue calcification may also be present. The pathophysiology of these bone mineral disorders is linked to the impaired kidney function in CKD, which alters the regulation of key minerals and hormones, leading to significant skeletal and vascular complications.[2] Management typically involves addressing the underlying metabolic abnormalities to mitigate the progression of these disorders.
+
+
+
+Citation
+
+
+
+	^ https://www.mdpi.com/1422-0067/23/20/12223
+	^ https://physoc.onlinelibrary.wiley.com/doi/full/10.1113/EP092401
+
+
+"
+45104,35433,Conventional and novel therapies for treating iron deficiency anemia in ND-CKD,"Iron deficiency anemia (IDA) is a common complication in non-dialysis chronic kidney disease (ND-CKD) patients, often exacerbated by inflammation and impaired iron utilization. Treatment strategies involve identifying absolute vs. functional iron deficiency using indicators like TSAT and ferritin levels.[1] Conventional therapies include oral iron supplements and intravenous (IV) iron, but these come with risks such as iron overload and oxidative stress. Novel therapies include ferric citrate (FC), which regulates iron absorption and is FDA-approved for ND-CKD patients, ferric maltol for patients with inflammatory bowel disease, and ferric pyrophosphate citrate (FPC), which is delivered via dialysate for hemodialysis patients. Liposomal and Sucrosomial iron offer promising results by bypassing the gastrointestinal tract, reducing side effects, and improving hemoglobin levels.[2] These emerging therapies provide safer, more effective alternatives for managing IDA in CKD.
+
+
+
+Citation
+
+
+
+	^ https://karger.com/aha/article-abstract/142/1/44/15533/Iron-Deficiency-Anemia-in-Chronic-Kidney-Disease?redirectedFrom=fulltext&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC10305423/&nbsp;
+
+
+"
+45105,35434,Conventional and novel therapies for treating iron deficiency anemia in ND-CKD,"Iron deficiency anemia (IDA) is a common complication in non-dialysis chronic kidney disease (ND-CKD) patients, often exacerbated by inflammation and impaired iron utilization. Treatment strategies involve identifying absolute vs. functional iron deficiency using indicators like TSAT and ferritin levels.[1] Conventional therapies include oral iron supplements and intravenous (IV) iron, but these come with risks such as iron overload and oxidative stress. Novel therapies include ferric citrate (FC), which regulates iron absorption and is FDA-approved for ND-CKD patients, ferric maltol for patients with inflammatory bowel disease, and ferric pyrophosphate citrate (FPC), which is delivered via dialysate for hemodialysis patients. Liposomal and Sucrosomial iron offer promising results by bypassing the gastrointestinal tract, reducing side effects, and improving hemoglobin levels.[2] These emerging therapies provide safer, more effective alternatives for managing IDA in CKD.
+
+
+
+Citation
+
+
+
+	^ https://karger.com/aha/article-abstract/142/1/44/15533/Iron-Deficiency-Anemia-in-Chronic-Kidney-Disease?redirectedFrom=fulltext&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC10305423/&nbsp;
+
+
+"
+45126,35446,Proteinuria in chronic kidney disease,"Proteinuria, the presence of excess protein in urine, is a significant marker of kidney damage in chronic kidney disease (CKD). It results from glomerular injury, leading to increased permeability of the filtration barrier, allowing proteins like albumin to pass into the urine.[1] Proteinuria is both a sign of kidney dysfunction and a risk factor for disease progression. The amount of proteinuria correlates with the severity of kidney damage and can predict the progression to end-stage renal disease. Managing proteinuria involves controlling blood pressure, particularly with angiotensin-converting enzyme inhibitors (ACE inhibitors) or angiotensin receptor blockers (ARBs), which help reduce protein leakage.[2] Tight glycemic control in diabetic patients and lifestyle modifications are also crucial. Regular monitoring of protein levels is essential for assessing CKD progression and treatment effectiveness.
+
+
+
+Citation
+
+
+
+	^ https://www.nature.com/articles/s41598-024-64833-8&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC9380095/&nbsp;
+
+
+"
+45173,35478,Cardiorenal syndrome,"Cardiorenal syndrome refers to the interdependent dysfunction of the heart and kidneys, where acute or chronic dysfunction in one organ induces dysfunction in the other. The pathophysiology is complex, involving the renin-angiotensin-aldosterone system (RAS), nitric oxide-reactive oxygen species (NO-ROS) imbalance, inflammation, and sympathetic activation.[1] Five types of cardiorenal syndrome are recognized, each defined by the primary organ dysfunction, with a novel sixth type, chronic secondary cardiorenal syndrome, also proposed. Patient history, clinical examination, and management aid in understanding the condition, while specific biomarkers for the heart and kidneys play a crucial role in diagnosis. Ultrasound is preferred for imaging, although MRI and nuclear imaging are also utilized. Key management strategies include decongestive therapies, ionotropic therapy, and RAAS inhibition, with specific treatment algorithms suggested by the cardio-renal dysfunction study group.[2]
+
+
+
+Citation
+
+
+
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC9179008/
+	^ https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063&nbsp;
+
+
+"
+45376,35546,GFR measurement,"
+Glomerular filtration rate (GFR) is widely accepted as the best index of kidney function in health and disease, and accurate values are required for optimal decision-making. Estimated GFR has been included in clinical practice guidelines to enable physicians to identify patients with chronic kidney disease (CKD) to enable earlier interventions to slow the progression of the disease.[1] Measured GFR using urinary or plasma clearance of exogenous filtration markers is considered the gold standard for evaluation of kidney function but is not routinely available. Inulin, creatinine, and urea are candidate markers of GFR. Additionally, a number of radiolabelled chelates have been used to assess GFR. It is recommended that CKD be classified based on the GFR category and the albuminuria category.[2]
+
+
+
+Citation
+
+
+
+	^ https://www.ajkd.org/article/S0272-6386(08)01235-3/fulltext
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC4089693/
+
+
+"
+45378,35547,Anemia in chronic kidney disease,"Anemia is a common complication of chronic kidney disease (CKD).[1] Anemia refers to a decrease in the number of RBCs or the amount of hemoglobin in the blood. It is relatively uncommon in stages 1-2 of CKD; however, almost 90% of patients with a glomerular filtration rate (GFR) less than 30 mL/min are anemic. Also, the prevalence of anemia in CKD increases as the CKD stage increases. For the evaluation of anemia in CKD, the initial tests must include a variety of tests, including complete blood count (CBC), serum ferritin, serum transferrin saturation (TSAT), absolute reticulocyte count, serum vitamin B12 and folate levels. Iron therapy is a commonly adopted approach for the treatment of anemia in CKD.[2]
+
+
+
+Citation
+
+
+
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC11200696/
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC7863960/
+
+
+"
+45382,35549,CKD screening in type 2 DM,"Chronic kidney disease (CKD) screening in individuals with type 2 diabetes is essential to prevent progression to end-stage renal disease (ESRD). Patients with diabetes are at an increased risk of CKD, yet a significant proportion remain undiagnosed. Early detection is critical, as it allows for timely intervention to slow disease progression.[1] Screening typically involves measuring urinary albumin excretion (UAE), which helps identify early signs of kidney damage. Regular monitoring of UAE and estimated glomerular filtration rate (eGFR) can aid in the early identification of CKD.[2] Screening should begin at diagnosis in patients with type 2 diabetes and continue annually, as early intervention with lifestyle changes and pharmacologic treatments, such as ACE inhibitors or ARBs, can significantly reduce the risk of ESRD and improve long-term outcomes.
+
+
+
+Citation
+
+
+
+	^ https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-022-02438-6&nbsp;
+	^ https://www.nature.com/articles/s41598-024-56765-0&nbsp;
+
+
+"
+45594,35660,Proteinuria in chronic kidney disease,"Proteinuria, the presence of excess protein in urine, is a significant marker of kidney damage in chronic kidney disease (CKD). It results from glomerular injury, leading to increased permeability of the filtration barrier, allowing proteins like albumin to pass into the urine.[1] Proteinuria is both a sign of kidney dysfunction and a risk factor for disease progression. The amount of proteinuria correlates with the severity of kidney damage and can predict the progression to end-stage renal disease. Managing proteinuria involves controlling blood pressure, particularly with angiotensin-converting enzyme inhibitors (ACE inhibitors) or angiotensin receptor blockers (ARBs), which help reduce protein leakage.[2] Tight glycemic control in diabetic patients and lifestyle modifications are also crucial. Regular monitoring of protein levels is essential for assessing CKD progression and treatment effectiveness.
+
+
+
+Citation
+
+
+
+	^ https://www.nature.com/articles/s41598-024-64833-8&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC9380095/&nbsp;
+
+
+"
+45595,35661,Proteinuria in chronic kidney disease,"Proteinuria, the presence of excess protein in urine, is a significant marker of kidney damage in chronic kidney disease (CKD). It results from glomerular injury, leading to increased permeability of the filtration barrier, allowing proteins like albumin to pass into the urine.[1] Proteinuria is both a sign of kidney dysfunction and a risk factor for disease progression. The amount of proteinuria correlates with the severity of kidney damage and can predict the progression to end-stage renal disease. Managing proteinuria involves controlling blood pressure, particularly with angiotensin-converting enzyme inhibitors (ACE inhibitors) or angiotensin receptor blockers (ARBs), which help reduce protein leakage.[2] Tight glycemic control in diabetic patients and lifestyle modifications are also crucial. Regular monitoring of protein levels is essential for assessing CKD progression and treatment effectiveness.
+
+
+
+Citation
+
+
+
+	^ https://www.nature.com/articles/s41598-024-64833-8&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC9380095/&nbsp;&nbsp;
+
+
+"
+45596,35662,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension (HTN) share a complex, bidirectional relationship&mdash;declining kidney function raises blood pressure, while sustained hypertension accelerates CKD progression. This harmful feedback loop is well-documented in both animal models and clinical studies. In the Chronic Renal Insufficiency Cohort (CRIC) study of 3612 adults with CKD, 86% reported hypertension compared to 29% in the general population. Hypertension becomes increasingly prevalent and harder to control as CKD advances.[1] Intensive blood pressure lowering has been shown to reduce the risk of kidney failure events by 17% and end-stage kidney disease by 18%, especially in patients with proteinuria.[2] Effective management of hypertension in CKD includes identifying the underlying renal pathology, setting appropriate BP goals, and implementing both non-pharmacological and pharmacological interventions.
+
+
+
+Citation
+
+
+
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/
+
+
+"
+45597,35663,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension exhibit a bidirectional relationship&mdash;declining renal function raises blood pressure, while persistent hypertension accelerates CKD progression, creating a harmful feedback loop documented in both experimental and clinical studies. The CRIC study revealed hypertension in 86% of adults with CKD, compared to 29% in the general population, with prevalence and treatment resistance increasing alongside CKD severity.[1] According to the European Society of Hypertension (ESH) MASTERplan, effective hypertension management involves accurate BP measurement, patient assessment, therapy selection, and regular evaluation, with referrals for complex cases.[2] Additionally, intensive blood pressure (BP) lowering reduces kidney failure risk by 17% and end-stage renal disease by 18%, particularly in proteinuric patients.[3] ESH guidelines also advocate universal lifestyle modifications&mdash;healthy diet, regular exercise, weight control, reduced sodium, increased potassium, smoking cessation, stress management, and pollution avoidance&mdash;to delay disease progression.[2]
+
+
+
+Citation
+
+
+
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/
+	a, b https://www.ejinme.com/article/S0953-6205(24)00238-3/fulltext
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/
+
+
+"
+45598,35664,Detection and evaluation of CKD,"Detection and evaluation of chronic kidney disease (CKD) primarily involves assessing glomerular filtration rate (GFR), which is now widely estimated based on serum creatinine levels.[1]Estimated GFR helps assess renal function, severity of disease, appropriate drug dosing, and renal involvement in systemic diseases. Renal function tests, including serum creatinine, plasma urea, urine volume, and minerals in urine, monitor renal damage and help determine the underlying etiology. The ideal GFR marker, such as inulin, is metabolically inert and cleared only by the kidneys.[2] Other markers like creatinine and urea are also used, though each has limitations. While creatinine clearance is useful, it can be inaccurate at low GFR and affected by drugs. Advanced methods, including radiolabeled compounds, can further assess kidney function.
+
+
+
+Citation
+
+
+
+	^ https://www.annlabmed.org/journal/view.html?uid=3514&amp;vmd=Full&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC11150208/&nbsp;
+
+
+"
+45599,35665,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension (HTN) share a complex, bidirectional relationship&mdash;declining kidney function raises blood pressure, while sustained hypertension accelerates CKD progression. This harmful feedback loop is well-documented in both animal models and clinical studies. In the Chronic Renal Insufficiency Cohort (CRIC) study of 3612 adults with CKD, 86% reported hypertension compared to 29% in the general population. Hypertension becomes increasingly prevalent and harder to control as CKD advances.[1] Intensive blood pressure lowering has been shown to reduce the risk of kidney failure events by 17% and end-stage kidney disease by 18%, especially in patients with proteinuria.[2] Effective management of hypertension in CKD includes identifying the underlying renal pathology, setting appropriate BP goals, and implementing both non-pharmacological and pharmacological interventions.
+
+
+
+Citation
+
+
+
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/
+
+
+"
+45600,35666,Detection and evaluation of CKD,"Detection and evaluation of chronic kidney disease (CKD) primarily involves assessing glomerular filtration rate (GFR), which is now widely estimated based on serum creatinine levels.[1] Estimated GFR helps assess renal function, severity of disease, appropriate drug dosing, and renal involvement in systemic diseases. Renal function tests, including serum creatinine, plasma urea, urine volume, and minerals in urine, monitor renal damage and help determine the underlying etiology. The ideal GFR marker, such as inulin, is metabolically inert and cleared only by the kidneys.[2] Other markers like creatinine and urea are also used, though each has limitations. While creatinine clearance is useful, it can be inaccurate at low GFR and affected by drugs. Advanced methods, including radiolabeled compounds, can further assess kidney function.
+
+
+
+Citation
+
+
+
+	^ https://www.annlabmed.org/journal/view.html?uid=3514&amp;vmd=Full&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC11150208/&nbsp;
+
+
+"
+45602,35668,CKD and bone mineral disorders,"Chronic kidney disease&ndash;mineral and bone disorder (CKD-MBD) is a systemic complication affecting 5&ndash;10% of the global population with CKD. It involves abnormalities in calcium, phosphate, parathyroid hormone (PTH), and vitamin D metabolism, as well as disruptions in bone turnover, mineralization, and vascular or soft tissue calcification.[1][2] CKD-MBD is often asymptomatic in its early stages, with later manifestations including joint pain, tendon rupture, fractures, and proximal muscle weakness. Both low- and high-turnover bone abnormalities may present with similar clinical features. Diagnosis typically relies on measuring calcium, phosphorus, and PTH levels, with bone biopsy considered the gold standard&mdash;though its use is limited due to its invasive nature.[3] Management primarily aims to prevent secondary hyperparathyroidism. KDIGO guidelines emphasize monitoring serial biochemical markers and highlight the importance of preventing hyperphosphatemia rather than focusing solely on normalization of phosphate levels.[1]
+
+
+
+Citation
+
+
+
+	a, b https://pmc.ncbi.nlm.nih.gov/articles/PMC6935280/
+	^ https://www.kidney-international.org/article/S0085-2538(15)51415-4/fulltext
+	^ https://journals.lww.com/jasn/abstract/2007/03000/metabolic_bone_disease_in_chronic_kidney_disease.27.aspx
+
+
+"
+45604,35670,CKD and bone mineral disorders,"Chronic kidney disease&ndash;mineral and bone disorder (CKD-MBD) is a systemic complication affecting 5&ndash;10% of the global population with CKD. It involves abnormalities in calcium, phosphate, parathyroid hormone (PTH), and vitamin D metabolism, as well as disruptions in bone turnover, mineralization, and vascular or soft tissue calcification.[1][2] CKD-MBD is often asymptomatic in its early stages, with later manifestations including joint pain, tendon rupture, fractures, and proximal muscle weakness. Both low- and high-turnover bone abnormalities may present with similar clinical features. Diagnosis typically relies on measuring calcium, phosphorus, and PTH levels, with bone biopsy considered the gold standard&mdash;though its use is limited due to its invasive nature.[3] Management primarily aims to prevent secondary hyperparathyroidism. KDIGO guidelines emphasize monitoring serial biochemical markers and highlight the importance of preventing hyperphosphatemia rather than focusing solely on normalization of phosphate levels.[1]
+
+
+
+Citation
+
+
+
+	a, b https://pmc.ncbi.nlm.nih.gov/articles/PMC6935280/&nbsp;
+	^ https://www.kidney-international.org/article/S0085-2538(15)51415-4/fulltext&nbsp;
+	^ https://journals.lww.com/jasn/abstract/2007/03000/metabolic_bone_disease_in_chronic_kidney_disease.27.aspx
+
+
+"
+45605,35671,Medical management of renal stones,"Kidney stones affect 1 in 11 people globally, with a high recurrence rate within 5&ndash;10 years.[1] In India, about 2 million cases of urolithiasis are reported annually. Most stones are calcium-based (70&ndash;80%), followed by uric acid, cystine, struvite, and mixed types. Risk factors include genetic predisposition, metabolic syndrome, low fluid intake, and high intake of sodium, animal protein, and oxalate-rich foods. Common symptoms include renal colic, flank pain, hematuria, and urinary tract infections (UTIs).[2] Diagnostic evaluation involves KUB X-ray, ultrasound, intravenous pyelogram (IVP), or helical CT, which has a sensitivity of 97%.[1] Management includes increased fluid intake, adequate dietary calcium (1000&ndash;1200 mg/day) in recurrent calcium stone formers, and reduction of sodium and oxalate intake, along with correction of hypocitraturia.[1][3] Pharmacological options&mdash;based on stone type&mdash;include thiazides, potassium citrate, allopurinol, pyridoxine, and tiopronin.[3] Medical expulsive therapy with tamsulosin, nifedipine, and steroids helps facilitate ureteric stone passage.[1]
+
+
+
+Citation
+
+
+
+	a, b, c, d https://journals.lww.com/indjem/fulltext/2012/16020/medical_management_of_renal_stone.14.aspx
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC5817324/
+	a, b https://www.bmj.com/content/352/bmj.i52.full
+
+
+"
+45606,35672,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension (HTN) share a complex, bidirectional relationship&mdash;declining kidney function raises blood pressure, while sustained hypertension accelerates CKD progression. This harmful feedback loop is well-documented in both animal models and clinical studies. In the Chronic Renal Insufficiency Cohort (CRIC) study of 3612 adults with CKD, 86% reported hypertension compared to 29% in the general population. Hypertension becomes increasingly prevalent and harder to control as CKD advances.[1] Intensive blood pressure lowering has been shown to reduce the risk of kidney failure events by 17% and end-stage kidney disease by 18%, especially in patients with proteinuria.[2] Effective management of hypertension in CKD includes identifying the underlying renal pathology, setting appropriate BP goals, and implementing both non-pharmacological and pharmacological interventions.
+
+
+
+Citation
+
+
+
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/
+
+
+"
+45616,35675,CKD screening in type 2 DM,"Chronic kidney disease (CKD) screening in individuals with type 2 diabetes is essential to prevent progression to end-stage renal disease (ESRD). Patients with diabetes are at an increased risk of CKD, yet a significant proportion remain undiagnosed. Early detection is critical, as it allows for timely intervention to slow disease progression.[1] Screening typically involves measuring urinary albumin excretion (UAE), which helps identify early signs of kidney damage. Regular monitoring of UAE and estimated glomerular filtration rate (eGFR) can aid in the early identification of CKD.[2] Screening should begin at diagnosis in patients with type 2 diabetes and continue annually, as early intervention with lifestyle changes and pharmacologic treatments, such as ACE inhibitors or ARBs, can significantly reduce the risk of ESRD and improve long-term outcomes.
+
+
+
+Citation
+
+
+
+	^ https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-022-02438-6&nbsp;
+	^ https://www.nature.com/articles/s41598-024-56765-0
+
+
+"
+45618,35677,Cardiorenal syndrome,"Cardiorenal syndrome refers to the interdependent dysfunction of the heart and kidneys, where acute or chronic dysfunction in one organ induces dysfunction in the other. The pathophysiology is complex, involving the renin-angiotensin-aldosterone system (RAS), nitric oxide-reactive oxygen species (NO-ROS) imbalance, inflammation, and sympathetic activation.[1]&nbsp;Five types of cardiorenal syndrome are recognized, each defined by the primary organ dysfunction, with a novel sixth type, chronic secondary cardiorenal syndrome, also proposed. Patient history, clinical examination, and management aid in understanding the condition, while specific biomarkers for the heart and kidneys play a crucial role in diagnosis. Ultrasound is preferred for imaging, although MRI and nuclear imaging are also utilized. Key management strategies include decongestive therapies, ionotropic therapy, and RAAS inhibition, with specific treatment algorithms suggested by the cardio-renal dysfunction study group.[2]
+
+
+
+Citation
+
+
+
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC9179008/
+	^ https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063&nbsp;
+
+
+"
+45699,35693,Nephrotic syndrome and CKD,"Nephrotic Syndrome (NS) is a clinical condition characterized by significant proteinuria (&gt;40 mg/m&sup2;/hour or &gt;3 g/day), leading to hypoalbuminemia (&lt;30 g/L), hyperlipidemia, and edema. Primary causes include minimal change disease, focal segmental glomerulosclerosis, membranous nephropathy, and hereditary nephropathies, while secondary causes include diabetes mellitus, lupus, vasculitis, and infections such as hepatitis B and HIV. In children, minimal change disease is the most frequent cause. Edema is the hallmark clinical feature of NS. Initial treatment typically involves corticosteroids, with a 12-week prednisone regimen: 60 mg/m&sup2;/day for 4 weeks, then 40 mg/m&sup2; on alternate days for another 4 weeks, followed by a taper of 5&ndash;10 mg/m&sup2; per week over 4 weeks. Thorough clinical assessment, including height, weight, blood pressure, and infection screening, is essential before initiating therapy. Patient education and adherence are critical for managing this chronic condition and preventing complications, particularly in outpatient settings where pharmacists can play a key role in supporting compliance.[1]
+
+
+
+Citation
+
+
+
+	^ https://www.ncbi.nlm.nih.gov/books/NBK470444/
+
+
+"
+45701,35694,Proteinuria in chronic kidney disease,"Proteinuria, the presence of excess protein in urine, is a significant marker of kidney damage in chronic kidney disease (CKD). It results from glomerular injury, leading to increased permeability of the filtration barrier, allowing proteins like albumin to pass into the urine.[1] Proteinuria is both a sign of kidney dysfunction and a risk factor for disease progression. The amount of proteinuria correlates with the severity of kidney damage and can predict the progression to end-stage renal disease. Managing proteinuria involves controlling blood pressure, particularly with angiotensin-converting enzyme inhibitors (ACE inhibitors) or angiotensin receptor blockers (ARBs), which help reduce protein leakage.[2] Tight glycemic control in diabetic patients and lifestyle modifications are also crucial. Regular monitoring of protein levels is essential for assessing CKD progression and treatment effectiveness.
+
+
+
+Citation
+
+
+
+	^ https://www.nature.com/articles/s41598-024-64833-8&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC9380095/&nbsp;&nbsp;
+
+
+"
+45703,35695,Nutritional management of chronic kidney disease and dialysis,"Chronic kidney disease (CKD) is a global public health issue affecting approximately 5%&ndash;15% of the population, with a growing number progressing to end-stage renal disease (ESRD) requiring dialysis.[1] Nutritional management plays a critical role across all stages of CKD. Early intervention targets modifiable risk factors such as obesity, diabetes, and hypertension through dietary adjustments, including reduced salt intake, increased fruits and vegetables, and lower saturated fat consumption. As eGFR declines, patients may develop dyslipidemia, anemia, and acidosis, requiring reduced animal protein intake, increased consumption of unsaturated fats and whole grains, and careful fluid management. In advanced stages of kidney failure, malnutrition, inflammation, and mineral-bone disorder become major concerns. Nutritional strategies include limiting fluid intake and dietary phosphate, optimizing protein quality and quantity, and introducing oral nutrition supplements when intake or weight declines. Tailored dietary approaches, along with regular monitoring, are essential to slow CKD progression and improve patient outcomes.[2]
+
+
+
+Citation
+
+
+
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC5372871/
+	^ https://www.ajkd.org/article/S0272-6386(21)00764-2/fulltext&nbsp;
+
+
+"
+45785,35717,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension (HTN) share a complex, bidirectional relationship&mdash;declining kidney function raises blood pressure, while sustained hypertension accelerates CKD progression. This harmful feedback loop is well-documented in both animal models and clinical studies. In the Chronic Renal Insufficiency Cohort (CRIC) study of 3612 adults with CKD, 86% reported hypertension compared to 29% in the general population. Hypertension becomes increasingly prevalent and harder to control as CKD advances.[1] Intensive blood pressure lowering has been shown to reduce the risk of kidney failure events by 17% and end-stage kidney disease by 18%, especially in patients with proteinuria.[2] Effective management of hypertension in CKD includes identifying the underlying renal pathology, setting appropriate BP goals, and implementing both non-pharmacological and pharmacological interventions.
+
+
+
+Citation
+
+
+
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/
+
+
+"
+45787,35719,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension (HTN) share a complex, bidirectional relationship&mdash;declining kidney function raises blood pressure, while sustained hypertension accelerates CKD progression. This harmful feedback loop is well-documented in both animal models and clinical studies. In the Chronic Renal Insufficiency Cohort (CRIC) study of 3612 adults with CKD, 86% reported hypertension compared to 29% in the general population. Hypertension becomes increasingly prevalent and harder to control as CKD advances.[1] Intensive blood pressure lowering has been shown to reduce the risk of kidney failure events by 17% and end-stage kidney disease by 18%, especially in patients with proteinuria.[2] Effective management of hypertension in CKD includes identifying the underlying renal pathology, setting appropriate BP goals, and implementing both non-pharmacological and pharmacological interventions.
+
+
+
+Citation
+
+
+
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/
+
+
+"
+45788,35720,Conventional and novel therapies for treating iron deficiency anemia in ND-CKD,"Iron deficiency anemia (IDA) is a common complication in non-dialysis chronic kidney disease (ND-CKD) patients, often exacerbated by inflammation and impaired iron utilization. Treatment strategies involve identifying absolute vs. functional iron deficiency using indicators like TSAT and ferritin levels.[1] Conventional therapies include oral iron supplements and intravenous (IV) iron, but these come with risks such as iron overload and oxidative stress. Novel therapies include Ferric citrate (FC), which regulates iron absorption and is FDA-approved for ND-CKD patients, Ferric maltol for patients with inflammatory bowel disease, and Ferric pyrophosphate citrate (FPC), which is delivered via dialysate for hemodialysis patients. Liposomal and Sucrosomial iron offer promising results by bypassing the gastrointestinal tract, reducing side effects, and improving hemoglobin levels.[2] These emerging therapies provide safer, more effective alternatives for managing IDA in CKD.
+
+
+
+Citation
+
+
+
+	^ https://karger.com/aha/article-abstract/142/1/44/15533/Iron-Deficiency-Anemia-in-Chronic-Kidney-Disease?redirectedFrom=fulltext&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC10305423/&nbsp;
+
+
+"
+45789,35721,Nephrotic syndrome and CKD,"Nephrotic Syndrome (NS) is a clinical condition characterized by significant proteinuria (&gt;40 mg/m&sup2;/hour or &gt;3 g/day), leading to hypoalbuminemia (&lt;30 g/L), hyperlipidemia, and edema. Primary causes include minimal change disease, focal segmental glomerulosclerosis, membranous nephropathy, and hereditary nephropathies, while secondary causes include diabetes mellitus, lupus, vasculitis, and infections such as hepatitis B and HIV. In children, minimal change disease is the most frequent cause. Edema is the hallmark clinical feature of NS. Initial treatment typically involves corticosteroids, with a 12-week Prednisone regimen: 60 mg/m&sup2;/day for 4 weeks, then 40 mg/m&sup2; on alternate days for another 4 weeks, followed by a taper of 5&ndash;10 mg/m&sup2; per week over 4 weeks. Thorough clinical assessment, including height, weight, blood pressure, and infection screening, is essential before initiating therapy. Patient education and adherence are critical for managing this chronic condition and preventing complications, particularly in outpatient settings where pharmacists can play a key role in supporting compliance.[1]
+
+
+
+Citation
+
+
+
+	^ https://www.ncbi.nlm.nih.gov/books/NBK470444/
+
+
+"
+45854,35746,Nephrotic syndrome,"Nephrotic syndrome is characterized by hypoalbuminemia, severe proteinuria, and peripheral edema, usually in conjunction with hyperlipidemia.[1] The condition may be idiopathic or can originate due to diverse secondary causes. Nephrotic syndrome may also give rise to complications, such as infections, hypocalcemia, bone abnormalities, hyperlipidemia, atherosclerosis, hypercoagulability, and hypovolemia. For diagnosis, blood tests, including serum albumin, total cholesterol and triglycerides, and creatinine assessment, are warranted. Testing for secondary causes is also recommended. Imaging tests include ultrasonography, renal biopsy tests, and autoantibodies against PLAR.[2] Management involves edema control via fluid and dietary restriction coupled with loop diuretics. Hospital admission may be needed for unresponsive patients.
+
+
+
+Citation
+
+
+
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC10924861/&nbsp;
+	^ https://www.ncbi.nlm.nih.gov/books/NBK470444/
+
+
+"
+45857,35747,Anemia in chronic kidney disease,"Anemia is a common complication of chronic kidney disease (CKD).[1] Anemia refers to a decrease in the number of RBCs or the amount of hemoglobin in the blood. It is relatively uncommon in stages 1-2 of CKD; however, almost 90% of patients with a glomerular filtration rate (GFR) less than 30 mL/min are anemic. Also, the prevalence of anemia in CKD increases as the CKD stage increases. For the evaluation of anemia in CKD, the initial tests must include a variety of tests, including complete blood count (CBC), serum ferritin, serum transferrin saturation (TSAT), absolute reticulocyte count, serum vitamin B12 and folate levels. Iron therapy is a commonly adopted approach for the treatment of anemia in CKD.[2]
+
+
+
+Citation
+
+
+
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC11200696/&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC7863960/
+
+
+"
+45858,35748,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension (HTN) share a complex, bidirectional relationship&mdash;declining kidney function raises blood pressure, while sustained hypertension accelerates CKD progression. This harmful feedback loop is well-documented in both animal models and clinical studies. In the Chronic Renal Insufficiency Cohort (CRIC) study of 3612 adults with CKD, 86% reported hypertension compared to 29% in the general population. Hypertension becomes increasingly prevalent and harder to control as CKD advances.[1] Intensive blood pressure lowering has been shown to reduce the risk of kidney failure events by 17% and end-stage kidney disease by 18%, especially in patients with proteinuria.[2] Effective management of hypertension in CKD includes identifying the underlying renal pathology, setting appropriate BP goals, and implementing both non-pharmacological and pharmacological interventions.
+
+
+
+Citation
+
+
+
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/
+
+
+"
+45882,35758,Detection and evaluation of CKD,"Detection and evaluation of chronic kidney disease (CKD) primarily involves assessing glomerular filtration rate (GFR), which is now widely estimated based on serum creatinine levels.[1] Estimated GFR helps assess renal function, severity of disease, appropriate drug dosing, and renal involvement in systemic diseases. Renal function tests, including serum creatinine, plasma urea, urine volume, and minerals in urine, monitor renal damage and help determine the underlying etiology. The ideal GFR marker, such as inulin, is metabolically inert and cleared only by the kidneys.[2] Other markers like creatinine and urea are also used, though each has limitations. While creatinine clearance is useful, it can be inaccurate at low GFR and affected by drugs. Advanced methods, including radiolabeled compounds, can further assess kidney function.
+
+
+
+Citation
+
+
+
+	^ https://www.annlabmed.org/journal/view.html?uid=3514&amp;vmd=Full&nbsp;
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC11150208/&nbsp;
+
+
+"
+45883,35759,CKD and bone mineral disorders,"Chronic kidney disease&ndash;mineral and bone disorder (CKD-MBD) is a systemic complication affecting 5&ndash;10% of the global population with CKD. It involves abnormalities in calcium, phosphate, parathyroid hormone (PTH), and vitamin D metabolism, as well as disruptions in bone turnover, mineralization, and vascular or soft tissue calcification.[1],[2] CKD-MBD is often asymptomatic in its early stages, with later manifestations including joint pain, tendon rupture, fractures, and proximal muscle weakness. Both low- and high-turnover bone abnormalities may present with similar clinical features. Diagnosis typically relies on measuring calcium, phosphorus, and PTH levels, with bone biopsy considered the gold standard&mdash;though its use is limited due to its invasive nature.[3] Management primarily aims to prevent secondary hyperparathyroidism. KDIGO guidelines emphasize monitoring serial biochemical markers and highlight the importance of preventing hyperphosphatemia rather than focusing solely on normalization of phosphate levels.
+
+
+
+Citation
+
+
+
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC6935280/
+	^ https://www.kidney-international.org/article/S0085-2538(15)51415-4/fulltext
+	^ https://journals.lww.com/jasn/abstract/2007/03000/metabolic_bone_disease_in_chronic_kidney_disease.27.aspx
+
+
+"
+45884,35760,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension (HTN) share a complex, bidirectional relationship&mdash;declining kidney function raises blood pressure, while sustained hypertension accelerates CKD progression. This harmful feedback loop is well-documented in both animal models and clinical studies. In the Chronic Renal Insufficiency Cohort (CRIC) study of 3612 adults with CKD, 86% reported hypertension compared to 29% in the general population. Hypertension becomes increasingly prevalent and harder to control as CKD advances.[1] Intensive blood pressure lowering has been shown to reduce the risk of kidney failure events by 17% and end-stage kidney disease by 18%, especially in patients with proteinuria.[2] Effective management of hypertension in CKD includes identifying the underlying renal pathology, setting appropriate BP goals, and implementing both non-pharmacological and pharmacological interventions.
+
+
+
+Citation
+
+
+
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/
+	^ https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/
+
+
+"
+45891,35763,Challenges and best practices for managing anemia in non-dialysis chronic kidney disease,"In recent years, chronic kidney disease (CKD) has emerged as a non-communicable disease. End-stage renal disease (ESRD) is the last stage of CKD. However, only 10% of patients with ESRD receive any form of renal replacement therapy (RRT).[1] Moreover, patients with moderate-to-severe cases of CKD usually develop anemia; it is commonly experienced by patients with non-dialysis-dependent CKD.[2] In CKD, anemia is often associated with an increased risk of mortality and morbidity. Guidelines recommend the initiation of iron agents in anemic patients with non-dialysis-dependent CKD to either reduce erythropoiesis-stimulating agent doses or obtain and increase in hemoglobin levels with either oral or intravenous iron therapy for patients with transferrin saturation &le; 30% and ferritin &le; 500 &micro;g/L.
+
+
+
+Citation
+
+
+
+	^ https://pubmed.ncbi.nlm.nih.gov/31929291/&nbsp;
+	^ https://bmcnephrol.biomedcentral.com/articles/10.1186/s12882-018-1119-7
+
+
+"
+46016,8613,Renal Implications of Antidiabetic Drugs,"Diabetes is a chronic metabolic disorder marked by high blood glucose levels, leading to heart disease, nerve damage, and kidney issues. It has three types: Type 1 (autoimmune insulin deficiency), type 2 (insulin resistance linked to lifestyle), and gestational diabetes (temporary but increases future risk). [1] Global diabetes prevalence is projected to rise by 59.7% between 2021–2050, reaching 1.31 billion cases due to obesity (49.6%) and demographic shifts (50.4%).[2] Diabetic kidney disease (DKD) affects 20–50% of patients with type 2 diabetes, leading to chronic kidney disease (CKD).[3] Overall, managing diabetes involves lifestyle changes, medications, and early detection.Reference(s):1.  https://www.mdpi.com/1422-0067/22/14/76442. https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(23)01301-6/fulltext3. https://www.scirp.org/reference/referencespapers?referenceid=3820709"
+46013,8611,CKD Screening in Type 2 DM,"Chronic kidney disease (CKD) screening in individuals with type 2 diabetes is essential to prevent progression to end-stage renal disease (ESRD). Patients with diabetes are at an increased risk of CKD, yet a significant proportion remain undiagnosed. Early detection is critical, as it allows for timely intervention to slow disease progression.[1] Screening typically involves measuring urinary albumin excretion (UAE), which helps identify early signs of kidney damage. Regular monitoring of UAE and estimated glomerular filtration rate (eGFR) can aid in the early identification of CKD.[2] Screening should begin at diagnosis in patients with type 2 diabetes and continue annually, as early intervention with lifestyle changes and pharmacologic treatments, such as ACE inhibitors or ARBs, can significantly reduce the risk of ESRD and improve long-term outcomes.Reference(s):1. https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-022-02438-62. https://www.nature.com/articles/s41598-024-56765-0"
+46014,8612,Medical Management of Renal Stones,"Kidney stones affect 1 in 11 people globally, with a high recurrence rate within 5–10 years.[1] In India, about 2 million cases of urolithiasis are reported annually. Most stones are calcium-based (70–80%), followed by uric acid, cystine, struvite, and mixed types. Risk factors include genetic predisposition, metabolic syndrome, low fluid intake, and high intake of sodium, animal protein, and oxalate-rich foods. Common symptoms include renal colic, flank pain, hematuria, and urinary tract infections (UTIs).[2] Diagnostic evaluation involves KUB X-ray, ultrasound, intravenous pyelogram (IVP), or helical CT, which has a sensitivity of 97%.[1] Management includes increased fluid intake, adequate dietary calcium (1000–1200 mg/day) in recurrent calcium stone formers, and reduction of sodium and oxalate intake, along with correction of hypocitraturia.[1][3] Pharmacological options—based on stone type—include thiazides, Potassium citrate, Allopurinol, Pyridoxine, and Tiopronin.[3] Medical expulsive therapy with Tamsulosin, Nifedipine, and steroids helps facilitate ureteric stone passage.[1]Reference(s):1. https://journals.lww.com/indjem/fulltext/2012/16020/medical_management_of_renal_stone.14.aspx2. https://pmc.ncbi.nlm.nih.gov/articles/PMC5817324/3. https://www.bmj.com/content/352/bmj.i52.full"
+46017,8614,Diabetic Kidney Disease,"Diabetic kidney disease (DKD) is the leading cause of chronic kidney disease (CKD) and end-stage renal disease. DKD develops in around 40% of patients with type 2 diabetes mellitus (T2DM) and 30% of patients with type 1 diabetes (T1D).[1] It is a progressive condition marked by declining kidney function and increased albumin in the urine. The use of estimated glomerular filtration rate (eGFR) and urine albumin-to-creatinine ratio (UACR) is essential, even in patients who may not show overt symptoms like proteinuria. Tight glycemic control, blood pressure management, and renin-angiotensin system (RAS) blockade using angiotensin-converting-enzyme (ACE) inhibitors or angiotensin receptor blockers (ARBs) are crucial to slow the progression of DKD.Reference(s):1. https://www.sciencedirect.com/science/article/pii/S221339842030155X"
+46020,8615,Diabetic Kidney Disease,"Diabetic kidney disease (DKD) is the leading cause of chronic kidney disease (CKD) and end-stage renal disease. DKD develops in around 40% of patients with type 2 diabetes mellitus (T2DM) and 30% of patients with type 1 diabetes (T1D).[1] It is a progressive condition marked by declining kidney function and increased albumin in the urine. The use of estimated glomerular filtration rate (eGFR) and urine albumin-to-creatinine ratio (UACR) is essential, even in patients who may not show overt symptoms like proteinuria. Tight glycemic control, blood pressure management, and renin-angiotensin system (RAS) blockade using angiotensin-converting-enzyme (ACE) inhibitors or angiotensin receptor blockers (ARBs) are crucial to slow the progression of DKD.Reference(s):1.  https://www.sciencedirect.com/science/article/pii/S221339842030155X"
+46021,8616,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension (HTN) share a complex, bidirectional relationship—declining kidney function raises blood pressure, while sustained hypertension accelerates CKD progression. This harmful feedback loop is well-documented in both animal models and clinical studies. In the Chronic Renal Insufficiency Cohort (CRIC) study of 3612 adults with CKD, 86% reported hypertension compared to 29% in the general population. Hypertension becomes increasingly prevalent and harder to control as CKD advances.1 Intensive blood pressure lowering has been shown to reduce the risk of kidney failure events by 17% and end-stage kidney disease by 18%, especially in patients with proteinuria.2 Effective management of hypertension in CKD includes identifying the underlying renal pathology, setting appropriate BP goals, and implementing both non-pharmacological and pharmacological interventions.Reference(s):1. https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/2. https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/"
+46060,8622,Diabetic Kidney Disease,"Diabetic kidney disease (DKD) is the leading cause of chronic kidney disease (CKD) and end-stage renal disease. DKD develops in around 40% of patients with type 2 diabetes mellitus (T2DM) and 30% of patients with type 1 diabetes (T1D).[1] It is a progressive condition marked by declining kidney function and increased albumin in the urine. The use of estimated glomerular filtration rate (eGFR) and urine albumin-to-creatinine ratio (UACR) is essential, even in patients who may not show overt symptoms like proteinuria. Tight glycemic control, blood pressure management, and renin-angiotensin system (RAS) blockade using angiotensin-converting-enzyme (ACE) inhibitors or angiotensin receptor blockers (ARBs) are crucial to slow the progression of DKD.Reference(s):1. https://www.sciencedirect.com/science/article/pii/S221339842030155X"
+46062,8624,Anemia in Chronic Kidney Disease,"Anemia is a common complication of chronic kidney disease (CKD).[1] Anemia refers to a decrease in the number of RBCs or the amount of hemoglobin in the blood. It is relatively uncommon in stages 1-2 of CKD; however, almost 90% of patients with a glomerular filtration rate (GFR) less than 30 mL/min are anemic. Also, the prevalence of anemia in CKD increases as the CKD stage increases. For the evaluation of anemia in CKD, the initial tests must include a variety of tests, including complete blood count (CBC), serum ferritin, serum transferrin saturation (TSAT), absolute reticulocyte count, serum vitamin B12 and folate levels. Iron therapy is a commonly adopted approach for the treatment of anemia in CKD.[2]Reference(s):1. https://pmc.ncbi.nlm.nih.gov/articles/PMC11200696/2. https://pmc.ncbi.nlm.nih.gov/articles/PMC7863960/"
+46067,8629,Cardiorenal Syndrome,"Cardiorenal syndrome refers to the interdependent dysfunction of the heart and kidneys, where acute or chronic dysfunction in one organ induces dysfunction in the other. The pathophysiology is complex, involving the renin-angiotensin-aldosterone system (RAAS), nitric oxide-reactive oxygen species (NO-ROS) imbalance, inflammation, and sympathetic activation.[1] Five types of cardiorenal syndrome are recognized, each defined by the primary organ dysfunction, with a novel sixth type, chronic secondary cardiorenal syndrome, also proposed. Patient history, clinical examination, and management aid in understanding the condition, while specific biomarkers for the heart and kidneys play a crucial role in diagnosis. Ultrasound is preferred for imaging, although MRI and nuclear imaging are also utilized. Key management strategies include decongestive therapies, ionotropic therapy, and RAAS inhibition, with specific treatment algorithms suggested by the cardio-renal dysfunction study group.[2]Reference(s):1. https://pmc.ncbi.nlm.nih.gov/articles/PMC9179008/2. https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063 "
+46068,8630,Conventional and Novel Therapies for Treating Iron Deficiency Anemia in ND-CKD,"Iron deficiency anemia (IDA) is a common complication in non-dialysis chronic kidney disease (ND-CKD) patients, often exacerbated by inflammation and impaired iron utilization. Treatment strategies involve identifying absolute vs. functional iron deficiency using indicators like TSAT and ferritin levels.[1] Conventional therapies include oral iron supplements and intravenous (IV) iron, but these come with risks such as iron overload and oxidative stress. Novel therapies include ferric citrate (FC), which regulates iron absorption and is FDA-approved for ND-CKD patients, ferric maltol for patients with inflammatory bowel disease, and ferric pyrophosphate citrate (FPC), which is delivered via dialysate for hemodialysis patients. Liposomal and Sucrosomial iron offer promising results by bypassing the gastrointestinal tract, reducing side effects, and improving hemoglobin levels.[2] These emerging therapies provide safer, more effective alternatives for managing IDA in CKD.Reference(s):1. https://karger.com/aha/article-abstract/142/1/44/15533/Iron-Deficiency-Anemia-in-Chronic-Kidney-Disease?redirectedFrom=fulltext 2. https://pmc.ncbi.nlm.nih.gov/articles/PMC10305423/"
+46070,8631,Proteinuria in Chronic Kidney Disease,"Proteinuria, the presence of excess protein in urine, is a significant marker of kidney damage in chronic kidney disease (CKD). It results from glomerular injury, leading to increased permeability of the filtration barrier, allowing proteins like albumin to pass into the urine.[1] Proteinuria is both a sign of kidney dysfunction and a risk factor for disease progression. The amount of proteinuria correlates with the severity of kidney damage and can predict the progression to end-stage renal disease. Managing proteinuria involves controlling blood pressure, particularly with angiotensin-converting enzyme inhibitors (ACE inhibitors) or angiotensin receptor blockers (ARBs), which help reduce protein leakage.[2] Tight glycemic control in diabetic patients and lifestyle modifications are also crucial. Regular monitoring of protein levels is essential for assessing CKD progression and treatment effectiveness.Reference(s):1. https://www.nature.com/articles/s41598-024-64833-82. https://pmc.ncbi.nlm.nih.gov/articles/PMC9380095/"
+46071,8632,Proteinuria in Chronic Kidney Disease,"Proteinuria, the presence of excess protein in urine, is a significant marker of kidney damage in chronic kidney disease (CKD). It results from glomerular injury, leading to increased permeability of the filtration barrier, allowing proteins like albumin to pass into the urine.[1] Proteinuria is both a sign of kidney dysfunction and a risk factor for disease progression. The amount of proteinuria correlates with the severity of kidney damage and can predict the progression to end-stage renal disease. Managing proteinuria involves controlling blood pressure, particularly with angiotensin-converting enzyme inhibitors (ACE inhibitors) or angiotensin receptor blockers (ARBs), which help reduce protein leakage.[2] Tight glycemic control in diabetic patients and lifestyle modifications are also crucial. Regular monitoring of protein levels is essential for assessing CKD progression and treatment effectiveness.Reference(s):1. https://www.nature.com/articles/s41598-024-64833-82. https://pmc.ncbi.nlm.nih.gov/articles/PMC9380095/"
+46074,8633,Renal Replacement Therapy,"Chronic kidney disease is a progressive condition causing structural and functional kidney changes, with reduced kidney function for at least three months. Key indicators include abnormal levels of albumin and blood in the urine. Managing risk involves lifestyle changes, blood pressure control, smoking cessation, and statin use to prevent cardiovascular complications.[1] Management of chronic kidney disease includes dietary and lifestyle modifications, pharmacological treatments, and renal replacement therapy. Hemodialysis may be contraindicated due to vascular access issues, needle phobia, heart failure, or bleeding disorders. Potential complications include low blood pressure during dialysis, muscle cramps, and allergic reactions to the dialyzer. Proper management helps improve patient outcomes.[2]Reference(s):1. https://www.sciencedirect.com/science/article/abs/pii/S01406736210051952. https://jamanetwork.com/journals/jama/article-abstract/2752067"
+46075,8634,Hypokalemia,"Hypokalemia is a common electrolyte imbalance characterized by low potassium levels in the blood.[1] The causes of hypokalemia range from gastrointestinal losses (vomiting and diarrhoea), renal losses (due to the use of diuretics), and inadequate intake of potassium. The clinical presentation may range from fatigue, muscle cramps, and constipation to serious complications like cardiac arrhythmias and respiratory weakness. Early recognition of hypokalemia is important, with blood tests and electrocardiographic (ECG) changes, such as the appearance of U waves. Treatment is based on severity—mild cases are treated with oral supplements and dietary potassium, while severe cases require intravenous replacement.Reference(s):1. https://pmc.ncbi.nlm.nih.gov/articles/PMC5881435/"
+46094,8641,Anemia in CKD,"Anemia is a common complication in chronic kidney disease (CKD), affecting a significant portion of patients with advanced stages. It primarily results from decreased erythropoietin production by the kidneys, which is essential for red blood cell production.[1] Additionally, CKD often leads to iron deficiency, inflammation, and shortened red blood cell lifespan, all contributing to anemia. Symptoms include fatigue, weakness, and pallor. Management includes erythropoiesis-stimulating agents (ESAs) to stimulate red blood cell production, alongside iron supplementation to address iron deficiency.[2] In some cases, blood transfusions may be necessary. Early detection and treatment are crucial to improving quality of life and preventing complications like cardiovascular disease. Regular monitoring of hemoglobin levels is important for optimal management in CKD patients.Reference(s):1. https://www.frontiersin.org/journals/medicine/articles/10.3389/fmed.2021.642296/full2. https://pmc.ncbi.nlm.nih.gov/articles/PMC9924302/"
+46095,8642,Glomerular Diseases,"Glomerular diseases refer to a group of conditions affecting the glomeruli, the tiny filters in the kidneys. These diseases are often identified through signs of glomerular hematuria (blood in urine) or glomerular proteinuria (excessive protein in urine).[1] While some glomerular diseases are idiopathic, meaning their cause is unknown, it is increasingly recognised that the classification of diseases as ""idiopathic"" or ""primary"" is insufficient. Modern terminology should focus on the underlying pathogenesis. Aggressive treatments, including kidney-protective measures and anti-proteinuria therapy, are crucial, with weight loss being recommended for obese patients.[2] If these treatments do not halt disease progression, a kidney biopsy may be required to gain further insights and guide management, enabling more precise therapeutic approaches to prevent further kidney damage.Reference(s):1. https://www.ajkd.org/article/S0272-6386(22)00584-4/fulltext2. https://www.mdpi.com/2075-4418/15/2/169"
+46096,8643,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension (HTN) share a complex, bidirectional relationship—declining kidney function raises blood pressure, while sustained hypertension accelerates CKD progression. This harmful feedback loop is well-documented in both animal models and clinical studies. In the Chronic Renal Insufficiency Cohort (CRIC) study of 3612 adults with CKD, 86% reported hypertension compared to 29% in the general population. Hypertension becomes increasingly prevalent and harder to control as CKD advances.[1] Intensive blood pressure lowering has been shown to reduce the risk of kidney failure events by 17% and end-stage kidney disease by 18%, especially in patients with proteinuria.[2] Effective management of hypertension in CKD includes identifying the underlying renal pathology, setting appropriate BP goals, and implementing both non-pharmacological and pharmacological interventions.Reference(s):1. https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/2. https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/"
+46101,8646,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension (HTN) share a complex, bidirectional relationship—declining kidney function raises blood pressure, while sustained hypertension accelerates CKD progression. This harmful feedback loop is well-documented in both animal models and clinical studies. In the Chronic Renal Insufficiency Cohort (CRIC) study of 3612 adults with CKD, 86% reported hypertension compared to 29% in the general population. Hypertension becomes increasingly prevalent and harder to control as CKD advances.[1] Intensive blood pressure lowering has been shown to reduce the risk of kidney failure events by 17% and end-stage kidney disease by 18%, especially in patients with proteinuria.[2] Effective management of hypertension in CKD includes identifying the underlying renal pathology, setting appropriate BP goals, and implementing both non-pharmacological and pharmacological interventions.Reference(s):1. https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/2. https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/"
+46103,8647,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension (HTN) share a complex, bidirectional relationship—declining kidney function raises blood pressure, while sustained hypertension accelerates CKD progression. This harmful feedback loop is well-documented in both animal models and clinical studies. In the Chronic Renal Insufficiency Cohort (CRIC) study of 3612 adults with CKD, 86% reported hypertension compared to 29% in the general population. Hypertension becomes increasingly prevalent and harder to control as CKD advances.[1] Intensive blood pressure lowering has been shown to reduce the risk of kidney failure events by 17% and end-stage kidney disease by 18%, especially in patients with proteinuria.[2] Effective management of hypertension in CKD includes identifying the underlying renal pathology, setting appropriate BP goals, and implementing both non-pharmacological and pharmacological interventions.Reference(s):1. https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/2. https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/"
+46104,8648,Urinary Tract Infections in Renal Insufficiency,"Urinary tract infections (UTIs) are amongst the most frequent bacterial infections in the community, as well as in healthcare systems. In renal insufficiency—especially stages 2–5 chronic kidney disease (CKD) and in dialysis—UTIs are frequent due to impaired immunity, and metabolic imbalances, and often require nuanced management. Escherichia coli remains the most common pathogen, though others like Proteus, Pseudomonas, and Enterococcus are also implicated in the infection. Clinical diagnosis relies on pyuria, bacteriuria, and the presence of symptoms; however, urine tests can be misleading, especially in oliguria or anuria. Treatment follows standard UTI guidelines, but antibiotics must be adjusted for the estimated glomerular filtration rate (eGFR) and dialysis clearance to avoid toxicity. Nephrotoxic agents (aminoglycosides, polymyxins) are used cautiously; Nitrofurantoin and Trimethoprim-Sulfamethoxazole are often avoided due to low urinary excretion and accumulation risk.1Reference(s):1. https://pmc.ncbi.nlm.nih.gov/articles/PMC8777485/"
+46123,8656,Renal Replacement Therapy,"""Chronic kidney disease is a progressive condition marked by structural and functional changes in the kidneys, with reduced kidney function lasting at least three months. Key indicators include abnormal levels of albumin and blood in the urine. Managing risk involves lifestyle changes, blood pressure control, smoking cessation, and statin use to reduce the risk of cardiovascular complications.1 Management of chronic kidney disease also includes dietary and lifestyle modifications, medication, and renal replacement therapy. Hemodialysis may be avoided due to vascular access problems, needle phobia, heart failure, or bleeding disorders. Potential complications include low blood pressure during dialysis, muscle cramps, and allergic reactions to the dialyzer. Effective management helps improve patient outcomes.2Reference(s):1. https://www.sciencedirect.com/science/article/abs/pii/S01406736210051952. https://jamanetwork.com/journals/jama/article-abstract/2752067"
+46124,8657,Proteinuria in Chronic Kidney Disease,"Proteinuria, the presence of excess protein in the urine, is a key indicator of kidney damage in chronic kidney disease (CKD). It occurs due to glomerular injury, which increases the permeability of the filtration barrier and allows proteins like albumin to enter the urine.[1] Proteinuria is both a marker of kidney dysfunction and a risk factor for disease progression. The level of proteinuria is directly related to the severity of kidney damage and the risk of progressing to end stage renal disease.[2] Management includes controlling blood pressure, especially with angiotensin converting enzyme inhibitors or angiotensin receptor blockers, along with tight blood sugar control in diabetic patients, lifestyle changes, and regular monitoring of protein levels to evaluate CKD progression and treatment response.Reference(s):1. https://www.nature.com/articles/s41598-024-64833-8 2. https://pmc.ncbi.nlm.nih.gov/articles/PMC9380095/"
+46133,8658,Tubulointerstitial Diseases and Vascular Reanal Diseases,"Tubulointerstitial diseases are a diverse group of disorders characterized by tubular and interstitial injury, which may progress to glomerular dysfunction and renal failure. The primary types include acute tubular necrosis and tubulointerstitial nephritis (TIN), which can be acute or chronic, primary or secondary. TIN has varied epidemiology, with infections being a leading cause globally, and autoimmune diseases like lupus and Sjögren’s more common in women. Clinical features often reflect the underlying cause. Diagnosis involves urinalysis, blood tests (e.g., ANCA, IgG), and urinary biomarkers (e.g., MCP-1, B2M). Treatment focuses on addressing the underlying etiology, with steroids used selectively.1Reference(s):1. https://pubmed.ncbi.nlm.nih.gov/32491469/"
+46134,8659,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension (HTN) have a complex, bidirectional relationship as declining kidney function increases blood pressure, while persistent hypertension worsens CKD. This cycle is well established in clinical and experimental research. In the Chronic Renal Insufficiency Cohort (CRIC) study of 3612 adults with CKD, 86 percent had hypertension compared to 29 percent in the general population. As CKD progresses, hypertension becomes more common and difficult to control.1 Intensive blood pressure lowering reduces kidney failure risk by 17 percent and end stage kidney disease by 18 percent, especially in those with proteinuria.2 Management includes addressing renal pathology, setting blood pressure targets, and using lifestyle and medical therapies.Reference(s):1. https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/2. https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/"
+46177,8683,CKD Screening in Type 2 DM,"Chronic kidney disease (CKD) screening in individuals with type 2 diabetes is essential to prevent progression to end-stage renal disease (ESRD). Patients with diabetes are at an increased risk of CKD, yet a significant proportion remain undiagnosed. Early detection is critical, as it allows for timely intervention to slow disease progression.[1] Screening typically involves measuring urinary albumin excretion (UAE), which helps identify early signs of kidney damage. Regular monitoring of UAE and estimated glomerular filtration rate (eGFR) can aid in the early identification of CKD.[2] Screening should begin at diagnosis in patients with type 2 diabetes and continue annually, as early intervention with lifestyle changes and pharmacologic treatments, such as ACE inhibitors or ARBs, can significantly reduce the risk of ESRD and improve long-term outcomes.Reference(s):1. https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-022-02438-62. https://www.nature.com/articles/s41598-024-56765-0 "
+46179,8684,Challenges and Best Practices for Managing Anemia in Non-Dialysis Chronic Kidney Diseases Patient,"Chronic kidney disease affects more than 10 percent of the general population and is a leading cause of noncommunicable death worldwide. Diagnosis is often difficult, but glomerular filtration rate is essential in identifying kidney dysfunction. When glomerular filtration rate falls below 60 milliliters per minute, anemia frequently develops. Anemia is defined as hemoglobin less than 13 grams per deciliter in men and less than 12 in women. Common symptoms include fatigue, poor concentration, breathlessness, and signs of heart failure. Management includes erythropoietin stimulating agents, oral or intravenous iron, and newer treatments such as hypoxia inducible factor prolyl hydroxylase inhibitors.[1][2]Reference(s):1. https://pubmed.ncbi.nlm.nih.gov/30969693/2. https://pubmed.ncbi.nlm.nih.gov/16548452/"
+46182,8686,Acute Kidney Injury,"Acute kidney injury (AKI) is defined as an abrupt (within hours) reduction in kidney function, which encompasses both injury (structural damage) and impairment (loss of function). Many patients with AKI have a mixed etiology where sepsis, ischemic, and nephrotoxicity often co-exist and complicate recognition and treatment.[1] Common signs and symptoms of AKI include decreased urine output, edema, dyspnea, fatigue, and loss of appetite. Hyperkalemia, hyponatremia, and intravascular overload are common complications of AKI. Management is based on treating the underlying cause of AKI, but supportive care—via fluid management, vasopressor therapy, kidney replacement therapy (KRT), and more—is also crucial.[2]Reference(s):1. https://pmc.ncbi.nlm.nih.gov/articles/PMC5198510/#sec152. https://pmc.ncbi.nlm.nih.gov/articles/PMC11084889/"
+46183,8687,Ferric Carboxymaltose for Oncology Hematology,"Parenteral iron preparations, like Ferric carboxymaltose (FCM), are commonly used to manage moderate-to-severe iron deficiency anemia.[1] FCM is a novel intravenous iron formulation offering rapid correction of iron deficiency anemia and effective iron store replenishment, making it valuable for cancer patients. It delivers up to 1000 mg iron in a single, 15‑minute dose, facilitating swift hemoglobin recovery and improving patient outcomes. FCM demonstrates safety and tolerance comparable to traditional treatments, with fewer gastrointestinal side effects than oral iron. Its controlled-release mechanism reduces free iron-related toxicity. For oncology and hematology patients who often exhibit treatment-related anemia, FCM provides a convenient, efficient, and well-tolerated therapeutic option.Reference(s):1. https://pmc.ncbi.nlm.nih.gov/articles/PMC9189149/"
+46186,8689,Conventional and Novel Therapies for Treating Iron Deficiency Anemia in ND-CKD,"Iron deficiency anemia (IDA) is a common complication in non-dialysis chronic kidney disease (ND-CKD) patients, often exacerbated by inflammation and impaired iron utilization. Treatment strategies involve identifying absolute vs. functional iron deficiency using indicators like TSAT and ferritin levels.[1] Conventional therapies include oral iron supplements and intravenous (IV) iron, but these come with risks such as iron overload and oxidative stress. Novel therapies include Ferric citrate (FC), which regulates iron absorption and is FDA-approved for ND-CKD patients, Ferric maltol for patients with inflammatory bowel disease, and Ferric pyrophosphate citrate (FPC), which is delivered via dialysate for hemodialysis patients. Liposomal and Sucrosomial iron offer promising results by bypassing the gastrointestinal tract, reducing side effects, and improving hemoglobin levels.[2] These emerging therapies provide safer, more effective alternatives for managing IDA in CKD.Reference(s):1. https://karger.com/aha/article-abstract/142/1/44/15533/Iron-Deficiency-Anemia-in-Chronic-Kidney-Disease?redirectedFrom=fulltext2. https://pmc.ncbi.nlm.nih.gov/articles/PMC10305423/"
+46284,8758,Detection and Evaluation of CKD,"Detection and evaluation of chronic kidney disease (CKD) primarily involves assessing glomerular filtration rate (GFR), which is now widely estimated based on serum creatinine levels.[1]&nbsp;Estimated GFR helps assess renal function, severity of disease, appropriate drug dosing, and renal involvement in systemic diseases. Renal function tests, including serum creatinine, plasma urea, urine volume, and minerals in urine, monitor renal damage and help determine the underlying etiology. The ideal GFR marker, such as inulin, is metabolically inert and cleared only by the kidneys.[2]&nbsp;Other markers like creatinine and urea are also used, though each has limitations. While creatinine clearance is useful, it can be inaccurate at low GFR and affected by drugs. Advanced methods, including radiolabeled compounds, can further assess kidney function.Reference(s):1.&nbsp;https://www.annlabmed.org/journal/view.html?uid=3514&amp;vmd=Full2.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC11150208/"
+46286,8760,Urinary Tract Infections in Renal Insufficiency,"Urinary tract infections (UTIs) are amongst the most frequent bacterial infections in the community, as well as in healthcare systems. In renal insufficiency—especially stages 2–5 chronic kidney disease (CKD) and in dialysis—UTIs are frequent due to impaired immunity, and metabolic imbalances, and often require nuanced management. Escherichia coli remains the most common pathogen, though others like Proteus, Pseudomonas, and Enterococcus are also implicated in the infection. Clinical diagnosis relies on pyuria, bacteriuria, and the presence of symptoms; however, urine tests can be misleading, especially in oliguria or anuria. Treatment follows standard UTI guidelines, but antibiotics must be adjusted for the estimated glomerular filtration rate (eGFR) and dialysis clearance to avoid toxicity. Nephrotoxic agents (aminoglycosides, polymyxins) are used cautiously; Nitrofurantoin and Trimethoprim-Sulfamethoxazole are often avoided due to low urinary excretion and accumulation risk.[1]Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC8777485/"
+46288,8762,Conventional and Novel Therapies for Treating Iron Deficiency Anemia in ND-CKD,"Iron deficiency anemia (IDA) is a common complication in non-dialysis chronic kidney disease (ND-CKD) patients, often exacerbated by inflammation and impaired iron utilization. Treatment strategies involve identifying absolute vs. functional iron deficiency using indicators like TSAT and ferritin levels.[1]&nbsp;Conventional therapies include oral iron supplements and intravenous (IV) iron, but these come with risks such as iron overload and oxidative stress. Novel therapies include Ferric citrate (FC), which regulates iron absorption and is FDA-approved for ND-CKD patients, Ferric maltol for patients with inflammatory bowel disease, and Ferric pyrophosphate citrate (FPC), which is delivered via dialysate for hemodialysis patients. Liposomal and Sucrosomial iron offer promising results by bypassing the gastrointestinal tract, reducing side effects, and improving hemoglobin levels.[2]&nbsp;These emerging therapies provide safer, more effective alternatives for managing IDA in CKD.Reference(s):1.&nbsp;https://karger.com/aha/article-abstract/142/1/44/15533/Iron-Deficiency-Anemia-in-Chronic-Kidney-Disease?redirectedFrom=fulltext&nbsp;2.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC10305423/&nbsp;"
+46289,8763,GFR Measurement,"Glomerular filtration rate (GFR) is widely accepted as the best index of kidney function in health and disease, and accurate values are required for optimal decision-making. Estimated GFR has been included in clinical practice guidelines to enable physicians to identify patients with chronic kidney disease (CKD) to enable earlier interventions to slow the progression of the disease.[1]&nbsp;Measured GFR using urinary or plasma clearance of exogenous filtration markers is considered the gold standard for evaluation of kidney function but is not routinely available. Inulin, creatinine and urea are candidate markers of GFR. Additionally, a number of radiolabelled chelates have been used to assess GFR. It is recommended that CKD be classified based on the GFR category and the albuminuria category.[2]Reference(s):1.&nbsp;&nbsp;https://www.ajkd.org/article/S0272-6386(08)01235-3/fulltext 2. https://pmc.ncbi.nlm.nih.gov/articles/PMC4089693/2.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC4089693/"
+46292,8765,Challenges and Best Practices for Managing Anemia in Non-dialysis Chronic Kidney Disease,"Chronic kidney disease (CKD) is extremely common and has emerged as one of the leading non-communicable causes of death worldwide. It has been substantiated that approximately 1 in 10 individuals are affected by CKD. Anemia is a common complication in CKD, and is associated with a reduced quality of life, and an increased morbidity and mortality.[1]&nbsp;In CKD, anemia develops when the glomerular filtration rate (GFR) decreases to &lt; 60 mL/min/1.73 m2. With CKD disease progression, the prevalence of anemia increases. Common symptoms of anemia in CKD include dyspnea, fatigue, generalized weakness, headache, decreased concentration, dizziness, and reduced exercise tolerance. Moreover, up to 60% of patients with non-dialysis dependent CKD develop anemia and around 50% of patients with non-dialysis dependent CKD have iron deficiency.Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC8032930/"
+46296,8766,Nephrotic Syndrome and CKD,"Nephrotic syndrome (NS) is a clinical condition characterized by significant proteinuria (&gt;40 mg/m²/hour or &gt;3 g/day), leading to hypoalbuminemia (&lt;30 g/L), hyperlipidemia, and edema. Primary causes include minimal change disease, focal segmental glomerulosclerosis, membranous nephropathy, and hereditary nephropathies, while secondary causes include diabetes mellitus, lupus, vasculitis, and infections such as hepatitis B and HIV. In children, minimal change disease is the most frequent cause. Edema is the hallmark clinical feature of NS. Initial treatment typically involves corticosteroids, with a 12-week Prednisone regimen: 60 mg/m²/day for 4 weeks, then 40 mg/m² on alternate days for another 4 weeks, followed by a taper of 5–10 mg/m² per week over 4 weeks. Thorough clinical assessment, including height, weight, blood pressure, and infection screening, is essential before initiating therapy. Patient education and adherence are critical for managing this chronic condition and preventing complications, particularly in outpatient settings where pharmacists can play a key role in supporting compliance.[1]Reference(s):1.&nbsp;https://www.ncbi.nlm.nih.gov/books/NBK470444/"
+46440,8882,Challenges and Best Practices for Managing Anemia in Non-Dialysis Chronic Kidney Disease,"Chronic kidney disease (CKD) is extremely common and has emerged as one of the leading non-communicable causes of death worldwide. It has been substantiated that approximately 1 in 10 individuals are affected by CKD. Anemia is a common complication in CKD, and is associated with a reduced quality of life, and an increased morbidity and mortality.[1]&nbsp;In CKD, anemia develops when the glomerular filtration rate (GFR) decreases to &lt; 60 mL/min/1.73 m2. With CKD disease progression, the prevalence of anemia increases. Common symptoms of anemia in CKD include dyspnea, fatigue, generalized weakness, headache, decreased concentration, dizziness, and reduced exercise tolerance. Moreover, up to 60% of patients with non-dialysis dependent CKD develop anemia and around 50% of patients with non-dialysis dependent CKD have iron deficiency.Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC8032930/&nbsp;"
+46445,8887,Urinary Tract Infections in Renal Insufficiency,"Urinary tract infections (UTIs) are amongst the most frequent bacterial infections in the community, as well as in healthcare systems. In renal insufficiency—especially stages 2–5 chronic kidney disease (CKD) and in dialysis—UTIs are frequent due to impaired immunity, and metabolic imbalances, and often require nuanced management. Escherichia coli remains the most common pathogen, though others like Proteus, Pseudomonas, and Enterococcus are also implicated in the infection. Clinical diagnosis relies on pyuria, bacteriuria, and the presence of symptoms; however, urine tests can be misleading, especially in oliguria or anuria. Treatment follows standard UTI guidelines, but antibiotics must be adjusted for the estimated glomerular filtration rate (eGFR) and dialysis clearance to avoid toxicity. Nephrotoxic agents (aminoglycosides, polymyxins) are used cautiously; Nitrofurantoin and Trimethoprim-Sulfamethoxazole are often avoided due to low urinary excretion and accumulation risk.[1]Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC8777485/"
+46443,8885,Anemia in Chronic Kidney Disease,"Anemia is a common complication of chronic kidney disease (CKD).[1]&nbsp;Anemia refers to a decrease in the number of RBCs or the amount of hemoglobin in the blood. It is relatively uncommon in stages 1-2 of CKD; however, almost 90% of patients with a glomerular filtration rate (GFR) less than 30 mL/min are anemic. Also, the prevalence of anemia in CKD increases as the CKD stage increases. For the evaluation of anemia in CKD, the initial tests must include a variety of tests, including complete blood count (CBC), serum ferritin, serum transferrin saturation (TSAT), absolute reticulocyte count, serum vitamin B12 and folate levels. Iron therapy is a commonly adopted approach for the treatment of anemia in CKD.[2]Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC11200696/&nbsp;2.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC7863960/"
+46447,8889,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension (HTN) have a complex, bidirectional relationship as declining kidney function increases blood pressure, while persistent hypertension worsens CKD. This cycle is well established in clinical and experimental research. In the Chronic Renal Insufficiency Cohort (CRIC) study of 3612 adults with CKD, 86 percent had hypertension compared to 29 percent in the general population. As CKD progresses, hypertension becomes more common and difficult to control.[1]&nbsp;Intensive blood pressure lowering reduces kidney failure risk by 17 percent and end stage kidney disease by 18 percent, especially in those with proteinuria.&nbsp;[2]&nbsp;Management includes addressing renal pathology, setting blood pressure targets, and using lifestyle and medical therapies.Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/2.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/"
+46449,8890,Cardiorenal Syndrome,"Cardiorenal syndrome refers to the interdependent dysfunction of the heart and kidneys, where acute or chronic dysfunction in one organ induces dysfunction in the other. The pathophysiology is complex, involving the renin-angiotensin-aldosterone system (RAAS), nitric oxide-reactive oxygen species (NO-ROS) imbalance, inflammation, and sympathetic activation.[1]Five types of cardiorenal syndrome are recognized, each defined by the primary organ dysfunction, with a novel sixth type, chronic secondary cardiorenal syndrome, also proposed. Patient history, clinical examination, and management aid in understanding the condition, while specific biomarkers for the heart and kidneys play a crucial role in diagnosis. Ultrasound is preferred for imaging, although MRI and nuclear imaging are also utilized. Key management strategies include decongestive therapies, ionotropic therapy, and RAAS inhibition, with specific treatment algorithms suggested by the cardio-renal dysfunction study group.[2]Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC9179008/2.&nbsp;https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063"
+46451,8892,Proteinuria in Chronic Kidney Disease,"Proteinuria, the presence of excess protein in the urine, is a key indicator of kidney damage in chronic kidney disease (CKD). It occurs due to glomerular injury, which increases the permeability of the filtration barrier and allows proteins like albumin to enter the urine.[1]&nbsp;Proteinuria is both a marker of kidney dysfunction and a risk factor for disease progression. The level of proteinuria is directly related to the severity of kidney damage and the risk of progressing to end stage renal disease.&nbsp;[2]Management includes controlling blood pressure, especially with angiotensin converting enzyme inhibitors or angiotensin receptor blockers, along with tight blood sugar control in diabetic patients, lifestyle changes, and regular monitoring of protein levels to evaluate CKD progression and treatment response.Reference(s):1.&nbsp;https://www.nature.com/articles/s41598-024-64833-82.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC9380095/"
+46452,8893,Anemia in CKD,"Anemia is a common complication in chronic kidney disease (CKD), affecting a significant portion of patients with advanced stages. It primarily results from decreased erythropoietin production by the kidneys, which is essential for red blood cell production.[1]Additionally, CKD often leads to iron deficiency, inflammation, and shortened red blood cell lifespan, all contributing to anemia. Symptoms include fatigue, weakness, and pallor. Management includes erythropoiesis-stimulating agents (ESAs) to stimulate red blood cell production, alongside iron supplementation to address iron deficiency.[2]In some cases, blood transfusions may be necessary. Early detection and treatment are crucial to improving quality of life and preventing complications like cardiovascular disease. Regular monitoring of hemoglobin levels is important for optimal management in CKD patients.Reference(s):1.&nbsp;https://www.frontiersin.org/journals/medicine/articles/10.3389/fmed.2021.642296/full2.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC9924302/"
+46454,8895,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension (HTN) have a complex, bidirectional relationship as declining kidney function increases blood pressure, while persistent hypertension worsens CKD. This cycle is well established in clinical and experimental research. In the Chronic Renal Insufficiency Cohort (CRIC) study of 3612 adults with CKD, 86 percent had hypertension compared to 29 percent in the general population. As CKD progresses, hypertension becomes more common and difficult to control.[1]Intensive blood pressure lowering reduces kidney failure risk by 17 percent and end stage kidney disease by 18 percent, especially in those with proteinuria.&nbsp;[2]Management includes addressing renal pathology, setting blood pressure targets, and using lifestyle and medical therapies.Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/2.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/"
+46455,8896,Anemia in Chronic Kidney Disease,"Anemia is a common complication of chronic kidney disease (CKD).[1]&nbsp;Anemia refers to a decrease in the number of RBCs or the amount of hemoglobin in the blood. It is relatively uncommon in stages 1-2 of CKD; however, almost 90% of patients with a glomerular filtration rate (GFR) less than 30 mL/min are anemic. Also, the prevalence of anemia in CKD increases as the CKD stage increases. For the evaluation of anemia in CKD, the initial tests must include a variety of tests, including complete blood count (CBC), serum ferritin, serum transferrin saturation (TSAT), absolute reticulocyte count, serum vitamin B12 and folate levels. Iron therapy is a commonly adopted approach for the treatment of anemia in CKD.[2]Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC11200696/2.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC7863960/"
+46456,8897,Challenges and Best Practices for Managing Anemia in Non-Dialysis Chronic Kidney Diseases Patient,"Chronic kidney disease (CKD) is extremely common and has emerged as one of the leading non-communicable causes of death worldwide. It has been substantiated that approximately 1 in 10 individuals are affected by CKD. Anemia is a common complication in CKD, and is associated with a reduced quality of life, and an increased morbidity and mortality.[1]In CKD, anemia develops when the glomerular filtration rate (GFR) decreases to &lt; 60 mL/min/1.73 m2. With CKD disease progression, the prevalence of anemia increases. Common symptoms of anemia in CKD include dyspnea, fatigue, generalized weakness, headache, decreased concentration, dizziness, and reduced exercise tolerance. Moreover, up to 60% of patients with non-dialysis dependent CKD develop anemia and around 50% of patients with non-dialysis dependent CKD have iron deficiency.Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC8032930/"
+46457,8898,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension (HTN) have a complex, bidirectional relationship as declining kidney function increases blood pressure, while persistent hypertension worsens CKD. This cycle is well established in clinical and experimental research. In the Chronic Renal Insufficiency Cohort (CRIC) study of 3612 adults with CKD, 86 percent had hypertension compared to 29 percent in the general population. As CKD progresses, hypertension becomes more common and difficult to control.[1]&nbsp;Intensive blood pressure lowering reduces kidney failure risk by 17 percent and end stage kidney disease by 18 percent, especially in those with proteinuria.&nbsp;[2]&nbsp;Management includes addressing renal pathology, setting blood pressure targets, and using lifestyle and medical therapies.Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/2.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/"
+46458,8899,Diabetic Kidney Disease,"Diabetic kidney disease (DKD) is the leading cause of chronic kidney disease (CKD) and end-stage renal disease. DKD develops in around 40% of patients with type 2 diabetes mellitus (T2DM) and 30% of patients with type 1 diabetes (T1D).[1]&nbsp;It is a progressive condition marked by declining kidney function and increased albumin in the urine. The use of estimated glomerular filtration rate (eGFR) and urine albumin-to-creatinine ratio (UACR) is essential, even in patients who may not show overt symptoms like proteinuria. Tight glycemic control, blood pressure management, and renin-angiotensin system (RAS) blockade using angiotensin-converting-enzyme (ACE) inhibitors or angiotensin receptor blockers (ARBs) are crucial to slow the progression of DKD.Reference(s):1.&nbsp;https://www.sciencedirect.com/science/article/pii/S221339842030155X"
+46459,8900,Challenges and Best Practices for Managing Anemia in Non-Dialysis Chronic Kidney Diseases Patient,"Chronic kidney disease (CKD) is extremely common and has emerged as one of the leading non-communicable causes of death worldwide. It has been substantiated that approximately 1 in 10 individuals are affected by CKD. Anemia is a common complication in CKD, and is associated with a reduced quality of life, and an increased morbidity and mortality.[1]&nbsp;In CKD, anemia develops when the glomerular filtration rate (GFR) decreases to &lt; 60 mL/min/1.73 m2. With CKD disease progression, the prevalence of anemia increases. Common symptoms of anemia in CKD include dyspnea, fatigue, generalized weakness, headache, decreased concentration, dizziness, and reduced exercise tolerance. Moreover, up to 60% of patients with non-dialysis dependent CKD develop anemia and around 50% of patients with non-dialysis dependent CKD have iron deficiency.Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC8032930/"
+46460,8901,Anemia in CKD,"Anemia is a common complication in chronic kidney disease (CKD), affecting a significant portion of patients with advanced stages. It primarily results from decreased erythropoietin production by the kidneys, which is essential for red blood cell production.1 Additionally, CKD often leads to iron deficiency, inflammation, and shortened red blood cell lifespan, all contributing to anemia. Symptoms include fatigue, weakness, and pallor. Management includes erythropoiesis-stimulating agents (ESAs) to stimulate red blood cell production, alongside iron supplementation to address iron deficiency.2 In some cases, blood transfusions may be necessary. Early detection and treatment are crucial to improving quality of life and preventing complications like cardiovascular disease. Regular monitoring of hemoglobin levels is important for optimal management in CKD patients."
+46461,8902,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension (HTN) have a complex, bidirectional relationship as declining kidney function increases blood pressure, while persistent hypertension worsens CKD. This cycle is well established in clinical and experimental research. In the Chronic Renal Insufficiency Cohort (CRIC) study of 3612 adults with CKD, 86 percent had hypertension compared to 29 percent in the general population. As CKD progresses, hypertension becomes more common and difficult to control.[1]Intensive blood pressure lowering reduces kidney failure risk by 17 percent and end stage kidney disease by 18 percent, especially in those with proteinuria.&nbsp;[2]Management includes addressing renal pathology, setting blood pressure targets, and using lifestyle and medical therapies.Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/2.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/"
+46462,8903,Nutritional Management of Chronic Kidney Disease and Dialysis,"Chronic kidney disease (CKD) is a global public health issue affecting approximately 5%–15% of the population, with a growing number progressing to end-stage renal disease (ESRD) requiring dialysis.[1]&nbsp;Nutritional management plays a critical role across all stages of CKD. Early intervention targets modifiable risk factors such as obesity, diabetes, and hypertension through dietary adjustments, including reduced salt intake, increased fruits and vegetables, and lower saturated fat consumption. As eGFR declines, patients may develop dyslipidemia, anemia, and acidosis, requiring reduced animal protein intake, increased consumption of unsaturated fats and whole grains, and careful fluid management. In advanced stages of kidney failure, malnutrition, inflammation, and mineral-bone disorder become major concerns. Nutritional strategies include limiting fluid intake and dietary phosphate, optimizing protein quality and quantity, and introducing oral nutrition supplements when intake or weight declines. Tailored dietary approaches, along with regular monitoring, are essential to slow CKD progression and improve patient outcomes.[2]Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC5372871/2.&nbsp;https://www.ajkd.org/article/S0272-6386(21)00764-2/fulltext&nbsp;"
+46823,9162,Anaemia in CKD,"Anaemia is a common complication in chronic kidney disease (CKD), affecting a significant portion of patients with advanced stages. It primarily results from decreased erythropoietin production by the kidneys, which is essential for red blood cell production.[1]&nbsp;Additionally, CKD often leads to iron deficiency, inflammation, and shortened red blood cell lifespan, all contributing to anaemia. Symptoms include fatigue, weakness, and pallor. Management includes erythropoiesis-stimulating agents (ESAs) to stimulate red blood cell production, alongside iron supplementation to address iron deficiency.[2]&nbsp;In some cases, blood transfusions may be necessary. Early detection and treatment are crucial to improving quality of life and preventing complications like cardiovascular disease. Regular monitoring of haemoglobin levels is important for optimal management in CKD patients.Reference(s):1.&nbsp;https://www.frontiersin.org/journals/medicine/articles/10.3389/fmed.2021.642296/full&nbsp;2.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC9924302/"
+46821,9161,Hypertension in CKD,"Chronic kidney disease (CKD) and hypertension (HTN) have a complex, bidirectional relationship as declining kidney function increases blood pressure, while persistent hypertension worsens CKD. This cycle is well established in clinical and experimental research. In the Chronic Renal Insufficiency Cohort (CRIC) study of 3612 adults with CKD, 86 percent had hypertension compared to 29 percent in the general population. As CKD progresses, hypertension becomes more common and difficult to control.[1]&nbsp;Intensive blood pressure lowering reduces kidney failure risk by 17 percent and end stage kidney disease by 18 percent, especially in those with proteinuria.&nbsp;[2]&nbsp;Management includes addressing renal pathology, setting blood pressure targets, and using lifestyle and medical therapies.Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC4445132/&nbsp;2.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC3735743/"
+46873,9202,Proteinuria in Chronic Kidney Disease,"Proteinuria, the presence of excess protein in the urine, is a key indicator of kidney damage in chronic kidney disease (CKD). It occurs due to glomerular injury, which increases the permeability of the filtration barrier and allows proteins like albumin to enter the urine.[1]&nbsp;Proteinuria is both a marker of kidney dysfunction and a risk factor for disease progression. The level of proteinuria is directly related to the severity of kidney damage and the risk of progressing to end stage renal disease.&nbsp;[2]&nbsp;Management includes controlling blood pressure, especially with angiotensin converting enzyme inhibitors or angiotensin receptor blockers, along with tight blood sugar control in diabetic patients, lifestyle changes, and regular monitoring of protein levels to evaluate CKD progression and treatment response.Reference(s):1.&nbsp;https://www.nature.com/articles/s41598-024-64833-82.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC9380095/"
+46876,9204,Challenges and Best Practices for Managing Anemia in Non-Dialysis Chronic Kidney Disease,"Chronic kidney disease (CKD) is extremely common and has emerged as one of the leading non-communicable causes of death worldwide. It has been substantiated that approximately 1 in 10 individuals are affected by CKD. Anemia is a common complication in CKD, and is associated with a reduced quality of life, and an increased morbidity and mortality.[1]&nbsp;In CKD, anemia develops when the glomerular filtration rate (GFR) decreases to &lt; 60 mL/min/1.73 m2. With CKD disease progression, the prevalence of anemia increases. Common symptoms of anemia in CKD include dyspnea, fatigue, generalized weakness, headache, decreased concentration, dizziness, and reduced exercise tolerance. Moreover, up to 60% of patients with non-dialysis dependent CKD develop anemia and around 50% of patients with non-dialysis dependent CKD have iron deficiency.&nbsp;Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC8032930/&nbsp;"
+46878,9206,Anemia in CKD,"Anemia is a common complication in chronic kidney disease (CKD), affecting a significant portion of patients with advanced stages. It primarily results from decreased erythropoietin production by the kidneys, which is essential for red blood cell production.[1]&nbsp;Additionally, CKD often leads to iron deficiency, inflammation, and shortened red blood cell lifespan, all contributing to anemia. Symptoms include fatigue, weakness, and pallor. Management includes erythropoiesis-stimulating agents (ESAs) to stimulate red blood cell production, alongside iron supplementation to address iron deficiency.[2]&nbsp;In some cases, blood transfusions may be necessary. Early detection and treatment are crucial to improving quality of life and preventing complications like cardiovascular disease. Regular monitoring of hemoglobin levels is important for optimal management in CKD patients.Reference(s):1.&nbsp;https://www.frontiersin.org/journals/medicine/articles/10.3389/fmed.2021.642296/full2.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC9924302/"
+46880,9208,Conventional and Novel Therapies for Treating Iron Deficiency Anemia in ND-CKD,"Iron deficiency anemia (IDA) is a common complication in non-dialysis chronic kidney disease (ND-CKD) patients, often exacerbated by inflammation and impaired iron utilization. Treatment strategies involve identifying absolute vs. functional iron deficiency using indicators like TSAT and ferritin levels.[1]&nbsp;Conventional therapies include oral iron supplements and intravenous (IV) iron, but these come with risks such as iron overload and oxidative stress. Novel therapies include Ferric citrate (FC), which regulates iron absorption and is FDA-approved for ND-CKD patients, Ferric maltol for patients with inflammatory bowel disease, and Ferric pyrophosphate citrate (FPC), which is delivered via dialysate for hemodialysis patients. Liposomal and Sucrosomial iron offer promising results by bypassing the gastrointestinal tract, reducing side effects, and improving hemoglobin levels.[2]&nbsp;These emerging therapies provide safer, more effective alternatives for managing IDA in CKD.Reference(s):1.&nbsp;https://karger.com/aha/article-abstract/142/1/44/15533/Iron-Deficiency-Anemia-in-Chronic-Kidney-Disease?redirectedFrom=fulltext2.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC10305423/"
+49489,10398,Acute Kidney Injury,"Acute kidney injury (AKI) is defined as an abrupt (within hours) reduction in kidney function, which encompasses both injury (structural damage) and impairment (loss of function). Many patients with AKI have a mixed etiology where sepsis, ischemic, and nephrotoxicity often co-exist and complicate recognition and treatment.[1]&nbsp;Common signs and symptoms of AKI include decreased urine output, edema, dyspnea, fatigue, and loss of appetite. Hyperkalemia, hyponatremia, and intravascular overload are common complications of AKI. Management is based on treating the underlying cause of AKI, but supportive care—via fluid management, vasopressor therapy, kidney replacement therapy (KRT), and more—is also crucial.[2]Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC5198510/#sec152.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC11084889/"
+49493,10399,Proteinuria in Chronic Kidney Disease,"Proteinuria, the presence of excess protein in urine, is a significant marker of kidney damage in chronic kidney disease (CKD). It results from glomerular injury, leading to increased permeability of the filtration barrier, allowing proteins like albumin to pass into the urine.[1]&nbsp;Proteinuria is both a sign of kidney dysfunction and a risk factor for disease progression. The amount of proteinuria correlates with the severity of kidney damage and can predict the progression to end-stage renal disease. Managing proteinuria involves controlling blood pressure, particularly with angiotensin-converting enzyme inhibitors (ACE inhibitors) or angiotensin receptor blockers (ARBs), which help reduce protein leakage.[2]&nbsp;Tight glycemic control in diabetic patients and lifestyle modifications are also crucial. Regular monitoring of protein levels is essential for assessing CKD progression and treatment effectiveness.Reference(s):1.&nbsp;https://www.nature.com/articles/s41598-024-64833-82.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC9380095/"
+49517,10400,Challenges and Best Practices for Managing Anemia in Non-Dialysis Chronic Kidney Diseases Patient,"Chronic kidney disease (CKD) is extremely common and has emerged as one of the leading non-communicable causes of death worldwide. It has been substantiated that approximately 1 in 10 individuals are affected by CKD. Anemia is a common complication in CKD, and is associated with a reduced quality of life, and an increased morbidity and mortality.[1]&nbsp;In CKD, anemia develops when the glomerular filtration rate (GFR) decreases to &lt; 60 mL/min/1.73 m2. With CKD disease progression, the prevalence of anemia increases. Common symptoms of anemia in CKD include dyspnea, fatigue, generalized weakness, headache, decreased concentration, dizziness, and reduced exercise tolerance. Moreover, up to 60% of patients with non-dialysis dependent CKD develop anemia and around 50% of patients with non-dialysis dependent CKD have iron deficiency.Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC8032930/"
+49670,10410,Ferric Carboxymaltose for Oncology Hematology,"Parenteral iron preparations, like Ferric carboxymaltose (FCM), are commonly used to manage moderate-to-severe iron deficiency anemia.[1]&nbsp;FCM is a novel intravenous iron formulation offering rapid correction of iron deficiency anemia and effective iron store replenishment, making it valuable for cancer patients. It delivers up to 1000 mg iron in a single, 15‑minute dose, facilitating swift hemoglobin recovery and improving patient outcomes. FCM demonstrates safety and tolerance comparable to traditional treatments, with fewer gastrointestinal side effects than oral iron. Its controlled-release mechanism reduces free iron-related toxicity. For oncology and hematology patients who often exhibit treatment-related anemia, FCM provides a convenient, efficient, and well-tolerated therapeutic option.Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC9189149/"
+49671,10411,Acute Kidney Injury,"Acute kidney injury (AKI) is defined as an abrupt (within hours) reduction in kidney function, which encompasses both injury (structural damage) and impairment (loss of function). Many patients with AKI have a mixed etiology where sepsis, ischemic, and nephrotoxicity often co-exist and complicate recognition and treatment.[1]&nbsp;Common signs and symptoms of AKI include decreased urine output, edema, dyspnea, fatigue, and loss of appetite. Hyperkalemia, hyponatremia, and intravascular overload are common complications of AKI. Management is based on treating the underlying cause of AKI, but supportive care—via fluid management, vasopressor therapy, kidney replacement therapy (KRT), and more—is also crucial.[2]Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC5198510/#sec152.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC11084889/"
+49672,10412,Conventional and Novel Therapies for Treating Iron Deficiency Anemia in ND-CKD,"Iron deficiency anemia (IDA) is a common complication in non-dialysis chronic kidney disease (ND-CKD) patients, often exacerbated by inflammation and impaired iron utilization. Treatment strategies involve identifying absolute vs. functional iron deficiency using indicators like TSAT and ferritin levels.[1]Conventional therapies include oral iron supplements and intravenous (IV) iron, but these come with risks such as iron overload and oxidative stress. Novel therapies include Ferric citrate (FC), which regulates iron absorption and is FDA-approved for ND-CKD patients, Ferric maltol for patients with inflammatory bowel disease, and Ferric pyrophosphate citrate (FPC), which is delivered via dialysate for hemodialysis patients. Liposomal and Sucrosomial iron offer promising results by bypassing the gastrointestinal tract, reducing side effects, and improving hemoglobin levels.[2]&nbsp;These emerging therapies provide safer, more effective alternatives for managing IDA in CKD.Reference(s):1.&nbsp;https://karger.com/aha/article-abstract/142/1/44/15533/Iron-Deficiency-Anemia-in-Chronic-Kidney-Disease?redirectedFrom=fulltext2.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC10305423/"
+49673,10413,GFR Measurement,"Glomerular filtration rate (GFR) is widely accepted as the best index of kidney function in health and disease, and accurate values are required for optimal decision-making. Estimated GFR has been included in clinical practice guidelines to enable physicians to identify patients with chronic kidney disease (CKD) to enable earlier interventions to slow the progression of the disease.[1]&nbsp;Measured GFR using urinary or plasma clearance of exogenous filtration markers is considered the gold standard for evaluation of kidney function but is not routinely available. Inulin, creatinine, and urea are candidate markers of GFR. Additionally, a number of radiolabelled chelates have been used to assess GFR. It is recommended that CKD be classified based on the GFR category and the albuminuria category.[2]Reference(s):1.&nbsp;https://www.ajkd.org/article/S0272-6386(08)01235-3/fulltext2.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC4089693/"
+49685,10414,Nephrotic Syndrome,"Nephrotic syndrome is characterized by hypoalbuminemia, severe proteinuria, and peripheral edema, usually in conjunction with hyperlipidemia.[1]&nbsp;The condition may be idiopathic or can originate due to diverse secondary causes. Nephrotic syndrome may also give rise to complications, such as infections, hypocalcemia, bone abnormalities, hyperlipidemia, atherosclerosis, hypercoagulability, and hypovolemia. For diagnosis, blood tests, including serum albumin, total cholesterol and triglycerides, and creatinine assessment, are warranted. Testing for secondary causes is also recommended. Imaging tests include ultrasonography, renal biopsy tests, and autoantibodies against PLAR.[2]&nbsp;Management involves edema control via fluid and dietary restriction coupled with loop diuretics. Hospital admission may be needed for unresponsive patients.Reference(s):1.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC10924861/2.&nbsp;https://www.ncbi.nlm.nih.gov/books/NBK470444/"
+49686,10415,Conventional and Novel Therapies for Treating Iron Deficiency Anemia in ND-CKD,"Iron deficiency anemia (IDA) is a common complication in non-dialysis chronic kidney disease (ND-CKD) patients, often exacerbated by inflammation and impaired iron utilization. Treatment strategies involve identifying absolute vs. functional iron deficiency using indicators like TSAT and ferritin levels.[1]&nbsp;Conventional therapies include oral iron supplements and intravenous (IV) iron, but these come with risks such as iron overload and oxidative stress. Novel therapies include ferric citrate (FC), which regulates iron absorption and is FDA-approved for ND-CKD patients, ferric maltol for patients with inflammatory bowel disease, and ferric pyrophosphate citrate (FPC), which is delivered via dialysate for hemodialysis patients. Liposomal and Sucrosomial iron offer promising results by bypassing the gastrointestinal tract, reducing side effects, and improving hemoglobin levels.[2]&nbsp;These emerging therapies provide safer, more effective alternatives for managing IDA in CKD.Reference(s):1.&nbsp;https://karger.com/aha/article-abstract/142/1/44/15533/Iron-Deficiency-Anemia-in-Chronic-Kidney-Disease?redirectedFrom=fulltext2.&nbsp;https://pmc.ncbi.nlm.nih.gov/articles/PMC10305423/"

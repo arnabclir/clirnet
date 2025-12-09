@@ -1,0 +1,72 @@
+Additionally, as discussed, I am sharing the SOP for content generation:
+Steps	Detailed tasks
+Step 1: Initiation of Content Generation	Provide the prompt to the automated content generator, specifying the exact topic
+Step 2: Generation of Topic Variants	•	The module produces 7–9 variants of content, each with a different topic name derived from the requested subject
+•	We review all the topics of generated variants
+Step 3: Duplicate Check	Check for duplicates in:
+•	The CRM portal using the main topic and relevant keywords
+•	Internal data sheets (internal Excel sheets maintained by the team)
+If similar contents were uploaded recently:
+•	Review which research papers/guidelines were cited in those contents
+•	If those sources already appear in recent uploads:
+o	Determine whether new research articles, updated guidelines, new drug approvals, or other updated information are missing from recent contents
+
+Verification of guideline updates:
+•	Guideline Central
+•	WHO, CDC, and other regulatory bodies
+•	Specialty-specific guidelines such as:
+•	ADA, GOLD, GINA, AAFP, FIGO, ESHIRE, etc.
+
+If such missing or updated information is identified:
+•	Consider selecting those updated topics for content generation
+Step 4: Initiation of Content Generation Process	•	Submit the final selected topics for automated generation
+•	Contents usually take 5–15 minutes to generate
+•	Generated contents appear in the “Team → Pending” tab
+Step 5: Identification and Assignment of Generated Content	•	Contents appear with system-generated IDs (not topic names)
+•	For each content:
+•	Click the “Action” button to view the actual topic name
+•	Reassign the content to the appropriate team member
+•	Once assigned, the designated team member sees the content in:
+“My → Pending” tab as “Task for MedWiki Review”
+
+Step 6: Content Editing, Fact Checking and Review Process	Categorization
+•	Select the appropriate Category: Diagnosis, Management, or Case
+
+Formatting Requirements
+•	Ensure the topic name, all headers, and sub-headers are in sentence case
+•	Maintain proper bullet format
+•	Provide “:” after each subheaders
+•	Maintain Upper case of each letters starting after “:”
+•	Maintain spacing format after, before, and between certain symbols (e.g., <, >, ≥, etc.)
+
+Scientific and Clinical Verification
+•	Verify all information against cited research articles and authoritative guidelines
+•	Alter or add information where necessary
+•	Check new drug approval and dosage from FDA, CDSCO
+•	Remove irrelevant or redundant content
+
+ Reference and Citation Verification
+Check whether the following criteria are fulfilled:
+•	AMA citation style
+•	Correct article titles, author names, and journal names
+•	Proper and valid URLs
+•	Correct sequence/numbering of citations
+If needed:
+•	Add missing references, ensuring accuracy and consistency
+
+Keywords
+•	Provide appropriate keywords for the final content
+
+Specialization and Region Selection
+•	Choose relevant medical specialties
+•	Select country status (Global or Indian)
+Step 7: Cover Image	Consider the automated image if scientifically relevant to the topic:
+•	Disregard the previous guidelines set for the cover image
+Step 8: Completion of Primary Review	•	Mark the task as Complete
+•	Assign the content to a reviewer for final approval
+Step 9: Final Review and Approval	•	Content appears in the reviewer’s “My → Pending” tab as “Task for MedWiki Approval”
+•	Reviewer performs the final review and validates all edits
+•	After final approval, the reviewer completes the task
+Step 10: Final Output	Upon completion, a MedWiki ID is generated indicating the content is finalized and stored in the MedWiki database
+
+Thanks,

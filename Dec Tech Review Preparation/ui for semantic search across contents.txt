@@ -1,0 +1,50 @@
+As per our last review, we have prepared a UI to help mitigate the time taken to search for content problem (~25 min per content title). The url is-> https://clir-dev-medwiki-gen-demo-574454500954.asia-south1.run.app/titles/ui
+Looks like this ->
+
+
+Semantic Search UI
+Overview
+The Semantic Search UI provides an intuitive interface for searching medical content available in the CLIRNET platform. It leverages advanced LLM-powered query expansion to find relevant medical articles, clinical guidelines, and educational content.
+Access URL: /titles/ui
+How It Helps
+1. Intelligent Query Expansion
+When you enter a search query, the system automatically generates multiple semantically related queries to maximize search coverage. For example:
+Your query: "hypertension treatment guidelines"
+Expanded queries generated:
+•	hypertension treatment guidelines
+•	hypertension management guidelines
+•	HTN treatment protocols
+•	guidelines for managing essential hypertension
+•	clinical practice guidelines for blood pressure control
+This ensures you don't miss relevant content due to terminology differences.
+2. Comprehensive Results
+The UI displays results in two organized sections:
+Expanded Queries Section
+•	Shows each generated query variant
+•	Displays the number of results found per query
+•	Expandable to view individual results for each query
+•	Helps understand which query variations yielded the most results
+Filtered Results Section
+•	Deduplicated, curated results from all queries
+•	Removes duplicate content that appeared in multiple query results
+•	Presents the most relevant content first
+3. Rich Content Preview
+Each result card displays:
+•	Question/Title: Clickable link to the full content on CLIRNET
+•	Answer Preview: Truncated summary of the content
+•	Date: Publication date for currency assessment
+How to Use
+1.	Navigate to the Semantic Search UI at /titles/ui
+2.	Enter your search query in the text area
+o	Use natural language (e.g., "diabetes management in elderly patients")
+o	Or specific terms (e.g., "SGLT2 inhibitors cardiovascular outcomes")
+3.	Click "Search" or press Ctrl+Enter
+4.	Wait for results (typically 60-120 seconds due to LLM query expansion)
+5.	Explore results:
+o	Click "Expanded Queries" to see all query variations and their results
+o	Click "Filtered Results" to see deduplicated top results
+o	Click any result title to open the full content on CLIRNET
+
+If this is helpful and works, we will figure out how to best integrate with the CMS Generator module. Please let us know in case of any issues.
+
+Arnab

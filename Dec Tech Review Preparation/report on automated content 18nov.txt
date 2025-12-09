@@ -1,0 +1,65 @@
+Sir,
+
+As discussed, I'm sharing the total number of automated contents produced so far, along with its specialty-wise categorization:
+
+ 	Automated Contents
+October	857
+November (As on 17.11.)	586
+Total	1443
+
+
+Breakup speciality wise
+#	Speciality	No. of Contents
+1	General Medicine/ Internal Medicine	196
+2	Obstetrics & Gynaecology	159
+3	Paediatrics	155
+4	Orthopaedics	86
+5	General Surgery	83
+6	Dermatology	79
+7	Cardiology	77
+8	Neurology	70
+9	Anaesthesiology	69
+10	Gastroenterology	67
+11	Diabetology	59
+12	Ophthalmology	48
+13	Critical Care	43
+14	Oncology	38
+15	Pulmonology	36
+16	ENT	27
+17	Psychiatry	27
+18	Nephrology	26
+19	Pathology	23
+20	Urology	21
+21	Radiology	16
+22	Haematology	15
+23	Rheumatology	14
+24	Endocrinology	9
+
+Drawing on our experience with automated content outputs, we have outlined the following feedback concerning the accuracy and overall quality of the references provided:
+1.	Absence of in-text citations:
+Several documents do not contain corresponding in-text citations.
+Example: ID 8595296, 8595608 – Reference 1
+2.	Non-compliance with AMA citation style:
+The references do not follow the required AMA formatting standards.
+3.	Improper structural placement:
+The conclusion and reference list should appear in clearly separated sections for proper formatting.
+4.	Non-sequential reference numbering:
+Reference numbers are not arranged in a logical sequence and show misalignment.
+Example: ID 8594045
+5.	Missing URLs in references:
+Some references lack the required URL information.
+Example: ID 8594045 – Reference 1
+6.	Non-functional URLs:
+Certain reference links do not open or lead to inaccessible pages.
+Example: ID 8594045 – Reference 2
+7.	Incorrect URLs provided:
+The URLs cited redirect to unrelated or incorrect articles.
+Examples: ID 8595296 – Reference 1 & 2; ID 8595294 – Reference 1
+8.	Incorrect author details:
+Some references include inaccurate or mismatched author names. Examples: ID 8595294 – Reference 1, 2 & 3; ID 8595608 – Reference 1 & 3
+9.	Missing author names:
+Certain references do not list the required author information.
+Example: ID 8595608 – Reference 2
+The required and relevant documents are attached. Additionally, we crafted the contents for the topics mentioned in the ID 8595296, 8595608, 8594045, 8595294, which have been developed in alignment with the latest guidelines and recently published research.
+
+Thanks,

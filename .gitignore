@@ -249,3 +249,8 @@ checkpoints/
 
 # Project specific
 # Add any project-specific ignores below
+
+# Large data files (exceeding GitHub limits)
+medwiki_facts_extractor/clirnet_articles.csv
+medwiki_facts_extractor/output/progress.csv
+medwiki_facts_extractor/output/results_live.json

@@ -1,0 +1,32 @@
+Hello,
+
+Following our meeting, I am sharing the Excel sheet that includes the compiled list of image variants, corresponding topics, and keyword variants. These image variant samples were created based on the outlined topics and their related content.
+
+Thanks.
+
+
+Regards,
+Saikat Rej
+Senior Associate
+
+
+________________________________________
+From: Tamalika Basak <tamalika.basak@clirnet.com>
+Sent: Thursday, November 27, 2025 4:37 PM
+To: Arnab Saha <arnab.saha@clirnet.com>; Uddipta Paul <uddipta.paul@clirnet.com>; Sabyasachi Pal <sabyasachi.pal@clirnet.com>
+Cc: Ashu Kasera <ashu@clirnet.com>; Tapas Datta <tapas.datta@clirnet.com>; Saif Imroz <saif.imroz@clirnet.com>; Saikat Rej <saikat.rej@clirnet.com>; Archi Roy <archi.roy@clirnet.com>; Padmawati Singh <padmawati.singh@clirnet.com>; Somasree Dey <somasree.dey@clirnet.com>; Soumi Mandal <soumi.mandal@clirnet.com>; Shahnaz Akhtar <shahnaz.akhtar@clirnet.com>
+Subject: Re: Re: Images in MedWiki Generator Module
+
+Hello,
+
+As discussed during our meeting, please find below the key points reviewed:
+
+•	The images generated for the topics are scientifically relevant
+
+•	However, it is preferred to avoid including written text within the images to minimize the risk of scientific inaccuracies.
+
+•	We will now proceed with utilizing automated images for MedWiki/Therapy Updates.
+
+•	The previously established guidelines for cover images for MedWiki/Therapy Updates will no longer be applied.
+
+Additionally, as discussed, I am sharing the SOP for content generation:

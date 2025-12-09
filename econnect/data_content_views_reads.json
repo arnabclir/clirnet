@@ -1,0 +1,749 @@
+{
+  "success": true,
+  "data": [
+    {
+      "type_id": 35390,
+      "views": 446,
+      "reads": 121,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8897,
+      "views": 476,
+      "reads": 132,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35717,
+      "views": 305,
+      "reads": 67,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8647,
+      "views": 324,
+      "reads": 55,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 10410,
+      "views": 151,
+      "reads": 14,
+      "date_Data": "7,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 10399,
+      "views": 791,
+      "reads": 39,
+      "date_Data": "0,0,2,1,1,1,1"
+    },
+    {
+      "type_id": 35407,
+      "views": 403,
+      "reads": 58,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35662,
+      "views": 440,
+      "reads": 74,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35291,
+      "views": 461,
+      "reads": 44,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8611,
+      "views": 229,
+      "reads": 75,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8893,
+      "views": 570,
+      "reads": 168,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8889,
+      "views": 192,
+      "reads": 29,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8630,
+      "views": 487,
+      "reads": 45,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35406,
+      "views": 1135,
+      "reads": 154,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8689,
+      "views": 791,
+      "reads": 216,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8766,
+      "views": 1258,
+      "reads": 392,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8684,
+      "views": 491,
+      "reads": 145,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8624,
+      "views": 164,
+      "reads": 63,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35720,
+      "views": 1435,
+      "reads": 398,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35225,
+      "views": 5684,
+      "reads": 192,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35446,
+      "views": 802,
+      "reads": 100,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35547,
+      "views": 833,
+      "reads": 115,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8648,
+      "views": 432,
+      "reads": 184,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35763,
+      "views": 689,
+      "reads": 219,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35668,
+      "views": 765,
+      "reads": 226,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35289,
+      "views": 1294,
+      "reads": 155,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35748,
+      "views": 1489,
+      "reads": 413,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 9206,
+      "views": 768,
+      "reads": 232,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8656,
+      "views": 435,
+      "reads": 48,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35666,
+      "views": 1354,
+      "reads": 394,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8885,
+      "views": 713,
+      "reads": 234,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35546,
+      "views": 635,
+      "reads": 80,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8898,
+      "views": 265,
+      "reads": 88,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8634,
+      "views": 329,
+      "reads": 80,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35746,
+      "views": 386,
+      "reads": 108,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8659,
+      "views": 134,
+      "reads": 39,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8616,
+      "views": 519,
+      "reads": 191,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8632,
+      "views": 357,
+      "reads": 76,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35412,
+      "views": 843,
+      "reads": 108,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35760,
+      "views": 837,
+      "reads": 265,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8765,
+      "views": 102,
+      "reads": 36,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35671,
+      "views": 2061,
+      "reads": 622,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35388,
+      "views": 808,
+      "reads": 92,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8613,
+      "views": 332,
+      "reads": 65,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35391,
+      "views": 853,
+      "reads": 109,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8657,
+      "views": 137,
+      "reads": 25,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35410,
+      "views": 668,
+      "reads": 88,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8687,
+      "views": 1006,
+      "reads": 287,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35178,
+      "views": 6697,
+      "reads": 291,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35431,
+      "views": 801,
+      "reads": 109,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35292,
+      "views": 424,
+      "reads": 44,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 9204,
+      "views": 1258,
+      "reads": 289,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35675,
+      "views": 610,
+      "reads": 107,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35721,
+      "views": 1289,
+      "reads": 282,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35663,
+      "views": 1452,
+      "reads": 448,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35664,
+      "views": 346,
+      "reads": 74,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8686,
+      "views": 907,
+      "reads": 252,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8896,
+      "views": 240,
+      "reads": 51,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8758,
+      "views": 674,
+      "reads": 205,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 10413,
+      "views": 808,
+      "reads": 25,
+      "date_Data": "3,1,1,0,4,10,0"
+    },
+    {
+      "type_id": 35747,
+      "views": 483,
+      "reads": 133,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8903,
+      "views": 1075,
+      "reads": 313,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 9161,
+      "views": 774,
+      "reads": 232,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35394,
+      "views": 825,
+      "reads": 106,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35693,
+      "views": 268,
+      "reads": 87,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35433,
+      "views": 1091,
+      "reads": 153,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8899,
+      "views": 786,
+      "reads": 214,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8622,
+      "views": 2032,
+      "reads": 639,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35434,
+      "views": 720,
+      "reads": 103,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35413,
+      "views": 1341,
+      "reads": 179,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35672,
+      "views": 837,
+      "reads": 241,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8633,
+      "views": 204,
+      "reads": 52,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 10414,
+      "views": 466,
+      "reads": 35,
+      "date_Data": "1,0,5,21,0,0,1"
+    },
+    {
+      "type_id": 8760,
+      "views": 1183,
+      "reads": 398,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8646,
+      "views": 335,
+      "reads": 70,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35759,
+      "views": 1008,
+      "reads": 308,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35665,
+      "views": 1032,
+      "reads": 302,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8615,
+      "views": 138,
+      "reads": 27,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35393,
+      "views": 644,
+      "reads": 86,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8902,
+      "views": 86,
+      "reads": 24,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8763,
+      "views": 1401,
+      "reads": 442,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8683,
+      "views": 356,
+      "reads": 76,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8642,
+      "views": 662,
+      "reads": 35,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35549,
+      "views": 1279,
+      "reads": 137,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 9202,
+      "views": 810,
+      "reads": 174,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8882,
+      "views": 173,
+      "reads": 58,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35719,
+      "views": 354,
+      "reads": 80,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35396,
+      "views": 417,
+      "reads": 53,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35398,
+      "views": 539,
+      "reads": 61,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8631,
+      "views": 229,
+      "reads": 52,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8629,
+      "views": 328,
+      "reads": 103,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8900,
+      "views": 255,
+      "reads": 66,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35411,
+      "views": 497,
+      "reads": 70,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35758,
+      "views": 352,
+      "reads": 115,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8612,
+      "views": 217,
+      "reads": 79,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 10398,
+      "views": 792,
+      "reads": 37,
+      "date_Data": "0,0,0,1,1,0,0"
+    },
+    {
+      "type_id": 8614,
+      "views": 187,
+      "reads": 36,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8887,
+      "views": 427,
+      "reads": 86,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35677,
+      "views": 653,
+      "reads": 88,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8762,
+      "views": 556,
+      "reads": 172,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35670,
+      "views": 748,
+      "reads": 221,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8895,
+      "views": 91,
+      "reads": 30,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8643,
+      "views": 199,
+      "reads": 64,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 9162,
+      "views": 873,
+      "reads": 261,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8901,
+      "views": 287,
+      "reads": 34,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35694,
+      "views": 352,
+      "reads": 59,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8892,
+      "views": 142,
+      "reads": 45,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 10400,
+      "views": 1682,
+      "reads": 28,
+      "date_Data": "0,0,0,0,0,0,2"
+    },
+    {
+      "type_id": 35660,
+      "views": 586,
+      "reads": 85,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35395,
+      "views": 365,
+      "reads": 55,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35405,
+      "views": 1440,
+      "reads": 184,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35409,
+      "views": 1103,
+      "reads": 160,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35661,
+      "views": 345,
+      "reads": 53,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 9208,
+      "views": 607,
+      "reads": 170,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8641,
+      "views": 210,
+      "reads": 43,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8890,
+      "views": 1230,
+      "reads": 362,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35695,
+      "views": 513,
+      "reads": 77,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 10415,
+      "views": 1730,
+      "reads": 28,
+      "date_Data": "0,0,1,2,8,0,0"
+    },
+    {
+      "type_id": 10411,
+      "views": 351,
+      "reads": 23,
+      "date_Data": "3,12,0,2,1,0,0"
+    },
+    {
+      "type_id": 35478,
+      "views": 1178,
+      "reads": 158,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 10412,
+      "views": 266,
+      "reads": 20,
+      "date_Data": "1,5,11,0,0,0,0"
+    },
+    {
+      "type_id": 35389,
+      "views": 947,
+      "reads": 105,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 35392,
+      "views": 923,
+      "reads": 122,
+      "date_Data": "0,0,0,0,0,0,0"
+    },
+    {
+      "type_id": 8658,
+      "views": 137,
+      "reads": 44,
+      "date_Data": "0,0,0,0,0,0,0"
+    }
+  ]
+}

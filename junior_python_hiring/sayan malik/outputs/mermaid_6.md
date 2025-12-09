@@ -1,0 +1,72 @@
+# Knowledge Graph for URL 6
+
+**Source:** https://www.medscape.com/viewarticle/time-reconsider-tramadol-chronic-pain-2025a1000ria
+
+**Status:**  Successfully Processed
+
+**Entities Extracted:** 44
+
+**Relations Found:** 107
+
+```mermaid
+flowchart LR
+    Tramadol["Tramadol"] -->|is a| Opioid["Opioid"]
+    Tramadol["Tramadol"] -->|modulates| Serotonin["Serotonin"]
+    Tramadol["Tramadol"] -->|modulates| Norepinephrine["Norepinephrine"]
+    Tramadol["Tramadol"] -->|is prescribed for| Chronic_Pain["Chronic Pain"]
+    Cardiac_complications["Cardiac complications"] -->|include| Chest_pain["Chest pain"]
+    Cardiac_complications["Cardiac complications"] -->|include| Coronary_artery_disease["Coronary artery disease"]
+    Cardiac_complications["Cardiac complications"] -->|include| Heart_failure["Heart failure"]
+    Tramadol["Tramadol"] -->|causes| Nausea["Nausea"]
+    Tramadol["Tramadol"] -->|causes| Dizziness["Dizziness"]
+    Tramadol["Tramadol"] -->|causes| Constipation["Constipation"]
+    Tramadol["Tramadol"] -->|causes| Drowsiness["Drowsiness"]
+    Tramadol["Tramadol"] -->|is less addictive than| Morphine["Morphine"]
+    Tramadol["Tramadol"] -->|is used for| Osteoarthritis["Osteoarthritis"]
+    Tramadol["Tramadol"] -->|is used for| Neuropathic_pain["Neuropathic pain"]
+    Pain_intensity["Pain intensity"] -->|is measured by| Numeric_Rating_Scale_NRS["Numeric Rating Scale (NRS)"]
+    Tramadol["Tramadol"] -->|leads to higher rate of| Discontinuation["Discontinuation"]
+    Discontinuation["Discontinuation"] -->|introduces| Attrition_bias["Attrition bias"]
+    Jehad_Ahmad_Barakji,_MD["Jehad Ahmad Barakji, MD"] -->|is affiliated with| Rigshospitalet["Rigshospitalet"]
+    Jehad_Ahmad_Barakji,_MD["Jehad Ahmad Barakji, MD"] -->|told| Medscape_Medical_News["Medscape Medical News"]
+    Jessica_Otte,_MD["Jessica Otte, MD"] -->|is affiliated with| University_of_British_Columbia["University of British Columbia"]
+    Jessica_Otte,_MD["Jessica Otte, MD"] -->|is affiliated with| Therapeutics_Initiative["Therapeutics Initiative"]
+    Houman_Danesh,_MD["Houman Danesh, MD"] -->|is affiliated with| Icahn_School_of_Medicine_at_Mount_Sinai["Icahn School of Medicine at Mount Sinai"]
+    Tramadol["Tramadol"] -->|may cause| Heart_rhythm_disturbances["Heart rhythm disturbances"]
+    Tramadol["Tramadol"] -->|should be reconsidered for| Chronic_Pain["Chronic Pain"]
+    Medscape_Medical_News["Medscape Medical News"] -->|published article on| October_13,_2025["October 13, 2025"]
+    Tramadol["Tramadol"] -->|affects| Serotonin["Serotonin"]
+    Tramadol["Tramadol"] -->|affects| Norepinephrine["Norepinephrine"]
+    Tramadol["Tramadol"] -->|used for| Chronic_Pain["Chronic Pain"]
+    Tramadol["Tramadol"] -->|used for| Osteoarthritis["Osteoarthritis"]
+    Tramadol["Tramadol"] -->|used for| Neuropathic_pain["Neuropathic pain"]
+    Opioid["Opioid"] -->|causes| Nausea["Nausea"]
+    Opioid["Opioid"] -->|causes| Dizziness["Dizziness"]
+    Opioid["Opioid"] -->|causes| Constipation["Constipation"]
+    Opioid["Opioid"] -->|causes| Drowsiness["Drowsiness"]
+    Opioid["Opioid"] -->|associated with| Dependence["Dependence"]
+    Opioid["Opioid"] -->|associated with| Addiction["Addiction"]
+    Opioid["Opioid"] -->|associated with| Cardiac_complications["Cardiac complications"]
+    Opioid["Opioid"] -->|associated with| Heart_rhythm_disturbances["Heart rhythm disturbances"]
+    Opioid["Opioid"] -->|affects| Cardiac_conduction["Cardiac conduction"]
+    Opioid["Opioid"] -->|used for| Chronic_Pain["Chronic Pain"]
+    Pain_intensity["Pain intensity"] -->|measured by| Numeric_Rating_Scale_NRS["Numeric Rating Scale (NRS)"]
+    Randomized_controlled_trials["Randomized controlled trials"] -->|used in| Meta_analysis["Meta-analysis"]
+    Meta_analysis["Meta-analysis"] -->|includes| Systematic_review["Systematic review"]
+    Meta_analysis["Meta-analysis"] -->|evaluates| Opioid["Opioid"]
+    Meta_analysis["Meta-analysis"] -->|evaluates| Analgesic["Analgesic"]
+    Systematic_review["Systematic review"] -->|assesses| Bias["Bias"]
+    Systematic_review["Systematic review"] -->|assesses| Attrition_bias["Attrition bias"]
+    Trial_sequential_analysis["Trial sequential analysis"] -->|used in| Meta_analysis["Meta-analysis"]
+    Placebo["Placebo"] -->|compared to| Opioid["Opioid"]
+    Placebo["Placebo"] -->|compared to| Analgesic["Analgesic"]
+    Discontinuation["Discontinuation"] -->|leads to| Attrition_bias["Attrition bias"]
+    Opioid["Opioid"] -->|improves| Quality_of_life["Quality of life"]
+    Opioid["Opioid"] -->|improves| Functional_improvement["Functional improvement"]
+    Chest_pain["Chest pain"] -->|associated with| Coronary_artery_disease["Coronary artery disease"]
+    Chest_pain["Chest pain"] -->|associated with| Heart_failure["Heart failure"]
+    Jehad_Ahmad_Barakji,_MD["Jehad Ahmad Barakji, MD"] -->|affiliated with| Rigshospitalet["Rigshospitalet"]
+    Jessica_Otte,_MD["Jessica Otte, MD"] -->|affiliated with| University_of_British_Columbia["University of British Columbia"]
+    Houman_Danesh,_MD["Houman Danesh, MD"] -->|affiliated with| Icahn_School_of_Medicine_at_Mount_Sinai["Icahn School of Medicine at Mount Sinai"]
+    Therapeutics_Initiative["Therapeutics Initiative"] -->|affiliated with| University_of_British_Columbia["University of British Columbia"]
+```

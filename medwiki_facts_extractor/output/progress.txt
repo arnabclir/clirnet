@@ -1,0 +1,19 @@
+
+========================================
+MedWiki Facts Extractor - Progress
+========================================
+Started: 2025-11-08 16:20:20
+Elapsed: 2573.9 minutes
+
+Articles Processed: 7018
+  [OK] Successful: 5714
+  [X] Failed: 1304
+  Success Rate: 81.4%
+
+Performance:
+  Average Time: 165.27s per article
+  Processing Rate: 2.7 articles/minute
+  Concurrent Workers: 20
+
+Last Updated: 2025-11-10 11:14:11
+========================================

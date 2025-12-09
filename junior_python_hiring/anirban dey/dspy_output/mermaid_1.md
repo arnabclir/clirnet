@@ -1,0 +1,23 @@
+```mermaid
+graph LR
+  "one third" -->|"Measurement → Measurement"| "one"
+  "one third" -->|"Measurement → Measurement"| "10"
+  "one third" -->|"Measurement → Measurement"| "11"
+  "one third" -->|"Measurement → Measurement"| "12"
+  "one third" -->|"Measurement → Concept"| "Rainforest Alliance"
+  "one third" -->|"Measurement → Concept"| "Fair Trade"
+  "one third" -->|"Measurement → Concept"| "UTZ Certified"
+  "one third" -->|"Measurement → Concept"| "GlobalGAP"
+  "one third" -->|"Measurement → Concept"| "Bird Friendly"
+  "one third" -->|"Measurement → Policy"| "the Common Code"
+  "one third" -->|"Measurement → Concept"| "the Coffee Community"
+  "one third" -->|"Measurement → Measurement"| "4C"
+  "one third" -->|"Measurement → Measurement"| "13"
+  "one third" -->|"Measurement → Measurement"| "1977"
+  "one third" -->|"Measurement → Concept"| "USDA"
+  "one third" -->|"Measurement → Measurement"| "14"
+  "one third" -->|"Measurement → Measurement"| "centuries"
+  "one third" -->|"Measurement → Measurement"| "15"
+  "one third" -->|"Measurement → Measurement"| "16"
+  "one third" -->|"Measurement → Measurement"| "17"
+```
