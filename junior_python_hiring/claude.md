@@ -275,4 +275,247 @@ Plan accordingly and provide progress updates.
 
 ---
 
+## candidate_tracking.md Document Format
+
+The `candidate_tracking.md` file follows a specific structure for consistency and navigation. When updating this document, maintain the following format:
+
+### Document Structure Overview
+
+```
+# Junior Python Developer - DSPy Assignment Candidate Tracking
+
+> **Last Updated**: YYYY-MM-DD | **Document Owner**: AVP of Product, CLIRNET
+
+---
+
+## Table of Contents
+[Clickable links to all sections]
+
+## Executive Summary
+[Quick stats table + key insight]
+
+## Candidate Rankings
+[Rankings by score and by submission date]
+
+## Evaluation Statistics
+[Distribution charts, grade breakdown, score statistics]
+
+## Common Issues & Strengths
+[Summary tables with rates]
+
+## Detailed Evaluations
+### ✅ Passing Candidates
+[Full evaluations for passing candidates]
+### ❌ Failing Candidates
+[Condensed evaluations for failing candidates]
+
+## Scoring Reference
+[Grade bands, category weights, auto-fail criteria]
+
+## Evaluation Workflow
+[Process diagram and guidelines]
+```
+
+### Section Templates
+
+#### Executive Summary Table
+
+```markdown
+| Metric | Value |
+|--------|-------|
+| **Total Evaluated** | X candidates |
+| **Pass Rate** | X% (X passed) |
+| **Average Score** | X/100 |
+| **Top Performer** | Name (Score/100) |
+| **Recommended for Interview** | Name1, Name2, Name3 |
+```
+
+#### Candidate Rankings Table
+
+```markdown
+| Rank | Candidate | Score | Grade | Status | Recommendation |
+|:----:|-----------|:-----:|:-----:|:------:|----------------|
+| 1 | [Name](#candidate-name) | **XX** | X | ✅ Pass | Recommendation |
+| 2 | [Name](#candidate-name) | **XX** | X | ❌ Fail | Recommendation |
+```
+
+#### Passing Candidate Evaluation Template
+
+```markdown
+### Candidate: [Name]
+
+| Field | Value |
+|-------|-------|
+| **Score** | **XX/100** (Grade: X) |
+| **Status** | ✅ **PASS** / ❌ **FAIL** |
+| **Recommendation** | Hire / Maybe / No Hire |
+| **Submitted** | YYYY-MM-DD |
+| **Reviewed** | YYYY-MM-DD |
+
+#### Category Scores
+
+| Category | Score | Max | % |
+|----------|:-----:|:---:|:-:|
+| Code Quality & Implementation | XX | 30 | XX% |
+| DSPy Concepts Understanding | XX | 25 | XX% |
+| Deliverables Completeness | XX | 25 | XX% |
+| Data Quality & Accuracy | XX | 15 | XX% |
+| Production Readiness | XX | 5 | XX% |
+
+#### Detailed Breakdown
+
+- DSPy Framework Usage: X/12 (notes)
+- Web Scraping: X/6 (notes)
+- Error Handling: X/6 (notes)
+- Code Organization: X/6 (notes)
+- Confidence Loops: X/10 (notes)
+- Deduplication Logic: X/8 (notes)
+- Pydantic & Validation: X/7 (notes)
+- Mermaid Diagrams: X/12 (notes)
+- CSV Quality: X/8 (notes)
+
+#### Deliverables
+
+- [x] / [ ] 10 Mermaid diagrams
+- [x] / [ ] CSV file with correct structure
+- [x] / [ ] Colab notebook
+- [x] / [ ] Code runs without errors
+- [x] / [ ] All 10 URLs processed
+
+#### Key Strengths
+
+1. **Strength 1** - Specific example
+2. **Strength 2** - Specific example
+...
+
+#### Areas for Improvement
+
+- **Issue 1** - Details
+- **Issue 2** - Details
+...
+
+#### Notes
+
+```
+Detailed evaluation notes in code block format.
+```
+
+[↑ Back to Top](#table-of-contents) | [↑ Back to Rankings](#candidate-rankings)
+```
+
+#### Failing Candidate Evaluation Template (Condensed)
+
+```markdown
+### Candidate: [Name]
+
+| Field | Value |
+|-------|-------|
+| **Score** | **XX/100** (Grade: F) |
+| **Status** | ❌ **FAIL** |
+| **Recommendation** | No Hire - Reject with feedback |
+| **Submitted** | YYYY-MM-DD |
+| **Reviewed** | YYYY-MM-DD |
+
+#### Category Scores
+
+| Category | Score | Max | % |
+|----------|:-----:|:---:|:-:|
+| Code Quality & Implementation | XX | 30 | XX% |
+| DSPy Concepts Understanding | XX | 25 | XX% |
+| Deliverables Completeness | XX | 25 | XX% |
+| Data Quality & Accuracy | XX | 15 | XX% |
+| Production Readiness | XX | 5 | XX% |
+
+#### Critical Issues
+
+- **AUTO-FAIL: Issue 1**
+- **AUTO-FAIL: Issue 2**
+- **CRITICAL: Issue 3**
+
+#### Summary
+
+Brief 2-3 sentence summary of why the candidate failed.
+
+[↑ Back to Top](#table-of-contents) | [↑ Back to Rankings](#candidate-rankings)
+```
+
+#### Statistics Section Format
+
+```markdown
+## Evaluation Statistics
+
+### Overall Distribution
+
+```
+Pass (≥60):  ███████░░░░░░░░░░░░░░░░░░░░░░░  X candidates (XX%)
+Fail (<60):  ███████████████████████████████  X candidates (XX%)
+```
+
+### Grade Breakdown
+
+| Grade | Range | Count | Candidates |
+|:-----:|:-----:|:-----:|------------|
+| **A** | 90-100 | X | Names |
+| **B** | 75-89 | X | Names |
+| **C** | 60-74 | X | Names |
+| **D/F** | <60 | X | Names |
+
+### Score Statistics
+
+| Metric | Value |
+|--------|:-----:|
+| Average | XX/100 |
+| Median | XX/100 |
+| Highest | XX/100 |
+| Lowest | XX/100 |
+```
+
+#### Common Issues Table Format
+
+```markdown
+### 🔴 Common Issues Found
+
+| Issue | Affected | Rate |
+|-------|:--------:|:----:|
+| **Issue description** | X/Y | XX% |
+
+### 🟢 Common Strengths Observed
+
+| Strength | Achieved | Rate |
+|----------|:--------:|:----:|
+| **Strength description** | X/Y | XX% |
+```
+
+### Navigation Elements
+
+Always include these navigation aids:
+
+1. **Table of Contents** at the top with anchor links
+2. **"Back to Top" links** after each major section: `[↑ Back to Top](#table-of-contents)`
+3. **"Back to Rankings" links** after each candidate evaluation: `[↑ Back to Rankings](#candidate-rankings)`
+4. **Anchor-linked candidate names** in rankings table pointing to detailed evaluations
+
+### Formatting Guidelines
+
+1. **Tables**: Center numeric columns using `:-----:` alignment
+2. **Status indicators**: Use ✅ for Pass, ❌ for Fail
+3. **Scores**: Bold the score in rankings (`**82**`)
+4. **Critical issues**: Prefix with `**AUTO-FAIL:**` or `**CRITICAL:**`
+5. **Notes sections**: Use code blocks (```) for detailed evaluation notes
+6. **Horizontal rules**: Use `---` to separate major sections
+7. **Last Updated**: Always update the timestamp in header and footer
+
+### Maintenance Tasks
+
+When adding new evaluations:
+
+1. Add candidate to Rankings table (both by score and by date)
+2. Add detailed evaluation in appropriate section (Passing or Failing)
+3. Update Executive Summary metrics
+4. Update Statistics section (counts, averages, distributions)
+5. Update Common Issues & Strengths if new patterns emerge
+6. Update Last Updated timestamp
+
+---
+
 *This workflow ensures systematic, fair, and thorough evaluation of all DSPy assignment submissions.*
