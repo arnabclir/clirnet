@@ -1,0 +1,565 @@
+link,tag,tag_type
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Sustainable agriculture,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Farming approach,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Environmental factors,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Economic factors,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Social factors,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Shade-grown coffee,Practice
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Polyculture,Practice
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Agroecosystem,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Ecosystem services,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Sustainable food systems,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Flexible business processes,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Farming practices,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Environmental footprint,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Climate change,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Greenhouse gas emissions,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Water scarcity,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Water pollution,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Land degradation,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Deforestation,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Permaculture,Practice
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Agroforestry,Practice
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Mixed farming,Practice
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Multiple cropping,Practice
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Crop rotation,Practice
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Land sparing,Practice
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Conventional intensive agriculture,Practice
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Natural habitats,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Sustainable diets,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Dietary shifts,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Sustainability standards,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Organic certification,Standard
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Rainforest Alliance,Standard
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Fair Trade,Standard
+https://en.wikipedia.org/wiki/Sustainable_agriculture,UTZ Certified,Standard
+https://en.wikipedia.org/wiki/Sustainable_agriculture,GlobalGAP,Standard
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Bird Friendly,Standard
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Common Code for the Coffee Community (4C),Standard
+https://en.wikipedia.org/wiki/Sustainable_agriculture,USDA,Organization
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Integrated system,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Site-specific application,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Human food needs,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Fiber needs,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Environmental quality,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Natural resource base,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Nonrenewable resources,Resource
+https://en.wikipedia.org/wiki/Sustainable_agriculture,On-farm resources,Resource
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Natural biological cycles,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Economic viability,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Quality of life,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Indigenous communities,Community
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Carrying capacity,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Planetary boundaries,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Nutrient cycling,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Soil regeneration,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Nitrogen fixation,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Non-renewable inputs,Resource
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Unsustainable inputs,Resource
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Self-reliance,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Self-sufficiency,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Pest management,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Irrigation,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Long-term economics,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Short-term economics,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Reconciliation ecology,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Biodiversity,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Appropriate technology,Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,AI research,Research Field
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Artificial intelligence (AI),Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Resource optimization,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Crop health monitoring,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Yield prediction,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,AI-controlled irrigation systems,Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Soil moisture sensors,Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Weather condition monitoring,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Water management technology,Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Artificial intelligence (AI) mobile soil analysis,Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Soil fertility,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Ecological footprint,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Intelligent systems,Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Weed detection,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Pest detection,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Plant disease detection,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Agroecology,Practice
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Digitalization,Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Precision breeding,Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Agrivoltaics,Practice
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Solar panels,Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Clean energy,Resource
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Microclimates,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Resilient farming practices,Practice
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Eco-friendly farming,Practice
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Excessive tilling,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Soil erosion,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Irrigation without drainage,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Soil salinization,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Conservation farming,Practice
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Climate,Environmental Factor
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Soil,Resource
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Nutrients,Resource
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Water resources,Resource
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Water conservation,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Soil conservation,Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Nutrient depletion,Process
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,Artificial intelligence,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,AI,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,healthcare,Domain
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,medical data,Concept
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,healthcare data,Concept
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,disease diagnosis,Process
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,treatment protocol development,Process
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,drug development,Process
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,personalized medicine,Concept
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,patient monitoring,Process
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,patient care,Process
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,radiographs,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,radiology,Domain
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,triage,Process
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,interpretation of radiographs,Process
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,data privacy,Concept
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,automation of jobs,Concept
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,algorithmic bias,Concept
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,machine learning,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,electronic health records,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,EHRs,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,Alzheimer's disease,Disease
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,dementias,Disease
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,decision support systems,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,emergency department,Domain
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,ChatGPT,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,Reddit's r/AskDocs,Platform
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,statistical physics,Concept
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,inference algorithms,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,data warehouses,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,natural language processing,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,NLP,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,heart attack,Disease
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,myocardial infarction,Disease
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,concept processing,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,rule-based system,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,Centerstone research institute,Organization
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,AlphaFold,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,protein structures,Concept
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,drug discovery,Process
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,Venki Ramakrishnan,Person
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,Demis Hassabis,Person
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,John Jumper,Person
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,David Baker,Person
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,University of Washington,Organization
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,Nobel Prize in Chemistry,Event
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,Breakthrough Prize in Life Sciences,Event
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,Albert Lasker Award for Basic Medical Research,Event
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,drug-drug interactions,Concept
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,DDIExtraction Challenge,Event
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,Carlos III University,Organization
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,FDA Adverse Event Reporting System,Organization
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,FAERS,Organization
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,World Health Organization,Organization
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,VigiBase,Database
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,deep learning,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,telemedicine,Process
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,pulse oximeter,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,sensors,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,wearable device,Technology
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,chat-bot therapy,Process
+https://en.wikipedia.org/wiki/Artificial_intelligence_in_healthcare,Woebot,Technology
+https://en.wikipedia.org/wiki/Climate_change,Climate change,Concept
+https://en.wikipedia.org/wiki/Climate_change,Global warming,Concept
+https://en.wikipedia.org/wiki/Climate_change,Human activity,Process
+https://en.wikipedia.org/wiki/Climate_change,Fossil fuel burning,Process
+https://en.wikipedia.org/wiki/Climate_change,Industrial Revolution,Event
+https://en.wikipedia.org/wiki/Climate_change,Greenhouse gases,Concept
+https://en.wikipedia.org/wiki/Climate_change,Carbon dioxide,Gas
+https://en.wikipedia.org/wiki/Climate_change,Deforestation,Process
+https://en.wikipedia.org/wiki/Climate_change,Agricultural practices,Process
+https://en.wikipedia.org/wiki/Climate_change,Industrial practices,Process
+https://en.wikipedia.org/wiki/Climate_change,Heat waves,Phenomenon
+https://en.wikipedia.org/wiki/Climate_change,Wildfires,Phenomenon
+https://en.wikipedia.org/wiki/Climate_change,Permafrost thawing,Process
+https://en.wikipedia.org/wiki/Climate_change,Glaciers retreat,Process
+https://en.wikipedia.org/wiki/Climate_change,Sea ice decline,Phenomenon
+https://en.wikipedia.org/wiki/Climate_change,Ocean heating,Process
+https://en.wikipedia.org/wiki/Climate_change,Ocean acidification,Process
+https://en.wikipedia.org/wiki/Climate_change,Sea level rise,Phenomenon
+https://en.wikipedia.org/wiki/Climate_change,Droughts,Phenomenon
+https://en.wikipedia.org/wiki/Climate_change,Intense storms,Phenomenon
+https://en.wikipedia.org/wiki/Climate_change,Weather extremes,Phenomenon
+https://en.wikipedia.org/wiki/Climate_change,Species extinction,Process
+https://en.wikipedia.org/wiki/Climate_change,Human migration,Process
+https://en.wikipedia.org/wiki/Climate_change,Economic loss,Concept
+https://en.wikipedia.org/wiki/Climate_change,Flooding,Phenomenon
+https://en.wikipedia.org/wiki/Climate_change,Food scarcity,Concept
+https://en.wikipedia.org/wiki/Climate_change,Water scarcity,Concept
+https://en.wikipedia.org/wiki/Climate_change,Disease,Concept
+https://en.wikipedia.org/wiki/Climate_change,World Health Organization,Organization
+https://en.wikipedia.org/wiki/Climate_change,Paris Agreement,Agreement
+https://en.wikipedia.org/wiki/Climate_change,2015 Paris Agreement,Event
+https://en.wikipedia.org/wiki/Climate_change,Nuclear power,Technology
+https://en.wikipedia.org/wiki/Climate_change,Wind power,Technology
+https://en.wikipedia.org/wiki/Climate_change,Solar power,Technology
+https://en.wikipedia.org/wiki/Climate_change,Hydro power,Technology
+https://en.wikipedia.org/wiki/Climate_change,Carbon removal,Process
+https://en.wikipedia.org/wiki/Climate_change,Forest cover,Concept
+https://en.wikipedia.org/wiki/Climate_change,Carbon farming,Process
+https://en.wikipedia.org/wiki/Climate_change,Climate crisis,Concept
+https://en.wikipedia.org/wiki/Climate_change,Climate emergency,Concept
+https://en.wikipedia.org/wiki/Climate_change,Global heating,Concept
+https://en.wikipedia.org/wiki/Climate_change,Global surface temperature,Concept
+https://en.wikipedia.org/wiki/Climate_change,"Temperature record of the last 2,000 years",Dataset
+https://en.wikipedia.org/wiki/Climate_change,Paleoclimatology,Discipline
+https://en.wikipedia.org/wiki/Climate_change,Last Interglacial,Event
+https://en.wikipedia.org/wiki/Climate_change,Medieval Warm Period,Event
+https://en.wikipedia.org/wiki/Climate_change,Little Ice Age,Event
+https://en.wikipedia.org/wiki/Climate_change,Climate proxies,Concept
+https://en.wikipedia.org/wiki/Climate_change,Ice cores,Data Source
+https://en.wikipedia.org/wiki/Climate_change,Tree rings,Data Source
+https://en.wikipedia.org/wiki/Climate_change,Ocean heat content,Concept
+https://en.wikipedia.org/wiki/Climate_change,Thermometer records,Data Source
+https://en.wikipedia.org/wiki/Climate_change,Sulfur dioxide,Gas
+https://en.wikipedia.org/wiki/Climate_change,Sulfate aerosols,Concept
+https://en.wikipedia.org/wiki/Climate_change,Global dimming,Phenomenon
+https://en.wikipedia.org/wiki/Climate_change,NASA,Organization
+https://en.wikipedia.org/wiki/Climate_change,James Hansen,Person
+https://en.wikipedia.org/wiki/Climate_change,Pacific Decadal Oscillation,Climate Pattern
+https://en.wikipedia.org/wiki/Climate_change,Atlantic Multidecadal Oscillation,Climate Pattern
+https://en.wikipedia.org/wiki/Climate_change,Global warming hiatus,Event
+https://en.wikipedia.org/wiki/Climate_change,Upper atmosphere cooling,Phenomenon
+https://en.wikipedia.org/wiki/Climate_change,Snow cover reduction,Process
+https://en.wikipedia.org/wiki/Climate_change,Evaporation,Process
+https://en.wikipedia.org/wiki/Climate_change,Atmospheric humidity,Concept
+https://en.wikipedia.org/wiki/Climate_change,Precipitation,Phenomenon
+https://en.wikipedia.org/wiki/Climate_change,Arctic,Region
+https://en.wikipedia.org/wiki/Climate_change,Earth,Location
+https://en.wikipedia.org/wiki/Climate_change,Greenland ice sheet,Feature
+https://medlineplus.gov/druginformation.html,Drugs,Drug
+https://medlineplus.gov/druginformation.html,Herbs,Drug
+https://medlineplus.gov/druginformation.html,Supplements,Drug
+https://medlineplus.gov/druginformation.html,MedlinePlus,Technology
+https://medlineplus.gov/druginformation.html,.gov,Technology
+https://medlineplus.gov/druginformation.html,HTTPS,Technology
+https://medlineplus.gov/druginformation.html,FDA,Organization
+https://medlineplus.gov/druginformation.html,DailyMed,Technology
+https://medlineplus.gov/druginformation.html,HIV/AIDS Medicines,Drug
+https://medlineplus.gov/druginformation.html,Antibiotics,Drug
+https://medlineplus.gov/druginformation.html,Antidepressants,Drug
+https://medlineplus.gov/druginformation.html,Blood Pressure Medicines,Drug
+https://medlineplus.gov/druginformation.html,Blood Thinners,Drug
+https://medlineplus.gov/druginformation.html,Cancer Alternative Therapies,Concept
+https://medlineplus.gov/druginformation.html,Cancer Chemotherapy,Process
+https://medlineplus.gov/druginformation.html,Cold and Cough Medicines,Drug
+https://medlineplus.gov/druginformation.html,Complementary and Alternative Medicine,Concept
+https://medlineplus.gov/druginformation.html,Diabetes Medicines,Drug
+https://medlineplus.gov/druginformation.html,Dietary Supplements,Drug
+https://medlineplus.gov/druginformation.html,Drug Safety,Concept
+https://medlineplus.gov/druginformation.html,Herbal Medicine,Drug
+https://medlineplus.gov/druginformation.html,Hormone Replacement Therapy,Process
+https://medlineplus.gov/druginformation.html,Medicines,Drug
+https://medlineplus.gov/druginformation.html,Over-the-Counter Medicines,Drug
+https://medlineplus.gov/druginformation.html,Pain Relievers,Drug
+https://medlineplus.gov/druginformation.html,Statins,Drug
+https://medlineplus.gov/druginformation.html,Steroids,Drug
+https://medlineplus.gov/druginformation.html,Vitamins,Drug
+https://medlineplus.gov/druginformation.html,Prescription medication,Drug
+https://medlineplus.gov/druginformation.html,AHFS® Consumer Medication Information,Technology
+https://medlineplus.gov/druginformation.html,American Society of Health-System Pharmacists,Organization
+https://medlineplus.gov/druginformation.html,ASHP,Organization
+https://www.fao.org/3/y4671e/y4671e06.htm,food security,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,chronic food insecurity,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,transitory food insecurity,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,trade liberalization,Process
+https://www.fao.org/3/y4671e/y4671e06.htm,2002 food crisis in Southern Africa,Event
+https://www.fao.org/3/y4671e/y4671e06.htm,World Food Summit (WFS),Event
+https://www.fao.org/3/y4671e/y4671e06.htm,World Food Conference of 1974,Event
+https://www.fao.org/3/y4671e/y4671e06.htm,Green Revolution,Technology
+https://www.fao.org/3/y4671e/y4671e06.htm,famine,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,hunger,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,food crisis,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,poverty,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,malnutrition,Disease
+https://www.fao.org/3/y4671e/y4671e06.htm,protein-energy malnutrition,Disease
+https://www.fao.org/3/y4671e/y4671e06.htm,human security,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,human rights,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,social security,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,Amartya Sen,Person
+https://www.fao.org/3/y4671e/y4671e06.htm,entitlements,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,nutritional status,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,vulnerability,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,household food security,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,sub-nutrition,Disease
+https://www.fao.org/3/y4671e/y4671e06.htm,dietary energy requirements,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,food balance sheets,Process
+https://www.fao.org/3/y4671e/y4671e06.htm,consumer expenditure data,Process
+https://www.fao.org/3/y4671e/y4671e06.htm,SOFI 2001,Document
+https://www.fao.org/3/y4671e/y4671e06.htm,poverty lines,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,World Bank,Organization
+https://www.fao.org/3/y4671e/y4671e06.htm,FAO,Organization
+https://www.fao.org/3/y4671e/y4671e06.htm,UNDP,Organization
+https://www.fao.org/3/y4671e/y4671e06.htm,WIDER,Organization
+https://www.fao.org/3/y4671e/y4671e06.htm,dietary needs,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,food preferences,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,food safety,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,nutritional balance,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,active and healthy life,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,physical access,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,economic access,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,social access,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,basic foodstuffs,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,cereals,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,income distribution,Process
+https://www.fao.org/3/y4671e/y4671e06.htm,consumer expenditure surveys,Process
+https://www.fao.org/3/y4671e/y4671e06.htm,cross-sectional comparisons,Process
+https://www.fao.org/3/y4671e/y4671e06.htm,time series comparisons,Process
+https://en.wikipedia.org/wiki/Astrophysics,Astrophysics,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Physics,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Chemistry,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Astronomy,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Celestial mechanics,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Sun,Celestial Body
+https://en.wikipedia.org/wiki/Astrophysics,Solar physics,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Stars,Celestial Body
+https://en.wikipedia.org/wiki/Astrophysics,Galaxies,Celestial Body
+https://en.wikipedia.org/wiki/Astrophysics,Extrasolar planets,Celestial Body
+https://en.wikipedia.org/wiki/Astrophysics,Interstellar medium,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Cosmic microwave background,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Electromagnetic spectrum,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Luminosity,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Density,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Temperature,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Chemical composition,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Classical mechanics,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Electromagnetism,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Statistical mechanics,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Thermodynamics,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Quantum mechanics,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Relativity,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Nuclear physics,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Particle physics,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Atomic physics,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Molecular physics,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Dark matter,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Dark energy,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Black holes,Celestial Body
+https://en.wikipedia.org/wiki/Astrophysics,The universe,Celestial Body
+https://en.wikipedia.org/wiki/Astrophysics,Solar System,Celestial Body
+https://en.wikipedia.org/wiki/Astrophysics,Stellar dynamics,Process
+https://en.wikipedia.org/wiki/Astrophysics,Stellar evolution,Process
+https://en.wikipedia.org/wiki/Astrophysics,Galaxy formation,Process
+https://en.wikipedia.org/wiki/Astrophysics,Galaxy evolution,Process
+https://en.wikipedia.org/wiki/Astrophysics,Magnetohydrodynamics,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Large-scale structure of matter,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Cosmic rays,Concept
+https://en.wikipedia.org/wiki/Astrophysics,General relativity,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Special relativity,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Quantum cosmology,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Physical cosmology,Concept
+https://en.wikipedia.org/wiki/Astrophysics,String cosmology,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Astroparticle physics,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Aristotelian worldview,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Plato,Person
+https://en.wikipedia.org/wiki/Astrophysics,Aristotle,Person
+https://en.wikipedia.org/wiki/Astrophysics,Fire,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Aether,Concept
+https://en.wikipedia.org/wiki/Astrophysics,17th century,Time
+https://en.wikipedia.org/wiki/Astrophysics,Galileo,Person
+https://en.wikipedia.org/wiki/Astrophysics,Descartes,Person
+https://en.wikipedia.org/wiki/Astrophysics,Newton,Person
+https://en.wikipedia.org/wiki/Astrophysics,William Hyde Wollaston,Person
+https://en.wikipedia.org/wiki/Astrophysics,Joseph von Fraunhofer,Person
+https://en.wikipedia.org/wiki/Astrophysics,Gustav Kirchhoff,Person
+https://en.wikipedia.org/wiki/Astrophysics,Robert Bunsen,Person
+https://en.wikipedia.org/wiki/Astrophysics,Norman Lockyer,Person
+https://en.wikipedia.org/wiki/Astrophysics,Edward Frankland,Person
+https://en.wikipedia.org/wiki/Astrophysics,Helium,Chemical Element
+https://en.wikipedia.org/wiki/Astrophysics,Edward C. Pickering,Person
+https://en.wikipedia.org/wiki/Astrophysics,Harvard College Observatory,Organization
+https://en.wikipedia.org/wiki/Astrophysics,Williamina Fleming,Person
+https://en.wikipedia.org/wiki/Astrophysics,Antonia Maury,Person
+https://en.wikipedia.org/wiki/Astrophysics,Annie Jump Cannon,Person
+https://en.wikipedia.org/wiki/Astrophysics,Harvard Classification Scheme,Concept
+https://en.wikipedia.org/wiki/Astrophysics,George Ellery Hale,Person
+https://en.wikipedia.org/wiki/Astrophysics,James E. Keeler,Person
+https://en.wikipedia.org/wiki/Astrophysics,The Astrophysical Journal,Organization
+https://en.wikipedia.org/wiki/Astrophysics,Arthur Eddington,Person
+https://en.wikipedia.org/wiki/Astrophysics,Nuclear fusion,Process
+https://en.wikipedia.org/wiki/Astrophysics,Hydrogen,Chemical Element
+https://en.wikipedia.org/wiki/Astrophysics,Einstein's equation,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Cecilia Helena Payne,Person
+https://en.wikipedia.org/wiki/Astrophysics,Cecilia Payne-Gaposchkin,Person
+https://en.wikipedia.org/wiki/Astrophysics,Radcliffe College,Organization
+https://en.wikipedia.org/wiki/Astrophysics,Saha's ionization theory,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Hertzsprung–Russell diagram,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Observational astrophysics,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Theoretical astrophysics,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Telescopes,Technology
+https://en.wikipedia.org/wiki/Astrophysics,Radio astronomy,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Infrared astronomy,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Optical astronomy,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Ultraviolet astronomy,Concept
+https://en.wikipedia.org/wiki/Astrophysics,X-ray astronomy,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Gamma ray astronomy,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Binary pulsars,Celestial Body
+https://en.wikipedia.org/wiki/Astrophysics,Magnetars,Celestial Body
+https://en.wikipedia.org/wiki/Astrophysics,Gravitational waves,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Supernova remnant,Celestial Body
+https://en.wikipedia.org/wiki/Astrophysics,LMC N 63A,Celestial Body
+https://en.wikipedia.org/wiki/Astrophysics,Radio waves,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Cosmic microwave background radiation,Concept
+https://en.wikipedia.org/wiki/Astrophysics,Pulsars,Celestial Body
+https://en.wikipedia.org/wiki/Astrophysics,Charge-coupled device,Technology
+https://en.wikipedia.org/wiki/Astrophysics,Spectroscopes,Technology
+https://en.wikipedia.org/wiki/Astrophysics,Adaptive optics,Technology
+https://en.wikipedia.org/wiki/Astrophysics,Space telescopes,Technology
+https://en.wikipedia.org/wiki/Pharmacovigilance,Pharmacovigilance,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Drug safety,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Adverse effects,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Adverse drug reactions,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Adverse event,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Medication errors,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Overdose,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Misuse,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Abuse,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Drug exposure during pregnancy,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Drug exposure during breastfeeding,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Safety signals,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Signal,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Causal relationship,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Implied causality,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Temporal relationship,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Individual Case Safety Report,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Life-threatening,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Harm,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Risk,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Risk factor,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Effectiveness,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Efficacy,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,Control group,Concept
+https://en.wikipedia.org/wiki/Pharmacovigilance,European Union,Organization
+https://en.wikipedia.org/wiki/Pharmacovigilance,U.S. Food and Drug Administration,Organization
+https://en.wikipedia.org/wiki/Pharmacovigilance,FDA,Organization
+https://en.wikipedia.org/wiki/Pharmacovigilance,European Medicines Agency,Organization
+https://en.wikipedia.org/wiki/Pharmacovigilance,National drug regulatory authority,Organization
+https://en.wikipedia.org/wiki/Pharmacovigilance,Patient reports,Process
+https://en.wikipedia.org/wiki/Pharmacovigilance,Healthcare provider reports,Process
+https://en.wikipedia.org/wiki/Pharmacovigilance,Adverse event reporting,Process
+https://en.wikipedia.org/wiki/Pharmacovigilance,Drug safety and pharmacovigilance audit,Process
+https://en.wikipedia.org/wiki/Pharmacovigilance,Clinical trial,Process
+https://en.wikipedia.org/wiki/Pharmacovigilance,Dechallenge,Process
+https://en.wikipedia.org/wiki/Pharmacovigilance,Rechallenge,Process
+https://en.wikipedia.org/wiki/Pharmacovigilance,Phase I,Process
+https://en.wikipedia.org/wiki/Pharmacovigilance,Phase II,Process
+https://en.wikipedia.org/wiki/Pharmacovigilance,Phase III,Process
+https://en.wikipedia.org/wiki/Pharmacovigilance,Phase IV,Process
+https://en.wikipedia.org/wiki/Pharmacovigilance,Triage,Process
+https://en.wikipedia.org/wiki/Pharmacovigilance,Guideline on good pharmacovigilance practices,Document
+https://en.wikipedia.org/wiki/Pharmacovigilance,Medical literature,Source
+https://en.wikipedia.org/wiki/Pharmacovigilance,Social media,Source
+https://en.wikipedia.org/wiki/Pharmacovigilance,Websites,Source
+https://en.wikipedia.org/wiki/Pharmacovigilance,BRCA1,Gene
+https://en.wikipedia.org/wiki/Pharmacovigilance,BRCA2,Gene
+https://en.wikipedia.org/wiki/Pharmacovigilance,Obesity,Risk factor
+https://en.wikipedia.org/wiki/Pharmacovigilance,High blood pressure,Risk factor
+https://en.wikipedia.org/wiki/Pharmacovigilance,Diabetes,Risk factor
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,Earth 2.0,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,telescope shape,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,rectangular space telescope,Technology
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,Diffractive Interfero Coronagraph Exoplanet Resolver,Technology
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,DICER,Technology
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,James Webb Space Telescope,Technology
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,JWST,Technology
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,Heidi Newberg,Person
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,Rensselaer Polytechnic Institute,Organization
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,Frontiers in Astronomy and Space Sciences,Publication
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,astrophysicist,Role
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,galaxy structure,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,habitable worlds,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,liquid water,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,extraterrestrial life,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,speed of light,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,sun-like stars,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,30 light-years,Measurement
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,exoplanet,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,optics theory,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,10 microns,Measurement
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,infrared wavelength,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,space telescope,Technology
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,20-meter space telescope,Technology
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,starshade,Technology
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,spacecraft,Technology
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,infrared telescope,Technology
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,one by 20 meter rectangle mirror,Technology
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,photosynthesis,Process
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,oxygen,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,deep space mission,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,sustainability in space travel,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,space debris,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,Moon mining,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,human evolution,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,space colonies,Concept
+https://www.nps.org.au/consumers/medicine-and-side-effects,side effects,Concept
+https://www.nps.org.au/consumers/medicine-and-side-effects,adverse reactions,Concept
+https://www.nps.org.au/consumers/medicine-and-side-effects,adverse events,Concept
+https://www.nps.org.au/consumers/medicine-and-side-effects,medicine,Drug
+https://www.nps.org.au/consumers/medicine-and-side-effects,drug interactions,Concept
+https://www.nps.org.au/consumers/medicine-and-side-effects,medicine management,Process
+https://www.nps.org.au/consumers/medicine-and-side-effects,MedicineWise App,Technology
+https://www.nps.org.au/consumers/medicine-and-side-effects,Australia,Concept
+https://www.nps.org.au/consumers/medicine-and-side-effects,approval and regulation processes,Process
+https://www.nps.org.au/consumers/medicine-and-side-effects,doxycycline,Drug
+https://www.nps.org.au/consumers/medicine-and-side-effects,anti-inflammatory medicines,Drug
+https://www.nps.org.au/consumers/medicine-and-side-effects,antibiotics,Drug
+https://www.nps.org.au/consumers/medicine-and-side-effects,nausea,Disease
+https://www.nps.org.au/consumers/medicine-and-side-effects,consumer medicine information,Concept
+https://www.nps.org.au/consumers/medicine-and-side-effects,CMI,Concept
+https://www.nps.org.au/consumers/medicine-and-side-effects,product information,Concept
+https://www.nps.org.au/consumers/medicine-and-side-effects,PI,Concept
+https://www.nps.org.au/consumers/medicine-and-side-effects,health professional,Concept
+https://www.nps.org.au/consumers/medicine-and-side-effects,Poisons Information Centre,Organization
+https://www.nps.org.au/consumers/medicine-and-side-effects,13 11 26,Concept
+https://www.nps.org.au/consumers/medicine-and-side-effects,000,Concept
+https://www.nps.org.au/consumers/medicine-and-side-effects,Therapeutic Goods Administration,Organization
+https://www.nps.org.au/consumers/medicine-and-side-effects,TGA,Organization
+https://www.nps.org.au/consumers/medicine-and-side-effects,Adverse Medicines Events Line,Service
+https://www.nps.org.au/consumers/medicine-and-side-effects,AME Line,Service
+https://www.nps.org.au/consumers/medicine-and-side-effects,1300 134 237,Concept
+https://www.nps.org.au/consumers/medicine-and-side-effects,Database of Adverse Event Notifications,Technology
+https://www.nps.org.au/consumers/medicine-and-side-effects,DAEN,Technology
+https://www.nps.org.au/consumers/medicine-and-side-effects,prescription medicines,Drug
+https://www.nps.org.au/consumers/medicine-and-side-effects,over-the-counter medicines,Drug
+https://www.nps.org.au/consumers/medicine-and-side-effects,complementary medicines,Drug
+https://www.nps.org.au/consumers/medicine-and-side-effects,vitamins,Drug
+https://www.nps.org.au/consumers/medicine-and-side-effects,minerals,Drug
+https://www.nps.org.au/consumers/medicine-and-side-effects,herbal medicines,Drug
+https://www.nps.org.au/consumers/medicine-and-side-effects,natural medicines,Drug
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Indian Astronomical Observatory,Technology
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Hanle,Location
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Ladakh,Location
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Himalayas,Location
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Tsering Dolkar,Person
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,astronomy ambassadors,Role
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,dark sky reserve,Concept
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Indian Institute of Astrophysics,Organization
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Bengaluru,Location
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Himalayan Chandra telescope,Technology
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Digpa-ratsa Ri,Location
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,astro-tourism,Concept
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,light pollution,Concept
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Niruj Mohan Ramanujam,Person
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Padma Chamchot,Person
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Kesang Dorjey,Person
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Buddhist monastery,Organization
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Nawang Tsoundu,Person
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,star party,Event
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Hashika Raj,Person
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Chennai,Location
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,energy-systems engineer,Role
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Bortle 1,Concept
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,China,Location
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,military camp,Location
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Milky Way,Astronomical Object
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Venus,Astronomical Object
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,summer triangle,Astronomical Object
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,astrophotography,Concept
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,homestay,Concept
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,global development,Concept
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,The Guardian,Organization

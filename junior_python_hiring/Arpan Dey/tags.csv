@@ -1,0 +1,260 @@
+link,tag,tag_type
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Sustainable agriculture,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,farming,Activity
+https://en.wikipedia.org/wiki/Sustainable_agriculture,food systems,System
+https://en.wikipedia.org/wiki/Sustainable_agriculture,textile needs,Need
+https://en.wikipedia.org/wiki/Sustainable_agriculture,ecosystem services,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,climate change,Environmental Issue
+https://en.wikipedia.org/wiki/Sustainable_agriculture,greenhouse gas emissions,Environmental Issue
+https://en.wikipedia.org/wiki/Sustainable_agriculture,water scarcity,Environmental Issue
+https://en.wikipedia.org/wiki/Sustainable_agriculture,water pollution,Environmental Issue
+https://en.wikipedia.org/wiki/Sustainable_agriculture,land degradation,Environmental Issue
+https://en.wikipedia.org/wiki/Sustainable_agriculture,deforestation,Environmental Issue
+https://en.wikipedia.org/wiki/Sustainable_agriculture,soil,Natural Resource
+https://en.wikipedia.org/wiki/Sustainable_agriculture,biodiversity,Natural Resource
+https://en.wikipedia.org/wiki/Sustainable_agriculture,permaculture,Farming Method
+https://en.wikipedia.org/wiki/Sustainable_agriculture,agroforestry,Farming Method
+https://en.wikipedia.org/wiki/Sustainable_agriculture,mixed farming,Farming Method
+https://en.wikipedia.org/wiki/Sustainable_agriculture,multiple cropping,Farming Method
+https://en.wikipedia.org/wiki/Sustainable_agriculture,crop rotation,Farming Method
+https://en.wikipedia.org/wiki/Sustainable_agriculture,land sparing,Farming Method
+https://en.wikipedia.org/wiki/Sustainable_agriculture,conventional intensive agriculture,Farming Method
+https://en.wikipedia.org/wiki/Sustainable_agriculture,sustainable diets,Dietary Pattern
+https://en.wikipedia.org/wiki/Sustainable_agriculture,organic certification,Certification
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Rainforest Alliance,Certification
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Fair Trade,Certification
+https://en.wikipedia.org/wiki/Sustainable_agriculture,UTZ Certified,Certification
+https://en.wikipedia.org/wiki/Sustainable_agriculture,GlobalGAP,Certification
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Bird Friendly,Certification
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Common Code for the Coffee Community,Certification
+https://en.wikipedia.org/wiki/Sustainable_agriculture,USDA,Organization
+https://en.wikipedia.org/wiki/Sustainable_agriculture,indigenous communities,Group
+https://en.wikipedia.org/wiki/Sustainable_agriculture,carrying capacity,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,planetary boundaries,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,reconciliation ecology,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,appropriate technology,Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,AI,Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,resource optimization,AI Application
+https://en.wikipedia.org/wiki/Sustainable_agriculture,crop health monitoring,AI Application
+https://en.wikipedia.org/wiki/Sustainable_agriculture,yield prediction,AI Application
+https://en.wikipedia.org/wiki/Sustainable_agriculture,AI-controlled irrigation systems,Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,mobile soil analysis,Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,soil fertility,Soil Property
+https://en.wikipedia.org/wiki/Sustainable_agriculture,soil nutrient levels,Soil Property
+https://en.wikipedia.org/wiki/Sustainable_agriculture,weeds,Pest
+https://en.wikipedia.org/wiki/Sustainable_agriculture,pests,Pest
+https://en.wikipedia.org/wiki/Sustainable_agriculture,plant disease,Disease
+https://en.wikipedia.org/wiki/Sustainable_agriculture,agroecology,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,digitalization,Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,precision breeding,Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Agrivoltaics,Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,solar panels,Technology
+https://en.wikipedia.org/wiki/Sustainable_agriculture,clean energy,Energy Source
+https://en.wikipedia.org/wiki/Sustainable_agriculture,tilling,Farming Practice
+https://en.wikipedia.org/wiki/Sustainable_agriculture,erosion,Environmental Issue
+https://en.wikipedia.org/wiki/Sustainable_agriculture,irrigation,Farming Practice
+https://en.wikipedia.org/wiki/Sustainable_agriculture,drainage,Infrastructure
+https://en.wikipedia.org/wiki/Sustainable_agriculture,salinization,Environmental Issue
+https://en.wikipedia.org/wiki/Sustainable_agriculture,nutrient depletion,Environmental Issue
+https://en.wikipedia.org/wiki/Sustainable_agriculture,natural gas,Non-renewable Resource
+https://en.wikipedia.org/wiki/Sustainable_agriculture,mineral ores,Non-renewable Resource
+https://en.wikipedia.org/wiki/Sustainable_agriculture,fertilizer,Agricultural Input
+https://en.wikipedia.org/wiki/Sustainable_agriculture,manure,Agricultural Input
+https://en.wikipedia.org/wiki/Sustainable_agriculture,eutrophication,Environmental Issue
+https://en.wikipedia.org/wiki/Sustainable_agriculture,rainforest destruction,Environmental Issue
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Asia,Region
+https://en.wikipedia.org/wiki/Sustainable_agriculture,AARI-1996,Reference
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Nitrates,Chemical
+https://en.wikipedia.org/wiki/Sustainable_agriculture,phosphorus,Nutrient
+https://en.wikipedia.org/wiki/Sustainable_agriculture,potassium,Nutrient
+https://en.wikipedia.org/wiki/Sustainable_agriculture,biochar,Soil Amendment
+https://en.wikipedia.org/wiki/Sustainable_agriculture,landraces,Genetic Resource
+https://en.wikipedia.org/wiki/Sustainable_agriculture,phosphate,Chemical
+https://en.wikipedia.org/wiki/Sustainable_agriculture,rock phosphate,Non-renewable Resource
+https://en.wikipedia.org/wiki/Sustainable_agriculture,peak phosphorus,Concept
+https://en.wikipedia.org/wiki/Sustainable_agriculture,Potassium chloride,Chemical
+https://en.wikipedia.org/wiki/Sustainable_agriculture,grains,Crop
+https://en.wikipedia.org/wiki/Sustainable_agriculture,fruits,Crop
+https://en.wikipedia.org/wiki/Sustainable_agriculture,vegetables,Crop
+https://en.wikipedia.org/wiki/Sustainable_agriculture,rice,Crop
+https://en.wikipedia.org/wiki/Sustainable_agriculture,wheat,Crop
+https://en.wikipedia.org/wiki/Sustainable_agriculture,millet,Crop
+https://en.wikipedia.org/wiki/Sustainable_agriculture,sugar,Crop
+https://en.wikipedia.org/wiki/Sustainable_agriculture,corn,Crop
+https://en.wikipedia.org/wiki/Sustainable_agriculture,soybeans,Crop
+https://en.wikipedia.org/wiki/Sustainable_agriculture,palm oil,Crop
+https://en.wikipedia.org/wiki/Sustainable_agriculture,coffee,Crop
+https://en.wikipedia.org/wiki/Sustainable_agriculture,photosynthesis,Biological Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,energy transfer,Biological Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,signal transduction,Biological Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,macromolecular biosynthesis,Biological Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,respiration,Biological Process
+https://en.wikipedia.org/wiki/Sustainable_agriculture,root ramification,Plant Trait
+https://en.wikipedia.org/wiki/Sustainable_agriculture,seed formation,Plant Trait
+https://en.wikipedia.org/wiki/Sustainable_agriculture,disease resistance,Plant Trait
+https://www.nature.com/articles/d41586-025-03353-5,Rachel Fieldhouse,Person
+https://www.nature.com/articles/d41586-025-03353-5,Nature,Organization
+https://www.nature.com/articles/d41586-025-03353-5,Sydney,Location
+https://www.nature.com/articles/d41586-025-03353-5,Australia,Location
+https://www.nature.com/articles/d41586-025-03353-5,PubMed,Database
+https://www.nature.com/articles/d41586-025-03353-5,Google Scholar,Database
+https://www.nature.com/articles/d41586-025-03353-5,Alzheimer’s disease,Disease
+https://www.nature.com/articles/d41586-025-03353-5,brain,Anatomy
+https://www.nature.com/articles/d41586-025-03353-5,ageing,Process
+https://www.nature.com/articles/d41586-025-03353-5,Proceedings of the National Academy of Sciences,Journal
+https://www.nature.com/articles/d41586-025-03353-5,"Ravndal, A.",Person
+https://www.nature.com/articles/d41586-025-03353-5,lithium supplement,Drug
+https://www.nature.com/articles/d41586-025-03353-5,memory loss,Symptom
+https://www.nature.com/articles/d41586-025-03353-5,mice,Organism
+https://www.nature.com/articles/d41586-025-03353-5,Huntington’s disease,Disease
+https://www.nature.com/articles/d41586-025-03353-5,gene therapy,Treatment
+https://www.nature.com/articles/d41586-025-03353-5,Nature Portfolio,Organization
+https://www.nature.com/articles/d41586-025-03353-5,Shanghai,Location
+https://www.nature.com/articles/d41586-025-03353-5,Beijing,Location
+https://www.nature.com/articles/d41586-025-03353-5,New York,Location
+https://www.nature.com/articles/d41586-025-03353-5,New Jersey,Location
+https://www.nature.com/articles/d41586-025-03353-5,"Chinese Institutes for Medical Research (CIMR), Beijing",Organization
+https://www.nature.com/articles/d41586-025-03353-5,Guangzhou,Location
+https://www.nature.com/articles/d41586-025-03353-5,Guangdong,Location
+https://www.nature.com/articles/d41586-025-03353-5,The Hong Kong University of Science and Technology (Guangzhou),Organization
+https://www.nature.com/articles/d41586-025-03353-5,Springer Nature Ltd,Organization
+https://www.nature.com/articles/d41586-025-03353-5,Nature Computational Science,Journal
+https://www.nature.com/articles/d41586-025-03353-5,Nature Briefing,Publication
+https://www.fao.org/3/y4671e/y4671e06.htm,chronic food insecurity,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,transitory food insecurity,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,food security,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,2002 food crisis in Southern Africa,Event
+https://www.fao.org/3/y4671e/y4671e06.htm,World Food Summit (WFS),Event
+https://www.fao.org/3/y4671e/y4671e06.htm,1974 World Food Summit,Event
+https://www.fao.org/3/y4671e/y4671e06.htm,1983 FAO expanded concept,Event
+https://www.fao.org/3/y4671e/y4671e06.htm,1986 World Bank report 'Poverty and Hunger',Event
+https://www.fao.org/3/y4671e/y4671e06.htm,1994 UNDP Human Development Report,Event
+https://www.fao.org/3/y4671e/y4671e06.htm,1996 World Food Summit,Event
+https://www.fao.org/3/y4671e/y4671e06.htm,The State of Food Insecurity 2001,Document
+https://www.fao.org/3/y4671e/y4671e06.htm,Amartya Sen,Person
+https://www.fao.org/3/y4671e/y4671e06.htm,Green Revolution,Event
+https://www.fao.org/3/y4671e/y4671e06.htm,World Food Conference of 1974,Event
+https://www.fao.org/3/y4671e/y4671e06.htm,WIDER investigation,Event
+https://www.fao.org/3/y4671e/y4671e06.htm,famine,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,hunger,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,food crisis,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,food supply problems,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,price stability of basic foodstuffs,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,global food economy,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,institutional arrangements,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,vulnerable people,Group
+https://www.fao.org/3/y4671e/y4671e06.htm,affected people,Group
+https://www.fao.org/3/y4671e/y4671e06.htm,poverty,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,malnutrition,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,protein-energy malnutrition,Condition
+https://www.fao.org/3/y4671e/y4671e06.htm,food safety,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,nutritional balance,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,minor nutrient requirements,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,food preferences,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,human security,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,human rights perspective on development,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,social security,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,entitlements of individuals and households,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,reduction and elimination of poverty,Policy Objective
+https://www.fao.org/3/y4671e/y4671e06.htm,halving of the number of hungry or undernourished people by 2015,Policy Objective
+https://www.fao.org/3/y4671e/y4671e06.htm,nutritional status,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,individual household member,Group
+https://www.fao.org/3/y4671e/y4671e06.htm,vulnerability,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,Household food security,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,physical access to food,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,economic access to food,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,social access to food,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,sub-nutrition,Condition
+https://www.fao.org/3/y4671e/y4671e06.htm,hunger,Condition
+https://www.fao.org/3/y4671e/y4671e06.htm,dietary energy requirements,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,food balance sheets,Method
+https://www.fao.org/3/y4671e/y4671e06.htm,national income distribution,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,consumer expenditure data,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,staple foods,Food Type
+https://www.fao.org/3/y4671e/y4671e06.htm,energy intake,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,poverty lines,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,extreme poverty,Concept
+https://www.fao.org/3/y4671e/y4671e06.htm,cereals,Food Type
+https://www.fao.org/3/y4671e/y4671e06.htm,"low, middle and upper income countries",Group
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,Heidi Newberg,Person
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,Rensselaer Polytechnic Institute,Organization
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,Frontiers in Astronomy and Space Sciences,Publication
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,telescope,Device
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,rectangular mirror,Component
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,circular mirror,Component
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,habitable worlds,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,Earth,Celestial Body
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,liquid water,Chemical
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,single-celled life,Life Form
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,multicellular life,Life Form
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,human life,Life Form
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,extraterrestrial life,Life Form
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,speed of light,Physical Constant
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,sun,Celestial Body
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,stars,Celestial Body
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,sun-like stars,Celestial Body
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,Earth-like exoplanet,Celestial Body
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,optics theory,Scientific Theory
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,resolution,Scientific Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,wavelength,Physical Property
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,microns,Unit of Measurement
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,James Webb Space Telescope,Device
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,infrared,Electromagnetic Spectrum
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,visible light,Electromagnetic Spectrum
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,starshade,Device
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,probe,Device
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,photosynthesis,Biological Process
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,oxygen,Chemical
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,Earth 2.0,Concept
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,30 light-years,Distance
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,20 meters,Distance
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,6.5 meters,Distance
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,one by 20 meter rectangle,Measurement
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,three years,Time
+https://www.frontiersin.org/news/2025/09/01/rectangle-telescope-finding-habitable-planets,"September 01, 2025",Date
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,India,Country
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Hanle,Location
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Ladakh,Region
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Tsering Dolkar,Person
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Venus,Celestial Body
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Milky Way,Celestial Body
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,dark sky reserve,Conservation Area
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,astronomy ambassadors,Occupation
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Indian Astronomical Observatory,Facility
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,light pollution,Environmental Issue
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Indian Institute of Astrophysics,Organization
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Bengaluru,City
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Niruj Mohan Ramanujam,Person
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Himalayan Chandra telescope,Equipment
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Digpa-ratsa Ri,Mountain
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Padma Chamchot,Person
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Kesang Dorjey,Person
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Nawang Tsoundu,Person
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Hanle Buddhist monastery,Religious Site
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Bortle 1,Sky Quality
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,China,Country
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,military camp,Facility
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,diesel generator,Equipment
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,star party,Event
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Hashika Raj,Person
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Chennai,City
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,energy-systems engineer,Occupation
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,astrophotography,Activity
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,homestay,Accommodation Type
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,"lentils, vegetables and rice",Food
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,summer triangle,Constellation Pattern
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,monks,Religious Role
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Buddhist practice,Cultural Practice
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,timekeeping,Cultural Practice
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,navigation,Cultural Practice
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,grazing fields,Land Use
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,nomadic communities,Social Group
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,global development team,Organization
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,Global Dispatch,Publication
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,tourism,Economic Sector
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,local economy,Economic Concept
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,stargazing,Activity
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,deep-sky exploration,Activity
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,telescope,Equipment
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,tripod,Equipment
+https://www.theguardian.com/global-development/2025/oct/13/astro-ambassadors-stargazers-himalayas-hanle-ladakh-india,clear night skies,Environmental Feature
