@@ -1,0 +1,11 @@
+# Data files
+T-Bact UID Data_Golden ID mapped.xlsm
+T-Bact UID Data_Golden ID mapped_Updated.xlsm
+UM_CL_email.csv
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
